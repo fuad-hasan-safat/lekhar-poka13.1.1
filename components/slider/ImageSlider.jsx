@@ -50,6 +50,7 @@ export function ImageSlider() {
         })
     }
 
+
     return (
         <section aria-label="Image Slider" style={{ width: "100%", height: "100%", position: "relative" }}>
             {/* <a href="#after-image-slider-controls" className="skip-link">
@@ -71,7 +72,7 @@ export function ImageSlider() {
                         {data.map(({ _id, title, caption, image, content }, index) => (
                             <img
                                 key={_id}
-                                src={`${apiBasePath}/${image}`}
+                                src={`${apiBasePath}/${image.slice(image.indexOf("/") + 1)}`}
                                 alt={image}
                                 aria-hidden={imageIndex !== index}
                                 className="img-slider-img"

@@ -67,7 +67,7 @@ export default function SobGolpoLeftContent() {
           {isLoading ? (
             <Loading />
           ) : error ? (
-            <div>Error fetching posts: {error.message}</div>
+            <div>Error fetching posts</div>
           ) : (
             <>
               <div className="lakha__main__content pt-20  text-3xl lg:mr-[100px] md:mr-[50px]">

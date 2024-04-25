@@ -101,7 +101,7 @@ export default function PostDetails() {
         <AudioPlayer
           playlist={[
             {
-              audioSrc: `${apiBasePath}/${data.audio}`,
+              audioSrc: `${apiBasePath}/${data.audio.slice(data.audio.indexOf("/") + 1)}`,
               metadata: {
                 title: data.title,
                 writer: data.writer,

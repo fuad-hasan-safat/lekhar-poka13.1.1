@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
       <section>
-        <section className="all__post__sec__wrap">
+        <section className="all__post__sec__wrap pt-[94px]">
           <div>
             <Image
               src={'/images/pages-banner-svg/aboutus.svg'}
