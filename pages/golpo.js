@@ -2,7 +2,7 @@ import SobGolpo from '../components/golpo/sobGolpo'
 
 export default function Home() {
   return (
-      <div className=" text-black">
+      <div className="globat__padding text-black">
         <SobGolpo />
       </div>
   );

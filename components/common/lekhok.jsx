@@ -1,5 +1,8 @@
-import Star from "./Star";
-import Image from "next/image";
+import Link from "next/link";
+
+const cl = (wrt) => {
+    console.log("wrt ", wrt)
+}
 
 const LekhokDetails = ({
     image,
@@ -17,9 +20,11 @@ const LekhokDetails = ({
                    />
                 </div>
                 <div className="pl-4 text-[20px] text-gray-900">
-                    <a className=" " href={`/postswriter/${writer}`}>
+                    <Link 
+                        onClick={cl(writer)}
+                        href={`/postswriter/${writer}`}>
                         {writer}
-                    </a>
+                    </Link>
                     <h1 className="text-[16px] text-gray-600">{lifeCycle}</h1>
                 </div>
             </div>

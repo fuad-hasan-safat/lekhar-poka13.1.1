@@ -16,7 +16,7 @@ const LekhaPokaProfile= ({
           <img src={image} height={100} width={100} alt="" />
         </div>
         <div className="pl-4  space-y-2">
-          <Link className="text-[20px] text-gray-800 " href={`/${id}`}>
+          <Link className="text-[20px] text-gray-800 " href={`/post/${id}`}>
             {title}
           </Link>
           <h1 className="text-[16px] text-gray-600">{writer}</h1>

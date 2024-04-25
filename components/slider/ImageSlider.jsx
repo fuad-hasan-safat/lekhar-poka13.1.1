@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Circle } from 'lucide-react';
+import { apiBasePath } from "../../utils/constant";
 // import '/public/assets/css/image-slider.css'
 // import './image-slider.css'
 // import { apiBasePath } from "@/utils/constant";
@@ -12,11 +13,12 @@ export function ImageSlider() {
     // api call 
     useEffect(() => {
 
-        fetch(`${process.env.API_BASE_PATH}/sliders`)
+        fetch(`${apiBasePath}/sliders`)
             .then(response => response.json())
             .then(data => {
                 setData(data)
-            }).catch(error => console.log("Error fetching data"))
+                console.log('slider data ------------>>>>', data)
+            }).catch(error => console.log("Error fetching --------------- slider -------------- data"))
 
 
     }, []);

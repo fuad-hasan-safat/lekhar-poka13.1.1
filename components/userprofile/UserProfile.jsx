@@ -3,8 +3,16 @@ import Loading from '../common/loading'
 import { useRouter } from "next/navigation";
 import { Suspense, useEffect, useState, useRef, useMemo } from "react";
 // import JoditEditor from "jodit-react";
-import dynamic from 'next/dynamic';
-const JoditEditor = dynamic(() => import('jodit-react'), { ssr: false });
+// import dynamic from 'next/dynamic';
+// const JoditEditor = dynamic(() => import('jodit-react'), { ssr: false });
+import {
+  BtnBold,
+  BtnItalic,
+  Editor,
+  EditorProvider,
+  Toolbar
+} from 'react-simple-wysiwyg';
+
 
 
 import Select from "react-select";
@@ -18,7 +26,7 @@ import Link from "next/link";
 import Checkbox from '../common/Checkbox'
 import AudioFileUpload from '../userprofile/AudiofileUpload'
 
-export default function UserProfile({slug}) {
+export default function UserProfile({ slug }) {
 
 
   // --------------- editor ----------
@@ -190,7 +198,7 @@ export default function UserProfile({slug}) {
     fetchDataAsync();
   }, []);
 
-  
+
 
   // Drop down category
   let Categoryoptions = [];
@@ -221,7 +229,7 @@ export default function UserProfile({slug}) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [progress, setProgress] = useState(0);
 
-  
+
 
 
   // jodit editor config
@@ -232,6 +240,11 @@ export default function UserProfile({slug}) {
     selectionStay: true,
 
   };
+
+  function textEditorHandler(e) {
+    setContent(e.target.value);
+  }
+
 
   const handleKeyUp = (event) => {
     // Check if the current selection is empty (no characters selected)
@@ -246,12 +259,12 @@ export default function UserProfile({slug}) {
   };
 
   // const joditconfig = useMemo(
-	// 	{
-	// 		readonly: false, // all options from https://xdsoft.net/jodit/docs/,
-	// 		placeholder: placeholder || 'Start typings...'
-	// 	},
-	// 	[placeholder]
-	// );
+  // 	{
+  // 		readonly: false, // all options from https://xdsoft.net/jodit/docs/,
+  // 		placeholder: placeholder || 'Start typings...'
+  // 	},
+  // 	[placeholder]
+  // );
 
 
 
@@ -441,7 +454,7 @@ export default function UserProfile({slug}) {
 
                         <div className="joidcss">
 
-                          <JoditEditor
+                          {/* <JoditEditor
                             ref={editor}
                             value={content}
                             config={joditconfig}
@@ -449,7 +462,21 @@ export default function UserProfile({slug}) {
                             onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
                             onChange={(newContent) => setContent(newContent)}
                             onKeyUp={handleKeyUp}
-                          />
+                          /> */}
+
+                          <EditorProvider>
+                            <Editor 
+                            value={content} 
+                            onChange={textEditorHandler}
+                            containerProps={{ style: { color: 'black' } }}
+
+                            >
+                              <Toolbar>
+                                <BtnBold />
+                                <BtnItalic />
+                              </Toolbar>
+                            </Editor>
+                          </EditorProvider>
 
                         </div>
 
@@ -462,7 +489,7 @@ export default function UserProfile({slug}) {
                           )}
                         </div> */}
                         <div>
-                          <AudioFileUpload selectedFile={selectedFile} setSelectedFile={setSelectedFile}/>
+                          <AudioFileUpload selectedFile={selectedFile} setSelectedFile={setSelectedFile} />
                           {/* <ChankFileUpload/> */}
                         </div>
                         <button

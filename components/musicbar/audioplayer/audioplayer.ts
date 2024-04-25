@@ -1,43 +1,20 @@
-// 'use client'
-// import { useEffect, useState } from "react";
-// import {
-//   Controls,
-//   PlaybackState,
-//   PlayerState,
-//   Playlist,
-//   TrackMetadata,
-// } from "./type";
+import {
+  Controls,
+  PlaybackState,
+  PlayerState,
+  Playlist,
+  TrackMetadata,
+} from "./type";
 
 export function createAudioplayer(
-  playlist,
-  onStateChange,
-) {
-
-// ----------------------------------
-// ------------ Log in and conditions -------------
-
-// const [status, setStatus] = useState("");
-//   const [username, setUsername] = useState("");
-//   const [userUuid, setUserUuid] = useState("");
-//   const [userPhone, setUserPhone] = useState("");
-//   const [userToken, setUserToken] = useState("");
-
-//   useEffect(() => {
-//     setUsername(localStorage.getItem('name')|| '');
-//     setUserUuid(localStorage.getItem('uuid')|| '')
-//     setUserPhone(localStorage.getItem('phone')|| '')
-//     setUserToken(localStorage.getItem('token')|| '')
-//   }, []);
-
-// ----------------------------------
-
-
+  playlist: Playlist,
+  onStateChange: (state: PlayerState) => void
+): Controls {
   let currentTrackIndex = 0;
   let repeat = false;
   let shuffle = false;
-  const playbackHistory = [];
-  const audioElement = new Audio();
-
+  const playbackHistory: Array<number> = [];
+  const audioElement: HTMLAudioElement = new Audio();
 
   /* === PlayerState === */
   //#region
@@ -46,7 +23,7 @@ export function createAudioplayer(
     onStateChange(state);
   }
 
-  function computeCurrentPlayerState() {
+  function computeCurrentPlayerState(): PlayerState {
     return {
       currentTrackMetadata: getCurrentTrackMetadata(),
       currentTrackDuration: getCurrentTrackDuration(),
@@ -57,7 +34,7 @@ export function createAudioplayer(
     };
   }
 
-  function getCurrentTrackMetadata() {
+  function getCurrentTrackMetadata(): TrackMetadata | null {
     if (currentTrackIndex < playlist.length) {
       return playlist[currentTrackIndex].metadata;
     } else {
@@ -65,15 +42,15 @@ export function createAudioplayer(
     }
   }
 
-  function getCurrentTrackDuration() {
+  function getCurrentTrackDuration(): number | null {
     return isNaN(audioElement.duration) ? null : audioElement.duration;
   }
 
-  function getCurrentTrackPlaybackPosition() {
+  function getCurrentTrackPlaybackPosition(): number | null {
     return isNaN(audioElement.currentTime) ? null : audioElement.currentTime;
   }
 
-  function getPlaybackState(){
+  function getPlaybackState(): PlaybackState {
     return audioElement.paused ? "PAUSED" : "PLAYING";
   }
   //#endregion
@@ -113,21 +90,21 @@ export function createAudioplayer(
     audioElement.play();
   }
 
-  function loadTrack(index) {
+  function loadTrack(index: number) {
     audioElement.src = playlist[index].audioSrc;
     audioElement.load();
     currentTrackIndex = index;
   }
 
-  function computeNextTrackIndex() {
+  function computeNextTrackIndex(): number {
     return shuffle ? computeRandomTrackIndex() : computeSubsequentTrackIndex();
   }
 
-  function computeSubsequentTrackIndex() {
+  function computeSubsequentTrackIndex(): number {
     return (currentTrackIndex + 1) % playlist.length;
   }
 
-  function computeRandomTrackIndex() {
+  function computeRandomTrackIndex(): number {
     if (playlist.length === 1) return 0;
     const index = Math.floor(Math.random() * (playlist.length - 1));
     return index < currentTrackIndex ? index : index + 1;
@@ -150,7 +127,7 @@ export function createAudioplayer(
 
   /* === Controls === */
   //#region
-  function setPlaybackPosition(position) {
+  function setPlaybackPosition(position: number) {
     if (isNaN(position)) return;
     audioElement.currentTime = position;
   }
@@ -177,15 +154,12 @@ export function createAudioplayer(
       replayCurrentTrack();
     } else {
       const previousTrackIndex = playbackHistory.pop();
-      loadTrack(previousTrackIndex);
+      loadTrack(previousTrackIndex!);
       audioElement.play();
     }
   }
 
   function togglePlayPause() {
-
-    
-    //console.log('audio current time: ------>>>>>>', audioElement.currentTime)
     if (audioElement.paused) {
       audioElement.play();
     } else {
@@ -201,7 +175,7 @@ export function createAudioplayer(
     }
   }
 
-  function handleVolumeChange(event) {
+  function handleVolumeChange(event: React.ChangeEvent<HTMLInputElement>) {
     audioElement.volume = Number(event.target.value);
   }
   //#endregion

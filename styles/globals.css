@@ -54,6 +54,11 @@ body {
   display: table;
 }
 
+
+.globat__padding{
+  padding-top: 94px;
+}
+
 /* 
 ---------------------
  Header css

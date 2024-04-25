@@ -12,8 +12,8 @@ import { apiBasePath } from "../../utils/constant";
 // import SimpleAudioPlayer from '../components/musicbar/SimpleAudioPlayer'
 
 export default function PostDetails() {
-   const router = useRouter();
-  const slug = router.query.slug;;
+  const router = useRouter();
+  const slug = router.query.slug;
   console.log("----slug-------", slug);
 
   const [data, setData] = useState([]); // State to store fetched data
@@ -26,28 +26,30 @@ export default function PostDetails() {
   const [rating, setRating] = useState(0);
 
 
-  useEffect(() => {
+  useEffect( () => {
     // console.log(
     //   "<<<<<<<<<<<<<<<<<<<<<<-------------------------in side use effect----------------------->>>>>>>>>>>>>>>>"
     // );
 
     async function fetchDataAsync() {
 
-      try {
-        const result = await fetchData(
-          `${apiBasePath}/getpost/${slug}`
-        );
-        //console.log("result->>>>>>>>>>>>>>>>", result.object);
-        setData(result.object);
-        //setcategory(result.object.category);
-        if (result.object.audio.length > 0) {
-          setIsAudioAvailAble(true);
-        }
-      } catch (error) {
-        console.log(error);
-      } finally {
-        //setcategory(kobita)
+    try {
+      const result = await fetchData(
+        `${apiBasePath}/getpost/${slug}`
+      );
+      //console.log("result->>>>>>>>>>>>>>>>", result.object);
+      setData(result.object);
+      console.log('post data -------- post', result.object)
+      //setcategory(result.object.category);
+      if (result.object.audio.length > 0) {
+        setIsAudioAvailAble(true);
       }
+    } catch (error) {
+      console.log(error);
+      console.log("ERROR");
+    } finally {
+      //setcategory(kobita)
+    }
     }
 
     fetchDataAsync();
@@ -67,14 +69,14 @@ export default function PostDetails() {
             alt={"kobita banner"}
           />
           <h2 className=" absolute top-[50%] left-[50%] text-[40px] text-[#F9A106] -translate-x-[50%] -translate-y-[50%]">{data.category}</h2>
-          
+
         </div>
 
         <div className="container">
           <div className="row">
             <div className="col-md-12">
               <div className="flex flex-row">
-                { <div className="flex flex-col w-[70%]">
+                {<div className="flex flex-col w-[70%]">
                   <FullPost
                     content={data.content}
                     title={data.title}
@@ -82,8 +84,8 @@ export default function PostDetails() {
                     catagory={data.category}
                   />
                   <RatingComponent setRating={setRating} rating={rating} post_id={data._id} />
-                </div> 
-                
+                </div>
+
                 }
 
                 <div className="w-sidebarwidth">

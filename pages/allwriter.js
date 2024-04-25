@@ -6,7 +6,7 @@ import AllWriterList from '../components/allwriterlist/AllWriterList'
 export default function AllWriterPage () {
   return (
     <section>
-        <div className='container'>
+        <div className='container globat__padding'>
             <div className='flex flex-row'>
                 <div className='w-[70%]'>
                     <AllWriterList/>

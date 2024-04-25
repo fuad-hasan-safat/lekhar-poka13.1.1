@@ -1,11 +1,16 @@
 import { useState, useRef, useEffect } from "react";
+import {
+  Controls,
+  InitialPlayerState,
+  PlayerState,
+  Playlist,
+} from "../audioplayer/type";
+import { createAudioplayer } from "../audioplayer/audioplayer";
+interface AudioPlayer extends Controls {
+  playerState: PlayerState;
+}
 
-import {createAudioplayer} from '../audioplayer/audioplayer'
-// interface AudioPlayer extends Controls {
-//   playerState: PlayerState;
-// }
-
-function useAudioPlayer(playlist) {
+function useAudioPlayer(playlist: Playlist): AudioPlayer {
   const [playerState, setPlayerState] =
     useState<PlayerState>(InitialPlayerState);
   const playerRef = useRef<Controls | null>(null);
@@ -13,13 +18,12 @@ function useAudioPlayer(playlist) {
   useEffect(() => {
     const newPlayer = createAudioplayer(playlist, setPlayerState);
     playerRef.current = newPlayer;
-
     return () => {
       newPlayer.cleanup();
     };
   }, [playlist]);
 
-  function setPlaybackPosition(position) {
+  function setPlaybackPosition(position: number) {
     playerRef.current?.setPlaybackPosition(position);
   }
 
@@ -34,7 +38,6 @@ function useAudioPlayer(playlist) {
   function togglePlayPause() {
     playerRef.current?.togglePlayPause();
   }
-
 
   function playNextTrack() {
     playerRef.current?.playNextTrack();
@@ -52,7 +55,7 @@ function useAudioPlayer(playlist) {
     playerRef.current?.muteSound();
   }
 
-  function handleVolumeChange(event) {
+  function handleVolumeChange(event: React.ChangeEvent<HTMLInputElement>) {
     playerRef.current?.handleVolumeChange(event);
   }
 

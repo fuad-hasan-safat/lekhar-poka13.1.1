@@ -1,15 +1,16 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import Controls from "./Control";
-import Progressbar from "./Progressbar";
+import { useRef, useState } from "react";
+import Controls from "../musicbar/Control";
+import Progressbar from "../musicbar/Progressbar";
+//import playlist from "./platlists";
 import SongInfo from "./song-info";
-// import useAudioPlayer from "./audioplayer/hook";
-import useAudioPlayer from './audioplayer/hook'
+import useAudioPlayer from "./audioplayer/hook";
 import MusicleftPart from "./leftPart/MusicLeftPart";
-// import { Playlist, Track } from "./audioplayer/type";
+import { Playlist, Track } from "./audioplayer/type";
+import React from "react";
 
-const AudioPlayer = ({playlist}) => {
-  // console.log("playlist data : ", playlist)
+const AudioPlayer = ({playlist} : any) => {
+  console.log("playlist data : ", playlist)
   const {
     playNextTrack,
     playPreviousTrack,
@@ -31,17 +32,12 @@ const AudioPlayer = ({playlist}) => {
     currentTrackMetadata,
   } = playerState;
 
-
-  useEffect(()=>{
-    console.log('current duration ------>>>>>', currentTrackPlaybackPosition)
-  })
-
-  function setProgress(value) {
+  function setProgress(value: number) {
     if (currentTrackDuration !== null) {
       setPlaybackPosition((value / 100) * currentTrackDuration);
     }
   }
-  function computeProgress() {
+  function computeProgress(): number {
     const noProgress =
       currentTrackDuration === null ||
       currentTrackPlaybackPosition === null ||
@@ -73,10 +69,7 @@ const AudioPlayer = ({playlist}) => {
             onPlayClick={togglePlayPause}
             isPlaying={playbackState === "PLAYING"}
             repeat={repeat}
-            shuffle={shuffle}
-            currentTrackDuration={currentTrackDuration}
-            currentTrackPlaybackPosition={currentTrackPlaybackPosition}
-          />
+            shuffle={shuffle} currentTrackDuration={undefined} currentTrackPlaybackPosition={undefined}          />
           <Progressbar
             rightLabel={formatTime(currentTrackDuration)}
             leftLabel={formatTime(currentTrackPlaybackPosition)}
@@ -98,7 +91,7 @@ const AudioPlayer = ({playlist}) => {
 
 export default AudioPlayer;
 
-function formatTime(timeInSeconds) {
+function formatTime(timeInSeconds: number | null): string {
   if (timeInSeconds === null) return "";
   const numberOfMinutes = Math.floor(timeInSeconds / 60);
   const numberOfSeconds = Math.floor(timeInSeconds - numberOfMinutes * 60);

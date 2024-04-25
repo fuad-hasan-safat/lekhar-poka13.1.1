@@ -1,16 +1,15 @@
 "use client"
 import { useEffect, useState } from "react";
 import MainContentDivider from "../common/mainContentDivider";
-import { sobGolpoPosts } from "@/public/demo-data/data";
 import SobPostsOfWriterBody from "./sobPostsOfWriterBody";
 import Loading from "../common/loading";
-import { apiBasePath } from "@/utils/constant";
+import { apiBasePath } from "../../utils/constant";
 
 
 export default function SobPostsOfWriterLeftContent() {
 
   //   const [selectedId, setSelectedId] = useState("sob");
-  const [postList, setPostList] = useState(sobGolpoPosts)
+  const [postList, setPostList] = useState([])
   const [isLoading, setIsLoading] = useState(true);
 
 
