@@ -22,7 +22,7 @@ const SignUpPage = () => {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              {!uuid ? (<div className={``}>
+              <div className={``}>
                 <div className="relative flex flex-row bg-[#FCF7E8] shadow-md">
                   {/* left part */}
                   <div className=" w-[640px]   ">
@@ -49,19 +49,8 @@ const SignUpPage = () => {
                   </div>
                 </div>
               </div>
-              ) :
-                (
-
-                  <div className={`pt-[130px] pb-10 w-full place-content-center`}>
-                    <div className="text-center text-7xl text-red-600">
-                      <div>You are already logged in to this site</div>
-                      <div className="text-4xl text-purple-900 underline hover:text-blue-500">
-                        <Link href="/">Go to homepage</Link>
-                      </div>
-                    </div>
-                  </div>
-
-                )}
+              
+          
             </div>
           </div>
         </div>

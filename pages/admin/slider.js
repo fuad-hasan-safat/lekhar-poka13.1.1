@@ -3,27 +3,35 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import Classes from './slider.module.css';
 import { apiBasePath } from '../../utils/constant';
+import NotFound from "../../components/common/nofFound"
+
 
 const Page = () => {
 
     const [highlight, setHighlight] = useState(false);
     const [imageFile, setImageFile] = useState(null);
     const [preview, setPreview] = useState(null);
-    const [title,setTitle] = useState('');
-    const [content,setContent] = useState('');
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
     const [caption, setCaption] = useState('');
     const [related, setRelated] = useState('');
     const [optionList, setOptionList] = useState([])
+    const [userType, setUserType] = useState("");
+
+
+    useEffect(() => {
+        setUserType(localStorage.getItem("usertype") || "");
+    }, []);
 
 
     const customStyles = {
         menu: (provided) => ({
-          ...provided,
-          backgroundColor: "#fff",
-          border: "1px solid #ccc",
-          color: "#000"
+            ...provided,
+            backgroundColor: "#fff",
+            border: "1px solid #ccc",
+            color: "#000"
         }),
-      };
+    };
 
     const handleProfileUpdate = async (e) => {
         e.preventDefault();
@@ -70,7 +78,7 @@ const Page = () => {
 
     const options = optionList.map((value, index) => <option value={value._id} key={index}>{value.title}</option>)
 
-    
+
 
     const saveData = async () => {
         const formData = new FormData();
@@ -116,69 +124,72 @@ const Page = () => {
             reader.readAsDataURL(file);
         }
     };
-
-    return (
-        <section className='admin__add__slider__sec' style={{padding:'100px 0'}}>
-            <div className='container'>
-                <div className='row'>
-                    <div className='col-md-12'>
-                        <div className='admin__add__slider__wrap'>
-                          <div className='admin__upload__wrap'>
-                            <div className='profile__image__upload'>
-                                <div
-                                    onDragEnter={(e) => setHighlight(true)}
-                                    onDragLeave={(e) => setHighlight(false)}
-                                    onDragOver={(e) => {
-                                        e.preventDefault();
-                                        e.stopPropagation();
-                                    }}
-                                    onDrop={(e) => handleUpload(e)} className={`${Classes.upload__slider__img}${highlight ? ' is-highlight' : ''}`} style={{ backgroundImage: `url(${preview || '/default-image.jpg'})` }}>
-                                    <form className='my__form'>
-                                        <div className='upload__button'>
-                                            <input
-                                                type='file'
-                                                className='upload__file'
-                                                accept='image/*'
-                                                onChange={(e) => handleUpload(e)}
-                                            />
-                                            <button className='button'><i className='ri-camera-line'></i></button>
+    if (userType === 'admin') {
+        return (
+            <section className='admin__add__slider__sec' style={{ padding: '100px 0' }}>
+                <div className='container'>
+                    <div className='row'>
+                        <div className='col-md-12'>
+                            <div className='admin__add__slider__wrap'>
+                                <div className='admin__upload__wrap'>
+                                    <div className='profile__image__upload'>
+                                        <div
+                                            onDragEnter={(e) => setHighlight(true)}
+                                            onDragLeave={(e) => setHighlight(false)}
+                                            onDragOver={(e) => {
+                                                e.preventDefault();
+                                                e.stopPropagation();
+                                            }}
+                                            onDrop={(e) => handleUpload(e)} className={`${Classes.upload__slider__img}${highlight ? ' is-highlight' : ''}`} style={{ backgroundImage: `url(${preview || '/default-image.jpg'})` }}>
+                                            <form className='my__form'>
+                                                <div className='upload__button'>
+                                                    <input
+                                                        type='file'
+                                                        className='upload__file'
+                                                        accept='image/*'
+                                                        onChange={(e) => handleUpload(e)}
+                                                    />
+                                                    <button className='button'><i className='ri-camera-line'></i></button>
+                                                </div>
+                                            </form>
                                         </div>
-                                    </form>
+                                    </div>
+                                    <div className='admin__form__wrap'>
+                                        <form onSubmit={handleProfileUpdate}>
+                                            <div className='admin__input'>
+                                                <label>Title</label>
+                                                <input type='text' value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Title' />
+                                            </div>
+                                            <div className='admin__input'>
+                                                <label>Content</label>
+                                                <textarea type='text' value={content} onChange={(e) => setContent(e.target.value)} placeholder='Content' />
+                                            </div>
+                                            <div className='admin__input'>
+                                                <label>Caption</label>
+                                                <textarea type='text' value={caption} onChange={(e) => setCaption(e.target.value)} placeholder='Caption' />
+                                            </div>
+                                            <div className='admin__input text-black'>
+                                                <select
+                                                    name="optons" id="options"
+                                                    onChange={(e) => setRelated(e.target.value)} >
+                                                    {options}
+                                                </select>
+                                            </div>
+                                            <div className='admin__submit'>
+                                                <button type='button' onClick={saveData}>Submit</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className='admin__form__wrap'>
-                                <form onSubmit={handleProfileUpdate}>
-                                    <div className='admin__input'>
-                                        <label>Title</label>
-                                        <input type='text' value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Title'/>
-                                    </div>
-                                    <div className='admin__input'>
-                                        <label>Content</label>
-                                        <textarea type='text' value={content} onChange={(e) => setContent(e.target.value)} placeholder='Content'/>
-                                    </div>
-                                    <div className='admin__input'>
-                                        <label>Caption</label>
-                                        <textarea type='text' value={caption} onChange={(e) => setCaption(e.target.value)} placeholder='Caption'/>
-                                    </div>
-                                    <div className='admin__input text-black'>
-                                        <select 
-                                        name="optons" id="options" 
-                                        onChange={(e) => setRelated(e.target.value)} >
-                                            {options}
-                                        </select>
-                                    </div>
-                                    <div className='admin__submit'>
-                                        <button type='button' onClick={saveData}>Submit</button>
-                                    </div>
-                                </form>
-                            </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-    );
+            </section>
+        );
+    } else {
+        <NotFound />
+    }
 };
 
 export default Page;

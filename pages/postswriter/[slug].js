@@ -1,10 +1,10 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import SobPostsOfWriterBody from '../../components/postOfWriter/sobPostsOfWriter'
 import Loading from '../../components/common/loading';
 import { apiBasePath } from '../../utils/constant';
 import Sidebar from '../../components/sidebar/Sidebar';
 import MainContentDivider from '../../components/common/mainContentDivider'
+import SobPostsOfWriterBody from '../../components/postOfWriter/sobPostsOfWriterBody'
 import { useRouter } from 'next/router';
 
 
@@ -44,12 +44,14 @@ export default function PostOfWriterPage() {
                 setIsLoading(false)
             }
         };
+        if (router.isReady) {
+            fetchPosts();
 
-        fetchPosts();
+        }
 
 
 
-    }, []);
+    }, [router.query]);
 
 
 
@@ -72,7 +74,7 @@ export default function PostOfWriterPage() {
 
         return (
             <section>
-                <div className='container flex flex-row'>
+                <div className='container flex flex-row pt-[94px]'>
                     <div className="pt-20 text-3xl w-[70%]">
 
 

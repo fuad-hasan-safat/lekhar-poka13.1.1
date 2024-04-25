@@ -49,7 +49,7 @@ const SobLekha = ({ sobClass }) => {
       </button>
 
       {isOpen && (
-        <div className="backdrop-blur-md shadow-xl bg-[#F9A106] z-[1000] origin-top-right absolute right-0 mt-2 w-56 rounded-md rounded ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu" tabIndex={-1}>
+        <div className="backdrop-blur-md shadow-xl bg-[#F9A106] z-[1000] origin-top-right absolute right-0 mt-2 w-56 rounded-md  ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu" tabIndex={-1}>
           <div className="text-black" role="none">
             <Link
               href="/kobita"

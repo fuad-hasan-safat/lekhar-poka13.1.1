@@ -123,7 +123,7 @@ export default function UserProfile({ slug }) {
     setUserUuid(localStorage.getItem("uuid") || "");
     setUserPhone(localStorage.getItem("phone") || "");
     setWriter(localStorage.getItem("name"));
-    setWriter(username);
+
   }, []);
 
 
@@ -302,6 +302,8 @@ export default function UserProfile({ slug }) {
         formData.append("new_writer", checkboxValue);
 
         if (title && selectedOption && summary) {
+
+          console.log(writer,writerId)
 
           try {
             const response = await fetch(`${apiBasePath}/posts`, {

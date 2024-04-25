@@ -16,7 +16,7 @@ const SobKobitaBody = ({
 
 
   function handleClick(kobitaId) {
-    router.push(`/${kobitaId}`);
+    router.push(`/post/${kobitaId}`);
   }
   return (
     <>

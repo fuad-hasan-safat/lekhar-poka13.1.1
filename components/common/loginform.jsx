@@ -69,7 +69,7 @@ export default function LoginForm({ logreg, btntext }) {
 
       //console.log({ response });
 
-      if (response.status === 200) {
+      if (response.status === 'success' || 200) {
         const data = await response.data;
 
         console.log(data)
@@ -93,7 +93,7 @@ export default function LoginForm({ logreg, btntext }) {
         router.push(`/`)
       } else {
         //console.log("error res", response);
-        alert(response.data.message);
+        alert('error');
       }
     } catch (error) {
       //console.log("inside catch", error);

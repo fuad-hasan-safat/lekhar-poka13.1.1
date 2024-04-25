@@ -160,7 +160,7 @@ const MyNavbar = () => {
                     </li>
                     <li
                       onClick={() => setSelectedNav("amader_somporke")}
-                      className={` lg:w-[130px] sm:w-[100px] ${
+                      className={` lg:w-[150px] sm:w-[100px] ${
                         selectedNav === "amader_somporke"
                           ? "text-[#F9A106] font-semibold underline"
                           : ""

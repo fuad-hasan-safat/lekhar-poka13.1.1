@@ -32,7 +32,10 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  font-family: "KongshoMJ", serif ;
+  /* font-family: 'KongshoMJRegular'; */
+  font-family: 'LiSirajee';
+  font-weight: 400;
+
    
 }
 
@@ -54,9 +57,9 @@ body {
   display: table;
 }
 
+.global_padding{
+  padding-top: 100px;
 
-.globat__padding{
-  padding-top: 94px;
 }
 
 /* 

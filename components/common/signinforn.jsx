@@ -35,7 +35,7 @@ export default function SigninForm({ logreg, btntext }) {
     // Validate phone number
     const validateMobileNumber = (mobileNumber) => {
         // Enforce exactly 11 digits after '01' using positive lookahead assertion
-        const regex = /^01(?=\d{11}$)/;
+        const regex = /^01[ \-\d]{9}$/;
         return regex.test(mobileNumber);
       };
     
@@ -79,6 +79,8 @@ export default function SigninForm({ logreg, btntext }) {
     const handleSubmit = async () => {
         validate(); // Perform validation before submitting
 
+        console.log({state})
+
         if (!state.isDisabled) {
 
             try {
@@ -93,7 +95,7 @@ export default function SigninForm({ logreg, btntext }) {
             } catch (error) {
                 console.error('Signup error:', error);
                 // Handle signup error (e.g., display error message)
-                alert(error.message);
+                alert('আপনি আগে থেকেই সাইন আপ করেছে');
             }
         }
     };

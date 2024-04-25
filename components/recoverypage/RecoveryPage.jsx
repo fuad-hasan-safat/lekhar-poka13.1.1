@@ -138,7 +138,7 @@ const RecoveryPage = () => {
             const responseBody = await response.json();
             console.log("API response:", responseBody);
             // Handle the response data here, for example, update UI or store in state
-            router.push('/login')
+            router.push('/')
 
           } catch (error) {
             console.error("Error:", error);

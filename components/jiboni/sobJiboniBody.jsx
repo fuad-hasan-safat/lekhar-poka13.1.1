@@ -15,7 +15,7 @@ const SobJiboniBody = ({
 
 
   function handleClick(jiboniId) {
-    router.push(`/${jiboniId}`);
+    router.push(`/post/${jiboniId}`);
   }
   return (
     <>

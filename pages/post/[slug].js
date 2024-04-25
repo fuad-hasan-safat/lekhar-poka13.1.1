@@ -53,7 +53,7 @@ export default function PostDetails() {
     }
 
     fetchDataAsync();
-  }, []);
+  }, [router.query]);
 
   //console.log("----DDDDDDDDD AAAAAAAAA TTTTTTTT AAAAAAAAAAA-------", data);
 

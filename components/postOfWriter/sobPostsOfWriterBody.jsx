@@ -10,7 +10,7 @@ const SobPostsOfWriterBody = ({id, title, writer, content}) => {
 
 
   function handleClick(postid) {
-    router.push(`/${postid}`);
+    router.push(`/post/${postid}`);
   }
   return (
     <>
