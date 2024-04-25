@@ -22,7 +22,8 @@ const [jonopriyoData, setJanapriyoData] = useState([])
        // console.log("result         ->>>>>>>>>>>>>>>>", result.object);
         setJanapriyoData(result.posts);
       } catch (error) {
-        alert(error)
+        //alert(error)
+        console.log(error)
       }
     }
 

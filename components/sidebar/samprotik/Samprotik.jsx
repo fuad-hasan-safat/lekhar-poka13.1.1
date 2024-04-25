@@ -24,7 +24,8 @@ useEffect(() => {
       //console.log("result         ->>>>>>>>>>>>>>>>", result.object);
       setSamprotikPost(result.posts);
     } catch (error) {
-      alert(error)
+      // alert(error)
+      console.log(error);
     }
   }
 

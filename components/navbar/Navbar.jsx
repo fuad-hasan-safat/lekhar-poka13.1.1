@@ -87,7 +87,7 @@ const MyNavbar = () => {
 
 
   function goToSearchPost(id){
-    router.push(`/${id}`)
+    router.push(`/post/${id}`)
   }
 
   return (

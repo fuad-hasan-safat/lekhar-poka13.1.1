@@ -23,7 +23,8 @@ useEffect(() => {
       console.log("result         ->>>>>>>>>>>>>>>>", result.object);
       setSomosamoyikPost(result.posts);
     } catch (error) {
-      alert(error)
+      //alert(error)
+      console.log(error)
     }
   }
 
