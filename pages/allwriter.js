@@ -8,11 +8,11 @@ export default function AllWriterPage () {
     <section>
         <div className='container globat__padding'>
             <div className='flex flex-row'>
-                <div className='w-[70%]'>
+                <div className='lg:w-[70%]'>
                     <AllWriterList/>
 
                 </div>
-                <div className='w-[30%]'>
+                <div className='lg:w-[30%]'>
                     <Sidebar/>
                 </div>
             </div>

@@ -9,10 +9,10 @@ export default function Procchod() {
           <div className="row">
             <div className="col-md-12">
               <div className="all__post__content flex flex-row pt-10">
-                <div className="w-[70%] pr-10">
+                <div className="lg:w-[70%] lg:pr-10">
                   <ProcchodLeftContent />
                 </div>
-                <div className="w-[30%]">
+                <div className="lg:w-[30%]">
                   <Sidebar />
                 </div>
               </div>

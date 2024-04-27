@@ -3,7 +3,7 @@ import ContactUs from '../components/contactus/contactus'
 
 export default function Home() {
   return (
-    <div className=" text-black globat__padding">
+    <div className="lg:pt-[95px] md:pt-[90px] sm:pt-[85px] text-black">
         <ContactUs />
     </div>
   );

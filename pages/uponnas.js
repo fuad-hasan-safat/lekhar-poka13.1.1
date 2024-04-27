@@ -2,7 +2,7 @@ import SobUponnas from '../components/uponnas/sobUponnas'
 
 export default function Home() {
   return (
-    <div className="global_padding text-black">
+    <div className="lg:pt-[95px] md:pt-[90px] sm:pt-[85px] text-black">
       <SobUponnas/>
     </div>
   );

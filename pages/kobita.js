@@ -1,7 +1,7 @@
 import SobKobita from '../components/kobita/sobKobita'
 export default function Home() {
   return (
-    <div className="global_padding text-black">
+    <div className=" lg:pt-[95px] sm:pt-[90px] xm:pt-[85] text-black">
       <SobKobita />
     </div>
   );
