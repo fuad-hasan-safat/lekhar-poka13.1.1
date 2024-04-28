@@ -56,23 +56,7 @@ const Lekhok = () => {
           <h1 className="text-[20px] text-yellow-500 font-semibold">লেখক</h1>
         </div>
         <div className="pt-[23px] ">
-          {/* {lekhokList.length &&
-            lekhokList.map((item, index) => (
-              <>
-                <div className="pb-3">
-                  <LekhokDetails
-                    key={index}
-                    image={`${apiBasePath}/${item.image}`}
-                    writer={item.name}
-                    id={item._id}
-                    lifeCycle={`${item.birth_date} - ${item.expiry_date}`}
-                  />
-                </div>
-                <div className="pb-3">
-                  {index <= lekhokList.length - 2 ? <SidebarPostDivider /> : ""}
-                </div>
-              </>
-            ))} */}
+       
           {getVisibleWriters().length > 0 &&
             getVisibleWriters().map((item, index) => (
               <>

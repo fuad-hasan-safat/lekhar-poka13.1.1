@@ -9,6 +9,7 @@ import RatingComponent from '../../components/common/starRating'
 import AudioPlayer from '../../components/musicbar/AudioPlayer'
 import { fetchData } from "../../function/api";
 import { apiBasePath } from "../../utils/constant";
+import MusicPlayer from "../../components/musicbar/MusicPlayer";
 // import SimpleAudioPlayer from '../components/musicbar/SimpleAudioPlayer'
 
 export default function PostDetails() {
@@ -91,18 +92,26 @@ export default function PostDetails() {
       </section>
 
       {isAudioAvailable && (
-        <AudioPlayer
-          playlist={[
-            {
-              audioSrc: `${apiBasePath}/${data.audio.slice(data.audio.indexOf("/") + 1)}`,
-              metadata: {
-                title: data.title,
-                writer: data.writer,
-                image: "/images/defaultUserPic/profile.jpg",
-              },
-            },
-          ]}
-        />
+        // <AudioPlayer
+        //   playlist={[
+        //     {
+        //       audioSrc: `${apiBasePath}/${data.audio.slice(data.audio.indexOf("/") + 1)}`,
+        //       metadata: {
+        //         title: data.title,
+        //         writer: data.writer,
+        //         image: "/images/defaultUserPic/profile.jpg",
+        //       },
+        //     },
+        //   ]}
+        // />
+        <MusicPlayer songs={[{
+          id: data._id,
+          title: data.title,
+          src: `${apiBasePath}/${data.audio.slice(data.audio.indexOf("/") + 1)}`,
+          writer: data.writer,
+          image: '/images/defaultUserPic/profile.jpg'
+
+        }]} />
 
         // <SimpleAudioPlayer playlist={[{ audioSrc: `${apiBasePath}/${data.audio}`}]} />
       )}

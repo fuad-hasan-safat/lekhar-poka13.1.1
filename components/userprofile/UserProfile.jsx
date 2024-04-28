@@ -18,6 +18,7 @@ import {
 import Select from "react-select";
 
 import UserDetails from '../user/userdetails'
+import UserProfileBanner from '../userprofile/userProfileBanner'
 import Sidebar from '../sidebar/Sidebar'
 import { fetchData } from "../../function/api";
 import { apiBasePath } from "../../utils/constant";
@@ -132,7 +133,7 @@ export default function UserProfile({ slug }) {
     fetch(`${apiBasePath}/getprofile/${slug}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log('pofile details on user profile--------------->>>>>>>', data);
+        // console.log('pofile details on user profile--------------->>>>>>>', data);
         setDesignation(data.object.profile.designation)
         setProfileStatus(data.object.profile.profileStatus)
         setGender(data.object.profile.gender)
@@ -141,11 +142,11 @@ export default function UserProfile({ slug }) {
         setEmail(data.object.profile.email)
         setPhone(data.object.profile.phone)
         setImage(data.object.profile.image || '')
-        setFollower(data.object.profile.follower)
-        setFollowing(data.object.profile.following)
-        setPost(data.object.profile.post)
+        setFollower(data.object.stats.follower)
+        setFollowing(data.object.stats.following)
+        setPost(data.object.stats.post)
 
-        console.log('pofile gender details on user profile--------------->>>>>>>', gender);
+        // console.log('pofile post )()()() details on user profile--------------->>>>>>>', post);
 
 
         if (!data.object.stats) {
@@ -154,7 +155,7 @@ export default function UserProfile({ slug }) {
           setCanPostStatus(true)
         }
 
-        console.log(' profile image----------->>>>', image)
+        // console.log(' profile image----------->>>>', image)
       })
       .catch((error) => console.error("Error fetching data:", error));
 
@@ -180,23 +181,23 @@ export default function UserProfile({ slug }) {
         const result = await fetchData(
           `${apiBasePath}/postsbyuser/${slug}`
         );
-        console.log(
-          "result        user profile  ->>>>>>>>>>>>>>>>",
-          result.object
-        );
+        // console.log(
+        //   "result        user profile  ->>>>>>>>>>>>>>>>",
+        //   result.object
+        // );
         setUserPost(result.object);
-        console.log(
-          "result        user USER POST  ->>>>>>>>>>>>>>>>",
-          userPost
-        );
+        // console.log(
+        //   "result        user USER POST  ->>>>>>>>>>>>>>>>",
+        //   userPost
+        // );
       } catch (error) {
         //alert("Error fetching user post");
-        console.log("Error fetching user post")
+        // console.log("Error fetching user post")
       }
     }
 
     fetchDataAsync();
-  }, []);
+  }, [slug]);
 
 
 
@@ -225,46 +226,16 @@ export default function UserProfile({ slug }) {
 
 
   // audio file 
-  const audioRef = useRef();
   const [selectedFile, setSelectedFile] = useState(null);
-  const [progress, setProgress] = useState(0);
 
-
-
-
-  // jodit editor config
-  const joditconfig = {
-    // Other configurations...
-    placeholder: 'লিখুন',
-    color: 'black',
-    selectionStay: true,
-
-  };
 
   function textEditorHandler(e) {
     setContent(e.target.value);
+    console.log(e.target.value);
   }
 
 
-  const handleKeyUp = (event) => {
-    // Check if the current selection is empty (no characters selected)
-    const selection = editorRef.current?.getSelection(); // Assuming Jodit provides a getSelection method
-    if (!selection || selection.toString().trim() === '') {
-      // If selection is empty, prevent default behavior only for specific key presses
-      // (e.g., arrow keys, navigation keys) that might cause unintended deselection
-      if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Tab'].includes(event.key)) {
-        event.preventDefault();
-      }
-    }
-  };
 
-  // const joditconfig = useMemo(
-  // 	{
-  // 		readonly: false, // all options from https://xdsoft.net/jodit/docs/,
-  // 		placeholder: placeholder || 'Start typings...'
-  // 	},
-  // 	[placeholder]
-  // );
 
 
 
@@ -351,47 +322,15 @@ export default function UserProfile({ slug }) {
         {status && (
           <div className="">
             <div>
-              <div>
-                <img
-                  className="w-full"
-                  src="/images/usericons/userbanner.svg"
-                  alt="banner"
+                <UserProfileBanner 
+                image={image} 
+                post={post} 
+                follower={follower} 
+                following={following} 
+                username={username} 
+                designation={designation} 
+                profileStatus={profileStatus}
                 />
-              </div>
-              <div className="grid place-content-center items-center text-center -mt-[110px]">
-                <div className="table m-auto">
-                  <img
-                    className="w-[264px] h-[264px] rounded-full  border-4 border-solid border-white  "
-                    src={image.length > 0 ? `${apiBasePath}/${image.slice(image.indexOf("/") + 1)}` : '/images/defaultUserPic/profile.jpg'} />
-                </div>
-                <div className="grid place-content-center  text-center space-y-4">
-                  <h1 className="text-[#FCD200] text-[35px]  items-center">
-                    {username}
-                  </h1>
-                  <h1 className="text-[#595D5B] text-[22px]  items-center">
-                    {designation}
-                  </h1>
-                  <h1 className="text-[#737373] text-[22px]  items-center">
-                    {profileStatus}
-                  </h1>
-                </div>
-                <div className="flex flex-row text-[#484848] text-[28px] justify-items-center  m-auto divide-x-2 space-x-3 pt-4">
-
-                  <div className="">
-                    <h1>{post}</h1>
-                    <h1>পোস্ট</h1>
-                  </div>
-
-                  <div className="pl-2">
-                    <h1>{follower}</h1>
-                    <h1>ফলোয়ার</h1>
-                  </div>
-                  <div className="pl-2">
-                    <h1>{following}</h1>
-                    <h1>ফলোয়িং</h1>
-                  </div>
-                </div>
-              </div>
             </div>
             <section className="all__post__sec__wrap">
               <div className="container">
@@ -456,16 +395,6 @@ export default function UserProfile({ slug }) {
 
                         <div className="joidcss">
 
-                          {/* <JoditEditor
-                            ref={editor}
-                            value={content}
-                            config={joditconfig}
-                             tabIndex={1} // tabIndex of textarea
-                            onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
-                            onChange={(newContent) => setContent(newContent)}
-                            onKeyUp={handleKeyUp}
-                          /> */}
-
                           <EditorProvider>
                             <Editor 
                             value={content} 
@@ -482,17 +411,9 @@ export default function UserProfile({ slug }) {
 
                         </div>
 
-                        {/* <div className="text-gray-800">
-                          <input type="file" accept="audio/*" onChange={handleFileChange} />
-                          {selectedFile ? (
-                            <p>Selected file: {selectedFile.name}</p>
-                          ) : (
-                            <p>অডিও ফাইল আপলোড করুন</p>
-                          )}
-                        </div> */}
+                     
                         <div>
                           <AudioFileUpload selectedFile={selectedFile} setSelectedFile={setSelectedFile} />
-                          {/* <ChankFileUpload/> */}
                         </div>
                         <button
                           onClick={handleSubmit}

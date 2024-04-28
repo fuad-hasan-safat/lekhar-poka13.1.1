@@ -110,7 +110,7 @@ export default function Login() {
         <>
           <div className="flex flex-col">
             <div className="text-black text-xl mb-4">
-              Hey {username} , welcom to LekharPoka
+               {username} , লেখার পকায় আপনাকে স্বাগতম
             </div>
             <div className="flex flex-row space-x-3 text-[18px]">
               <LogoutButton

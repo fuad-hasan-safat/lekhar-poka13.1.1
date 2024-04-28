@@ -1,11 +1,11 @@
+
 "use client";
 import { useEffect, useState } from "react";
 import MaincontentBody from "../common/maincontentBody";
 import MainContentDivider from "../common/mainContentDivider";
-import ProcchodButtonList from "./ProcchodButtonList";
 import { apiBasePath } from "../../utils/constant";
 
-export default function ProcchodLeftContent() {
+export default function ProfilePostLeftContent({slug}) {
 
   const [selectedId, setSelectedId] = useState("sob");
   const [postList, setPostList] = useState([])
@@ -30,9 +30,10 @@ export default function ProcchodLeftContent() {
 
     const fetchPosts = async () => {
       try {
-        const response = await fetch(`${apiBasePath}/posts`);
+        const response = await fetch(`${apiBasePath}/postsbyuser/${slug}`);
         const data = await response.json();
-        setPostList(data);
+        setPostList(data.object);
+        console.log('user post ------------->>>>>>>', postList)
 
         // Calculate total pages based on posts and postsPerPage
         setTotalPages(Math.ceil(data.length / postsPerPage));
@@ -71,7 +72,7 @@ export default function ProcchodLeftContent() {
   };
 
   const startIndex = (currentPage - 1) * postsPerPage;
-  const endIndex = Math.min(startIndex + postsPerPage, postList.length); // Ensure endIndex doesn't exceed posts length
+  const endIndex = Math.min(startIndex + postsPerPage, postList?.length); // Ensure endIndex doesn't exceed posts length
 
   const displayedPosts = postList.slice(startIndex, endIndex); // Slice the posts for the current page
 
@@ -79,11 +80,9 @@ export default function ProcchodLeftContent() {
 
   return (
     <div>
-      <ProcchodButtonList buttons={buttons} setButtons={setButtons} selectedId={selectedId} setSelectedId={setSelectedId} setPostList={setPostList} postList={postList} setTotalPages={setTotalPages} postsPerPage={postsPerPage} setCurrentPage={setCurrentPage} />
-      <div className="text-3xl">
 
         {error ? (
-          <div>Error fetching posts: {error.message}</div>
+          <div>Error fetching posts: {}</div>
         ) : (
           <>
             <div className="lakha__main__content pt-20 text-3xl">
@@ -96,7 +95,7 @@ export default function ProcchodLeftContent() {
                       title={post.title}
                       writer={post.writer}
                       category={post.category}
-                      content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 200).join(" ")}` : `${post.content.split(/\s+/).slice(0, 200).join(" ")}`} // Truncate content
+                      content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 40).join(" ")}` : `${post.content.split(/\s+/).slice(0, 200).join(" ")}`} // Truncate content
                     />
                   </div>
                   {index < displayedPosts.length - 1 && <MainContentDivider />}
@@ -132,7 +131,8 @@ export default function ProcchodLeftContent() {
           </>
         )}
 
-      </div>
+      
     </div>
   );
 }
+

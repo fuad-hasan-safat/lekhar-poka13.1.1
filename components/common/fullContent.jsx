@@ -16,15 +16,15 @@ const FullPost = ({ content, title, writer, catagory }) => {
 
     if (catagory === 'কবিতা') {
         return (
-            <div className="kobita__content text-black pt-24 space-y-3 text-center">
+            <div className="kobita__content text-black space-y-3 text-center py-[55px]">
                 <div className="font-semibold text-[35px] text-yellow-400">{title}</div>
                 <div className="text-[22px] text-[#595D5B] ">{writer}</div>
-                {lines.slice(prevLines, numLines).map((line, index) => (
-                    <div key={index} className="text-[16px] text-gray-500 text-justify" dangerouslySetInnerHTML={{ __html: line }} />
-                ))}
-                {numLines < lines.length && (
-                    <button className="text-[14] text-yellow-400" onClick={handleLoadMore}>পরবর্তী </button>
-                ) }
+                {/* {lines.slice(prevLines, numLines).map((line, index) => ( */}
+                    <div className="text-[16px] text-gray-500 text-justify" dangerouslySetInnerHTML={{ __html: content }} />
+                {/* ))} */}
+                {/* {numLines < lines.length && ( */}
+                    {/* <button className="text-[14] text-yellow-400" onClick={handleLoadMore}>পরবর্তী </button> */}
+                {/* ) } */}
             </div>
         );
     } else {
@@ -32,12 +32,12 @@ const FullPost = ({ content, title, writer, catagory }) => {
             <div className=" text-black pr-[100px] pt-24 space-y-3">
                 <div className="font-semibold text-[35px] text-[#FCD200]">{title}</div>
                 <div className="text-[22px] text-[#595D5B] ">{writer}</div>
-                {lines.slice(prevLines, numLines).map((line, index) => (
-                    <div key={index} className="text-[16px] text-gray-500 text-justify" dangerouslySetInnerHTML={{ __html: line }} />
-                ))}
-                {numLines < lines.length && (
-                    <button onClick={handleLoadMore}>পরবর্তী</button>
-                ) }
+                {/* {lines.slice(prevLines, numLines).map((line, index) => ( */}
+                    <div className="text-[16px] text-gray-500 text-justify" dangerouslySetInnerHTML={{ __html: content }} />
+                {/* ))} */}
+                {/* {numLines < lines.length && ( */}
+                    {/* <button onClick={handleLoadMore}>পরবর্তী</button> */}
+                {/* ) } */}
             </div>
         );
     }

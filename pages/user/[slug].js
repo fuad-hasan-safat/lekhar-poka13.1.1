@@ -10,7 +10,7 @@ export default function Home() {
   return (
     router.isReady &&
     <>
-      <div className='global_padding'>
+      <div className='pt-[95px]'>
         <UserProfile slug={slug} />
       </div>
     </>

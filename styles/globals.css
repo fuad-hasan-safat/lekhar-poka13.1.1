@@ -39,7 +39,9 @@ body {
 }
 
 
-
+.progress-bar {
+  background-color: #fdcb43 !important;
+}
 
 
 .container {
@@ -325,8 +327,8 @@ background-color: #f8e405;
   border-radius: 20px;
   transform: scale(1.05);
   transition: all 0.5s;
-  margin: 60px;
-  padding: 30px 30px 40px;
+  margin: 110px;
+  padding: 70px 30px 40px;
 }
 
 

@@ -69,9 +69,6 @@ const MyNavbar = () => {
 
   useEffect(() => {
     if (search !== "") {
-      // fetch(`http://api.tvmaze.com/search/shows?q=${search}`)
-      //     .then((res) => res.json())
-      //     .then((data) => setSearchData(data))
       try {
         const newFiltreddata = postList.filter((post) => {
           return post.title
@@ -215,16 +212,6 @@ const MyNavbar = () => {
                         <h1>No Result Found</h1>
                       )}
                     </div>
-
-                    {/* <input
-                        className={`w-[200px] relative text-[16px] bg-transparent text-black py-2 rounded-md focus:outline-none  ${isSearchActive ? "visible" : "hidden"
-                          }`}
-                        type="text"
-                        placeholder=" অনুসন্ধান..."
-                        autoComplete="off"
-                        value={searchTerm}
-                        onChange={handleSearchChange}
-                      /> */}
 
                     {isSearchActive && (
                       <FontAwesomeIcon
