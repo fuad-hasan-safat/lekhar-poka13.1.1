@@ -79,7 +79,8 @@ const Lekhok = () => {
                 <div className="pb-3">
                   <LekhokDetails
                     key={index}
-                    image={`${apiBasePath}/${item.image}`}
+                    image={`${apiBasePath}/${item.image.replace('/uploads/', '/')
+                  }`}
                     writer={item.name}
                     id={item._id}
                     lifeCycle={`${item.birth_date} - ${item.expiry_date}`}

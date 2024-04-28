@@ -4,29 +4,19 @@ import Image from "next/image";
 export default function Home() {
   return (
     <>
-      <section>
-        <section className="all__post__sec__wrap pt-[94px]">
-          <div>
-            <Image
-              src={'/images/pages-banner-svg/aboutus.svg'}
-              height={380}
-              width={1920}
-              alt={"kobita banner"}
-            />
-          </div>
-          <div className="container">
-            <div className="row">
-              <div className="col-md-12">
-              </div>
-            </div>
-          </div>
+   
+      <section className="lg:pt-[95px] md:pt-[90px] sm:pt-[85px] xs:pt-[80px] text-black"> 
+        <section className="all__post__sec__wrap">
+        <div className="relative w-full xl:h-[380px] lg:h-[360px] md:h-[340px] sm:h-[280px] xs:h-[260px]  overflow-hidden" style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat`}}>
+                <h2 className=" absolute top-[50%] left-[50%] text-[40px] text-[#F9A106] -translate-x-[50%] -translate-y-[50%] max-h-[0px]">আমাদের কথা</h2>
+        </div>
         </section>
 
-        <section className="py-[54px]">
+        <section className="lg:py-[54px]">
           <div className="container">
             <div >
 
-              <p className=" text-center text-gray-700 [word-spacing:8px] lg:text-[28px] xs:text-[20]">
+              <p className=" text-center text-gray-700 [word-spacing:8px] lg:text-[28px] xs:text-[20px]">
                 লেখার পোকা  হলো কবিতা, গান, প্রবন্ধ গল্প এবং জীবনী লেখা প্রকাশের একটি ওয়েব <br />
                 সাইট। যেটা অভিব্যক্তির একটি সুন্দর রূপ যা ব্যক্তিদের তাদের চিন্তাভাবনা, আবেগ এবং <br />
                 অভিজ্ঞতা সৃজনশীল এবং শৈল্পিক উপায়ে প্রকাশ করতে দেয়। </p>
@@ -34,10 +24,10 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="pt-[40px]">
+        <section className="lg:pt-[40px]">
           <div className="container">
             <div className="lg:flex lg:flex-row">
-              <div className="w-1/2">
+              <div className="lg:w-1/2">
                 <Image
                   width={669}
                   height={500}
@@ -45,10 +35,10 @@ export default function Home() {
                   src="/images/aboutuspage/missionSideImage.png"
                 />
               </div>
-              <div className=" flex flex-col lg:text-[20px] xs:text-[16] lg:w-1/2 xs:w-full text-justify space-y-[25px]">
+              <div className=" lg:flex lg:flex-col lg:text-[20px] xs:text-[16] lg:w-1/2  text-justify lg:space-y-[25px]">
                 <div className="text-[#F9A106] text-[48px]">মিশন</div>
                 <div>
-                  <hr className={` w-[547px]  h-[0.5px] border-0 bg-[#F9A106]`} />
+                  <hr className={` w-full  h-[0.5px] border-0 bg-[#F9A106]`} />
                 </div>
                 <div className="text-[#484848]  pt-1">
                   লেখার পোকার &apos;কবিতা গল্প জীবনী নিয়ে মিশন&apos; হলো একটি আদর্শ,
@@ -87,14 +77,14 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="my-[80px]">
+        <section className="lg:my-[80px]">
           <div className="container">
-            <div className="flex flex-row space-x-10">
+            <div className="lg:flex lg:flex-row lg:space-x-10">
 
-              <div className="flex flex-col lg:text-[20px] xs:text-[16] lg:w-1/2 xs:w-full text-justify space-y-[25px]">
+              <div className="lg:flex lg:flex-col lg:text-[20px] xs:text-[16] lg:w-1/2 xs:w-full text-justify lg:space-y-[25px]">
                 <div className="text-[#F9A106] text-[48px]">ভিশন</div>
                 <div>
-                  <hr className={` w-[547px]  h-[0.5px] border-0 bg-[#F9A106]`} />
+                  <hr className={` w-full  h-[0.5px] border-0 bg-[#F9A106]`} />
                 </div>
                 <div className="text-[#484848]  pt-1">
                   লেখার পোকার &apos;কবিতা, গল্প, এবং জীবনী নিয়ে ভিশন&apos; হলো একটি প্রস্তাবনা বা ধারণা যেখানে এই তিনটি চরিত্রিত শৃঙ্খলা বা জীবনের আংশ নিয়ে নির্ধারিত উদ্দেশ্য বা
@@ -124,8 +114,8 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className=" lg:w-1/2 sm:w-full ">
-                <div className="mt-[150px]">
+              <div className=" lg:w-1/2 ">
+                <div className="lg:mt-[150px]">
                   <Image
                     width={669}
                     height={1032}

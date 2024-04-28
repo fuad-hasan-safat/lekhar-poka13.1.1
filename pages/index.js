@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <>
-        <div className="globat__padding">
+        <div className="lg:pt-[95px] md:pt-[90px] sm:pt-[85px] text-black">
        
         <ImageSlider/>
         <Procchod />

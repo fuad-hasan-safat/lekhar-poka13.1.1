@@ -7,13 +7,8 @@ export default function ContactUs() {
     const emailIcon = '/images/svgs/email.svg';
     return (
         <div className="flex flex-col pt[115px]">
-            <div>
-                <Image
-                    src={'/images/pages-banner-svg/zogajog.svg'}
-                    height={380}
-                    width={1920}
-                    alt={"zogajog banner"}
-                />
+           <div className="relative w-full xl:h-[380px] lg:h-[360px] md:h-[340px] sm:h-[280px] xs:h-[260px]  overflow-hidden" style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat`}}>
+                <h2 className=" absolute top-[50%] left-[50%] text-[40px] text-[#F9A106] -translate-x-[50%] -translate-y-[50%] max-h-[0px]">যোগাযোগ</h2>
             </div>
             <div className="container">
                 <div className="row">

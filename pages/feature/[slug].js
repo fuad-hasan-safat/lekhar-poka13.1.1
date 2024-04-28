@@ -31,27 +31,23 @@ export default function PostDetails() {
         );
         //console.log("result         ->>>>>>>>>>>>>>>>", result.object);
         setData(result.object.post);
+        console.log('data -------------- slider >>>>>', data)
       } catch (error) {
         alert(error)
       }
     }
 
     fetchDataAsync();
-  }, []);
+  }, [router.query]);
 
   //console.log('----DDDDDDDDD AAAAAAAAA TTTTTTTT AAAAAAAAAAA-------', data)
 
   return (
+    
     <>
-      <section className="all__post__sec__wrap">
-        <div>
-          {/* <Image
-            src={"/images/pages-banner-svg/golpo.svg"}
-            height={380}
-            width={1920}
-            alt={"kobita banner"}
-          /> */}
-        </div>
+      <section className="all__post__sec__wrap pt-[95px]">
+        {data?.length && (
+  
         <div className="container">
           <div className="row">
             <div className="col-md-12">
@@ -66,7 +62,7 @@ export default function PostDetails() {
                     <RatingComponent setRating={setRating} rating={rating} post_id={data._id} />
                   </div>
 
-                  <div className="w-sidebarwidth">
+                  <div className="w-[30%]">
                     <Sidebar />
                   </div>
                 </div>
@@ -74,6 +70,14 @@ export default function PostDetails() {
             </div>
           </div>
         </div>
+      )}
+      {
+        !data?.length&&(
+          <div className="text-black">
+            There Is no data in server for this request
+          </div>
+        )
+      }
       </section>
 
       {isAudioAvailable && (
