@@ -33,10 +33,11 @@ export default function AllWriterList() {
                                 <div className="pb-3">
                                     <LekhokDetails
                                         key={index}
-                                        image={`${apiBasePath}/${item.image}`}
+                                        image={`${apiBasePath}/${item.image.slice(item.image.indexOf("/") + 1)}`}
                                         writer={item.name}
                                         id={item._id}
-                                        lifeCycle={`${item.birth_date} - ${item.expiry_date}`}
+                                        lifeCycle={`${item.birth_date} - ${item.expiry_date === null? `বর্তমান` : `${item.expiry_date}`}`}
+
                                     />
                                 </div>
                                 <div className="pb-3">

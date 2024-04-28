@@ -46,7 +46,7 @@ const [jonopriyoData, setJanapriyoData] = useState([])
                 <div className="pb-1">
                   <LekhaPokaProfile
                     key={index}
-                    image={'/images/writerimage/robi.jpg'}
+                    image={'/images/defaultUserPic/profile.jpg'}
                     title={item.title}
                     writer={item.writer}
                     id={item._id}

@@ -26,30 +26,30 @@ export default function PostDetails() {
   const [rating, setRating] = useState(0);
 
 
-  useEffect( () => {
+  useEffect(() => {
     // console.log(
     //   "<<<<<<<<<<<<<<<<<<<<<<-------------------------in side use effect----------------------->>>>>>>>>>>>>>>>"
     // );
 
     async function fetchDataAsync() {
 
-    try {
-      const result = await fetchData(
-        `${apiBasePath}/getpost/${slug}`
-      );
-      //console.log("result->>>>>>>>>>>>>>>>", result.object);
-      setData(result.object);
-      console.log('post data -------- post', result.object)
-      //setcategory(result.object.category);
-      if (result.object.audio.length > 0) {
-        setIsAudioAvailAble(true);
+      try {
+        const result = await fetchData(
+          `${apiBasePath}/getpost/${slug}`
+        );
+        //console.log("result->>>>>>>>>>>>>>>>", result.object);
+        setData(result.object);
+        console.log('post data -------- post', result.object)
+        //setcategory(result.object.category);
+        if (result.object.audio.length > 0) {
+          setIsAudioAvailAble(true);
+        }
+      } catch (error) {
+        console.log(error);
+        console.log("ERROR");
+      } finally {
+        //setcategory(kobita)
       }
-    } catch (error) {
-      console.log(error);
-      console.log("ERROR");
-    } finally {
-      //setcategory(kobita)
-    }
     }
 
     fetchDataAsync();
@@ -61,22 +61,15 @@ export default function PostDetails() {
   return (
     <>
       <section className="all__post__sec__wrap">
-        <div className="relative">
-          <Image
-            src={"/images/pages-banner-svg/baseBanner.png"}
-            height={380}
-            width={1920}
-            alt={"kobita banner"}
-          />
-          <h2 className=" absolute top-[50%] left-[50%] text-[40px] text-[#F9A106] -translate-x-[50%] -translate-y-[50%]">{data.category}</h2>
-
+        <div className="relative w-full xl:h-[380px] lg:h-[360px] md:h-[340px] sm:h-[280px] xs:h-[260px]  overflow-hidden" style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat` }}>
+          <h2 className=" absolute top-[50%] left-[50%] text-[40px] text-[#F9A106] -translate-x-[50%] -translate-y-[50%] max-h-[0px]">{data.category}</h2>
         </div>
 
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <div className="flex flex-row">
-                {<div className="flex flex-col w-[70%]">
+              <div className="lg:flex lg:flex-row">
+                {<div className="flex flex-col lg:w-[70%]">
                   <FullPost
                     content={data.content}
                     title={data.title}
@@ -88,7 +81,7 @@ export default function PostDetails() {
 
                 }
 
-                <div className="w-sidebarwidth">
+                <div className="lg:w-[30%]">
                   <Sidebar />
                 </div>
               </div>
@@ -105,7 +98,7 @@ export default function PostDetails() {
               metadata: {
                 title: data.title,
                 writer: data.writer,
-                image: "/images/writerimage/nazrul.jpg",
+                image: "/images/defaultUserPic/profile.jpg",
               },
             },
           ]}

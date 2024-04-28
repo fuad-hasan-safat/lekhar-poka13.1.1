@@ -73,8 +73,8 @@ export default function PostDetails() {
       )}
       {
         !data?.length&&(
-          <div className="text-black">
-            There Is no data in server for this request
+          <div className="text-black text-center text-3xl py-[50px]">
+            সাময়িক অসুবিধার জন্য দুঃখিত
           </div>
         )
       }

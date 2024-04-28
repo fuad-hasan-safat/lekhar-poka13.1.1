@@ -362,7 +362,7 @@ export default function UserProfile({ slug }) {
                 <div className="table m-auto">
                   <img
                     className="w-[264px] h-[264px] rounded-full  border-4 border-solid border-white  "
-                    src={image.length > 0 ? `${apiBasePath}/${image}` : '/images/defaultUserPic/profile.jpg'} />
+                    src={image.length > 0 ? `${apiBasePath}/${image.slice(image.indexOf("/") + 1)}` : '/images/defaultUserPic/profile.jpg'} />
                 </div>
                 <div className="grid place-content-center  text-center space-y-4">
                   <h1 className="text-[#FCD200] text-[35px]  items-center">
@@ -397,8 +397,8 @@ export default function UserProfile({ slug }) {
               <div className="container">
                 <div className="row">
                   <div className="col-md-12"></div>
-                  <div className="flex flex-row pt-[80px]">
-                    <div className="w-[71%]">
+                  <div className="lg:flex lg:flex-row pt-[80px]">
+                    <div className="lg:w-[71%]">
                       <div className="pr-6 space-y-4">
                         <input
                           onChange={handleTitle}
@@ -531,7 +531,7 @@ export default function UserProfile({ slug }) {
                           ))}
                       </div>
                     </div>
-                    <div className="w-[29%] flex flex-col">
+                    <div className="lg:w-[29%] flex flex-col">
                       <UserDetails
                         sex={gender}
                         birthdate={dob}
