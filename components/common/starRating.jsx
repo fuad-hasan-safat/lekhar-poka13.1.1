@@ -61,7 +61,7 @@ export default function RatingComponent({ post_id, setRating, rating }) {
 
 
   return (
-    <div className='start__rating place-content-center justify-center  pt-[20px] pb-[20px] mx-[40px] rounded-xl float-left text-center border-2 text-black border-gray-400'>
+    <div className='start__rating place-content-center justify-center  pt-[50px] pb-[50px] mx-[40px] mb-[50px] rounded-xl float-left text-center border-2 text-black border-gray-400'>
      <p>রেটিং দিন ।</p> 
 
      <div>

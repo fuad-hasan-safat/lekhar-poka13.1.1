@@ -73,7 +73,7 @@ export default function SobKobitaLeftContent() {
                       title={post.title}
                       writer={post.writer}
                       category={post.category}
-                      content={post.content.split(/\s+/).slice(0, 40).join(" ")}
+                      content={post.content.split(/\s+/).slice(0, 180).join(" ")}
                     />
                   </div>
                   {index < displayedPosts.length - 1 && <MainContentDivider />}
