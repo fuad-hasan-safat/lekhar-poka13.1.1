@@ -5,6 +5,7 @@ import axios from "axios";
 import Loading from "../common/loading";
 import SobOnugolpoBody from "./sobOnugolpoBody";
 import { apiBasePath } from "../../utils/constant";
+import { countWords } from "../../function/api";
 
 export default function SobOnugolpoLeftContent() {
 
@@ -60,12 +61,12 @@ export default function SobOnugolpoLeftContent() {
       {isLoading ? (
         <Loading />
       ) : error ? (
-        <div>Error fetching posts: {error.message}</div>
+        <div>Error fetching posts: </div>
       ) : (
         <>
 
           <div className='container'>
-            <div className='flex'>
+            {postList && <div className='flex'>
               <div className="lakha__main__content pt-20  text-3xl lg:mr-[100px] md:mr-[50px]">
                 {displayedPosts.length && (
                   displayedPosts.map((post, index) => (
@@ -75,7 +76,9 @@ export default function SobOnugolpoLeftContent() {
                           id={post._id} // Assuming '_id' is the unique identifier
                           title={post.title}
                           writer={post.writer}
-                          content={post.content.split(/\s+/).slice(0, 200).join(" ")}
+                          content={countWords(post.content, 70)}
+
+                        // content={post.content.split(/\s+/).slice(0, 200).join(" ")}
                         />
                       </div>
                       {index < displayedPosts.length - 1 && <MainContentDivider />}
@@ -84,6 +87,7 @@ export default function SobOnugolpoLeftContent() {
                 )}
               </div>
             </div>
+            }
             {totalPages > 1 && <div className="py-10 space-x-4"> {/* Add a class for styling */}
               <button
                 className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"

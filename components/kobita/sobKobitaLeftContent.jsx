@@ -6,6 +6,7 @@ import SobKobitaBody from "./sobKobitaBody";
 import axios from "axios";
 import Loading from "../common/loading";
 import { apiBasePath } from "../../utils/constant";
+import { countWords } from "../../function/api";
 
 export default function SobKobitaLeftContent() {
 
@@ -75,7 +76,9 @@ export default function SobKobitaLeftContent() {
                           title={post.title}
                           writer={post.writer}
                           category={post.category}
-                          content={post.content.split(/\s+/).slice(0, 180).join(" ")}
+                          // content={post.content.split(/\s+/).slice(0, 180).join(" ")}
+                           content={countWords(post.content, 30)}
+
                         />
                       </div>
                       {index < displayedPosts.length - 1 && <MainContentDivider />}

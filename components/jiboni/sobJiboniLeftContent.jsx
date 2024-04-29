@@ -4,6 +4,7 @@ import MainContentDivider from "../common/mainContentDivider";
 import Loading from "../common/loading";
 import SobJiboniBody from "./sobJiboniBody";
 import { apiBasePath } from "../../utils/constant";
+import { countWords } from "../../function/api";
 
 export default function SobJiboniLeftContent() {
 
@@ -74,7 +75,9 @@ export default function SobJiboniLeftContent() {
                           id={post.id} // Assuming 'id' is the unique identifier
                           title={post.title}
                           writer={post.writer}
-                          content={post.content.split(/\s+/).slice(0, 200).join(" ")}
+                          content={countWords(post.content, 70)}
+
+                          // content={post.content.split(/\s+/).slice(0, 200).join(" ")}
 
                         />
                       </div>

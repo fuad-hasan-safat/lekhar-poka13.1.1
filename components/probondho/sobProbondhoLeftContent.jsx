@@ -6,6 +6,7 @@ import axios from "axios";
 import Loading from "../common/loading";
 import { apiBasePath } from "../../utils/constant";
 import SobProbondhoBody from "./sobProbondhoBody";
+import { countWords } from "../../function/api";
 
 export default function SobProbondhoLeftContent() {
 
@@ -77,7 +78,9 @@ export default function SobProbondhoLeftContent() {
                           id={post._id} // Assuming '_id' is the unique identifier
                           title={post.title}
                           writer={post.writer}
-                          content={post.content.split(/\s+/).slice(0, 200).join(" ")}
+                          content={countWords(post.content, 70)}
+
+                          // content={post.content.split(/\s+/).slice(0, 200).join(" ")}
 
                         />
                       </div>
