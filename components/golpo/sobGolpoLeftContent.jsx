@@ -61,15 +61,14 @@ export default function SobGolpoLeftContent() {
 
     return (
       <div>
-        <div className="pt-20 text-3xl">
-
-
           {isLoading ? (
             <Loading />
           ) : error ? (
             <div>Error fetching posts</div>
           ) : (
             <>
+              <div className='container'>
+            <div className='flex'>
               <div className="lakha__main__content pt-20  text-3xl lg:mr-[100px] md:mr-[50px]">
                 {displayedPosts.length && (
                   displayedPosts.map((post, index) => (
@@ -86,6 +85,7 @@ export default function SobGolpoLeftContent() {
                     </>
                   ))
                 )}
+                </div>
               </div>
               {totalPages > 1 && <div className="py-10 space-x-4"> {/* Add a class for styling */}
                 <button
@@ -117,12 +117,9 @@ export default function SobGolpoLeftContent() {
                 </button>
               </div>
               }
+              </div>
             </>
           )}
-
-
-
-        </div>
       </div>
     );
   }

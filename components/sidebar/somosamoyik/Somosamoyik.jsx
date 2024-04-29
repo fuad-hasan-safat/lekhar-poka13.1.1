@@ -35,17 +35,17 @@ useEffect(() => {
 
   return (
     <>
-      <div>
+      <div className="">
         <div>
-          <div className="text-[20px] text-yellow-500 font-semibold">
-            সমসাময়িক
+          <div className="text-[20px] text-yellow-500 font-semibold ">
+           <p>সমসাময়িক</p> 
           </div>
         </div>
         <div className="pt-[23px]">
           {somosamoyikPost.length &&
             somosamoyikPost.map((item, index) => (
               <>
-                <div className="pb-1">
+                <div className="pb-1 ">
                   <LekhaPokaProfile
                    key={index}
                    image={'/images/defaultUserPic/profile.jpg'}

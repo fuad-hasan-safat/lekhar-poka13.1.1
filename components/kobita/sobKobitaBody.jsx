@@ -1,5 +1,3 @@
-"use client";
-import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -11,9 +9,6 @@ const SobKobitaBody = ({
   category
 }) => {
   const router = useRouter();
-
-  const [html, setHTML] = useState({ __html: content });
-
 
   function handleClick(kobitaId) {
     router.push(`/post/${kobitaId}`);

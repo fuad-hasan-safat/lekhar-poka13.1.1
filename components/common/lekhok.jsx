@@ -12,7 +12,7 @@ const LekhokDetails = ({
 }) => {
     return (
         <>
-            <div className="flex w-full">
+            <div className="flex lg:justify-start sm:justify-center xs:justify-center">
                 <div className="lekhokIteam">
                     <img 
                     src={image}  

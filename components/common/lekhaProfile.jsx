@@ -11,7 +11,7 @@ const LekhaPokaProfile= ({
 }) => {
   return (
     <>
-      <div className="flex ">
+      <div className="flex lg:justify-start sm:place-content-center sx:justify-center">
         <div className="iteam">
           <img src={image} height={100} width={100} alt="" />
         </div>

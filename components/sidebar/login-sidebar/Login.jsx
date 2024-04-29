@@ -108,7 +108,7 @@ export default function Login() {
     <>
       {status === 'success' ? (
         <>
-          <div className="flex flex-col">
+          <div className="flex flex-col items-center">
             <div className="text-black text-xl mb-4">
                {username} , লেখার পকায় আপনাকে স্বাগতম
             </div>

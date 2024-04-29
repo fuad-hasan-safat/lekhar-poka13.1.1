@@ -67,7 +67,7 @@ const Lekhok = () => {
                   }`}
                     writer={item.name}
                     id={item._id}
-                    lifeCycle={`${item.birth_date} - ${item.expiry_date}`}
+                    lifeCycle={`${item.birth_date} - ${item.expiry_date === null ? 'বর্তমান' : item.expiry_date}`}
                   />
                 </div>
                 <div className="pb-3">
@@ -81,7 +81,7 @@ const Lekhok = () => {
             ))}
         </div>
         <div>
-          <div className="w-[180px] pb-[60px] pt-[30px] flex ">
+          <div className="pb-[60px] pt-[30px] flex justify-center ">
             <div>
               <button
                 onClick={allWriterHandler}
