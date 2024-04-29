@@ -26,9 +26,10 @@ import Link from "next/link";
 
 import Checkbox from '../common/Checkbox'
 import AudioFileUpload from '../userprofile/AudiofileUpload'
+import ProfilePostLeftContent from './ProfilePostLeftContent';
 
 export default function UserProfile({ slug }) {
-
+  // console.log("user profile main page---------------------->>>>>>>>>>>>><<<<<<<<<<<<<<<< SLUG ",slug)
 
   // --------------- editor ----------
 
@@ -176,27 +177,27 @@ export default function UserProfile({ slug }) {
 
     // user post
 
-    async function fetchDataAsync() {
-      try {
-        const result = await fetchData(
-          `${apiBasePath}/postsbyuser/${slug}`
-        );
-        // console.log(
-        //   "result        user profile  ->>>>>>>>>>>>>>>>",
-        //   result.object
-        // );
-        setUserPost(result.object);
-        // console.log(
-        //   "result        user USER POST  ->>>>>>>>>>>>>>>>",
-        //   userPost
-        // );
-      } catch (error) {
-        //alert("Error fetching user post");
-        // console.log("Error fetching user post")
-      }
-    }
+    // async function fetchDataAsync() {
+    //   try {
+    //     const result = await fetchData(
+    //       `${apiBasePath}/postsbyuser/${slug}`
+    //     );
+    //     // console.log(
+    //     //   "result        user profile  ->>>>>>>>>>>>>>>>",
+    //     //   result.object
+    //     // );
+    //     setUserPost(result.object);
+    //     // console.log(
+    //     //   "result        user USER POST  ->>>>>>>>>>>>>>>>",
+    //     //   userPost
+    //     // );
+    //   } catch (error) {
+    //     //alert("Error fetching user post");
+    //     // console.log("Error fetching user post")
+    //   }
+    // }
 
-    fetchDataAsync();
+    // fetchDataAsync();
   }, [slug]);
 
 
@@ -425,7 +426,7 @@ export default function UserProfile({ slug }) {
                       </div>
 
                       <div>
-                        {userPost.length &&
+                        {/* {userPost.length &&
                           userPost.map((post, index) => (
                             <>
                               <div>
@@ -449,7 +450,8 @@ export default function UserProfile({ slug }) {
                                 </div>
                               </div>
                             </>
-                          ))}
+                          ))} */}
+                          {<ProfilePostLeftContent slug={slug}/>}
                       </div>
                     </div>
                     <div className="lg:w-[29%] flex flex-col">
