@@ -29,7 +29,7 @@ export default function Home() {
             <div className="lg:flex lg:flex-row">
               <div className="lg:w-1/2">
                 <img
-                  className="lg:h-[800px] md:hidden sm:hidden xs:hidden"
+                  className="lg:h-[800px] md:h-[400px] sm:h-[400px] xs:h-[400px] "
                   alt="mission side image"
                   src="/images/aboutuspage/missionSideImage.png"
                 />
@@ -116,7 +116,7 @@ export default function Home() {
               <div className=" lg:w-1/2 ">
                 <div className="lg:mt-[25px]">
                   <img
-                    className="lg:h-[900px] md:hidden sm:hidden xs:hidden"
+                    className="lg:h-[900px] md:h-[400px] sm:h-[400px] xs:h-[400px]"
                     alt="mission side image"
                     src="/images/aboutuspage/vissionSideImage.png"
                   />
