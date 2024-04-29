@@ -69,7 +69,7 @@ return (
       <div>Error fetching posts: {error.message}</div>
     ) : (
       <>
-        <div className='container'>
+        {/* <div className='container'> */}
           <div className='flex'>
             <div className="lakha__main__content pt-20 text-3xl lg:mr-[100px] md:mr-[50px]">
               {displayedPosts.length && (
@@ -121,7 +121,7 @@ return (
             </button>
           </div>
           }
-        </div>
+        {/* </div> */}
       </>
     )}
   </div>

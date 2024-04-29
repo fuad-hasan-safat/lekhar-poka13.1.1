@@ -338,7 +338,7 @@ export default function UserProfile({ slug }) {
                 <div className="row">
                   <div className="col-md-12"></div>
                   <div className="lg:flex lg:flex-row pt-[80px]">
-                    <div className="lg:w-[71%]">
+                    <div className="lg:w-[70%]">
                       <div className="pr-6 space-y-4">
                         <input
                           onChange={handleTitle}
@@ -426,35 +426,10 @@ export default function UserProfile({ slug }) {
                       </div>
 
                       <div>
-                        {/* {userPost.length &&
-                          userPost.map((post, index) => (
-                            <>
-                              <div>
-                                <div className="pb-3 pt-10">
-                                  <div className="text-3xl text-yellow-400 font-bold">
-                                    {post.title}
-                                  </div>
-                                </div>
-                                <div className="pb-4">
-                                  <div className="text-xl text-gray-800 font-semibold ">
-                                    {post.writer}
-                                  </div>
-                                </div>
-                                <div className="pb-3">
-                                  <div
-                                    className="text-[16px] text-gray-500 text-justify pr-11"
-                                    dangerouslySetInnerHTML={{
-                                      __html: post.content,
-                                    }}
-                                  />
-                                </div>
-                              </div>
-                            </>
-                          ))} */}
                           {<ProfilePostLeftContent slug={slug}/>}
                       </div>
                     </div>
-                    <div className="lg:w-[29%] flex flex-col">
+                    <div className="lg:w-[30%] flex flex-col">
                       <UserDetails
                         sex={gender}
                         birthdate={dob}

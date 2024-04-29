@@ -7,7 +7,7 @@ export default function AllWriterPage () {
   return (
     <section>
         <div className='container globat__padding'>
-            <div className='flex flex-row'>
+            <div className='lg:flex lg:flex-row'>
                 <div className='lg:w-[70%]'>
                     <AllWriterList/>
 

@@ -5,6 +5,8 @@ import MainContentDivider from "../common/mainContentDivider";
 import ProcchodButtonList from "./ProcchodButtonList";
 import { apiBasePath } from "../../utils/constant";
 
+import { countWords } from "../../function/api";
+
 export default function ProcchodLeftContent() {
 
   const [selectedId, setSelectedId] = useState("sob");
@@ -96,7 +98,11 @@ export default function ProcchodLeftContent() {
                       title={post.title}
                       writer={post.writer}
                       category={post.category}
-                      content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 200).join(" ")}` : `${post.content.split(/\s+/).slice(0, 200).join(" ")}`} // Truncate content
+                      content={post.category === 'কবিতা' ? countWords(post.content, 30) : countWords(post.content, 70)}
+
+                      // content={post.category === 'কবিতা' ? post.content.match(/(\S+\s*){1,100}/)?.[0] : post.content.match(/(\S+\s*){1,200}/)?.[0]}
+                      // content={post.summary}
+                      // content={post.category === 'কবিতা' ? `${post.content.split().slice(0, 10)}` : `${post.content.split().slice(0, 30)}`} // Truncate content
                     />
                   </div>
                   {index < displayedPosts.length - 1 && <MainContentDivider />}
