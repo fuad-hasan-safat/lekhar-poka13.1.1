@@ -28,9 +28,8 @@ export default function Home() {
           <div className="container">
             <div className="lg:flex lg:flex-row">
               <div className="lg:w-1/2">
-                <Image
-                  width={669}
-                  height={500}
+                <img
+                  className="lg:h-[800px] md:hidden sm:hidden xs:hidden"
                   alt="mission side image"
                   src="/images/aboutuspage/missionSideImage.png"
                 />
@@ -77,7 +76,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="lg:my-[80px]">
+        <section className="lg:my-[80px] lg:pt-[80px]">
           <div className="container">
             <div className="lg:flex lg:flex-row lg:space-x-10">
 
@@ -115,10 +114,9 @@ export default function Home() {
               </div>
 
               <div className=" lg:w-1/2 ">
-                <div className="lg:mt-[150px]">
-                  <Image
-                    width={669}
-                    height={1032}
+                <div className="lg:mt-[25px]">
+                  <img
+                    className="lg:h-[900px] md:hidden sm:hidden xs:hidden"
                     alt="mission side image"
                     src="/images/aboutuspage/vissionSideImage.png"
                   />
