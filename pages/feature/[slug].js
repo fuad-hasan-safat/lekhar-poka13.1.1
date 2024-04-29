@@ -31,12 +31,14 @@ export default function PostDetails() {
           `${apiBasePath}/getslider/${slug}`
         );
         console.log("result         ->>>>>>>>>>>>>>>>", result.object.post);
+        console.log({slug, result})
         setData(result.object.post);
-
+        setIsLoading(false)
         router.push(`/post/${result.object.post._id}`)
         setIsLoading(false)
         console.log('data -------------- slider  -------------- slider >>>>>', data)
       } catch (error) {
+
         console.log(error)
       } finally {
         setIsLoading(false)

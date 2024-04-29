@@ -48,26 +48,26 @@ const Page = () => {
         }
 
         // const token = JSON.parse(localStorage.getItem('token'));
-        try {
-            const response = await fetch(`${apiBasePath}/sliders`, {
-                method: 'PUT',
-                headers: {
-                    'x-access-token': token,
-                },
-                body: formData
-            });
+        // try {
+        //     const response = await fetch(`${apiBasePath}/sliders`, {
+        //         method: 'PUT',
+        //         headers: {
+        //             'x-access-token': token,
+        //         },
+        //         body: formData
+        //     });
 
-            if (response.ok) {
-                const data = await response.json();
-                console.log('Slider updated successfully:', data);
-                // Redirect to another page
-                // router.push('/user-setting');
-            } else {
-                console.error('Failed to update Slider:', response.statusText);
-            }
-        } catch (error) {
-            console.error('Error updating Slider:', error);
-        }
+        //     if (response.ok) {
+        //         const data = await response.json();
+        //         console.log('Slider updated successfully:', data);
+        //         // Redirect to another page
+        //         // router.push('/user-setting');
+        //     } else {
+        //         console.error('Failed to update Slider:', response.statusText);
+        //     }
+        // } catch (error) {
+        //     console.error('Error updating Slider:', error);
+        // }
     };
 
     useEffect(() => {
@@ -88,7 +88,7 @@ const Page = () => {
         formData.append('content', content);
         formData.append('related_content', related);
 
-        console.log(formData)
+       // console.log('related data_____________________>>>>>', related)
 
         try {
             const response = await fetch(`${apiBasePath}/sliders`, {
