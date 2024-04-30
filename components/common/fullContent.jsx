@@ -29,7 +29,7 @@ const FullPost = ({ content, title, writer, catagory }) => {
         );
     } else {
         return (
-            <div className=" text-black pr-[100px] pt-24 space-y-3">
+            <div className=" text-black lg:pr-[100px] pt-24 space-y-3">
                 <div className="font-semibold text-[35px] text-[#FCD200]">{title}</div>
                 <div className="text-[22px] text-[#595D5B] ">{writer}</div>
                 {/* {lines.slice(prevLines, numLines).map((line, index) => ( */}

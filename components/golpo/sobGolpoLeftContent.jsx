@@ -72,7 +72,7 @@ export default function SobGolpoLeftContent() {
 
             <div className='container'>
               {postList && <div className='flex'>
-                <div className="lakha__main__content pt-20  text-3xl lg:mr-[100px] md:mr-[50px]">
+                <div className="lakha__main__content pt-20  text-3xl lg:mr-[100px] md:mr-[50px] sm:mr-[40px] xs:mr-[10px]">
                   {displayedPosts.length && (
                     displayedPosts.map((post, index) => (
                       <>
