@@ -327,8 +327,11 @@ background-color: #f8e405;
   border-radius: 20px;
   transform: scale(1.05);
   transition: all 0.5s;
-  margin: 110px;
-  padding: 70px 30px 40px;
+  margin-top: 110px;
+  margin-bottom: 110px;
+  margin-left: 25px ;
+  margin-right: 55px;
+  padding: 30px 20px 20px;
 }
 
 
@@ -689,6 +692,17 @@ transition: all 0.5s !important;
   .login__lft__text h2 {
       font-size: 45px;
   }
+  .kobita__content {
+    box-shadow: 0px 10px 100px 0px rgb(0 0 0 / 0.2);
+    border-radius: 20px;
+    transform: scale(1.05);
+    transition: all 0.5s;
+    margin-top: 150px;
+    margin-bottom: 110px;
+    margin-left: 25px ;
+    margin-right: 25px;
+    padding: 30px 20px 20px;
+  }
 }
 @media(max-width:1199px){
   .slider__bg__img img {
@@ -770,6 +784,17 @@ transition: all 0.5s !important;
   }
   .OTP__text{
     font-size: 40px;
+  }
+  .kobita__content {
+    box-shadow: 0px 10px 100px 0px rgb(0 0 0 / 0.2);
+    border-radius: 20px;
+    transform: scale(1.05);
+    transition: all 0.5s;
+    margin-top: 150px;
+    margin-bottom: 110px;
+    margin-left: 25px ;
+    margin-right: 25px;
+    padding: 30px 20px 20px;
   }
 }
 @media(max-width:767px){
