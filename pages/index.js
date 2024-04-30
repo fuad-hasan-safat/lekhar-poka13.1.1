@@ -1,8 +1,9 @@
 
 // import Procchod from "@/components/procchod/Procchod";
+import Head from 'next/head';
 import Procchod from '../components/procchod/Procchod'
 //import { ImageSlider } from "@/components/slider/MySlider";
-import {ImageSlider} from '../components/slider/ImageSlider'
+import { ImageSlider } from '../components/slider/ImageSlider'
 
 
 // export const metadata = {
@@ -13,12 +14,18 @@ export default function Home() {
 
   return (
     <>
+      <div>
+        <Head>
+          <title>প্রচ্ছদ</title>
+        </Head>
+
         <div className="lg:pt-[95px] md:pt-[90px] sm:pt-[85px] text-black">
-       
-        <ImageSlider/>
-        <Procchod />
+
+
+          <ImageSlider />
+          <Procchod />
         </div>
-        
+      </div>
     </>
   );
 }

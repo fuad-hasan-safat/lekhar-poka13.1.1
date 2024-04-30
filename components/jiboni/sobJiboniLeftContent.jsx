@@ -66,26 +66,31 @@ export default function SobJiboniLeftContent() {
         <>
           <div className='container'>
             <div className='flex'>
-              <div className="lakha__main__content pt-20  text-3xl lg:mr-[100px] md:mr-[50px]">
-                {displayedPosts.length && (
-                  displayedPosts.map((post, index) => (
-                    <>
-                      <div key={index}>
-                        <SobJiboniBody
-                          id={post.id} // Assuming 'id' is the unique identifier
-                          title={post.title}
-                          writer={post.writer}
-                          content={countWords(post.content, 70)}
+              {postList.length > 0 ?
+                <div className="lakha__main__content pt-20  text-3xl lg:mr-[100px] md:mr-[50px]">
+                  {displayedPosts.length && (
+                    displayedPosts.map((post, index) => (
+                      <>
+                        <div key={index}>
+                          <SobJiboniBody
+                            id={post.id} // Assuming 'id' is the unique identifier
+                            title={post.title}
+                            writer={post.writer}
+                            content={countWords(post.content, 70)}
 
                           // content={post.content.split(/\s+/).slice(0, 200).join(" ")}
 
-                        />
-                      </div>
-                      {index < displayedPosts.length - 1 && <MainContentDivider />}
-                    </>
-                  ))
-                )}
-              </div>
+                          />
+                        </div>
+                        {index < displayedPosts.length - 1 && <MainContentDivider />}
+                      </>
+                    ))
+                  )}
+                </div> :
+                <div className="pt-10"> লেখা নেই </div>
+
+
+              }
             </div>
             {totalPages > 1 && <div className="py-10 space-x-4"> {/* Add a class for styling */}
               <button

@@ -55,31 +55,35 @@ const Lekhok = () => {
         <div>
           <h1 className="text-[20px] text-yellow-500 font-semibold">লেখক</h1>
         </div>
-        <div className="pt-[23px] ">
-       
-          {getVisibleWriters().length > 0 &&
-            getVisibleWriters().map((item, index) => (
-              <>
-                <div className="pb-3">
-                  <LekhokDetails
-                    key={index}
-                    image={`${apiBasePath}/${item.image.replace('/uploads/', '/')
-                  }`}
-                    writer={item.name}
-                    id={item._id}
-                    lifeCycle={`${item.birth_date} - ${item.expiry_date === null ? 'বর্তমান' : item.expiry_date}`}
-                  />
-                </div>
-                <div className="pb-3">
-                  {index < getVisibleWriters().length - 1 ? (
-                    <SidebarPostDivider />
-                  ) : (
-                    ""
-                  )}
-                </div>
-              </>
-            ))}
-        </div>
+        {lekhokList.length > 0 ?
+          <div className="pt-[23px] ">
+
+            {getVisibleWriters().length > 0 &&
+              getVisibleWriters().map((item, index) => (
+                <>
+                  <div className="pb-3">
+                    <LekhokDetails
+                      key={index}
+                      image={`${apiBasePath}/${item.image.replace('/uploads/', '/')
+                        }`}
+                      writer={item.name}
+                      id={item._id}
+                      lifeCycle={`${item.birth_date} - ${item.expiry_date === null ? 'বর্তমান' : item.expiry_date}`}
+                    />
+                  </div>
+                  <div className="pb-3">
+                    {index < getVisibleWriters().length - 1 ? (
+                      <SidebarPostDivider />
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                </>
+              ))}
+          </div> :
+          <div className="pt-10"> লেখক নেই </div>
+
+        }
         <div>
           <div className="pb-[60px] pt-[30px] flex justify-center ">
             <div>

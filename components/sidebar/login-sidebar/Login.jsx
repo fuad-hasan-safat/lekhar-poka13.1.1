@@ -160,7 +160,7 @@ export default function Login() {
               className="pt-[12px] float-right mb-[15px] inline-block align-baseline font-bold text-xs text-gray-600 hover:text-black-800"
               href="/account/recoverpassword"
             >
-              পাসওয়ার্ড ভুলে গেসেন?
+              পাসওয়ার্ড ভুলে গেছেন?
             </a>
             <div className="">
               <button

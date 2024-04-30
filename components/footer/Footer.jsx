@@ -56,22 +56,22 @@ const MyFooter = () => {
                           title="যোগাযোগ"
                           links={[
                             { url: "", label: "ফোনঃ +৮৮০ ১৩৬৫৪৭৬৫৪" },
-                            { url: "", label: "ইমেইলঃ xyz@gmail.com" },
-                            { url: "", label: "ঠিকানাঃ ঢাকা, বাংলাদেশ" },
+                            { url: "", label: "ইমেইলঃ info@live-technologies.net" },
+                            { url: "", label: "ঠিকানাঃ Dhanmondi, Dhaka" },
                           ]}
                         />
                       </div>
                   </li>
                   <li>
-                    <div className="ftr__socail__icon text-white">
+                    <div className="ftr__socail__icon text-white lg:pl-[90px] md:pl-0 sm:pl-0 xs:pl-0">
                         <SocialLink
                           title="Social"
                           links={[
                             { label: "/images/footer/fb.svg",  url:'#' },
-                            { label: "/images/footer/ig.svg", url:'#' },
-                            { label: "/images/footer/tweet.svg",  url:'#' },
-                            { label: "/images/footer/youtube.svg",  url:'#' },
-                            { label: "/images/footer/wordpress.svg" ,  url:'#'},
+                            // { label: "/images/footer/ig.svg", url:'#' },
+                            // { label: "/images/footer/tweet.svg",  url:'#' },
+                            // { label: "/images/footer/youtube.svg",  url:'#' },
+                            // { label: "/images/footer/wordpress.svg" ,  url:'#'},
                           ]}
                         />
                       </div>

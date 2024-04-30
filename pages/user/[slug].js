@@ -1,6 +1,8 @@
 import React from 'react'
 import UserProfile from '../../components/userprofile/UserProfile'
 import { useRouter } from 'next/router';
+import Head from 'next/head';
+
 
 
 export default function Home() {
@@ -10,7 +12,16 @@ export default function Home() {
   return (
     router.isReady &&
     <>
+      {/* <div>
+        <head>
+          <title>প্রোফাইল</title>
+        </head>
+      </div> */}
       <div className='pt-[95px]'>
+      <Head>
+        <title>প্রোফাইল</title>
+        {/* Other meta tags or link elements can be added here */}
+      </Head>
         <UserProfile slug={slug} />
       </div>
     </>

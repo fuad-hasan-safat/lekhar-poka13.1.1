@@ -52,9 +52,9 @@ export default function SobOnugolpoLeftContent() {
   };
 
   const startIndex = (currentPage - 1) * postsPerPage;
-  const endIndex = Math.min(startIndex + postsPerPage, postList.length); // Ensure endIndex doesn't exceed posts length
+  const endIndex = Math.min(startIndex + postsPerPage, postList?.length); // Ensure endIndex doesn't exceed posts length
 
-  const displayedPosts = postList.slice(startIndex, endIndex);
+  const displayedPosts = postList?.slice(startIndex, endIndex);
 
   return (
     <div>
@@ -66,7 +66,8 @@ export default function SobOnugolpoLeftContent() {
         <>
 
           <div className='container'>
-            {postList && <div className='flex'>
+            {postList.length>0 ? 
+            <div className='flex'>
               <div className="lakha__main__content pt-20  text-3xl lg:mr-[100px] md:mr-[50px]">
                 {displayedPosts.length && (
                   displayedPosts.map((post, index) => (
@@ -86,7 +87,8 @@ export default function SobOnugolpoLeftContent() {
                   ))
                 )}
               </div>
-            </div>
+            </div> :
+            <div className="pt-10"> লেখা নেই </div>
             }
             {totalPages > 1 && <div className="py-10 space-x-4"> {/* Add a class for styling */}
               <button
@@ -119,7 +121,7 @@ export default function SobOnugolpoLeftContent() {
             </div>
             }
           </div>
-        </>
+        </> 
       )}
     </div>
   );

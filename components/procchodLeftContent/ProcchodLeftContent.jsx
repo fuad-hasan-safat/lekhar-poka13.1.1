@@ -88,27 +88,33 @@ export default function ProcchodLeftContent() {
           <div>Error fetching posts: {error.message}</div>
         ) : (
           <>
-            <div className="lakha__main__content pt-20 text-3xl">
-              {displayedPosts.map((post, index) => (
-                <>
-                  <div key={index}>
-                    <MaincontentBody
-                      id={post._id}
-                      buttons={buttons}
-                      title={post.title}
-                      writer={post.writer}
-                      category={post.category}
-                      content={post.category === 'কবিতা' ? countWords(post.content, 30) : countWords(post.content, 70)}
+            {postList.length > 0 ?
+              <div className="lakha__main__content pt-20 text-3xl">
+                {displayedPosts.map((post, index) => (
+                  <>
+                    <div key={index}>
+                      <MaincontentBody
+                        id={post._id}
+                        buttons={buttons}
+                        title={post.title}
+                        writer={post.writer}
+                        category={post.category}
+                        content={post.category === 'কবিতা' ? countWords(post.content, 30) : countWords(post.content, 70)}
 
                       // content={post.category === 'কবিতা' ? post.content.match(/(\S+\s*){1,100}/)?.[0] : post.content.match(/(\S+\s*){1,200}/)?.[0]}
                       // content={post.summary}
                       // content={post.category === 'কবিতা' ? `${post.content.split().slice(0, 10)}` : `${post.content.split().slice(0, 30)}`} // Truncate content
-                    />
-                  </div>
-                  {index < displayedPosts.length - 1 && <MainContentDivider />}
-                </>
-              ))}
-            </div>
+                      />
+                    </div>
+                    {index < displayedPosts.length - 1 && <MainContentDivider />}
+                  </>
+                ))}
+              </div> :
+
+              <div className="pt-10"> লেখা নেই </div>
+
+
+            }
             {totalPages > 1 && <div className="py-10 space-x-4"> {/* Add a class for styling */}
               <button
                 className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"

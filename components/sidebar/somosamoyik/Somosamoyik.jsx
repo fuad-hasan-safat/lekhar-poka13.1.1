@@ -41,6 +41,7 @@ useEffect(() => {
            <p>সমসাময়িক</p> 
           </div>
         </div>
+        {somosamoyikPost.length>0?
         <div className="pt-[23px]">
           {somosamoyikPost.length &&
             somosamoyikPost.map((item, index) => (
@@ -64,7 +65,10 @@ useEffect(() => {
                 </div>
               </>
             ))}
-        </div>
+        </div>:
+                <div className="pt-10"> লেখা নেই </div>
+
+}
       </div>
     </>
   );

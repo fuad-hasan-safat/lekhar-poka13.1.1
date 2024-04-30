@@ -6,6 +6,7 @@ import Sidebar from '../../components/sidebar/Sidebar';
 import MainContentDivider from '../../components/common/mainContentDivider'
 import SobPostsOfWriterBody from '../../components/postOfWriter/sobPostsOfWriterBody'
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 
 export default function PostOfWriterPage() {
@@ -73,7 +74,11 @@ export default function PostOfWriterPage() {
     } else {
 
         return (
-            <section>
+            
+            <div>
+                <Head>
+                    <title>লেখক পোস্ট</title>
+                </Head>
                 <div className='container lg:flex lg:flex-row pt-[94px]'>
                     <div className="pt-20 text-3xl lg:w-[70%]">
 
@@ -141,7 +146,7 @@ export default function PostOfWriterPage() {
                         <Sidebar />
                     </div>
                 </div>
-            </section>
+            </div>
         );
     }
 }

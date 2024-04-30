@@ -9,6 +9,7 @@ import {
   MdRepeat
 } from "react-icons/md";
 import ProgressBar from "react-bootstrap/ProgressBar";
+import { useRouter } from "next/navigation";
 // import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 // import "./styles.css";
 
@@ -37,6 +38,7 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 // ];
 
 export default function MusicPlayer({songs}) {
+  const router = useRouter();
   const audioPlayer = useRef(null);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -56,6 +58,7 @@ export default function MusicPlayer({songs}) {
  })
   useEffect(() => {
     setDuration(audioPlayer.current.duration);
+  
   }, [currentSong]);
 
   useEffect(() => {

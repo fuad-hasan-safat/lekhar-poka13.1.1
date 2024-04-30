@@ -65,28 +65,34 @@ export default function SobKobitaLeftContent() {
       ) : (
         <>
           <div className='container'>
-            <div className='flex justify-center'>
-              <div className="lakha__main__content pt-20  text-3xl lg:mr-[100px] md:mr-[70px] ">
-                {displayedPosts.length && (
-                  displayedPosts.map((post, index) => (
-                    <>
-                      <div key={index}>
-                        <SobKobitaBody
-                          id={post._id} // Assuming '_id' is the unique identifier
-                          title={post.title}
-                          writer={post.writer}
-                          category={post.category}
-                          // content={post.content.split(/\s+/).slice(0, 180).join(" ")}
-                           content={countWords(post.content, 30)}
+            {postList.length ?
+              <div className='flex justify-center'>
+                <div className="lakha__main__content pt-20  text-3xl lg:mr-[100px] md:mr-[70px] ">
+                  {displayedPosts.length && (
+                    displayedPosts.map((post, index) => (
+                      <>
+                        <div key={index}>
+                          <SobKobitaBody
+                            id={post._id} // Assuming '_id' is the unique identifier
+                            title={post.title}
+                            writer={post.writer}
+                            category={post.category}
+                            // content={post.content.split(/\s+/).slice(0, 180).join(" ")}
+                            content={countWords(post.content, 30)}
 
-                        />
-                      </div>
-                      {index < displayedPosts.length - 1 && <MainContentDivider />}
-                    </>
-                  ))
-                )}
-              </div>
-            </div>
+                          />
+                        </div>
+                        {index < displayedPosts.length - 1 && <MainContentDivider />}
+                      </>
+                    ))
+                  )}
+                </div>
+              </div> :
+
+              <div className="pt-10"> লেখা নেই </div>
+
+
+            }
             {totalPages > 1 && <div className="py-10 space-x-4"> {/* Add a class for styling */}
               <button
                 className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"

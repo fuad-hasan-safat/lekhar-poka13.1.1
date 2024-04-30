@@ -88,7 +88,8 @@ const MyNavbar = () => {
 
 
   function goToSearchPost(id){
-    router.push(`/${id}`)
+    router.push(`/post/${id}`)
+    // router.refresh()
   }
 
   return (
@@ -229,11 +230,17 @@ const MyNavbar = () => {
                       /> */}
 
                     {isSearchActive && (
-                      <FontAwesomeIcon
-                        icon={faList}
-                        className="absolute z-50 text-gray-500 text-lg px-2 cursor-pointer ml-auto mt-[10px] right-2" // Right-aligned
-                        onClick={() => setIsSearchActive(false)}
-                      />
+
+                      <button
+                      onClick={() => setIsSearchActive(false)}
+                      >
+                      <i class="ri-list-check"></i>
+                      </button>
+                      // <FontAwesomeIcon
+                      //   icon={faList}
+                      //   className="absolute z-50 text-gray-500 text-lg px-2 cursor-pointer ml-auto mt-[10px] right-2" // Right-aligned
+                      //   onClick={() => setIsSearchActive(false)}
+                      // />
                     )}
                   </div>
               </div>

@@ -68,28 +68,32 @@ export default function SobProbondhoLeftContent() {
       ) : (
         <>
           <div className='container'>
-            <div className='flex'>
-              <div className="lakha__main__content pt-20 text-3xl lg:mr-[100px] md:mr-[50px]">
-                {displayedPosts.length && (
-                  displayedPosts.map((post, index) => (
-                    <>
-                      <div key={index}>
-                        <SobProbondhoBody
-                          id={post._id} // Assuming '_id' is the unique identifier
-                          title={post.title}
-                          writer={post.writer}
-                          content={countWords(post.content, 70)}
+            {postList.length > 0 ?
+              <div className='flex'>
+                <div className="lakha__main__content pt-20 text-3xl lg:mr-[100px] md:mr-[50px]">
+                  {displayedPosts.length && (
+                    displayedPosts.map((post, index) => (
+                      <>
+                        <div key={index}>
+                          <SobProbondhoBody
+                            id={post._id} // Assuming '_id' is the unique identifier
+                            title={post.title}
+                            writer={post.writer}
+                            content={countWords(post.content, 70)}
 
                           // content={post.content.split(/\s+/).slice(0, 200).join(" ")}
 
-                        />
-                      </div>
-                      {index < displayedPosts.length - 1 && <MainContentDivider />}
-                    </>
-                  ))
-                )}
-              </div>
-            </div>
+                          />
+                        </div>
+                        {index < displayedPosts.length - 1 && <MainContentDivider />}
+                      </>
+                    ))
+                  )}
+                </div>
+              </div> :
+              <div className="pt-10"> লেখা নেই </div>
+
+            }
             {totalPages > 1 && <div className="py-10 space-x-4"> {/* Add a class for styling */}
               <button
                 className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
