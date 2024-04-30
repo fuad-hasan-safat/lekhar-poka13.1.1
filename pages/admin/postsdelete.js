@@ -7,7 +7,7 @@ import StyledModal from './Modal';
 import { apiBasePath } from "../../utils/constant";
 import NotFound from "../../components/common/nofFound"
 
-const PostTable = () => {
+const DeletePosts = () => {
   const router = useRouter();
   const [userType, setUserType] = useState("");
 
@@ -125,4 +125,4 @@ const PostTable = () => {
   }
 }
 
-export default PostTable
+export default DeletePosts

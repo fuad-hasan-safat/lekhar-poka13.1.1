@@ -10,10 +10,9 @@ const Modal = ({ isOpen, selectedContent, onClose }) => {
       <div className="modal-content">
         <h2>{selectedContent.title}</h2>
         <div
-         className="text-[16px] text-gray-500"
+         className="text-[16px] text-gray-500 modal_handle"
          dangerouslySetInnerHTML={{__html:selectedContent.content}}
         >
-
         </div>
         {/* <p>{selectedContent.content}</p> */}
         <button onClick={onClose}>Close</button>

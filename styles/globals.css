@@ -159,8 +159,15 @@ body {
   width: 60px;
   height: 60px;
 }
-
-
+/* 
+----------------------
+------- MODAL HANDLE ---
+--------------------
+*/
+.modal_handle {
+  max-height: 300px; /* Adjust height as needed */
+  overflow-y: scroll; /* Enable scrolling for long content */
+}
 /*
 -------------------
  Slider Img

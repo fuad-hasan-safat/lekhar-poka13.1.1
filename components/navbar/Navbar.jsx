@@ -69,6 +69,9 @@ const MyNavbar = () => {
 
   useEffect(() => {
     if (search !== "") {
+      // fetch(`http://api.tvmaze.com/search/shows?q=${search}`)
+      //     .then((res) => res.json())
+      //     .then((data) => setSearchData(data))
       try {
         const newFiltreddata = postList.filter((post) => {
           return post.title
@@ -84,7 +87,7 @@ const MyNavbar = () => {
 
 
   function goToSearchPost(id){
-    router.push(`/post/${id}`)
+    router.push(`/${id}`)
   }
 
   return (
@@ -157,7 +160,7 @@ const MyNavbar = () => {
                     </li>
                     <li
                       onClick={() => setSelectedNav("amader_somporke")}
-                      className={` lg:w-[150px] sm:w-[100px] ${
+                      className={` lg:w-[130px] sm:w-[100px] ${
                         selectedNav === "amader_somporke"
                           ? "text-[#F9A106] font-semibold underline"
                           : ""
@@ -212,6 +215,16 @@ const MyNavbar = () => {
                         <h1>No Result Found</h1>
                       )}
                     </div>
+
+                    {/* <input
+                        className={`w-[200px] relative text-[16px] bg-transparent text-black py-2 rounded-md focus:outline-none  ${isSearchActive ? "visible" : "hidden"
+                          }`}
+                        type="text"
+                        placeholder=" অনুসন্ধান..."
+                        autoComplete="off"
+                        value={searchTerm}
+                        onChange={handleSearchChange}
+                      /> */}
 
                     {isSearchActive && (
                       <FontAwesomeIcon
