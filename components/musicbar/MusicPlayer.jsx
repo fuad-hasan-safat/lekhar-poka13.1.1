@@ -157,11 +157,11 @@ export default function MusicPlayer({songs}) {
 
   return (
        <>
-    <div className=" fixed text-black  backdrop-blur-lg  place-content-center text-center justify-center bottom-[24px] bg-yellow-500/30  w-full lg:h-[140px] md:h-[240px] sm:h-[240px] xs:h-[240px]">
+    <div className=" fixed text-black  backdrop-blur-lg  place-content-center text-center justify-center bottom-[24px] bg-yellow-500/30  w-full h-[140px]">
     <div className="container lg:flex lg:flex-row justify-center content-center lg:space-x-16">
       <div className="items-center content-center justify-center z-[200] w-[300px]">
         {/* song info */}
-        <div className="flex flex-row lg:w-[380px] space-x-2">
+        <div className="lg:flex lg:flex-row lg:w-[380px] space-x-2  md:hidden sm:hidden xs:hidden">
                 <div className="">
                     <img 
                         src={currentSong?.image}
@@ -184,7 +184,7 @@ export default function MusicPlayer({songs}) {
 
       </div>
 
-      <div className="flex flex-col text-center items-center content-center justify-center space-y-3  w-full">
+      <div className="flex flex-col text-center items-center content-center justify-center space-y-3  lg:w-full">
        {/* audio player */}
        <div>
             <audio
