@@ -86,7 +86,7 @@ const SliderTable = () => {
                 <div className="flex flex-row">
                     <div className="w-1/2">
                         <div className="text-7xl pb-4">Slider List</div>
-                        <ContentList content={sliderList} />
+                        <ContentList content={sliderList} isSlider={true} />
 
                     </div>
                     <div className="w-1/2">

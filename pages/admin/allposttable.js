@@ -15,6 +15,7 @@ const PostTable = () => {
 
 
   const [isOpen, setIsOpen] = useState(false);
+  const [istitleClick, setIsTitleClick] = useState(false)
   const [selectedContent, setSelectedContent] = useState(null);
 
   const handleOpenModal = (item) => {
@@ -24,6 +25,7 @@ const PostTable = () => {
 
   const handleCloseModal = () => {
     setIsOpen(false);
+    setIsTitleClick(false)
     setSelectedContent(null);
   };
 
@@ -84,8 +86,8 @@ const PostTable = () => {
         <div className="flex flex-row">
           <div className="w-1/2">
             <div className="text-7xl pb-4">Post List</div>
-            <ContentList content={postList} onOpenModal={handleOpenModal} />
-            <StyledModal isOpen={isOpen} selectedContent={selectedContent} onClose={handleCloseModal} />
+            <ContentList content={postList} onOpenModal={handleOpenModal} setIsTitleClick={setIsTitleClick}/>
+            {istitleClick && <StyledModal isOpen={isOpen} selectedContent={selectedContent} onClose={handleCloseModal} />}
 
 
           </div>

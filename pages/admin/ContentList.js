@@ -2,7 +2,7 @@
 import React from 'react';
 
 
-const ContentList = ({ content, onOpenModal, setIsTitleClick }) => {
+const ContentList = ({ content, onOpenModal, setIsTitleClick, isSlider= false }) => {
 
 
 
@@ -10,7 +10,9 @@ const ContentList = ({ content, onOpenModal, setIsTitleClick }) => {
     <ul>
       {content?.map((item) => (
         <li key={item._id}>
-          <button onClick={() => {onOpenModal(item); setIsTitleClick(true)}}>{item.title}</button>
+          {!isSlider  && ( <button onClick={() => {onOpenModal(item); setIsTitleClick(true)}}>{item.title}</button>)}
+          {isSlider && <p>{item.title}</p>}
+         
         </li>
       ))}
     </ul>
