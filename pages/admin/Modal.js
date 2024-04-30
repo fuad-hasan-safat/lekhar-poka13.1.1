@@ -6,6 +6,7 @@ const Modal = ({ isOpen, selectedContent, onClose }) => {
 
 
   return (
+  
     <div className="modal">
       <div className="modal-content">
         <h2>{selectedContent.title}</h2>
@@ -36,8 +37,9 @@ const modalStyles = {
 
 export default function StyledModal({ isOpen, selectedContent, onClose }) {
   return (
+
     <div
-    className=' bg-black/25'
+    className={` bg-black/25`}
      style={modalStyles}>
       <Modal isOpen={isOpen} selectedContent={selectedContent} onClose={onClose} />
     </div>
