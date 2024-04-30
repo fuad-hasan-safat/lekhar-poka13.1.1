@@ -18,15 +18,7 @@ const SliderTable = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedContent, setSelectedContent] = useState(null);
 
-    const handleOpenModal = (item) => {
-        setSelectedContent(item);
-        setIsOpen(true);
-    };
-
-    const handleCloseModal = () => {
-        setIsOpen(false);
-        setSelectedContent(null);
-    };
+  
 
     useEffect(() => {
         setUserType(localStorage.getItem("usertype") || "");
