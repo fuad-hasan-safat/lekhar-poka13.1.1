@@ -204,7 +204,7 @@ export default function MusicPlayer({songs}) {
                     <MdSkipPrevious />
                 </button>
 
-                <button className="text-3xl" onClick={togglePlay}>
+                <button className="text-4xl" onClick={togglePlay}>
                         {isPlaying ?
                         //  <MdPause /> 
                         <>
