@@ -31,6 +31,10 @@ export default function MyApp({ Component, pageProps }) {
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
   } else if(pathname == "/admin/slider"){
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
+  } else if(pathname == "/admin/allslidertable"){
+    result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
+  } else if(pathname == "/admin/postsdelete"){
+    result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
   }
   else{
     result = <Layout><Component {...pageProps} /></Layout>
