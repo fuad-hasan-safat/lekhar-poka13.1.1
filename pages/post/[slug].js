@@ -15,13 +15,12 @@ import MusicPlayer from "../../components/musicbar/MusicPlayer";
 export default function PostDetails() {
   const router = useRouter();
   const slug = router.query.slug;
-  console.log("----slug-------", slug);
+  // console.log("----slug-------", slug);
 
-  const [data, setData] = useState([]); // State to store fetched data
+  const [data, setData] = useState(null); // State to store fetched data
   const [error, setError] = useState(null); // State to store any errors
   const [isAudioAvailable, setIsAudioAvailAble] = useState(false);
-  const [audioSrc, setAudioSrc] = useState("");
-  const [audioData, setAudioData] = useState(null);
+
   //const [catagory, setcategory] = useState('')
 
   const [rating, setRating] = useState(0);
@@ -40,14 +39,15 @@ export default function PostDetails() {
         );
         //console.log("result->>>>>>>>>>>>>>>>", result.object);
         setData(result.object);
-        console.log('post data -------- post', result.object)
+        // console.log('post data -------- post', result.object)
         //setcategory(result.object.category);
         if (result.object.audio.length > 0) {
           setIsAudioAvailAble(true);
         }
       } catch (error) {
+        setError(error)
         console.log(error);
-        console.log("ERROR");
+        // console.log("ERROR");
       } finally {
         //setcategory(kobita)
       }
@@ -63,24 +63,30 @@ export default function PostDetails() {
     <>
       <section className="all__post__sec__wrap">
         <div className="relative w-full xl:h-[380px] lg:h-[360px] md:h-[340px] sm:h-[280px] xs:h-[260px]  overflow-hidden" style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat` }}>
-          <h2 className=" absolute top-[50%] left-[50%] text-[40px] text-[#F9A106] -translate-x-[50%] -translate-y-[50%] max-h-[0px]">{data.category}</h2>
+         {!error && <h2 className=" absolute top-[50%] left-[50%] text-[40px] text-[#F9A106] -translate-x-[50%] -translate-y-[50%] max-h-[0px]">{data?.category}</h2>}
+         {error && <h2 className=" absolute top-[50%] left-[50%] text-[40px] text-[#F9A106] -translate-x-[50%] -translate-y-[50%] max-h-[0px]">নেই</h2>}
+
         </div>
 
         <div className="container">
           <div className="row">
             <div className="col-md-12">
               <div className="lg:flex lg:flex-row">
-                {<div className="flex flex-col lg:w-[70%]">
+                {!error ? (<div className="flex flex-col lg:w-[70%]">
                   <FullPost
-                    content={data.content}
-                    title={data.title}
-                    writer={data.writer}
-                    catagory={data.category}
+                    content={data?.content}
+                    title={data?.title}
+                    writer={data?.writer}
+                    catagory={data?.category}
                   />
-                  <RatingComponent setRating={setRating} rating={rating} post_id={data._id} />
-                </div>
+                  <RatingComponent setRating={setRating} rating={rating} post_id={data?._id} />
+                </div>) : (
+
+                  <div className="lg:w-[70%] pt-[110px] text-black" > সার্ভার এ পোস্টটি পাওয়া যায় নি </div>
+                )
 
                 }
+
 
                 <div className="lg:w-[30%]">
                   <Sidebar />
@@ -90,6 +96,7 @@ export default function PostDetails() {
           </div>
         </div>
       </section>
+
 
       {isAudioAvailable && (
         // <AudioPlayer
