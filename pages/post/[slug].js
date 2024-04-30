@@ -63,8 +63,7 @@ export default function PostDetails() {
     <>
       <section className="all__post__sec__wrap">
         <div className="relative w-full xl:h-[380px] lg:h-[360px] md:h-[340px] sm:h-[280px] xs:h-[260px]  overflow-hidden" style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat` }}>
-         {!error && <h2 className=" absolute top-[50%] left-[50%] text-[40px] text-[#F9A106] -translate-x-[50%] -translate-y-[50%] max-h-[0px]">{data?.category}</h2>}
-         {error && <h2 className=" absolute top-[50%] left-[50%] text-[40px] text-[#F9A106] -translate-x-[50%] -translate-y-[50%] max-h-[0px]">নেই</h2>}
+         { <h2 className=" absolute top-[50%] left-[50%] text-[40px] text-[#F9A106] -translate-x-[50%] -translate-y-[50%] max-h-[0px]">{data?.category}</h2>}
 
         </div>
 
@@ -72,7 +71,7 @@ export default function PostDetails() {
           <div className="row">
             <div className="col-md-12">
               <div className="lg:flex lg:flex-row">
-                {!error ? (<div className="flex flex-col lg:w-[70%]">
+                {(<div className="flex flex-col lg:w-[70%]">
                   <FullPost
                     content={data?.content}
                     title={data?.title}
@@ -80,10 +79,11 @@ export default function PostDetails() {
                     catagory={data?.category}
                   />
                   <RatingComponent setRating={setRating} rating={rating} post_id={data?._id} />
-                </div>) : (
+                </div>) 
+                // : (
 
-                  <div className="lg:w-[70%] pt-[110px] text-black" > সার্ভার এ পোস্টটি পাওয়া যায় নি </div>
-                )
+                //   <div className="lg:w-[70%] pt-[110px] text-black" > সার্ভার এ পোস্টটি পাওয়া যায় নি </div>
+                // )
 
                 }
 
