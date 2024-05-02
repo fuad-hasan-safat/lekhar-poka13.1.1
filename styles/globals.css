@@ -39,6 +39,7 @@ body {
 }
 
 
+
 .progress-bar {
   background-color: #fdcb43 !important;
 }
@@ -531,6 +532,21 @@ transition: all 0.5s !important;
 }
 
 /*
+------------------
+ Procchod Button
+------------------ 
+*/
+.procchod__button{
+  width: 20%;
+  float: left;
+  text-align: center;
+  padding: 0 5px 5px;
+}
+.procchod__button button {
+  padding: 5px 10px;
+}
+
+/*
 -------------------
 -------------------
 */
@@ -728,10 +744,6 @@ transition: all 0.5s !important;
 ---------------------- 
 */
 @media(max-width:1299px){
-  .procchod__button button{
-    width: 25%;
-    float: left;
-  }
   .login__lft__text h2 {
       font-size: 45px;
   }
@@ -755,7 +767,6 @@ transition: all 0.5s !important;
     font-size: 50px;
   }
   .procchod__button button {
-      width: 90px;
       font-size: 14px;
   }
   .sidebar__all__see{
@@ -804,7 +815,7 @@ transition: all 0.5s !important;
     align-items: center;
   }
   .procchod__button{
-    width: 30%;
+    width: 25%;
     float: left;
   }
 
@@ -904,11 +915,7 @@ transition: all 0.5s !important;
       bottom: 5rem !important;
       left: 8% !important;
   }
-  .procchod__button{
-    margin: 0 5px !important;
-  }
   .procchod__button button {
-      width: 25%;
       margin-bottom: 6px;
       font-size: 13px;
   }
@@ -920,6 +927,7 @@ transition: all 0.5s !important;
     display: inline-block;
     margin: 0 auto;
     text-align: center;
+    width: 100%;
   }
   .ftr__main__content{
     text-align: center;
@@ -998,7 +1006,6 @@ transition: all 0.5s !important;
       padding-top: 70px;
   }
   .procchod__button button {
-      width: 65px;
       font-size: 13px;
   }
   .OTP__text{
@@ -1007,16 +1014,29 @@ transition: all 0.5s !important;
 }
 @media(max-width:479px){
   .logo a img {
-      width: 140px !important;
+      width: 110px !important;
   }
   .logo {
       padding: 10px 10px 10px 0;
   }
   .logo:after {
-      border-top: 70px solid #ffd700;
-      border-right: 100px solid transparent;
-      right: -100px;
-  }
+    border-top: 60px solid #ffd700;
+    border-right: 70px solid transparent;
+    right: -69px;
+}
+.search__bar img{
+  width: 35px !important;
+}
+.search_result {
+  top: 36px;
+}
+.search__bar{
+  margin-left: 5px !important;
+}
+.search__bar input{
+  width: 90px !important;
+  font-size: 15px !important;
+}
   .slider__bg__img img {
       height: 450px;
   }
@@ -1037,7 +1057,6 @@ transition: all 0.5s !important;
       left: 10% !important;
   }
   .procchod__button button {
-      width: 45px;
       font-size: 10px;
   }
   .login__create__text{

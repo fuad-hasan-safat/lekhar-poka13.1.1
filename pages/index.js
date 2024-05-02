@@ -19,7 +19,7 @@ export default function Home() {
           <title>প্রচ্ছদ</title>
         </Head>
 
-        <div className="lg:pt-[95px] md:pt-[90px] sm:pt-[85px] text-black">
+        <div className="lg:pt-[95px] md:pt-[90px] sm:pt-[92px] text-black">
 
 
           <ImageSlider />
