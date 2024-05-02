@@ -87,7 +87,7 @@ export default function SobJiboniLeftContent() {
                     ))
                   )}
                 </div> :
-                <div className="pt-10"> লেখা নেই </div>
+                <div className="pt-10">  এই মুহূর্তে কোনো লেখা নেই </div>
 
 
               }

@@ -26,9 +26,34 @@ export function ImageSlider() {
     //  handler
     const router = useRouter();
 
+    async function fetchDataAsync(postId) {
+        try {
+          const result = await fetchData(
+            `${apiBasePath}/getslider/${postId}`
+          );
+        //   console.log("result         ->>>>>>>>>>>>>>>>", result.object.post);
+        //   console.log({slug, result})
+        //   setData(result.object.post);
+        //   setIsLoading(false)
+          router.push(`/post/${result.object.post._id}`)
+        //   setIsLoading(false)
+        //   console.log('data -------------- slider  -------------- slider >>>>>', data)
+        } catch (error) {
+  
+          console.log(error)
+        } finally {
+        //   setIsLoading(false)
+        }
+      }
+
     function featureHandler(postId) {
         console.log('features handler ------>>>>>>>>>>>>', postId)
-        router.push(`/feature/${postId}`);
+
+        
+      
+          fetchDataAsync(postId);
+      
+        // router.push(`/feature/${postId}`);
     }
 
 
