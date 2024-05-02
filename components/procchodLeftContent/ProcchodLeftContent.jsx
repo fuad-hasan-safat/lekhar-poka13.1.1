@@ -111,7 +111,7 @@ export default function ProcchodLeftContent() {
                 ))}
               </div> :
 
-              <div className="pt-10"> লেখা নেই </div>
+              <div className="pt-10"> </div>
 
 
             }
