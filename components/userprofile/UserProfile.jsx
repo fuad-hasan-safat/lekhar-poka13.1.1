@@ -27,6 +27,8 @@ import Link from "next/link";
 import Checkbox from '../common/Checkbox'
 import AudioFileUpload from '../userprofile/AudiofileUpload'
 import ProfilePostLeftContent from './ProfilePostLeftContent';
+import CreateWriter from './createWriter';
+import CreateCategory from './createCategory';
 
 export default function UserProfile({ slug }) {
   // console.log("user profile main page---------------------->>>>>>>>>>>>><<<<<<<<<<<<<<<< SLUG ",slug)
@@ -275,7 +277,7 @@ export default function UserProfile({ slug }) {
 
         if (title && selectedOption && summary) {
 
-          console.log(writer,writerId)
+          console.log(writer, writerId)
 
           try {
             const response = await fetch(`${apiBasePath}/posts`, {
@@ -323,15 +325,15 @@ export default function UserProfile({ slug }) {
         {status && (
           <div className="">
             <div>
-                <UserProfileBanner 
-                image={image} 
-                post={post} 
-                follower={follower} 
-                following={following} 
-                username={username} 
-                designation={designation} 
+              <UserProfileBanner
+                image={image}
+                post={post}
+                follower={follower}
+                following={following}
+                username={username}
+                designation={designation}
                 profileStatus={profileStatus}
-                />
+              />
             </div>
             <section className="all__post__sec__wrap">
               <div className="container">
@@ -360,12 +362,18 @@ export default function UserProfile({ slug }) {
                         />
                         <div className="text-yellow-800 text-[22px]">আপনার লেখার ধরণ নির্বাচন করুন</div>
 
-                        <Select
-                          value={selectedOption}
-                          onChange={categoryhandleChange}
-                          styles={customStyles}
-                          options={Categoryoptions}
-                        />
+                        <div>
+                          <Select
+                            value={selectedOption}
+                            onChange={categoryhandleChange}
+                            styles={customStyles}
+                            options={Categoryoptions}
+                          />
+                        </div>
+                        <div>
+                          <CreateCategory />
+
+                        </div>
 
                         <div className="text-yellow-800 text-[22px]">লেখক নির্বাচন করুন(<span className="text-red-500">যদি আপনার নাম তালিকায় থাকে</span>)</div>
                         <div className=" place-content-center justify-center ">
@@ -378,6 +386,9 @@ export default function UserProfile({ slug }) {
                               options={writersOptions}
                             />
 
+                          </div>
+                          <div>
+                            <CreateWriter />
                           </div>
 
                           <div className="pt-[10px]">
@@ -397,10 +408,10 @@ export default function UserProfile({ slug }) {
                         <div className="joidcss">
 
                           <EditorProvider>
-                            <Editor 
-                            value={content} 
-                            onChange={textEditorHandler}
-                            containerProps={{ style: { color: 'black' } }}
+                            <Editor
+                              value={content}
+                              onChange={textEditorHandler}
+                              containerProps={{ style: { color: 'black' } }}
 
                             >
                               <Toolbar>
@@ -412,7 +423,7 @@ export default function UserProfile({ slug }) {
 
                         </div>
 
-                     
+
                         <div>
                           <AudioFileUpload selectedFile={selectedFile} setSelectedFile={setSelectedFile} />
                         </div>
@@ -426,7 +437,7 @@ export default function UserProfile({ slug }) {
                       </div>
 
                       <div>
-                          {<ProfilePostLeftContent slug={slug}/>}
+                        {<ProfilePostLeftContent slug={slug} />}
                       </div>
                     </div>
                     <div className="lg:w-[30%] flex flex-col">

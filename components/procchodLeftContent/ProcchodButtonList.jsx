@@ -34,7 +34,8 @@ const ProcchodButtonList = ({
   }, []);
 
   return (
-    <div className="all__button__list flex space-x-6 pt-16">
+    <div className="all__button__list flex space-x-4 pt-16">
+    
       {buttons.length &&
         buttons.map((button, index) => (
           <ButtonItem
@@ -53,7 +54,7 @@ const ProcchodButtonList = ({
             buttons={buttons}
           />
         ))}
-    </div>
+        </div>
   );
 };
 
