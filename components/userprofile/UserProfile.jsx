@@ -177,29 +177,7 @@ export default function UserProfile({ slug }) {
       .catch((error) => console.error("Error fetching data:", error))
       .finally(setIsLoading(false));
 
-    // user post
 
-    // async function fetchDataAsync() {
-    //   try {
-    //     const result = await fetchData(
-    //       `${apiBasePath}/postsbyuser/${slug}`
-    //     );
-    //     // console.log(
-    //     //   "result        user profile  ->>>>>>>>>>>>>>>>",
-    //     //   result.object
-    //     // );
-    //     setUserPost(result.object);
-    //     // console.log(
-    //     //   "result        user USER POST  ->>>>>>>>>>>>>>>>",
-    //     //   userPost
-    //     // );
-    //   } catch (error) {
-    //     //alert("Error fetching user post");
-    //     // console.log("Error fetching user post")
-    //   }
-    // }
-
-    // fetchDataAsync();
   }, [slug]);
 
 

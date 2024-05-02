@@ -19,14 +19,33 @@ export default function SigninForm({ logreg, btntext }) {
     });
 
     const [numberPrefix, setNumberPrefix] = useState('88');
+    const [showPassword, setShowPassword] = useState(false);
+    const [reshowPassword, setReShowPassword] = useState(false);
+
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+    const togglerePasswordVisibility = () => {
+        setReShowPassword(!reshowPassword);
+    };
 
     const handleChange = (event) => {
         const { name, value } = event.target;
         setState((prevState) => ({
-          ...prevState,
-          [name]: value,
-          // Validate phone number on every change for inline error display
-          phoneError: validateMobileNumber(value) ? null : 'Mobile number is invalid.',
+            ...prevState,
+            [name]: value,
+        }));
+
+    };
+
+    const numberhandleChange = (event) => {
+        const { name, value } = event.target;
+        setState((prevState) => ({
+            ...prevState,
+            [name]: value,
+            // Validate phone number on every change for inline error display
+            phoneError: validateMobileNumber(value) ? null : 'Mobile number is invalid.',
         }));
 
     };
@@ -37,49 +56,49 @@ export default function SigninForm({ logreg, btntext }) {
         // Enforce exactly 11 digits after '01' using positive lookahead assertion
         const regex = /^01[ \-\d]{9}$/;
         return regex.test(mobileNumber);
-      };
-    
-      const validate = () => {
+    };
+
+    const validate = () => {
         console.log(`--------------->>>>>>SSSS <span class="math-inline">\{numberPrefix\}</span>{state.password}`);
         let isValid = true;
         setState((prevState) => ({ ...prevState, error: null, phoneError: null }));
-    
+
         if (!state.mobileNumber) {
-          setState((prevState) => ({ ...prevState, phoneError: 'Mobile number is required.' }));
-          isValid = false;
+            setState((prevState) => ({ ...prevState, phoneError: 'Mobile number is required.' }));
+            isValid = false;
         } else if (!validateMobileNumber(state.mobileNumber)) {
-          let errorMessage = 'Mobile number must start with 01 and be 11 digits long.';
-          if (state.mobileNumber.length < 3) {
-            errorMessage = 'Mobile number is too short.';
-          } else if (state.mobileNumber.length > 11) {
-            errorMessage = 'Mobile number is too long.';
-          } else if (!state.mobileNumber.startsWith('01')) {
-            errorMessage = 'Mobile number must start with 01.';
-          }
-          setState((prevState) => ({ ...prevState, phoneError: errorMessage }));
-          isValid = false;
+            let errorMessage = 'Mobile number must start with 01 and be 11 digits long.';
+            if (state.mobileNumber.length < 3) {
+                errorMessage = 'Mobile number is too short.';
+            } else if (state.mobileNumber.length > 11) {
+                errorMessage = 'Mobile number is too long.';
+            } else if (!state.mobileNumber.startsWith('01')) {
+                errorMessage = 'Mobile number must start with 01.';
+            }
+            setState((prevState) => ({ ...prevState, phoneError: errorMessage }));
+            isValid = false;
         }
-    
+
         if (!state.password) {
-          setState((prevState) => ({ ...prevState, error: 'Password is required.' }));
-          isValid = false;
+            setState((prevState) => ({ ...prevState, error: 'Password is required.' }));
+            isValid = false;
         } else if (state.password.length < 8) {
-          setState((prevState) => ({ ...prevState, error: 'Password must be at least 8 characters long.' }));
-          isValid = false;
+            setState((prevState) => ({ ...prevState, error: 'Password must be at least 8 characters long.' }));
+            isValid = false;
         }
-    
+
         if (state.password !== state.retypePassword) {
-          setState((prevState) => ({ ...prevState, error: 'Passwords do not match.' }));
-          isValid = false;
+            setState((prevState) => ({ ...prevState, error: 'Passwords do not match.' }));
+            isValid = false;
         }
-    
+
         setState((prevState) => ({ ...prevState, isDisabled: !isValid })); // Enable button if all validations pass
-      };
-    
+    };
+
     const handleSubmit = async () => {
         validate(); // Perform validation before submitting
 
-        console.log({state})
+        console.log({ state })
 
         if (!state.isDisabled) {
 
@@ -116,7 +135,7 @@ export default function SigninForm({ logreg, btntext }) {
                             name="fullName"
                             placeholder="Full Name"
                             value={state.fullName}
-                            onChange={handleChange}
+                            onChange={numberhandleChange}
                             className="w-[559px] h-[62px] p-4 bg-[#FCF7E8] rounded-2xl text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             required
                         />
@@ -134,13 +153,13 @@ export default function SigninForm({ logreg, btntext }) {
                             className="w-[559px] h-[62px] p-4 bg-[#FCF7E8] rounded-2xl text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             required
                         />
-                       {state.phoneError && state.mobileNumber && <p className="error text-red-500">{state.phoneError}</p>}
+                        {state.phoneError && state.mobileNumber && <p className="error text-red-500">{state.phoneError}</p>}
                     </div>
-                    <div className="mb-5">
+                    <div className="mb-5 relative">
 
                         <input
                             id="password"
-                            type="password"
+                            type={showPassword ? 'text' : 'password'}
                             name="password"
                             placeholder="Password"
                             value={state.password}
@@ -149,12 +168,15 @@ export default function SigninForm({ logreg, btntext }) {
                             className="w-[559px] h-[62px] p-4 bg-[#FCF7E8]  rounded-2xl   text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
                             required
                         />
+                        <button className="absolute right-0 p-4" type="button" onClick={togglePasswordVisibility}>
+                            {showPassword ? <i class="ri-eye-off-line"></i> : <i class="ri-eye-line"></i>}
+                        </button>
 
                     </div>
-                    <div className="">
+                    <div className="relative">
 
                         <input
-                            type="password"
+                            type={reshowPassword ? 'text' : 'password'}
                             name="retypePassword"
                             placeholder="Retype Password"
                             value={state.retypePassword}
@@ -163,6 +185,9 @@ export default function SigninForm({ logreg, btntext }) {
                             className="w-[559px] h-[62px] p-4 bg-[#FCF7E8]  rounded-2xl   text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
                             required
                         />
+                        <button className="absolute right-0 p-4" type="button" onClick={togglerePasswordVisibility}>
+                            {reshowPassword ? <i class="ri-eye-off-line"></i> : <i class="ri-eye-line"></i>}
+                        </button>
                         {state.error && <p className="error">{state.error}</p>}
 
                     </div>

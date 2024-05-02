@@ -34,7 +34,7 @@ export default function ContactUs() {
                                         height={20}
                                         alt="phone"
                                     />
-                                    <p className="text-[18px] text-black">০১২৩৪৫৬৭৮৯</p>
+                                    <p className="text-[18px] text-black">+৮৮০ ১৩৬৫৪৭৬৫৪</p>
                                 </div>
                                 <div className="flex flex-row space-x-2">
                                     <Image
@@ -43,7 +43,7 @@ export default function ContactUs() {
                                         height={20}
                                         alt="email"
                                     />
-                                    <p className="text-[18px] text-black">Contact@lekhapoka.com</p>
+                                    <p className="text-[18px] text-black">info@live-technologies.net</p>
                                 </div>
                                 <div>
                                     <iframe
