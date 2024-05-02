@@ -1041,10 +1041,13 @@ transition: all 0.5s !important;
       height: 450px;
   }
   .slider__desc h1{
-    font-size:34px;
+    font-size:30px;
   }
   .slider__desc h2{
-    font-size: 24px;
+    font-size: 20px;
+  }
+  .slider__desc p {
+      font-size: 14px;
   }
   .slider__desc button {
       font-size: 17px;
@@ -1053,7 +1056,7 @@ transition: all 0.5s !important;
       margin-top: 20px;
   }
   .slider__pagination {
-      bottom: 3rem !important;
+      bottom: 2rem !important;
       left: 10% !important;
   }
   .procchod__button button {
