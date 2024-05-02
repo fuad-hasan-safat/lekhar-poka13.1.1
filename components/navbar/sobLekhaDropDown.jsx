@@ -32,7 +32,7 @@ const SobLekha = ({ sobClass }) => {
   };
 
   return (
-    <div className="relative inline-block text-left" ref={dropdownRef}>
+    <div className="relative inline-block lg:text-left md:text-left sm:text-center" ref={dropdownRef}>
       <button
         type="button"
         onClick={toggleDropdown}
