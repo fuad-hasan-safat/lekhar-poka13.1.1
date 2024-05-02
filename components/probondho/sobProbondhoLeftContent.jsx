@@ -6,6 +6,7 @@ import axios from "axios";
 import Loading from "../common/loading";
 import { apiBasePath } from "../../utils/constant";
 import SobProbondhoBody from "./sobProbondhoBody";
+import { countWords } from "../../function/api";
 
 export default function SobProbondhoLeftContent() {
 
@@ -66,54 +67,64 @@ export default function SobProbondhoLeftContent() {
         <div>Error fetching posts: {error.message}</div>
       ) : (
         <>
-          <div className="lakha__main__content pt-20 text-3xl lg:mr-[100px] md:mr-[50px]">
-            {displayedPosts.length && (
-              displayedPosts.map((post, index) => (
-                <>
-                  <div key={index}>
-                    <SobProbondhoBody
-                      id={post._id} // Assuming '_id' is the unique identifier
-                      title={post.title}
-                      writer={post.writer}
-                      content={post.content.split(/\s+/).slice(0, 200).join(" ")}
+          <div className='container'>
+            {postList.length > 0 ?
+              <div className='flex'>
+                <div className="lakha__main__content pt-20 text-3xl lg:mr-[100px] md:mr-[50px]">
+                  {displayedPosts.length && (
+                    displayedPosts.map((post, index) => (
+                      <>
+                        <div key={index}>
+                          <SobProbondhoBody
+                            id={post._id} // Assuming '_id' is the unique identifier
+                            title={post.title}
+                            writer={post.writer}
+                            content={countWords(post.content, 70)}
 
-                    />
-                  </div>
-                  {index < displayedPosts.length - 1 && <MainContentDivider />}
-                </>
-              ))
-            )}
+                          // content={post.content.split(/\s+/).slice(0, 200).join(" ")}
+
+                          />
+                        </div>
+                        {index < displayedPosts.length - 1 && <MainContentDivider />}
+                      </>
+                    ))
+                  )}
+                </div>
+              </div> :
+              <div className="pt-10"> লেখা নেই </div>
+
+            }
+            {totalPages > 1 && <div className="py-10 space-x-4"> {/* Add a class for styling */}
+              <button
+                className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
+
+                onClick={() => handlePageChange(1)} disabled={currentPage === 1}>
+                প্রথম পৃষ্ঠা
+              </button>
+              <button
+                className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
+
+                onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+                পূর্ববর্তী পৃষ্ঠা
+              </button>
+              <span
+                className="text-sm "
+              >পৃষ্ঠা {currentPage} এর {totalPages}</span>
+              <button
+                className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
+
+                onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
+                পরবর্তী পৃষ্ঠা
+              </button>
+              <button
+                className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
+
+                onClick={() => handlePageChange(totalPages)} disabled={currentPage === totalPages}>
+                শেষ পৃষ্ঠা
+              </button>
+            </div>
+            }
           </div>
-          {totalPages > 1 && <div className="py-10 space-x-4"> {/* Add a class for styling */}
-                <button
-                  className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
-
-                  onClick={() => handlePageChange(1)} disabled={currentPage === 1}>
-                  প্রথম পৃষ্ঠা 
-                </button>
-                <button
-                  className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
-
-                  onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
-                  পূর্ববর্তী পৃষ্ঠা 
-                </button>
-                <span
-                  className="text-sm "
-                >পৃষ্ঠা {currentPage} এর {totalPages}</span>
-                <button
-                  className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
-
-                  onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
-                  পরবর্তী পৃষ্ঠা 
-                </button>
-                <button
-                  className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
-
-                  onClick={() => handlePageChange(totalPages)} disabled={currentPage === totalPages}>
-                  শেষ পৃষ্ঠা
-                </button>
-              </div>
-              }
         </>
       )}
     </div>

@@ -6,14 +6,14 @@ const Modal = ({ isOpen, selectedContent, onClose }) => {
 
 
   return (
+  
     <div className="modal">
       <div className="modal-content">
         <h2>{selectedContent.title}</h2>
         <div
-         className="text-[16px] text-gray-500"
+         className="text-[16px] text-gray-500 modal_handle"
          dangerouslySetInnerHTML={{__html:selectedContent.content}}
         >
-
         </div>
         {/* <p>{selectedContent.content}</p> */}
         <button onClick={onClose}>Close</button>
@@ -37,8 +37,9 @@ const modalStyles = {
 
 export default function StyledModal({ isOpen, selectedContent, onClose }) {
   return (
+
     <div
-    className=' bg-black/25'
+    className={` bg-black/25`}
      style={modalStyles}>
       <Modal isOpen={isOpen} selectedContent={selectedContent} onClose={onClose} />
     </div>

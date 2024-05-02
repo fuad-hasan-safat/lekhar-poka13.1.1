@@ -1,9 +1,18 @@
+import Head from 'next/head';
 import SobUponnas from '../components/uponnas/sobUponnas'
 
 export default function Home() {
   return (
-    <div className="lg:pt-[95px] md:pt-[90px] sm:pt-[85px] text-black">
-      <SobUponnas/>
-    </div>
+    <>
+      <div>
+        <Head>
+          <title>উপন্যাস</title>
+        </Head>
+      
+      <div className="lg:pt-[95px] md:pt-[90px] sm:pt-[85px] ">
+        <SobUponnas />
+      </div>
+      </div>
+    </>
   );
 }

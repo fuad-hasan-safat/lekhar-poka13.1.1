@@ -11,11 +11,13 @@ const LekhaPokaProfile= ({
 }) => {
   return (
     <>
-      <div className="flex ">
-        <div className="iteam">
+    
+    <div className="flex relative w-full">
+      <div className="">
+        <div className="iteam absolute left-0">
           <img src={image} height={100} width={100} alt="" />
         </div>
-        <div className="pl-4  space-y-2">
+        <div className="pl-[80px] space-y-2 w-full">
           <Link className="text-[20px] text-gray-800 " href={`/post/${id}`}>
             {title}
           </Link>
@@ -27,7 +29,7 @@ const LekhaPokaProfile= ({
         </div>
 
       </div>
-      
+      </div>      
     </>
   );
 };

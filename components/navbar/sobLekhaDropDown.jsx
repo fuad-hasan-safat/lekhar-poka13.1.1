@@ -4,9 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 
-// type soblekhaProp = {
-//   sobClass: string;
-// }
 
 const SobLekha = ({ sobClass }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,7 +46,10 @@ const SobLekha = ({ sobClass }) => {
       </button>
 
       {isOpen && (
-        <div className="backdrop-blur-md shadow-xl bg-[#F9A106] z-[1000] origin-top-right absolute right-0 mt-2 w-56 rounded-md  ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu" tabIndex={-1}>
+        <div className="
+        lg:backdrop-blur-md md:backdrop-blur-md  
+        lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none 
+        lg:bg-[#F9A106] md:bg-[#F9A106] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu" tabIndex={-1}>
           <div className="text-black" role="none">
             <Link
               href="/kobita"

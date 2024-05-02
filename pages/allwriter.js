@@ -1,22 +1,33 @@
 import React from 'react'
 import Sidebar from '../components/sidebar/Sidebar'
 import AllWriterList from '../components/allwriterlist/AllWriterList'
+import Head from 'next/head'
 
 
-export default function AllWriterPage () {
-  return (
-    <section>
-        <div className='container globat__padding'>
-            <div className='flex flex-row'>
-                <div className='lg:w-[70%]'>
-                    <AllWriterList/>
+export default function AllWriterPage() {
+    return (
+        <>
+            {/* <div>
+                <head>
+                    <title>লেখক লিস্ট</title>
+                </head>
+            </div> */}
+            <div>
+                <Head>
+                    <title>লেখক লিস্ট</title>
+                </Head>
+                <div className='container globat__padding'>
+                    <div className='lg:flex lg:flex-row'>
+                        <div className='lg:w-[70%]'>
+                            <AllWriterList />
 
-                </div>
-                <div className='lg:w-[30%]'>
-                    <Sidebar/>
+                        </div>
+                        <div className='lg:w-[30%]'>
+                            <Sidebar />
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-  )
+        </>
+    )
 }

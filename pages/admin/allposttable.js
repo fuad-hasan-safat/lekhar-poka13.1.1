@@ -6,6 +6,7 @@ import ContentList from './ContentList';
 import StyledModal from './Modal';
 import { apiBasePath } from "../../utils/constant";
 import NotFound from "../../components/common/nofFound"
+import axios from "axios";
 
 const PostTable = () => {
   const router = useRouter();
@@ -15,6 +16,7 @@ const PostTable = () => {
 
 
   const [isOpen, setIsOpen] = useState(false);
+  const [istitleClick, setIsTitleClick] = useState(false)
   const [selectedContent, setSelectedContent] = useState(null);
 
   const handleOpenModal = (item) => {
@@ -24,6 +26,7 @@ const PostTable = () => {
 
   const handleCloseModal = () => {
     setIsOpen(false);
+    setIsTitleClick(false)
     setSelectedContent(null);
   };
 
@@ -74,22 +77,50 @@ const PostTable = () => {
         console.error('Error updating data:', error);
       });
 
-    router.push(`/admin/allposttable`);
+    // router.push(`/admin/allposttable`);
+    router.refresh()
 
   }
+
+
+  async function deleteData(id) {
+    try {
+        const response = await axios.delete(`${apiBasePath}/posts/${id}`);
+        console.log('Delete successful:', response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Error deleting data:', error);
+        throw error;
+    }
+}
+
+
+  
+  async function deletePost(id) {
+    try {
+        await deleteData(id);
+        // If successful, update state or do something else
+        alert('Delete Sucessfully')
+    } catch (error) {
+        // Handle error
+        alert('Failed to Delete')
+
+    }
+    router.refresh()
+}
 
   if (userType === 'admin') {
     return (
       <div className="pt-[115px]  text-black mx-10">
         <div className="flex flex-row">
-          <div className="w-1/2">
+          <div className="w-1/3">
             <div className="text-7xl pb-4">Post List</div>
-            <ContentList content={postList} onOpenModal={handleOpenModal} />
-            <StyledModal isOpen={isOpen} selectedContent={selectedContent} onClose={handleCloseModal} />
+            <ContentList content={postList} onOpenModal={handleOpenModal} setIsTitleClick={setIsTitleClick}/>
+            {istitleClick && <StyledModal isOpen={isOpen} selectedContent={selectedContent} onClose={handleCloseModal} />}
 
 
           </div>
-          <div className="w-1/2">
+          <div className="w-1/3">
             <div className="text-7xl pb-4 ">Toggle Ststud</div>
             <ul>
               {postList.length &&
@@ -103,7 +134,6 @@ const PostTable = () => {
 
                       onClick={() => {
                         revokeStatus(post._id, post.status);
-                        router.refresh();
                       }}
                     >
                       {post.status ? 'Revoke Status' : 'Give Status'}
@@ -113,11 +143,29 @@ const PostTable = () => {
                 ))}
             </ul>
           </div>
+          <div className="w-1/3">
+          <div className="text-7xl pb-4 ">Delete Post</div>
+                        <ul>
+                            {postList.length &&
+                                postList.map((post, index) => (
+                                    <li key={index}>
+                                        <button
+                                            id={index}
+                                            className="text-red-600"
+                                            onClick={() => { deletePost(post._id) }}
+                                        >
+                                            Delete
+                                        </button>
+                                    </li>
+                                ))}
+                        </ul>
+
+          </div>
         </div>
       </div >
     )
   } else {
-    <NotFound />
+   return <NotFound />
     // <div className="text-9xl text-black">
     //   <p>not available</p>
 

@@ -1,5 +1,3 @@
-"use client";
-import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -11,7 +9,6 @@ const SobOnugolpoBody = ({
 }) => {
   const router = useRouter();
 
-  const [html, setHTML] = useState({ __html: content });
 
 
   function handleClick(onugolpoId) {
@@ -28,7 +25,7 @@ const SobOnugolpoBody = ({
       <div className="pb-3">
         <div
           className="text-[16px] text-gray-500"
-          dangerouslySetInnerHTML={html}
+          dangerouslySetInnerHTML={{__html:content}}
         />
       </div>
 

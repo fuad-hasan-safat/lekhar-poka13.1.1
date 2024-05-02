@@ -1,9 +1,18 @@
 import SobGolpo from '../components/golpo/sobGolpo'
+import Head from 'next/head';
 
 export default function Home() {
   return (
-      <div className="lg:pt-[95px] md:pt-[90px] sm:pt-[85px] text-black">
+    <>
+      <div>
+        <Head>
+          <title>গল্প</title>
+        </Head>
+      
+      <div className="lg:pt-[95px] sm:pt-[90px] xm:pt-[85] text-black">
         <SobGolpo />
       </div>
+      </div>
+    </>
   );
 }

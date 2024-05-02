@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { faList } from "@fortawesome/fontawesome-free";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import 'remixicon/fonts/remixicon.css'
 
 import Logo from "../common/Logo";
 import SobLekha from "./sobLekhaDropDown";
@@ -87,7 +88,8 @@ const MyNavbar = () => {
 
 
   function goToSearchPost(id){
-    router.push(`/${id}`)
+    router.push(`/post/${id}`)
+    // router.refresh()
   }
 
   return (
@@ -111,6 +113,7 @@ const MyNavbar = () => {
               <div className={`flex justify-between items-center space-x-3 text-black lg:text-[18px] sm:text-[15px] pt-1  place-content-center `}>
                 <div className="hambar__icon" onClick={ToggleSidebar} >
                   <i class="ri-menu-line"></i>
+                  {/* <img src="/public/images/navbaricon/list.svg"/> */}
                 </div>
                 {/* Buttons */}
                 <div className={`sidebar ${isOpen == true ? 'active' : ''}`}>
@@ -160,7 +163,7 @@ const MyNavbar = () => {
                     </li>
                     <li
                       onClick={() => setSelectedNav("amader_somporke")}
-                      className={` lg:w-[150px] sm:w-[100px] ${
+                      className={` lg:w-[130px] sm:w-[100px] ${
                         selectedNav === "amader_somporke"
                           ? "text-[#F9A106] font-semibold underline"
                           : ""
@@ -227,11 +230,17 @@ const MyNavbar = () => {
                       /> */}
 
                     {isSearchActive && (
-                      <FontAwesomeIcon
-                        icon={faList}
-                        className="absolute z-50 text-gray-500 text-lg px-2 cursor-pointer ml-auto mt-[10px] right-2" // Right-aligned
-                        onClick={() => setIsSearchActive(false)}
-                      />
+
+                      <button
+                      onClick={() => setIsSearchActive(false)}
+                      >
+                      <i class="ri-list-check"></i>
+                      </button>
+                      // <FontAwesomeIcon
+                      //   icon={faList}
+                      //   className="absolute z-50 text-gray-500 text-lg px-2 cursor-pointer ml-auto mt-[10px] right-2" // Right-aligned
+                      //   onClick={() => setIsSearchActive(false)}
+                      // />
                     )}
                   </div>
               </div>

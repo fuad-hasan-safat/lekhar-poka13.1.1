@@ -108,9 +108,9 @@ export default function Login() {
     <>
       {status === 'success' ? (
         <>
-          <div className="flex flex-col">
+          <div className="flex flex-col items-center">
             <div className="text-black text-xl mb-4">
-              Hey {username} , welcom to LekharPoka
+               {username} , লেখার পকায় আপনাকে স্বাগতম
             </div>
             <div className="flex flex-row space-x-3 text-[18px]">
               <LogoutButton
@@ -160,7 +160,7 @@ export default function Login() {
               className="pt-[12px] float-right mb-[15px] inline-block align-baseline font-bold text-xs text-gray-600 hover:text-black-800"
               href="/account/recoverpassword"
             >
-              পাসওয়ার্ড ভুলে গেসেন?
+              পাসওয়ার্ড ভুলে গেছেন?
             </a>
             <div className="">
               <button

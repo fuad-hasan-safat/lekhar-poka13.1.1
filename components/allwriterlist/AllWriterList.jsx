@@ -26,25 +26,31 @@ export default function AllWriterList() {
                     <p> লেখকদের তালিকা </p>
                     <hr className='bg-[#fcac00]'></hr>
                 </div>
-                <div className="pt-[23px] ">
-                    {lekhokList.length &&
-                        lekhokList.map((item, index) => (
-                            <>
-                                <div className="pb-3">
-                                    <LekhokDetails
-                                        key={index}
-                                        image={`${apiBasePath}/${item.image}`}
-                                        writer={item.name}
-                                        id={item._id}
-                                        lifeCycle={`${item.birth_date} - ${item.expiry_date}`}
-                                    />
-                                </div>
-                                <div className="pb-3">
-                                    {index <= lekhokList.length - 2 ? <SidebarPostDivider /> : ""}
-                                </div>
-                            </>
-                        ))}
-                </div>
+                {lekhokList.length > 0 ?
+                    <div className="pt-[23px] ">
+                        {lekhokList.length &&
+                            lekhokList.map((item, index) => (
+                                <>
+                                    <div className="pb-3">
+                                        <LekhokDetails
+                                            key={index}
+                                            image={`${apiBasePath}/${item.image.slice(item.image.indexOf("/") + 1)}`}
+                                            writer={item.name}
+                                            id={item._id}
+                                            lifeCycle={`${item.birth_date} - ${item.expiry_date === null ? `বর্তমান` : `${item.expiry_date}`}`}
+
+                                        />
+                                    </div>
+                                    <div className="pb-3">
+                                        {index <= lekhokList.length - 2 ? <SidebarPostDivider /> : ""}
+                                    </div>
+                                </>
+                            ))}
+                    </div> :
+
+                    <div className="pt-10"> লেখা নেই </div>
+
+                }
             </div>
         </div>
     )

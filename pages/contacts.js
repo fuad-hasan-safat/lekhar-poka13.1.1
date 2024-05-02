@@ -1,10 +1,21 @@
 import ContactUs from '../components/contactus/contactus'
+import Head from 'next/head';
 
 
 export default function Home() {
   return (
-    <div className="lg:pt-[95px] md:pt-[90px] sm:pt-[85px] text-black">
+    <>
+      <div>
+        <Head>
+          <title>যোগাযোগ</title>
+        </Head>
+      
+      <div className="lg:pt-[95px] md:pt-[90px] sm:pt-[85px] text-black">
+       
         <ContactUs />
-    </div>
+      </div>
+      </div>
+    </>
+
   );
 }

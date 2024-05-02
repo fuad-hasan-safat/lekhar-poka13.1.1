@@ -6,6 +6,7 @@ import Sidebar from '../../components/sidebar/Sidebar';
 import MainContentDivider from '../../components/common/mainContentDivider'
 import SobPostsOfWriterBody from '../../components/postOfWriter/sobPostsOfWriterBody'
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 
 export default function PostOfWriterPage() {
@@ -73,9 +74,13 @@ export default function PostOfWriterPage() {
     } else {
 
         return (
-            <section>
-                <div className='container flex flex-row pt-[94px]'>
-                    <div className="pt-20 text-3xl w-[70%]">
+            
+            <div>
+                <Head>
+                    <title>লেখক পোস্ট</title>
+                </Head>
+                <div className='container lg:flex lg:flex-row pt-[94px]'>
+                    <div className="pt-20 text-3xl lg:w-[70%]">
 
 
                         {isLoading ? (
@@ -84,7 +89,7 @@ export default function PostOfWriterPage() {
                             <div>Error fetching posts: {error.message}</div>
                         ) : (
                             <>
-                                <div className="pt-20  text-3xl mr-[50px]">
+                                <div className="pt-20  text-3xl lg:mr-[100px] md:mr-[70px]">
                                     {displayedPosts.length && (
                                         displayedPosts.map((post, index) => (
                                             <>
@@ -93,7 +98,9 @@ export default function PostOfWriterPage() {
                                                         id={post._id}
                                                         title={post.title}
                                                         writer={post.writer}
-                                                        content={post.content.split('\n').slice(0, 8).join('\n')}
+                                                        category={post.category}
+                                                        content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 200).join(" ")}` : `${post.content.split(/\s+/).slice(0, 200).join(" ")}`} // Truncate content
+
                                                     />
                                                 </div>
                                                 {index < displayedPosts.length - 1 && <MainContentDivider />}
@@ -135,11 +142,11 @@ export default function PostOfWriterPage() {
                         )}
 
                     </div>
-                    <div className='w-[30%]'>
+                    <div className='lg:w-[30%]'>
                         <Sidebar />
                     </div>
                 </div>
-            </section>
+            </div>
         );
     }
 }
