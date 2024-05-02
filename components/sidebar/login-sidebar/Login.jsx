@@ -65,8 +65,11 @@ export default function Login() {
       );
 
 
+      console.log('side ------------------------- log in response message---------------->>>>>>', response)
 
-      if (response.status === 'success' || 200) {
+
+
+      if (response.data.status === 'success') {
         const data = await response.data;
         console.log(data);
         setStatus(data.status);
@@ -84,13 +87,18 @@ export default function Login() {
         setnumber("");
         setPassword("");
         router.refresh()
-      } else {
-        console.log("error res--------------------", response);
-        alert(response.data.message);
       }
+      else if(response.data.status === "failed"){
+        alert(' সঠিক নাম্বার দিন ')
+      }
+      
+      // else {
+      //   // console.log("error res--------------------", response.data.);
+      //   alert('নাম্বার ভুল দিয়েছেন');
+      // }
     } catch (error) {
-      console.log("inside catch ----------------", error);
-      alert('Invalid Password');
+      // console.log("inside catch ----------------", error);
+      alert('সঠিক পাসওয়ার্ড দিন');
     }
   }
 
