@@ -6,9 +6,11 @@ import ProcchodButtonList from "./ProcchodButtonList";
 import { apiBasePath } from "../../utils/constant";
 
 import { countWords } from "../../function/api";
+import Loading from "../common/loading";
 
 export default function ProcchodLeftContent() {
 
+  const [isLoading, setIsLoading] = useState(true);
   const [selectedId, setSelectedId] = useState("sob");
   const [postList, setPostList] = useState([])
   const [error, setError] = useState(null);
@@ -40,6 +42,8 @@ export default function ProcchodLeftContent() {
         setTotalPages(Math.ceil(data.length / postsPerPage));
       } catch (error) {
         setError(error);
+      } finally {
+        setIsLoading(false)
       }
     };
 
@@ -77,74 +81,78 @@ export default function ProcchodLeftContent() {
 
   const displayedPosts = postList.slice(startIndex, endIndex); // Slice the posts for the current page
 
+  if (isLoading) {
+    <Loading />
+  } else {
 
+    return (
+      <div>
+        <ProcchodButtonList buttons={buttons} setButtons={setButtons} selectedId={selectedId} setSelectedId={setSelectedId} setPostList={setPostList} postList={postList} setTotalPages={setTotalPages} postsPerPage={postsPerPage} setCurrentPage={setCurrentPage} />
+        <div className="text-3xl">
 
-  return (
-    <div>
-      <ProcchodButtonList buttons={buttons} setButtons={setButtons} selectedId={selectedId} setSelectedId={setSelectedId} setPostList={setPostList} postList={postList} setTotalPages={setTotalPages} postsPerPage={postsPerPage} setCurrentPage={setCurrentPage} />
-      <div className="text-3xl">
+          {error ? (
+            <div></div>
+          ) : (
+            <>
+              {postList.length > 0 ?
+                (<div className="lakha__main__content pt-20 text-3xl">
+                  {displayedPosts.map((post, index) => (
+                    <>
+                      <div key={index}>
+                        <MaincontentBody
+                          id={post._id}
+                          buttons={buttons}
+                          title={post.title}
+                          writer={post.writer}
+                          category={post.category}
+                          content={post.category === 'কবিতা' ? countWords(post.content, 30) : countWords(post.content, 70)}
 
-        {error ? (
-          <div>Error fetching posts: {error.message}</div>
-        ) : (
-          <>
-            {postList.length > 0 ?
-              <div className="lakha__main__content pt-20 text-3xl">
-                {displayedPosts.map((post, index) => (
-                  <>
-                    <div key={index}>
-                      <MaincontentBody
-                        id={post._id}
-                        buttons={buttons}
-                        title={post.title}
-                        writer={post.writer}
-                        category={post.category}
-                        content={post.category === 'কবিতা' ? countWords(post.content, 30) : countWords(post.content, 70)}
+                        // content={post.category === 'কবিতা' ? post.content.match(/(\S+\s*){1,100}/)?.[0] : post.content.match(/(\S+\s*){1,200}/)?.[0]}
+                        // content={post.summary}
+                        // content={post.category === 'কবিতা' ? `${post.content.split().slice(0, 10)}` : `${post.content.split().slice(0, 30)}`} // Truncate content
+                        />
+                      </div>
+                      {index < displayedPosts.length - 1 && <MainContentDivider />}
+                    </>
+                  ))}
+                </div>) : (
 
-                      // content={post.category === 'কবিতা' ? post.content.match(/(\S+\s*){1,100}/)?.[0] : post.content.match(/(\S+\s*){1,200}/)?.[0]}
-                      // content={post.summary}
-                      // content={post.category === 'কবিতা' ? `${post.content.split().slice(0, 10)}` : `${post.content.split().slice(0, 30)}`} // Truncate content
-                      />
-                    </div>
-                    {index < displayedPosts.length - 1 && <MainContentDivider />}
-                  </>
-                ))}
-              </div> :
+                  <div className="pt-10">  এই মুহূর্তে কোনো লেখা নেই </div>
 
-              <div className="pt-10"> </div>
+                )
 
+              }
+              {totalPages > 1 && <div className="py-10 space-x-4"> {/* Add a class for styling */}
+                <button
+                  className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
+                  onClick={firstPage} disabled={currentPage === 1}>
+                  প্রথম পৃষ্ঠা
+                </button>
+                <button
+                  className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
+                  onClick={prevPage} disabled={currentPage === 1}>
+                  পূর্ববর্তী পৃষ্ঠা
+                </button>
+                <span
+                  className="text-sm text-gray-800"
+                >পৃষ্ঠা {currentPage} এর {totalPages}</span>
+                <button
+                  className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
+                  onClick={nextPage} disabled={currentPage === totalPages}>
+                  পরবর্তী পৃষ্ঠা
+                </button>
+                <button
+                  className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
+                  onClick={lastPage} disabled={currentPage === totalPages}>
+                  শেষ পৃষ্ঠা
+                </button>
+              </div>
+              }
+            </>
+          )}
 
-            }
-            {totalPages > 1 && <div className="py-10 space-x-4"> {/* Add a class for styling */}
-              <button
-                className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
-                onClick={firstPage} disabled={currentPage === 1}>
-                প্রথম পৃষ্ঠা
-              </button>
-              <button
-                className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
-                onClick={prevPage} disabled={currentPage === 1}>
-                পূর্ববর্তী পৃষ্ঠা
-              </button>
-              <span
-                className="text-sm text-gray-800"
-              >পৃষ্ঠা {currentPage} এর {totalPages}</span>
-              <button
-                className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
-                onClick={nextPage} disabled={currentPage === totalPages}>
-                পরবর্তী পৃষ্ঠা
-              </button>
-              <button
-                className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
-                onClick={lastPage} disabled={currentPage === totalPages}>
-                শেষ পৃষ্ঠা
-              </button>
-            </div>
-            }
-          </>
-        )}
-
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
