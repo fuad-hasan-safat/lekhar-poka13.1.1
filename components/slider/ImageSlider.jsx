@@ -126,8 +126,8 @@ export function ImageSlider() {
                                     <div className="row">
                                         <div className="col-md-12">
                                             <div className="slider__desc">
-                                                <h1 className="text-[52px] text-[#86312F]" >{title}</h1>
-                                                <h2 className="text-[28px] text-[#595D5B]">{caption}</h2>
+                                                <h1 className="lg:text-[52px] md:text-[48px] sm:text-[44px] xs:text-[38px] text-[#86312F]" >{title}</h1>
+                                                <h2 className="lg:text-[28px] md:text-[26px] sm:text-[24px] xs:text-[22px] text-[#595D5B]">{caption}</h2>
                                                 <p className="text-[16px] text-[#595D5B] w-[50%]">{content}</p>
 
                                                 <button
@@ -153,7 +153,7 @@ export function ImageSlider() {
 
             <button
                 onClick={showPrevImage}
-                className="img-slider-btn"
+                className="img-slider-btn img-slider-btn-lft"
                 style={{ left: 0 }}
                 aria-label="View Previous Image"
             >
@@ -163,7 +163,7 @@ export function ImageSlider() {
             </button>
             <button
                 onClick={showNextImage}
-                className="img-slider-btn"
+                className="img-slider-btn img-slider-btn-rgt"
                 style={{ right: 0 }}
                 aria-label="View Next Image"
             >

@@ -61,3 +61,17 @@
 .upload.is-highlight {
     /* background-color: rgba(74, 160, 234, 0.5); */
 }
+
+/*
+--------------------
+ Responsive Css
+-------------------- 
+*/
+@media(max-width:575px){
+    .user__profile__wrap{
+        width: 440px;
+    }
+    .user__profile__wrap{
+        width: 330px;
+    }
+}
