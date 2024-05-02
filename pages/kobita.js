@@ -7,9 +7,9 @@ export default function Home() {
         <Head>
           <title>কবিতা</title>
         </Head>
-    
+    {/* lg:pt-[95px] sm:pt-[90px] xm:pt-[85] */}
 
-      <div className=" lg:pt-[95px] sm:pt-[90px] xm:pt-[85] ">
+      <div className="  ">
         <SobKobita />
       </div>
       </div>

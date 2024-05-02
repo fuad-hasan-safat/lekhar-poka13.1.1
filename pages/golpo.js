@@ -8,8 +8,8 @@ export default function Home() {
         <Head>
           <title>গল্প</title>
         </Head>
-      
-      <div className="lg:pt-[95px] sm:pt-[90px] xm:pt-[85] text-black">
+      {/* lg:pt-[95px] sm:pt-[90px] xm:pt-[85] text-black */}
+      <div className="">
         <SobGolpo />
       </div>
       </div>

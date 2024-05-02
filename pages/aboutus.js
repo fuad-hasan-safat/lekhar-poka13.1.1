@@ -11,8 +11,8 @@ export default function Home() {
           <title>আমাদের সম্পর্কে</title>
         </head>
       </div> */}
-
-      <div className="lg:pt-[95px] md:pt-[90px] sm:pt-[85px] xs:pt-[80px] text-black">
+{/* lg:pt-[95px] md:pt-[90px] sm:pt-[85px] xs:pt-[80px] */}
+      <div className=" text-black">
         <Head>
           <title>আমাদের সম্পর্কে</title>
         </Head>
