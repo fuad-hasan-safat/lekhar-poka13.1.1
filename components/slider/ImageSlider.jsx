@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Circle } from 'lucide-react';
 import { apiBasePath } from "../../utils/constant";
+import { fetchData } from "../../function/api";
 // import '/public/assets/css/image-slider.css'
 // import './image-slider.css'
 // import { apiBasePath } from "@/utils/constant";
@@ -27,32 +28,33 @@ export function ImageSlider() {
     const router = useRouter();
 
     async function fetchDataAsync(postId) {
+        console.log('__________________(((((((((((((<<<<<<<<<<<<<<<<<------->>>>>>>>>>>>>>>>>)))))))))))))______', postId)
         try {
-          const result = await fetchData(
-            `${apiBasePath}/getslider/${postId}`
-          );
-        //   console.log("result         ->>>>>>>>>>>>>>>>", result.object.post);
-        //   console.log({slug, result})
-        //   setData(result.object.post);
-        //   setIsLoading(false)
-          router.push(`/post/${result.object.post._id}`)
-        //   setIsLoading(false)
-        //   console.log('data -------------- slider  -------------- slider >>>>>', data)
+            const result = await fetchData(
+                `${apiBasePath}/getslider/${postId}`
+            );
+            console.log("slider result          ->>>>>>>>>>>>>>>>", result.object.post);
+            //   console.log({slug, result})
+            //   setData(result.object.post);
+            //   setIsLoading(false)
+            router.push(`/post/${result.object.post._id}`)
+            //   setIsLoading(false)
+            //   console.log('data -------------- slider  -------------- slider >>>>>', data)
         } catch (error) {
-  
-          console.log(error)
+
+            console.log(error)
         } finally {
-        //   setIsLoading(false)
+            //   setIsLoading(false)
         }
-      }
+    }
 
     function featureHandler(postId) {
         console.log('features handler ------>>>>>>>>>>>>', postId)
 
-        
-      
-          fetchDataAsync(postId);
-      
+
+
+        fetchDataAsync(postId);
+
         // router.push(`/feature/${postId}`);
     }
 
@@ -82,8 +84,8 @@ export function ImageSlider() {
                 Skip Image Slider Controls
             </a> */}
 
+            {data.length > 0 ?
 
-            {data.length &&
                 <div>
                     <div
                         className="relative slider__bg__img"
@@ -109,7 +111,7 @@ export function ImageSlider() {
                         className="absolute left-0 top-[50%] -translate-y-1/2"
                         style={{
                             width: "100%",
-                           
+
                             display: "flex",
                             overflow: "hidden",
                         }}
@@ -149,6 +151,10 @@ export function ImageSlider() {
 
 
                 </div>
+                :
+                <div>
+                        <p></p>
+                </div>
             }
 
             <button
@@ -172,7 +178,7 @@ export function ImageSlider() {
                 />
             </button>
             <div
-            className="slider__pagination"
+                className="slider__pagination"
                 style={{
                     position: "absolute",
                     bottom: "8rem",
@@ -183,7 +189,7 @@ export function ImageSlider() {
                 }}
             >
                 {data.map((_, index) => (
-                    
+
                     <button
                         key={index}
                         className={`img-slider-dot-btn ${index === imageIndex ? 'active-img-slider-dot-btn' : ''}`}

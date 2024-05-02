@@ -92,10 +92,7 @@ export default function Login() {
         alert(' সঠিক নাম্বার দিন ')
       }
       
-      // else {
-      //   // console.log("error res--------------------", response.data.);
-      //   alert('নাম্বার ভুল দিয়েছেন');
-      // }
+    
     } catch (error) {
       // console.log("inside catch ----------------", error);
       alert('সঠিক পাসওয়ার্ড দিন');

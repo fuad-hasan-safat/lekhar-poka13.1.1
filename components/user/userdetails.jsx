@@ -38,7 +38,30 @@ export default function UserDetails({ sex = '---', birthdate = '---', location =
 
     // profile state
 
+    //  image string to file convertor
 
+// Convert the base64 string to a Blob
+function dataURItoBlob(dataURI) {
+    const byteString = atob(dataURI.split(',')[1]);
+    const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ab], { type: mimeString });
+  }
+  
+  // Convert the Blob to a File
+  function blobToFile(blob, fileName) {
+    blob.lastModifiedDate = new Date();
+    blob.name = fileName;
+    return blob;
+  }
+  
+  // Convert the string data to a file
+//   const blob = dataURItoBlob(imageData);
+//   const file = blobToFile(blob, "profile_picture.jpg");
 
     // get profile data 
 
@@ -64,8 +87,15 @@ export default function UserDetails({ sex = '---', birthdate = '---', location =
                 setAddress(data.object.profile.address)
                 setemail(data.object.profile.email)
                 //setPhone(data.object.profile.phone)
-                setImage(data.object.profile.image)
                 setGender(data.object.profile.gender)
+                setPreview(`${apiBasePath}/${data.object.profile.image.slice(data.object.profile.image.indexOf("/") + 1)}`)
+
+                const blob = dataURItoBlob(preview);
+                const file = blobToFile(blob, "profile_picture.jpg");
+                
+                setImage(data.object.profile.image)
+                setImageFile(file)
+                console.log(' Image ---------------------------- file ******', file)
                 //setFollower(data.object.profile.follower)
                 //setFollowing(data.object.profile.following)
                 //setPost(data.object.profile.post)
@@ -75,6 +105,11 @@ export default function UserDetails({ sex = '---', birthdate = '---', location =
             .catch((error) => console.error("Error fetching profile:", error));
 
     }, [])
+
+
+
+
+
 
 
 
@@ -121,6 +156,8 @@ export default function UserDetails({ sex = '---', birthdate = '---', location =
             } catch (error) {
                 console.error('Error updating profile:', error);
             }
+
+            setIsOpen(false);
         }
     };
 
@@ -149,7 +186,7 @@ export default function UserDetails({ sex = '---', birthdate = '---', location =
                         <img
                             src="/images/usericons/sexicon.svg"
                         />
-                        <p>{sex}</p>
+                        <p className='capitalize'>{sex}</p>
                     </div>
 
                     <div className="flex flex-row space-x-2 pt-2">
@@ -273,7 +310,8 @@ export default function UserDetails({ sex = '---', birthdate = '---', location =
                                                         name='gender'
                                                         checked={gender === 'male'}
                                                         className='custom-radio'
-                                                        value='male' onChange={(e) => setGender(e.target.value)} />
+                                                        value='male' 
+                                                        onChange={(e) => setGender(e.target.value)} />
                                                     <label htmlFor='male' className='custom-radio-label'>Male</label>
                                                 </div>
                                                 <div className='radio-container'>
@@ -283,7 +321,7 @@ export default function UserDetails({ sex = '---', birthdate = '---', location =
                                                         name='gender'
                                                         className='custom-radio'
                                                         value='female'
-                                                        checked={gender === 'famale'}
+                                                        checked={gender === 'female'}
                                                         onChange={(e) => setGender(e.target.value)} />
                                                     <label htmlFor='female' className='custom-radio-label'>Female</label>
                                                 </div>
