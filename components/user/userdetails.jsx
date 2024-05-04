@@ -38,30 +38,14 @@ export default function UserDetails({ sex = '---', birthdate = '---', location =
 
     // profile state
 
-    //  image string to file convertor
-
-// Convert the base64 string to a Blob
-function dataURItoBlob(dataURI) {
-    const byteString = atob(dataURI.split(',')[1]);
-    const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-    const ab = new ArrayBuffer(byteString.length);
-    const ia = new Uint8Array(ab);
-    for (let i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
-    }
-    return new Blob([ab], { type: mimeString });
-  }
-  
-  // Convert the Blob to a File
-  function blobToFile(blob, fileName) {
-    blob.lastModifiedDate = new Date();
-    blob.name = fileName;
-    return blob;
-  }
-  
-  // Convert the string data to a file
-//   const blob = dataURItoBlob(imageData);
-//   const file = blobToFile(blob, "profile_picture.jpg");
+    function saveImageFromURL(url, filename) {
+        fetch(url)
+        .then(response => response.blob())
+        .then(blob => {
+            setImageFile(blob);
+        })
+        .catch(error => console.error('Error:', error));
+      }
 
     // get profile data 
 
@@ -79,26 +63,18 @@ function dataURItoBlob(dataURI) {
             .then((response) => response.json())
             .then((data) => {
                 console.log('pofile details --------------->>>>>>>', data);
-                // setFullName(data.object.profile.)
                 setDesignation(data.object.profile.designation)
                 setProfileStatus(data.object.profile.profileStatus)
                 setGender(data.object.profile.gender)
                 setBirthOfDate(data.object.profile.dob)
                 setAddress(data.object.profile.address)
                 setemail(data.object.profile.email)
-                //setPhone(data.object.profile.phone)
                 setGender(data.object.profile.gender)
                 setPreview(`${apiBasePath}/${data.object.profile.image.slice(data.object.profile.image.indexOf("/") + 1)}`)
 
-                const blob = dataURItoBlob(preview);
-                const file = blobToFile(blob, "profile_picture.jpg");
-                
-                setImage(data.object.profile.image)
-                setImageFile(file)
+                setImage(`${apiBasePath}/${data.object.profile.image.slice(data.object.profile.image.indexOf("/") + 1)}`)
+                saveImageFromURL(`${apiBasePath}/${data.object.profile.image.slice(data.object.profile.image.indexOf("/") + 1)}`, 'profile.jpg')
                 console.log(' Image ---------------------------- file ******', file)
-                //setFollower(data.object.profile.follower)
-                //setFollowing(data.object.profile.following)
-                //setPost(data.object.profile.post)
 
                 console.log(' profile image----------->>>>', image)
             })
@@ -116,7 +92,7 @@ function dataURItoBlob(dataURI) {
     const handleProfileUpdate = async (e) => {
         e.preventDefault();
 
-        if (!imageFile) {
+        if (!imageFile ) {
             alert('Upload your image')
         } else if (!gender) {
             alert('Select your gender')
