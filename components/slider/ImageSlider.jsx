@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Circle } from 'lucide-react';
 import { apiBasePath } from "../../utils/constant";
+import { fetchData } from "../../function/api";
 // import '/public/assets/css/image-slider.css'
 // import './image-slider.css'
 // import { apiBasePath } from "@/utils/constant";
@@ -26,9 +27,35 @@ export function ImageSlider() {
     //  handler
     const router = useRouter();
 
+    async function fetchDataAsync(postId) {
+        console.log('__________________(((((((((((((<<<<<<<<<<<<<<<<<------->>>>>>>>>>>>>>>>>)))))))))))))______', postId)
+        try {
+            const result = await fetchData(
+                `${apiBasePath}/getslider/${postId}`
+            );
+            console.log("slider result          ->>>>>>>>>>>>>>>>", result.object.post);
+            //   console.log({slug, result})
+            //   setData(result.object.post);
+            //   setIsLoading(false)
+            router.push(`/post/${result.object.post._id}`)
+            //   setIsLoading(false)
+            //   console.log('data -------------- slider  -------------- slider >>>>>', data)
+        } catch (error) {
+
+            console.log(error)
+        } finally {
+            //   setIsLoading(false)
+        }
+    }
+
     function featureHandler(postId) {
         console.log('features handler ------>>>>>>>>>>>>', postId)
-        router.push(`/feature/${postId}`);
+
+
+
+        fetchDataAsync(postId);
+
+        // router.push(`/feature/${postId}`);
     }
 
 
@@ -57,8 +84,8 @@ export function ImageSlider() {
                 Skip Image Slider Controls
             </a> */}
 
+            {data.length > 0 ?
 
-            {data.length &&
                 <div>
                     <div
                         className="relative slider__bg__img"
@@ -84,7 +111,7 @@ export function ImageSlider() {
                         className="absolute left-0 top-[50%] -translate-y-1/2"
                         style={{
                             width: "100%",
-                           
+
                             display: "flex",
                             overflow: "hidden",
                         }}
@@ -101,8 +128,8 @@ export function ImageSlider() {
                                     <div className="row">
                                         <div className="col-md-12">
                                             <div className="slider__desc">
-                                                <h1 className="text-[52px] text-[#86312F]" >{title}</h1>
-                                                <h2 className="text-[28px] text-[#595D5B]">{caption}</h2>
+                                                <h1 className="lg:text-[52px] md:text-[48px] sm:text-[44px] xs:text-[38px] text-[#86312F]" >{title}</h1>
+                                                <h2 className="lg:text-[28px] md:text-[26px] sm:text-[24px] xs:text-[22px] text-[#595D5B]">{caption}</h2>
                                                 <p className="text-[16px] text-[#595D5B] w-[50%]">{content}</p>
 
                                                 <button
@@ -124,11 +151,15 @@ export function ImageSlider() {
 
 
                 </div>
+                :
+                <div>
+                        <p></p>
+                </div>
             }
 
             <button
                 onClick={showPrevImage}
-                className="img-slider-btn"
+                className="img-slider-btn img-slider-btn-lft"
                 style={{ left: 0 }}
                 aria-label="View Previous Image"
             >
@@ -138,7 +169,7 @@ export function ImageSlider() {
             </button>
             <button
                 onClick={showNextImage}
-                className="img-slider-btn"
+                className="img-slider-btn img-slider-btn-rgt"
                 style={{ right: 0 }}
                 aria-label="View Next Image"
             >
@@ -147,7 +178,7 @@ export function ImageSlider() {
                 />
             </button>
             <div
-            className="slider__pagination"
+                className="slider__pagination"
                 style={{
                     position: "absolute",
                     bottom: "8rem",
@@ -158,7 +189,7 @@ export function ImageSlider() {
                 }}
             >
                 {data.map((_, index) => (
-                    
+
                     <button
                         key={index}
                         className={`img-slider-dot-btn ${index === imageIndex ? 'active-img-slider-dot-btn' : ''}`}

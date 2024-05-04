@@ -59,7 +59,7 @@ export default function PostDetails() {
       {
         <div className="lg:flex lg:flex-row">
           <div className="lg:w-[70%] text-black text-center text-3xl py-[100px]">
-            সাময়িক অসুবিধার জন্য দুঃখিত
+            {/* সাময়িক অসুবিধার জন্য দুঃখিত */}
           </div>
           <div className="lg:w-[30%]">
             <Sidebar />

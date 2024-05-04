@@ -65,8 +65,11 @@ export default function Login() {
       );
 
 
+      console.log('side ------------------------- log in response message---------------->>>>>>', response)
 
-      if (response.status === 'success' || 200) {
+
+
+      if (response.data.status === 'success') {
         const data = await response.data;
         console.log(data);
         setStatus(data.status);
@@ -84,13 +87,15 @@ export default function Login() {
         setnumber("");
         setPassword("");
         router.refresh()
-      } else {
-        console.log("error res--------------------", response);
-        alert(response.data.message);
       }
+      else if(response.data.status === "failed"){
+        alert(' সঠিক নাম্বার দিন ')
+      }
+      
+    
     } catch (error) {
-      console.log("inside catch ----------------", error);
-      alert('Invalid Password');
+      // console.log("inside catch ----------------", error);
+      alert('সঠিক পাসওয়ার্ড দিন');
     }
   }
 
@@ -110,7 +115,7 @@ export default function Login() {
         <>
           <div className="flex flex-col items-center">
             <div className="text-black text-xl mb-4">
-               {username} , লেখার পকায় আপনাকে স্বাগতম
+               {username} , লেখার পোকায় আপনাকে স্বাগতম
             </div>
             <div className="flex flex-row space-x-3 text-[18px]">
               <LogoutButton

@@ -39,6 +39,7 @@ body {
 }
 
 
+
 .progress-bar {
   background-color: #fdcb43 !important;
 }
@@ -164,6 +165,41 @@ body {
 ------- MODAL HANDLE ---
 --------------------
 */
+
+.modal {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .modal_handle {
   max-height: 300px; /* Adjust height as needed */
   overflow-y: scroll; /* Enable scrolling for long content */
@@ -496,6 +532,21 @@ transition: all 0.5s !important;
 }
 
 /*
+------------------
+ Procchod Button
+------------------ 
+*/
+.procchod__button{
+  width: 20%;
+  float: left;
+  text-align: center;
+  padding: 0 5px 5px;
+}
+.procchod__button button {
+  padding: 5px 10px;
+}
+
+/*
 -------------------
 -------------------
 */
@@ -686,6 +737,9 @@ transition: all 0.5s !important;
 .login__lft__text h2 span{
   font-weight: 600;
 }
+.all__post__sec__wrap{
+  padding-top: 100px;
+}
 
 /*
 ----------------------
@@ -693,9 +747,6 @@ transition: all 0.5s !important;
 ---------------------- 
 */
 @media(max-width:1299px){
-  .procchod__button button{
-    width: 110px;
-  }
   .login__lft__text h2 {
       font-size: 45px;
   }
@@ -719,7 +770,6 @@ transition: all 0.5s !important;
     font-size: 50px;
   }
   .procchod__button button {
-      width: 90px;
       font-size: 14px;
   }
   .sidebar__all__see{
@@ -767,6 +817,11 @@ transition: all 0.5s !important;
     justify-content: center;
     align-items: center;
   }
+  .procchod__button{
+    width: 25%;
+    float: left;
+  }
+
   .ftr__main__content > ul > li {
       width: 33.3333%;
       float: left;
@@ -863,18 +918,19 @@ transition: all 0.5s !important;
       bottom: 5rem !important;
       left: 8% !important;
   }
-  .procchod__button{
-    margin: 0 5px !important;
-  }
   .procchod__button button {
-      width: 80px;
+      margin-bottom: 6px;
       font-size: 13px;
   }
   .lakha__main__content{
     padding-top: 50px !important;
   }
   .all__button__list {
-      padding-top: 30px;
+    padding-top: 30px;
+    display: inline-block;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
   }
   .ftr__main__content{
     text-align: center;
@@ -953,33 +1009,52 @@ transition: all 0.5s !important;
       padding-top: 70px;
   }
   .procchod__button button {
-      width: 65px;
       font-size: 13px;
   }
   .OTP__text{
     font-size: 35px;
   }
+  .kobita__content {
+      margin-top: 80px;
+      margin-bottom: 60px;
+  }
 }
 @media(max-width:479px){
   .logo a img {
-      width: 140px !important;
+      width: 110px !important;
   }
   .logo {
       padding: 10px 10px 10px 0;
   }
   .logo:after {
-      border-top: 70px solid #ffd700;
-      border-right: 100px solid transparent;
-      right: -100px;
-  }
+    border-top: 60px solid #ffd700;
+    border-right: 70px solid transparent;
+    right: -69px;
+}
+.search__bar img{
+  width: 35px !important;
+}
+.search_result {
+  top: 36px;
+}
+.search__bar{
+  margin-left: 5px !important;
+}
+.search__bar input{
+  width: 90px !important;
+  font-size: 15px !important;
+}
   .slider__bg__img img {
       height: 450px;
   }
   .slider__desc h1{
-    font-size:34px;
+    font-size:30px;
   }
   .slider__desc h2{
-    font-size: 24px;
+    font-size: 20px;
+  }
+  .slider__desc p {
+      font-size: 14px;
   }
   .slider__desc button {
       font-size: 17px;
@@ -988,14 +1063,35 @@ transition: all 0.5s !important;
       margin-top: 20px;
   }
   .slider__pagination {
-      bottom: 3rem !important;
+      bottom: 2rem !important;
       left: 10% !important;
   }
   .procchod__button button {
-      width: 45px;
       font-size: 10px;
   }
   .login__create__text{
     display: block;
+  }
+  .img-slider-btn-lft{
+    top: auto !important;
+    left: 35% !important;
+  }
+  .img-slider-btn-rgt{
+    top: auto !important;
+    right: 35% !important;
+  }
+  .slider__pagination {
+      display: none !important;
+  }
+  .audio-sound-line{
+    max-width: 320px;
+    width: 100%;
+  }
+  .audio-player-wrap{
+    bottom: 0 !important;
+    height: 125px;
+  }
+  .progress{
+    border-radius: 5px;
   }
 }

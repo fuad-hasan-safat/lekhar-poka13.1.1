@@ -9,8 +9,8 @@ export default function Home() {
         <Head>
           <title>প্রবন্ধ</title>
         </Head>
-      
-      <div className="lg:pt-[95px] md:pt-[90px] sm:pt-[90pxpx] ">
+      {/* lg:pt-[95px] md:pt-[90px] sm:pt-[90px] */}
+      <div className=" ">
         <SobProbondho />
       </div>
       </div>

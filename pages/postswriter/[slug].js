@@ -74,7 +74,7 @@ export default function PostOfWriterPage() {
     } else {
 
         return (
-            
+
             <div>
                 <Head>
                     <title>লেখক পোস্ট</title>
@@ -89,25 +89,29 @@ export default function PostOfWriterPage() {
                             <div>Error fetching posts: {error.message}</div>
                         ) : (
                             <>
-                                <div className="pt-20  text-3xl lg:mr-[100px] md:mr-[70px]">
-                                    {displayedPosts.length && (
-                                        displayedPosts.map((post, index) => (
-                                            <>
-                                                <div key={index}>
-                                                    <SobPostsOfWriterBody
-                                                        id={post._id}
-                                                        title={post.title}
-                                                        writer={post.writer}
-                                                        category={post.category}
-                                                        content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 200).join(" ")}` : `${post.content.split(/\s+/).slice(0, 200).join(" ")}`} // Truncate content
+                                {postList.length > 0 ?
+                                    <div className="pt-20  text-3xl lg:mr-[100px] md:mr-[70px]">
+                                        {displayedPosts.length && (
+                                            displayedPosts.map((post, index) => (
+                                                <>
+                                                    <div key={index}>
+                                                        <SobPostsOfWriterBody
+                                                            id={post._id}
+                                                            title={post.title}
+                                                            writer={post.writer}
+                                                            category={post.category}
+                                                            content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 200).join(" ")}` : `${post.content.split(/\s+/).slice(0, 200).join(" ")}`} // Truncate content
 
-                                                    />
-                                                </div>
-                                                {index < displayedPosts.length - 1 && <MainContentDivider />}
-                                            </>
-                                        ))
-                                    )}
-                                </div>
+                                                        />
+                                                    </div>
+                                                    {index < displayedPosts.length - 1 && <MainContentDivider />}
+                                                </>
+                                            ))
+                                        )}
+                                    </div> :
+                                    <div className="pt-10">  এই মুহূর্তে কোনো লেখা নেই </div>
+
+                                }
                                 {totalPages > 1 && <div className="py-10 space-x-4"> {/* Add a class for styling */}
                                     <button
                                         className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"

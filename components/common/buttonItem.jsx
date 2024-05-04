@@ -58,12 +58,12 @@ const ButtonItem = ({
   return (
     <>
       <div
-        className={`procchod__button py-1 rounded-md border border-gray-300  ${selectedId === id ? " bg-yellow-400 shadow-md" : "bg-gray-300"
-          }`}
+        className={`procchod__button`}
       >
         <button
           onClick={() => handleButton(title)}
-          className={`w-[120px] h-[12px] text-gray-600 font-semibold`}
+          className={`w-full py-1 rounded-md border border-gray-300  text-gray-600 font-semibold ${selectedId === id ? " bg-yellow-400 shadow-md" : "bg-gray-300"
+        }`}
         >
           {title}
         </button>

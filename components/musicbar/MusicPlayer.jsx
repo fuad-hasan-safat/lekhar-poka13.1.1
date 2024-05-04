@@ -10,32 +10,7 @@ import {
 } from "react-icons/md";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { useRouter } from "next/navigation";
-// import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
-// import "./styles.css";
 
-// const songs = [
-//   {
-//     id: 1,
-//     title: "Song 1",
-//     src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-//     writer: 'Writer 1',
-//     image: '/images/demopic/demopic.png'
-//   },
-//   {
-//     id: 2,
-//     title: "Song 2",
-//     src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-//     writer: 'Writer 2',
-//     image: '/images/demopic/demopic.png'
-//   },
-//   {
-//     id: 3,
-//     title: "Song 3",
-//     src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
-//     writer: 'Writer 3',
-//     image: '/images/demopic/demopic.png'
-//   }
-// ];
 
 export default function MusicPlayer({songs}) {
   const router = useRouter();
@@ -160,7 +135,7 @@ export default function MusicPlayer({songs}) {
 
   return (
        <>
-    <div className=" fixed text-black  backdrop-blur-lg  place-content-center text-center justify-center bottom-[24px] bg-yellow-500/30  w-full h-[140px]">
+    <div className="audio-player-wrap fixed text-black  backdrop-blur-lg  place-content-center text-center justify-center bottom-[0] bg-yellow-500/30  w-full h-[140px]">
     <div className="container lg:flex lg:flex-row justify-center content-center lg:space-x-16">
       <div className="items-center content-center justify-center z-[200] w-[300px]">
         {/* song info */}
@@ -232,7 +207,7 @@ export default function MusicPlayer({songs}) {
                 </div>
             
         </div>
-        <div className="flex flex-row text-center place-content-center justify-center space-x-5 pb-[15px]">
+        <div className="audio-sound-line flex flex-row text-center place-content-center justify-center space-x-5 pb-[15px]">
 
         <span className="text-xs">{formatTime(currentTime)}</span>
 

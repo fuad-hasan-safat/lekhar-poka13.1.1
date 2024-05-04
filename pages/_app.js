@@ -3,6 +3,7 @@ import '../public/assets/fonts/customfont.css'
 import '../public/assets/css/image-slider.css'
 import '../components/userprofile/FileUpload.css'
 
+
 // export default function App({ Component, pageProps }) {
 //   return <Component {...pageProps} />
 // }
