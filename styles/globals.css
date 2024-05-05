@@ -741,6 +741,12 @@ transition: all 0.5s !important;
   padding-top: 95px;
 }
 
+/* about us image */
+.about__img{
+  max-width: 350px;
+  width: 100%;
+}
+
 
 /*
 ----------------------
