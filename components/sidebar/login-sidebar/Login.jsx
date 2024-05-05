@@ -3,7 +3,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 
 import axios, { AxiosError } from "axios";
 import SignInOption from '../../signInOption/SignInOption'
- import { apiBasePath } from "../../../utils/constant";
+import { apiBasePath } from "../../../utils/constant";
 import { useRouter } from "next/navigation";
 import Divider from '../../common/sidebardivider';
 import LogoutButton from '../../common/logoutButton'
@@ -21,8 +21,11 @@ export default function Login() {
   const [status, setStatus] = useState("");
   const [username, setUsername] = useState("");
   const [userUuid, setUserUuid] = useState("");
-  const [error, setError] = useState(null); 
+  const [error, setError] = useState(null);
   const [numberPrefix, setNumberPrefix] = useState('88');
+
+  // google login state start
+  const [profile, setProfile] = useState([]);
 
 
   const handleNumberhange = (e) => {
@@ -83,16 +86,16 @@ export default function Login() {
         localStorage.setItem("usertype", data.usertype);
         localStorage.setItem("phone", data.phone);
 
-          console.log(apiBasePath, data.usertype)
+        console.log(apiBasePath, data.usertype)
         setnumber("");
         setPassword("");
         router.refresh()
       }
-      else if(response.data.status === "failed"){
+      else if (response.data.status === "failed") {
         alert(' সঠিক নাম্বার দিন ')
       }
-      
-    
+
+
     } catch (error) {
       // console.log("inside catch ----------------", error);
       alert('সঠিক পাসওয়ার্ড দিন');
@@ -115,7 +118,7 @@ export default function Login() {
         <>
           <div className="flex flex-col items-center">
             <div className="text-black text-xl mb-4">
-               {username} , লেখার পোকায় আপনাকে স্বাগতম
+              {username} , লেখার পোকায় আপনাকে স্বাগতম
             </div>
             <div className="flex flex-row space-x-3 text-[18px]">
               <LogoutButton
@@ -178,14 +181,15 @@ export default function Login() {
             </div>
 
             <SignInOption
+              user={user}
+              setUser={setUser}
+              profile={profile}
+              setProfile={setProfile}
               title="অথবা সাইন ইন করুন"
               icon1="/images/loginOptionIcon/google.svg"
-              icon2="/images/loginOptionIcon/facebook_squre.svg"
-              icon3="/images/loginOptionIcon/apple.svg"
               lowermessege1="একাউন্ট নেই? "
               lowermessege2="একাউন্ট তৈরী করুন ।"
               signLogLink="/account/signup"
-              classProperty=" flex shadow-primary-1 w-[70px] h-[47px] items-center justify-center"
             />
           </div>
           <Divider />

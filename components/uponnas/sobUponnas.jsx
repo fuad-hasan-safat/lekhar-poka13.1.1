@@ -10,7 +10,7 @@ export default function SobUponnas() {
                     <h2 className=" absolute top-[50%] left-[50%] text-[40px] text-[#F9A106] -translate-x-[50%] -translate-y-[50%] max-h-[0px]">উপন্যাস</h2>
                 </div>
             </section>
-            <section>
+            <section className='all__page__main__content'>
 
                 <div className='container '>
                     <div className='all__post__content flex flex-row'>

@@ -3,9 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 
-export default function SignInOption({ title, icon1, icon2, icon3, lowermessege1, lowermessege2, classProperty, signLogLink }) {
-    const [user, setUser] = useState([]);
-    const [profile, setProfile] = useState([]);
+export default function SignInOption({ title, icon1,  lowermessege1, lowermessege2, signLogLink, user, setUser, profile, setProfile }) {
+    // const [user, setUser] = useState([]);
+    // const [profile, setProfile] = useState([]);
 
     const login = useGoogleLogin({
         onSuccess: (codeResponse) => setUser(codeResponse),

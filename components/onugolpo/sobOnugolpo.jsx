@@ -12,7 +12,7 @@ export default function SobOnuGolpo() {
                 </div>
 
             </section>
-            <section className="">
+            <section className="all__page__main__content">
 
                 <div className="container">
                     <div className="all__post__content flex flex-row">
