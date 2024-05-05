@@ -30,6 +30,9 @@ export default function WriterProfile() {
     const [post, setPost] = useState(0);
     const [following, setFollowing] = useState(0);
 
+    //  following status check
+    const [isAlreadyFollowing, setIsAlreadyFollowing] = useState(false)
+
 
     //  fetch data from local store
     const [isLoading, setIsLoading] = useState(true);
@@ -41,6 +44,37 @@ export default function WriterProfile() {
     const [userToken, setUserToken] = useState("");
 
 
+    async function getFollowingStatus(user_id, following) {
+        try {
+            const followingResponse = await axios.post(
+                `${apiBasePath}/followstatus`,
+                {
+                    user_id: following,
+                    following: user_id,
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+
+
+            setIsAlreadyFollowing(followingResponse.data.status)
+
+
+            console.log('followingResponse ------------------------- writer in response message---------------->>>>>>', followingResponse.data.status)
+
+
+
+
+
+
+        } catch (error) {
+            // console.log("inside catch ----------------", error);
+        }
+
+    }
 
     useEffect(() => {
         console.log("-----------------------------  SLUG -----------------------", slug);
@@ -66,6 +100,9 @@ export default function WriterProfile() {
             })
             .catch((error) => console.error("Error fetching data:", error));
 
+        //  following status
+
+
 
 
         // user post
@@ -86,6 +123,9 @@ export default function WriterProfile() {
 
         fetchDataAsync();
 
+
+        getFollowingStatus(slug, userUuid)
+
     }, [router.query])
 
 
@@ -97,33 +137,33 @@ export default function WriterProfile() {
 
     }, []);
 
-   async function followUserhandler(user_id, following) {
+    async function followUserhandler(user_id, following) {
         try {
             const response = await axios.post(
-              `${apiBasePath}/follow`,
-              {
-                user_id: user_id,
-                following: following,
-              },
-              {
-                headers: {
-                  "Content-Type": "application/json",
+                `${apiBasePath}/follow`,
+                {
+                    user_id: following,
+                    following: user_id,
                 },
-              }
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
             );
-      
-      
-             console.log('following ------------------------- writer in response message---------------->>>>>>', response)
-      
-      
-      
-            
-      
-      
-          } catch (error) {
+
+
+            console.log('following ------------------------- writer in response message---------------->>>>>>', response)
+
+
+
+
+
+
+        } catch (error) {
             // console.log("inside catch ----------------", error);
-          }
-        
+        }
+
 
     }
 
@@ -148,16 +188,28 @@ export default function WriterProfile() {
                             />
 
                         </div>
+                        {isAlreadyFollowing === false ?
+                            <div className='container  '>
+                                <button
+                                    className='mt-[30px] ml-[12.5%] h-[43px] bg-[#F9A106] hover:bg-[#c67256] px-[48px] p-1 rounded-lg text-white text-[16px]'
+                                    onClick={() => followUserhandler(slug, userUuid)}
+                                >
+                                    অনুসরণ করুন
+                                </button>
 
-                        <div className='container  '>
-                            <button
-                                className='mt-[30px] ml-[12.5%] h-[43px] bg-[#F9A106] hover:bg-[#c67256] px-[48px] p-1 rounded-lg text-white text-[16px]'
-                                onClick={() => followUserhandler(slug, userUuid)}
-                            >
-                                অনুসরণ করুন
-                            </button>
+                            </div> :
 
-                        </div>
+                            <div className='container  '>
+                                <button
+                                    className='mt-[30px] ml-[12.5%] h-[43px] bg-[#F9A106]  px-[48px] p-1 rounded-lg text-white text-[16px]'
+                                    onClick={() => followUserhandler(slug, userUuid)}
+                                >
+                                    অনুসরণ করছেন
+                                </button>
+
+                            </div>
+
+                        }
 
                     </div>
 
