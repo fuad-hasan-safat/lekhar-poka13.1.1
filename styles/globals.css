@@ -744,12 +744,35 @@ transition: all 0.5s !important;
   
 }
 
-
-/* about us image */
-.about__img{
-  max-width: 350px;
-  width: 100%;
+.about__btm__wrap,
+.about__content__wrap{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+.about__img {
+  width: 45%;
+  padding-right: 20px;
+}
+.about__dsc{
+  width: 55%;
+  padding-left: 30px;
+}
+.about__btm__dsc p,
+.about__dsc p {
+  margin-bottom: 25px;
+  font-size: 20px;
+  text-align: justify;
+}
+.about__btm__img {
+  width: 45%;
+  padding-left: 100px;
+  text-align: center;
+}
+.about__btm__dsc{
+  width: 55%;
+}
+
 
 
 
@@ -803,6 +826,25 @@ transition: all 0.5s !important;
   }
   .OTP__text{
     font-size: 45px;
+  }
+  .about__dsc {
+      width: 50%;
+      padding-left: 20px;
+  }
+  .about__img {
+      width: 50%;
+      padding-right: 0;
+  }
+  .about__btm__dsc p, .about__dsc p {
+      margin-bottom: 20px;
+      font-size: 18px;
+  }
+  .about__btm__img {
+      width: 45%;
+      padding-left: 50px;
+  }
+  .about__text__tp p br{
+    display: none;
   }
 }
 @media(max-width:991px){
@@ -869,6 +911,38 @@ transition: all 0.5s !important;
     margin-left: 25px ;
     margin-right: 25px;
     padding: 30px 20px 20px;
+  }
+  .about__btm__wrap,
+  .about__content__wrap{
+    display: block;
+  }
+  .about__img {
+      width: 100%;
+      padding-right: 0;
+      padding-bottom: 30px;
+  }
+  .about__img img {
+      display: table;
+      margin: 0 auto;
+      max-width: 500px;
+      width: 100%;
+  }
+  .about__dsc {
+      width: 100%;
+      padding-left: 0;
+      padding-bottom: 20px;
+  }
+  .about__btm__dsc {
+      width: 100%;
+  }
+  .about__btm__img {
+      width: 100%;
+      padding-left: 0;
+      padding-bottom: 50px;
+  }
+  .about__btm__img img{
+    display: table;
+    margin: 0 auto;
   }
 }
 @media(max-width:767px){
@@ -1015,6 +1089,9 @@ transition: all 0.5s !important;
   .verify__button a{
     padding-left: 0;
   }
+  .about__text__tp p{
+    font-size: 18px;
+  }
 }
 @media(max-width:575px){
   .slider__bg__img img {
@@ -1032,6 +1109,14 @@ transition: all 0.5s !important;
   .kobita__content {
       margin-top: 80px;
       margin-bottom: 60px;
+  }
+  .about__img img {
+      max-width: 250px;
+      width: 100%;
+  }
+  .about__btm__img img {
+      max-width: 250px;
+      width: 100%;
   }
 }
 @media(max-width:479px){
@@ -1108,5 +1193,9 @@ transition: all 0.5s !important;
   }
   .progress{
     border-radius: 5px;
+  }
+  .about__btm__dsc p, .about__dsc p {
+      margin-bottom: 15px;
+      font-size: 16px;
   }
 }
