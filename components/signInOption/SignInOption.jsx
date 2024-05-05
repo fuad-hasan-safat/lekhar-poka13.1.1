@@ -1,12 +1,43 @@
-import { useState } from 'react'
-import { GoogleLogin } from '@react-oauth/google';
-
+'use client'
+import React, { useState, useEffect } from 'react';
+import { googleLogout, useGoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
 
 export default function SignInOption({ title, icon1, icon2, icon3, lowermessege1, lowermessege2, classProperty, signLogLink }) {
-    const [loggedIn, setLoggedIn] = useState(false)
-    const [user, setUser] = useState(null)
-  
-  
+    const [user, setUser] = useState([]);
+    const [profile, setProfile] = useState([]);
+
+    const login = useGoogleLogin({
+        onSuccess: (codeResponse) => setUser(codeResponse),
+        onError: (error) => console.log('Login Failed:', error)
+    });
+
+    useEffect(
+        () => {
+            if (user) {
+                axios
+                    .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
+                        headers: {
+                            Authorization: `Bearer ${user.access_token}`,
+                            Accept: 'application/json'
+                        }
+                    })
+                    .then((res) => {
+                        setProfile(res.data);
+                        console.log('google response data ------>>>>', res.data)
+                    })
+                    .catch((err) => console.log(err));
+            }
+        },
+        [user]
+    );
+
+    const logOut = () => {
+        googleLogout();
+        setProfile(null);
+    };
+
+
     return (
         <>
 
@@ -23,19 +54,44 @@ export default function SignInOption({ title, icon1, icon2, icon3, lowermessege1
             {icon1?.length &&
                 <div className="flex place-content-center justify-center">
 
-<GoogleLogin
-  onSuccess={credentialResponse => {
-    console.log(credentialResponse);
-  }}
-  onError={() => {
-    console.log('Login Failed');
-  }}
-/>;
+                    {/* <GoogleLogin
+                        onSuccess={credentialResponse => {
+                            console.log(credentialResponse);
+                        }}
+                        onError={() => {
+                            console.log('Login Failed');
+                        }}
+                    />; */}
 
-       
+                    {profile ? (
+                        <div>
+                            <img src={profile.picture} alt="user image" />
+                            <h3>User Logged in</h3>
+                            <p>Name: {profile.name}</p>
+                            <p>Email Address: {profile.email}</p>
+                            <br />
+                            <br />
+                            <button onClick={logOut}>Log out</button>
+                        </div>
+                    ) : (
+                        <button
+                            className="flex border border-solid rounded-md shadow-md p-1 py-[9px] px-[5px]"
+                            onClick={login}
+                        >
+                            <img
+                                src={icon1}
+                                width={300}
+                                height={300}
+                                alt="fac"
+                                className="w-[44px] h-[22px]"
+                            />
+
+                        </button>
+                    )}
+
                     {/* <button
                         className="flex border border-solid rounded-md shadow-md p-1 py-[9px] px-[5px]"
-                    onClick={() => signIn('google')}
+                        onClick={login}
                     >
                         <img
                             src={icon1}
@@ -47,37 +103,6 @@ export default function SignInOption({ title, icon1, icon2, icon3, lowermessege1
 
                     </button> */}
                 </div>
-                // <div className="pt-4 flex space-x-6 pl-6">
-
-
-                //      <a
-                //         className={`${classProperty} `} href="#!"
-                //         role="button"
-                //         data-twe-ripple-init
-                //         data-twe-ripple-color="light">
-                //         <img
-                //             src={icon2}
-                //             width={300}
-                //             height={300}
-                //             alt="fac"
-                //             className="w-[44px] h-[22px]"
-                //         />
-                //     </a>
-
-                //     <a
-                //         className={`${classProperty} `} href="#!"
-                //         role="button"
-                //         data-twe-ripple-init
-                //         data-twe-ripple-color="light">
-                //         <img
-                //             src={icon3}
-                //             width={300}
-                //             height={300}
-                //             alt="fac"
-                //             className="w-[44px] h-[22px]"
-                //         />
-                //     </a> 
-                //  </div> 
             }
             <div className="flex space-x-3 pt-5 items-center justify-center">
                 <p className=" text-gray-500">{lowermessege1}</p> <a className=" text-black font-semibold text-lg" href={signLogLink}>{lowermessege2}</a>

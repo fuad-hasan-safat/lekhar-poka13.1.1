@@ -9,8 +9,8 @@ export default function Home() {
         <Head>
           <title>যোগাযোগ</title>
         </Head>
-      
-      <div className="lg:pt-[95px] md:pt-[90px] sm:pt-[85px] text-black">
+      {/* lg:pt-[95px] md:pt-[90px] sm:pt-[85px] */}
+      <div className=" text-black">
        
         <ContactUs />
       </div>

@@ -86,7 +86,7 @@ export default function PostOfWriterPage() {
                         {isLoading ? (
                             <Loading />
                         ) : error ? (
-                            <div>Error fetching posts: {error.message}</div>
+                            <div className='text-black'>এই লেখক নেই</div>
                         ) : (
                             <>
                                 {postList.length > 0 ?
@@ -109,7 +109,7 @@ export default function PostOfWriterPage() {
                                             ))
                                         )}
                                     </div> :
-                                    <div className="pt-10">  এই মুহূর্তে কোনো লেখা নেই </div>
+                                    <div className="pt-10 text-black">  এই মুহূর্তে কোনো লেখা নেই </div>
 
                                 }
                                 {totalPages > 1 && <div className="py-10 space-x-4"> {/* Add a class for styling */}
