@@ -66,7 +66,7 @@ export default function SobKobitaLeftContent() {
         <>
           <div className='container'>
             {postList.length ?
-              <div className='flex justify-center'>
+              <div className='flex'>
                 <div className="lakha__main__content pt-20  text-3xl lg:mr-[100px] md:mr-[70px] ">
                   {displayedPosts.length && (
                     displayedPosts.map((post, index) => (

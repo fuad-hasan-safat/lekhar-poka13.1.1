@@ -21,7 +21,7 @@ const MaincontentBody = ({
   }
   return (
     <>
-      {category === 'কবিতা' ? (
+      {/* {category === 'কবিতা' ? (
         <div className="text-center">
           <div className="pb-3">
             <div className="text-3xl text-yellow-400 font-bold">{title}</div>
@@ -49,8 +49,8 @@ const MaincontentBody = ({
             </button>
           </div>
         </div >
-      ) :
-        (<>
+      ) : */}
+        {/* (<> */}
 
 
           <div className="pb-3">
@@ -80,7 +80,7 @@ const MaincontentBody = ({
             </button>
           </div>
 
-        </>)}
+        {/* </>)} */}
 
       {/* button -- it would be conditionally appaer */}
 

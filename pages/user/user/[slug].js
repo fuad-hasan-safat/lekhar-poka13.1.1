@@ -171,7 +171,7 @@ export default function WriterProfile() {
         router.isReady &&
         <>
             {/* main section */}
-            <section className='pt-[95px] text-black' >
+            <section className=' text-black' >
                 {/* profile header */}
                 <section>
 

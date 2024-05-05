@@ -9,7 +9,7 @@ const SobPostsOfWriterBody = ({id, title, writer, content, category}) => {
   }
   return (
     <>
-     {category === 'কবিতা' ? (
+     {/* {category === 'কবিতা' ? (
         <div className="text-center">
           <div className="pb-3">
             <div className="text-3xl text-yellow-400 font-bold">{title}</div>
@@ -38,7 +38,7 @@ const SobPostsOfWriterBody = ({id, title, writer, content, category}) => {
           </div>
         </div >
       ) :
-        (<>
+        (<> */}
 
 
           <div className="pb-3">
@@ -68,7 +68,7 @@ const SobPostsOfWriterBody = ({id, title, writer, content, category}) => {
             </button>
           </div>
 
-        </>)}
+        {/* </>)} */}
 
     </>
   );

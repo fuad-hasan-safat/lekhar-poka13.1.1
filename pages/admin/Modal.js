@@ -1,19 +1,21 @@
+'use client'
 
-import React from 'react';
+import React,{useState} from 'react';
 
 const Modal = ({ isOpen, selectedContent, onClose }) => {
   if (!isOpen) return null; // Don't render if modal is closed
+  const [html, setHTML] = useState({ __html: selectedContent.content });
 
 
   return (
-  
     <div className="modal">
       <div className="modal-content">
         <h2>{selectedContent.title}</h2>
         <div
-         className="text-[16px] text-gray-500 modal_handle"
-         dangerouslySetInnerHTML={{__html:selectedContent.content}}
+         className="text-[16px] text-gray-500"
+         dangerouslySetInnerHTML={html}
         >
+
         </div>
         {/* <p>{selectedContent.content}</p> */}
         <button onClick={onClose}>Close</button>
@@ -37,9 +39,8 @@ const modalStyles = {
 
 export default function StyledModal({ isOpen, selectedContent, onClose }) {
   return (
-
     <div
-    className={` bg-black/25`}
+    className=' bg-black/25'
      style={modalStyles}>
       <Modal isOpen={isOpen} selectedContent={selectedContent} onClose={onClose} />
     </div>

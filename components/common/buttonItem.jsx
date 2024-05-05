@@ -30,7 +30,7 @@ const ButtonItem = ({
         .then(data => {
           setPostList(data)
           setTotalPages(Math.ceil(data.length / 5))
-          console.log('data --->>>>>>>>>>>>>>>>>>>>>>>>>', data);
+          // console.log('data --->>>>>>>>>>>>>>>>>>>>>>>>>', data);
 
         })
         .catch(error => console.error("Error fetching data:", error));
@@ -39,12 +39,13 @@ const ButtonItem = ({
     }
     else {
 
+      console.log(`${apiBasePath}/posts/${title}`)
       fetch(`${apiBasePath}/posts/${title}`)
         .then(response => response.json())
         .then(data => {
           setPostList(data.object)
           setTotalPages(Math.ceil(data.object.length / 5))
-          console.log('data --->>>>>>>>>>>>>>>>>>>>>>>>>', data);
+          console.log('category data --->>>>>>>>>>>>>>>>>>>>>>>>>', data.object);
 
         })
         .catch(error => console.error("Error fetching data:", error));
