@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
+import { apiBasePath } from '../../utils/constant';
+import { useRouter } from 'next/router';
 
 export default function SignInOption({
     title,
@@ -20,6 +22,7 @@ export default function SignInOption({
 }) {
     // const [user, setUser] = useState([]);
     // const [profile, setProfile] = useState([]);
+    const router = useRouter();
 
     const login = useGoogleLogin({
         onSuccess: (codeResponse) => {
@@ -28,6 +31,48 @@ export default function SignInOption({
         },
         onError: (error) => console.log('Login Failed:', error)
     });
+
+    async function sendDataToBackend(id, email, name, picture, access_token) {
+        try {
+            const response = await axios.post(
+                `${apiBasePath}/google-login`,
+                {
+                    id: id,
+                    email: email,
+                    name: name,
+                    picture: picture,
+                    access_token: access_token,
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+
+            if (response.data.status === 'success') {
+                const data = await response.data;
+                console.log(data);
+                setStatus(data.status);
+                setUserUuid(data.uuid);
+                setUser(data);
+                localStorage.setItem("status", data.status);
+                localStorage.setItem("name", data.name);
+                localStorage.setItem("uuid", data.uuid);
+                localStorage.setItem("phone", data.phone);
+                localStorage.setItem("token", data.access_token);
+                localStorage.setItem("usertype", data.usertype);
+                localStorage.setItem("phone", data.phone);
+
+                router.refresh()
+            }
+
+            console.log('following ------------------------- writer in response message---------------->>>>>>', response)
+
+        } catch (error) {
+            // console.log("inside catch ----------------", error);
+        }
+    }
 
     useEffect(
         () => {
@@ -45,6 +90,7 @@ export default function SignInOption({
                         setUsername(res.data.name)
                         setStatus('success')
 
+
                         localStorage.setItem("status", 'success');
                         localStorage.setItem("name", res.data.name);
                         localStorage.setItem("uuid", '');
@@ -54,6 +100,10 @@ export default function SignInOption({
                         localStorage.setItem("phone", '');
                         localStorage.setItem("email", res.data.email);
                         console.log('google response data ------>>>>', res.data)
+                        sendDataToBackend(res.data.id, res.data.email, res.data.name, res.data.picture, user.access_token)
+
+
+
                     })
                     .catch((err) => console.log(err));
             }

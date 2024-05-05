@@ -4,6 +4,7 @@ import Sidebar from '../../../components/sidebar/Sidebar';
 import UserProfileBanner from '../../../components/userprofile/userProfileBanner';
 import { apiBasePath } from '../../../utils/constant';
 import ProfilePostLeftContent from '../../../components/userprofile/ProfilePostLeftContent';
+import axios from 'axios';
 
 export default function WriterProfile() {
     const router = useRouter()
@@ -96,7 +97,33 @@ export default function WriterProfile() {
 
     }, []);
 
-    function followUserhandler(user_id, following) {
+   async function followUserhandler(user_id, following) {
+        try {
+            const response = await axios.post(
+              `${apiBasePath}/follow`,
+              {
+                user_id: user_id,
+                following: following,
+              },
+              {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              }
+            );
+      
+      
+             console.log('following ------------------------- writer in response message---------------->>>>>>', response)
+      
+      
+      
+            
+      
+      
+          } catch (error) {
+            // console.log("inside catch ----------------", error);
+          }
+        
 
     }
 
@@ -125,7 +152,7 @@ export default function WriterProfile() {
                         <div className='container  '>
                             <button
                                 className='mt-[30px] ml-[12.5%] h-[43px] bg-[#F9A106] hover:bg-[#c67256] px-[48px] p-1 rounded-lg text-white text-[16px]'
-                                onClick={() => followUserhandler()}
+                                onClick={() => followUserhandler(slug, userUuid)}
                             >
                                 অনুসরণ করুন
                             </button>
