@@ -740,12 +740,17 @@ transition: all 0.5s !important;
 .all__post__sec__wrap{
   padding-top: 95px;
 }
+.post__pagination button{
+  
+}
+
 
 /* about us image */
 .about__img{
   max-width: 350px;
   width: 100%;
 }
+
 
 
 /*
@@ -867,6 +872,9 @@ transition: all 0.5s !important;
   }
 }
 @media(max-width:767px){
+  .all__post__sec__wrap {
+      padding-top: 60px;
+  }
   .slider__pt__wrap{
     padding-top: 85px;
   }
