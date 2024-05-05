@@ -23,7 +23,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="lg:py-[54px]">
+        <section className="py-[54px]">
           <div className="container">
             <div >
 
@@ -35,22 +35,22 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="lg:pt-[40px]">
+        <section className="pt-[40px]">
           <div className="container">
             <div className="lg:flex lg:flex-row">
-              <div className="lg:w-1/2">
+              <div className="about__img w-1/2 md:flex md:justify-center sm:flex sm:justify-center xs:flex xs:justify-center">
                 <img
-                  className="lg:h-[800px] md:h-[400px] sm:h-[400px] xs:h-[400px] "
+                  // className="lg:h-[800px] md:h-[400px] sm:h-[400px] xs:h-[400px] "
                   alt="mission side image"
                   src="/images/aboutuspage/missionSideImage.png"
                 />
               </div>
-              <div className=" lg:flex lg:flex-col lg:text-[20px] xs:text-[16] lg:w-1/2  text-justify lg:space-y-[25px]">
+              <div className=" lg:flex lg:flex-col lg:text-[20px] xs:text-[16] w-1/2  text-justify ">
                 <div className="text-[#F9A106] text-[48px]">মিশন</div>
                 <div>
                   <hr className={` w-full  h-[0.5px] border-0 bg-[#F9A106]`} />
                 </div>
-                <div className="text-[#484848]  pt-1">
+                <div className="text-[#484848]  pt-[20px]">
                   লেখার পোকার &apos;কবিতা গল্প জীবনী নিয়ে মিশন&apos; হলো একটি আদর্শ,
                   একাংশিক বা পূর্ণসংখ্যানে কবিতা, গল্প, এবং জীবনী নিয়ে নির্ধারিত উদ্দেশ্য বা লক্ষ্য বা ধারণা।
                   এই মিশনের পেছনের উদ্দেশ্য মূলত কবিতা, গল্প, এবং জীবনীর মাধ্যমে নিম্নলিখিত
@@ -87,16 +87,16 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="lg:my-[80px] lg:pt-[80px]">
+        <section className="lg:my-[80px]">
           <div className="container">
             <div className="lg:flex lg:flex-row lg:space-x-10">
 
-              <div className="lg:flex lg:flex-col lg:text-[20px] xs:text-[16] lg:w-1/2 xs:w-full text-justify lg:space-y-[25px]">
+              <div className="lg:flex lg:flex-col lg:text-[20px] xs:text-[16] w-1/2 xs:w-full text-justify">
                 <div className="text-[#F9A106] text-[48px]">ভিশন</div>
                 <div>
                   <hr className={` w-full  h-[0.5px] border-0 bg-[#F9A106]`} />
                 </div>
-                <div className="text-[#484848]  pt-1">
+                <div className="text-[#484848]  pt-[20px]">
                   লেখার পোকার &apos;কবিতা, গল্প, এবং জীবনী নিয়ে ভিশন&apos; হলো একটি প্রস্তাবনা বা ধারণা যেখানে এই তিনটি চরিত্রিত শৃঙ্খলা বা জীবনের আংশ নিয়ে নির্ধারিত উদ্দেশ্য বা
                   লক্ষ্য সেট করা হয়। এই ভিশনের মাধ্যমে প্রতিটি উপাদান কবিতা, গল্প, এবং জীবনীর মধ্যে নির্ধারিত উদ্দেশ্যের দিকে ধারণা করা হয়।
                 </div>
@@ -124,10 +124,10 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className=" lg:w-1/2 ">
-                <div className="lg:mt-[25px]">
+              <div className=" w-1/2 ">
+                <div className="about__img my-[25px] md:flex md:justify-center sm:flex sm:justify-center xs:flex xs:justify-center">
                   <img
-                    className="lg:h-[900px] md:h-[400px] sm:h-[400px] xs:h-[400px]"
+                    // className="lg:h-[700px] md:h-[400px] sm:h-[400px] xs:h-[400px]"
                     alt="mission side image"
                     src="/images/aboutuspage/vissionSideImage.png"
                   />
