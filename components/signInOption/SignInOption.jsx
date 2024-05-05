@@ -3,12 +3,29 @@ import React, { useState, useEffect } from 'react';
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 
-export default function SignInOption({ title, icon1,  lowermessege1, lowermessege2, signLogLink, user, setUser, profile, setProfile }) {
+export default function SignInOption({
+    title,
+    icon1,
+    lowermessege1,
+    lowermessege2,
+    signLogLink,
+    user,
+    setUser,
+    profile,
+    setProfile,
+    setStatus,
+    setUsername,
+    setUserUuid,
+    setEmail,
+}) {
     // const [user, setUser] = useState([]);
     // const [profile, setProfile] = useState([]);
 
     const login = useGoogleLogin({
-        onSuccess: (codeResponse) => setUser(codeResponse),
+        onSuccess: (codeResponse) => {
+            setUser(codeResponse)
+
+        },
         onError: (error) => console.log('Login Failed:', error)
     });
 
@@ -24,6 +41,18 @@ export default function SignInOption({ title, icon1,  lowermessege1, lowermesseg
                     })
                     .then((res) => {
                         setProfile(res.data);
+                        setUserUuid(res.data.id)
+                        setUsername(res.data.name)
+                        setStatus('success')
+
+                        localStorage.setItem("status", 'success');
+                        localStorage.setItem("name", res.data.name);
+                        localStorage.setItem("uuid", '');
+                        localStorage.setItem("phone", '');
+                        localStorage.setItem("token", res.data.id);
+                        localStorage.setItem("usertype", 'user');
+                        localStorage.setItem("phone", '');
+                        localStorage.setItem("email", res.data.email);
                         console.log('google response data ------>>>>', res.data)
                     })
                     .catch((err) => console.log(err));
@@ -31,6 +60,8 @@ export default function SignInOption({ title, icon1,  lowermessege1, lowermesseg
         },
         [user]
     );
+
+
 
     const logOut = () => {
         googleLogout();
@@ -54,42 +85,7 @@ export default function SignInOption({ title, icon1,  lowermessege1, lowermesseg
             {icon1?.length &&
                 <div className="flex place-content-center justify-center">
 
-                    {/* <GoogleLogin
-                        onSuccess={credentialResponse => {
-                            console.log(credentialResponse);
-                        }}
-                        onError={() => {
-                            console.log('Login Failed');
-                        }}
-                    />; */}
-
-                    {profile ? (
-                        <div>
-                            <img src={profile.picture} alt="user image" />
-                            <h3>User Logged in</h3>
-                            <p>Name: {profile.name}</p>
-                            <p>Email Address: {profile.email}</p>
-                            <br />
-                            <br />
-                            <button onClick={logOut}>Log out</button>
-                        </div>
-                    ) : (
-                        <button
-                            className="flex border border-solid rounded-md shadow-md p-1 py-[9px] px-[5px]"
-                            onClick={login}
-                        >
-                            <img
-                                src={icon1}
-                                width={300}
-                                height={300}
-                                alt="fac"
-                                className="w-[44px] h-[22px]"
-                            />
-
-                        </button>
-                    )}
-
-                    {/* <button
+                    <button
                         className="flex border border-solid rounded-md shadow-md p-1 py-[9px] px-[5px]"
                         onClick={login}
                     >
@@ -101,7 +97,7 @@ export default function SignInOption({ title, icon1,  lowermessege1, lowermesseg
                             className="w-[44px] h-[22px]"
                         />
 
-                    </button> */}
+                    </button>
                 </div>
             }
             <div className="flex space-x-3 pt-5 items-center justify-center">

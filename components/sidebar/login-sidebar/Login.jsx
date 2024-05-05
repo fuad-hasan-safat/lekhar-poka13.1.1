@@ -17,16 +17,17 @@ export default function Login() {
 
   const [number, setnumber] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   const [status, setStatus] = useState("");
   const [username, setUsername] = useState("");
   const [userUuid, setUserUuid] = useState("");
   const [error, setError] = useState(null);
   const [numberPrefix, setNumberPrefix] = useState('88');
 
+
   // google login state start
   const [profile, setProfile] = useState([]);
-
+  const [email, setEmail] = useState('')
 
   const handleNumberhange = (e) => {
     // Allow only numbers and backspace key
@@ -125,6 +126,8 @@ export default function Login() {
                 buttonText="Logout"
                 buttonClass="text-white rounded-[6px] bg-[#F9A106] w-[120px] h-[40px]"
                 setStatus={setStatus}
+                setProfile={setProfile}
+                setUser={setUser}
               />
               <GoToProfile
                 buttonText="Your Profile"
@@ -185,6 +188,10 @@ export default function Login() {
               setUser={setUser}
               profile={profile}
               setProfile={setProfile}
+              setStatus={setStatus}
+              setUsername={setUsername}
+              setUserUuid={setUserUuid}
+              setEmail={setEmail}
               title="অথবা সাইন ইন করুন"
               icon1="/images/loginOptionIcon/google.svg"
               lowermessege1="একাউন্ট নেই? "

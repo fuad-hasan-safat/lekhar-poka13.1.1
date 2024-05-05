@@ -1,10 +1,14 @@
-import { useRouter } from "next/navigation";
-import { SetStateAction, useEffect, useState } from "react";
+import { googleLogout } from "@react-oauth/google";
+import { useRouter } from "next/router";
 
 
 
-export default function LogoutButton({ buttonClass, buttonText, setStatus }) {
+export default function LogoutButton({ buttonClass, buttonText, setStatus, setProfile,setUser }) {
   const router = useRouter()
+  googleLogout();
+  setProfile(null);
+  setUser(null);
+
     function logoutHandaler(){
         localStorage.removeItem("status");
         localStorage.removeItem("name");
@@ -12,6 +16,8 @@ export default function LogoutButton({ buttonClass, buttonText, setStatus }) {
         localStorage.removeItem("phone");
         localStorage.removeItem("token");
         localStorage.removeItem("usertype");
+        localStorage.removeItem("email");
+        
         setStatus("");
 
         router.push('/');

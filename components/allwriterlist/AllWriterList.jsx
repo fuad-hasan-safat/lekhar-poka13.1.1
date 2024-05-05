@@ -37,6 +37,7 @@ export default function AllWriterList() {
                                             image={`${apiBasePath}/${item.image.slice(item.image.indexOf("/") + 1)}`}
                                             writer={item.name}
                                             id={item._id}
+                                            user_id={item.user_id}
                                             lifeCycle={`${item.birth_date} - ${item.expiry_date === null ? `বর্তমান` : `${item.expiry_date}`}`}
 
                                         />

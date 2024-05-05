@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Sidebar from '../../../components/sidebar/Sidebar';
 import UserProfileBanner from '../../../components/userprofile/userProfileBanner';
 import { apiBasePath } from '../../../utils/constant';
+import ProfilePostLeftContent from '../../../components/userprofile/ProfilePostLeftContent';
 
 export default function WriterProfile() {
     const router = useRouter()
@@ -29,6 +30,16 @@ export default function WriterProfile() {
     const [following, setFollowing] = useState(0);
 
 
+    //  fetch data from local store
+    const [isLoading, setIsLoading] = useState(true);
+
+    const [status, setStatus] = useState("");
+    const [loggedInUser, setLoggedInUser] = useState("");
+    const [userUuid, setUserUuid] = useState("");
+    const [userPhone, setUserPhone] = useState("");
+    const [userToken, setUserToken] = useState("");
+
+
 
     useEffect(() => {
         console.log("-----------------------------  SLUG -----------------------", slug);
@@ -49,14 +60,6 @@ export default function WriterProfile() {
                 setPost(data.object.stats.post)
                 setUserName(data.object.name)
 
-                // console.log('pofile post )()()() details on user profile--------------->>>>>>>', post);
-
-
-                if (!data.object.stats) {
-                    setCanPostStatus(false)
-                } else {
-                    setCanPostStatus(true)
-                }
 
                 // console.log(' profile image----------->>>>', image)
             })
@@ -71,24 +74,31 @@ export default function WriterProfile() {
                 const result = await fetchData(
                     `${apiBasePath}/postsbyuser/${slug}`
                 );
-                // console.log(
-                //   "result        user profile  ->>>>>>>>>>>>>>>>",
-                //   result.object
-                // );
+
                 setUserPost(result.object);
-                // console.log(
-                //   "result        user USER POST  ->>>>>>>>>>>>>>>>",
-                //   userPost
-                // );
+
             } catch (error) {
                 //alert("Error fetching user post");
-                // console.log("Error fetching user post")
+                console.log("Error fetching user post")
             }
         }
 
         fetchDataAsync();
 
     }, [router.query])
+
+
+    useEffect(() => {
+        setLoggedInUser(localStorage.getItem("name") || "");
+        setUserToken(localStorage.getItem("token") || "");
+        setUserUuid(localStorage.getItem("uuid") || "");
+        // setUserPhone(localStorage.getItem("phone") || "");
+
+    }, []);
+
+    function followUserhandler(user_id, following) {
+
+    }
 
     return (
         router.isReady &&
@@ -114,7 +124,8 @@ export default function WriterProfile() {
 
                         <div className='container  '>
                             <button
-                                className='mt-[30px] ml-[12.5%] h-[43px] bg-[#F9A106] px-[48px] p-1 rounded-lg text-white text-[16px]'
+                                className='mt-[30px] ml-[12.5%] h-[43px] bg-[#F9A106] hover:bg-[#c67256] px-[48px] p-1 rounded-lg text-white text-[16px]'
+                                onClick={() => followUserhandler()}
                             >
                                 অনুসরণ করুন
                             </button>
@@ -128,18 +139,20 @@ export default function WriterProfile() {
                 {/* profile body */}
 
                 <section>
-
-                    <div className='lg:flex lg:flex-row'>
-                        {/* body */}
-                        <div className='lg:w-[70%]'>
-
-                        </div>
-                        {/* sidebar */}
-                        <div className='lg:w-[30%]'>
-                            <Sidebar />
+                    <div className='all__post__sec__wrap'>
+                        <div className='container'>
+                            <div className='lg:flex lg:flex-row'>
+                                {/* body */}
+                                <div className='lg:w-[70%]'>
+                                    {<ProfilePostLeftContent slug={slug} />}
+                                </div>
+                                {/* sidebar */}
+                                <div className='lg:w-[30%]'>
+                                    <Sidebar />
+                                </div>
+                            </div>
                         </div>
                     </div>
-
                 </section>
 
             </section>
