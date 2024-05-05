@@ -38,6 +38,9 @@ export default function MyApp({ Component, pageProps }) {
   } else if(pathname == "/admin/postsdelete"){
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
   }
+  else if(pathname == "/admin/allcategory"){
+    result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
+  }
   else{
     result = <Layout><Component {...pageProps} /></Layout>
   } 
