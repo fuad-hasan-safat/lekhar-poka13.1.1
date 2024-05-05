@@ -24,7 +24,7 @@ export default function UserProfileBanner({ image = '', username = 'demo', desig
                     <div className="profile-img lg:pl-[10%] relative">
                         <img
                             className="w-[264px] h-[264px] rounded-full  border-4 border-solid border-white -mt-[110px]  "
-                            src={image.length > 0 ? `${apiBasePath}/${image.slice(image.indexOf("/") + 1)}` : '/images/defaultUserPic/profile.jpg'} />
+                            src={image?.length > 0 ? `${apiBasePath}/${image.slice(image.indexOf("/") + 1)}` : '/images/defaultUserPic/profile.jpg'} />
                     </div>
 
 

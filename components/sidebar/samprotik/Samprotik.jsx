@@ -47,7 +47,7 @@ const Samprotik = () => {
                   <div className="pb-1">
                     <LekhaPokaProfile
                       key={index}
-                      image={'/images/defaultUserPic/profile.jpg'}
+                      image={item.image}
                       title={item.title}
                       writer={item.writer}
                       id={item._id}
