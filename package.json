@@ -19,6 +19,7 @@
     "@next/font": "^13.1.1",
     "@ramonak/react-progress-bar": "^5.2.0",
     "@react-md/icon": "^5.1.6",
+    "@react-oauth/google": "^0.12.1",
     "@remixicon/react": "^4.2.0",
     "axios": "^1.6.8",
     "babel-polyfill": "^6.26.0",

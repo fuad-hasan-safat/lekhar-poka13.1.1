@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import '../public/assets/fonts/customfont.css'
 import '../public/assets/css/image-slider.css'
 import '../components/userprofile/FileUpload.css'
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 
 // export default function App({ Component, pageProps }) {
@@ -44,8 +45,12 @@ export default function MyApp({ Component, pageProps }) {
     // <Layout>
     //   <Component {...pageProps} />
     // </Layout>
-    <>
+    <GoogleOAuthProvider clientId="854926132475-sm4btto49sresu4g5o9qpuk9lgtqor9f.apps.googleusercontent.com">
+<>
       {result}
     </>
+    </GoogleOAuthProvider>
+
+    
   )
 }

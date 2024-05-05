@@ -1,6 +1,12 @@
+import { useState } from 'react'
+import { GoogleLogin } from '@react-oauth/google';
 
 
 export default function SignInOption({ title, icon1, icon2, icon3, lowermessege1, lowermessege2, classProperty, signLogLink }) {
+    const [loggedIn, setLoggedIn] = useState(false)
+    const [user, setUser] = useState(null)
+  
+  
     return (
         <>
 
@@ -16,10 +22,20 @@ export default function SignInOption({ title, icon1, icon2, icon3, lowermessege1
 
             {icon1?.length &&
                 <div className="flex place-content-center justify-center">
-                    <button
-                        // className="mb-3 flex  w-[67px] h-[43px] items-center justify-center rounded leading-normal  shadow-primary-3 transition duration-150 ease-in-out hover:bg-yellow-400 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
+
+<GoogleLogin
+  onSuccess={credentialResponse => {
+    console.log(credentialResponse);
+  }}
+  onError={() => {
+    console.log('Login Failed');
+  }}
+/>;
+
+       
+                    {/* <button
                         className="flex border border-solid rounded-md shadow-md p-1 py-[9px] px-[5px]"
-                    // onClick={() => signIn('google')}
+                    onClick={() => signIn('google')}
                     >
                         <img
                             src={icon1}
@@ -29,7 +45,7 @@ export default function SignInOption({ title, icon1, icon2, icon3, lowermessege1
                             className="w-[44px] h-[22px]"
                         />
 
-                    </button>
+                    </button> */}
                 </div>
                 // <div className="pt-4 flex space-x-6 pl-6">
 
