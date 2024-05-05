@@ -96,7 +96,7 @@ export default function ProcchodLeftContent() {
             <>
               {postList.length > 0 ?
                 (<div className="lakha__main__content pt-20 text-3xl">
-                  {displayedPosts.map((post, index) => (
+                  {postList.map((post, index) => (
                     <>
                       <div key={index}>
                         <MaincontentBody
@@ -112,7 +112,7 @@ export default function ProcchodLeftContent() {
                         // content={post.category === 'কবিতা' ? `${post.content.split().slice(0, 10)}` : `${post.content.split().slice(0, 30)}`} // Truncate content
                         />
                       </div>
-                      {index < displayedPosts.length - 1 && <MainContentDivider />}
+                      {index < postList.length  && <MainContentDivider />}
                     </>
                   ))}
                 </div>) : (
@@ -122,7 +122,7 @@ export default function ProcchodLeftContent() {
                 )
 
               }
-              {totalPages > 1 && <div className="post__pagination py-10 space-x-4"> {/* Add a class for styling */}
+              {/* {totalPages > 1 && <div className="post__pagination py-10 space-x-4"> 
                 <button
                   className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
                   onClick={firstPage} disabled={currentPage === 1}>
@@ -147,7 +147,7 @@ export default function ProcchodLeftContent() {
                   শেষ পৃষ্ঠা
                 </button>
               </div>
-              }
+              } */}
             </>
           )}
 
