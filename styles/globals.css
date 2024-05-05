@@ -809,6 +809,11 @@ transition: all 0.5s !important;
 
 }
 @media(max-width:1199px){
+  .logo:after {
+      right: -145px;
+      border-top: 92px solid #ffd700;
+      border-right: 145px solid transparent;
+  }
   .slider__bg__img img {
       height: 680px;
   }
@@ -1003,7 +1008,7 @@ transition: all 0.5s !important;
   }
   .logo:after {
       border-top: 85px solid #ffd700;
-      border-right: 135px solid transparent;
+      border-right: 145px solid transparent;
   }
   .slider__bg__img img {
       height: 600px;
@@ -1026,7 +1031,7 @@ transition: all 0.5s !important;
     padding-top: 50px !important;
   }
   .all__button__list {
-    padding-top: 30px;
+    padding-top: 0;
     display: inline-block;
     margin: 0 auto;
     text-align: center;
