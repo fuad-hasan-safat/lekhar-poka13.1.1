@@ -313,13 +313,13 @@ export default function UserProfile({ slug }) {
                 profileStatus={profileStatus}
               />
             </div>
-            <section className="all__post__sec__wrap">
+            <section className="all__page__main__content">
               <div className="container">
                 <div className="row">
                   <div className="col-md-12"></div>
-                  <div className="lg:flex lg:flex-row pt-[80px]">
+                  <div className="lg:flex lg:flex-row lg:pt-[80px] md:pt-[60px] sm:pt-[40px] xs:pt-[40px]">
                     <div className="lg:w-[70%]">
-                      <div className="pr-6 space-y-4">
+                      <div className="lg:pr-6 md:pr-0 sm:pr-0 space-y-4">
                         <input
                           onChange={handleTitle}
                           value={title}
