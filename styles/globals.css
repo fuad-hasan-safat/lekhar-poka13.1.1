@@ -1092,6 +1092,18 @@ transition: all 0.5s !important;
   .about__text__tp p{
     font-size: 18px;
   }
+  .profile-img{
+      display: table;
+      margin: 0 auto;
+  }
+  .profile-img img{
+    width: 200px;
+    height: 200px;
+  }
+  .edit__btn__wrap{
+    width: 100%;
+    padding-top: 30px !important;
+  }
 }
 @media(max-width:575px){
   .slider__bg__img img {
@@ -1117,6 +1129,11 @@ transition: all 0.5s !important;
   .about__btm__img img {
       max-width: 250px;
       width: 100%;
+  }
+  .profile-img img {
+      width: 160px;
+      height: 160px;
+      margin-top: -75px;
   }
 }
 @media(max-width:479px){

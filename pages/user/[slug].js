@@ -17,7 +17,7 @@ export default function Home() {
           <title>প্রোফাইল</title>
         </head>
       </div> */}
-      <div className='pt-[95px]'>
+      <div className=''>
       <Head>
         <title>প্রোফাইল</title>
         {/* Other meta tags or link elements can be added here */}

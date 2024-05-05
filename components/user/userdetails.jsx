@@ -155,9 +155,9 @@ export default function UserDetails({ sex = '---', birthdate = '---', location =
 
     return (
         <>
-            <div className='m-auto lg:pt-0 md:pt-[40px] sm:pt-[50px] xs:pt-[70px]'>
+            <div className='edit__btn__wrap m-auto lg:pt-0 md:pt-[40px] sm:pt-[50px] xs:pt-[70px]'>
                 <div className="text-[28px] text-[#F9A106]">বিস্তারিত</div>
-                <div className="text-[20px] text-[#737373] divide-y w-[200px] space-y-3 ">
+                <div className="text-[20px] text-[#737373] divide-y lg:w-[200px] md:w-[200px] sm:w-full space-y-3 ">
                     <div className="flex flex-row space-x-2">
                         <img
                             src="/images/usericons/sexicon.svg"
