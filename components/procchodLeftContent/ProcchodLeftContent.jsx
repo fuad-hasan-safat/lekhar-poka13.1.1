@@ -122,7 +122,7 @@ export default function ProcchodLeftContent() {
                 )
 
               }
-              {totalPages > 1 && <div className="py-10 space-x-4"> {/* Add a class for styling */}
+              {totalPages > 1 && <div className="post__pagination py-10 space-x-4"> {/* Add a class for styling */}
                 <button
                   className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
                   onClick={firstPage} disabled={currentPage === 1}>
