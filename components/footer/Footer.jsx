@@ -10,7 +10,7 @@ const MyFooter = () => {
   const icon = "";
   return (
     <div className={`bg-black pt-[65px]`}>
-      <section className="all__post__sec__wrap">
+      <section className="">
         <div className="container">
           <div className="row">
             <div className="col-md-12">
