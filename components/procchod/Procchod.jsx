@@ -4,7 +4,7 @@ import ProcchodLeftContent from '../procchodLeftContent/ProcchodLeftContent'
 import Sidebar from '../sidebar/Sidebar'
 export default function Procchod() {
   return (
-    <section className="all__post__sec__wrap">
+    <section className="all__page__main__content">
         <div className="container">
           <div className="row">
             <div className="col-md-12">
