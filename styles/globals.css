@@ -773,7 +773,10 @@ transition: all 0.5s !important;
 .about__btm__dsc{
   width: 55%;
 }
-
+.slider__desc{
+  max-width: 700px;
+  width: 100%;
+}
 
 
 
@@ -782,6 +785,13 @@ transition: all 0.5s !important;
  Resposnive Css
 ---------------------- 
 */
+@media(max-width:1399px){
+  .logo:after {
+      right: -145px;
+      border-top: 92px solid #ffd700;
+      border-right: 135px solid transparent;
+  }
+}
 @media(max-width:1299px){
   .login__lft__text h2 {
       font-size: 45px;
@@ -797,6 +807,7 @@ transition: all 0.5s !important;
     margin-right: 25px;
     padding: 30px 20px 20px;
   }
+
 }
 @media(max-width:1199px){
   .slider__bg__img img {
