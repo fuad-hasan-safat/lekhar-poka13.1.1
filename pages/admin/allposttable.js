@@ -8,6 +8,7 @@ import { apiBasePath } from "../../utils/constant";
 import NotFound from "../../components/common/nofFound"
 import axios from "axios";
 import StyledModal from "./styleModal";
+import AdminLayOut from "./admin";
 
 const PostTable = () => {
   const router = useRouter();
@@ -112,6 +113,7 @@ const PostTable = () => {
 
   if (userType === 'admin') {
     return (
+      <AdminLayOut>
       <div className="pt-[115px]  text-black mx-10">
         <div className="flex flex-row">
           <div className="w-1/3">
@@ -157,6 +159,8 @@ const PostTable = () => {
                                         >
                                             Delete
                                         </button>
+                                        <hr />
+
                                     </li>
                                 ))}
                         </ul>
@@ -164,6 +168,7 @@ const PostTable = () => {
           </div>
         </div>
       </div >
+      </AdminLayOut>
     )
   } else {
    return <NotFound />

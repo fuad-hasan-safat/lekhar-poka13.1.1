@@ -6,6 +6,7 @@ import ContentList from './ContentList';
 import { apiBasePath } from "../../utils/constant";
 import NotFound from "../../components/common/nofFound"
 import axios from "axios";
+import AdminLayOut from "./admin";
 
 const SliderTable = () => {
     const router = useRouter();
@@ -72,7 +73,9 @@ const SliderTable = () => {
     }
 
     if (userType === 'admin') {
+
         return (
+            <AdminLayOut>
             <div className="pt-[115px]  text-black mx-10">
                 <div className="flex flex-row">
                     <div className="w-1/2">
@@ -96,6 +99,7 @@ const SliderTable = () => {
                                         >
                                             Delete Slider
                                         </button>
+                                        <hr />
 
                                     </li>
                                 ))}
@@ -103,6 +107,7 @@ const SliderTable = () => {
                     </div>
                 </div>
             </div >
+            </AdminLayOut>
         )
     } else {
         return <NotFound />

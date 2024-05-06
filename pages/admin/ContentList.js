@@ -12,6 +12,7 @@ const ContentList = ({ content, onOpenModal, setIsTitleClick, isSlider= false })
         <li key={item._id}>
           {!isSlider  && ( <button onClick={() => {onOpenModal(item); setIsTitleClick(true)}}>{item.title}</button>)}
           {isSlider && <p>{item.title}</p>}
+          <hr />
          
         </li>
       ))}

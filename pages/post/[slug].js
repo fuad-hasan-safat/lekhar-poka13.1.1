@@ -84,7 +84,7 @@ export default function PostDetails() {
                 <div className="lg:flex lg:flex-row">
                   {(
                     <div className="flex flex-col lg:w-[70%]">
-                      <div className="mb-[110px]">
+                      <div className="lg:mb-[110px] md:mb-[84px]">
                         <FullPost
                           content={data?.content}
                           title={data?.title}

@@ -35,10 +35,13 @@ export default function MyApp({ Component, pageProps }) {
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
   } else if(pathname == "/admin/allslidertable"){
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
-  } else if(pathname == "/admin/postsdelete"){
+  } else if(pathname == "/admin/writerlist"){
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
   }
   else if(pathname == "/admin/allcategory"){
+    result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
+  }
+  else if(pathname == "/admin/admin"){
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
   }
   else{
