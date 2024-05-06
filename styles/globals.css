@@ -207,7 +207,7 @@ body {
 }
 
 /* ------------------------
------------ All Post Main Content
+----------- All Post Mail Content
 ---------------------------- */
 .all__post__main__content{
   margin-top: 110px;
@@ -376,7 +376,7 @@ background-color: #f8e405;
 .kobita__content {
   box-shadow: 0px 10px 100px 0px rgb(0 0 0 / 0.2);
   border-radius: 20px;
-  /* transform: scale(1.05); */
+  transform: scale(1.05);
   transition: all 0.5s;
   /* margin-top: 110px;
   margin-bottom: 110px; */
@@ -823,6 +823,13 @@ transition: all 0.5s !important;
       border-right: 135px solid transparent;
   }
 }
+@media(max-width:1350px){
+  .logo:after {
+      right: -130px;
+      border-top: 92px solid #ffd700;
+      border-right: 132px solid transparent;
+  }
+}
 @media(max-width:1299px){
   .login__lft__text h2 {
       font-size: 45px;
@@ -830,7 +837,7 @@ transition: all 0.5s !important;
   .kobita__content {
     box-shadow: 0px 10px 100px 0px rgb(0 0 0 / 0.2);
     border-radius: 20px;
-    /* transform: scale(1.05); */
+    transform: scale(1.05);
     transition: all 0.5s;
     /* margin-top: 150px;
     margin-bottom: 110px; */
@@ -961,12 +968,12 @@ transition: all 0.5s !important;
       padding-top: 20px;
   }
   .login__img img {
-      display: table;
-      margin: 0 auto;
-      padding-top: 0;
-      max-width: 280px;
-      width: 100%;
-  }
+    display: table;
+    margin: 0 auto;
+    padding-top: 0;
+    max-width: 280px;
+    width: 100%;
+}
   .login__lft__text h2 {
       font-size: 40px;
   }
@@ -976,16 +983,13 @@ transition: all 0.5s !important;
   .kobita__content {
     box-shadow: 0px 10px 100px 0px rgb(0 0 0 / 0.2);
     border-radius: 20px;
-    /* transform: scale(1.05); */
+    transform: scale(1.05);
     transition: all 0.5s;
     /* margin-top: 150px;
     margin-bottom: 110px; */
     margin-left: 25px ;
     margin-right: 25px;
     padding: 30px 20px 20px;
-  }
-  .all__post__main__content{
-    margin-top: 90px;
   }
   .about__btm__wrap,
   .about__content__wrap{
@@ -1193,7 +1197,10 @@ transition: all 0.5s !important;
   .OTP__text{
     font-size: 35px;
   }
-
+  .kobita__content {
+      /* margin-top: 80px;
+      margin-bottom: 60px; */
+  }
   .about__img img {
       max-width: 250px;
       width: 100%;
