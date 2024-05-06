@@ -29,7 +29,7 @@ const SignUpPage = () => {
                   </div>
                   {/* right part */}
                   <div className="login__form__right bg-white rounded-l-[46px] text-black grid place-items-center ">
-                    <div className="login__form__dsc grid place-items-center">
+                    <div className="">
                       <SigninForm logreg="Create Account" btntext="Sign Up" />
                       <SignInOption
                         title="Or Signup with"

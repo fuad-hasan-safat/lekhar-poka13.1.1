@@ -115,11 +115,11 @@ export default function LoginForm({ logreg, btntext }) {
 
   return (
     <>
-      <div>
+      <div className="login__form__dsc">
         <div className="text-[48px] mb-5  font-semibold text-yellow-500">
           {logreg}
         </div>
-        <div className="login__form__fleds  grid place-items-center">
+        <div className="login__form__fleds w-full ">
           <div className="mb-4 ">
             <input
               onChange={handleNumberhange}
