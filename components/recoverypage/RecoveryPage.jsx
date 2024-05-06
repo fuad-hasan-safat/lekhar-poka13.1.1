@@ -150,126 +150,114 @@ const RecoveryPage = () => {
 
     return (
         <>
-            <section className="all__post__sec__wrap">
-
+            <section className="login__form__sec__wrp clearfix">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
-                            <div className={`flex`}>
-                                <div className="flex flex-row  bg-[#FCF7E8] shadow-md">
-                                    {/* left part */}
-                                    <div className=" w-[640px]   ">
-                                        <LoginSignInOtpLeftPartDesign />
-                                    </div>
-                                    {/* right part */}
-                                    <div className="relative w-[640px]  bg-white rounded-l-[46px] text-black grid place-items-center ">
-
-                                        <div className="grid place-items-center ">
-
-                                            <div>
-                                                <div className="text-[48px] mb-5  font-semibold text-yellow-500">
-                                                    Recover Password
-                                                </div>
-                                                <div className="  grid place-items-center">
-                                                    {!isSend && <div className="mb-4 ">
-                                                        <input
-                                                            onChange={handleNumberhange}
-                                                            value={number}
-                                                            className="w-[559px] h-[62px] p-4 bg-[#FCF7E8] rounded-2xl text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                                            id="phone"
-                                                            type="number"
-                                                            placeholder="Enter Number"
-                                                            required
-                                                        />
-                                                    </div>
-                                                    }
-                                                    {!isSend &&
-                                                        <button
-                                                            type="button"
-                                                            onClick={handleSubmit}
-                                                            className=" mt-8 px-5 bg-[#F9A106] rounded-full text-[35px] text-white w-[368px] h-[75px] "
-                                                        >
-                                                            Send Number
-                                                        </button>
-
-                                                    }
-
-                                                    {/* after send number */}
-
-
-                                                    {isValidUser &&
-                                                        <>
-
-                                                            <div className="mb-5">
-
-                                                                <input
-                                                                    id="password"
-                                                                    type="password"
-                                                                    name="password"
-                                                                    placeholder="Password"
-                                                                    value={state.password}
-                                                                    onChange={handleChange}
-                                                                    onBlur={validate}
-                                                                    className="w-[559px] h-[62px] p-4 bg-[#FCF7E8]  rounded-2xl   text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
-                                                                    required
-                                                                />
-
-                                                            </div>
-                                                            <div className="mb-5">
-
-                                                                <input
-                                                                    type="password"
-                                                                    name="retypePassword"
-                                                                    placeholder="Retype Password"
-                                                                    value={state.retypePassword}
-                                                                    onChange={handleChange}
-                                                                    onBlur={validate}
-                                                                    className="w-[559px] h-[62px] p-4 bg-[#FCF7E8]  rounded-2xl   text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
-                                                                    required
-                                                                />
-                                                                {state.error && <p className="error">{state.error}</p>}
-
-                                                            </div>
-                                                            <button
-                                                                onClick={handleUpdatePassword}
-                                                                className=" mt-8 px-5 bg-[#F9A106] rounded-full text-[35px] text-white w-[368px] h-[75px] "
-                                                            >
-                                                                Update Password
-                                                            </button>
-
-                                                        </>
-                                                    }
-                                                    {
-                                                        !isValidUser && isSend && <>
-                                                        <div>
-                                                            <p>Sorry Your Phone number is not registred</p>
-                                                            <p>Kindly use a valid phone number</p>
-                                                        </div>
-                                                        <div className="pt-5">
-                                                        <a
-                                                        href="/account/recoverpassword"
-                                                        className=" bg-[#F9A106] rounded-2xl text-[25px] text-white px-5 py-2"
-                                                        >Recover Password</a>
-
-                                                        </div>
-                                                       
-                                                        </>
-                                                    }
-
-
-
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div className="absolute top-7 right-0 pr-2">
-                                            <DropDown />
-                                        </div>
-                                    </div>
-
-                                </div>
+                         <div className="login__form__wrap flex flex-row  bg-[#FCF7E8] shadow-md">
+                            {/* left part */}
+                            <div className="login__form__left">
+                                <LoginSignInOtpLeftPartDesign />
                             </div>
+                            {/* right part */}
+                            <div className="login__form__right relative bg-white rounded-l-[46px] text-black grid place-items-center ">
+                                <div className="login__form__dsc">
+                                    <div className="lg:text-[48px] md:text-[44px] sm:text-[40px] xs:text-[37px] mb-5  font-semibold text-yellow-500">
+                                        Recover Password 
+                                    </div>
+                                    <div className="login__form__fleds">
+                                        {!isSend && <div className="mb-4 ">
+                                            <input
+                                                onChange={handleNumberhange}
+                                                value={number}
+                                                className="h-[62px] p-4 bg-[#FCF7E8] rounded-2xl text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                id="phone"
+                                                type="number"
+                                                placeholder="Enter Number"
+                                                required
+                                            />
+                                        </div>
+                                        }
+                                        {!isSend &&
+                                            <button
+                                                type="button"
+                                                onClick={handleSubmit}
+                                                className="login__btn mt-8 px-5 bg-[#F9A106] rounded-full lg:text-[35px] md:text-[34px] sm:text-[33px] xs:text-[30px] text-white lg:h-[75px] md:h-[70px] sm:h-[65px] xs:h-[60px]"
+                                            >
+                                                Send Number
+                                            </button>
+
+                                        }
+
+                                        {/* after send number */}
+
+
+                                        {isValidUser &&
+                                            <>
+
+                                                <div className="mb-5">
+
+                                                    <input
+                                                        id="password"
+                                                        type="password"
+                                                        name="password"
+                                                        placeholder="Password"
+                                                        value={state.password}
+                                                        onChange={handleChange}
+                                                        onBlur={validate}
+                                                        className="w-[559px] h-[62px] p-4 bg-[#FCF7E8]  rounded-2xl   text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
+                                                        required
+                                                    />
+
+                                                </div>
+                                                <div className="mb-5">
+
+                                                    <input
+                                                        type="password"
+                                                        name="retypePassword"
+                                                        placeholder="Retype Password"
+                                                        value={state.retypePassword}
+                                                        onChange={handleChange}
+                                                        onBlur={validate}
+                                                        className="w-[559px] h-[62px] p-4 bg-[#FCF7E8]  rounded-2xl   text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
+                                                        required
+                                                    />
+                                                    {state.error && <p className="error">{state.error}</p>}
+
+                                                </div>
+                                                <button
+                                                    onClick={handleUpdatePassword}
+                                                    className="login__btn mt-8 px-5 bg-[#F9A106] rounded-full lg:text-[35px] md:text-[34px] sm:text-[33px] xs:text-[30px] text-white lg:h-[75px] md:h-[70px] sm:h-[65px] xs:h-[60px]"
+                                                >
+                                                    Update Password
+                                                </button>
+
+                                            </>
+                                        }
+                                        {
+                                            !isValidUser && isSend && <>
+                                            <div>
+                                                <p>Sorry Your Phone number is not registred</p>
+                                                <p>Kindly use a valid phone number</p>
+                                            </div>
+                                            <div className="pt-5">
+                                            <a
+                                            href="/account/recoverpassword"
+                                            className=" bg-[#F9A106] rounded-2xl text-[25px] text-white px-5 py-2"
+                                            >Recover Password</a>
+
+                                            </div>
+                                            
+                                            </>
+                                        }
+                                    </div>
+                                </div>
+                                {/* <div className="absolute top-7 right-0 pr-2">
+                                    <DropDown />
+                                </div> */}
+                            </div>
+
+                        </div>
                         </div>
                     </div>
                 </div>
