@@ -1295,4 +1295,8 @@ transition: all 0.5s !important;
       margin-bottom: 15px;
       font-size: 16px;
   }
+  .profile__btn__midl{
+    display: table;
+    margin: 0 auto;
+  }
 }

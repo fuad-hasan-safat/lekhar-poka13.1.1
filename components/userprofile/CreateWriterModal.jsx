@@ -94,6 +94,7 @@ const CreateWriterModal = ({ showModal, handleClose }) => {
                         value={deathDate}
                         onChange={(e) => setDeathDate(e.target.value)}
                         required
+                        // style={{ '::webkit-input-placeholder': { color: 'red' }, '::placeholder': { color: 'red' } }} 
                       />
                     </div>
                     <div className="mb-4">

@@ -319,7 +319,7 @@ export default function UserProfile({ slug }) {
                   <div className="col-md-12"></div>
                   <div className="lg:flex lg:flex-row lg:pt-[80px] md:pt-[60px] sm:pt-[40px] xs:pt-[40px]">
                     <div className="lg:w-[70%]">
-                      <div className="lg:pr-6 md:pr-0 sm:pr-0 space-y-4">
+                      <div className="lg:pr-6 md:pr-0 sm:pr-0 space-y-4 ">
                         <input
                           onChange={handleTitle}
                           value={title}
@@ -348,7 +348,7 @@ export default function UserProfile({ slug }) {
                             options={Categoryoptions}
                           />
                         </div>
-                        <div>
+                        <div className='profile__btn__midl'>
                           <CreateCategory />
 
                         </div>
@@ -365,7 +365,7 @@ export default function UserProfile({ slug }) {
                             />
 
                           </div>
-                          <div>
+                          <div className='profile__btn__midl'>
                             <CreateWriter />
                           </div>
 
@@ -407,7 +407,7 @@ export default function UserProfile({ slug }) {
                         </div>
                         <button
                           onClick={handleSubmit}
-                          className="w-[219px] h-[43px] bg-[#F9A106] text-[16px] text-white"
+                          className="px-[20px] h-[43px] bg-[#F9A106] rounded-md text-[16px] text-white items-center profile__btn__midl"
                         >
                           পোস্ট করুন
                         </button>
@@ -418,7 +418,7 @@ export default function UserProfile({ slug }) {
                         {<ProfilePostLeftContent slug={slug} />}
                       </div>
                     </div>
-                    <div className="lg:w-[30%] flex flex-col">
+                    <div className="lg:w-[30%] flex flex-col ">
                       <UserDetails
                         sex={gender}
                         birthdate={dob}
