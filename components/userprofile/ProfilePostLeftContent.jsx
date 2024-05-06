@@ -92,7 +92,7 @@ export default function ProfilePostLeftContent({ slug }) {
                 )}
               </div>
             </div> :
-            <div className="pt-10"> লেখা নেই </div>
+            <div className="pt-10"> এই মুহূর্তে কোনো লেখা নেই </div>
 
           }
           {totalPages > 1 && <div className="py-10 space-x-4"> {/* Add a class for styling */}

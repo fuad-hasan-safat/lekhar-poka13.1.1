@@ -57,7 +57,7 @@ useEffect(() => {
                   />
                 </div>
                 <div className="pb-3">
-                  {index <= somosamoyikPost.length - 2 ? (
+                  {index <= somosamoyikPost.length  ? (
                     <SidebarPostDivider />
                   ) : (
                     ""
@@ -66,7 +66,8 @@ useEffect(() => {
               </>
             ))}
         </div>:
-                <div className="pt-10"> লেখা নেই </div>
+                <div className="pt-10"> এই মুহূর্তে কোনো লেখা নেই
+                </div>
 
 }
       </div>

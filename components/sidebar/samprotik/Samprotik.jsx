@@ -55,7 +55,7 @@ const Samprotik = () => {
                     />
                   </div>
                   <div className="pb-[14px]">
-                    {index <= samprotikPost.length - 2 ? (
+                    {index <= samprotikPost.length  ? (
                       <SidebarPostDivider />
                     ) : (
                       ""
@@ -65,7 +65,8 @@ const Samprotik = () => {
 
               ))}
           </div> :
-          <div className="pt-10"> লেখা নেই </div>
+          <div className="pt-10"> এই মুহূর্তে কোনো লেখা নেই
+          </div>
 
         }
       </div>

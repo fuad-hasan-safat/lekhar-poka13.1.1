@@ -55,7 +55,7 @@ const Jonopriyo = () => {
                     />
                   </div>
                   <div className="pb-3">
-                    {index <= jonopriyoData.length - 2 ? (
+                    {index <= jonopriyoData.length ? (
                       <SidebarPostDivider />
                     ) : (
                       ""
@@ -66,7 +66,7 @@ const Jonopriyo = () => {
 
               ))}
           </div> :
-          <div className="pt-10"> লেখা নেই </div>
+          <div className="pt-10"> এই মুহূর্তে কোনো লেখা নেই </div>
 
         }
       </div>
