@@ -64,7 +64,7 @@ export default function SobKobitaLeftContent() {
         <div>Error fetching posts: {error.message}</div>
       ) : (
         <>
-          <div className='container'>
+          <div className=''>
             {postList.length ?
               <div className='flex'>
                 <div className="lakha__main__content pt-20  text-3xl lg:mr-[100px] md:mr-[70px] ">
@@ -93,7 +93,7 @@ export default function SobKobitaLeftContent() {
 
 
             }
-            {totalPages > 1 && <div className="py-10 space-x-4"> {/* Add a class for styling */}
+            {totalPages > -1 && <div className="pagination__btn py-10 space-x-4"> {/* Add a class for styling */}
               <button
                 className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
 
