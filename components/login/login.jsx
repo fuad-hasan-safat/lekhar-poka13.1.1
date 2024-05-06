@@ -39,7 +39,7 @@ const LoginPage = () => {
                   {/* right part */}
                   <div className="login__form__right relative bg-white rounded-l-[46px] text-black grid place-items-center ">
 
-                    <div className="grid place-items-center ">
+                    <div className="login__form__dsc grid place-items-center ">
                       <LoginReg logreg="Log In" btntext="Log In" />
                       <SignInOption
                         title="Or Signup with"
