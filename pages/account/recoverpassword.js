@@ -11,7 +11,7 @@ export default function Home() {
         <title>পাসওয়ার্ড রিকভারি</title>
       </Head>
 
-      <div className="h-screen flex items-center justify-center ">
+      <div className="">
         <RecoveryPage />
       </div>
     </div>
