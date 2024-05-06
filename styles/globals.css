@@ -207,7 +207,7 @@ body {
 }
 
 /* ------------------------
------------ All Post Mail Content
+----------- All Post Main Content
 ---------------------------- */
 .all__post__main__content{
   margin-top: 110px;
@@ -936,6 +936,9 @@ transition: all 0.5s !important;
     margin-right: 25px;
     padding: 30px 20px 20px;
   }
+  .all__post__main__content{
+    margin-top: 90px;
+  }
   .about__btm__wrap,
   .about__content__wrap{
     display: block;
@@ -1142,10 +1145,7 @@ transition: all 0.5s !important;
   .OTP__text{
     font-size: 35px;
   }
-  .kobita__content {
-      /* margin-top: 80px;
-      margin-bottom: 60px; */
-  }
+
   .about__img img {
       max-width: 250px;
       width: 100%;
