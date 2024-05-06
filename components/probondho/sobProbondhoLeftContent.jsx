@@ -13,9 +13,6 @@ export default function SobProbondhoLeftContent() {
   //   const [selectedId, setSelectedId] = useState("sob");
   const [postList, setPostList] = useState([])
   const [isLoading, setIsLoading] = useState(true);
-
-
-  const [data, setData] = useState(null); // State to store fetched data
   const [error, setError] = useState(null); // State to store any errors
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
@@ -45,17 +42,43 @@ export default function SobProbondhoLeftContent() {
 
   }, []);
 
+  useEffect(() => {
+    console.log('window inner height', window.innerHeight)
+    console.log('document scroll ', document.documentElement.scrollTop)
+    console.log('document scroll offset ', document.documentElement.offsetHeight)
 
-  const handlePageChange = (pageNumber) => {
-    if (pageNumber > 0 && pageNumber <= totalPages) {
-      setCurrentPage(pageNumber);
-    }
-  };
 
-  const startIndex = (currentPage - 1) * postsPerPage;
-  const endIndex = Math.min(startIndex + postsPerPage, postList.length); // Ensure endIndex doesn't exceed posts length
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop < document.documentElement.offsetHeight - 300
+      )
+        return;
+      if (currentPage < totalPages) {
+        setCurrentPage(currentPage + 1);
+      }
+    };
 
-  const displayedPosts = postList.slice(startIndex, endIndex);
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [currentPage, totalPages]);
+
+
+
+
+
+  // const handlePageChange = (pageNumber) => {
+  //   if (pageNumber > 0 && pageNumber <= totalPages) {
+  //     setCurrentPage(pageNumber);
+  //   }
+  // };
+
+  // const startIndex = (currentPage - 1) * postsPerPage;
+  // const endIndex = Math.min(startIndex + postsPerPage, postList.length); // Ensure endIndex doesn't exceed posts length
+
+  // const displayedPosts = postList.slice(startIndex, endIndex);
 
 
   return (
@@ -71,8 +94,8 @@ export default function SobProbondhoLeftContent() {
             {postList.length > 0 ?
               <div className='flex'>
                 <div className="lakha__main__content pt-20 text-3xl lg:mr-[100px] md:mr-[50px]">
-                  {displayedPosts.length && (
-                    displayedPosts.map((post, index) => (
+                  {postList.length && (
+                    postList?.slice(0, currentPage * postsPerPage).map((post, index) => (
                       <>
                         <div key={index}>
                           <SobProbondhoBody
@@ -85,7 +108,7 @@ export default function SobProbondhoLeftContent() {
 
                           />
                         </div>
-                        {index < displayedPosts.length - 1 && <MainContentDivider />}
+                        {index < postList.length - 1 && <MainContentDivider />}
                       </>
                     ))
                   )}
@@ -94,7 +117,7 @@ export default function SobProbondhoLeftContent() {
               <div className="pt-10">  এই মুহূর্তে কোনো লেখা নেই </div>
 
             }
-            {totalPages > 1 && <div className="py-10 space-x-4"> {/* Add a class for styling */}
+            {/* {totalPages > 1 && <div className="py-10 space-x-4">
               <button
                 className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
 
@@ -123,7 +146,7 @@ export default function SobProbondhoLeftContent() {
                 শেষ পৃষ্ঠা
               </button>
             </div>
-            }
+            } */}
           </div>
         </>
       )}

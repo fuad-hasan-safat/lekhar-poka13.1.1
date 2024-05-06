@@ -55,7 +55,7 @@ const Samprotik = () => {
                     />
                   </div>
                   <div className="pb-[14px]">
-                    {index <= samprotikPost.length  ? (
+                    {index <= samprotikPost.length - 2  ? (
                       <SidebarPostDivider />
                     ) : (
                       ""

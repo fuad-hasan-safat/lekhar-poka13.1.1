@@ -57,7 +57,7 @@ useEffect(() => {
                   />
                 </div>
                 <div className="pb-3">
-                  {index <= somosamoyikPost.length  ? (
+                  {index <= somosamoyikPost.length - 2 ? (
                     <SidebarPostDivider />
                   ) : (
                     ""

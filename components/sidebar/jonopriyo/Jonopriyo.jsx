@@ -55,7 +55,7 @@ const Jonopriyo = () => {
                     />
                   </div>
                   <div className="pb-3">
-                    {index <= jonopriyoData.length ? (
+                    {index <= jonopriyoData.length - 2 ? (
                       <SidebarPostDivider />
                     ) : (
                       ""

@@ -104,8 +104,6 @@ export default function ProcchodLeftContent() {
                           writer={post.writer}
                           category={post.category}
                           content={post.category === 'কবিতা' ? countWords(post.content, 30) : countWords(post.content, 70)}
-
-
                         />
                       </div>
                       {index < postList.length  && <MainContentDivider />}
