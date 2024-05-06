@@ -6,6 +6,7 @@ import ContentList from './ContentList';
 import { apiBasePath } from "../../utils/constant";
 import NotFound from "../../components/common/nofFound"
 import axios from "axios";
+import AdminLayOut from "./admin";
 
 const WriterList = () => {
     const router = useRouter();
@@ -15,7 +16,7 @@ const WriterList = () => {
 
 
 
-  
+
 
     useEffect(() => {
         setUserType(localStorage.getItem("usertype") || "");
@@ -37,17 +38,17 @@ const WriterList = () => {
 
     async function deleteData(id) {
         try {
-          const response = await axios.delete(`${apiBasePath}/writers/${id}`);
-          console.log('Delete successful:', response.data);
-          return response.data;
+            const response = await axios.delete(`${apiBasePath}/writers/${id}`);
+            console.log('Delete successful:', response.data);
+            return response.data;
         } catch (error) {
-          console.error('Error deleting data:', error);
-          throw error;
+            console.error('Error deleting data:', error);
+            throw error;
         }
-      }
+    }
 
 
-      async  function deleteWriter(id) {
+    async function deleteWriter(id) {
 
 
 
@@ -55,11 +56,11 @@ const WriterList = () => {
             await deleteData(id);
             // If successful, update state or do something else
             alert('Delete Sucessfully')
-          } catch (error) {
+        } catch (error) {
             // Handle error
             alert('Failed to Delete')
 
-          }
+        }
 
 
 
@@ -71,47 +72,49 @@ const WriterList = () => {
 
     if (userType === 'admin') {
         return (
-            <div className="pt-[115px]  text-black mx-10">
-                <div className="flex flex-row">
-                    <div className="w-1/2">
-                        <div className="text-7xl pb-4">Writer List</div>
-                        <ul>
-                            {writerList.length &&
-                                writerList.map((writer, index) => (
+            <AdminLayOut>
+                <div className="pt-[115px]  text-black mx-10">
+                    <div className="flex flex-row">
+                        <div className="w-1/2">
+                            <div className="text-7xl pb-4">Writer List</div>
+                            <ul>
+                                {writerList.length &&
+                                    writerList.map((writer, index) => (
 
-                                    <li key={index}>
-                                        <p className="mb-4">{writer.name}</p>
-                                        <hr/>
+                                        <li key={index}>
+                                            <p className="mb-4">{writer.name}</p>
+                                            <hr />
 
-                                    </li>
-                                ))}
-                        </ul>
+                                        </li>
+                                    ))}
+                            </ul>
 
+                        </div>
+                        <div className="w-1/2">
+                            <div className="text-7xl pb-4 ">Delete Writer</div>
+                            <ul>
+                                {writerList.length &&
+                                    writerList.map((writer, index) => (
+
+                                        <li key={index}>
+                                            {/* {setToggleStatus(post.status)} */}
+                                            <button
+                                                id={index}
+                                                className={`text-red-500 hover:text-red-950 mb-4`}
+
+                                                onClick={() => { deleteWriter(writer._id) }}
+                                            >
+                                                Delete Writer
+                                            </button>
+                                            <hr />
+
+                                        </li>
+                                    ))}
+                            </ul>
+                        </div>
                     </div>
-                    <div className="w-1/2">
-                        <div className="text-7xl pb-4 ">Delete Writer</div>
-                        <ul>
-                            {writerList.length &&
-                                writerList.map((writer, index) => (
-
-                                    <li key={index}>
-                                        {/* {setToggleStatus(post.status)} */}
-                                        <button
-                                            id={index}
-                                            className={`text-red-500 hover:text-red-950 mb-4`}
-
-                                            onClick={() => { deleteWriter(writer._id) }}
-                                        >
-                                            Delete Writer
-                                        </button>
-                                        <hr/>
-
-                                    </li>
-                                ))}
-                        </ul>
-                    </div>
-                </div>
-            </div >
+                </div >
+            </AdminLayOut>
         )
     } else {
         return <NotFound />

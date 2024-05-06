@@ -183,16 +183,16 @@ export default function UserDetails({ sex = '---', birthdate = '---', location =
                         />
                         <p>{mail}</p>
                     </div>
-                    <div className="flex flex-row space-x-2 pt-2">
+                    <div className="flex flex-row space-x-2 pt-2 mb-[50px]">
                         <img
                             src="/images/usericons/phone.svg"
                         />
                         <p>{phone}</p>
                     </div>
                     <button
-                        className="bg-[#F9A106]  text-white py-2 px-4 rounded"
+                        className="bg-[#F9A106]  text-white py-2  px-4 rounded"
                         onClick={toggleModal}>
-                        Edit Profile
+                        প্রোফাইল আপডেট
                     </button>
                     {isOpen && (
                         <div className="fixed inset-0 flex items-center justify-center z-[9999]">
@@ -305,7 +305,7 @@ export default function UserDetails({ sex = '---', birthdate = '---', location =
                                             <div className='form__submit'>
                                                 <button
                                                     className='bg-[#F9A106] hover:bg-orange-600'
-                                                    type='submit'>Update</button>
+                                                    type='submit'>আপডেট</button>
                                             </div>
                                         </form>
                                     </div>

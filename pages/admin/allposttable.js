@@ -8,6 +8,7 @@ import { apiBasePath } from "../../utils/constant";
 import NotFound from "../../components/common/nofFound"
 import axios from "axios";
 import StyledModal from "./styleModal";
+import AdminLayOut from "./admin";
 
 const PostTable = () => {
   const router = useRouter();
@@ -112,17 +113,18 @@ const PostTable = () => {
 
   if (userType === 'admin') {
     return (
+      <AdminLayOut>
       <div className="pt-[115px]  text-black mx-10">
         <div className="flex flex-row">
           <div className="w-1/3">
-            <div className="text-7xl pb-4">Post List</div>
+            <div className="text-3xl pb-4">Post List</div>
             <ContentList content={postList} onOpenModal={handleOpenModal} setIsTitleClick={setIsTitleClick}/>
             {istitleClick && <StyledModal isOpen={isOpen} selectedContent={selectedContent} onClose={handleCloseModal} />}
 
 
           </div>
           <div className="w-1/3">
-            <div className="text-7xl pb-4 ">Toggle Ststud</div>
+            <div className="text-3xl pb-4 ">Toggle Ststud</div>
             <ul>
               {postList.length &&
                 postList.map((post, index) => (
@@ -139,13 +141,15 @@ const PostTable = () => {
                     >
                       {post.status ? 'Revoke Status' : 'Give Status'}
                     </button>
+                    <hr />
+
 
                   </li>
                 ))}
             </ul>
           </div>
           <div className="w-1/3">
-          <div className="text-7xl pb-4 ">Delete Post</div>
+          <div className="text-3xl pb-4 ">Delete Post</div>
                         <ul>
                             {postList.length &&
                                 postList.map((post, index) => (
@@ -157,6 +161,8 @@ const PostTable = () => {
                                         >
                                             Delete
                                         </button>
+                                        <hr />
+
                                     </li>
                                 ))}
                         </ul>
@@ -164,6 +170,7 @@ const PostTable = () => {
           </div>
         </div>
       </div >
+      </AdminLayOut>
     )
   } else {
    return <NotFound />
