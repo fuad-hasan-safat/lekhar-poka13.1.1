@@ -3,6 +3,7 @@ import React from 'react'
 
 export default function AdminLayOut({children}) {
   return (
+    
     <div className='px-[70px] pt-[70px] text-black'>
         <h1 className='text-3xl '> Admin Control Page List </h1>
         <div className='flex flex-row space-x-5'>

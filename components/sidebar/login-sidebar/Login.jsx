@@ -15,6 +15,7 @@ export default function Login() {
 
   const router = useRouter();
 
+
   const [number, setnumber] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
@@ -28,6 +29,8 @@ export default function Login() {
   // google login state start
   const [profile, setProfile] = useState([]);
   const [email, setEmail] = useState('')
+
+
 
   const handleNumberhange = (e) => {
     // Allow only numbers and backspace key
@@ -134,7 +137,14 @@ export default function Login() {
                 buttonClass="text-white rounded-[6px] bg-[#F9A106] px-[20px] h-[40px]  "
                 id={userUuid}
               />
+              
             </div>
+            {localStorage.getItem("usertype") === 'admin' && 
+            <button
+            onClick={()=> router.push('/admin/admin')}
+            className="text-white rounded-[6px] bg-[#F9A106] px-[20px] h-[40px] mt-[25px]"
+            >অ্যাডমিন প্যানেল</button>
+            }
             <Divider />
           </div>
         </>
