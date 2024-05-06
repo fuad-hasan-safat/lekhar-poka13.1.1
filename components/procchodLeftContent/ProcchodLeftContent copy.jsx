@@ -53,31 +53,33 @@ export default function ProcchodLeftContent() {
 
   }, []);
 
-  useEffect(() => {
-    console.log('window inner height', window.innerHeight)
-    console.log('document scroll ', document.documentElement.scrollTop)
-    console.log('document scroll offset ', document.documentElement.offsetHeight)
 
+  // const handlePageChange = (pageNumber) => {
+  //   if (pageNumber > 0 && pageNumber <= totalPages) {
+  //     setCurrentPage(pageNumber);
+  //   }
+  // };
 
-    const handleScroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop < document.documentElement.offsetHeight - 300
-      )
-        return;
-      if (currentPage < totalPages) {
-        setCurrentPage(currentPage + 1);
-      }
-    };
+  // const firstPage = () => {
+  //   handlePageChange(1);
+  // };
 
-    window.addEventListener("scroll", handleScroll);
+  // const lastPage = () => {
+  //   handlePageChange(totalPages);
+  // };
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [currentPage, totalPages]);
+  // const nextPage = () => {
+  //   handlePageChange(currentPage + 1);
+  // };
 
+  // const prevPage = () => {
+  //   handlePageChange(currentPage - 1);
+  // };
 
-  
+  // const startIndex = (currentPage - 1) * postsPerPage;
+  // const endIndex = Math.min(startIndex + postsPerPage, postList.length); // Ensure endIndex doesn't exceed posts length
+
+  // const displayedPosts = postList.slice(startIndex, endIndex); // Slice the posts for the current page
 
   if (isLoading) {
     <Loading />
@@ -94,7 +96,7 @@ export default function ProcchodLeftContent() {
             <>
               {postList.length > 0 ?
                 (<div className="lakha__main__content pt-20 text-3xl">
-                  {postList?.slice(0, currentPage * postsPerPage).map((post, index) => (
+                  {postList.map((post, index) => (
                     <>
                       <div key={index}>
                         <MaincontentBody
@@ -105,7 +107,9 @@ export default function ProcchodLeftContent() {
                           category={post.category}
                           content={post.category === 'কবিতা' ? countWords(post.content, 30) : countWords(post.content, 70)}
 
-
+                        // content={post.category === 'কবিতা' ? post.content.match(/(\S+\s*){1,100}/)?.[0] : post.content.match(/(\S+\s*){1,200}/)?.[0]}
+                        // content={post.summary}
+                        // content={post.category === 'কবিতা' ? `${post.content.split().slice(0, 10)}` : `${post.content.split().slice(0, 30)}`} // Truncate content
                         />
                       </div>
                       {index < postList.length  && <MainContentDivider />}
@@ -118,7 +122,32 @@ export default function ProcchodLeftContent() {
                 )
 
               }
-           
+              {/* {totalPages > 1 && <div className="post__pagination py-10 space-x-4"> 
+                <button
+                  className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
+                  onClick={firstPage} disabled={currentPage === 1}>
+                  প্রথম পৃষ্ঠা
+                </button>
+                <button
+                  className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
+                  onClick={prevPage} disabled={currentPage === 1}>
+                  পূর্ববর্তী পৃষ্ঠা
+                </button>
+                <span
+                  className="text-sm text-gray-800"
+                >পৃষ্ঠা {currentPage} এর {totalPages}</span>
+                <button
+                  className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
+                  onClick={nextPage} disabled={currentPage === totalPages}>
+                  পরবর্তী পৃষ্ঠা
+                </button>
+                <button
+                  className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
+                  onClick={lastPage} disabled={currentPage === totalPages}>
+                  শেষ পৃষ্ঠা
+                </button>
+              </div>
+              } */}
             </>
           )}
 
