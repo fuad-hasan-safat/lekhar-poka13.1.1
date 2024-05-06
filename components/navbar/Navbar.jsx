@@ -88,6 +88,9 @@ const MyNavbar = () => {
 
 
   function goToSearchPost(id){
+    setSearch("");
+    setSearchData([]);
+    setSelectedIteam(-1);
     router.push(`/post/${id}`)
     // router.refresh()
   }

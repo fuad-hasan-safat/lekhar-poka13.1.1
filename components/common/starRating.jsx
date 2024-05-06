@@ -45,11 +45,11 @@ export default function RatingComponent({ post_id, setRating, rating }) {
       if (!response.ok) {
         throw new Error(`Error updating data: ${response.statusText}`);
       } else {
-        alert('Rating Sucessfully update');
+        alert('রেটিং সফলভাবে সম্পন্ন হয়েছে');
       }
 
     }else{
-      alert('Looged In first')
+      alert('দয়া করে লগইন করুন')
     }
     
   }

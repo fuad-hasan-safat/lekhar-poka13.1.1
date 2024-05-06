@@ -227,7 +227,7 @@ export default function UserProfile({ slug }) {
     else {
 
       if (!title) {
-        alert('দয়া করে আপনার লেখার শিরোনাম')
+        alert('দয়া করে আপনার লেখার শিরোনাম দিন')
       }
       else if (!selectedOption) {
         alert('দয়া করে আপনার লেখার ধরণ নির্বাচন করুন')

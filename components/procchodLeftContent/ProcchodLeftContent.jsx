@@ -61,7 +61,7 @@ export default function ProcchodLeftContent() {
 
     const handleScroll = () => {
       if (
-        window.innerHeight + document.documentElement.scrollTop < document.documentElement.offsetHeight - 300
+        window.innerHeight + document.documentElement.scrollTop < document.documentElement.offsetHeight - 700
       )
         return;
       if (currentPage < totalPages) {
