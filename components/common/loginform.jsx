@@ -124,7 +124,7 @@ export default function LoginForm({ logreg, btntext }) {
             <input
               onChange={handleNumberhange}
               value={number}
-              className="w-[559px] h-[62px] p-4 bg-[#FCF7E8] rounded-2xl text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="h-[62px] p-4 bg-[#FCF7E8] rounded-2xl text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="phone"
               type="number"
               placeholder="Enter Phone Number (01-XXXXXXXXX)"
@@ -136,7 +136,7 @@ export default function LoginForm({ logreg, btntext }) {
             <input
               onChange={handlePasswordChange}
               value={password}
-              className="w-[559px] h-[62px] p-4 bg-[#FCF7E8]  rounded-2xl   text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
+              className="h-[62px] p-4 bg-[#FCF7E8]  rounded-2xl   text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
               id="password"
               type="password"
               placeholder="Password"
@@ -147,7 +147,7 @@ export default function LoginForm({ logreg, btntext }) {
           <button
             type="button"
             onClick={submitLogin}
-            className=" mt-8 px-5 bg-[#F9A106] rounded-full text-[35px] text-white w-[368px] h-[75px] "
+            className=" mt-8 px-5 bg-[#F9A106] rounded-full text-[35px] text-white  h-[75px] "
           >
             {btntext}
           </button>

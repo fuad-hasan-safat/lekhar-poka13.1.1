@@ -17,19 +17,18 @@ const SignUpPage = () => {
 
   return (
     <>
-      <section className="all__post__sec__wrap">
+      <section className="login__form__sec__wrp clearfix">
 
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <div className={``}>
-                <div className="relative flex flex-row bg-[#FCF7E8] shadow-md">
+                <div className="login__form__wrap flex flex-row bg-[#FCF7E8] shadow-md">
                   {/* left part */}
-                  <div className=" w-[640px]   ">
+                  <div className="login__form__left">
                     <LoginSignInOtpLeftPartDesign />
                   </div>
                   {/* right part */}
-                  <div className=" w-[640px]  bg-white rounded-l-[46px] text-black grid place-items-center ">
+                  <div className="login__form__right bg-white rounded-l-[46px] text-black grid place-items-center ">
                     <div className="grid place-items-center">
                       <SigninForm logreg="Create Account" btntext="Sign Up" />
                       <SignInOption
@@ -44,13 +43,10 @@ const SignUpPage = () => {
                     </div>
 
                   </div>
-                  <div className="absolute top-7 right-0 pr-2">
+                  {/* <div className="absolute top-7 right-0 pr-2">
                     <DropDown />
-                  </div>
-                </div>
+                  </div> */}
               </div>
-              
-          
             </div>
           </div>
         </div>

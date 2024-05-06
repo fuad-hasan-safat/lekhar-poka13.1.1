@@ -10,9 +10,9 @@ export default function Home() {
       <Head>
         <title>লগ ইন</title>
       </Head>
-    <div className="h-screen flex items-center justify-center ">
-      <LoginPage />
-    </div>
+      <div className="items-center justify-center ">
+        <LoginPage />
+      </div>
     </div>
   );
 }

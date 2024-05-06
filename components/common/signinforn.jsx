@@ -136,7 +136,7 @@ export default function SigninForm({ logreg, btntext }) {
                             placeholder="Full Name"
                             value={state.fullName}
                             onChange={numberhandleChange}
-                            className="w-[559px] h-[62px] p-4 bg-[#FCF7E8] rounded-2xl text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className=" h-[62px] p-4 bg-[#FCF7E8] rounded-2xl text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             required
                         />
                     </div>
@@ -150,7 +150,7 @@ export default function SigninForm({ logreg, btntext }) {
                             value={state.mobileNumber}
                             onChange={handleChange}
                             onBlur={validate}
-                            className="w-[559px] h-[62px] p-4 bg-[#FCF7E8] rounded-2xl text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className="h-[62px] p-4 bg-[#FCF7E8] rounded-2xl text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             required
                         />
                         {state.phoneError && state.mobileNumber && <p className="error text-red-500">{state.phoneError}</p>}
@@ -165,7 +165,7 @@ export default function SigninForm({ logreg, btntext }) {
                             value={state.password}
                             onChange={handleChange}
                             onBlur={validate}
-                            className="w-[559px] h-[62px] p-4 bg-[#FCF7E8]  rounded-2xl   text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
+                            className="h-[62px] p-4 bg-[#FCF7E8]  rounded-2xl   text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
                             required
                         />
                         <button className="absolute right-0 p-4" type="button" onClick={togglePasswordVisibility}>
@@ -182,7 +182,7 @@ export default function SigninForm({ logreg, btntext }) {
                             value={state.retypePassword}
                             onChange={handleChange}
                             onBlur={validate}
-                            className="w-[559px] h-[62px] p-4 bg-[#FCF7E8]  rounded-2xl   text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
+                            className=" h-[62px] p-4 bg-[#FCF7E8]  rounded-2xl   text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
                             required
                         />
                         <button className="absolute right-0 p-4" type="button" onClick={togglerePasswordVisibility}>
@@ -195,7 +195,7 @@ export default function SigninForm({ logreg, btntext }) {
 
                     <button
                         onClick={handleSubmit}
-                        className=" mt-8 px-5 bg-[#F9A106] rounded-full text-[35px] text-white w-[368px] h-[75px] "
+                        className=" mt-8 px-5 bg-[#F9A106] rounded-full text-[35px] text-white h-[75px] "
                     >
                         {btntext}
                     </button>

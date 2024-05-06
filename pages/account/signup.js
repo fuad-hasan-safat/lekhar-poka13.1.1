@@ -7,7 +7,7 @@ export default function Home() {
       <Head>
         <title>সাইন আপ</title>
       </Head>
-      <div className="h-screen flex items-center justify-center ">
+      <div className="items-center justify-center ">
         <SignUpPage />
       </div>
     </div>
