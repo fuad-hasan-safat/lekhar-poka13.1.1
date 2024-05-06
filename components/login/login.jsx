@@ -8,11 +8,14 @@ import DropDown from "../common/dropDown";
 
 const LoginPage = () => {
 
+  const [userToken, setUserToken] = useState("");
+  const [user, setUser] = useState(null);
   const [status, setStatus] = useState("");
   const [username, setUsername] = useState("");
   const [userUuid, setUserUuid] = useState("");
-  const [userToken, setUserToken] = useState("");
-  
+  // google login state start
+  const [profile, setProfile] = useState([]);
+  const [email, setEmail] = useState('')
 
 
 
@@ -31,17 +34,17 @@ const LoginPage = () => {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-                <div className="login__form__wrap flex flex-row bg-[#FCF7E8] shadow-md">
-                  {/* left part */}
-                  <div className="login__form__left">
-                    <LoginSignInOtpLeftPartDesign />
-                  </div>
-                  {/* right part */}
-                  <div className="login__form__right relative bg-white rounded-l-[46px] text-black grid place-items-center ">
+              <div className="login__form__wrap flex flex-row bg-[#FCF7E8] shadow-md">
+                {/* left part */}
+                <div className="login__form__left">
+                  <LoginSignInOtpLeftPartDesign />
+                </div>
+                {/* right part */}
+                <div className="login__form__right relative bg-white rounded-l-[46px] text-black grid place-items-center ">
 
-                    <div className=" ">
-                      <LoginReg logreg="Log In" btntext="Log In" />
-                      <SignInOption
+                  <div className="w-full">
+                    <LoginReg logreg="Log In" btntext="Log In" />
+                    {/* <SignInOption
                         title="Or Signup with"
                         icon1="/images/loginOptionIcon/google.svg"
                         icon2="/images/loginOptionIcon/facebook_squre.svg"
@@ -49,13 +52,29 @@ const LoginPage = () => {
                         lowermessege1="Don't have any account? "
                         lowermessege2="Create account."
                         signLogLink="/account/signup"
-                      />
+                      /> */}
 
-                    </div>
-                    {/* <div className="absolute top-7 right-0 pr-2">
+                    <SignInOption
+                      user={user}
+                      setUser={setUser}
+                      profile={profile}
+                      setProfile={setProfile}
+                      setStatus={setStatus}
+                      setUsername={setUsername}
+                      setUserUuid={setUserUuid}
+                      setEmail={setEmail}
+                      title="অথবা সাইন ইন করুন"
+                      icon1="/images/loginOptionIcon/google.svg"
+                      lowermessege1="একাউন্ট নেই? "
+                      lowermessege2="একাউন্ট তৈরী করুন ।"
+                      signLogLink="/account/signup"
+                    />
+
+                  </div>
+                  {/* <div className="absolute top-7 right-0 pr-2">
                       <DropDown />
                     </div> */}
-                  </div>
+                </div>
 
               </div>
             </div>

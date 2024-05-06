@@ -147,7 +147,7 @@ export default function LoginForm({ logreg, btntext }) {
           <button
             type="button"
             onClick={submitLogin}
-            className=" mt-8 px-5 bg-[#F9A106] rounded-full text-[35px] text-white  h-[75px] "
+            className=" mt-8 px-[90px] bg-[#F9A106] rounded-full text-[35px] text-white  h-[75px] "
           >
             {btntext}
           </button>

@@ -1,5 +1,9 @@
 'use client'
+
+import { useRouter } from "next/router";
+
 export default function LoginSignInOtpLeftPartDesign() {
+  const router = useRouter()
   return (
     <>
       <div className="">
@@ -9,6 +13,7 @@ export default function LoginSignInOtpLeftPartDesign() {
             height={72}
             width={205}
             alt="logo"
+            onClick={()=> router.push('/')}
           />
         </div>
         <div className="login__text lg:text-left md:text-center sm:text-center text-black lg:text-6xl md:text-4xl sm:text-4xl xs:text-3xl">

@@ -13,12 +13,10 @@ export default function SignInOption({
     signLogLink,
     user,
     setUser,
-    profile,
     setProfile,
     setStatus,
     setUsername,
     setUserUuid,
-    setEmail,
 }) {
     // const [user, setUser] = useState([]);
     // const [profile, setProfile] = useState([]);
@@ -27,6 +25,7 @@ export default function SignInOption({
     const login = useGoogleLogin({
         onSuccess: (codeResponse) => {
             setUser(codeResponse)
+            router.push('/')
 
         },
         onError: (error) => console.log('Login Failed:', error)
@@ -64,7 +63,7 @@ export default function SignInOption({
                 localStorage.setItem("usertype", data.usertype);
                 localStorage.setItem("phone", data.phone);
 
-                router.refresh()
+                
             }
 
             console.log('following ------------------------- writer in response message---------------->>>>>>', response)
@@ -102,7 +101,7 @@ export default function SignInOption({
                         console.log('google response data ------>>>>', res.data)
                         sendDataToBackend(res.data.id, res.data.email, res.data.name, res.data.picture, user.access_token)
 
-
+                        router.push('/')
 
                     })
                     .catch((err) => console.log(err));
@@ -150,7 +149,7 @@ export default function SignInOption({
                     </button>
                 </div>
             }
-            <div className="flex space-x-3 pt-5 items-center justify-center">
+            <div className="flex space-x-3 pt-5  items-center justify-center">
                 <p className=" text-gray-500">{lowermessege1}</p> <a className=" text-black font-semibold text-lg" href={signLogLink}>{lowermessege2}</a>
             </div>
         </>
