@@ -45,7 +45,7 @@ export default function PostDetails() {
         //setcategory(result.object.category);
         if (result.object.audio?.length > 0) {
           setIsAudioAvailAble(true);
-        }else{
+        } else {
           setIsAudioAvailAble(false)
         }
 
@@ -68,31 +68,36 @@ export default function PostDetails() {
   return (
     <>
       <div>
-          <Head>
-            <title>{data?.title}</title>
-          </Head>
-       </div>
-       <section className="banner-sec-wrap ">
-           <div className="relative w-full xl:h-[380px] lg:h-[360px] md:h-[340px] sm:h-[280px] xs:h-[260px]  overflow-hidden" style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat` }}>
-                {<h2 className=" absolute top-[50%] left-[50%] text-[40px] text-[#F9A106] -translate-x-[50%] -translate-y-[50%] max-h-[0px]">{data?.category}</h2>}
+        <Head>
+          <title>{data?.title}</title>
+        </Head>
+      </div>
+      <section className="banner-sec-wrap ">
+        <div className="relative w-full xl:h-[380px] lg:h-[360px] md:h-[340px] sm:h-[280px] xs:h-[260px]  overflow-hidden" style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat` }}>
+          {<h2 className=" absolute top-[50%] left-[50%] text-[40px] text-[#F9A106] -translate-x-[50%] -translate-y-[50%] max-h-[0px]">{data?.category}</h2>}
 
-            </div>
-        </section>
-      <section className="all__page__main__content">
+        </div>
+      </section>
+      <section className="all__post__main__content">
         <div>
           <div className="container">
-            <div className="row">
-              <div className="col-md-12">
+            <div className="">
+              <div className="">
                 <div className="lg:flex lg:flex-row">
-                  {(<div className="flex flex-col lg:w-[70%]">
-                    <FullPost
-                      content={data?.content}
-                      title={data?.title}
-                      writer={data?.writer}
-                      catagory={data?.category}
-                    />
-                    <RatingComponent setRating={setRating} rating={rating} post_id={data?._id} />
-                  </div>)
+                  {(
+                    <div className="flex flex-col lg:w-[70%]">
+                      <div className="mb-[110px]">
+                        <FullPost
+                          content={data?.content}
+                          title={data?.title}
+                          writer={data?.writer}
+                          catagory={data?.category}
+                        />
+                      </div>
+                      {/* <div className="w-full"> */}
+                        <RatingComponent setRating={setRating} rating={rating} post_id={data?._id} />
+                      {/* </div> */}
+                    </div>)
                     // : (
 
                     //   <div className="lg:w-[70%] pt-[110px] text-black" > সার্ভার এ পোস্টটি পাওয়া যায় নি </div>

@@ -16,7 +16,7 @@ const FullPost = ({ content, title, writer, catagory }) => {
 
     if (catagory === 'কবিতা') {
         return (
-            <div className="kobita__content text-black space-y-3 text-center py-[55px]">
+            <div className="kobita__content text-black text-center">
                 <div className="font-semibold text-[35px] text-yellow-400">{title}</div>
                 <div className="text-[22px] text-[#595D5B] ">{writer}</div>
                 {/* {lines.slice(prevLines, numLines).map((line, index) => ( */}
@@ -29,7 +29,7 @@ const FullPost = ({ content, title, writer, catagory }) => {
         );
     } else {
         return (
-            <div className=" text-black lg:pr-[100px] pt-24 space-y-3">
+            <div className=" text-black lg:pr-[100px]">
                 <div className="font-semibold text-[35px] text-[#FCD200]">{title}</div>
                 <div className="text-[22px] text-[#595D5B] ">{writer}</div>
                 {/* {lines.slice(prevLines, numLines).map((line, index) => ( */}
