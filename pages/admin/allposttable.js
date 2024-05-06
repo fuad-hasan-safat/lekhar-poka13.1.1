@@ -3,10 +3,11 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { useRouter } from "next/navigation";
 import ContentList from './ContentList';
-import StyledModal from './Modal';
+// import StyledModal from './Modal';
 import { apiBasePath } from "../../utils/constant";
 import NotFound from "../../components/common/nofFound"
 import axios from "axios";
+import StyledModal from "./styleModal";
 
 const PostTable = () => {
   const router = useRouter();

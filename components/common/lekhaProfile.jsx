@@ -1,6 +1,7 @@
 import Star from "./Star";
 import Image from "next/image";
 import Link from "next/link";
+import { apiBasePath } from "../../utils/constant";
 
 const LekhaPokaProfile= ({
   image,
@@ -9,13 +10,17 @@ const LekhaPokaProfile= ({
   writer,
   star,
 }) => {
+  console.log('lekhok details --- image -------------------->>>>>>>>>>>>>>>>', image)
   return (
     <>
     
     <div className="flex relative w-full">
       <div className="">
         <div className="iteam absolute left-0">
-          <img src={image} height={100} width={100} alt="" />
+          <img 
+          src={image === null ?  '/images/defaultUserPic/profile.jpg' : `${apiBasePath}/${image?.slice(image.indexOf("/") + 1)}` } 
+          
+          height={100} width={100} alt={image} />
         </div>
         <div className="pl-[80px] space-y-2 w-full">
           <Link className="text-[20px] text-gray-800 " href={`/post/${id}`}>
