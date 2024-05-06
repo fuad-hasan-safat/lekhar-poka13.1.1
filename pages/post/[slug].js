@@ -79,10 +79,8 @@ export default function PostDetails() {
         </div>
       </section>
       <section className="all__post__main__content">
-        <div>
+        
           <div className="container">
-            <div className="">
-              <div className="">
                 <div className="lg:flex lg:flex-row">
                   {(
                     <div className="flex flex-col lg:w-[70%]">
@@ -109,11 +107,9 @@ export default function PostDetails() {
                   <div className="lg:w-[30%]">
                     <Sidebar />
                   </div>
-                </div>
-              </div>
             </div>
           </div>
-        </div>
+        
 
       </section>
 
