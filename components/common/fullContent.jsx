@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import FullPostPagination from "../fullPost/FullPostpagination";
+import LogViewer from "../fullPost/FullPostpag";
 
 const FullPost = ({ content, title, writer, catagory }) => {
     console.log(' detail ----------------->>>>> cat', catagory)
@@ -20,6 +22,8 @@ const FullPost = ({ content, title, writer, catagory }) => {
                 <div className="font-semibold text-[35px] text-yellow-400">{title}</div>
                 <div className="text-[22px] text-[#595D5B] ">{writer}</div>
                 {/* {lines.slice(prevLines, numLines).map((line, index) => ( */}
+                {/* <FullPostPagination logText={content} /> */}
+                {/* <LogViewer logText={content}/> */}
                     <div className="text-[16px] text-gray-500 " dangerouslySetInnerHTML={{ __html: content }} />
                 {/* ))} */}
                 {/* {numLines < lines.length && ( */}
