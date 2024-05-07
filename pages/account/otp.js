@@ -8,7 +8,7 @@ const otp = () => {
             <Head>
                 <title>ওটিপি</title>
             </Head>
-            <div className="items-center justify-center ">
+            <div className="items-center justify-center">
                 <OtpPage />
             </div>
         </div>

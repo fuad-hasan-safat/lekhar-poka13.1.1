@@ -44,6 +44,9 @@ export default function MyApp({ Component, pageProps }) {
   else if(pathname == "/admin/admin"){
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
   }
+  else if(pathname == "/account/otp"){
+    result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
+  }
   else{
     result = <Layout><Component {...pageProps} /></Layout>
   } 
