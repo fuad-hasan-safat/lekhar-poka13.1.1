@@ -1050,7 +1050,7 @@ transition: all 0.5s !important;
       -ms-transition: all 0.5s;
       -webkit-transition: all 0.5s;
   }
-  .active.sidebar{
+  .menu__active.sidebar{
     opacity: 1;
     visibility: visible;
   }
