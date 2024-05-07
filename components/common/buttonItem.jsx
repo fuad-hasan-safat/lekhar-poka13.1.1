@@ -49,33 +49,31 @@ const ButtonItem = ({
 
 
   function handleButton(title) {
-    setPostList([])
     setSelectedId(id)
     setCurrentPage(1)
     setSelectedCategory(title)
 
     console.log('buton ->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', title);
 
-    if (title === 'সব') {
-      fetch(`${apiBasePath}/posts`)
-        .then(response => response.json())
-        .then(data => {
-          // setPostList(data)
-          // setTotalPages(Math.ceil(data.length / 5))
-          // console.log('data --->>>>>>>>>>>>>>>>>>>>>>>>>', data);
+    // if (title === 'সব') {
+    //   fetch(`${apiBasePath}/posts`)
+    //     .then(response => response.json())
+    //     .then(data => {
+    //       // setPostList(data)
+    //       // setTotalPages(Math.ceil(data.length / 5))
+    //       // console.log('data --->>>>>>>>>>>>>>>>>>>>>>>>>', data);
 
-        })
-        .catch(error => console.error("Error fetching data:", error));
+    //     })
+    //     .catch(error => console.error("Error fetching data:", error));
 
 
-    }
-    else {
+    // }
+    // else {
 
       console.log(`${apiBasePath}/categorypostpages/${title}`)
       fetch(`${apiBasePath}/categorypostpages/${title}`)
         .then(response => response.json())
         .then(data => {
-          setPostList([])
           setTotalPages(data?.length);
           if (data.length > 1) {
             setisHasMore(true)
@@ -87,7 +85,7 @@ const ButtonItem = ({
         })
         .catch(error => console.error("Error fetching data:", error));
 
-    }
+    // }
 
 
 
