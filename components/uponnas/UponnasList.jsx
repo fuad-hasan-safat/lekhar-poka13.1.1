@@ -1,5 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react'
+import InfiniteScroll from 'react-infinite-scroll-component';
+
 import SobGolpoBody from '../golpo/sobGolpoBody'
 import { apiBasePath } from '../../utils/constant';
 import MainContentDivider from '../common/mainContentDivider';
@@ -11,77 +13,73 @@ export default function UponnasList() {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null); // State to store any errors
     const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
+    const [totalPages, setTotalPages] = useState(0);
     const postsPerPage = 5; // Number of posts to display per page
+    const [isHasMore, setisHasMore] = useState(false);
 
     useEffect(() => {
-        const fetchPosts = async () => {
+        const fetchTotalPage = async () => {
             try {
-                const response = await fetch(`${apiBasePath}/posts/উপন্যাস`);
+                const response = await fetch(`${apiBasePath}/categorypostpages/উপন্যাস`);
                 const data = await response.json();
-                setPostList(data.object);
-
-                // Calculate total pages based on posts and postsPerPage
-                setTotalPages(Math.ceil(data.object.length / postsPerPage));
+                setTotalPages(data?.length);
+                if (data?.length > 1) {
+                    setisHasMore(true)
+                }
+                console.log('total page ----->>>>', data.length)
             } catch (error) {
                 setError(error);
             } finally {
-                setIsLoading(false);
+                // setIsLoading(false)
             }
         };
 
-        fetchPosts();
-
-
+        fetchTotalPage();
 
     }, [])
 
 
+    const fetchPosts = async () => {
+        console.log('fetch post called for page -----', currentPage)
+        try {
+            const response = await fetch(`${apiBasePath}/categoryposts/উপন্যাস/${currentPage}`);
+            const data = await response.json();
+            setPostList(postList.concat(data));
+
+            console.log('main post by per page inside loader-------->>', data)
+        } catch (error) {
+            setError(error);
+        } finally {
+            setIsLoading(false)
+        }
+    };
+
     useEffect(() => {
-        console.log('window inner height', window.innerHeight)
-        console.log('document scroll ', document.documentElement.scrollTop)
-        console.log('document scroll offset ', document.documentElement.offsetHeight)
-    
-    
-        const handleScroll = () => {
-          if (
-            window.innerHeight + document.documentElement.scrollTop < document.documentElement.offsetHeight - 300
-          )
-            return;
-          if (currentPage < totalPages) {
-            setCurrentPage(currentPage + 1);
-          }
-        };
-    
-        window.addEventListener("scroll", handleScroll);
-    
-        return () => {
-          window.removeEventListener("scroll", handleScroll);
-        };
-      }, [currentPage, totalPages]);
+        fetchPosts();
+    }, [totalPages]);
 
 
+    const loadnextPage = () => {
 
-    // const handlePageChange = (pageNumber) => {
-    //     if (pageNumber > 0 && pageNumber <= totalPages) {
-    //         setCurrentPage(pageNumber);
-    //     }
-    // };
+        console.log({ currentPage, totalPages })
+        setCurrentPage(currentPage + 1)
 
-    // const startIndex = (currentPage - 1) * postsPerPage;
-    // const endIndex = Math.min(startIndex + postsPerPage, postList.length); // Ensure endIndex doesn't exceed posts length
-
-    // const displayedPosts = postList.slice(startIndex, endIndex);
+        if (currentPage <= totalPages) {
+            fetchPosts();
+        } else {
+            setisHasMore(false)
+        }
+    }
 
 
     return (
         <>
             <div className='container'>
-                {postList.length > 0 ?
+                {postList?.length > 0 ?
                     <div className='flex'>
                         <div className='lakha__main__content pt-20  text-3xl lg:mr-[100px] md:mr-[50px]">'>
-                            {postList.length && (
-                                postList?.slice(0, currentPage * postsPerPage).map((post, index) => (
+                            {postList?.length && (
+                                postList?.map((post, index) => (
                                     <>
                                         <div key={index}>
                                             <SobGolpoBody
@@ -104,37 +102,14 @@ export default function UponnasList() {
                     <div className="pt-10"> এই মুহূর্তে কোনো লেখা নেই </div>
 
                 }
-                {/* {totalPages > 1 && <div className="py-10 space-x-4"> 
-                    <button
-                        className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
+                <InfiniteScroll
+                    dataLength={postList?.length} //This is important field to render the next data
+                    next={loadnextPage}
+                    hasMore={isHasMore}
+                    loader={<h6>ডাটা লোড হচ্ছে ...</h6>}
 
-                        onClick={() => handlePageChange(1)} disabled={currentPage === 1}>
-                        প্রথম পৃষ্ঠা
-                    </button>
-                    <button
-                        className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
-
-                        onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
-                        পূর্ববর্তী পৃষ্ঠা
-                    </button>
-                    <span
-                        className="text-sm text-gray-700 "
-                    >পৃষ্ঠা {currentPage} এর {totalPages}</span>
-                    <button
-                        className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
-
-                        onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
-                        পরবর্তী পৃষ্ঠা
-                    </button>
-                    <button
-                        className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
-
-                        onClick={() => handlePageChange(totalPages)} disabled={currentPage === totalPages}>
-                        শেষ পৃষ্ঠা
-                    </button>
-                </div>
-                } */}
-
+                >
+                </InfiniteScroll>
             </div>
         </>
     )

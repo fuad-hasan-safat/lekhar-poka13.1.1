@@ -1,5 +1,7 @@
 "use client"
 import { useEffect, useState } from "react";
+import InfiniteScroll from 'react-infinite-scroll-component';
+
 import MainContentDivider from "../common/mainContentDivider";
 import Loading from "../common/loading";
 import SobJiboniBody from "./sobJiboniBody";
@@ -14,69 +16,64 @@ export default function SobJiboniLeftContent() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const postsPerPage = 5; // Number of posts to display per page
+  const [isHasMore, setisHasMore] = useState(false);
 
 
   useEffect(() => {
 
-
-    const fetchPosts = async () => {
+    const fetchTotalPage = async () => {
       try {
-        const response = await fetch(`${apiBasePath}/posts/জীবনী`);
+        const response = await fetch(`${apiBasePath}/categorypostpages/জীবনী`);
         const data = await response.json();
-        setPostList(data.object);
-
-        // Calculate total pages based on posts and postsPerPage
-        setTotalPages(Math.ceil(data.object.length / postsPerPage));
+        setTotalPages(data?.length);
+        if (data?.length > 1) {
+          setisHasMore(true)
+        }
+        console.log('total page ----->>>>', data.length)
       } catch (error) {
         setError(error);
       } finally {
-        setIsLoading(false);
+        // setIsLoading(false)
       }
     };
 
-    fetchPosts();
-
-
+    fetchTotalPage();
 
   }, []);
 
 
+  const fetchPosts = async () => {
+    console.log('fetch post called for page -----', currentPage)
+    try {
+      const response = await fetch(`${apiBasePath}/categoryposts/জীবনী/${currentPage}`);
+      const data = await response.json();
+      setPostList(postList.concat(data));
+
+      console.log('main post by per page inside loader-------->>', data)
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false)
+    }
+  };
+
   useEffect(() => {
-    console.log('window inner height', window.innerHeight)
-    console.log('document scroll ', document.documentElement.scrollTop)
-    console.log('document scroll offset ', document.documentElement.offsetHeight)
+    fetchPosts();
+  }, [totalPages]);
 
 
-    const handleScroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop < document.documentElement.offsetHeight - 300
-      )
-        return;
-      if (currentPage < totalPages) {
-        setCurrentPage(currentPage + 1);
-      }
-    };
+  const loadnextPage = () => {
 
-    window.addEventListener("scroll", handleScroll);
+    console.log({ currentPage, totalPages })
+    setCurrentPage(currentPage + 1)
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [currentPage, totalPages]);
+    if (currentPage <= totalPages) {
+      fetchPosts();
+    } else {
+      setisHasMore(false)
+    }
+  }
 
-
-
-
-  // const handlePageChange = (pageNumber) => {
-  //   if (pageNumber > 0 && pageNumber <= totalPages) {
-  //     setCurrentPage(pageNumber);
-  //   }
-  // };
-
-  // const startIndex = (currentPage - 1) * postsPerPage;
-  // const endIndex = Math.min(startIndex + postsPerPage, postList.length); // Ensure endIndex doesn't exceed posts length
-
-  // const displayedPosts = postList.slice(startIndex, endIndex); // Slice the posts for the current page
 
 
   return (
@@ -92,11 +89,11 @@ export default function SobJiboniLeftContent() {
               {postList.length > 0 ?
                 <div className="lakha__main__content pt-20  text-3xl lg:mr-[100px] md:mr-[50px]">
                   {postList.length && (
-                    postList?.slice(0, currentPage * postsPerPage).map((post, index) => (
+                    postList?.map((post, index) => (
                       <>
                         <div key={index}>
                           <SobJiboniBody
-                            id={post._id} 
+                            id={post._id}
                             title={post.title}
                             writer={post.writer}
                             content={countWords(post.content, 70)}
@@ -110,39 +107,18 @@ export default function SobJiboniLeftContent() {
                 <div className="pt-10">  এই মুহূর্তে কোনো লেখা নেই </div>
               }
             </div>
-            {/* {totalPages > 1 && <div className="py-10 space-x-4">
-              <button
-                className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
 
-                onClick={() => handlePageChange(1)} disabled={currentPage === 1}>
-                প্রথম পৃষ্ঠা
-              </button>
-              <button
-                className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
-
-                onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
-                পূর্ববর্তী পৃষ্ঠা
-              </button>
-              <span
-                className="text-sm text-gray-700"
-              >পৃষ্ঠা {currentPage} এর {totalPages}</span>
-              <button
-                className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
-
-                onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
-                পরবর্তী পৃষ্ঠা
-              </button>
-              <button
-                className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
-
-                onClick={() => handlePageChange(totalPages)} disabled={currentPage === totalPages}>
-                শেষ পৃষ্ঠা
-              </button>
-            </div>
-            } */}
           </div>
         </>
       )}
+      <InfiniteScroll
+        dataLength={postList?.length} //This is important field to render the next data
+        next={loadnextPage}
+        hasMore={isHasMore}
+        loader={<h6>ডাটা লোড হচ্ছে ...</h6>}
+
+      >
+      </InfiniteScroll>
     </div>
   );
 

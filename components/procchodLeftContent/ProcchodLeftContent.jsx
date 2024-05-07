@@ -21,7 +21,7 @@ export default function ProcchodLeftContent() {
   const postsPerPage = 5; // Number of posts to display per page
   const [isHasMore, setisHasMore] = useState(false);
 
-  const [selectedCategory, setSelectedCategory] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState(null)
 
   const [buttons, setButtons] = useState([
     {
@@ -53,30 +53,9 @@ export default function ProcchodLeftContent() {
   }, []);
 
 
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await fetch(`${apiBasePath}/posts/${currentPage}`);
-        const data = await response.json();
-        setPostList(data);
-
-        console.log('main post by per page-------->>', data)
-      } catch (error) {
-        setError(error);
-      } finally {
-        setIsLoading(false)
-      }
-    };
-
-    fetchPosts();
-
-
-
-  }, [totalPages]);
-
-
+  
   const fetchPosts = async () => {
+    console.log('fetch post called for page -----', currentPage)
     try {
       const response = await fetch(`${apiBasePath}/posts/${currentPage}`);
       const data = await response.json();
@@ -90,15 +69,13 @@ export default function ProcchodLeftContent() {
     }
   };
 
-
-  
   const fetcCategoryhPosts = async () => {
     try {
-      const response = await fetch(`${apiBasePath}/categorypostpages/${selectedCategory}/${currentPage}`);
+      const response = await fetch(`${apiBasePath}/categoryposts/${selectedCategory}/${currentPage}`);
       const data = await response.json();
       setPostList(postList.concat(data));
 
-      console.log('main post by per page inside loader-------->>', data)
+      console.log('main post category_______>>>>> by per page inside loader-------->>', data)
     } catch (error) {
       setError(error);
     } finally {
@@ -107,15 +84,34 @@ export default function ProcchodLeftContent() {
   };
 
 
+  useEffect(() => {
+ 
+    if(!selectedCategory){
+      setPostList([])
+      fetchPosts();
+      }else{
+        fetcCategoryhPosts();
+      }
+
+
+
+  }, [totalPages]);
+
+
+
+  
+
+
+
   const loadnextPage = () => {
 
     console.log({ currentPage, totalPages })
+    setCurrentPage(currentPage + 1)
 
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1)
+    if (currentPage <= totalPages) {
 
-   
-      if(selectedCategory===''){
+   console.log('current page of next loading---------------->>>', currentPage)
+      if(!selectedCategory && currentPage >1){
       fetchPosts();
       }else{
         fetcCategoryhPosts();
@@ -170,23 +166,8 @@ export default function ProcchodLeftContent() {
                 next={loadnextPage}
                 hasMore={isHasMore}
                 loader={<h6>ডাটা লোড হচ্ছে ...</h6>}
-              // endMessage={
-              //   <p style={{ textAlign: 'center' }}>
-              //     <b>Yay! You have seen it all</b>
-              //   </p>
-              // }
-              // // below props only if you need pull down functionality
-              // refreshFunction={this.refresh}
-              // pullDownToRefresh
-              // pullDownToRefreshThreshold={50}
-              // pullDownToRefreshContent={
-              //   <h3 style={{ textAlign: 'center' }}>&#8595; Pull down to refresh</h3>
-              // }
-              // releaseToRefreshContent={
-              //   <h3 style={{ textAlign: 'center' }}>&#8593; Release to refresh</h3>
-              // }
+          
               >
-                {/* {items} */}
               </InfiniteScroll>
 
             </>

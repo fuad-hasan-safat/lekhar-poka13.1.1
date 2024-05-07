@@ -26,29 +26,30 @@ const ButtonItem = ({
 
 
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await fetch(`${apiBasePath}/posts/${currentPage}`);
-        const data = await response.json();
-        setPostList(data);
+  // useEffect(() => {
+  //   const fetchPosts = async () => {
+  //     try {
+  //       const response = await fetch(`${apiBasePath}/posts/${currentPage}`);
+  //       const data = await response.json();
+  //       setPostList(data);
 
-        console.log('main post by per page-------->>', data)
-      } catch (error) {
-        setError(error);
-      } finally {
-        setIsLoading(false)
-      }
-    };
+  //       console.log('main post by per page-------->>', data)
+  //     } catch (error) {
+  //       setError(error);
+  //     } finally {
+  //       setIsLoading(false)
+  //     }
+  //   };
 
-    fetchPosts();
+  //   fetchPosts();
 
 
 
-  }, [totalPages]);
+  // }, [totalPages]);
 
 
   function handleButton(title) {
+    setPostList([])
     setSelectedId(id)
     setCurrentPage(1)
     setSelectedCategory(title)
@@ -74,12 +75,12 @@ const ButtonItem = ({
       fetch(`${apiBasePath}/categorypostpages/${title}`)
         .then(response => response.json())
         .then(data => {
-          setPostList(data.object)
-          setTotalPages(data.object?.length);
-          if (data.object?.length > 1) {
+          setPostList([])
+          setTotalPages(data?.length);
+          if (data.length > 1) {
             setisHasMore(true)
           }
-          console.log('category data --->>>>>>>>>>>>>>>>>>>>>>>>>', data.object);
+          console.log('category data --->>>>>>>>>>>>>>>>>>>>>>>>>', data);
 
         })
         .catch(error => console.error("Error fetching data:", error));
