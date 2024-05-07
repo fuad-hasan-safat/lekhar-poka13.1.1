@@ -25,12 +25,17 @@ export default function Login() {
   const [error, setError] = useState(null);
   const [numberPrefix, setNumberPrefix] = useState('88');
 
+  const [showPassword, setShowPassword] = useState(false);
+
+
 
   // google login state start
   const [profile, setProfile] = useState([]);
   const [email, setEmail] = useState('')
 
-
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleNumberhange = (e) => {
     // Allow only numbers and backspace key
@@ -122,7 +127,7 @@ export default function Login() {
         <>
           <div className="flex flex-col items-center">
             <div className="text-black text-xl mb-4">
-             <p className="py-[10px] px-[10px]"><span className="text-[#F9A106]">{username} </span> , লেখার পোকায় আপনাকে স্বাগতম </p>
+              <p className="py-[10px] px-[10px]"><span className="text-[#F9A106]">{username} </span> , লেখার পোকায় আপনাকে স্বাগতম </p>
             </div>
             <div className="flex flex-row space-x-3 text-[18px]">
               <LogoutButton
@@ -137,13 +142,13 @@ export default function Login() {
                 buttonClass="text-white rounded-[6px] bg-[#F9A106] px-[20px] h-[40px]  "
                 id={userUuid}
               />
-              
+
             </div>
-            {localStorage.getItem("usertype") === 'admin' && 
-            <button
-            onClick={()=> router.push('/admin/admin')}
-            className="text-white rounded-[6px] bg-[#F9A106] px-[20px] h-[40px] mt-[25px]"
-            >অ্যাডমিন প্যানেল</button>
+            {localStorage.getItem("usertype") === 'admin' &&
+              <button
+                onClick={() => router.push('/admin/admin')}
+                className="text-white rounded-[6px] bg-[#F9A106] px-[20px] h-[40px] mt-[25px]"
+              >অ্যাডমিন প্যানেল</button>
             }
             <Divider />
           </div>
@@ -154,7 +159,7 @@ export default function Login() {
             <div className="text-[20px] text-yellow-500 h-[28px]  pt-5 pb-[28px]">
               লগইন
             </div>
-            <div className="mb-3  pt-4">
+            <div className="mb-3  pt-4 w-full">
               <input
                 className="border rounded-lg w-full h-[43px] text-[14px] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="phonenumber"
@@ -166,16 +171,20 @@ export default function Login() {
               />
               {error && <p className="error text-red-500">{error}</p>}
             </div>
-            <div className="">
+            <div className="relative">
               <input
                 className="border rounded-lg w-full h-[43px] text-[14px] py-2 px-3 text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
                 id="password"
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 placeholder="পাসওয়ার্ড দিন"
                 required
                 onChange={handlePasswordChange}
                 value={password}
               />
+              <button className="absolute right-[10px]  pt-[10px]" type="button" onClick={togglePasswordVisibility}>
+                {showPassword ? <i class="ri-eye-off-line"></i> : <i class="ri-eye-line"></i>}
+              </button>
+
             </div>
             <a
               className="pt-[12px] float-right mb-[15px] inline-block align-baseline font-bold text-xs text-gray-600 hover:text-black-800"
