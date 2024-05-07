@@ -1,5 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
+import InfiniteScroll from 'react-infinite-scroll-component';
+
 import MaincontentBody from "../common/maincontentBody";
 import MainContentDivider from "../common/mainContentDivider";
 import ProcchodButtonList from "./ProcchodButtonList";
@@ -17,6 +19,9 @@ export default function ProcchodLeftContent() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const postsPerPage = 5; // Number of posts to display per page
+  const [isHasMore, setisHasMore] = useState(false);
+
+  const [selectedCategory, setSelectedCategory] = useState('')
 
   const [buttons, setButtons] = useState([
     {
@@ -27,19 +32,36 @@ export default function ProcchodLeftContent() {
   ]);
 
 
+  useEffect(() => {
+    const fetchTotalPage = async () => {
+      try {
+        const response = await fetch(`${apiBasePath}/postpages`);
+        const data = await response.json();
+        setTotalPages(data?.length);
+        if(data?.length> 1){
+          setisHasMore(true)
+        }
+        console.log('total page ----->>>>', data.length)
+      } catch (error) {
+        setError(error);
+      } finally {
+        // setIsLoading(false)
+      }
+    };
+
+    fetchTotalPage();
+  }, []);
+
 
 
   useEffect(() => {
-
-
     const fetchPosts = async () => {
       try {
-        const response = await fetch(`${apiBasePath}/posts`);
+        const response = await fetch(`${apiBasePath}/posts/${currentPage}`);
         const data = await response.json();
         setPostList(data);
 
-        // Calculate total pages based on posts and postsPerPage
-        setTotalPages(Math.ceil(data.length / postsPerPage));
+        console.log('main post by per page-------->>', data)
       } catch (error) {
         setError(error);
       } finally {
@@ -51,33 +73,59 @@ export default function ProcchodLeftContent() {
 
 
 
-  }, []);
-
-  useEffect(() => {
-    console.log('window inner height', window.innerHeight)
-    console.log('document scroll ', document.documentElement.scrollTop)
-    console.log('document scroll offset ', document.documentElement.offsetHeight)
+  }, [totalPages]);
 
 
-    const handleScroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop < document.documentElement.offsetHeight - 700
-      )
-        return;
-      if (currentPage < totalPages) {
-        setCurrentPage(currentPage + 1);
-      }
-    };
+  const fetchPosts = async () => {
+    try {
+      const response = await fetch(`${apiBasePath}/posts/${currentPage}`);
+      const data = await response.json();
+      setPostList(postList.concat(data));
 
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [currentPage, totalPages]);
+      console.log('main post by per page inside loader-------->>', data)
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false)
+    }
+  };
 
 
   
+  const fetcCategoryhPosts = async () => {
+    try {
+      const response = await fetch(`${apiBasePath}/categorypostpages/${selectedCategory}/${currentPage}`);
+      const data = await response.json();
+      setPostList(postList.concat(data));
+
+      console.log('main post by per page inside loader-------->>', data)
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false)
+    }
+  };
+
+
+  const loadnextPage = () => {
+
+    console.log({ currentPage, totalPages })
+
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1)
+
+   
+      if(selectedCategory===''){
+      fetchPosts();
+      }else{
+        fetcCategoryhPosts();
+      }
+
+    }else{
+      setisHasMore(false)
+    }
+  }
+
 
   if (isLoading) {
     <Loading />
@@ -85,16 +133,16 @@ export default function ProcchodLeftContent() {
 
     return (
       <div>
-        <ProcchodButtonList buttons={buttons} setButtons={setButtons} selectedId={selectedId} setSelectedId={setSelectedId} setPostList={setPostList} postList={postList} setTotalPages={setTotalPages} postsPerPage={postsPerPage} setCurrentPage={setCurrentPage} />
+        <ProcchodButtonList buttons={buttons} setButtons={setButtons} selectedId={selectedId} setSelectedId={setSelectedId} setPostList={setPostList} postList={postList} setTotalPages={setTotalPages} totalPages={totalPages} postsPerPage={postsPerPage} currentPage={currentPage} setCurrentPage={setCurrentPage} setisHasMore={setisHasMore} setIsLoading={setIsLoading} setSelectedCategory={setSelectedCategory}/>
         <div className="text-3xl">
 
           {error ? (
             <div></div>
           ) : (
             <>
-              {postList.length > 0 ?
+              {postList?.length > 0 ?
                 (<div className="lakha__main__content pt-20 text-3xl">
-                  {postList?.slice(0, currentPage * postsPerPage).map((post, index) => (
+                  {postList?.map((post, index) => (
                     <>
                       <div key={index}>
                         <MaincontentBody
@@ -106,7 +154,7 @@ export default function ProcchodLeftContent() {
                           content={post.category === 'কবিতা' ? countWords(post.content, 30) : countWords(post.content, 70)}
                         />
                       </div>
-                      {index < postList.length  && <MainContentDivider />}
+                      {index < postList?.length && <MainContentDivider />}
                     </>
                   ))}
                 </div>) : (
@@ -116,7 +164,31 @@ export default function ProcchodLeftContent() {
                 )
 
               }
-           
+
+              <InfiniteScroll
+                dataLength={postList?.length} //This is important field to render the next data
+                next={loadnextPage}
+                hasMore={isHasMore}
+                loader={<h6>ডাটা লোড হচ্ছে ...</h6>}
+              // endMessage={
+              //   <p style={{ textAlign: 'center' }}>
+              //     <b>Yay! You have seen it all</b>
+              //   </p>
+              // }
+              // // below props only if you need pull down functionality
+              // refreshFunction={this.refresh}
+              // pullDownToRefresh
+              // pullDownToRefreshThreshold={50}
+              // pullDownToRefreshContent={
+              //   <h3 style={{ textAlign: 'center' }}>&#8595; Pull down to refresh</h3>
+              // }
+              // releaseToRefreshContent={
+              //   <h3 style={{ textAlign: 'center' }}>&#8593; Release to refresh</h3>
+              // }
+              >
+                {/* {items} */}
+              </InfiniteScroll>
+
             </>
           )}
 

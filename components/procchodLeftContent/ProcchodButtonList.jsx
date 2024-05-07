@@ -14,6 +14,11 @@ const ProcchodButtonList = ({
   setCurrentPage,
   buttons,
   setButtons,
+  setisHasMore,
+  totalPages,
+  currentPage,
+  setIsLoading,
+  setSelectedCategory,
 }) => {
 
 
@@ -51,6 +56,11 @@ const ProcchodButtonList = ({
             setTotalPages={setTotalPages}
             postsPerPage={postsPerPage}
             setCurrentPage={setCurrentPage}
+            setisHasMore={setisHasMore}
+            totalPages={totalPages}
+            currentPage={currentPage}
+            setIsLoading={setIsLoading}
+            setSelectedCategory={setSelectedCategory}
             buttons={buttons}
           />
         ))}
