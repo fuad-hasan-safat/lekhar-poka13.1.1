@@ -109,6 +109,8 @@ export default function SigninForm({ logreg, btntext }) {
                     password: state.password,
                     usertype: "user",
                 });
+                console.log(`full number ------>>> ${numberPrefix}`)
+                console.log('sigh up ------>> ', response)
                 // Handle successful signup response (e.g., redirect)
                 router.push(`/`)
             } catch (error) {
