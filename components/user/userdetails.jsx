@@ -9,6 +9,8 @@ import TakePhoneNumber from './takePhoneNumber';
 
 export default function UserDetails({ sex = '---', birthdate = '---', location = '---', mail = '---', phone = '---', userID = '' }) {
 
+    console.log('user page phone number------>>>', phone)
+
     const router = useRouter();
     const [startDate, setStartDate] = useState(new Date());
     const [birthOfDate, setBirthOfDate] = useState('')

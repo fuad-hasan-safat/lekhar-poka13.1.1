@@ -34,6 +34,12 @@ export default function ProcchodLeftContent() {
 
   useEffect(() => {
     const fetchTotalPage = async () => {
+      // var apiParam = ``
+      // if(!selectedCategory){
+      //   apiParam = 'postpages'
+      // }else{
+      //   apiParam = `${}`
+      // }
       try {
         const response = await fetch(`${apiBasePath}/postpages`);
         const data = await response.json();

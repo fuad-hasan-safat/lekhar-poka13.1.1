@@ -116,11 +116,6 @@ export default function UserProfile({ slug }) {
   //
   const [canPostStatus, setCanPostStatus] = useState(false)
 
-
-  useEffect(() => {
-    setStatus(localStorage.getItem("status") || "");
-  }, [status]);
-
   useEffect(() => {
     setUsername(localStorage.getItem("name") || "");
     setUserToken(localStorage.getItem("token") || "");
@@ -129,6 +124,12 @@ export default function UserProfile({ slug }) {
     setWriter(localStorage.getItem("name"));
 
   }, []);
+
+  useEffect(() => {
+    setStatus(localStorage.getItem("status") || "");
+  }, [status]);
+
+
 
 
   useEffect(() => {
@@ -149,7 +150,7 @@ export default function UserProfile({ slug }) {
         setFollowing(data.object.stats.following)
         setPost(data.object.stats.post)
 
-        // console.log('pofile post )()()() details on user profile--------------->>>>>>>', post);
+        console.log('pofile post )()()() details on user profile--------------->>>>>>>');
 
 
         if (!data.object.stats) {
