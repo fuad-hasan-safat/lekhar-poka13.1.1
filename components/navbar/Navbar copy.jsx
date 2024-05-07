@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState,useRef } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { faList } from "@fortawesome/fontawesome-free";
@@ -21,16 +21,11 @@ const MyNavbar = () => {
   const [selectedIteam, setSelectedIteam] = useState(-1);
 
   //Resposnive Header Toggle
-  // const [isOpen, setIsopen] = useState(false);
+  const [isOpen, setIsopen] = useState(false);
 
-  // const ToggleSidebar = () => {
-  //     isOpen === true ? setIsopen(false) : setIsopen(true);
-  // }
-
-  const menuRef = useRef(null);
-  const toggleMenu=()=> menuRef.current.classList.toggle('menu__active');
-
-
+  const ToggleSidebar = () => {
+      isOpen === true ? setIsopen(false) : setIsopen(true);
+  }
 
   const handleChange = (e) => {
     setSearch(e.target.value);
@@ -119,12 +114,12 @@ const MyNavbar = () => {
                 </Link>
               </div>
               <div className={`flex justify-between items-center space-x-3 text-black lg:text-[18px] sm:text-[15px] pt-1  place-content-center `}>
-                <div className="hambar__icon" onClick={toggleMenu}>
+                <div className="hambar__icon" onClick={ToggleSidebar} >
                   <i class="ri-menu-line"></i>
                   {/* <img src="/public/images/navbaricon/list.svg"/> */}
                 </div>
                 {/* Buttons */}
-                <div className={`sidebar`} ref={menuRef} onClick={toggleMenu}>
+                <div className={`sidebar ${isOpen == true ? 'active' : ''}`}>
                   <ul className={`flex flex-row lg:space-x-6 sm:space-x-4 xs:space-x-[0px] kangsa-font transition-all ease-in-out duration-2000"}`}>
                     <li
                       onClick={() => setSelectedNav("procchod")}
@@ -149,6 +144,16 @@ const MyNavbar = () => {
                         }`}
                       />
                     </li>
+                    {/* <li
+                      onClick={() => setSelectedNav("bistarito")}
+                      className={`${
+                        selectedNav === "bistarito"
+                          ? "text-[#F9A106] font-semibold underline"
+                          : ""
+                      }`}
+                    >
+                      <Link href="/details">বিস্তারিত</Link>
+                    </li> */}
                     <li
                       onClick={() => setSelectedNav("zogazog")}
                       className={`${
