@@ -5,7 +5,7 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 
 
-const SobLekha = ({ sobClass }) => {
+const SobLekha = ({ sobClass, closeMenu }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const [soblekhaSelect, setSoblekhaSelect] = useState('সব লেখা');
@@ -34,7 +34,7 @@ const SobLekha = ({ sobClass }) => {
   return (
     <div className="relative inline-block lg:text-left md:text-left sm:text-center" ref={dropdownRef}>
       <button
-        type="button"
+        type="button" 
         onClick={toggleDropdown}
         className={`${sobClass} inline-flex w-[110px] justify-center  px-2  bg-transparent font-medium  focus:outline-none focus:text-[#F9A106]`}
         aria-haspopup="true"
@@ -57,7 +57,7 @@ const SobLekha = ({ sobClass }) => {
               role="menuitem"
               tabIndex={-1}
               id="options-menu-item-0"
-              onClick={() => setSoblekhaSelect('কবিতা')}
+              onClick={() => { setSoblekhaSelect('কবিতা'); closeMenu(); }}
             >
               কবিতা
             </Link>
@@ -67,7 +67,7 @@ const SobLekha = ({ sobClass }) => {
               role="menuitem"
               tabIndex={-1}
               id="options-menu-item-1"
-              onClick={() => setSoblekhaSelect('গল্প')}
+              onClick={() => { setSoblekhaSelect('গল্প'); closeMenu(); }}
             >
               গল্প
             </Link>
@@ -77,7 +77,7 @@ const SobLekha = ({ sobClass }) => {
               role="menuitem"
               tabIndex={-1}
               id="options-menu-item-2"
-              onClick={() => setSoblekhaSelect('অনুগল্প')}
+              onClick={() => { setSoblekhaSelect('অনুগল্প'); closeMenu(); }}
             >
               অনুগল্প
             </Link>
@@ -87,7 +87,7 @@ const SobLekha = ({ sobClass }) => {
               role="menuitem"
               tabIndex={-1}
               id="options-menu-item-3"
-              onClick={() => setSoblekhaSelect('প্রবন্ধ')}
+              onClick={() => { setSoblekhaSelect('প্রবন্ধ'); closeMenu(); }}
 
             >
               প্রবন্ধ
@@ -98,7 +98,7 @@ const SobLekha = ({ sobClass }) => {
               role="menuitem"
               tabIndex={-1}
               id="options-menu-item-4"
-              onClick={() => setSoblekhaSelect('জীবনী')}
+              onClick={() => { setSoblekhaSelect('জীবনী'); closeMenu(); }}
 
             >
               জীবনী
@@ -109,7 +109,7 @@ const SobLekha = ({ sobClass }) => {
               role="menuitem"
               tabIndex={-1}
               id="options-menu-item-4"
-              onClick={() => setSoblekhaSelect('উপন্যাস')}
+              onClick={() => { setSoblekhaSelect('উপন্যাস'); closeMenu(); }}
 
             >
               উপন্যাস
