@@ -111,23 +111,21 @@ export default function ProcchodLeftContent() {
         fetcCategoryhPosts();
       }
 
-  }, [selectedCategory]);
+  }, [selectedCategory, currentPage]);
 
-  useEffect(() => {
+  // useEffect(() => {
  
-    // setPostList([])
-    if(currentPage>1){
-      if(!selectedCategory){
-        fetchPosts();
-        }else{
-          fetcCategoryhPosts();
-        }
+  //   // setPostList([])
+  //   if(currentPage>1){
+  //     if(!selectedCategory){
+  //       fetchPosts();
+  //       }else{
+  //         fetcCategoryhPosts();
+  //       }
 
-    }
+  //   }
     
-   
-
-  }, [currentPage]);
+  // }, [currentPage]);
 
 
   const loadnextPage = () => {
