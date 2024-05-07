@@ -36,13 +36,13 @@ const SobLekha = ({ sobClass, closeMenu }) => {
       <button
         type="button" 
         onClick={toggleDropdown}
-        className={`${sobClass} inline-flex w-[110px] justify-center  px-2  bg-transparent font-medium  focus:outline-none focus:text-[#F9A106]`}
+        className={`${sobClass} hdr__dropdown__menu inline-flex w-[110px] justify-center  px-2  bg-transparent font-medium  focus:outline-none focus:text-[#F9A106]`}
         aria-haspopup="true"
         aria-expanded={isOpen ? 'true' : 'false'}
 
       >
         {soblekhaSelect}
-        <FontAwesomeIcon icon={faAngleDown} className="ml-2 pt-1 h-5 w-5 focus:text-[#F9A106]" />
+        <FontAwesomeIcon icon={faAngleDown} className="ml-2 pt-1 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-4 sm:w-4 xs:h-4 xs:w-4 focus:text-[#F9A106]" />
       </button>
 
       {isOpen && (
