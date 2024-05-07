@@ -3,32 +3,14 @@ import FullPostPagination from "../fullPost/FullPostpagination";
 import LogViewer from "../fullPost/FullPostpag";
 
 const FullPost = ({ content, title, writer, catagory }) => {
-    console.log(' detail ----------------->>>>> cat', catagory)
 
-    const [numLines, setNumLines] = useState(10); 
-    const [prevLines, setPrevLines] = useState(0);
-
-    const handleLoadMore = () => {
-        setPrevLines(numLines);
-        setNumLines(prevNumLines => prevNumLines + 10);
-        console.log(`prevline : ${prevLines} and next line : ${numLines}`)
-    };
-
-    const lines = content ? content.split('\n') : [];
 
     if (catagory === 'কবিতা') {
         return (
             <div className="kobita__content text-black text-center">
                 <div className="font-semibold text-[35px] text-yellow-400">{title}</div>
                 <div className="text-[22px] text-[#595D5B] ">{writer}</div>
-                {/* {lines.slice(prevLines, numLines).map((line, index) => ( */}
                 <FullPostPagination customclass='text-[16px] text-gray-500' logText={content} />
-                {/* <LogViewer logText={content}/> */}
-                    {/* <div className="text-[16px] text-gray-500 " dangerouslySetInnerHTML={{ __html: content }} /> */}
-                {/* ))} */}
-                {/* {numLines < lines.length && ( */}
-                    {/* <button className="text-[14] text-yellow-400" onClick={handleLoadMore}>পরবর্তী </button> */}
-                {/* ) } */}
             </div>
         );
     } else {
@@ -36,14 +18,7 @@ const FullPost = ({ content, title, writer, catagory }) => {
             <div className=" text-black lg:pr-[100px]">
                 <div className="font-semibold text-[35px] text-[#FCD200]">{title}</div>
                 <div className="text-[22px] text-[#595D5B] ">{writer}</div>
-                {/* {lines.slice(prevLines, numLines).map((line, index) => ( */}
                  <FullPostPagination customclass='text-[16px] text-gray-500' logText={content} />
-
-                    {/* <div className="text-[16px] text-gray-500 text-justify" dangerouslySetInnerHTML={{ __html: content }} /> */}
-                {/* ))} */}
-                {/* {numLines < lines.length && ( */}
-                    {/* <button onClick={handleLoadMore}>পরবর্তী</button> */}
-                {/* ) } */}
             </div>
         );
     }

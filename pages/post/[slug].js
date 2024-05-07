@@ -12,37 +12,27 @@ import AudioPlayer from '../../components/musicbar/AudioPlayer'
 import { fetchData } from "../../function/api";
 import { apiBasePath } from "../../utils/constant";
 import MusicPlayer from "../../components/musicbar/MusicPlayer";
-// import SimpleAudioPlayer from '../components/musicbar/SimpleAudioPlayer'
 
 export default function PostDetails() {
   const router = useRouter();
   const slug = router.query.slug;
-  // console.log("----slug-------", slug);
-
   const [data, setData] = useState(null); // State to store fetched data
   const [error, setError] = useState(null); // State to store any errors
   const [isAudioAvailable, setIsAudioAvailAble] = useState(false);
 
-  //const [catagory, setcategory] = useState('')
 
   const [rating, setRating] = useState(0);
 
 
   useEffect(() => {
-    // console.log(
-    //   "<<<<<<<<<<<<<<<<<<<<<<-------------------------in side use effect----------------------->>>>>>>>>>>>>>>>"
-    // );
-
+ 
     async function fetchDataAsync() {
 
       try {
         const result = await fetchData(
           `${apiBasePath}/getpost/${slug}`
         );
-        //console.log("result->>>>>>>>>>>>>>>>", result.object);
         setData(result.object);
-        // console.log('post data -------- post', result.object)
-        //setcategory(result.object.category);
         if (result.object.audio?.length > 0) {
           setIsAudioAvailAble(true);
         } else {
@@ -52,17 +42,13 @@ export default function PostDetails() {
         console.log('is audio available ------->>>', isAudioAvailable)
       } catch (error) {
         setError(error)
-        console.log(error);
-        // console.log("ERROR");
       } finally {
-        //setcategory(kobita)
       }
     }
 
     fetchDataAsync();
   }, [router.query]);
 
-  //console.log("----DDDDDDDDD AAAAAAAAA TTTTTTTT AAAAAAAAAAA-------", data);
 
 
   return (
@@ -92,18 +78,10 @@ export default function PostDetails() {
                           catagory={data?.category}
                         />
                       </div>
-                      {/* <div className="w-full"> */}
                         <RatingComponent setRating={setRating} rating={rating} post_id={data?._id} />
-                      {/* </div> */}
                     </div>)
-                    // : (
-
-                    //   <div className="lg:w-[70%] pt-[110px] text-black" > সার্ভার এ পোস্টটি পাওয়া যায় নি </div>
-                    // )
 
                   }
-
-
                   <div className="lg:w-[30%]">
                     <Sidebar />
                   </div>
@@ -115,18 +93,7 @@ export default function PostDetails() {
 
 
       {isAudioAvailable && (
-        // <AudioPlayer
-        //   playlist={[
-        //     {
-        //       audioSrc: `${apiBasePath}/${data.audio.slice(data.audio.indexOf("/") + 1)}`,
-        //       metadata: {
-        //         title: data.title,
-        //         writer: data.writer,
-        //         image: "/images/defaultUserPic/profile.jpg",
-        //       },
-        //     },
-        //   ]}
-        // />
+
         <MusicPlayer songs={[{
           id: data._id,
           title: data.title,
@@ -136,7 +103,6 @@ export default function PostDetails() {
 
         }]} />
 
-        // <SimpleAudioPlayer playlist={[{ audioSrc: `${apiBasePath}/${data.audio}`}]} />
       )}
     </>
   );
