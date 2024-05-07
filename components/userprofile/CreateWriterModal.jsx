@@ -56,7 +56,7 @@ const CreateWriterModal = ({ showModal, handleClose }) => {
                 </h3>
                 <div className="mt-2">
                   <form onSubmit={handleSubmit}>
-                    <div className="mb-4">
+                    <div className="mb-4 profile__date">
                       <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
                         নাম
                       </label>
@@ -70,7 +70,7 @@ const CreateWriterModal = ({ showModal, handleClose }) => {
                         required
                       />
                     </div>
-                    <div className="mb-4">
+                    <div className="mb-4 profile__date">
                       <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="birthDate">
                         জন্ম তারিখ
                       </label>
@@ -83,7 +83,7 @@ const CreateWriterModal = ({ showModal, handleClose }) => {
                         required
                       />
                     </div>
-                    <div className="mb-4">
+                    <div className="mb-4 profile__date">
                       <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="deathDate">
                         মৃত্যু তারিখ
                       </label>
@@ -97,7 +97,7 @@ const CreateWriterModal = ({ showModal, handleClose }) => {
                         // style={{ '::webkit-input-placeholder': { color: 'red' }, '::placeholder': { color: 'red' } }} 
                       />
                     </div>
-                    <div className="mb-4">
+                    <div className="mb-4 profile__date">
                       <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="image">
                         ছবি আপলোড করুন
                       </label>
