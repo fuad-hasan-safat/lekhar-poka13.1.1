@@ -42,7 +42,7 @@ export default function UserProfileBanner({ image = '', username = 'demo', desig
                                 {profileStatus}
                             </h1>
                         </div>
-                        <div className="flex flex-row text-[#484848] text-[28px] justify-items-center  m-auto divide-x-2 space-x-3 pt-4 lg:pl-[130px] 
+                        <div className="flex flex-row text-[#484848] lg:text-[28px] md:text-[26px] sm:text-[24px] xs:text-[20px] justify-items-center  m-auto divide-x-2 space-x-3 pt-4 lg:pl-[130px] 
                     place-content-center">
 
                             <div className="text-center">
