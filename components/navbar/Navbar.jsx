@@ -135,7 +135,7 @@ const MyNavbar = () => {
                 </div>
                 {/* Buttons */}
                 <div className={`sidebar`} ref={menuRef}>
-                  <ul className={`flex flex-row lg:space-x-6 sm:space-x-4 xs:space-x-[0px] kangsa-font transition-all ease-in-out duration-2000"}`}>
+                  <ul className={`flex flex-row lg:space-x-6 sm:space-x-2 xs:space-x-[0px] kangsa-font transition-all ease-in-out duration-2000"}`}>
                     <li
                       onClick={() => {setSelectedNav("procchod"); closeMenu();}}
                       className={`${
