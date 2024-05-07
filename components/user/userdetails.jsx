@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Classes from './profile.module.css';
 import { apiBasePath } from '../../utils/constant';
 import { useRouter } from 'next/navigation';
+import TakePhoneNumber from './takePhoneNumber';
 
 
 
@@ -194,6 +195,9 @@ export default function UserDetails({ sex = '---', birthdate = '---', location =
                         onClick={toggleModal}>
                         প্রোফাইল আপডেট
                     </button>
+                    {phone === "" && 
+                    <TakePhoneNumber userUuid={userUuid}/>
+                    }
                     {isOpen && (
                         <div className="fixed inset-0 flex items-center justify-center z-[9999]">
                             <div className="absolute inset-0 bg-gray-500 opacity-75"></div>

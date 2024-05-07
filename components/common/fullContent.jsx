@@ -22,9 +22,9 @@ const FullPost = ({ content, title, writer, catagory }) => {
                 <div className="font-semibold text-[35px] text-yellow-400">{title}</div>
                 <div className="text-[22px] text-[#595D5B] ">{writer}</div>
                 {/* {lines.slice(prevLines, numLines).map((line, index) => ( */}
-                {/* <FullPostPagination logText={content} /> */}
+                <FullPostPagination customclass='text-[16px] text-gray-500' logText={content} />
                 {/* <LogViewer logText={content}/> */}
-                    <div className="text-[16px] text-gray-500 " dangerouslySetInnerHTML={{ __html: content }} />
+                    {/* <div className="text-[16px] text-gray-500 " dangerouslySetInnerHTML={{ __html: content }} /> */}
                 {/* ))} */}
                 {/* {numLines < lines.length && ( */}
                     {/* <button className="text-[14] text-yellow-400" onClick={handleLoadMore}>পরবর্তী </button> */}
@@ -37,7 +37,9 @@ const FullPost = ({ content, title, writer, catagory }) => {
                 <div className="font-semibold text-[35px] text-[#FCD200]">{title}</div>
                 <div className="text-[22px] text-[#595D5B] ">{writer}</div>
                 {/* {lines.slice(prevLines, numLines).map((line, index) => ( */}
-                    <div className="text-[16px] text-gray-500 text-justify" dangerouslySetInnerHTML={{ __html: content }} />
+                 <FullPostPagination customclass='text-[16px] text-gray-500' logText={content} />
+
+                    {/* <div className="text-[16px] text-gray-500 text-justify" dangerouslySetInnerHTML={{ __html: content }} /> */}
                 {/* ))} */}
                 {/* {numLines < lines.length && ( */}
                     {/* <button onClick={handleLoadMore}>পরবর্তী</button> */}
