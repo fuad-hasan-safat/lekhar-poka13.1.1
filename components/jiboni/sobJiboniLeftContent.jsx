@@ -96,13 +96,10 @@ export default function SobJiboniLeftContent() {
                       <>
                         <div key={index}>
                           <SobJiboniBody
-                            id={post._id} // Assuming 'id' is the unique identifier
+                            id={post._id} 
                             title={post.title}
                             writer={post.writer}
                             content={countWords(post.content, 70)}
-
-                          // content={post.content.split(/\s+/).slice(0, 200).join(" ")}
-
                           />
                         </div>
                         {index < postList.length - 1 && <MainContentDivider />}

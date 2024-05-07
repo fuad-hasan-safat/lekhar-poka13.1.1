@@ -13,6 +13,7 @@ export default function LoginSignInOtpLeftPartDesign() {
             height={72}
             width={205}
             alt="logo"
+            className="cursor-pointer"
             onClick={()=> router.push('/')}
           />
         </div>

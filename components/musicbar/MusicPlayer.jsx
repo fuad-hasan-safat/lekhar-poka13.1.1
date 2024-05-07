@@ -213,7 +213,7 @@ export default function MusicPlayer({songs}) {
 
         <ProgressBar
             now={(currentTime / duration) * 100}
-            style={{ width: "300px", height:"6px" , backgroundColor:'white'}}
+            style={{ width: "300px", height:"6px" , backgroundColor:'white' , borderRadius:'5px', cursor:'pointer'}}
             onClick={handleProgressClick}
         />
 
@@ -237,12 +237,12 @@ export default function MusicPlayer({songs}) {
                {isMute && <img onClick={()=>{setIsMute(false); audioPlayer.current.volume = volume}} width={30} height={30} src="/images/icons/ic_volumeoff.svg"></img>}
                 
             {/* volume bar */}
-            <div className="text-center items-center content-center justify-center">
+            <div className="text-center items-center content-center justify-center ">
 
                 <ProgressBar
                     // variant="customBarColor"
                     now={volume * 100}
-                    style={{ width: "100px", height: "6px", backgroundColor:'white'}}
+                    style={{ width: "100px", height: "6px", backgroundColor:'white', borderRadius:'5px', cursor:'pointer'}}
                     onClick={handleVolumeClick}
                 />
 
