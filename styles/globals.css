@@ -1061,6 +1061,9 @@ transition: all 0.5s !important;
   .sidebar ul li{
     width: auto !important;
   }
+  .hdr__dropdown__menu{
+    margin-left: 30px;
+  }
   .logo a img{
     width: 180px !important;
   }

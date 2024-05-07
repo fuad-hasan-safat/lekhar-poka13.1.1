@@ -27,8 +27,18 @@ const MyNavbar = () => {
   //     isOpen === true ? setIsopen(false) : setIsopen(true);
   // }
 
+  // const menuRef = useRef(null);
+  // const toggleMenu=()=> menuRef.current.classList.toggle('menu__active');
+
+  //Resposnive Header Toggle
   const menuRef = useRef(null);
-  const toggleMenu=()=> menuRef.current.classList.toggle('menu__active');
+
+  const toggleMenu = () => {
+    menuRef.current.classList.toggle("menu__active");
+  };
+  const closeMenu = () => {
+    menuRef.current.classList.remove("menu__active");
+  };
 
 
 
@@ -124,24 +134,22 @@ const MyNavbar = () => {
                   {/* <img src="/public/images/navbaricon/list.svg"/> */}
                 </div>
                 {/* Buttons */}
-                <div className={`sidebar`} ref={menuRef} onClick={toggleMenu}>
+                <div className={`sidebar`} ref={menuRef}>
                   <ul className={`flex flex-row lg:space-x-6 sm:space-x-4 xs:space-x-[0px] kangsa-font transition-all ease-in-out duration-2000"}`}>
                     <li
-                      onClick={() => setSelectedNav("procchod")}
+                      onClick={() => {setSelectedNav("procchod"); closeMenu();}}
                       className={`${
                         selectedNav === "procchod"
                           ? "text-[#F9A106] font-semibold underline"
                           : ""
                       }`}
-                    >
-                      <Link href="/">প্রচ্ছদ</Link>
+                     >
+                      <Link href="/">প্রচ্ছদ</Link> 
                     </li>
                     <li
-                      onClick={() => {
-                        setSelectedNav("soblekha");
-                      }}
-                    >
+                      onClick={() => {setSelectedNav("soblekha");}}>
                       <SobLekha
+                      closeMenu={closeMenu}
                         sobClass={`${
                           selectedNav === "soblekha"
                             ? "text-[#F9A106] font-semibold underline"
@@ -150,7 +158,7 @@ const MyNavbar = () => {
                       />
                     </li>
                     <li
-                      onClick={() => setSelectedNav("zogazog")}
+                      onClick={() => {setSelectedNav("zogazog"); closeMenu();}}
                       className={`${
                         selectedNav === "zogazog"
                           ? "text-[#F9A106] font-semibold underline"
@@ -160,7 +168,7 @@ const MyNavbar = () => {
                       <Link href="/contacts">যোগাযোগ</Link>
                     </li>
                     <li
-                      onClick={() => setSelectedNav("amader_somporke")}
+                      onClick={() => {setSelectedNav("amader_somporke"); closeMenu();}}
                       className={` lg:w-[130px] sm:w-[100px] ${
                         selectedNav === "amader_somporke"
                           ? "text-[#F9A106] font-semibold underline"

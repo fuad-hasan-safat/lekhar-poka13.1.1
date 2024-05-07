@@ -1,20 +1,18 @@
-import LoginReg from "@/components/common/loginform";
 import LoginSignInOtpLeftPartDesign from "../common/login-signup-otp-left-design";
-import { arial } from "../fonts/arial";
 import SignInOption from "../signInOption/SignInOption";
 import DropDown from "../common/dropDown";
 
 const OtpPage = () => {
     return (
         <>
-            <div className={`flex ${arial.variable} font-arial`}>
+            <div className={`flex`}>
                 <div className="flex flex-row h-[832px]  w-[1280px] bg-[#FCF7E8] shadow-md">
                     {/* left part */}
-                    <div className=" w-[640px]   ">
+                    <div className="w-[640px]">
                         <LoginSignInOtpLeftPartDesign />
                     </div>
                     {/* right part */}
-                    <div className="relative w-[640px]  bg-white rounded-l-[46px] text-black grid place-items-center ">
+                    <div className="relative w-[640px]  bg-white rounded-l-[46px] text-black grid place-items-center">
                         <div className="grid place-items-center">
                             <div className="grid place-items-center pt-28">
                                 <h1 className=" text-black text-5xl mb-[40px]">OTP Verification</h1>
@@ -56,7 +54,6 @@ const OtpPage = () => {
                             </div>
                             <div className="pt-32">
                                 <SignInOption
-
                                     lowermessege1="Already Have Account? "
                                     lowermessege2="Log In"
                                     signLogLink="\login"
