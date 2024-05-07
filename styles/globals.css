@@ -63,6 +63,31 @@ body {
   display: table;
 }
 
+
+/* 
+--------------------------
+-----------------------
+------------- full post pagination
+ */
+ .pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  list-style: none;
+  padding: 0;
+}
+
+.page-item {
+  margin-top: 10px;
+  margin: 0 5px;
+  font-family: 'KongshoMJRegular';
+}
+
+.active {
+  font-weight: bold;
+  color: #db9800;
+}
+
 /* 
 ---------------------
  Header css

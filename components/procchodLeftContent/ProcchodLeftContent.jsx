@@ -98,11 +98,6 @@ export default function ProcchodLeftContent() {
   }, [totalPages]);
 
 
-
-  
-
-
-
   const loadnextPage = () => {
 
     console.log({ currentPage, totalPages })

@@ -60,8 +60,8 @@ const ButtonItem = ({
       fetch(`${apiBasePath}/posts`)
         .then(response => response.json())
         .then(data => {
-          setPostList(data)
-          setTotalPages(Math.ceil(data.length / 5))
+          // setPostList(data)
+          // setTotalPages(Math.ceil(data.length / 5))
           // console.log('data --->>>>>>>>>>>>>>>>>>>>>>>>>', data);
 
         })
@@ -79,32 +79,13 @@ const ButtonItem = ({
           setTotalPages(data?.length);
           if (data.length > 1) {
             setisHasMore(true)
+          }else{
+            setisHasMore(false)
           }
           console.log('category data --->>>>>>>>>>>>>>>>>>>>>>>>>', data);
 
         })
         .catch(error => console.error("Error fetching data:", error));
-
-
-      // useEffect(() => {
-      //   const fetchTotalPage = async () => {
-      //     try {
-      //       const response = await fetch(`${apiBasePath}/postpages`);
-      //       const data = await response.json();
-      //       setTotalPages(data?.length);
-      //       if(data?.length> 1){
-      //         setisHasMore(true)
-      //       }
-      //       console.log('total page ----->>>>', data.length)
-      //     } catch (error) {
-      //       setError(error);
-      //     } finally {
-      //       // setIsLoading(false)
-      //     }
-      //   };
-
-      //   fetchTotalPage();
-      // }, []);
 
     }
 
