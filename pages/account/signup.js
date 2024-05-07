@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import SignUpPage from '../../components/signup/SignUpPage'
+import SignUpPageBeforeOTP from '../../components/signup/SignUpPageBeforeOTP';
 
 export default function Home() {
   return (
@@ -8,7 +8,8 @@ export default function Home() {
         <title>সাইন আপ</title>
       </Head>
       <div className="items-center justify-center ">
-        <SignUpPage />
+        {/* <SignUpPage /> */}
+        <SignUpPageBeforeOTP/>
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import LoginSignInOtpLeftPartDesign from "../common/login-signup-otp-left-design
 // import { arial } from "../fonts/arial";
 import SignInOption from "../signInOption/SignInOption";
 import DropDown from "../common/dropDown";
-import SigninForm from "../common/signinforn";
+import SigninForm from "../common/signinfornAfterOtp";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
@@ -39,15 +39,6 @@ const SignUpPage = () => {
                 <div className="login__form__right bg-white rounded-l-[46px] text-black grid place-items-center ">
                   <div className="w-full">
                     <SigninForm logreg="Create Account" btntext="Sign Up" />
-                    {/* <SignInOption
-                        title="Or Signup with"
-                        icon1="/images/loginOptionIcon/google.svg"
-                        icon2="/images/loginOptionIcon/facebook_squre.svg"
-                        icon3="/images/loginOptionIcon/ig.svg"
-                        lowermessege1="Already Have Account? "
-                        lowermessege2="Log In"
-                        signLogLink="/account/login"
-                      /> */}
                     <SignInOption
                       user={user}
                       setUser={setUser}
