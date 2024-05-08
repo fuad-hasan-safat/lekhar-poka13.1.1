@@ -71,19 +71,20 @@ const CreateWriterModal = ({ showModal, handleClose, setIsWriterAdded }) => {
                         required
                       />
                     </div>
-                    <div className="mb-4 profile__date">
+                    <div className="mb-4 profile__date relative">
                       <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="birthDate">
                         জন্ম তারিখ
                       </label>
                       <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow appearance-none border rounded bg-transparent  w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="birthDate"
                         type="date"
-                        placeholder='mm/dd/yyyy'
                         value={birthDate}
                         onChange={(e) => setBirthDate(e.target.value)}
                         required
+                      
                       />
+                      <span className='absolute text-gray-700 right-[195px] pt-[8px] '>mm/dd /yyyy</span>
                     </div>
                     <div className="mb-4 profile__date">
                       <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="deathDate">

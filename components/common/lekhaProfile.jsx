@@ -10,7 +10,7 @@ const LekhaPokaProfile= ({
   writer,
   star,
 }) => {
-  console.log('lekhok details --- image -------------------->>>>>>>>>>>>>>>>', image)
+  // console.log('lekhok details --- image -------------------->>>>>>>>>>>>>>>>', image)
   return (
     <>
     

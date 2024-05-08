@@ -20,7 +20,7 @@ const Lekhok = () => {
         setLekhokList(data);
         // console.log("-----------", data);
         // console.log("-----------", setLekhokList);
-        console.log('lekhok ----- data=================>>>>>', data)
+        // console.log('lekhok ----- data=================>>>>>', data)
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);

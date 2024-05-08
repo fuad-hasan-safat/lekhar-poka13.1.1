@@ -37,7 +37,7 @@ export default function PostDetails() {
           `${apiBasePath}/getpost/${slug}`
         );
         setData(result.object);
-        console.log('post page ====================>>>>>>>>>>>>>>>>>>>>', result.object)
+        // console.log('post page ====================>>>>>>>>>>>>>>>>>>>>', result.object)
         if (result.object.audio?.length > 0) {
           setIsAudioAvailAble(true);
         } else {
@@ -53,7 +53,7 @@ export default function PostDetails() {
         // console.log('is audio available ------->>>', isAudioAvailable)
       } catch (error) {
         setError(error)
-        console.log('post page ====================>>>>>>>>>>>>>>>>>>>>', error)
+        // console.log('post page ====================>>>>>>>>>>>>>>>>>>>>', error)
 
       } finally {
       }
@@ -127,10 +127,10 @@ export default function PostDetails() {
       {isAudioAvailable && (
 
         <MusicPlayer songs={[{
-          id: data._id,
-          title: data.title,
-          src: `${apiBasePath}/${data.audio?.slice(data.audio.indexOf("/") + 1)}`,
-          writer: data.writer,
+          id: data?._id,
+          title: data?.title,
+          src: `${apiBasePath}/${data?.audio.slice(data.audio.indexOf("/") + 1)}`,
+          writer: data?.writer,
           image: '/images/defaultUserPic/profile.jpg'
 
         }]} />
