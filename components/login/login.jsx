@@ -43,24 +43,35 @@ const LoginPage = () => {
                 <div className="login__form__right relative bg-white rounded-l-[46px] text-black grid place-items-center ">
 
                   <div className="w-full">
-                    <LoginReg logreg="Log In" btntext="Log In" />
+                    {
+                      userUuid?.length > 0 ?
+                      <>
+                      <div>
+                        <p className="text-black text-3xl">You are already logged in.<a href="/"> <span className="text-orange-500 cursor-pointer">Go to Home</span></a></p>
+                      </div>
+                      </>
+                      :
+                      <>
+                        <LoginReg logreg="Log In" btntext="Log In" />
 
+                        <SignInOption
+                          user={user}
+                          setUser={setUser}
+                          profile={profile}
+                          setProfile={setProfile}
+                          setStatus={setStatus}
+                          setUsername={setUsername}
+                          setUserUuid={setUserUuid}
+                          setEmail={setEmail}
+                          title="অথবা সাইন ইন করুন"
+                          icon1="/images/loginOptionIcon/google.svg"
+                          lowermessege1="একাউন্ট নেই? "
+                          lowermessege2="একাউন্ট তৈরী করুন ।"
+                          signLogLink="/account/signup"
+                        />
+                      </>
 
-                    <SignInOption
-                      user={user}
-                      setUser={setUser}
-                      profile={profile}
-                      setProfile={setProfile}
-                      setStatus={setStatus}
-                      setUsername={setUsername}
-                      setUserUuid={setUserUuid}
-                      setEmail={setEmail}
-                      title="অথবা সাইন ইন করুন"
-                      icon1="/images/loginOptionIcon/google.svg"
-                      lowermessege1="একাউন্ট নেই? "
-                      lowermessege2="একাউন্ট তৈরী করুন ।"
-                      signLogLink="/account/signup"
-                    />
+                    }
 
                   </div>
                   {/* <div className="absolute top-7 right-0 pr-2">
