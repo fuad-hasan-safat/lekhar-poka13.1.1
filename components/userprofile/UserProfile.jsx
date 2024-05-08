@@ -373,8 +373,6 @@ export default function UserProfile({ slug }) {
                               options={writersOptions}
                             />
 
-                            <input type="date" class="form-control" />
-
                           </div>
                           <div className='profile__btn__midl'>
                             <CreateWriter setIsWriterAdded={setIsWriterAdded} />
