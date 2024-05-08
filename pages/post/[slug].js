@@ -12,10 +12,13 @@ import AudioPlayer from '../../components/musicbar/AudioPlayer'
 import { fetchData } from "../../function/api";
 import { apiBasePath } from "../../utils/constant";
 import MusicPlayer from "../../components/musicbar/MusicPlayer";
+import ShareOnFacebook from "../../components/share/share";
 
 export default function PostDetails() {
   const router = useRouter();
   const slug = router.query.slug;
+  const { asPath } = router;
+
   const [data, setData] = useState(null); // State to store fetched data
   const [error, setError] = useState(null); // State to store any errors
   const [isAudioAvailable, setIsAudioAvailAble] = useState(false);
@@ -90,6 +93,7 @@ export default function PostDetails() {
                         title={data?.title}
                         writer={data?.writer}
                         catagory={data?.category}
+                        url={asPath}
                       />
                     </div>
                     <RatingComponent setRating={setRating} rating={rating} post_id={data?._id} />
