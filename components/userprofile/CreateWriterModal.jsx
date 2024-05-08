@@ -75,14 +75,15 @@ const CreateWriterModal = ({ showModal, handleClose, setIsWriterAdded }) => {
                       <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="birthDate">
                         জন্ম তারিখ
                       </label>
-                      <input
+                      {/* <input
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="birthDate"
                         type="date"
                         value={birthDate}
                         onChange={(e) => setBirthDate(e.target.value)}
                         required
-                      />
+                      /> */}
+                      <input type="date" class="form-control" />
                     </div>
                     <div className="mb-4 profile__date">
                       <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="deathDate">
