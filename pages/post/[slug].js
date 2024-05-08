@@ -68,6 +68,8 @@ export default function PostDetails() {
     router.isReady &&
 
     <>
+      {/* <CustomHead title={data?.title} description={data?.writer} image={''} /> */}
+
       <div>
         <Head>
           <title>{data?.title}</title>
@@ -96,6 +98,7 @@ export default function PostDetails() {
                         url={asPath}
                       />
                     </div>
+                    <ShareOnFacebook url={asPath} title={data?.title} description={data?.writer} image={' '} />
                     <RatingComponent setRating={setRating} rating={rating} post_id={data?._id} />
                   </>
                 }

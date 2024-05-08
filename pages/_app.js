@@ -13,7 +13,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import Layout from '../components/layout'
 import LayoutNoSidebar from '../components/layoutnosidebar'
 import { useRouter } from 'next/router'
- 
+
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const { pathname } = router;
@@ -23,43 +23,50 @@ export default function MyApp({ Component, pageProps }) {
   // /account/signup
   // /account/recoverpassword
   let result = <Layout><Component {...pageProps} /></Layout>
-  if (pathname == "/account/login"){
+  if (pathname == "/account/login") {
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
-  } else if(pathname == "/account/signup"){
+  } else if (pathname == "/account/signup") {
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
-  } else if(pathname == "/account/recoverpassword"){
+  } else if (pathname == "/account/recoverpassword") {
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
-  } else if(pathname == "/admin/allposttable"){
+  } else if (pathname == "/admin/allposttable") {
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
-  } else if(pathname == "/admin/slider"){
+  } else if (pathname == "/admin/slider") {
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
-  } else if(pathname == "/admin/allslidertable"){
+  } else if (pathname == "/admin/allslidertable") {
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
-  } else if(pathname == "/admin/writerlist"){
-    result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
-  }
-  else if(pathname == "/admin/allcategory"){
+  } else if (pathname == "/admin/writerlist") {
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
   }
-  else if(pathname == "/admin/admin"){
+  else if (pathname == "/admin/allcategory") {
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
   }
-  else if(pathname == "/account/otp"){
+  else if (pathname == "/admin/admin") {
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
   }
-  else{
+  else if (pathname == "/account/otp") {
+    result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
+  }
+  else {
     result = <Layout><Component {...pageProps} /></Layout>
-  } 
+  }
   return (
     // <Layout>
     //   <Component {...pageProps} />
     // </Layout>
-    <GoogleOAuthProvider clientId="854926132475-sm4btto49sresu4g5o9qpuk9lgtqor9f.apps.googleusercontent.com">
-<>
-      {result}
-    </>
-    </GoogleOAuthProvider>
+    <>
 
-    
+      <script async defer
+        src="https://connect.facebook.net/en_US/sdk.js/xfbml.js?appId=YOUR_FACEBOOK_APP_ID&version=v16.0"
+        crossOrigin="anonymous"
+      />
+      <GoogleOAuthProvider clientId="854926132475-sm4btto49sresu4g5o9qpuk9lgtqor9f.apps.googleusercontent.com">
+        <>
+          {result}
+        </>
+      </GoogleOAuthProvider>
+    </>
+
+
   )
 }
