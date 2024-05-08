@@ -164,6 +164,7 @@ export default function ProcchodLeftContent() {
                 dataLength={postList?.length} //This is important field to render the next data
                 next={loadnextPage}
                 hasMore={isHasMore}
+                scrollThreshold= {0.5}
                 loader={<h6>ডাটা লোড হচ্ছে ...</h6>}
           
               >
