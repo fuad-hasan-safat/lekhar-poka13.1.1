@@ -34,6 +34,7 @@ export default function ProcchodLeftContent() {
 
   useEffect(() => {
     const fetchTotalPage = async () => {
+
       try {
         const response = await fetch(`${apiBasePath}/postpages`);
         const data = await response.json();
@@ -53,13 +54,23 @@ export default function ProcchodLeftContent() {
   }, []);
 
 
+  const preparePostList = (newData = []) => {
+    console.log("==========preparePostList========= 63", currentPage)
+    if (currentPage === 1) {
+      setPostList(newData);
+    } else {
+      setPostList(postList.concat(newData));
+    }
+  }
+
   
   const fetchPosts = async () => {
     console.log('fetch post called for page -----', currentPage)
     try {
       const response = await fetch(`${apiBasePath}/posts/${currentPage}`);
       const data = await response.json();
-      setPostList(postList.concat(data));
+      
+      preparePostList(data)
 
       console.log('main post by per page inside loader-------->>', data)
     } catch (error) {
@@ -73,7 +84,8 @@ export default function ProcchodLeftContent() {
     try {
       const response = await fetch(`${apiBasePath}/categoryposts/${selectedCategory}/${currentPage}`);
       const data = await response.json();
-      setPostList(postList.concat(data));
+      
+      preparePostList(data)
 
       console.log('main post category_______>>>>> by per page inside loader-------->>', data)
     } catch (error) {
@@ -86,16 +98,16 @@ export default function ProcchodLeftContent() {
 
   useEffect(() => {
  
+    // setPostList([])
+    
     if(!selectedCategory){
-      setPostList([])
       fetchPosts();
       }else{
         fetcCategoryhPosts();
       }
 
+  }, [selectedCategory, currentPage]);
 
-
-  }, [totalPages]);
 
 
   const loadnextPage = () => {
@@ -103,16 +115,8 @@ export default function ProcchodLeftContent() {
     console.log({ currentPage, totalPages })
     setCurrentPage(currentPage + 1)
 
-    if (currentPage <= totalPages) {
+    if (currentPage >= totalPages) {
 
-   console.log('current page of next loading---------------->>>', currentPage)
-      if(!selectedCategory && currentPage >1){
-      fetchPosts();
-      }else{
-        fetcCategoryhPosts();
-      }
-
-    }else{
       setisHasMore(false)
     }
   }

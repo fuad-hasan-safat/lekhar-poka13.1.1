@@ -44,15 +44,7 @@ const LoginPage = () => {
 
                   <div className="w-full">
                     <LoginReg logreg="Log In" btntext="Log In" />
-                    {/* <SignInOption
-                        title="Or Signup with"
-                        icon1="/images/loginOptionIcon/google.svg"
-                        icon2="/images/loginOptionIcon/facebook_squre.svg"
-                        icon3="/images/loginOptionIcon/ig.svg"
-                        lowermessege1="Don't have any account? "
-                        lowermessege2="Create account."
-                        signLogLink="/account/signup"
-                      /> */}
+
 
                     <SignInOption
                       user={user}

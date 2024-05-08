@@ -95,6 +95,10 @@ export default function UserProfile({ slug }) {
   //  category and writer fetch
   const [category, setCategory] = useState([]);
   const [writers, setWriters] = useState([]);
+  // -------
+  const [isWriterAdded, setIsWriterAdded] = useState(false)
+  const [isCategoryAdded, setIsCategoryAdded] = useState(false)
+  const [isProfileUpdated, setIsProfileUpdated] = useState(false)
 
 
 
@@ -116,11 +120,6 @@ export default function UserProfile({ slug }) {
   //
   const [canPostStatus, setCanPostStatus] = useState(false)
 
-
-  useEffect(() => {
-    setStatus(localStorage.getItem("status") || "");
-  }, [status]);
-
   useEffect(() => {
     setUsername(localStorage.getItem("name") || "");
     setUserToken(localStorage.getItem("token") || "");
@@ -129,6 +128,12 @@ export default function UserProfile({ slug }) {
     setWriter(localStorage.getItem("name"));
 
   }, []);
+
+  useEffect(() => {
+    setStatus(localStorage.getItem("status") || "");
+  }, [status]);
+
+
 
 
   useEffect(() => {
@@ -149,7 +154,7 @@ export default function UserProfile({ slug }) {
         setFollowing(data.object.stats.following)
         setPost(data.object.stats.post)
 
-        // console.log('pofile post )()()() details on user profile--------------->>>>>>>', post);
+        console.log('pofile post )()()() details on user profile--------------->>>>>>>');
 
 
         if (!data.object.stats) {
@@ -178,7 +183,10 @@ export default function UserProfile({ slug }) {
       .finally(setIsLoading(false));
 
 
-  }, [slug]);
+      setIsCategoryAdded(false)
+      setIsWriterAdded(false)
+      setIsProfileUpdated(false)
+  }, [slug, isWriterAdded, isCategoryAdded]);
 
 
 
@@ -349,7 +357,8 @@ export default function UserProfile({ slug }) {
                           />
                         </div>
                         <div className='profile__btn__midl'>
-                          <CreateCategory />
+
+                          <CreateCategory setIsCategoryAdded={setIsCategoryAdded} />
 
                         </div>
 
@@ -366,7 +375,7 @@ export default function UserProfile({ slug }) {
 
                           </div>
                           <div className='profile__btn__midl'>
-                            <CreateWriter />
+                            <CreateWriter setIsWriterAdded={setIsWriterAdded} />
                           </div>
 
                           <div className="pt-[10px]">
@@ -426,6 +435,7 @@ export default function UserProfile({ slug }) {
                         mail={email}
                         phone={phone}
                         userID={userUuid}
+                        setIsProfileUpdated={setIsProfileUpdated}
                       />
                       <Sidebar />
                     </div>

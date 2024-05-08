@@ -18,8 +18,7 @@ export default function SignInOption({
     setUsername,
     setUserUuid,
 }) {
-    // const [user, setUser] = useState([]);
-    // const [profile, setProfile] = useState([]);
+
     const router = useRouter();
 
     const login = useGoogleLogin({
@@ -66,10 +65,7 @@ export default function SignInOption({
                 
             }
 
-            console.log('following ------------------------- writer in response message---------------->>>>>>', response)
-
         } catch (error) {
-            // console.log("inside catch ----------------", error);
         }
     }
 
@@ -112,10 +108,10 @@ export default function SignInOption({
 
 
 
-    const logOut = () => {
-        googleLogout();
-        setProfile(null);
-    };
+    // const logOut = () => {
+    //     googleLogout();
+    //     setProfile(null);
+    // };
 
 
     return (

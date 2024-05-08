@@ -18,8 +18,8 @@ const Lekhok = () => {
       .then((response) => response.json())
       .then((data) => {
         setLekhokList(data);
-        console.log("-----------", data);
-        console.log("-----------", setLekhokList);
+        // console.log("-----------", data);
+        // console.log("-----------", setLekhokList);
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);

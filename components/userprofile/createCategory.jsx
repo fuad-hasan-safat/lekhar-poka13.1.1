@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import CreatecategoryModal from './createCategoryModal';
 
-export default function CreateCategory() {
+export default function CreateCategory({setIsCategoryAdded}) {
     const [showModal, setShowModal] = useState(false);
 
     const handleClose = () => setShowModal(false);
@@ -16,7 +16,7 @@ export default function CreateCategory() {
                 নতুন লেখার ধরণ করুন
             </button>
 
-            <CreatecategoryModal showModal={showModal} handleClose={handleClose} />
+            <CreatecategoryModal showModal={showModal} handleClose={handleClose} setIsCategoryAdded={setIsCategoryAdded} />
         </div>
     );
 }

@@ -16,9 +16,9 @@ const OtpPage = ({ phonenumber, setIsOtpVarified, SetIsOtpSucess }) => {
       // Handle success response
       console.log("OTP Verification Success:", response.data);
       if(response.data.status === 'failed'){
-        setIsOtpVarified(true);
-        SetIsOtpSucess(false);
-        // alert('ওটিপি সফলভাবে সম্পন্ন হয়নি ');
+        // setIsOtpVarified(true);
+        // SetIsOtpSucess(false);
+        alert('ওটিপি সফলভাবে সম্পন্ন হয়নি ');
       }
 
       if(response.data.status === 'success'){

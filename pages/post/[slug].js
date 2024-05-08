@@ -12,26 +12,20 @@ import AudioPlayer from '../../components/musicbar/AudioPlayer'
 import { fetchData } from "../../function/api";
 import { apiBasePath } from "../../utils/constant";
 import MusicPlayer from "../../components/musicbar/MusicPlayer";
-// import SimpleAudioPlayer from '../components/musicbar/SimpleAudioPlayer'
 
 export default function PostDetails() {
   const router = useRouter();
   const slug = router.query.slug;
-  // console.log("----slug-------", slug);
-
   const [data, setData] = useState(null); // State to store fetched data
   const [error, setError] = useState(null); // State to store any errors
   const [isAudioAvailable, setIsAudioAvailAble] = useState(false);
+  const [isdataFetch, setisDataFetch] = useState(false)
 
-  //const [catagory, setcategory] = useState('')
 
   const [rating, setRating] = useState(0);
 
 
   useEffect(() => {
-    // console.log(
-    //   "<<<<<<<<<<<<<<<<<<<<<<-------------------------in side use effect----------------------->>>>>>>>>>>>>>>>"
-    // );
 
     async function fetchDataAsync() {
 
@@ -39,33 +33,37 @@ export default function PostDetails() {
         const result = await fetchData(
           `${apiBasePath}/getpost/${slug}`
         );
-        //console.log("result->>>>>>>>>>>>>>>>", result.object);
         setData(result.object);
-        // console.log('post data -------- post', result.object)
-        //setcategory(result.object.category);
+        console.log('post page ====================>>>>>>>>>>>>>>>>>>>>', result.object)
         if (result.object.audio?.length > 0) {
           setIsAudioAvailAble(true);
         } else {
           setIsAudioAvailAble(false)
         }
 
-        console.log('is audio available ------->>>', isAudioAvailable)
+        if (result.status === 'success') {
+          setisDataFetch(true)
+        } else if (result.status === 'failed') {
+          setisDataFetch(false)
+        }
+
+        // console.log('is audio available ------->>>', isAudioAvailable)
       } catch (error) {
         setError(error)
-        console.log(error);
-        // console.log("ERROR");
+        console.log('post page ====================>>>>>>>>>>>>>>>>>>>>', error)
+
       } finally {
-        //setcategory(kobita)
       }
     }
 
     fetchDataAsync();
   }, [router.query]);
 
-  //console.log("----DDDDDDDDD AAAAAAAAA TTTTTTTT AAAAAAAAAAA-------", data);
 
 
   return (
+    router.isReady &&
+
     <>
       <div>
         <Head>
@@ -79,54 +77,48 @@ export default function PostDetails() {
         </div>
       </section>
       <section className="all__post__main__content">
-        
-          <div className="container">
-                <div className="lg:flex lg:flex-row">
-                  {(
-                    <div className="flex flex-col lg:w-[70%]">
-                      <div className="lg:mb-[110px] md:mb-[84px]">
-                        <FullPost
-                          content={data?.content}
-                          title={data?.title}
-                          writer={data?.writer}
-                          catagory={data?.category}
-                        />
-                      </div>
-                      {/* <div className="w-full"> */}
-                        <RatingComponent setRating={setRating} rating={rating} post_id={data?._id} />
-                      {/* </div> */}
-                    </div>)
-                    // : (
 
-                    //   <div className="lg:w-[70%] pt-[110px] text-black" > সার্ভার এ পোস্টটি পাওয়া যায় নি </div>
-                    // )
+        <div className="container">
+          <div className="lg:flex lg:flex-row">
+            {(
+              <div className="flex flex-col lg:w-[70%]">
+                {isdataFetch &&
+                  <>
+                    <div className="lg:mb-[110px] md:mb-[84px]">
+                      <FullPost
+                        content={data?.content}
+                        title={data?.title}
+                        writer={data?.writer}
+                        catagory={data?.category}
+                      />
+                    </div>
+                    <RatingComponent setRating={setRating} rating={rating} post_id={data?._id} />
+                  </>
+                }
+                {! isdataFetch && 
+                <>
+                <div className="text-black text-2xl">
+                  আপনার অনুসন্ধানকৃত লেখাটি পাওয়া যাচ্ছে না !   
+                </div>
+                </>
+                }
+              </div>
 
-                  }
+            )
 
-
-                  <div className="lg:w-[30%]">
-                    <Sidebar />
-                  </div>
+            }
+            <div className="lg:w-[30%]">
+              <Sidebar />
             </div>
           </div>
-        
+        </div>
+
 
       </section>
 
 
       {isAudioAvailable && (
-        // <AudioPlayer
-        //   playlist={[
-        //     {
-        //       audioSrc: `${apiBasePath}/${data.audio.slice(data.audio.indexOf("/") + 1)}`,
-        //       metadata: {
-        //         title: data.title,
-        //         writer: data.writer,
-        //         image: "/images/defaultUserPic/profile.jpg",
-        //       },
-        //     },
-        //   ]}
-        // />
+
         <MusicPlayer songs={[{
           id: data._id,
           title: data.title,
@@ -136,7 +128,6 @@ export default function PostDetails() {
 
         }]} />
 
-        // <SimpleAudioPlayer playlist={[{ audioSrc: `${apiBasePath}/${data.audio}`}]} />
       )}
     </>
   );

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { apiBasePath } from '../../utils/constant';
 
-const CreateWriterModal = ({ showModal, handleClose }) => {
+const CreateWriterModal = ({ showModal, handleClose, setIsWriterAdded }) => {
   const [name, setName] = useState('');
   const [birthDate, setBirthDate] = useState('');
   const [deathDate, setDeathDate] = useState('');
@@ -25,6 +25,7 @@ const CreateWriterModal = ({ showModal, handleClose }) => {
         method: 'POST',
         body: formData
       });
+      setIsWriterAdded(true)
 
       handleClose();
 
@@ -89,13 +90,14 @@ const CreateWriterModal = ({ showModal, handleClose }) => {
                         মৃত্যু তারিখ
                       </label>
                       <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow deathDateInput appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="deathDate"
                         type="date"
+                        placeholder='mm/dd/yyyy'
                         value={deathDate}
                         onChange={(e) => setDeathDate(e.target.value)}
                         required
-                        // style={{ '::webkit-input-placeholder': { color: 'red' }, '::placeholder': { color: 'red' } }} 
+                        //  style={{ '::placeholder': { color: 'red' } }} 
                       />
                     </div>
                     <div className="mb-4 profile__date">

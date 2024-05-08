@@ -23,76 +23,24 @@ const ButtonItem = ({
   setSelectedCategory,
 }) => {
 
-
-
-
-  // useEffect(() => {
-  //   const fetchPosts = async () => {
-  //     try {
-  //       const response = await fetch(`${apiBasePath}/posts/${currentPage}`);
-  //       const data = await response.json();
-  //       setPostList(data);
-
-  //       console.log('main post by per page-------->>', data)
-  //     } catch (error) {
-  //       setError(error);
-  //     } finally {
-  //       setIsLoading(false)
-  //     }
-  //   };
-
-  //   fetchPosts();
-
-
-
-  // }, [totalPages]);
-
-
   function handleButton(title) {
-    setPostList([])
     setSelectedId(id)
     setCurrentPage(1)
     setSelectedCategory(title)
 
-    console.log('buton ->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', title);
 
-    if (title === 'সব') {
-      fetch(`${apiBasePath}/posts`)
-        .then(response => response.json())
-        .then(data => {
-          // setPostList(data)
-          // setTotalPages(Math.ceil(data.length / 5))
-          // console.log('data --->>>>>>>>>>>>>>>>>>>>>>>>>', data);
-
-        })
-        .catch(error => console.error("Error fetching data:", error));
-
-
-    }
-    else {
-
-      console.log(`${apiBasePath}/categorypostpages/${title}`)
       fetch(`${apiBasePath}/categorypostpages/${title}`)
         .then(response => response.json())
         .then(data => {
-          setPostList([])
           setTotalPages(data?.length);
           if (data.length > 1) {
             setisHasMore(true)
           }else{
             setisHasMore(false)
           }
-          console.log('category data --->>>>>>>>>>>>>>>>>>>>>>>>>', data);
 
         })
         .catch(error => console.error("Error fetching data:", error));
-
-    }
-
-
-
-
-
 
   }
 

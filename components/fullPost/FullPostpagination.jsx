@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+'use client'
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 
 const FullPostPagination = ({ logText, customclass }) => {
+  const router = useRouter()
+  console.log(router.query)
+  const [slug, setSlug] = useState(router.query.slug)
   const [currentPage, setCurrentPage] = useState(0);
   const linesPerPage = 10;
 
@@ -13,9 +18,14 @@ const FullPostPagination = ({ logText, customclass }) => {
   const startIndex = currentPage * linesPerPage;
   const endIndex = startIndex + linesPerPage;
 
+  useEffect(()=>{
+    setCurrentPage(0)
+  },[router.query])
+
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
   };
+
 
   return (
     <div>
@@ -26,20 +36,13 @@ const FullPostPagination = ({ logText, customclass }) => {
             <div key={startIndex + index} className={customclass} dangerouslySetInnerHTML={{__html: line}} ></div>
           ))}
       </div>
-      {/* <ReactPaginate
-        pageCount={totalPages}
-        pageRangeDisplayed={5}
-        marginPagesDisplayed={2}
-        onPageChange={handlePageChange}
-        containerClassName="pagination"
-        activeClassName="active"
-        className='flex space-x-6 flex-wrap'
-      /> */}
+
         <ReactPaginate
         pageCount={totalPages}
         pageRangeDisplayed={5}
         marginPagesDisplayed={2}
         onPageChange={handlePageChange}
+        forcePage={currentPage}
         containerClassName="pagination"
         activeClassName="active"
         pageClassName="page-item"
@@ -52,6 +55,7 @@ const FullPostPagination = ({ logText, customclass }) => {
         nextLinkClassName="page-link"
         breakClassName="page-item"
         breakLinkClassName="page-link"
+
       />
 
     </div>

@@ -142,6 +142,12 @@ export default function LoginForm({ logreg, btntext }) {
               placeholder="Password"
               required
             />
+             <a
+              className="pt-[12px] float-right mb-[15px] inline-block align-baseline font-bold text-xs text-gray-600 hover:text-black-800"
+              href="/account/recoverpassword"
+            >
+              পাসওয়ার্ড ভুলে গেছেন?
+            </a>
           </div>
 
           <button
