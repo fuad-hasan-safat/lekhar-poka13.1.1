@@ -116,6 +116,8 @@ export default function SobJiboniLeftContent() {
         next={loadnextPage}
         hasMore={isHasMore}
         loader={<h6>ডাটা লোড হচ্ছে ...</h6>}
+        scrollThreshold= {0.5}
+
 
       >
       </InfiniteScroll>

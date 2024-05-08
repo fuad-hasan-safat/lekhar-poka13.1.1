@@ -79,7 +79,7 @@ const MyFooter = () => {
                 </ul>
               </div>
               <div className="ftr__btm text-white text-center">
-                <p>© 2024 Lekhapoka | All Rights Reserved</p>
+                <p>© 2024 Lekharpoka | All Rights Reserved</p>
               </div>
             </div>
           </div>

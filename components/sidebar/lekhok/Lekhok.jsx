@@ -20,6 +20,7 @@ const Lekhok = () => {
         setLekhokList(data);
         // console.log("-----------", data);
         // console.log("-----------", setLekhokList);
+        console.log('lekhok ----- data=================>>>>>', data)
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
@@ -69,7 +70,7 @@ const Lekhok = () => {
                       writer={item.name}
                       id={item._id}
                       user_id={item.user_id}
-                      lifeCycle={`${item.birth_date} - ${item.expiry_date === null ? 'বর্তমান' : item.expiry_date}`}
+                      lifeCycle={`${item.expiry_date} - ${item.birth_date === null ? 'বর্তমান' : item.birth_date}`}
                     />
                   </div>
                   <div className="pb-3">
