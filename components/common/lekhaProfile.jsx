@@ -22,7 +22,7 @@ const LekhaPokaProfile= ({
           
           height={100} width={100} alt={image} />
         </div>
-        <div className="pl-[80px] space-y-2 w-full">
+        <div className="sidebar__post pl-[80px] space-y-2 w-full">
           <Link className="text-[20px] text-gray-800 " href={`/post/${id}`}>
             {title}
           </Link>
