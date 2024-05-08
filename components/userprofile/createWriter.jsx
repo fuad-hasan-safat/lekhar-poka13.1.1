@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import CreateWriterModal from './CreateWriterModal';
 
 
-export default function CreateWriter() {
+export default function CreateWriter({setIsWriterAdded}) {
     const [showModal, setShowModal] = useState(false);
 
     const handleClose = () => setShowModal(false);
@@ -17,7 +17,7 @@ export default function CreateWriter() {
                 নতুন রাইটার ক্রিয়েট করুন
             </button>
 
-            <CreateWriterModal showModal={showModal} handleClose={handleClose} />
+            <CreateWriterModal showModal={showModal} handleClose={handleClose} setIsWriterAdded={setIsWriterAdded} />
         </div>
     );
 

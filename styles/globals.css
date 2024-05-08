@@ -230,6 +230,10 @@ body {
   height: 100%;
   overflow-y: scroll; /* Enable scrolling for long content */
 }
+/* date input field */
+.deathDateInput::placeholder {
+  color: red;
+}
 
 /* ------------------------
 ----------- All Post Mail Content
@@ -416,7 +420,15 @@ background-color: #f8e405;
  -------- paginationButton-------- /
 / --------------------------- / */
 
+/* inifinity */
+.post-item {
+  margin-bottom: 50px; /* Add some space between posts */
+  /* Add other styles for your post items here (width, background, etc.) */
+}
 
+.post-item:last-child {
+  margin-bottom: 0; /* Remove bottom margin for the last item */
+}
 
 /* / search input / */
 .search_section {

@@ -19,13 +19,14 @@ export default function PostDetails() {
   const [data, setData] = useState(null); // State to store fetched data
   const [error, setError] = useState(null); // State to store any errors
   const [isAudioAvailable, setIsAudioAvailAble] = useState(false);
+  const [isdataFetch, setisDataFetch] = useState(false)
 
 
   const [rating, setRating] = useState(0);
 
 
   useEffect(() => {
- 
+
     async function fetchDataAsync() {
 
       try {
@@ -33,15 +34,24 @@ export default function PostDetails() {
           `${apiBasePath}/getpost/${slug}`
         );
         setData(result.object);
+        console.log('post page ====================>>>>>>>>>>>>>>>>>>>>', result.object)
         if (result.object.audio?.length > 0) {
           setIsAudioAvailAble(true);
         } else {
           setIsAudioAvailAble(false)
         }
 
-        console.log('is audio available ------->>>', isAudioAvailable)
+        if (result.status === 'success') {
+          setisDataFetch(true)
+        } else if (result.status === 'failed') {
+          setisDataFetch(false)
+        }
+
+        // console.log('is audio available ------->>>', isAudioAvailable)
       } catch (error) {
         setError(error)
+        console.log('post page ====================>>>>>>>>>>>>>>>>>>>>', error)
+
       } finally {
       }
     }
@@ -52,6 +62,8 @@ export default function PostDetails() {
 
 
   return (
+    router.isReady &&
+
     <>
       <div>
         <Head>
@@ -65,29 +77,42 @@ export default function PostDetails() {
         </div>
       </section>
       <section className="all__post__main__content">
-        
-          <div className="container">
-                <div className="lg:flex lg:flex-row">
-                  {(
-                    <div className="flex flex-col lg:w-[70%]">
-                      <div className="lg:mb-[110px] md:mb-[84px]">
-                        <FullPost
-                          content={data?.content}
-                          title={data?.title}
-                          writer={data?.writer}
-                          catagory={data?.category}
-                        />
-                      </div>
-                        <RatingComponent setRating={setRating} rating={rating} post_id={data?._id} />
-                    </div>)
 
-                  }
-                  <div className="lg:w-[30%]">
-                    <Sidebar />
-                  </div>
+        <div className="container">
+          <div className="lg:flex lg:flex-row">
+            {(
+              <div className="flex flex-col lg:w-[70%]">
+                {isdataFetch &&
+                  <>
+                    <div className="lg:mb-[110px] md:mb-[84px]">
+                      <FullPost
+                        content={data?.content}
+                        title={data?.title}
+                        writer={data?.writer}
+                        catagory={data?.category}
+                      />
+                    </div>
+                    <RatingComponent setRating={setRating} rating={rating} post_id={data?._id} />
+                  </>
+                }
+                {! isdataFetch && 
+                <>
+                <div className="text-black text-2xl">
+                  আপনার অনুসন্ধানকৃত লেখাটি পাওয়া যাচ্ছে না !   
+                </div>
+                </>
+                }
+              </div>
+
+            )
+
+            }
+            <div className="lg:w-[30%]">
+              <Sidebar />
             </div>
           </div>
-        
+        </div>
+
 
       </section>
 

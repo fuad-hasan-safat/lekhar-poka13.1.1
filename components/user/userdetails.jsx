@@ -7,7 +7,7 @@ import TakePhoneNumber from './takePhoneNumber';
 
 
 
-export default function UserDetails({ sex = '---', birthdate = '---', location = '---', mail = '---', phone = '---', userID = '' }) {
+export default function UserDetails({ sex = '---', birthdate = '---', location = '---', mail = '---', phone = '---', userID = '', setIsProfileUpdated, isProfileUpdated }) {
 
     console.log('user page phone number------>>>', phone)
 
@@ -83,7 +83,9 @@ export default function UserDetails({ sex = '---', birthdate = '---', location =
             })
             .catch((error) => console.error("Error fetching profile:", error));
 
-    }, [])
+            setIsProfileUpdated(false)
+
+    }, [isProfileUpdated])
 
 
 
@@ -124,6 +126,7 @@ export default function UserDetails({ sex = '---', birthdate = '---', location =
                     },
                     body: formData
                 });
+                setIsProfileUpdated(true)
 
                 if (response.ok) {
                     const data = await response.json();

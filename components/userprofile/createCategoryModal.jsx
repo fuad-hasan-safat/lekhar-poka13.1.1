@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { apiBasePath } from '../../utils/constant';
 
-const CreatecategoryModal = ({ showModal, handleClose }) => {
+const CreatecategoryModal = ({ showModal, handleClose, setIsCategoryAdded }) => {
   const [title, setTitle] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
@@ -12,6 +12,7 @@ const CreatecategoryModal = ({ showModal, handleClose }) => {
 
     try {
       const response = await axios.post(`${apiBasePath}/categories`, { title });
+      setIsCategoryAdded(true)
 
       handleClose();
 
