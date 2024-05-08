@@ -860,6 +860,27 @@ transition: all 0.5s !important;
   margin-right: 40px;
 } */
 
+.profile__date input::-webkit-input-placeholder { 
+  color: #000 !important;
+  opacity: 1 !important;
+  background: #fff !important;
+}
+.profile__date input::-moz-placeholder {
+  color: #000 !important;
+  opacity: 1 !important;
+  background: #fff !important;
+}
+.profile__date input:-ms-input-placeholder { 
+  color: #000 !important;
+  opacity: 1 !important;
+  background: #fff !important;
+}
+.profile__date input:-moz-placeholder { 
+  color: #000 !important;
+  opacity: 1 !important;
+  background: #fff !important;
+}
+
 
 
 /*

@@ -79,6 +79,7 @@ const CreateWriterModal = ({ showModal, handleClose, setIsWriterAdded }) => {
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="birthDate"
                         type="date"
+                        placeholder='mm/dd/yyyy'
                         value={birthDate}
                         onChange={(e) => setBirthDate(e.target.value)}
                         required
