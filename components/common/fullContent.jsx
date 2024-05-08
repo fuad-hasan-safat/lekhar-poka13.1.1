@@ -12,6 +12,7 @@ const FullPost = ({ content, title, writer, catagory, url }) => {
             <div className="kobita__content text-black text-center">
                 <div className="font-semibold text-[35px] text-yellow-400">{title}</div>
                 <div className="text-[22px] text-[#595D5B] ">{writer}</div>
+                {/* <div className="text-[22px] text-[#595D5B] " dangerouslySetInnerHTML={{__html:content}}></div> */}
                 <FullPostPagination customclass='text-[16px] text-gray-500' logText={content} />
             </div>
             {/* <ShareOnFacebook url={url} title={title} description={writer} image={' '} /> */}

@@ -2,6 +2,7 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
+import parse from 'html-react-parser';
 import { apiBasePath } from '../../utils/constant';
 import axios from 'axios';
 
@@ -11,6 +12,7 @@ const FullPostPagination = ({ logText, customclass }) => {
   const slug = router.query.slug
   const [currentPage, setCurrentPage] = useState(0);
   const linesPerPage = 8;
+  
 
   const logLines = logText?.split('<br>');
 
@@ -44,7 +46,7 @@ const FullPostPagination = ({ logText, customclass }) => {
 
 
   const getSavedpage = async () => {
-    console.log("get saved page")
+    // console.log("get saved page")
     const userUUID = localStorage.getItem("uuid")
     console.log({ userUUID, slug, userUuid })
 
@@ -66,12 +68,12 @@ const FullPostPagination = ({ logText, customclass }) => {
       if (response.data.status === 'success') {
         setCurrentPage(response.data.saved_page)
         console.log('get =======>>>saved page =====>>>>>', response.data.saved_page)
+      }else{
+        setCurrentPage(0)
+
       }
-
-
-
-
     } catch (error) {
+      setCurrentPage(0)
 
     }
 
@@ -81,21 +83,21 @@ const FullPostPagination = ({ logText, customclass }) => {
   const saveCurrentPage = async (selected) => {
     const userUUID = localStorage.getItem("uuid")
 
-    console.log({ userUUID, slug })
+    // console.log({ userUUID, slug })
     let body_data = {
       userId: userUUID,
       postId: slug,
-      currentPage: selected,
+      currentPage: currentPage,
     }
 
-    console.log(body_data)
+    // console.log(body_data)
 
 
     try {
       const response = await axios.post(
         `${apiBasePath}/recordpostpage`,
         {
-          userId: userUuid,
+          userId: userUUID,
           postId: slug,
           currentPage: currentPage,
         },
@@ -106,20 +108,15 @@ const FullPostPagination = ({ logText, customclass }) => {
         }
       );
 
-
-
-
-
-      console.log(response)
+      // console.log(response)
 
       if (response.status === 'success') {
-        console.log("page save ----", response.msg)
+        // console.log("page save ----", response.msg)
       }
 
       if (response.status === 'failed') {
-        console.log("page save ----", response.msg)
+        // console.log("page save ----", response.msg)
       }
-
 
     } catch (error) {
 
@@ -128,20 +125,30 @@ const FullPostPagination = ({ logText, customclass }) => {
 
   const handlePageChange = ({ selected }) => {
      saveCurrentPage(selected);
-    console.log('Handle page ------ selected ----', selected)
+    // console.log('Handle page ------ selected ----', selected)
 
     setCurrentPage(selected);
 
   };
 
 
+ 
+
+
   return (
+    router.isReady &&
     <div>
       <div>
         {logLines
           ?.slice(startIndex, endIndex)
           .map((line, index) => (
-            <div key={startIndex + index} className={''} dangerouslySetInnerHTML={{ __html: line }} ></div>
+            // <div key={startIndex + index} className={''} dangerouslySetInnerHTML={{ __html: line }} ></div>
+            parse(line, { replace: (domNode) => { // Add the replace option
+              if (domNode.attribs && domNode.attribs.style) {
+                delete domNode.attribs.style;
+              }
+              return domNode;
+            } })
           ))}
       </div>
 
