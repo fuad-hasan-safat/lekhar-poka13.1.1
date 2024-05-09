@@ -25,13 +25,13 @@ export default function UserProfileBanner({ image = '', username = 'demo', desig
                     <div className='md:flex md:flex-row pt-[20px] md:lg:pl-[6%] ]'>
 
                         <div className="grid place-content-center  text-center space-y-4 ">
-                            <h1 className="text-[#FCD200] text-[35px]  items-center">
+                            <h1 className="text-[#FCD200] lg:text-[35px] md:text-[34px] sm:text-[32px] xs:text-[30px]  items-center">
                                 {username}
                             </h1>
-                            <h1 className="text-[#595D5B] text-[22px]  items-center">
+                            <h1 className="text-[#595D5B] lg:text-[22px] md:text-[21px] sm:text-[20px] xs:text-[17px] items-center">
                                 {designation}
                             </h1>
-                            <h1 className="text-[#737373] text-[22px]  items-center">
+                            <h1 className="text-[#737373] lg:text-[22px] md:text-[21px] sm:text-[20px] xs:text-[17px]  items-center">
                                 {profileStatus}
                             </h1>
                         </div>
