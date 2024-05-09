@@ -7,17 +7,9 @@ import { useState } from "react";
 import OtpPage from "../otp/otppage";
 
 
-export default function SigninFormBeforeOTP({ logreg, btntext, SetIsOtpSucess, setState, state}) {
+export default function SigninFormBeforeOTP({ logreg, btntext, SetIsOtpSucess, setState, state , otpStatus, setOtpStatus}) {
     const router = useRouter()
-    // const [state, setState] = useState({
-    //     fullName: '',
-    //     mobileNumber: '',
-    //     password: '',
-    //     retypePassword: '',
-    //     error: null,
-    //     phoneError: null,
-    //     isDisabled: true, // Button initially disabled
-    // });
+
 
     const [numberPrefix, setNumberPrefix] = useState('88');
     const [showPassword, setShowPassword] = useState(false);
@@ -81,19 +73,6 @@ export default function SigninFormBeforeOTP({ logreg, btntext, SetIsOtpSucess, s
             isValid = false;
         }
 
-        // if (!state.password) {
-        //     setState((prevState) => ({ ...prevState, error: 'Password is required.' }));
-        //     isValid = false;
-        // } else if (state.password.length < 8) {
-        //     setState((prevState) => ({ ...prevState, error: 'Password must be at least 8 characters long.' }));
-        //     isValid = false;
-        // }
-
-        // if (state.password !== state.retypePassword) {
-        //     setState((prevState) => ({ ...prevState, error: 'Passwords do not match.' }));
-        //     isValid = false;
-        // }
-
         setState((prevState) => ({ ...prevState, isDisabled: !isValid })); // Enable button if all validations pass
     };
 
@@ -106,21 +85,26 @@ export default function SigninFormBeforeOTP({ logreg, btntext, SetIsOtpSucess, s
 
             try {
                 const response = await axios.post(`${apiBasePath}/send-otp`, {
-                    name: state.fullName,
                     phone: `${numberPrefix}${state.mobileNumber}`,
                 });
                 // console.log(`full number ------>>> ${numberPrefix}`)
                 console.log('sigh up OTP Before ------>> ', response)
-                // Handle successful signup response (e.g., redirect)
-                // alert('আপনার রেজিস্ট্রেশন সম্পূর্ণ হয়েছে। অনুগ্রহ করে লগিন করুন।')
-                // router.push(`/account/otp`)
-                if(response.data.status = "success"){
+
+                if(response.data.status === 'success'){
                     SetIsOtpSucess(true)
                 }
+             
+                // if(response.data.otp_status = "SENT"){
+                //     SetIsOtpSucess(true)
+                // }
+                // if(response.data.otp_status = "LIMIT_CROSSED"){
+                // // SetIsOtpSucess(false)
+                // alert('আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন');
+                // }
             } catch (error) {
                 console.error('Signup error:', error);
                 // Handle signup error (e.g., display error message)
-                alert('আপনি আগে থেকেই সাইন আপ করেছেন');
+                // alert('আপনি আগে থেকেই সাইন আপ করেছেন');
             }
         }
     };
@@ -141,7 +125,7 @@ export default function SigninFormBeforeOTP({ logreg, btntext, SetIsOtpSucess, s
 
                         <input
                             id="phonenumber"
-                            type="number"
+                            type="tel"
                             name="mobileNumber"
                             placeholder="Enter Phone Number (01-XXXXXXXXX)"
                             value={state.mobileNumber}

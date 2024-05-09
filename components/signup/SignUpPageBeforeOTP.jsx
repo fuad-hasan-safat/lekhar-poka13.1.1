@@ -22,6 +22,9 @@ const SignUpPageBeforeOTP = () => {
   const [isOtpSucess, SetIsOtpSucess] = useState(false)
   const [isOtpVarified, setIsOtpVarified] = useState(false)
 
+  // save get otp status 
+  const [otpStatus, setOtpStatus] = useState('')
+
 
 
   const [state, setState] = useState({
@@ -57,8 +60,8 @@ const SignUpPageBeforeOTP = () => {
                 <div className="login__form__right bg-white rounded-l-[46px] text-black grid place-items-center ">
                   <div className="w-full">
                     {/* <SigninForm logreg="Create Account" btntext="Sign Up" /> */}
-                    {!isOtpSucess && !isOtpVarified  && <SigninFormBeforeOTP logreg="Create Account" btntext="Sign Up" SetIsOtpSucess={SetIsOtpSucess}  setState={setState} state={state}/> }
-                    {isOtpSucess && !isOtpVarified && <OtpPage phonenumber={state.mobileNumber} SetIsOtpSucess={SetIsOtpSucess} setIsOtpVarified={setIsOtpVarified}/> }
+                    {!isOtpSucess && !isOtpVarified  && <SigninFormBeforeOTP logreg="Create Account" btntext="Sign Up" SetIsOtpSucess={SetIsOtpSucess}  setState={setState} state={state} otpStatus={otpStatus} setOtpStatus={setOtpStatus}/> }
+                    {isOtpSucess && !isOtpVarified && <OtpPage phonenumber={state.mobileNumber} setIsOtpSuccess={SetIsOtpSucess} setIsOtpVerified={setIsOtpVarified} otpStatus={otpStatus} setOtpStatus={setOtpStatus}/> }
                     {isOtpVarified && <SigninFormAterOTP logreg="Create Account" btntext="Sign Up" phonenumber={state.mobileNumber}/> }
                    
                     <SignInOption

@@ -1,17 +1,30 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import { apiBasePath } from "../../utils/constant";
 
-const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess }) => {
+const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus, otpStatus }) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [numberPrefix, setNumberPrefix] = useState('88');
+
+  const [timer, setTimer] = useState(60); // Initial timer value set to 60 seconds
   const inputRefs = useRef([]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (timer > 0) {
+        setTimer((prevTimer) => prevTimer - 1);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [timer]);
 
   const sendOtp = async () => {
     const formattedPhoneNumber = `88${phonenumber}`;
     try {
       const response = await axios.post(`${apiBasePath}/verify-otp`, {
-        otp: otp.join(""),
+        otp: Number(otp.join("")),
         phone: formattedPhoneNumber,
       });
       if (response.data.status === "success") {
@@ -40,7 +53,36 @@ const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess }) => {
     if (value && inputRefs.current[index + 1]) {
       inputRefs.current[index + 1].focus();
     }
+
+    setOtp(newOtp);
+
+    console.log(otp.join(''))
+    console.log(typeof(otp.join()))
   };
+
+  // const handleSendOtpAgain = async () => {
+
+  //   try {
+  //     const response = await axios.post(`${apiBasePath}/send-otp`, {
+  //       phone: `${numberPrefix}${phonenumber}`,
+  //     });
+  //     // console.log(`full number ------>>> ${numberPrefix}`)
+  //     console.log('sigh up OTP Before ------>> ', response)
+
+  //     // if (response.data.otp_status = "SENT") {
+  //     //   setOtpStatus(true)
+  //     // }
+  //     // if (response.data.otp_status = "LIMIT_CROSSED") {
+  //     //   // SetIsOtpSucess(false)
+  //     //   alert('আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন');
+  //     // }
+  //   } catch (error) {
+  //     console.error('Signup error:', error);
+  //     // Handle signup error (e.g., display error message)
+  //     alert('আপনি আগে থেকেই সাইন আপ করেছেন');
+  //   }
+
+  // }
 
   return (
     <div className="w-full">
@@ -66,21 +108,26 @@ const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess }) => {
           />
         ))}
       </div>
-      <div>
-        <div className="flex justify-center items-center flex-col">
-          <button
-            onClick={sendOtp}
-            disabled={isButtonDisabled}
-            className={`login__btn mt-8 px-5 bg-[#F9A106] rounded-full lg:text-[35px] md:text-[34px] sm:text-[33px] xs:text-[30px] text-white lg:h-[75px] md:h-[70px] sm:h-[65px] xs:h-[60px] ${
-              isButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
+      <div className="flex justify-center items-center flex-col">
+        {otpStatus === "SENT" && <p className="text-gray-500">{`Resend OTP in ${timer} seconds`}</p>}
+        <button
+          onClick={sendOtp}
+          disabled={isButtonDisabled}
+          className={`login__btn mt-8 px-5 bg-[#F9A106] rounded-full lg:text-[35px] md:text-[34px] sm:text-[33px] xs:text-[30px] text-white lg:h-[75px] md:h-[70px] sm:h-[65px] xs:h-[60px] ${isButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
             }`}
+        >
+          Verify
+        </button>
+        {timer > 0 &&
+
+          <button
+            // onClick={handleSendOtpAgain}
+            className="lg:pl-60 md:pl-50 sm:pl-40 xs:pl-10 pt-2 text-gray-400 font-semibold text-sm"
           >
-            Verify
-          </button>
-          <a className="lg:pl-60 md:pl-50 sm:pl-40 xs:pl-10 pt-2 text-gray-400 font-semibold text-sm" href="#">
             Did not get OTP?
-          </a>
-        </div>
+          </button>
+        }
+
       </div>
     </div>
   );
