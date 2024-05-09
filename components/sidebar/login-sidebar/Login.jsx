@@ -163,7 +163,7 @@ export default function Login() {
               <input
                 className="border rounded-lg w-full h-[43px] text-[14px] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="phonenumber"
-                type="number"
+                type="tel"
                 placeholder="মোবাইল নাম্বার দিন ০১-xxxxxxxxx"
                 required
                 onChange={handleNumberhange}
