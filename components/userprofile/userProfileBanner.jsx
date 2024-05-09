@@ -20,7 +20,7 @@ export default function UserProfileBanner({ image = '', username = 'demo', desig
                 />
             </div> */}
             <section>
-                <div className="md:flex md:flex-row relative container">
+                <div className="profile-img__wrap md:flex md:flex-row relative container">
                     <div className="profile-img">
                         <img
                             className="w-[264px] h-[264px] rounded-full  border-4 border-solid border-white -mt-[110px]  "
