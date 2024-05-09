@@ -69,12 +69,37 @@ body {
 -----------------------
 ------------- full post pagination
  */
- .pagination {
+ .pagination{
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 30px;
   list-style: none;
   padding: 0;
+  margin-bottom: 20px;
+}
+.pagination li:last-child a,
+.pagination li:first-child a{
+  border: 0;
+  width: auto;
+  height: auto;
+  line-height: 18px;
+  font-weight: 600;
+  color: #F9A106;
+}
+.pagination li a {
+  display: inline-block;
+  vertical-align: baseline;
+  text-decoration: none;
+  border: 1px solid #000;
+  padding: 5px;
+  width: 25px;
+  height: 25px;
+  border-radius: 30px;
+  font-size: 16px;
+  line-height: 14px;
+}
+.pagination li.active a{
+  border-color: #db9800;
 }
 
 .page-item {
@@ -894,13 +919,16 @@ transition: all 0.5s !important;
 .sidebar__post h1{
   margin-top: 0 !important;
 }
+.all__page__main__content{
+  padding-bottom: 50px;
+}
 /*
 ---------------------
  Profile Css
 --------------------- 
 */
 .profile-img__wrap{
-  padding-left: 264px;
+  padding-left: 280px;
 }
 .profile-img{
   position: absolute;
@@ -1305,6 +1333,15 @@ transition: all 0.5s !important;
     width: 100%;
     padding-top: 30px !important;
   }
+  .profile-img__wrap {
+    padding-left: 0;
+}
+  .profile-img__wrap {
+    padding-left: 0;
+  }
+  .profile-img {
+      position: static;
+  }
 }
 @media(max-width:575px){
   .slider__bg__img img {
@@ -1425,5 +1462,15 @@ transition: all 0.5s !important;
       margin-left: 0;
       margin-right: 0;
       padding: 30px 10px 20px;
+  }
+  .page-item {
+      margin: 0 3px;
+  }
+  .pagination li a {
+      padding: 5px;
+      width: 18px;
+      height: 18px;
+      font-size: 14px;
+      line-height: 8px;
   }
 }
