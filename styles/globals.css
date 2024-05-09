@@ -935,6 +935,9 @@ transition: all 0.5s !important;
   left: 15px;
   top: 0;
 }
+.facebook__share {
+  margin-left: 30px;
+}
 
 
 /*
@@ -1342,6 +1345,12 @@ transition: all 0.5s !important;
   .profile-img {
       position: static;
   }
+  .facebook__share {
+      margin-top: 30px;
+  }
+  .all__post__main__content {
+      margin-top: 60px;
+  }
 }
 @media(max-width:575px){
   .slider__bg__img img {
@@ -1372,6 +1381,18 @@ transition: all 0.5s !important;
       width: 160px;
       height: 160px;
       margin-top: -75px;
+  }
+  .pagination li a {
+      padding: 5px;
+      width: 18px;
+      height: 18px;
+      font-size: 14px;
+      line-height: 8px;
+  }
+  .start__rating {
+      margin-bottom: 0;
+      margin-left: 0;
+      margin-right: 0;
   }
 }
 @media(max-width:479px){
@@ -1472,5 +1493,8 @@ transition: all 0.5s !important;
       height: 18px;
       font-size: 14px;
       line-height: 8px;
+  }
+  .facebook__share {
+      margin-left: 0;
   }
 }
