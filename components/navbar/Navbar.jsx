@@ -10,6 +10,7 @@ import Logo from "../common/Logo";
 import SobLekha from "./sobLekhaDropDown";
 import { useRouter } from "next/navigation";
 import { apiBasePath } from "../../utils/constant";
+import PostDropDown from "./postDropdown";
 
 const MyNavbar = () => {
   const router = useRouter();
@@ -20,18 +21,19 @@ const MyNavbar = () => {
   const [searchData, setSearchData] = useState([]);
   const [selectedIteam, setSelectedIteam] = useState(-1);
 
-  //Resposnive Header Toggle
-  // const [isOpen, setIsopen] = useState(false);
+  const [username, setUsername] = useState("");
+  const [userUuid, setUserUuid] = useState("");
+  const [userToken, setUserToken] = useState("");
 
-  // const ToggleSidebar = () => {
-  //     isOpen === true ? setIsopen(false) : setIsopen(true);
-  // }
-
-  // const menuRef = useRef(null);
-  // const toggleMenu=()=> menuRef.current.classList.toggle('menu__active');
-
-  //Resposnive Header Toggle
   const menuRef = useRef(null);
+
+
+  useEffect(() => {
+    setUsername(localStorage.getItem("name") || "");
+    setUserToken(localStorage.getItem("token") || "");
+    setUserUuid(localStorage.getItem("uuid") || "");
+
+  }, []);
 
   const toggleMenu = () => {
     menuRef.current.classList.toggle("menu__active");
@@ -177,8 +179,45 @@ const MyNavbar = () => {
                     >
                       <Link href="/aboutus">আমাদের সম্পর্কে</Link>
                     </li>
+                    {
+                      userUuid.length>0 &&
+                      <li
+                      onClick={() => {setSelectedNav("post"); closeMenu();}}
+                      className={` lg:w-[130px] sm:w-[100px] ${
+                        selectedNav === "post"
+                          ? "text-[#F9A106] font-semibold underline"
+                          : ""
+                      }`}
+                      >
+                      <PostDropDown 
+                       closeMenu={closeMenu}
+                       sobClass={`${
+                         selectedNav === "post"
+                           ? "text-[#F9A106] font-semibold underline"
+                           : "text-black"
+                       }`}/>
+                      </li>
+                    }
+                     {
+                      userUuid.length>0 &&
+                      <li
+                      onClick={() => {setSelectedNav("user"); closeMenu();}}
+                      className={`  text-2xl ${
+                        selectedNav === "user"
+                          ? "text-[#F9A106] font-semibold underline"
+                          : ""
+                      }`}
+                      >
+                       <Link href='#'> {username[0]}</Link>
+                      </li>
+                    }
                   </ul>
                 </div>
+                {/* logged in user */}
+                <div>
+
+                </div>
+                {/* --------- */}
                 <div className="search__bar relative flex flex-row place-content-center">
                     <Image
                       src="/images/svgs/search.svg"
@@ -225,15 +264,6 @@ const MyNavbar = () => {
                       )}
                     </div>
 
-                    {/* <input
-                        className={`w-[200px] relative text-[16px] bg-transparent text-black py-2 rounded-md focus:outline-none  ${isSearchActive ? "visible" : "hidden"
-                          }`}
-                        type="text"
-                        placeholder=" অনুসন্ধান..."
-                        autoComplete="off"
-                        value={searchTerm}
-                        onChange={handleSearchChange}
-                      /> */}
 
                     {isSearchActive && (
 
@@ -242,11 +272,7 @@ const MyNavbar = () => {
                       >
                       <i class="ri-list-check"></i>
                       </button>
-                      // <FontAwesomeIcon
-                      //   icon={faList}
-                      //   className="absolute z-50 text-gray-500 text-lg px-2 cursor-pointer ml-auto mt-[10px] right-2" // Right-aligned
-                      //   onClick={() => setIsSearchActive(false)}
-                      // />
+                    
                     )}
                   </div>
               </div>

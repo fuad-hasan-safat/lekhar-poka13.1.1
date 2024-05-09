@@ -7,7 +7,7 @@ import SobUserPostBody from "./SobUserPostBody";
 import Loading from "../common/loading";
 import axios from "axios";
 
-export default function ProfilePostLeftContent({ slug }) {
+export default function ProfilePostLeftContentUnApproved() {
   //   const [selectedId, setSelectedId] = useState("sob");
   const [postList, setPostList] = useState([])
   const [isLoading, setIsLoading] = useState(true);
@@ -19,14 +19,27 @@ export default function ProfilePostLeftContent({ slug }) {
   const [totalPages, setTotalPages] = useState(0);
   const postsPerPage = 5; // Number of posts to display per page
 
+  const [username, setUsername] = useState("");
+  const [slug, setUserUuid] = useState("");
+  const [userToken, setUserToken] = useState("");
+  
+useEffect(() => {
+  setUsername(localStorage.getItem("name") || "");
+  setUserToken(localStorage.getItem("token") || "");
+  setUserUuid(localStorage.getItem("uuid") || "");
+
+  console.log({username, slug, userToken})
+
+}, []);
+
 
   useEffect(() => {
 
-    console.log("user profile post---------------------->>>>>>>>>>>>><<<<<<<<<<<<<<<< SLUG ", slug)
+    console.log("user profile post---------------------->>>>>>>>>>>>><<<<<<<<<<<<<<<< SLUG ", localStorage.getItem("uuid"))
 
     const fetchPosts = async () => {
       try {
-        const response = await axios.get(`${apiBasePath}/postsbyuser/${slug}`); // Use Axios
+        const response = await axios.get(`${apiBasePath}/unverifiedpostsbyuser/${localStorage.getItem("uuid")}`); // Use Axios
         const data = response.data; // Assuming the response structure
         setPostList(data.object);
 
@@ -62,7 +75,7 @@ export default function ProfilePostLeftContent({ slug }) {
 
   return (
 
-    <div className="text-black">
+    <div className="text-black ">
       {isLoading ? (
         <Loading />
       ) : error ? (
@@ -71,7 +84,7 @@ export default function ProfilePostLeftContent({ slug }) {
         <>
           {/* <div className='container'> */}
           {postList.length > 0 ?
-            <div className='flex justify-center'>
+            <div className='flex'>
               <div className="lakha__main__content pt-20 text-3xl lg:mr-[100px] md:mr-[50px]">
                 {displayedPosts.length && (
                   displayedPosts.map((post, index) => (

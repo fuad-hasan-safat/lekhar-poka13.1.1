@@ -26,7 +26,7 @@ import Link from "next/link";
 
 import Checkbox from '../common/Checkbox'
 import AudioFileUpload from '../userprofile/AudiofileUpload'
-import ProfilePostLeftContent from './ProfilePostLeftContent';
+import ProfilePostLeftContent from './ProfilePostLeftContentApproved';
 import CreateWriter from './createWriter';
 import CreateCategory from './createCategory';
 
@@ -115,7 +115,9 @@ export default function UserProfile({ slug }) {
   const [phone, setPhone] = useState('');
   const [image, setImage] = useState('');
   const [follower, setFollower] = useState(0);
-  const [post, setPost] = useState(0);
+  const [approvedPostNum, setApprovedPostNum] = useState(0);
+  const [unapprovedPostNum, setunApprovedPostNum] = useState(0);
+
   const [following, setFollowing] = useState(0);
   //
   const [canPostStatus, setCanPostStatus] = useState(false)
@@ -152,9 +154,11 @@ export default function UserProfile({ slug }) {
         setImage(data.object.profile.image || '')
         setFollower(data.object.stats.follower)
         setFollowing(data.object.stats.following)
-        setPost(data.object.stats.post)
+        setApprovedPostNum(data.object.approved_post)
+        setunApprovedPostNum(data.object.unapproved_post)
 
-        console.log('pofile post )()()() details on user profile--------------->>>>>>>');
+
+        console.log('pofile post )()()() details on user profile--------------->>>>>>>', data);
 
 
         if (!data.object.stats) {
@@ -183,9 +187,9 @@ export default function UserProfile({ slug }) {
       .finally(setIsLoading(false));
 
 
-      setIsCategoryAdded(false)
-      setIsWriterAdded(false)
-      setIsProfileUpdated(false)
+    setIsCategoryAdded(false)
+    setIsWriterAdded(false)
+    setIsProfileUpdated(false)
   }, [slug, isWriterAdded, isCategoryAdded]);
 
 
@@ -313,7 +317,8 @@ export default function UserProfile({ slug }) {
             <div>
               <UserProfileBanner
                 image={image}
-                post={post}
+                apprevedPost={approvedPostNum}
+                unApprovedPost={unapprovedPostNum}
                 follower={follower}
                 following={following}
                 username={username}
@@ -327,116 +332,29 @@ export default function UserProfile({ slug }) {
                   <div className="col-md-12"></div>
                   <div className="lg:flex lg:flex-row lg:pt-[80px] md:pt-[60px] sm:pt-[40px] xs:pt-[40px]">
                     <div className="lg:w-[70%]">
-                      <div className="lg:pr-6 md:pr-0 sm:pr-0 space-y-4 ">
-                        <input
-                          onChange={handleTitle}
-                          value={title}
-                          className="w-full h-[62px] p-4 bg-[#FCF7E8] border-solid border-slate-800 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                          id="title"
-                          type="text"
-                          placeholder="শিরোনাম"
-                          required
-                        />
-                        <textarea
-                          onChange={handleSummary}
-                          value={summary}
-                          className="w-full h-[200px] p-4 bg-[#FCF7E8] border-solid border-slate-800 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                          id="summary"
-                          type="textarea"
-                          placeholder="সারসংক্ষেপ"
-                          required
-                        />
-                        <div className="text-yellow-800 text-[22px]">আপনার লেখার ধরণ নির্বাচন করুন</div>
-
-                        <div>
-                          <Select
-                            value={selectedOption}
-                            onChange={categoryhandleChange}
-                            styles={customStyles}
-                            options={Categoryoptions}
-                          />
-                        </div>
-                        <div className='profile__btn__midl'>
-
-                          <CreateCategory setIsCategoryAdded={setIsCategoryAdded} />
-
-                        </div>
-
-                        <div className="text-yellow-800 text-[22px]">লেখক নির্বাচন করুন(<span className="text-red-500">যদি আপনার নাম তালিকায় থাকে</span>)</div>
-                        <div className=" place-content-center justify-center ">
-
-                          <div className="">
-                            <Select
-                              value={selectedWriter}
-                              onChange={writerhandleChange}
-                              styles={customStyles}
-                              options={writersOptions}
-                            />
-
-                          </div>
-                          <div className='profile__btn__midl'>
-                            <CreateWriter setIsWriterAdded={setIsWriterAdded} />
-                          </div>
-
-                          <div className="pt-[10px]">
-
-                            <h1 className="text-black text-[16px]">নিচের বক্সটি চেক করুন (<span className="text-red-500"> যদি আপনার নাম তালিকায় না থাকে</span>) </h1>
-                            <Checkbox label="" name="myCheckbox" onChange={handleCheckboxChange} />
-                            {/* <p className="text-black">Checkbox value: {checkboxValue.toString()}</p> */}
-
-                          </div>
-
-
-                        </div>
-
-
-                        <div className="text-yellow-800 text-[22px]">আপনার লেখা নিচে লিখুন</div>
-
-                        <div className="joidcss">
-
-                          <EditorProvider>
-                            <Editor
-                              value={content}
-                              onChange={textEditorHandler}
-                              containerProps={{ style: { color: 'black' } }}
-
-                            >
-                              <Toolbar>
-                                <BtnBold />
-                                <BtnItalic />
-                              </Toolbar>
-                            </Editor>
-                          </EditorProvider>
-
-                        </div>
-
-
-                        <div>
-                          <AudioFileUpload selectedFile={selectedFile} setSelectedFile={setSelectedFile} />
-                        </div>
-                        <button
-                          onClick={handleSubmit}
-                          className="px-[20px] h-[43px] bg-[#F9A106] rounded-md text-[16px] text-white items-center profile__btn__midl"
-                        >
-                          পোস্ট করুন
-                        </button>
-                        <hr class="my-4 border-gray-200" />
-                      </div>
 
                       <div>
-                        {<ProfilePostLeftContent slug={slug} />}
+                        <UserDetails
+                          sex={gender}
+                          birthdate={dob}
+                          location={address}
+                          mail={email}
+                          phone={phone}
+                          userID={userUuid}
+                          setIsProfileUpdated={setIsProfileUpdated}
+                        />
                       </div>
+
+                      <div className='mt-[80px]'>
+                        <h1 className="text-[28px] text-[#F9A106]">জীবন বৃত্তান্ত</h1>
+                        <p className='text-black'> জীবন বৃত্তান্ত এখানে দেখানো হবে</p>
+                      </div>
+
                     </div>
                     <div className="lg:w-[30%] flex flex-col ">
-                      <UserDetails
-                        sex={gender}
-                        birthdate={dob}
-                        location={address}
-                        mail={email}
-                        phone={phone}
-                        userID={userUuid}
-                        setIsProfileUpdated={setIsProfileUpdated}
-                      />
+
+
+
                       <Sidebar />
                     </div>
                   </div>

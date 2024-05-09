@@ -48,6 +48,8 @@ export default function SignInOption({
                 }
             );
 
+            console.log('google log in backend res ----', response)
+
             if (response.data.status === 'success') {
                 const data = await response.data;
                 console.log(data);
