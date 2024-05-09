@@ -904,7 +904,7 @@ transition: all 0.5s !important;
 }
 .profile-img{
   position: absolute;
-  left: 0;
+  left: 15px;
   top: 0;
 }
 
