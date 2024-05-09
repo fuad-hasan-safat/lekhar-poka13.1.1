@@ -20,8 +20,8 @@ export default function UserProfileBanner({ image = '', username = 'demo', desig
                 />
             </div> */}
             <section>
-                <div className="md:flex md:flex-row container">
-                    <div className="profile-img relative">
+                <div className="profile-img__wrap md:flex md:flex-row relative container">
+                    <div className="profile-img">
                         <img
                             className="w-[264px] h-[264px] rounded-full  border-4 border-solid border-white -mt-[110px]  "
                             src={image?.length > 0 ? `${apiBasePath}/${image.slice(image.indexOf("/") + 1)}` : '/images/defaultUserPic/profile.jpg'} />

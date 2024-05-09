@@ -894,7 +894,19 @@ transition: all 0.5s !important;
 .sidebar__post h1{
   margin-top: 0 !important;
 }
-
+/*
+---------------------
+ Profile Css
+--------------------- 
+*/
+.profile-img__wrap{
+  padding-left: 264px;
+}
+.profile-img{
+  position: absolute;
+  left: 0;
+  top: 0;
+}
 
 
 /*
@@ -1179,8 +1191,9 @@ transition: all 0.5s !important;
       padding: 5px 0;
   }
   .logo:after {
-      border-top: 85px solid #ffd700;
+      border-top: 85px solid gold;
       border-right: 145px solid transparent;
+      right: -144px;
   }
   .slider__bg__img img {
       height: 600px;
@@ -1407,5 +1420,10 @@ transition: all 0.5s !important;
   .profile__btn__midl{
     display: table;
     margin: 0 auto;
+  }
+  .kobita__content {
+      margin-left: 0;
+      margin-right: 0;
+      padding: 30px 10px 20px;
   }
 }
