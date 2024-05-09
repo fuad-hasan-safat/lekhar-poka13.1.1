@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import parse from 'html-react-parser';
 
 const SobKobitaBody = ({
   id,
@@ -15,7 +16,7 @@ const SobKobitaBody = ({
   }
   return (
     <>
-       {category === 'কবিতা' ? (
+      {category === 'কবিতা' ? (
         <div className="text-center">
           <div className="pb-3">
             <div className="text-3xl text-yellow-400 font-bold">{title}</div>
@@ -24,10 +25,25 @@ const SobKobitaBody = ({
             <div className="text-xl text-gray-800 font-semibold ">{writer}</div>
           </div>
           <div className="pb-3">
-            <div
+            {/* <div
               className="text-[16px] text-gray-500 "
               dangerouslySetInnerHTML={{ __html: content }}
-            />
+            /> */}
+            {content && (
+              <div className="text-[16px] text-gray-500">
+                {parse(content, {
+                  replace: (domNode) => {
+                    if (domNode.attribs && domNode.attribs.style) {
+                      delete domNode.attribs.style;
+                    }
+                    return domNode;
+                  },
+                  onError: (error) => {
+                    console.error('Error parsing content:', error);
+                  },
+                })}
+              </div>
+            )}
           </div>
           <div className="text-center">
             <button
@@ -54,10 +70,25 @@ const SobKobitaBody = ({
             <div className="text-xl text-gray-800 font-semibold ">{writer}</div>
           </div>
           <div className="pb-3">
-            <div
+            {/* <div
               className="text-[16px] text-gray-500 "
               dangerouslySetInnerHTML={{ __html: content }}
-            />
+            /> */}
+            {content && (
+              <div className="text-[16px] text-gray-500">
+                {parse(content, {
+                  replace: (domNode) => {
+                    if (domNode.attribs && domNode.attribs.style) {
+                      delete domNode.attribs.style;
+                    }
+                    return domNode;
+                  },
+                  onError: (error) => {
+                    console.error('Error parsing content:', error);
+                  },
+                })}
+              </div>
+            )}
           </div>
 
           <div className="flex space-x-2">

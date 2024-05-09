@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
+import parse from 'html-react-parser';
 import { useRouter } from "next/navigation";
 
 const SobGolpoBody = ({id, title, writer, content}) => {
@@ -21,10 +22,25 @@ const SobGolpoBody = ({id, title, writer, content}) => {
         <div className="text-xl text-gray-800 font-semibold ">{writer}</div>
       </div>
       <div className="pb-3">
-        <div
+        {/* <div
           className="text-[16px] text-gray-500 text-justify"
           dangerouslySetInnerHTML={html}
-        />
+        /> */}
+         {content && (
+          <div className="text-[16px] text-gray-500">
+            {parse(content, {
+              replace: (domNode) => {
+                if (domNode.attribs && domNode.attribs.style) {
+                  delete domNode.attribs.style;
+                }
+                return domNode;
+              },
+              onError: (error) => {
+                console.error('Error parsing content:', error);
+              },
+            })}
+          </div>
+        )}
       </div>
 
       {/* button -- it would be conditionally appaer */}
