@@ -36,7 +36,7 @@ const SobLekha = ({ sobClass, closeMenu }) => {
       <button
         type="button" 
         onClick={toggleDropdown}
-        className={`${sobClass} hdr__dropdown__menu inline-flex w-[110px] justify-center  px-2  bg-transparent font-medium  focus:outline-none focus:text-[#F9A106]`}
+        className={`${sobClass} hinline-flex w-[110px] justify-center  px-2  bg-transparent font-medium  focus:outline-none focus:text-[#F9A106]`}
         aria-haspopup="true"
         aria-expanded={isOpen ? 'true' : 'false'}
 
@@ -46,10 +46,16 @@ const SobLekha = ({ sobClass, closeMenu }) => {
       </button>
 
       {isOpen && (
-        <div className="
+        <div 
+        className="
         lg:backdrop-blur-md md:backdrop-blur-md  
         lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none 
-        lg:bg-[#F9A106] md:bg-[#F9A106] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu" tabIndex={-1}>
+        lg:bg-[#F9A106] md:bg-[#F9A106] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none" 
+        role="menu" 
+        aria-orientation="vertical" 
+        aria-labelledby="options-menu" 
+        tabIndex={-1}
+        >
           <div className="text-black" role="none">
             <Link
               href="/kobita"

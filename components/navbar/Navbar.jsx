@@ -2,15 +2,15 @@
 import React, { useEffect, useState,useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { faList } from "@fortawesome/fontawesome-free";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import 'remixicon/fonts/remixicon.css'
 
 import Logo from "../common/Logo";
 import SobLekha from "./sobLekhaDropDown";
 import { useRouter } from "next/navigation";
 import { apiBasePath } from "../../utils/constant";
-import PostDropDown from "./postDropdown";
+import PostDropDown from "./PostDropDown";
+import ProfileDropDown from "./ProfileDropDown";
+// import PostDropDown from "./postDropdown";
 
 const MyNavbar = () => {
   const router = useRouter();
@@ -27,6 +27,18 @@ const MyNavbar = () => {
 
   const menuRef = useRef(null);
 
+  //  post drop down start
+
+  const postOptions = [
+    { value: 'sokol', label: 'সকল', path: '/user/alluserpost' },
+    { value: 'likhun', label: 'লিখুন', path: '/user/createpost' },
+   
+  ];
+  
+  const [selectedOption, setSelectedOption] = useState(null);
+  
+  const handleOptionSelect = (option) => setSelectedOption(option);
+
 
   useEffect(() => {
     setUsername(localStorage.getItem("name") || "");
@@ -35,6 +47,50 @@ const MyNavbar = () => {
 
   }, []);
 
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch(`${apiBasePath}/posts`);
+        const data = await response.json();
+        setPostList(data);
+        //console.log( "------------------->>>> POST LIST ------------------>>>>>>>",postList );
+      } catch (error) {
+       // alert("Error Fetching data");
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
+  // post drop down end
+
+    //  profile drop down start
+
+    // const profileOptions = [
+    //   { value: 'profile', label: 'প্রোফাইল', path: '/user/alluserpost' },
+    //   { value: 'logout', label: 'লগ আউট', path: '/user/createpost' },
+     
+    // ];
+
+    const profileOptions = [
+      { value: 'profile', label: 'প্রোফাইল', path: `/user/${userUuid}`, action: null }, // Profile view, no action
+      {
+        value: 'logout',
+        label: 'লগ আউট',
+        path: null, // No path for logout confirmation, handled within the component
+        action: true,
+      },
+    ];
+    
+    const [selectedOptionprofile, setSelectedOptionprofile] = useState(null);
+    
+    const handleOptionSelectprofile = (option) => setSelectedOptionprofile(option);
+  
+    // profile drop down end
+
+
+ 
   const toggleMenu = () => {
     menuRef.current.classList.toggle("menu__active");
   };
@@ -70,20 +126,7 @@ const MyNavbar = () => {
     setSelectedIteam(-1);
   };
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await fetch(`${apiBasePath}/posts`);
-        const data = await response.json();
-        setPostList(data);
-        //console.log( "------------------->>>> POST LIST ------------------>>>>>>>",postList );
-      } catch (error) {
-       // alert("Error Fetching data");
-      }
-    };
 
-    fetchPosts();
-  }, []);
 
   useEffect(() => {
     if (search !== "") {
@@ -130,7 +173,7 @@ const MyNavbar = () => {
                   />
                 </Link>
               </div>
-              <div className={`flex justify-between items-center space-x-3 text-black lg:text-[18px] sm:text-[15px] pt-1  place-content-center `}>
+              <div className={`flex justify-between items-center text-black lg:text-[18px] sm:text-[15px] pt-1  place-content-center `}>
                 <div className="hambar__icon" onClick={toggleMenu}>
                   <i class="ri-menu-line"></i>
                   {/* <img src="/public/images/navbaricon/list.svg"/> */}
@@ -179,38 +222,8 @@ const MyNavbar = () => {
                     >
                       <Link href="/aboutus">আমাদের সম্পর্কে</Link>
                     </li>
-                    {
-                      userUuid.length>0 &&
-                      <li
-                      onClick={() => {setSelectedNav("post"); closeMenu();}}
-                      className={` lg:w-[130px] sm:w-[100px] ${
-                        selectedNav === "post"
-                          ? "text-[#F9A106] font-semibold underline"
-                          : ""
-                      }`}
-                      >
-                      <PostDropDown 
-                       closeMenu={closeMenu}
-                       sobClass={`${
-                         selectedNav === "post"
-                           ? "text-[#F9A106] font-semibold underline"
-                           : "text-black"
-                       }`}/>
-                      </li>
-                    }
-                     {
-                      userUuid.length>0 &&
-                      <li
-                      onClick={() => {setSelectedNav("user"); closeMenu();}}
-                      className={`  text-2xl ${
-                        selectedNav === "user"
-                          ? "text-[#F9A106] font-semibold underline"
-                          : ""
-                      }`}
-                      >
-                       <Link href='#'> {username[0]}</Link>
-                      </li>
-                    }
+                   
+                   
                   </ul>
                 </div>
                 {/* logged in user */}
@@ -218,6 +231,42 @@ const MyNavbar = () => {
 
                 </div>
                 {/* --------- */}
+                {
+                userUuid.length>0 && 
+                <PostDropDown
+                onClick={() => {setSelectedNav("post");}}
+                sobClass={`${
+                  selectedNav === "post"
+                    ? "text-[#F9A106] font-semibold underline"
+                    : "text-black"
+                }`}
+                  options={postOptions} 
+                  selected={selectedOption} 
+                  onSelect={handleOptionSelect} 
+                  selectedNav={setSelectedNav}
+                  lebel='পোস্ট'/>
+                  }
+
+                {
+                userUuid.length>0 && 
+                <ProfileDropDown
+                onClick={() => {setSelectedNav("profile");}}
+                sobClass={`${
+                  selectedNav === "profile"
+                    ? "text-[#F9A106] font-semibold underline"
+                    : "text-black"
+                }`}
+                  options={profileOptions} 
+                  selected={selectedOptionprofile} 
+                  onSelect={handleOptionSelectprofile} 
+                  lebel={`${username[0]}`}
+                  selectedNav={setSelectedNav}
+
+                  />
+                  
+                  }
+                
+   
                 <div className="search__bar relative flex flex-row place-content-center">
                     <Image
                       src="/images/svgs/search.svg"

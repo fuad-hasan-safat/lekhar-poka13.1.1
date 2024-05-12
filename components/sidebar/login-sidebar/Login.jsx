@@ -126,7 +126,7 @@ export default function Login() {
       {status === 'success' ? (
         <>
           <div className="flex flex-col items-center">
-            <div className="text-black text-xl mb-4">
+            {/* <div className="text-black text-xl mb-4">
               <p className="py-[10px] px-[10px]"><span className="text-[#F9A106]">{username} </span> , লেখার পোকায় আপনাকে স্বাগতম </p>
             </div>
             <div className="flex flex-row space-x-3 text-[18px]">
@@ -143,7 +143,7 @@ export default function Login() {
                 id={userUuid}
               />
 
-            </div>
+            </div> */}
             {localStorage.getItem("usertype") === 'admin' &&
               <button
                 onClick={() => router.push('/admin/admin')}
