@@ -7,6 +7,7 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 const ProfileDropDown = ({ options, selected, onSelect, lebel, sobClass }) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+  const [isLogOut, setisLogOut] = useState(false)
   const dropdownRef1 = useRef(null); // Ref to hold the dropdown element
 
   const handleClickOutside = (event) => {
@@ -38,9 +39,9 @@ const ProfileDropDown = ({ options, selected, onSelect, lebel, sobClass }) => {
           localStorage.removeItem("email");
           
           // setStatus("");
-  
-          router.push('/');
-          router.reload()
+            setisLogOut(true)
+
+          router.push('/account/login');
         }
       } catch (error) {
         console.error('Error displaying confirmation dialog:', error);
@@ -49,6 +50,8 @@ const ProfileDropDown = ({ options, selected, onSelect, lebel, sobClass }) => {
       router.push(option.path); 
     }
   };
+
+
 
   // Add event listener on document click only when isOpen is true
   useEffect(() => {

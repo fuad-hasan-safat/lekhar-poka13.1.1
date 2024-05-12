@@ -222,38 +222,7 @@ const MyNavbar = () => {
                     >
                       <Link href="/aboutus">আমাদের সম্পর্কে</Link>
                     </li>
-                    {/* {
-                      userUuid.length>0 &&
-                      <li
-                      onClick={() => {setSelectedNav("post"); closeMenu();}}
-                      className={` lg:w-[130px] sm:w-[100px] ${
-                        selectedNav === "post"
-                          ? "text-[#F9A106] font-semibold underline"
-                          : ""
-                      }`}
-                      >
-                      <PostDropDown 
-                       closeMenu={closeMenu}
-                       sobClass={`${
-                         selectedNav === "post"
-                           ? "text-[#F9A106] font-semibold underline"
-                           : "text-black"
-                       }`}/>
-                      </li>
-                    }
-                     {
-                      userUuid.length>0 &&
-                      <li
-                      onClick={() => {setSelectedNav("user"); closeMenu();}}
-                      className={`  text-2xl ${
-                        selectedNav === "user"
-                          ? "text-[#F9A106] font-semibold underline"
-                          : ""
-                      }`}
-                      >
-                       <Link href='#'> {username[0]}</Link>
-                      </li>
-                    } */}
+                   
                    
                   </ul>
                 </div>
