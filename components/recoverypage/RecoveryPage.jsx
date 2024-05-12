@@ -138,7 +138,8 @@ const RecoveryPage = () => {
             const responseBody = await response.json();
             console.log("API response:", responseBody);
             // Handle the response data here, for example, update UI or store in state
-            router.push('/')
+            alert('পাসওয়ার্ড রিকভারি সফলভাবে সম্পন্ন হয়েছে, অনুগ্রহ করে লগইন করুন')
+            router.push('/account/login')
 
           } catch (error) {
             console.error("Error:", error);

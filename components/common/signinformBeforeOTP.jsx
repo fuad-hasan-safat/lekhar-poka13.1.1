@@ -104,7 +104,7 @@ export default function SigninFormBeforeOTP({ logreg, btntext, SetIsOtpSucess, s
             } catch (error) {
                 console.error('Signup error:', error);
                 // Handle signup error (e.g., display error message)
-                // alert('আপনি আগে থেকেই সাইন আপ করেছেন');
+                 alert('আপনি আগে থেকেই সাইন আপ করেছেন');
             }
         }
     };

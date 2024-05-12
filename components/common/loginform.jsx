@@ -67,9 +67,9 @@ export default function LoginForm({ logreg, btntext }) {
         }
       );
 
-      //console.log({ response });
+      console.log('Log In page response--------', response);
 
-      if (response.status === 'success' || 200) {
+      if (response.data.status === 'success') {
         const data = await response.data;
 
         console.log(data)
@@ -93,11 +93,11 @@ export default function LoginForm({ logreg, btntext }) {
         router.push(`/`)
       } else {
         //console.log("error res", response);
-        alert('error');
+        alert('সঠিক নাম্বার দিন');
       }
     } catch (error) {
       //console.log("inside catch", error);
-      alert(error.response.data.message);
+      alert('সঠিক পাসওয়ার্ড দিন');
     }
   }
 

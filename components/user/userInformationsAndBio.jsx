@@ -7,6 +7,7 @@ import Classes from './profile.module.css';
 import { apiBasePath } from '../../utils/constant';
 import { useRouter } from 'next/navigation';
 import TakePhoneNumber from './takePhoneNumber';
+import axios from 'axios';
 
 
 
@@ -25,6 +26,8 @@ export default function UserInformationsAndBio() {
     const [imageFile, setImageFile] = useState(null);
     const [image, setImage] = useState('');
     const [preview, setPreview] = useState(null);
+    const [bio, setBio] = useState('')
+    const [bioId, setBioId] = useState('')
     // get saved info
 
     // get saved info
@@ -89,14 +92,16 @@ export default function UserInformationsAndBio() {
 
 
 
-        // const fetchUserBioData = async () => {
-        //     const response = await fetch(`${apiBasePath}/bio/${localStorage.getItem("uuid")}`);
-        //     const data = await response.json();
-        //     console.log('------------>>> BIO <<<-------------', data)
+        const fetchUserBioData = async () => {
+            const response = await fetch(`${apiBasePath}/bio/${localStorage.getItem("uuid")}`);
+            const data = await response.json();
+            setBio(data.content)
+            setBioId(data._id)
+            console.log('------------>>> BIO  <<<-------------', data)
 
-        // };
+        };
 
-        // fetchUserBioData();
+        fetchUserBioData();
     }, []);
 
 
@@ -145,6 +150,7 @@ export default function UserInformationsAndBio() {
 
                 if (response.ok) {
                     const data = await response.json();
+                    alert('প্রোফাইল সফলভাবে আপডেট হয়েছে')
                     console.log('Profile updated successfully:', data);
 
                 } else {
@@ -155,6 +161,59 @@ export default function UserInformationsAndBio() {
             }
 
         }
+
+        //  update bio
+        try {
+            const response = await axios.post(
+                `${apiBasePath}/bio`,
+                {
+                    user_id: `${localStorage.getItem("uuid")}`,
+                    content: bio,
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+
+            // setIsProfileUpdated(true)
+
+            console.log('------>>>> Bio RESPONSE <<<<<<--------', response)
+
+
+        } catch (error) {
+            console.error('Error updating profile:', error);
+        }
+
+
+
+
+        try {
+            const response = await axios.put(
+                `${apiBasePath}/bio/${bioId}`,
+                {
+                    content: bio
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+
+            // setIsProfileUpdated(true)
+
+            console.log('------>>>> Bio RESPONSE <<<<<<--------', response)
+
+
+        } catch (error) {
+            console.error('Error updating profile:', error);
+        }
+
+
+
+
 
     };
 
@@ -218,21 +277,11 @@ export default function UserInformationsAndBio() {
                                     dateFormat="MM-dd-yyyy"
                                     onChange={handleDate}
                                 />
-                                {/* <input
-                                        type="date"
-                                        id="birthDate"
-                                        name="birthDate"
-                                        required
-                                        value={birthOfDate}
-                                        onChange={(e) => setBirthOfDate(e.target.value)}
-
-                                    // onChange={handleChange}
-                                    /> */}
                             </div>
                         </div>
                     </div>
 
-                    <div className=' lg:flex lg:flex-row w-full'>
+                    <div className=' lg:flex lg:flex-row w-full pt-[15px]'>
                         <div className='lg:w-[50%]'>
 
                             <div className="flex flex-row space-x-2 ">
@@ -259,7 +308,7 @@ export default function UserInformationsAndBio() {
 
                         </div>
                         <div className='lg:w-[50%]'>
-                            <div className="flex flex-row space-x-2 pt-2">
+                            <div className="flex flex-row space-x-2">
                                 <div htmlFor="email">
                                     <img
                                         src="/images/usericons/email.svg"
@@ -340,16 +389,16 @@ export default function UserInformationsAndBio() {
 
                                 </div>
                                 <div className='lg:w-[50%]'>
-                                <div className="flex flex-col">
+                                    <div className="flex flex-col">
                                         <label htmlFor="ProfileStatus" className='text-[#ffa844]'> স্ট্যাটাস </label>
                                         <input id='ProfileStatus' type='text' value={profileStatus} onChange={(e) => setProfileStatus(e.target.value)} placeholder='ProfileStatus' />
                                     </div>
-                                    
+
                                 </div>
 
                             </div>
 
-                      
+
                         </div>
 
                     </div>
@@ -359,9 +408,9 @@ export default function UserInformationsAndBio() {
                         <textarea
                             id="bio"
                             name="bio"
-                            className='w-[90%] border border-gray-200 rounded-2xl h-[90px]'
-                            value=''
-                        // onChange={handleChange}
+                            className='w-[90%] border border-gray-200 rounded-2xl h-[90px] px-[10px] py-[5px]'
+                            value={bio}
+                            onChange={(e) => setBio(e.target.value)}
                         />
                     </div>
                     <button
