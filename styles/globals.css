@@ -608,6 +608,15 @@ transition: all 0.5s !important;
 } */
 
 /*
+----------------------
+ edit__btn__wrap
+----------------------
+*/
+.edit__btn__wrap{
+  padding-right: 40px;
+}
+
+/*
 -------------------
  Profile Edit
 -------------------
