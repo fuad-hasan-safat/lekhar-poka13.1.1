@@ -73,6 +73,9 @@ const toggleVisibility = (index) => {
     };
 
     fetchPosts();
+
+
+    
   }, []);
 
 

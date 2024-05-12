@@ -18,6 +18,7 @@ export default function UpdatedNavBar() {
     const [username, setUsername] = useState("");
     const [userUuid, setUserUuid] = useState("");
     const [userToken, setUserToken] = useState("");
+    const [userImage, setUserImage] = useState(null);
 
 
     useEffect(() => {
@@ -40,6 +41,20 @@ export default function UpdatedNavBar() {
     };
 
     fetchPosts();
+
+
+    const fetchUserPhoto = async () => {
+        try {
+          const response = await fetch(`${apiBasePath}/getprofilepic/${localStorage.getItem("uuid")}`);
+          const data = await response.json();
+          setUserImage(data);
+          //console.log( "------------------->>>> POST LIST ------------------>>>>>>>",postList );
+        } catch (error) {
+          // alert("Error Fetching data");
+        }
+      };
+  
+      fetchUserPhoto();
   }, []);
 
 
@@ -267,7 +282,9 @@ function Logout(){
                                             <li
                                                 className='relative'
                                                 onClick={() => { toggleVisibility(2); closeMenu(); }}>
-                                                <img src='/images/user/deafultProfile.png' alt='profile pic' className='h-[35px] w-[35px] rounded-full' />
+                                                    {userImage?.length> 0 ?  <img src={`${apiBasePath}/${userImage.slice(userImage.indexOf("/") + 1)}`} alt='profile pic' className='h-[35px] w-[35px] rounded-full' />:
+                                                    <img src='/images/user/deafultProfile.png' alt='profile pic' className='h-[35px] w-[35px] rounded-full' />}
+                                               
                                                 {visibleItem === 2 && (
                                                     <ul className='absolute text-sm lg:backdrop-blur-md md:backdrop-blur-md  lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none lg:bg-[#F9A106] md:bg-[#F9A106] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none'>
                                                         <li
