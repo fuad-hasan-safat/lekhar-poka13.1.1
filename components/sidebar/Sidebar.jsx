@@ -10,29 +10,26 @@ export default function Sidebar() {
         <div>
             <div className="bg-white rounded  pt-12 ">
                 <div className=" shadow-md lg:px-10 md:px-8 sm:px-6 xs:px-5 mb-[40px]">
-                
-                                <div className="">
-                                    <Login />
-                                </div>
+                    <div className="">
+                        <Login />
+                    </div>
 
-                                <div>
-                                    <Somosamoyik />
-                                </div>
-                                <Divider />
-                                <div>
-                                    <Samprotik />
-                                </div>
-                                <Divider />
-                                <div>
-                                    <Jonopriyo />
-                                </div>
-                                <Divider />
-                                <div>
-                                    <Lekhok />
-                                </div>
-                            </div>
-                {/* <h1 className="text-3xl">This is Sidebar</h1> */}
-
+                    <div>
+                        <Somosamoyik />
+                    </div>
+                    <Divider />
+                    <div>
+                        <Samprotik />
+                    </div>
+                    <Divider />
+                    <div>
+                        <Jonopriyo />
+                    </div>
+                    <Divider />
+                    <div>
+                        <Lekhok />
+                    </div>
+                </div>
             </div>
         </div>
     )

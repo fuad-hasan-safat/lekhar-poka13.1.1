@@ -85,10 +85,10 @@ export default function PostDetails() {
         <div className="container">
           <div className="lg:flex lg:flex-row">
             {(
-              <div className="flex flex-col w-full relative z-50">
+              <div className="flex flex-col lg:w-[70%]">
                 {isdataFetch &&
                   <>
-                    <div className="kobita__dsc__lft lg:mb-[110px] md:mb-[84px]">
+                    <div className="lg:mb-[110px] md:mb-[84px]">
                       <FullPost
                         content={data?.content}
                         title={data?.title}
@@ -97,10 +97,8 @@ export default function PostDetails() {
                         url={asPath}
                       />
                     </div>
-                    <div className="rating__share__wrap">
-                      <ShareOnFacebook url={asPath} title={data?.title} description={data?.writer} image={' '} />
-                      <RatingComponent setRating={setRating} rating={rating} post_id={data?._id} />
-                    </div>
+                    <ShareOnFacebook url={asPath} title={data?.title} description={data?.writer} image={' '} />
+                    <RatingComponent setRating={setRating} rating={rating} post_id={data?._id} />
                   </>
                 }
                 {! isdataFetch && 
@@ -115,9 +113,9 @@ export default function PostDetails() {
             )
 
             }
-            {/* <div className="kobita__dsc__rgt lg:w-[30%]">
+            <div className="lg:w-[30%]">
               <Sidebar />
-            </div> */}
+            </div>
           </div>
         </div>
 
