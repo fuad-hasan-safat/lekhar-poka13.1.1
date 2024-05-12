@@ -183,7 +183,7 @@ export default function UpdatedNavBar() {
                                             >
                                                 <a href="/">প্রচ্ছদ</a>
                                             </li>
-                                            <li className={`relative`} onClick={() => { toggleVisibility(0); setSelectedNav("soblekha"); closeMenu(); }}>
+                                            <li className={`relative`} onClick={() => { toggleVisibility(0); setSelectedNav("soblekha"); }}>
                                                 <a
                                                     className={`${selectedNav === "soblekha"
                                                         ? "text-[#F9A106] font-semibold underline"
@@ -256,7 +256,7 @@ export default function UpdatedNavBar() {
                                                 userUuid.length > 0 &&
                                                 <li
                                                     className='relative'
-                                                    onClick={() => { toggleVisibility(1); setSelectedNav("post"); closeMenu(); }}>
+                                                    onClick={() => { toggleVisibility(1); setSelectedNav("post"); }}>
                                                     <a
                                                         className={`${selectedNav === "post"
                                                             ? "text-[#F9A106] font-semibold underline"
@@ -283,7 +283,7 @@ export default function UpdatedNavBar() {
                                                 userUuid.length > 0 &&
                                                 <li
                                                     className='relative'
-                                                    onClick={() => { toggleVisibility(2); closeMenu(); }}>
+                                                    onClick={() => { toggleVisibility(2);}}>
                                                     {userImage?.length > 0 ? <img src={`${apiBasePath}/${userImage.slice(userImage.indexOf("/") + 1)}`} alt={userImage} className='h-[35px] w-[35px] rounded-full' /> :
                                                         <img src='/images/user/deafultProfile.png' alt='profile pic' className='h-[35px] w-[35px] rounded-full' />}
 

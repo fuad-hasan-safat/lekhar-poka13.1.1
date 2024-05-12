@@ -1283,9 +1283,13 @@ transition: all 0.5s !important;
     opacity: 1;
     visibility: visible;
   }
-  .sidebar ul{
+  .sidebar > ul{
     display: block;
     padding: 30px 30px !important;
+  }
+  .sidebar > ul li ul{
+    display: table;
+    margin: 0 auto;
   }
   .sidebar ul li{
     width: auto !important;
@@ -1303,8 +1307,8 @@ transition: all 0.5s !important;
   }
   .logo:after {
       border-top: 85px solid gold;
-      border-right: 145px solid transparent;
-      right: -144px;
+      border-right: 130px solid transparent;
+      right: -129px;
   }
   .slider__bg__img img {
       height: 600px;
@@ -1433,6 +1437,10 @@ transition: all 0.5s !important;
   }
   .rating__share__wrap{
     padding-bottom: 50px;
+  }
+  .sidebar ul li img{
+    display: table;
+    margin: 0 auto;
   }
 }
 @media(max-width:575px){
