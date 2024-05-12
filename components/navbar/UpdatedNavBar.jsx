@@ -134,17 +134,21 @@ export default function UpdatedNavBar() {
     //   logout
 
     function Logout() {
-        localStorage.removeItem("status");
-        localStorage.removeItem("name");
-        localStorage.removeItem("uuid");
-        localStorage.removeItem("phone");
-        localStorage.removeItem("token");
-        localStorage.removeItem("usertype");
-        localStorage.removeItem("email");
+        const confirmLogout =  window.confirm('আপনি কি আসলেই লগ আউট করতে চান?');
+        if (confirmLogout) {
+          // alert('Logging out...'); 
+          localStorage.removeItem("status");
+          localStorage.removeItem("name");
+          localStorage.removeItem("uuid");
+          localStorage.removeItem("phone");
+          localStorage.removeItem("token");
+          localStorage.removeItem("usertype");
+          localStorage.removeItem("email");
+          
+            // setisLogOut(true)
 
-        //   setisLogOut(true)
-
-        router.push('/account/login');
+          router.push('/account/login');
+        }
     }
 
     return (
@@ -197,40 +201,41 @@ export default function UpdatedNavBar() {
                                                      lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none 
                                                      lg:bg-[#F9A106] md:bg-[#F9A106] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none'>
                                                         <li
+                                                        
                                                             className="block px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
 
                                                         >
-                                                            <a href="/kobita">কবিতা</a>
+                                                            <a className='block' href="/kobita">কবিতা</a>
                                                         </li>
                                                         <li
                                                             className="block px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
 
                                                         >
-                                                            <a href="/golpo">গল্প</a>
+                                                            <a className='block' href="/golpo">গল্প</a>
                                                         </li>
                                                         <li
                                                             className="block px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
 
                                                         >
-                                                            <a href="/onugolpo">অনুগল্প</a>
+                                                            <a className='block' href="/onugolpo">অনুগল্প</a>
                                                         </li>
                                                         <li
                                                             className="block px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
 
                                                         >
-                                                            <a href="/probondho">প্রবন্ধ</a>
+                                                            <a className='block' href="/probondho">প্রবন্ধ</a>
                                                         </li>
                                                         <li
                                                             className="block px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
 
                                                         >
-                                                            <a href="/jiboni">জীবনী</a>
+                                                            <a className='block' href="/jiboni">জীবনী</a>
                                                         </li>
                                                         <li
                                                             className="block px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
 
                                                         >
-                                                            <a href="/uponnas">উপন্যাস</a>
+                                                            <a className='block' href="/uponnas">উপন্যাস</a>
                                                         </li>
                                                     </ul>
                                                 )}
@@ -255,10 +260,10 @@ export default function UpdatedNavBar() {
                                             {
                                                 userUuid.length > 0 &&
                                                 <li
-                                                    className='relative'
+                                                    className='relative block'
                                                     onClick={() => { toggleVisibility(1); setSelectedNav("post"); closeMenu(); }}>
                                                     <a
-                                                        className={`${selectedNav === "post"
+                                                        className={`block ${selectedNav === "post"
                                                             ? "text-[#F9A106] font-semibold underline"
                                                             : "text-black"
                                                             }`}
@@ -269,12 +274,12 @@ export default function UpdatedNavBar() {
                                                                 className="block cursor-pointer px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
 
                                                             >
-                                                                <a href="/user/alluserpost">সকল</a>
+                                                                <a className='block' href="/user/alluserpost">সকল</a>
                                                             </li>
                                                             <li
                                                                 className="block cursor-pointer px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
 
-                                                            ><a href="/user/createpost">লিখুন</a></li>
+                                                            ><a className='block' href="/user/createpost">লিখুন</a></li>
                                                         </ul>
                                                     )}
                                                 </li>
@@ -293,13 +298,13 @@ export default function UpdatedNavBar() {
                                                                 className="block cursor-pointer px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
 
                                                             >
-                                                                <a onClick={() => router.push(`/user/${localStorage.getItem("uuid")}`)} href='#'>প্রোফাইল</a>
+                                                                <a  className='block' onClick={() => router.push(`/user/${localStorage.getItem("uuid")}`)} href='#'>প্রোফাইল</a>
                                                             </li>
                                                             <li
                                                                 className="block cursor-pointer px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
 
                                                             >
-                                                                <a onClick={Logout} href="#">লগ আউট</a>
+                                                                <a className='block' onClick={Logout} href="#">লগ আউট</a>
                                                             </li>
                                                         </ul>
                                                     )}
