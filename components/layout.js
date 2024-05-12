@@ -1,4 +1,4 @@
-import MyNavbar from '../components/navbar/Navbar'
+import MyNavbar from './navbar/Navbar'
 import MyFooter from '../components/footer/Footer'
 
 

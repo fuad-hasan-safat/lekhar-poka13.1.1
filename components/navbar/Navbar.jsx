@@ -1,15 +1,16 @@
 "use client";
-import React, { useEffect, useState,useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { faList } from "@fortawesome/fontawesome-free";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import 'remixicon/fonts/remixicon.css'
 
 import Logo from "../common/Logo";
 import SobLekha from "./sobLekhaDropDown";
 import { useRouter } from "next/navigation";
 import { apiBasePath } from "../../utils/constant";
+import PostDropDown from "./PostDropDown";
+import ProfileDropDown from "./ProfileDropDown";
+// import PostDropDown from "./postDropdown";
 
 const MyNavbar = () => {
   const router = useRouter();
@@ -20,18 +21,94 @@ const MyNavbar = () => {
   const [searchData, setSearchData] = useState([]);
   const [selectedIteam, setSelectedIteam] = useState(-1);
 
-  //Resposnive Header Toggle
-  // const [isOpen, setIsopen] = useState(false);
+  const [username, setUsername] = useState("");
+  const [userUuid, setUserUuid] = useState("");
+  const [userToken, setUserToken] = useState("");
 
-  // const ToggleSidebar = () => {
-  //     isOpen === true ? setIsopen(false) : setIsopen(true);
-  // }
-
-  // const menuRef = useRef(null);
-  // const toggleMenu=()=> menuRef.current.classList.toggle('menu__active');
-
-  //Resposnive Header Toggle
   const menuRef = useRef(null);
+
+  // Shared reference for all dropdowns
+  const dropdownRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      closeAllDropdowns(); // Close all dropdowns if clicked outside
+    }
+  };
+
+  //  post drop down start
+
+  const postOptions = [
+    { value: 'sokol', label: 'সকল', path: '/user/alluserpost' },
+    { value: 'likhun', label: 'লিখুন', path: '/user/createpost' },
+
+  ];
+
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const handleOptionSelect = (option) => setSelectedOption(option);
+
+
+  useEffect(() => {
+    setUsername(localStorage.getItem("name") || "");
+    setUserToken(localStorage.getItem("token") || "");
+    setUserUuid(localStorage.getItem("uuid") || "");
+
+  }, []);
+
+
+
+  useEffect(() => {
+    // Add event listener on component mount
+    document.addEventListener("click", handleClickOutside);
+
+    // Cleanup function to remove listener on unmount
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []); // Empty dependency array for effect to run only once
+
+  const toggleMainNav = (navItem) => {
+    setSelectedNav(navItem === selectedNav ? "" : navItem); // Toggle nav selection
+  };
+
+  const closeAllDropdowns = () => {
+    setSelectedNav(""); // Reset selectedNav to close all dropdowns
+  };
+
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch(`${apiBasePath}/posts`);
+        const data = await response.json();
+        setPostList(data);
+        //console.log( "------------------->>>> POST LIST ------------------>>>>>>>",postList );
+      } catch (error) {
+        // alert("Error Fetching data");
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
+
+
+  const profileOptions = [
+    { value: 'profile', label: 'প্রোফাইল', path: `/user/${userUuid}`, action: null }, // Profile view, no action
+    {
+      value: 'logout',
+      label: 'লগ আউট',
+      path: null, // No path for logout confirmation, handled within the component
+      action: true,
+    },
+  ];
+
+  const [selectedOptionprofile, setSelectedOptionprofile] = useState(null);
+
+  const handleOptionSelectprofile = (option) => setSelectedOptionprofile(option);
+
+  // profile drop down end
+
+
 
   const toggleMenu = () => {
     menuRef.current.classList.toggle("menu__active");
@@ -68,26 +145,11 @@ const MyNavbar = () => {
     setSelectedIteam(-1);
   };
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await fetch(`${apiBasePath}/posts`);
-        const data = await response.json();
-        setPostList(data);
-        //console.log( "------------------->>>> POST LIST ------------------>>>>>>>",postList );
-      } catch (error) {
-       // alert("Error Fetching data");
-      }
-    };
 
-    fetchPosts();
-  }, []);
 
   useEffect(() => {
     if (search !== "") {
-      // fetch(`http://api.tvmaze.com/search/shows?q=${search}`)
-      //     .then((res) => res.json())
-      //     .then((data) => setSearchData(data))
+  
       try {
         const newFiltreddata = postList.filter((post) => {
           return post.title
@@ -95,14 +157,14 @@ const MyNavbar = () => {
             .includes(search.toLocaleLowerCase());
         });
         setSearchData(newFiltreddata);
-      } catch (error) {}
+      } catch (error) { }
     } else {
       setSearchData([]);
     }
   }, [search]);
 
 
-  function goToSearchPost(id){
+  function goToSearchPost(id) {
     setSearch("");
     setSearchData([]);
     setSelectedIteam(-1);
@@ -114,7 +176,7 @@ const MyNavbar = () => {
     <div className="fixed w-full bg-white z-[100]">
       <header className="header shadow-md">
         {/* Logo */}
-       
+
         <div className="container">
           <div className="row-span-12">
             <div className="header-innr">
@@ -128,7 +190,7 @@ const MyNavbar = () => {
                   />
                 </Link>
               </div>
-              <div className={`flex justify-between items-center space-x-3 text-black lg:text-[18px] sm:text-[15px] pt-1  place-content-center `}>
+              <div className={`flex justify-between items-center text-black lg:text-[18px] sm:text-[15px] pt-1  place-content-center `}>
                 <div className="hambar__icon" onClick={toggleMenu}>
                   <i class="ri-menu-line"></i>
                   {/* <img src="/public/images/navbaricon/list.svg"/> */}
@@ -137,118 +199,142 @@ const MyNavbar = () => {
                 <div className={`sidebar`} ref={menuRef}>
                   <ul className={`flex flex-row lg:space-x-6 sm:space-x-2 xs:space-x-[0px] kangsa-font transition-all ease-in-out duration-2000"}`}>
                     <li
-                      onClick={() => {setSelectedNav("procchod"); closeMenu();}}
-                      className={`${
-                        selectedNav === "procchod"
-                          ? "text-[#F9A106] font-semibold underline"
-                          : ""
-                      }`}
-                     >
-                      <Link href="/">প্রচ্ছদ</Link> 
+                      onClick={() => { setSelectedNav("procchod");toggleMainNav("procchod"); closeMenu(); }}
+                      className={`${selectedNav === "procchod"
+                        ? "text-[#F9A106] font-semibold underline"
+                        : ""
+                        }`}
+                    >
+                      <Link href="/">প্রচ্ছদ</Link>
                     </li>
                     <li
-                      onClick={() => {setSelectedNav("soblekha");}}>
+                      onClick={() => { setSelectedNav("soblekha"); toggleMainNav("soblekha");}}>
                       <SobLekha
-                      closeMenu={closeMenu}
-                        sobClass={`${
-                          selectedNav === "soblekha"
-                            ? "text-[#F9A106] font-semibold underline"
-                            : "text-black"
-                        }`}
+                        closeMenu={closeMenu}
+                        sobClass={`${selectedNav === "soblekha"
+                          ? "text-[#F9A106] font-semibold underline"
+                          : "text-black"
+                          }`}
                       />
                     </li>
                     <li
-                      onClick={() => {setSelectedNav("zogazog"); closeMenu();}}
-                      className={`${
-                        selectedNav === "zogazog"
-                          ? "text-[#F9A106] font-semibold underline"
-                          : ""
-                      }`}
+                      onClick={() => { setSelectedNav("zogazog");toggleMainNav("zogazog"); closeMenu(); }}
+                      className={`${selectedNav === "zogazog"
+                        ? "text-[#F9A106] font-semibold underline"
+                        : ""
+                        }`}
                     >
                       <Link href="/contacts">যোগাযোগ</Link>
                     </li>
                     <li
-                      onClick={() => {setSelectedNav("amader_somporke"); closeMenu();}}
-                      className={` lg:w-[130px] sm:w-[100px] ${
-                        selectedNav === "amader_somporke"
-                          ? "text-[#F9A106] font-semibold underline"
-                          : ""
-                      }`}
+                      onClick={() => { setSelectedNav("amader_somporke");toggleMainNav("amader_somporke"); closeMenu(); }}
+                      className={` lg:w-[130px] sm:w-[100px] ${selectedNav === "amader_somporke"
+                        ? "text-[#F9A106] font-semibold underline"
+                        : ""
+                        }`}
                     >
                       <Link href="/aboutus">আমাদের সম্পর্কে</Link>
                     </li>
+                    <li
+                      onClick={() => { setSelectedNav("post"); toggleMainNav("post"); }}
+                    >
+
+                      {
+                        userUuid.length > 0 &&
+                        <PostDropDown
+                          sobClass={`${selectedNav === "post"
+                            ? "text-[#F9A106] font-semibold underline"
+                            : "text-black"
+                            }`}
+                          options={postOptions}
+                          selected={selectedOption}
+                          onSelect={handleOptionSelect}
+                          selectedNav={setSelectedNav}
+                          lebel='পোস্ট' />
+                      }
+                    </li>
+
+                    <li
+                      onClick={() => { setSelectedNav("profile");toggleMainNav("profile") }}
+
+                    >
+                      {
+                        userUuid.length > 0 &&
+                        <ProfileDropDown
+                          sobClass={`${selectedNav === "profile"
+                            ? "text-[#F9A106] font-semibold underline"
+                            : "text-black"
+                            }`}
+                          options={profileOptions}
+                          selected={selectedOptionprofile}
+                          onSelect={handleOptionSelectprofile}
+                          lebel={`${username[0]}`}
+                          selectedNav={setSelectedNav}
+                        />
+                      }
+                    </li>
                   </ul>
                 </div>
+                <div>
+
+                </div>
+
                 <div className="search__bar relative flex flex-row place-content-center">
-                    <Image
-                      src="/images/svgs/search.svg"
-                      height={50}
-                      width={50}
-                      alt=""
-                      className={` cursor-pointer`}
-                      onClick={() => setIsSearchActive(true)}
+                  <Image
+                    src="/images/svgs/search.svg"
+                    height={50}
+                    width={50}
+                    alt=""
+                    className={` cursor-pointer`}
+                    onClick={() => setIsSearchActive(true)}
+                  />
+
+                  {isSearchActive && (
+                    <input
+                      type="text"
+                      className={` w-[200px] text-[16px] bg-transparent text-black py-2 pr-10 rounded-md focus:outline-none`}
+                      placeholder=" অনুসন্ধান..."
+                      autoComplete="off"
+                      onChange={handleChange}
+                      value={search}
+                      onKeyDown={handleKeyDown}
                     />
-
-                    {isSearchActive && (
-                      <input
-                        type="text"
-                        className={` w-[200px] text-[16px] bg-transparent text-black py-2 pr-10 rounded-md focus:outline-none`}
-                        placeholder=" অনুসন্ধান..."
-                        autoComplete="off"
-                        onChange={handleChange}
-                        value={search}
-                        onKeyDown={handleKeyDown}
-                      />
-                    )}
-                    <div
-                      className={`search_result ${
-                        isSearchActive ? "visible" : "hidden"
+                  )}
+                  <div
+                    className={`search_result ${isSearchActive ? "visible" : "hidden"
                       }`}
-                    >
-                      {searchData.map((data, index) => {
-                        return (
-                          <button
-                          onClick={()=> goToSearchPost(data._id)}
-                            className={
-                              selectedIteam === index
-                                ? "search_suggestion_line active"
-                                : "search_suggestion_line"
-                            }
-                            key={index}
-                          >
-                            {data.title}
-                          </button>
-                        );
-                      })}
-                      {searchData.length === 0 && search !== "" && (
-                        <h1>No Result Found</h1>
-                      )}
-                    </div>
-
-                    {/* <input
-                        className={`w-[200px] relative text-[16px] bg-transparent text-black py-2 rounded-md focus:outline-none  ${isSearchActive ? "visible" : "hidden"
-                          }`}
-                        type="text"
-                        placeholder=" অনুসন্ধান..."
-                        autoComplete="off"
-                        value={searchTerm}
-                        onChange={handleSearchChange}
-                      /> */}
-
-                    {isSearchActive && (
-
-                      <button
-                      onClick={() => setIsSearchActive(false)}
-                      >
-                      <i class="ri-list-check"></i>
-                      </button>
-                      // <FontAwesomeIcon
-                      //   icon={faList}
-                      //   className="absolute z-50 text-gray-500 text-lg px-2 cursor-pointer ml-auto mt-[10px] right-2" // Right-aligned
-                      //   onClick={() => setIsSearchActive(false)}
-                      // />
+                  >
+                    {searchData.map((data, index) => {
+                      return (
+                        <button
+                          onClick={() => goToSearchPost(data._id)}
+                          className={
+                            selectedIteam === index
+                              ? "search_suggestion_line active"
+                              : "search_suggestion_line"
+                          }
+                          key={index}
+                        >
+                          {data.title}
+                        </button>
+                      );
+                    })}
+                    {searchData.length === 0 && search !== "" && (
+                      <h1>No Result Found</h1>
                     )}
                   </div>
+
+
+                  {isSearchActive && (
+
+                    <button
+                      onClick={() => setIsSearchActive(false)}
+                    >
+                      <i class="ri-list-check"></i>
+                    </button>
+
+                  )}
+                </div>
               </div>
             </div>
           </div>

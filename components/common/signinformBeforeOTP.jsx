@@ -88,23 +88,24 @@ export default function SigninFormBeforeOTP({ logreg, btntext, SetIsOtpSucess, s
                     phone: `${numberPrefix}${state.mobileNumber}`,
                 });
                 // console.log(`full number ------>>> ${numberPrefix}`)
-                console.log('sigh up OTP Before ------>> ', response)
-
+                console.log('sigh up OTP Before ------>> ', response.data)
+                setOtpStatus(response.data.otp_status)
                 if(response.data.status === 'success'){
-                    SetIsOtpSucess(true)
+                    // SetIsOtpSucess(true)
                 }
              
-                // if(response.data.otp_status = "SENT"){
-                //     SetIsOtpSucess(true)
-                // }
-                // if(response.data.otp_status = "LIMIT_CROSSED"){
-                // // SetIsOtpSucess(false)
-                // alert('আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন');
-                // }
+                if(response.data.otp_status === "SENT"){
+                    SetIsOtpSucess(true)
+                }
+                if(response.data.otp_status === "LIMIT_CROSSED"){
+                // SetIsOtpSucess(false)
+                alert('আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন');
+                SetIsOtpSucess(false)
+                }
             } catch (error) {
                 console.error('Signup error:', error);
                 // Handle signup error (e.g., display error message)
-                // alert('আপনি আগে থেকেই সাইন আপ করেছেন');
+                 alert('আপনি আগে থেকেই সাইন আপ করেছেন');
             }
         }
     };

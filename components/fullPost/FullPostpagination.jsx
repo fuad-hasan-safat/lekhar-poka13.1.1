@@ -108,14 +108,14 @@ const FullPostPagination = ({ logText, customclass }) => {
         }
       );
 
-      // console.log(response)
+       console.log(response)
 
       if (response.status === 'success') {
-        // console.log("page save ----", response.msg)
+        console.log("page save ----", response.msg)
       }
 
       if (response.status === 'failed') {
-        // console.log("page save ----", response.msg)
+         console.log("page save ----", response.msg)
       }
 
     } catch (error) {

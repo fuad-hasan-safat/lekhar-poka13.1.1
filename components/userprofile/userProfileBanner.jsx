@@ -2,9 +2,9 @@
 import React from 'react'
 import { apiBasePath } from '../../utils/constant'
 
-export default function UserProfileBanner({ image = '', username = 'demo', designation = 'demo', profileStatus = 'demo', post = 1, follower = 4, following = 6 }) {
+export default function UserProfileBanner({ image = '', username = 'demo', designation = 'demo', profileStatus = 'demo', apprevedPost = 0, unApprovedPost = 0, follower = 4, following = 6 }) {
 
-    console.log({ username, designation, profileStatus, post })
+    // console.log({ username, designation, profileStatus })
     return (
         <>
 
@@ -12,13 +12,6 @@ export default function UserProfileBanner({ image = '', username = 'demo', desig
                 <div className="relative w-full xl:h-[380px] lg:h-[360px] md:h-[340px] sm:h-[280px] xs:h-[220px]  overflow-hidden" style={{ background: `url('/images/usericons/userbanner.svg')center center / cover no-repeat` }}>
                 </div>
             </section>
-            {/* <div>
-                <img
-                    className="w-full"
-                    src="/images/usericons/userbanner.svg"
-                    alt="banner"
-                />
-            </div> */}
             <section>
                 <div className="profile-img__wrap md:flex md:flex-row relative container">
                     <div className="profile-img">
@@ -42,12 +35,12 @@ export default function UserProfileBanner({ image = '', username = 'demo', desig
                                 {profileStatus}
                             </h1>
                         </div>
-                        <div className="flex flex-row text-[#484848] lg:text-[28px] md:text-[26px] sm:text-[24px] xs:text-[20px] justify-items-center  m-auto divide-x-2 space-x-3 pt-4 lg:pl-[130px] 
+                        <div className="flex flex-row text-[#484848] lg:text-[18px] md:text-[14px] sm:text-[14px] xs:text-[12px] justify-items-center  m-auto divide-x-2 space-x-3 pt-4 lg:pl-[130px] 
                     place-content-center">
 
                             <div className="text-center">
-                                <h1>{post}</h1>
-                                <h1>পোস্ট</h1>
+                                <h1>{apprevedPost}</h1>
+                                <h1>অনুমোদিত পোস্ট</h1>
                             </div>
 
                             <div className="pl-2 text-center">
@@ -57,6 +50,10 @@ export default function UserProfileBanner({ image = '', username = 'demo', desig
                             <div className="pl-2 text-center">
                                 <h1>{following}</h1>
                                 <h1>ফলোয়িং</h1>
+                            </div>
+                            <div className="pl-2 text-center">
+                                <h1>{unApprovedPost}</h1>
+                                <h1>অনুমোদনহীন পোস্ট</h1>
                             </div>
                         </div>
 

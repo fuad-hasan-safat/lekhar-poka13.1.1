@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { apiBasePath } from '../../utils/constant';
 
 export default function TakePhoneNumber({userUuid}) {
     const [showModal, setShowModal] = useState(false);
@@ -36,7 +37,7 @@ export default function TakePhoneNumber({userUuid}) {
                 }
             });
 
-           console.log(response)
+           console.log('phone number updated -------------', response)
         } catch (error) {
             console.error('Error updating phonenumber:', error);
         }

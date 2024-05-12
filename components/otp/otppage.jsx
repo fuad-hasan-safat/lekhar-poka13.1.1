@@ -60,29 +60,34 @@ const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus,
     console.log(typeof(otp.join()))
   };
 
-  // const handleSendOtpAgain = async () => {
+  const handleSendOtpAgain = async () => {
+    console.log('phone number in otp page ----', phonenumber)
 
-  //   try {
-  //     const response = await axios.post(`${apiBasePath}/send-otp`, {
-  //       phone: `${numberPrefix}${phonenumber}`,
-  //     });
-  //     // console.log(`full number ------>>> ${numberPrefix}`)
-  //     console.log('sigh up OTP Before ------>> ', response)
+    try {
+      const response = await axios.post(`${apiBasePath}/send-otp`, {
+        phone: `${numberPrefix}${phonenumber}`,
+      });
+      // console.log(`full number ------>>> ${numberPrefix}`)
+      console.log('sigh up OTP In otp page  ------>> ', response)
+      setOtpStatus(response.data.otp_status)
 
-  //     // if (response.data.otp_status = "SENT") {
-  //     //   setOtpStatus(true)
-  //     // }
-  //     // if (response.data.otp_status = "LIMIT_CROSSED") {
-  //     //   // SetIsOtpSucess(false)
-  //     //   alert('আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন');
-  //     // }
-  //   } catch (error) {
-  //     console.error('Signup error:', error);
-  //     // Handle signup error (e.g., display error message)
-  //     alert('আপনি আগে থেকেই সাইন আপ করেছেন');
-  //   }
+      if (response.data.otp_status === "SENT") {
+        setTimer(60)
+        setOtpStatus(true)
+        setOtpStatus('SENT')
+      }
+      if (response.data.otp_status === "LIMIT_CROSSED") {
+        setIsOtpSuccess(false)
+        setOtpStatus(false)
+        alert('আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন');
+      }
+    } catch (error) {
+      console.error('Signup error:', error);
+      // Handle signup error (e.g., display error message)
+      alert('nothing happen');
+    }
 
-  // }
+  }
 
   return (
     <div className="w-full">
@@ -118,10 +123,10 @@ const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus,
         >
           Verify
         </button>
-        {timer > 0 &&
+        {timer <= 0 &&
 
           <button
-            // onClick={handleSendOtpAgain}
+            onClick={handleSendOtpAgain}
             className="lg:pl-60 md:pl-50 sm:pl-40 xs:pl-10 pt-2 text-gray-400 font-semibold text-sm"
           >
             Did not get OTP?

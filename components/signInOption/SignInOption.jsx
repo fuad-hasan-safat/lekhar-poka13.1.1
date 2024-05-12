@@ -48,6 +48,8 @@ export default function SignInOption({
                 }
             );
 
+            console.log('google log in backend res ----', response)
+
             if (response.data.status === 'success') {
                 const data = await response.data;
                 console.log(data);
@@ -61,6 +63,8 @@ export default function SignInOption({
                 localStorage.setItem("token", data.access_token);
                 localStorage.setItem("usertype", data.usertype);
                 localStorage.setItem("phone", data.phone);
+
+                router.reload();
 
                 
             }
