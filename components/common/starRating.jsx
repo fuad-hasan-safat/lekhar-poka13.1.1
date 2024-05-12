@@ -68,7 +68,7 @@ const router = useRouter()
 
   return (
     
-    <div className='start__rating place-content-center justify-center  mt-[50px] pt-[50px] pb-[50px] mx-[40px] mb-[50px] rounded-xl float-left text-center border-2 text-black border-gray-400'>
+    <div className='start__rating place-content-center justify-center  mt-[50px] pt-[50px] pb-[50px] mx-[40px] mb-[50px] rounded-xl float-left text-center border-2 text-black border-gray-400 '>
      <p>রেটিং দিন ।</p> 
 
      <div>
