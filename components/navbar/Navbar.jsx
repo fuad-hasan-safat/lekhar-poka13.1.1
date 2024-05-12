@@ -211,6 +211,7 @@ const MyNavbar = () => {
                       onClick={() => { setSelectedNav("soblekha"); toggleMainNav("soblekha");}}>
                       <SobLekha
                         closeMenu={closeMenu}
+                
                         sobClass={`${selectedNav === "soblekha"
                           ? "text-[#F9A106] font-semibold underline"
                           : "text-black"

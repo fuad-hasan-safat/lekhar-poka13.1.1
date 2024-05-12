@@ -240,7 +240,7 @@ export default function UserInformationsAndBio() {
     return (
         <>
             <div className='edit__btn__wrap m-auto lg:pt-0 md:pt-[40px] sm:pt-[50px] xs:pt-[70px] text-black'>
-                <div className="text-[28px] text-[#F9A106]">বিস্তারিত</div>
+                <div className="text-[28px] mb-2 text-[#F9A106]">বিস্তারিত</div>
                 <div className="text-[20px] text-[#737373] divide-y  space-y-3 ">
                     <div className=' lg:flex lg:flex-row w-full'>
                         <div className="lg:w-[50%]">
@@ -266,7 +266,7 @@ export default function UserInformationsAndBio() {
                         </div>
 
                         <div className="lg:w-[50%]">
-                            <div className='flex flex-row space-x-2'>
+                            <div className='flex justify-left align-items-center flex-row space-x-2'>
                                 <div htmlFor="birthDate">
                                     <img
                                         src="/images/usericons/birthdate.svg"
@@ -284,7 +284,7 @@ export default function UserInformationsAndBio() {
                     <div className=' lg:flex lg:flex-row w-full pt-[15px]'>
                         <div className='lg:w-[50%]'>
 
-                            <div className="flex flex-row space-x-2 ">
+                            <div className="flex justify-left flex-row space-x-2 ">
                                 <div htmlFor="phoneNumber">
                                     <img
                                         src="/images/usericons/phone.svg"
@@ -308,7 +308,7 @@ export default function UserInformationsAndBio() {
 
                         </div>
                         <div className='lg:w-[50%]'>
-                            <div className="flex flex-row space-x-2">
+                            <div className="flex justify-left align-items-center items-center flex-row space-x-2">
                                 <div htmlFor="email">
                                     <img
                                         src="/images/usericons/email.svg"
@@ -336,7 +336,7 @@ export default function UserInformationsAndBio() {
                     <div className='lg:flex lg:flex-row'>
 
 
-                        <div className="flex flex-row w-full space-x-2 pt-2">
+                        <div className="flex justify-left items-center flex-row w-full space-x-2 pt-2">
                             <div htmlFor="address">
                                 <img
                                     src="/images/usericons/location.svg"
@@ -345,7 +345,7 @@ export default function UserInformationsAndBio() {
                             <textarea
                                 id="address"
                                 name="address"
-                                className='w-[90%] border border-gray-200 rounded-2xl h-[50px] px-[15px] py-[5px]'
+                                className='w-full border border-gray-200 rounded-2xl h-[100px] px-[15px] py-[5px]'
                                 value={address}
                                 onChange={(e) => setAddress(e.target.value)}
 
@@ -354,8 +354,8 @@ export default function UserInformationsAndBio() {
 
                     </div>
 
-                    <div className='mt-[60px]'>
-                        <label htmlFor="profilePic">প্রোফাইল স্থিরচিত্র:</label>
+                    <div className='mt-[60px] pt-5'>
+                        <label className='mb-[20px]' htmlFor="profilePic">প্রোফাইল স্থিরচিত্র:</label>
                         <div className='profile__image__upload'>
                             <div
                                 onDragEnter={(e) => setHighlight(true)}
@@ -379,19 +379,19 @@ export default function UserInformationsAndBio() {
                                 </form>
                             </div>
 
-                            <div className=' lg:flex lg:flex-row lg:space-x-[15px] w-full mt-[15px]'>
+                            <div className=' lg:flex lg:flex-row lg:space-x-[15px] w-full mt-[30px]'>
                                 <div className='lg:w-[50%]'>
 
                                     <div className="flex flex-col">
                                         <label htmlFor="designation" className='text-[#ffa844] '> পদবী </label>
-                                        <input id="designation" type='text' value={designation} onChange={(e) => setDesignation(e.target.value)} placeholder='Designation' />
+                                        <input className='border h-[45px] p-3 rounded-[10px]' id="designation" type='text' value={designation} onChange={(e) => setDesignation(e.target.value)} placeholder='Designation' />
                                     </div>
 
                                 </div>
                                 <div className='lg:w-[50%]'>
                                     <div className="flex flex-col">
                                         <label htmlFor="ProfileStatus" className='text-[#ffa844]'> স্ট্যাটাস </label>
-                                        <input id='ProfileStatus' type='text' value={profileStatus} onChange={(e) => setProfileStatus(e.target.value)} placeholder='ProfileStatus' />
+                                        <input className='border h-[45px] p-3 rounded-[10px]' id='ProfileStatus' type='text' value={profileStatus} onChange={(e) => setProfileStatus(e.target.value)} placeholder='ProfileStatus' />
                                     </div>
 
                                 </div>
@@ -404,11 +404,11 @@ export default function UserInformationsAndBio() {
                     </div>
 
                     <div className='mt-[80px] w-full'>
-                        <h1 htmlFor="bio" className="text-[28px] text-[#F9A106]">জীবন বৃত্তান্ত</h1>
+                        <h1 htmlFor="bio" className="text-[20px] mt-5 text-[#F9A106]">জীবন বৃত্তান্ত</h1>
                         <textarea
                             id="bio"
                             name="bio"
-                            className='w-[90%] border border-gray-200 rounded-2xl h-[90px] px-[10px] py-[5px]'
+                            className='w-full border border-gray-200 rounded-2xl h-[120px] px-[10px] py-[5px]'
                             value={bio}
                             onChange={(e) => setBio(e.target.value)}
                         />
