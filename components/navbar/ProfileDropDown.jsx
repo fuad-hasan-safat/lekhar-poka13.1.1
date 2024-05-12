@@ -38,7 +38,6 @@ const ProfileDropDown = ({ options, selected, onSelect, lebel, sobClass }) => {
           localStorage.removeItem("usertype");
           localStorage.removeItem("email");
           
-          // setStatus("");
             setisLogOut(true)
 
           router.push('/account/login');

@@ -197,6 +197,7 @@ export default function CreatePost() {
                 alert('দয়া করে লেখক নির্বাচন করুন ')
             }
             else {
+                console.log({content})
 
                 const formData = new FormData();
                 formData.append("file", selectedFile);

@@ -113,7 +113,7 @@ export default function SigninFormAterOTP({ logreg, btntext, phonenumber }) {
                 console.log(`full number ------>>> ${numberPrefix}`)
                 console.log('sigh up ------>> ', response)
                 // Handle successful signup response (e.g., redirect)
-                alert('আপনার রেজিস্ট্রেশন সম্পূর্ণ হয়েছে। অনুগ্রহ করে লগিন করুন।')
+                alert('আপনার রেজিস্ট্রেশন সম্পূর্ণ হয়েছে। অনুগ্রহ করে লগইন করুন।')
                 router.push(`/`)
             } catch (error) {
                 console.error('Signup error:', error);
