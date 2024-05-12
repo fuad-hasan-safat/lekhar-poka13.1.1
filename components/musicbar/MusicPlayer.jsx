@@ -135,7 +135,7 @@ export default function MusicPlayer({songs}) {
 
   return (
        <>
-    <div className="audio-player-wrap fixed text-black  backdrop-blur-lg  place-content-center text-center justify-center bottom-[0] bg-yellow-500/30  w-full h-[140px]">
+    <div className="audio-player-wrap fixed text-black  backdrop-blur-lg  place-content-center text-center justify-center bottom-[0] bg-yellow-500/30  w-full h-[140px] z-[999999]">
     <div className="container lg:flex lg:flex-row justify-center content-center lg:space-x-16">
       <div className="items-center content-center justify-center z-[200] w-[300px]">
         {/* song info */}
