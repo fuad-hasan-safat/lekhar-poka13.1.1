@@ -28,6 +28,9 @@ export default function UserInformationsAndBio() {
     const [preview, setPreview] = useState(null);
     const [bio, setBio] = useState('')
     const [bioId, setBioId] = useState('')
+    const [isSubmit, setIsSubMit] = useState(false)
+    const [isSubmitEmail, setIsSubMitEmail] = useState(false)
+
     // get saved info
 
     // get saved info
@@ -84,6 +87,15 @@ export default function UserInformationsAndBio() {
 
                 setImage(`${apiBasePath}/${data.object.profile.image.slice(data.object.profile.image.indexOf("/") + 1)}`)
                 saveImageFromURL(`${apiBasePath}/${data.object.profile.image.slice(data.object.profile.image.indexOf("/") + 1)}`, 'profile.jpg')
+
+                if(data.object.profile.phone?.length >0) {
+                    isSubmit(true);
+                }
+
+                if(data.object.profile.email?.length>0) {
+                    setIsSubMitEmail(true)
+                }
+                
 
                 console.log(' profile image----------->>>>', image)
             })
@@ -152,6 +164,7 @@ export default function UserInformationsAndBio() {
                     const data = await response.json();
                     alert('প্রোফাইল সফলভাবে আপডেট হয়েছে')
                     console.log('Profile updated successfully:', data);
+                    setIsSubMit(true)
 
                 } else {
                     console.error('Failed to update profile:', response.statusText);
@@ -290,7 +303,7 @@ export default function UserInformationsAndBio() {
                                         src="/images/usericons/phone.svg"
                                     />
                                 </div>
-                                {phoneNumber?.length > 0 ? <>
+                                {phoneNumber?.length > 0 && isSubmit ? <>
                                     <p>{phoneNumber}</p>
                                 </> : <>
 
@@ -314,7 +327,7 @@ export default function UserInformationsAndBio() {
                                         src="/images/usericons/email.svg"
                                     />
                                 </div>
-                                {email?.length > 0 ? <>
+                                {email?.length > 0 && isSubmitEmail ? <>
                                     <p>{email}</p>
                                 </> : <>
                                     <input
