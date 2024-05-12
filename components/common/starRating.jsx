@@ -1,12 +1,13 @@
 'use client'
 
+import { useRouter } from 'next/router'
 import { apiBasePath } from '../../utils/constant'
 import React, { useEffect, useState } from 'react'
 import { Rating } from 'react-simple-star-rating'
 
 
 export default function RatingComponent({ post_id, setRating, rating }) {
-
+const router = useRouter()
   const [status, setStatus] = useState("");
   const [username, setUsername] = useState("");
   const [userUuid, setUserUuid] = useState("");
@@ -49,7 +50,12 @@ export default function RatingComponent({ post_id, setRating, rating }) {
       }
 
     }else{
-      alert('দয়া করে লগইন করুন')
+      // alert('দয়া করে লগইন করুন')
+      const confirmLogout =  window.confirm('দয়া করে লগইন করুন');
+      if(confirmLogout){
+        router.push('/account/login')
+      }
+
     }
     
   }
