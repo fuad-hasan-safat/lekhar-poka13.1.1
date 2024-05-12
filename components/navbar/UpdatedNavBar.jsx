@@ -27,35 +27,35 @@ export default function UpdatedNavBar() {
         setUserUuid(localStorage.getItem("uuid") || "");
 
     }, []);
-    
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await fetch(`${apiBasePath}/posts`);
-        const data = await response.json();
-        setPostList(data);
-        //console.log( "------------------->>>> POST LIST ------------------>>>>>>>",postList );
-      } catch (error) {
-        // alert("Error Fetching data");
-      }
-    };
 
-    fetchPosts();
+    useEffect(() => {
+        const fetchPosts = async () => {
+            try {
+                const response = await fetch(`${apiBasePath}/posts`);
+                const data = await response.json();
+                setPostList(data);
+                //console.log( "------------------->>>> POST LIST ------------------>>>>>>>",postList );
+            } catch (error) {
+                // alert("Error Fetching data");
+            }
+        };
+
+        fetchPosts();
 
 
-    const fetchUserPhoto = async () => {
-        try {
-          const response = await fetch(`${apiBasePath}/getprofilepic/${localStorage.getItem("uuid")}`);
-          const data = await response.json();
-          setUserImage(data);
-          //console.log( "------------------->>>> POST LIST ------------------>>>>>>>",postList );
-        } catch (error) {
-          // alert("Error Fetching data");
-        }
-      };
-  
-      fetchUserPhoto();
-  }, []);
+        const fetchUserPhoto = async () => {
+            try {
+                const response = await fetch(`${apiBasePath}/getprofilepic/${localStorage.getItem("uuid")}`);
+                const data = await response.json();
+                setUserImage(data.image);
+                //console.log( "------------------->>>> POST LIST ------------------>>>>>>>",postList );
+            } catch (error) {
+                // alert("Error Fetching data");
+            }
+        };
+
+        fetchUserPhoto();
+    }, []);
 
 
     const menuRef = useRef(null);
@@ -76,76 +76,76 @@ export default function UpdatedNavBar() {
 
 
 
-//  search ---
-const handleChange = (e) => {
-    setSearch(e.target.value);
-  };
-  const handleKeyDown = (e) => {
-    // console.log(e.key)
-    if (selectedIteam < searchData.length) {
-      if (e.key === "ArrowUp" && selectedIteam > 0) {
-        setSelectedIteam((prev) => prev - 1);
-      } else if (
-        e.key === "ArrowDown" &&
-        selectedIteam < searchData.length - 1
-      ) {
-        setSelectedIteam((prev) => prev + 1);
-      } else if (e.key === "Enter") {
-        window.open(searchData[selectedIteam].link);
-      }
-    } else {
-      setSelectedIteam(-1);
+    //  search ---
+    const handleChange = (e) => {
+        setSearch(e.target.value);
+    };
+    const handleKeyDown = (e) => {
+        // console.log(e.key)
+        if (selectedIteam < searchData.length) {
+            if (e.key === "ArrowUp" && selectedIteam > 0) {
+                setSelectedIteam((prev) => prev - 1);
+            } else if (
+                e.key === "ArrowDown" &&
+                selectedIteam < searchData.length - 1
+            ) {
+                setSelectedIteam((prev) => prev + 1);
+            } else if (e.key === "Enter") {
+                window.open(searchData[selectedIteam].link);
+            }
+        } else {
+            setSelectedIteam(-1);
+        }
+    };
+    const handleClose = () => {
+        setSearch("");
+        setSearchData([]);
+        setSelectedIteam(-1);
+    };
+
+
+
+    useEffect(() => {
+        if (search !== "") {
+
+            try {
+                const newFiltreddata = postList.filter((post) => {
+                    return post.title
+                        .toLocaleLowerCase()
+                        .includes(search.toLocaleLowerCase());
+                });
+                setSearchData(newFiltreddata);
+            } catch (error) { }
+        } else {
+            setSearchData([]);
+        }
+    }, [search]);
+
+
+    function goToSearchPost(id) {
+        setSearch("");
+        setSearchData([]);
+        setSelectedIteam(-1);
+        router.push(`/post/${id}`)
+        // router.refresh()
     }
-  };
-  const handleClose = () => {
-    setSearch("");
-    setSearchData([]);
-    setSelectedIteam(-1);
-  };
 
 
+    //   logout
 
-  useEffect(() => {
-    if (search !== "") {
-  
-      try {
-        const newFiltreddata = postList.filter((post) => {
-          return post.title
-            .toLocaleLowerCase()
-            .includes(search.toLocaleLowerCase());
-        });
-        setSearchData(newFiltreddata);
-      } catch (error) { }
-    } else {
-      setSearchData([]);
+    function Logout() {
+        localStorage.removeItem("status");
+        localStorage.removeItem("name");
+        localStorage.removeItem("uuid");
+        localStorage.removeItem("phone");
+        localStorage.removeItem("token");
+        localStorage.removeItem("usertype");
+        localStorage.removeItem("email");
+
+        //   setisLogOut(true)
+
+        router.push('/account/login');
     }
-  }, [search]);
-
-
-  function goToSearchPost(id) {
-    setSearch("");
-    setSearchData([]);
-    setSelectedIteam(-1);
-    router.push(`/post/${id}`)
-    // router.refresh()
-  }
-
-
-//   logout
-
-function Logout(){
-    localStorage.removeItem("status");
-    localStorage.removeItem("name");
-    localStorage.removeItem("uuid");
-    localStorage.removeItem("phone");
-    localStorage.removeItem("token");
-    localStorage.removeItem("usertype");
-    localStorage.removeItem("email");
-    
-    //   setisLogOut(true)
-
-    router.push('/account/login');
-}
 
     return (
         <>
@@ -279,29 +279,32 @@ function Logout(){
                                                     )}
                                                 </li>
                                             }
-                                            <li
-                                                className='relative'
-                                                onClick={() => { toggleVisibility(2); closeMenu(); }}>
-                                                    {userImage?.length> 0 ?  <img src={`${apiBasePath}/${userImage.slice(userImage.indexOf("/") + 1)}`} alt='profile pic' className='h-[35px] w-[35px] rounded-full' />:
-                                                    <img src='/images/user/deafultProfile.png' alt='profile pic' className='h-[35px] w-[35px] rounded-full' />}
-                                               
-                                                {visibleItem === 2 && (
-                                                    <ul className='absolute text-sm lg:backdrop-blur-md md:backdrop-blur-md  lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none lg:bg-[#F9A106] md:bg-[#F9A106] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none'>
-                                                        <li
-                                                            className="block cursor-pointer px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
+                                            {
+                                                userUuid.length > 0 &&
+                                                <li
+                                                    className='relative'
+                                                    onClick={() => { toggleVisibility(2); closeMenu(); }}>
+                                                    {userImage?.length > 0 ? <img src={`${apiBasePath}/${userImage.slice(userImage.indexOf("/") + 1)}`} alt={userImage} className='h-[35px] w-[35px] rounded-full' /> :
+                                                        <img src='/images/user/deafultProfile.png' alt='profile pic' className='h-[35px] w-[35px] rounded-full' />}
 
-                                                        >
-                                                            <a onClick={()=> router.push(`/user/${localStorage.getItem("uuid")}`)} href='#'>প্রোফাইল</a>
-                                                        </li>
-                                                        <li
-                                                            className="block cursor-pointer px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
+                                                    {visibleItem === 2 && (
+                                                        <ul className='absolute text-sm lg:backdrop-blur-md md:backdrop-blur-md  lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none lg:bg-[#F9A106] md:bg-[#F9A106] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none'>
+                                                            <li
+                                                                className="block cursor-pointer px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
 
-                                                        >
-                                                            <a onClick={Logout} href="#">লগ আউট</a>
-                                                        </li>
-                                                    </ul>
-                                                )}
-                                            </li>
+                                                            >
+                                                                <a onClick={() => router.push(`/user/${localStorage.getItem("uuid")}`)} href='#'>প্রোফাইল</a>
+                                                            </li>
+                                                            <li
+                                                                className="block cursor-pointer px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
+
+                                                            >
+                                                                <a onClick={Logout} href="#">লগ আউট</a>
+                                                            </li>
+                                                        </ul>
+                                                    )}
+                                                </li>
+                                            }
                                         </ul>
                                     </div>
                                     <div className="search__bar relative flex flex-row place-content-center">
