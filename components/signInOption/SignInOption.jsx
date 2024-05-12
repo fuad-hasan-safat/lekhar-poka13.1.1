@@ -64,6 +64,8 @@ export default function SignInOption({
                 localStorage.setItem("usertype", data.usertype);
                 localStorage.setItem("phone", data.phone);
 
+                router.reload();
+
                 
             }
 

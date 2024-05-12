@@ -29,6 +29,7 @@ import AudioFileUpload from '../userprofile/AudiofileUpload'
 import ProfilePostLeftContent from './ProfilePostLeftContentApproved';
 import CreateWriter from './createWriter';
 import CreateCategory from './createCategory';
+import UserInformationsAndBio from '../user/userInformationsAndBio';
 
 export default function UserProfile({ slug }) {
   // console.log("user profile main page---------------------->>>>>>>>>>>>><<<<<<<<<<<<<<<< SLUG ",slug)
@@ -158,7 +159,7 @@ export default function UserProfile({ slug }) {
         setunApprovedPostNum(data.object.unapproved_post)
 
 
-        console.log('pofile post )()()() details on user profile--------------->>>>>>>', data);
+        // console.log('pofile post )()()() details on user profile--------------->>>>>>>', data);
 
 
         if (!data.object.stats) {
@@ -209,23 +210,8 @@ export default function UserProfile({ slug }) {
     writersOptions.push(data);
   }
 
-  const handleTitle = (e) => {
-    setTitle(e.target.value);
-  };
+ 
 
-  const handleSummary = (e) => {
-    setSummary(e.target.value);
-  };
-
-
-  // audio file 
-  const [selectedFile, setSelectedFile] = useState(null);
-
-
-  function textEditorHandler(e) {
-    setContent(e.target.value);
-    console.log(e.target.value);
-  }
 
 
 
@@ -334,7 +320,7 @@ export default function UserProfile({ slug }) {
                     <div className="lg:w-[70%]">
 
                       <div>
-                        <UserDetails
+                        <UserInformationsAndBio
                           sex={gender}
                           birthdate={dob}
                           location={address}
@@ -343,12 +329,18 @@ export default function UserProfile({ slug }) {
                           userID={userUuid}
                           setIsProfileUpdated={setIsProfileUpdated}
                         />
+
+                        {/* <UserDetails
+                          sex={gender}
+                          birthdate={dob}
+                          location={address}
+                          mail={email}
+                          phone={phone}
+                          userID={userUuid}
+                          setIsProfileUpdated={setIsProfileUpdated}
+                        /> */}
                       </div>
 
-                      <div className='mt-[80px]'>
-                        <h1 className="text-[28px] text-[#F9A106]">জীবন বৃত্তান্ত</h1>
-                        <p className='text-black'> জীবন বৃত্তান্ত এখানে দেখানো হবে</p>
-                      </div>
 
                     </div>
                     <div className="lg:w-[30%] flex flex-col ">
