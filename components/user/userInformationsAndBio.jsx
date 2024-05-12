@@ -89,10 +89,12 @@ export default function UserInformationsAndBio() {
                 saveImageFromURL(`${apiBasePath}/${data.object.profile.image.slice(data.object.profile.image.indexOf("/") + 1)}`, 'profile.jpg')
 
                 if(data.object.profile.phone?.length >0) {
+                    console.log('------ issubmit')
                     isSubmit(true);
                 }
 
-                if(data.object.profile.email?.length>0) {
+               if(data.object.profile.email?.length>0) {
+                    console.log('------ issubmit email')
                     setIsSubMitEmail(true)
                 }
                 
@@ -303,7 +305,7 @@ export default function UserInformationsAndBio() {
                                         src="/images/usericons/phone.svg"
                                     />
                                 </div>
-                                {phoneNumber?.length > 0 && isSubmit ? <>
+                                { isSubmit ? <>
                                     <p>{phoneNumber}</p>
                                 </> : <>
 
@@ -327,7 +329,7 @@ export default function UserInformationsAndBio() {
                                         src="/images/usericons/email.svg"
                                     />
                                 </div>
-                                {email?.length > 0 && isSubmitEmail ? <>
+                                { isSubmitEmail ? <>
                                     <p>{email}</p>
                                 </> : <>
                                     <input

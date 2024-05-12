@@ -5,7 +5,7 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 
 
-const SobLekha = ({ sobClass, closeMenu }) => {
+const SobLekha = ({ sobClass, closeMenu, visibleItem }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const [soblekhaSelect, setSoblekhaSelect] = useState('সব লেখা');

@@ -27,14 +27,14 @@ const MyNavbar = () => {
 
   const menuRef = useRef(null);
 
-  // Shared reference for all dropdowns
-  const dropdownRef = useRef(null);
+// 
 
-  const handleClickOutside = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      closeAllDropdowns(); // Close all dropdowns if clicked outside
-    }
-  };
+const [visibleItem, setVisibleItem] = useState(null);
+
+const toggleVisibility = (index) => {
+  setVisibleItem(visibleItem === index ? null : index);
+};
+
 
   //  post drop down start
 
@@ -58,21 +58,6 @@ const MyNavbar = () => {
 
 
 
-  useEffect(() => {
-    // Add event listener on component mount
-    document.addEventListener("click", handleClickOutside);
-
-    // Cleanup function to remove listener on unmount
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, []); // Empty dependency array for effect to run only once
-
-  const toggleMainNav = (navItem) => {
-    setSelectedNav(navItem === selectedNav ? "" : navItem); // Toggle nav selection
-  };
-
-  const closeAllDropdowns = () => {
-    setSelectedNav(""); // Reset selectedNav to close all dropdowns
-  };
 
 
   useEffect(() => {
@@ -199,7 +184,7 @@ const MyNavbar = () => {
                 <div className={`sidebar`} ref={menuRef}>
                   <ul className={`flex flex-row lg:space-x-6 sm:space-x-2 xs:space-x-[0px] kangsa-font transition-all ease-in-out duration-2000"}`}>
                     <li
-                      onClick={() => { setSelectedNav("procchod");toggleMainNav("procchod"); closeMenu(); }}
+                      onClick={() => { setSelectedNav("procchod"); closeMenu(); }}
                       className={`${selectedNav === "procchod"
                         ? "text-[#F9A106] font-semibold underline"
                         : ""
@@ -208,9 +193,10 @@ const MyNavbar = () => {
                       <Link href="/">প্রচ্ছদ</Link>
                     </li>
                     <li
-                      onClick={() => { setSelectedNav("soblekha"); toggleMainNav("soblekha");}}>
+                      onClick={() => { setSelectedNav("soblekha");  toggleVisibility(0)}}>
                       <SobLekha
                         closeMenu={closeMenu}
+                        visibleItem={visibleItem}
                         sobClass={`${selectedNav === "soblekha"
                           ? "text-[#F9A106] font-semibold underline"
                           : "text-black"
@@ -218,7 +204,7 @@ const MyNavbar = () => {
                       />
                     </li>
                     <li
-                      onClick={() => { setSelectedNav("zogazog");toggleMainNav("zogazog"); closeMenu(); }}
+                      onClick={() => { setSelectedNav("zogazog"); closeMenu(); }}
                       className={`${selectedNav === "zogazog"
                         ? "text-[#F9A106] font-semibold underline"
                         : ""
@@ -227,7 +213,7 @@ const MyNavbar = () => {
                       <Link href="/contacts">যোগাযোগ</Link>
                     </li>
                     <li
-                      onClick={() => { setSelectedNav("amader_somporke");toggleMainNav("amader_somporke"); closeMenu(); }}
+                      onClick={() => { setSelectedNav("amader_somporke"); closeMenu(); }}
                       className={` lg:w-[130px] sm:w-[100px] ${selectedNav === "amader_somporke"
                         ? "text-[#F9A106] font-semibold underline"
                         : ""
@@ -236,7 +222,7 @@ const MyNavbar = () => {
                       <Link href="/aboutus">আমাদের সম্পর্কে</Link>
                     </li>
                     <li
-                      onClick={() => { setSelectedNav("post"); toggleMainNav("post"); }}
+                      onClick={() => { setSelectedNav("post");  toggleVisibility(1) }}
                     >
 
                       {
@@ -250,12 +236,13 @@ const MyNavbar = () => {
                           selected={selectedOption}
                           onSelect={handleOptionSelect}
                           selectedNav={setSelectedNav}
+                          visibleItem={visibleItem}
                           lebel='পোস্ট' />
                       }
                     </li>
 
                     <li
-                      onClick={() => { setSelectedNav("profile");toggleMainNav("profile") }}
+                      onClick={() => { setSelectedNav("profile"); toggleVisibility(2); console.log(visibleItem) }}
 
                     >
                       {
@@ -270,6 +257,7 @@ const MyNavbar = () => {
                           onSelect={handleOptionSelectprofile}
                           lebel={`${username[0]}`}
                           selectedNav={setSelectedNav}
+                          visibleItem={visibleItem}
                         />
                       }
                     </li>
