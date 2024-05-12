@@ -1001,6 +1001,10 @@ transition: all 0.5s !important;
 .facebook__share {
   margin-left: 30px;
 }
+.sidebar ul{
+  justify-content: center;
+  align-items: center;
+}
 
 
 /*
@@ -1044,6 +1048,9 @@ transition: all 0.5s !important;
       right: -145px;
       border-top: 92px solid #ffd700;
       border-right: 145px solid transparent;
+  }
+  .search__bar input{
+    width: 180px !important;
   }
   .slider__bg__img img {
       height: 680px;
