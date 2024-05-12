@@ -5,9 +5,9 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import Classes from './profile.module.css';
 import { apiBasePath } from '../../utils/constant';
-import { useRouter } from 'next/navigation';
 import TakePhoneNumber from './takePhoneNumber';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 
 
@@ -167,6 +167,8 @@ export default function UserInformationsAndBio() {
                     alert('প্রোফাইল সফলভাবে আপডেট হয়েছে')
                     console.log('Profile updated successfully:', data);
                     setIsSubMit(true)
+
+                    router.reload()
 
                 } else {
                     console.error('Failed to update profile:', response.statusText);
