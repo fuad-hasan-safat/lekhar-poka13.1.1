@@ -1,12 +1,13 @@
 'use client'
 
+import { useRouter } from 'next/router'
 import { apiBasePath } from '../../utils/constant'
 import React, { useEffect, useState } from 'react'
 import { Rating } from 'react-simple-star-rating'
 
 
 export default function RatingComponent({ post_id, setRating, rating }) {
-
+const router = useRouter()
   const [status, setStatus] = useState("");
   const [username, setUsername] = useState("");
   const [userUuid, setUserUuid] = useState("");
@@ -49,7 +50,12 @@ export default function RatingComponent({ post_id, setRating, rating }) {
       }
 
     }else{
-      alert('দয়া করে লগইন করুন')
+      // alert('দয়া করে লগইন করুন')
+      const confirmLogout =  window.confirm('দয়া করে লগইন করুন');
+      if(confirmLogout){
+        router.push('/account/login')
+      }
+
     }
     
   }
@@ -62,7 +68,7 @@ export default function RatingComponent({ post_id, setRating, rating }) {
 
   return (
     
-    <div className='start__rating place-content-center justify-center  mt-[50px] pt-[50px] pb-[50px] mx-[40px] mb-[50px] rounded-xl float-left text-center border-2 text-black border-gray-400'>
+    <div className='start__rating place-content-center justify-center  mt-[50px] pt-[50px] pb-[50px] mx-[40px] mb-[50px] rounded-xl float-left text-center border-2 text-black border-gray-400 '>
      <p>রেটিং দিন ।</p> 
 
      <div>

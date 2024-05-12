@@ -69,8 +69,8 @@ const ProfileDropDown = ({ options, selected, onSelect, lebel, sobClass }) => {
         className={` ${sobClass} inline-flex w-[80px] justify-center  px-2  bg-transparent font-medium  focus:outline-none focus:text-[#F9A106]`}
         aria-haspopup="true"
       >
-        {lebel}
-        <img src='' />
+        {/* {lebel} */}
+        <img src='/images/user/deafultProfile.png' alt='profile pic' className='h-[35px] w-[35px] rounded-full'/>
         {/* <FontAwesomeIcon icon={faAngleDown} className="ml-2 pt-1 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-4 sm:w-4 xs:h-4 xs:w-4 focus:text-[#F9A106]" /> */}
       </button>
       {isOpen && (
