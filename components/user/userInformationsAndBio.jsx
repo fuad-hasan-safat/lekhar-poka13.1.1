@@ -397,7 +397,7 @@ export default function UserInformationsAndBio() {
                             <div className=' lg:flex lg:flex-row lg:space-x-[15px] w-full mt-[30px]'>
                                 <div className='lg:w-[50%]'>
 
-                                    <div className="flex flex-col">
+                                    <div className="flex flex-col md:mb-4 sm:mb-3 xs:mb-2">
                                         <label htmlFor="designation" className='text-[#ffa844] '> পদবী </label>
                                         <input className='border h-[45px] p-3 rounded-[10px]' id="designation" type='text' value={designation} onChange={(e) => setDesignation(e.target.value)} placeholder='Designation' />
                                     </div>
