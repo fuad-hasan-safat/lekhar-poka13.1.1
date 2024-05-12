@@ -95,8 +95,8 @@ export default function UserInformationsAndBio() {
         const fetchUserBioData = async () => {
             const response = await fetch(`${apiBasePath}/bio/${localStorage.getItem("uuid")}`);
             const data = await response.json();
-            setBio(data.content)
-            setBioId(data._id)
+            setBio(data?.content)
+            setBioId(data?._id)
             console.log('------------>>> BIO  <<<-------------', data)
 
         };

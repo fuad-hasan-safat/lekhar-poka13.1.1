@@ -70,7 +70,8 @@ const ProfileDropDown = ({ options, selected, onSelect, lebel, sobClass }) => {
         aria-haspopup="true"
       >
         {lebel}
-        <FontAwesomeIcon icon={faAngleDown} className="ml-2 pt-1 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-4 sm:w-4 xs:h-4 xs:w-4 focus:text-[#F9A106]" />
+        <img src='' />
+        {/* <FontAwesomeIcon icon={faAngleDown} className="ml-2 pt-1 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-4 sm:w-4 xs:h-4 xs:w-4 focus:text-[#F9A106]" /> */}
       </button>
       {isOpen && (
         <ul
