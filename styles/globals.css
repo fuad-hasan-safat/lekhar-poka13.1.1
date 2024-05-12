@@ -1052,6 +1052,10 @@ transition: all 0.5s !important;
   .search__bar input{
     width: 180px !important;
   }
+  .sidebar ul li {
+      margin-right: 5px !important;
+      margin-left: 5px !important;
+  }
   .slider__bg__img img {
       height: 680px;
   }
@@ -1231,7 +1235,7 @@ transition: all 0.5s !important;
       border-right: 80px solid transparent;
   }
   .search__bar input {
-      width: 120px;
+      width: 100px !important;
   }
   .search__bar img{
       width: 40px;
