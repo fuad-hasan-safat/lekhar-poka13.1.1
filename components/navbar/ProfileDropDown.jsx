@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
-const ProfileDropDown = ({ options, selected, onSelect, lebel, sobClass }) => {
+const ProfileDropDown = ({ options, selected, onSelect, lebel, sobClass, visibleItem }) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isLogOut, setisLogOut] = useState(false)
