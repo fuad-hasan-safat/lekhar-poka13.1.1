@@ -302,6 +302,8 @@ input[type="number"] {
   max-width: 800px;
   width: 100%;
   margin: 0 auto;
+  position: relative;
+  z-index: 999999;
 }
 .kobita__dsc__rgt{
   position: relative;
@@ -380,8 +382,7 @@ input[type="number"] {
 } */
 
 .carousel__indicator{
-
-  border-radius: 50%;
+ border-radius: 50%;
  display: flex;
  justify-content: center;
  align-items: center;
