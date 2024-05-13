@@ -1,5 +1,7 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import Logo from '../common/Logo';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
@@ -55,6 +57,7 @@ export default function UpdatedNavBar() {
         };
 
         fetchUserPhoto();
+        
     }, []);
 
 
@@ -187,13 +190,14 @@ export default function UpdatedNavBar() {
                                             >
                                                 <a href="/">প্রচ্ছদ</a>
                                             </li>
-                                            <li className={`relative`} onClick={() => { toggleVisibility(0); setSelectedNav("soblekha"); }}>
+                                            <li className={`relative cursor-pointer`} onClick={() => { toggleVisibility(0); setSelectedNav("soblekha"); }}>
                                                 <a
                                                     className={`${selectedNav === "soblekha"
                                                         ? "text-[#F9A106] font-semibold underline"
                                                         : "text-black"
                                                         }`}
                                                     href="#">সব লেখা</a>
+                                                    <FontAwesomeIcon icon={faAngleDown} className="ml-2 pt-1 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-4 sm:w-4 xs:h-4 xs:w-4 focus:text-[#F9A106]" />
                                                 {visibleItem === 0 && (
                                                     <ul
                                                         className='absolute text-sm
@@ -203,36 +207,42 @@ export default function UpdatedNavBar() {
                                                         <li
                                                         
                                                             className="block px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
+                                                            onClick={()=> closeMenu()}
 
                                                         >
                                                             <a className='block' href="/kobita">কবিতা</a>
                                                         </li>
                                                         <li
                                                             className="block px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
+                                                            onClick={()=> closeMenu()}
 
                                                         >
                                                             <a className='block' href="/golpo">গল্প</a>
                                                         </li>
                                                         <li
                                                             className="block px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
+                                                            onClick={()=> closeMenu()}
 
                                                         >
                                                             <a className='block' href="/onugolpo">অনুগল্প</a>
                                                         </li>
                                                         <li
                                                             className="block px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
+                                                            onClick={()=> closeMenu()}
 
                                                         >
                                                             <a className='block' href="/probondho">প্রবন্ধ</a>
                                                         </li>
                                                         <li
                                                             className="block px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
+                                                            onClick={()=> closeMenu()}
 
                                                         >
                                                             <a className='block' href="/jiboni">জীবনী</a>
                                                         </li>
                                                         <li
                                                             className="block px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
+                                                            onClick={()=> closeMenu()}
 
                                                         >
                                                             <a className='block' href="/uponnas">উপন্যাস</a>
@@ -261,25 +271,29 @@ export default function UpdatedNavBar() {
                                                 userUuid.length > 0 &&
                                                 <li
 
-                                                    className='relative'
+                                                    className='relative cursor-pointer '
                                                     onClick={() => { toggleVisibility(1); setSelectedNav("post"); }}>
 
                                                     <a
-                                                        className={`block ${selectedNav === "post"
+                                                        className={` ${selectedNav === "post"
                                                             ? "text-[#F9A106] font-semibold underline"
                                                             : "text-black"
                                                             }`}
                                                         href="#">পোস্ট</a>
+                                                    <FontAwesomeIcon icon={faAngleDown} className="ml-2 pt-1 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-4 sm:w-4 xs:h-4 xs:w-4 focus:text-[#F9A106]" />
+
                                                     {visibleItem === 1 && (
                                                         <ul className='absolute text-sm lg:backdrop-blur-md md:backdrop-blur-md  lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none lg:bg-[#F9A106] md:bg-[#F9A106] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none'>
                                                             <li
                                                                 className="block cursor-pointer px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
+                                                                onClick={()=> closeMenu()}
 
                                                             >
                                                                 <a className='block' href="/user/alluserpost">সকল</a>
                                                             </li>
                                                             <li
                                                                 className="block cursor-pointer px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
+                                                                onClick={()=> closeMenu()}
 
                                                             ><a className='block' href="/user/createpost">লিখুন</a></li>
                                                         </ul>
@@ -289,7 +303,7 @@ export default function UpdatedNavBar() {
                                             {
                                                 userUuid.length > 0 &&
                                                 <li
-                                                    className='relative'
+                                                    className='relative cursor-pointer'
                                                     onClick={() => { toggleVisibility(2);}}>
                                                     {userImage?.length > 0 ? <img src={`${apiBasePath}/${userImage.slice(userImage.indexOf("/") + 1)}`} alt={userImage} className='h-[35px] w-[35px] rounded-full' /> :
                                                         <img src='/images/user/deafultProfile.png' alt='profile pic' className='h-[35px] w-[35px] rounded-full' />}
@@ -298,12 +312,14 @@ export default function UpdatedNavBar() {
                                                         <ul className='absolute text-sm lg:backdrop-blur-md md:backdrop-blur-md  lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none lg:bg-[#F9A106] md:bg-[#F9A106] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none'>
                                                             <li
                                                                 className="block cursor-pointer px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
+                                                                onClick={()=> closeMenu()}
 
                                                             >
                                                                 <a  className='block' onClick={() => router.push(`/user/${localStorage.getItem("uuid")}`)} href='#'>প্রোফাইল</a>
                                                             </li>
                                                             <li
                                                                 className="block cursor-pointer px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
+                                                                onClick={()=> closeMenu()}
 
                                                             >
                                                                 <a className='block' onClick={Logout} href="#">লগ আউট</a>
