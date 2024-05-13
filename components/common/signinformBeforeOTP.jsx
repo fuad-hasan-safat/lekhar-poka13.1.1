@@ -7,7 +7,7 @@ import { useState } from "react";
 import OtpPage from "../otp/otppage";
 
 
-export default function SigninFormBeforeOTP({ logreg, btntext, SetIsOtpSucess, setState, state , otpStatus, setOtpStatus}) {
+export default function SigninFormBeforeOTP({ logreg, btntext, SetIsOtpSucess, setState, state , otpStatus, setOtpStatus, otpProp}) {
     const router = useRouter()
 
 
@@ -84,7 +84,7 @@ export default function SigninFormBeforeOTP({ logreg, btntext, SetIsOtpSucess, s
         if (!state.isDisabled) {
 
             try {
-                const response = await axios.post(`${apiBasePath}/send-otp`, {
+                const response = await axios.post(`${apiBasePath}/${otpProp}`, {
                     phone: `${numberPrefix}${state.mobileNumber}`,
                 });
                 // console.log(`full number ------>>> ${numberPrefix}`)

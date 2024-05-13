@@ -85,7 +85,7 @@ export default function CreatePost() {
                 console.log('pofile post )()()() details on user profile--------------->>>>>>>', data);
 
 
-                if (!data.object.stats) {
+                if (!data.object.profile_completion_status) {
                     setCanPostStatus(false)
                 } else {
                     setCanPostStatus(true)
@@ -328,7 +328,7 @@ export default function CreatePost() {
                         <Editor
                             value={content}
                             onChange={textEditorHandler}
-                            containerProps={{ style: { color: 'black' } }}
+                            containerProps={{ style: { color: 'black' , height: '550px'} }}
 
                         >
                             <Toolbar>

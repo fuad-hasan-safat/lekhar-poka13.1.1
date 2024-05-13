@@ -2,7 +2,7 @@
 import React from 'react'
 import { apiBasePath } from '../../utils/constant'
 
-export default function UserProfileBanner({ image = '', username = 'demo', designation = 'demo', profileStatus = 'demo', apprevedPost = 0, unApprovedPost = 0, follower = 4, following = 6 }) {
+export default function UserProfileBanner({ image = '', username = '', designation = '', profileStatus = '', apprevedPost = 0, unApprovedPost = 0, follower = 0, following = 0 }) {
 
     // console.log({ username, designation, profileStatus })
     return (

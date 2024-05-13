@@ -49,7 +49,7 @@ export default function AllWriterList() {
                             ))}
                     </div> :
 
-                    <div className="pt-10"> লেখা নেই </div>
+                    <div className="pt-10"> লেখক নেই </div>
 
                 }
             </div>

@@ -159,7 +159,8 @@ export default function UserProfile({ slug }) {
         setunApprovedPostNum(data.object.unapproved_post)
 
 
-       console.log('pofile get PROFILE post )()()() details on user profile--------------->>>>>>>', data.object.unapproved_post);
+       console.log('pofile get PROFILE post )()()() details on user profile--------------->>>>>>>', data.object.profile_completion_status
+      );
 
 
         if (!data.object.stats) {

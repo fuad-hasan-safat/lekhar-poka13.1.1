@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import RecoveryPage from '../../components/recoverypage/RecoveryPage'
+import PassRecoveryPageBeforeOTP from '../../components/recoverypage/UpdateRecoveryPage';
 
 
 
@@ -12,7 +13,7 @@ export default function Home() {
       </Head>
 
       <div className="">
-        <RecoveryPage />
+        <PassRecoveryPageBeforeOTP/>
       </div>
     </div>
   );
