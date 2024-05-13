@@ -61,7 +61,7 @@ const PassRecoveryPageBeforeOTP = () => {
                 <div className="login__form__right bg-white rounded-l-[46px] text-black grid place-items-center ">
                   <div className="w-full">
                     {/* <SigninForm logreg="Create Account" btntext="Sign Up" /> */}
-                    {!isOtpSucess && !isOtpVarified  && <SigninFormBeforeOTP logreg="Recovery Password" btntext="Recover" SetIsOtpSucess={SetIsOtpSucess}  setState={setState} state={state} otpStatus={otpStatus} setOtpStatus={setOtpStatus} otpProp='send-otp-reset-password'/> }
+                    {!isOtpSucess && !isOtpVarified  && <SigninFormBeforeOTP type='recoveryPass' logreg="Recovery Password" btntext="Recover" SetIsOtpSucess={SetIsOtpSucess}  setState={setState} state={state} otpStatus={otpStatus} setOtpStatus={setOtpStatus} otpProp='send-otp-reset-password'/> }
                     {isOtpSucess && !isOtpVarified && <OtpPage phonenumber={state.mobileNumber} setIsOtpSuccess={SetIsOtpSucess} setIsOtpVerified={setIsOtpVarified} otpStatus={otpStatus} setOtpStatus={setOtpStatus}/> }
                     {isOtpVarified && <PassRecovertFormAterOTP phonenumber={state.mobileNumber}/> }
                    

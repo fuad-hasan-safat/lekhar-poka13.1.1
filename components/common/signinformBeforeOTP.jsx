@@ -7,7 +7,7 @@ import { useState } from "react";
 import OtpPage from "../otp/otppage";
 
 
-export default function SigninFormBeforeOTP({ logreg, btntext, SetIsOtpSucess, setState, state , otpStatus, setOtpStatus, otpProp}) {
+export default function SigninFormBeforeOTP({type, logreg, btntext, SetIsOtpSucess, setState, state , otpStatus, setOtpStatus, otpProp}) {
     const router = useRouter()
 
 
@@ -83,30 +83,64 @@ export default function SigninFormBeforeOTP({ logreg, btntext, SetIsOtpSucess, s
 
         if (!state.isDisabled) {
 
-            try {
-                const response = await axios.post(`${apiBasePath}/${otpProp}`, {
-                    phone: `${numberPrefix}${state.mobileNumber}`,
-                });
-                // console.log(`full number ------>>> ${numberPrefix}`)
-                console.log('sigh up OTP Before ------>> ', response.data)
-                setOtpStatus(response.data.otp_status)
-                if(response.data.status === 'success'){
-                    // SetIsOtpSucess(true)
+            if(type === 'recoveryPass'){
+                console.log(' in re pass ------------')
+
+                try {
+                    const response = await axios.post(`${apiBasePath}/${otpProp}`, {
+                        phone: `${numberPrefix}${state.mobileNumber}`,
+                    });
+                    // console.log(`full number ------>>> ${numberPrefix}`)
+                    console.log('sigh up OTP Before ------>> ', response.data)
+                    setOtpStatus(response.data.otp_status)
+                    if(response.data.status === 'failed'){
+                        alert('এই নাম্বার এ লগইন করা নেই ')
+                        // SetIsOtpSucess(true)
+                    }
+                 
+                    if(response.data.otp_status === "SENT"){
+                        SetIsOtpSucess(true)
+                    }
+                    if(response.data.otp_status === "LIMIT_CROSSED"){
+                    // SetIsOtpSucess(false)
+                    alert('আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন');
+                    SetIsOtpSucess(false)
+                    }
+                } catch (error) {
+                    alert(error.response.data.message);
+
                 }
-             
-                if(response.data.otp_status === "SENT"){
-                    SetIsOtpSucess(true)
+
+            }else {
+
+                try {
+                    const response = await axios.post(`${apiBasePath}/${otpProp}`, {
+                        phone: `${numberPrefix}${state.mobileNumber}`,
+                    });
+                    // console.log(`full number ------>>> ${numberPrefix}`)
+                    console.log('sigh up OTP Before ------>> ', response.data)
+                    setOtpStatus(response.data.otp_status)
+                    if(response.data.status === 'success'){
+                        // SetIsOtpSucess(true)
+                    }
+                 
+                    if(response.data.otp_status === "SENT"){
+                        SetIsOtpSucess(true)
+                    }
+                    if(response.data.otp_status === "LIMIT_CROSSED"){
+                    // SetIsOtpSucess(false)
+                    alert('আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন');
+                    SetIsOtpSucess(false)
+                    }
+                } catch (error) {
+                    console.error('Signup error:', error);
+                    // Handle signup error (e.g., display error message)
+                     alert('আপনি আগে থেকেই সাইন আপ করেছেন');
                 }
-                if(response.data.otp_status === "LIMIT_CROSSED"){
-                // SetIsOtpSucess(false)
-                alert('আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন');
-                SetIsOtpSucess(false)
-                }
-            } catch (error) {
-                console.error('Signup error:', error);
-                // Handle signup error (e.g., display error message)
-                 alert('আপনি আগে থেকেই সাইন আপ করেছেন');
+
             }
+
+           
         }
     };
 
