@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import parse from 'html-react-parser';
 
@@ -14,6 +14,24 @@ const MaincontentBody = ({
   category,
 }) => {
   const router = useRouter();
+
+  const elementRef = useRef(null);
+  useEffect(() => {
+    const element = elementRef.current;
+
+    const handleRightClick = (event) => {
+      event.preventDefault(); // Prevent default context menu
+      // Implement custom logic here (e.g., display an alert)
+      alert('Right-click detected!');
+    };
+
+    element.addEventListener('contextmenu', handleRightClick);
+
+    return () => {
+      element.removeEventListener('contextmenu', handleRightClick);
+    };
+  }, []);
+
 
   // const [html, setHTML] = useState({ __html: content });
 
@@ -35,7 +53,7 @@ const MaincontentBody = ({
           dangerouslySetInnerHTML={{ __html: content }}
         /> */}
          {content && (
-          <div className="text-[16px] text-gray-500">
+          <div className="text-[16px] text-gray-500" ref={elementRef}>
             {parse(content, {
               replace: (domNode) => {
                 if (domNode.attribs && domNode.attribs.style) {
