@@ -6,12 +6,12 @@ import parse from 'html-react-parser';
 import { apiBasePath } from '../../utils/constant';
 import axios from 'axios';
 
-const FullPostPagination = ({ logText, customclass }) => {
+const FullPostPaginationOthers = ({ logText, customclass }) => {
   const router = useRouter()
   console.log(router.query)
   const slug = router.query.slug
   const [currentPage, setCurrentPage] = useState(0);
-  const linesPerPage = 20;
+  const linesPerPage = 60;
 
 
   const logLines = logText?.split('\n');
@@ -142,7 +142,7 @@ const FullPostPagination = ({ logText, customclass }) => {
         {logLines
           ?.slice(startIndex, endIndex)
           .map((line, index) => (
-            <div key={startIndex + index} className={'text-[18px]'} dangerouslySetInnerHTML={{ __html: line }} ></div>
+            <div key={startIndex + index} className={'text-[18px] text-justify'} dangerouslySetInnerHTML={{ __html: line }} ></div>
             // parse(line, { replace: (domNode) => { // Add the replace option
             //   if (domNode.attribs && domNode.attribs.style) {
             //     delete domNode.attribs.style;
@@ -152,7 +152,8 @@ const FullPostPagination = ({ logText, customclass }) => {
           ))}
       </div>
 
-      {totalPages>1 && <ReactPaginate
+
+      {totalPages > 1 && <ReactPaginate
         pageCount={totalPages}
         pageRangeDisplayed={5}
         marginPagesDisplayed={2}
@@ -178,4 +179,4 @@ const FullPostPagination = ({ logText, customclass }) => {
   );
 };
 
-export default FullPostPagination;
+export default FullPostPaginationOthers;

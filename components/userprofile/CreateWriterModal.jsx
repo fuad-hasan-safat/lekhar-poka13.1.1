@@ -71,7 +71,7 @@ const CreateWriterModal = ({ showModal, handleClose, setIsWriterAdded }) => {
                         required
                       />
                     </div>
-                    <div className="mb-4 profile__date relative">
+                    <div className="mb-4 profile__date">
                       <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="birthDate">
                         জন্ম তারিখ
                       </label>
@@ -84,7 +84,7 @@ const CreateWriterModal = ({ showModal, handleClose, setIsWriterAdded }) => {
                         required
                       
                       />
-                      <span className='absolute text-gray-700 right-[195px] pt-[8px] '>mm/dd /yyyy</span>
+                      {/* <span className='absolute text-gray-700 right-[195px] pt-[8px] '>mm/dd /yyyy</span> */}
                     </div>
                     <div className="mb-4 profile__date">
                       <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="deathDate">

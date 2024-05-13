@@ -173,10 +173,45 @@ export default function CreatePost() {
     // audio file 
     const [selectedFile, setSelectedFile] = useState(null);
 
+    
+    function extractText(poemText) {
+        var isContinousBr = true;
+        console.log({isContinousBr})
+        const formattedLines = poemText.split(/<[^>]+>/).map(line => {
+          // Extract text content (excluding tags)
+          const text = line.trim();
+
+          if(text?.length>0){
+            isContinousBr =false
+            return `<p>${line.trim()}</p>\n`;
+          }else{
+            console.log(" inside ------ ", isContinousBr)
+            if(!isContinousBr){
+                isContinousBr = true;
+            return `<p><br></p>\n`;
+            }
+            
+
+          }
+          return ;
+      
+       
+            // Wrap non-extracted lines in <p> with newline
+          
+        });
+      
+        // Join formatted lines with double newlines
+        const formattedPoem = formattedLines.join('');
+      
+        return formattedPoem;
+      }
+
 
     function textEditorHandler(e) {
         setContent(e.target.value);
-        console.log(e.target.value);
+        // console.log(e.target.value);
+        console.log(content);
+
     }
 
     const handleSubmit = async () => {
@@ -197,7 +232,9 @@ export default function CreatePost() {
                 alert('দয়া করে লেখক নির্বাচন করুন ')
             }
             else {
-                console.log({content})
+
+                const formated_text= extractText(content)
+                console.log('FORMATED Text ----------------->>>>>', formated_text)
 
                 const formData = new FormData();
                 formData.append("file", selectedFile);
@@ -207,7 +244,7 @@ export default function CreatePost() {
                 formData.append("writer_id", writerId);
                 formData.append("title", title);
                 formData.append("summary", summary);
-                formData.append("content", content);
+                formData.append("content", formated_text);
                 formData.append("rating", 1);
                 formData.append("status", false);
                 formData.append("uploaded_by", userUuid);
@@ -229,7 +266,7 @@ export default function CreatePost() {
                         if (response.ok) {
                             const data = await response.json();
                             console.log("sucessfully sent:", data);
-                            alert("Send Data Sucessfully");
+                            alert("আপনার লেখাটি অনুমোদনের জন্য এডমিনের কাছে পাঠানো হয়েছে। লেখাটি শীঘ্রই প্রকাশিত হবে। ধন্যবাদ");
 
                             setSelectedFile(null);
                             setTitle('');
