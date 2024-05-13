@@ -33,7 +33,7 @@ export default function SobKobitaLeftContent() {
         if (data?.length > 1) {
           setisHasMore(true)
         }
-        console.log('total page ----->>>>', data.length)
+        console.log('total page kobita ----->>>>', data)
       } catch (error) {
         setError(error);
       } finally {
@@ -54,7 +54,7 @@ export default function SobKobitaLeftContent() {
       const data = await response.json();
       setPostList(postList.concat(data));
 
-      console.log('main post by per page inside loader-------->>', data)
+      console.log('Kobita --- by per page inside loader-------->>', data)
     } catch (error) {
       setError(error);
     } finally {
@@ -63,11 +63,16 @@ export default function SobKobitaLeftContent() {
   };
 
   useEffect(() => {
+    console.log('useEffect Calling ______________---- PAGE IS LOADING >>>>>>>>>>>>>>>>')
+
+    setPostList([])
     fetchPosts();
-  }, [totalPages]);
+  }, []);
 
 
   const loadnextPage = () => {
+
+    console.log('next ______________---- PAGE IS LOADING >>>>>>>>>>>>>>>>')
 
     console.log({ currentPage, totalPages })
     setCurrentPage(currentPage + 1)
@@ -84,7 +89,7 @@ export default function SobKobitaLeftContent() {
       {isLoading ? (
         <Loading />
       ) : error ? (
-        <div>Error fetching posts: {error.message}</div>
+        <div></div>
       ) : (
         <>
           <div className=''>
@@ -124,39 +129,7 @@ export default function SobKobitaLeftContent() {
               </div> :
 
               <div className="pt-10">  এই মুহূর্তে কোনো লেখা নেই </div>
-
-
             }
-            {/* {totalPages > -1 && <div className="pagination__btn py-10 space-x-4"> 
-              <button
-                className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
-
-                onClick={() => handlePageChange(1)} disabled={currentPage === 1}>
-                প্রথম পৃষ্ঠা
-              </button>
-              <button
-                className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
-
-                onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
-                পূর্ববর্তী পৃষ্ঠা
-              </button>
-              <span
-                className="text-sm text-gray-700"
-              >পৃষ্ঠা {currentPage} এর {totalPages}</span>
-              <button
-                className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
-
-                onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
-                পরবর্তী পৃষ্ঠা
-              </button>
-              <button
-                className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
-
-                onClick={() => handlePageChange(totalPages)} disabled={currentPage === totalPages}>
-                শেষ পৃষ্ঠা
-              </button>
-            </div>
-            } */}
           </div>
         </>
       )}

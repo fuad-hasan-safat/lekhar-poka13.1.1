@@ -65,7 +65,7 @@ export default function SobOnugolpoLeftContent() {
 
   useEffect(() => {
     fetchPosts();
-  }, [totalPages]);
+  }, []);
 
 
   const loadnextPage = () => {

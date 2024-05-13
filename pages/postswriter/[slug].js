@@ -28,13 +28,13 @@ export default function PostOfWriterPage() {
 
         // console.log("QUERY ", router.query.slug);
         const fetchPosts = async () => {
-            // console.log('------------------slug of writers ---------------', slug)
+            console.log('------------------slug of writers ---------------', slug)
             try {
                 const response = await fetch(`${apiBasePath}/postswriter/${slug}`);
                 const data = await response.json();
                 setPostList(data.object);
 
-                // console.log('posts of writer ----------------------------------', data.object)
+                console.log('posts of writer ----------------------------------', data.object)
 
                 // Calculate total pages based on posts and postsPerPage
                 setTotalPages(Math.ceil(data.object.length / postsPerPage));
