@@ -20,6 +20,7 @@ export default function PostDetails() {
   const { asPath } = router;
 
   const [data, setData] = useState(null); // State to store fetched data
+  const [writerImage, setWriterImage] = useState('')
   const [error, setError] = useState(null); // State to store any errors
   const [isAudioAvailable, setIsAudioAvailAble] = useState(false);
   const [isdataFetch, setisDataFetch] = useState(false)
@@ -37,6 +38,7 @@ export default function PostDetails() {
           `${apiBasePath}/getpost/${slug}`
         );
         setData(result.object);
+        setWriterImage(result.writer_image)
         // console.log('post page ====================>>>>>>>>>>>>>>>>>>>>', result.object)
         if (result.object.audio?.length > 0) {
           setIsAudioAvailAble(true);
@@ -133,7 +135,7 @@ export default function PostDetails() {
           title: data?.title,
           src: `${apiBasePath}/${data?.audio.slice(data.audio.indexOf("/") + 1)}`,
           writer: data?.writer,
-          image: '/images/defaultUserPic/profile.jpg'
+          image: `${apiBasePath}/${writerImage.slice(writerImage.indexOf("/")+1)}`,
 
         }]} />
 

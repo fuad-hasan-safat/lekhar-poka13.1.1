@@ -200,48 +200,59 @@ export default function UpdatedNavBar() {
                                                     <FontAwesomeIcon icon={faAngleDown} className="ml-2 pt-1 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-4 sm:w-4 xs:h-4 xs:w-4 focus:text-[#F9A106]" />
                                                 {visibleItem === 0 && (
                                                     <ul
-                                                        className='absolute text-sm
+                                                        className='absolute  lg:text-[16px] sm:text-[13px]
                                                     lg:backdrop-blur-md md:backdrop-blur-md  
                                                      lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none 
-                                                     lg:bg-[#F9A106] md:bg-[#F9A106] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none'>
+                                                     lg:bg-[#FCF7E8] md:bg-[#FCF7E8] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none'>
                                                         <li
                                                         
-                                                            className="block px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
+                                                            className="block px-4 py-2 hover:bg-[#F9A106]  hover:text-white"
                                                             onClick={()=> closeMenu()}
 
                                                         >
                                                             <a className='block' href="/kobita">কবিতা</a>
+                                                            {/* <hr/> */}
                                                         </li>
+                                                        <hr/>
+
                                                         <li
-                                                            className="block px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
+                                                            className="block px-4 py-2  hover:bg-[#F9A106]  hover:text-white"
                                                             onClick={()=> closeMenu()}
 
                                                         >
                                                             <a className='block' href="/golpo">গল্প</a>
                                                         </li>
+                                                        <hr/>
+
                                                         <li
-                                                            className="block px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
+                                                            className="block px-4 py-2 hover:bg-[#F9A106]  hover:text-white"
                                                             onClick={()=> closeMenu()}
 
                                                         >
                                                             <a className='block' href="/onugolpo">অনুগল্প</a>
                                                         </li>
+                                                        <hr/>
+
                                                         <li
-                                                            className="block px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
+                                                            className="block px-4 py-2  hover:bg-[#F9A106]  hover:text-white"
                                                             onClick={()=> closeMenu()}
 
                                                         >
                                                             <a className='block' href="/probondho">প্রবন্ধ</a>
                                                         </li>
+                                                        <hr/>
+
                                                         <li
-                                                            className="block px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
+                                                            className="block px-4 py-2   hover:bg-[#F9A106]  hover:text-white"
                                                             onClick={()=> closeMenu()}
 
                                                         >
                                                             <a className='block' href="/jiboni">জীবনী</a>
                                                         </li>
+                                                        <hr/>
+
                                                         <li
-                                                            className="block px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
+                                                            className="block px-4 py-2   hover:bg-[#F9A106]  hover:text-white"
                                                             onClick={()=> closeMenu()}
 
                                                         >
@@ -283,16 +294,18 @@ export default function UpdatedNavBar() {
                                                     <FontAwesomeIcon icon={faAngleDown} className="ml-2 pt-1 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-4 sm:w-4 xs:h-4 xs:w-4 focus:text-[#F9A106]" />
 
                                                     {visibleItem === 1 && (
-                                                        <ul className='absolute text-sm lg:backdrop-blur-md md:backdrop-blur-md  lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none lg:bg-[#F9A106] md:bg-[#F9A106] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none'>
+                                                        <ul className='absolute lg:text-[16px] sm:text-[13px] lg:backdrop-blur-md md:backdrop-blur-md  lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none lg:bg-[#FCF7E8] md:bg-[#FCF7E8] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none'>
                                                             <li
-                                                                className="block cursor-pointer px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
+                                                                className="block cursor-pointer px-4 py-2  hover:bg-[#F9A106]  hover:text-white"
                                                                 onClick={()=> closeMenu()}
 
                                                             >
                                                                 <a className='block' href="/user/alluserpost">সকল</a>
                                                             </li>
+                                                        <hr/>
+
                                                             <li
-                                                                className="block cursor-pointer px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
+                                                                className="block cursor-pointer px-4 py-2 hover:bg-[#F9A106]  hover:text-white"
                                                                 onClick={()=> closeMenu()}
 
                                                             ><a className='block' href="/user/createpost">লিখুন</a></li>
@@ -309,16 +322,18 @@ export default function UpdatedNavBar() {
                                                         <img src='/images/user/deafultProfile.png' alt='profile pic' className='h-[35px] w-[35px] rounded-full' />}
 
                                                     {visibleItem === 2 && (
-                                                        <ul className='absolute text-sm lg:backdrop-blur-md md:backdrop-blur-md  lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none lg:bg-[#F9A106] md:bg-[#F9A106] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none'>
+                                                        <ul className='absolute lg:text-[16px] sm:text-[13px] lg:backdrop-blur-md md:backdrop-blur-md  lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none lg:bg-[#FCF7E8] md:bg-[#FCF7E8] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none'>
                                                             <li
-                                                                className="block cursor-pointer px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
+                                                                className="block cursor-pointer px-4 py-2 hover:bg-[#F9A106]  hover:text-white"
                                                                 onClick={()=> closeMenu()}
 
                                                             >
                                                                 <a  className='block' onClick={() => router.push(`/user/${localStorage.getItem("uuid")}`)} href='#'>প্রোফাইল</a>
                                                             </li>
+                                                        <hr/>
+
                                                             <li
-                                                                className="block cursor-pointer px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
+                                                                className="block cursor-pointer px-4 py-2   hover:bg-[#F9A106]  hover:text-white"
                                                                 onClick={()=> closeMenu()}
 
                                                             >

@@ -315,6 +315,8 @@ export default function UserInformationsAndBio() {
                                         type="tel"
                                         id="phoneNumber"
                                         name="phoneNumber"
+                                        className='w-[90%] px-4 py-1'
+                                        placeholder='8801XXXXXXXXX'
                                         required
                                         value={phoneNumber}
                                         onChange={(e) => setPhoneNumber(e.target.value)}
@@ -338,6 +340,8 @@ export default function UserInformationsAndBio() {
                                         type="email"
                                         id="email"
                                         name="email"
+                                        className='w-full px-4 py-1'
+                                        placeholder='mail@domain.com'
                                         required
                                         value={email}
                                         onChange={(e) => setemail(e.target.value)}
@@ -362,8 +366,9 @@ export default function UserInformationsAndBio() {
                             <textarea
                                 id="address"
                                 name="address"
+                                placeholder='ঠিকানা'
                                 className='w-full border border-gray-200 rounded-2xl h-[100px] px-[15px] py-[5px]'
-                                value={address}
+                                value={`${address==='undefined'? '' : address}`}
                                 onChange={(e) => setAddress(e.target.value)}
 
                             />
@@ -401,14 +406,20 @@ export default function UserInformationsAndBio() {
 
                                     <div className="flex flex-col md:mb-4 sm:mb-3 xs:mb-2">
                                         <label htmlFor="designation" className='text-[#ffa844] '> পদবী </label>
-                                        <input className='border h-[45px] p-3 rounded-[10px]' id="designation" type='text' value={designation} onChange={(e) => setDesignation(e.target.value)} placeholder='Designation' />
+                                        <input className='border h-[45px] p-3 rounded-[10px]' id="designation" type='text' 
+                                        value={`${designation==='undefined'? '': designation}`} 
+                                        onChange={(e) => setDesignation(e.target.value)} 
+                                        placeholder='পদবী' />
                                     </div>
 
                                 </div>
                                 <div className='lg:w-[50%]'>
                                     <div className="flex flex-col">
                                         <label htmlFor="ProfileStatus" className='text-[#ffa844]'> স্ট্যাটাস </label>
-                                        <input className='border h-[45px] p-3 rounded-[10px]' id='ProfileStatus' type='text' value={profileStatus} onChange={(e) => setProfileStatus(e.target.value)} placeholder='ProfileStatus' />
+                                        <input className='border h-[45px] p-3 rounded-[10px]' id='ProfileStatus' type='text' 
+                                        value={`${profileStatus==='undefined' ? '' : profileStatus}`} 
+                                        onChange={(e) => setProfileStatus(e.target.value)} 
+                                        placeholder='স্ট্যাটাস' />
                                     </div>
 
                                 </div>
@@ -425,7 +436,8 @@ export default function UserInformationsAndBio() {
                         <textarea
                             id="bio"
                             name="bio"
-                            className='w-full border border-gray-200 rounded-2xl h-[120px] px-[10px] py-[5px]'
+                            placeholder='জীবন বৃত্তান্ত'
+                            className='w-full border border-gray-200 rounded-2xl h-[120px] px-[10px] py-[5px] text-black'
                             value={bio}
                             onChange={(e) => setBio(e.target.value)}
                         />

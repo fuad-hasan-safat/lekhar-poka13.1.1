@@ -270,7 +270,7 @@ export default function UserProfile({ slug }) {
               console.log("sucessfully sent:", data);
               alert("Send Data Sucessfully");
 
-              setSelectedFile(null);
+              // setSelectedFile(null);
               setTitle('');
               setCategory('');
               setWriters('');

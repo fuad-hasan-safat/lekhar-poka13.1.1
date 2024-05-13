@@ -38,7 +38,7 @@ export default function AllWriterList() {
                                             writer={item.name}
                                             id={item._id}
                                             user_id={item.user_id}
-                                            lifeCycle={`${item.expiry_date === null? '' : `${item.expiry_date}-` }  ${item.birth_date === null ? `বর্তমান` : `${item.birth_date}`}`}
+                                            lifeCycle={`  ${item.birth_date === null ? `বর্তমান` : `${item.birth_date} `} থেকে  ${item.expiry_date === null? '' : ` ${item.expiry_date}` } `}
 
                                         />
                                     </div>
