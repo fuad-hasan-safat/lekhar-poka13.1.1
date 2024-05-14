@@ -1,10 +1,12 @@
 
 import React from 'react'
 import { apiBasePath } from '../../utils/constant'
+import ImageCrop from './cropComponents/ImageCrop'
+import ImageCropProvider from './cropComponents/ImageCropProvider'
 
-export default function UserProfileBanner({ image = '', username = '', designation = '', profileStatus = '', apprevedPost = 0, unApprovedPost = 0, follower = 0, following = 0 }) {
+export default function UserProfileBanner({ image ='', username = '', designation = '', profileStatus = '', apprevedPost = 0, unApprovedPost = 0, follower = 0, following = 0 }) {
 
-    // console.log({ username, designation, profileStatus })
+     console.log('image --------- length >>>>>', image)
     return (
         <>
 
@@ -15,9 +17,13 @@ export default function UserProfileBanner({ image = '', username = '', designati
             <section>
                 <div className="profile-img__wrap md:flex md:flex-row relative container">
                     <div className="profile-img">
-                        <img
+                        {/* <img
                             className="w-[264px] h-[264px] rounded-full  border-4 border-solid border-white -mt-[110px]  "
-                            src={image?.length > 0 ? `${apiBasePath}/${image.slice(image.indexOf("/") + 1)}` : '/images/defaultUserPic/profile.jpg'} />
+                            src={image?.length > 0 ? `${apiBasePath}/${image.slice(image.indexOf("/") + 1)}` : '/images/defaultUserPic/profile.jpg'}
+                        /> */}
+                        <ImageCropProvider>
+                        <ImageCrop image={`${apiBasePath}/${image}`} />
+                        </ImageCropProvider>
                     </div>
 
 

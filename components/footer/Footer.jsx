@@ -43,8 +43,8 @@ const MyFooter = () => {
                       <FooterLink
                         title="গুরুত্বপূর্ণ লিঙ্ক"
                         links={[
-                          { url: "/", label: "প্রচ্ছদ" },
-                          { url: "/contacts", label: "যোগাযোগ" },
+                          { url: "/privecypolicy", label: "প্রাইভেসি" },
+                          { url: "/termsandconditions", label: "শর্তাবলি" },
                           { url: "/aboutus", label: "আমাদের সম্পর্কে" },
                         ]}
                       />

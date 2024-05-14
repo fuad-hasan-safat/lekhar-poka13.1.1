@@ -152,15 +152,14 @@ export default function UserProfile({ slug }) {
         setAddress(data.object.profile.address)
         setEmail(data.object.profile.email)
         setPhone(data.object.profile.phone)
-        setImage(data.object.profile.image || '')
+        setImage(data.object.profile.image?.slice(data.object.profile.image?.indexOf("/")+1) || '')
         setFollower(data.object.stats.follower)
         setFollowing(data.object.stats.following)
         setApprovedPostNum(data.object.approved_post)
         setunApprovedPostNum(data.object.unapproved_post)
 
 
-       console.log('pofile get PROFILE post )()()() details on user profile--------------->>>>>>>', data.object.profile_completion_status
-      );
+       console.log('pofile get PROFILE post )()()() details on user profile--------------->>>>>>>', data.object);
 
 
         if (!data.object.stats) {
@@ -212,87 +211,6 @@ export default function UserProfile({ slug }) {
   }
 
  
-
-
-
-
-
-
-
-  const handleSubmit = async () => {
-    if (!canPostStatus) {
-      alert('দয়া করে প্রোফাইল তৈরি করুন')
-    }
-    else {
-
-      if (!title) {
-        alert('দয়া করে আপনার লেখার শিরোনাম দিন')
-      }
-      else if (!selectedOption) {
-        alert('দয়া করে আপনার লেখার ধরণ নির্বাচন করুন')
-      }
-      else if (!summary) {
-        alert('দয়া করে আপনার লেখার সারমর্ম লিখুন')
-      } else if (!writer && !checkboxValue) {
-        alert('দয়া করে লেখক নির্বাচন করুন ')
-      }
-      else {
-
-        const formData = new FormData();
-        formData.append("file", selectedFile);
-        formData.append("category", selectedOption?.label);
-        formData.append("cat_id", selectedOption?.value);
-        formData.append("writer", writer);
-        formData.append("writer_id", writerId);
-        formData.append("title", title);
-        formData.append("summary", summary);
-        formData.append("content", content);
-        formData.append("rating", 1);
-        formData.append("status", false);
-        formData.append("uploaded_by", userUuid);
-        formData.append("new_writer", checkboxValue);
-
-        if (title && selectedOption && summary) {
-
-          console.log(writer, writerId)
-
-          try {
-            const response = await fetch(`${apiBasePath}/posts`, {
-              method: "POST",
-              headers: {
-
-              },
-              body: formData,
-            });
-
-            if (response.ok) {
-              const data = await response.json();
-              console.log("sucessfully sent:", data);
-              alert("Send Data Sucessfully");
-
-              // setSelectedFile(null);
-              setTitle('');
-              setCategory('');
-              setWriters('');
-              setContent('');
-              setSummary('');
-            } else {
-              console.error("Failed to update profile:", response.statusText);
-              alert(response.statusText);
-            }
-          } catch (error) {
-            console.error("Error updating profile:", error);
-            alert(error);
-          }
-        } else {
-          alert('শিরোনাম, লেখার ধরণ ও সারসংক্ষেপ লিখুন')
-        }
-      }
-
-    }
-
-
-  };
 
   if (isLoading) {
     return <Loading />;

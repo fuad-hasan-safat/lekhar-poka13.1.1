@@ -74,12 +74,12 @@ export default function UserInformationsAndBio() {
         fetch(`${apiBasePath}/getprofile/${localStorage.getItem("uuid")}`)
             .then((response) => response.json())
             .then((data) => {
-                console.log('pofile details --------------->>>>>>>', data);
-                setDesignation(data.object.profile.designation)
-                setProfileStatus(data.object.profile.profileStatus)
+                // console.log('pofile details --------------->>>>>>>', data);
+                setDesignation(data.object.profile?.designation || '')
+                setProfileStatus(data.object.profile?.profileStatus|| '')
                 setGender(data.object.profile.gender)
                 setBirthOfDate(data.object.profile.dob)
-                setAddress(data.object.profile.address)
+                setAddress(data.object.profile?.address|| '')
                 setemail(data.object.profile.email)
                 setPhoneNumber(data.object.profile.phone)
                 setGender(data.object.profile.gender)
@@ -88,18 +88,19 @@ export default function UserInformationsAndBio() {
                 setImage(`${apiBasePath}/${data.object.profile.image.slice(data.object.profile.image.indexOf("/") + 1)}`)
                 saveImageFromURL(`${apiBasePath}/${data.object.profile.image.slice(data.object.profile.image.indexOf("/") + 1)}`, 'profile.jpg')
 
+                console.log(`adress -------------------->>>>>>${data.object.profile.address}`)
                 if(data.object.profile.phone?.length >0) {
-                    console.log('------ issubmit')
+                    // console.log('------ issubmit')
                     isSubmit(true);
                 }
 
                if(data.object.profile.email?.length>0) {
-                    console.log('------ issubmit email')
+                    // console.log('------ issubmit email')
                     setIsSubMitEmail(true)
                 }
                 
 
-                console.log(' profile image----------->>>>', image)
+                // console.log(' profile image----------->>>>', image)
             })
             .catch((error) => console.error("Error fetching profile:", error));
 
@@ -116,6 +117,9 @@ export default function UserInformationsAndBio() {
         };
 
         fetchUserBioData();
+
+
+        console.log({address, phoneNumber})
     }, []);
 
 
@@ -127,7 +131,8 @@ export default function UserInformationsAndBio() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("From submit ------------------------ 110")
+        // console.log("From submit ------------------------")
+        // console.log(typeof(address))
 
         if (!imageFile) {
             alert('Upload your image')
@@ -140,7 +145,7 @@ export default function UserInformationsAndBio() {
             //const formattedDate = moment(startDate).format('DD-MM-YYYY');
 
             const formData = new FormData();
-            formData.append('file', imageFile);
+            // formData.append('file', imageFile);
             formData.append('designation', designation);
             formData.append('profileStatus', profileStatus);
             formData.append('gender', gender);
@@ -160,7 +165,7 @@ export default function UserInformationsAndBio() {
                 });
                 // setIsProfileUpdated(true)
 
-                console.log('------>>>> PROFILE RESPONSE <<<<<<--------', response)
+                // console.log('------>>>> PROFILE RESPONSE <<<<<<--------', response)
 
                 if (response.ok) {
                     const data = await response.json();
@@ -171,10 +176,10 @@ export default function UserInformationsAndBio() {
                     router.reload()
 
                 } else {
-                    console.error('Failed to update profile:', response.statusText);
+                    // console.error('Failed to update profile:', response.statusText);
                 }
             } catch (error) {
-                console.error('Error updating profile:', error);
+                // console.error('Error updating profile:', error);
             }
 
         }
@@ -368,7 +373,7 @@ export default function UserInformationsAndBio() {
                                 name="address"
                                 placeholder='ঠিকানা'
                                 className='w-full border border-gray-200 rounded-2xl h-[100px] px-[15px] py-[5px]'
-                                value={`${address==='undefined'? '' : address}`}
+                                value={`${address===('undefined' || undefined )? '' : address}`}
                                 onChange={(e) => setAddress(e.target.value)}
 
                             />
@@ -377,9 +382,9 @@ export default function UserInformationsAndBio() {
                     </div>
 
                     <div className='mt-[60px] pt-5'>
-                        <label className='mb-[20px]' htmlFor="profilePic">প্রোফাইল স্থিরচিত্র:</label>
+                        {/* <label className='mb-[20px]' htmlFor="profilePic">প্রোফাইল স্থিরচিত্র:</label> */}
                         <div className='profile__image__upload'>
-                            <div
+                            {/* <div
                                 onDragEnter={(e) => setHighlight(true)}
                                 onDragLeave={(e) => setHighlight(false)}
                                 onDragOver={(e) => {
@@ -399,7 +404,7 @@ export default function UserInformationsAndBio() {
                                         <button className='button'><i className='ri-camera-line'></i></button>
                                     </div>
                                 </form>
-                            </div>
+                            </div> */}
 
                             <div className=' lg:flex lg:flex-row lg:space-x-[15px] w-full mt-[30px]'>
                                 <div className='lg:w-[50%]'>
