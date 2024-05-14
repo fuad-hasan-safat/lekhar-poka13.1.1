@@ -178,9 +178,67 @@ export default function UpdatedNavBar() {
                                         <i class="ri-menu-line"></i>
                                         {/* <img src="/public/images/navbaricon/list.svg"/> */}
                                     </div>
-                                    <div className={`sidebar`} ref={menuRef}>
 
-                                        <ul className={`flex flex-row lg:space-x-6 sm:space-x-2 xs:space-x-[0px] kangsa-font transition-all ease-in-out duration-2000`}>
+                                    <div className="search__bar relative flex flex-row place-content-center">
+                                        <Image
+                                            src="/images/svgs/search.svg"
+                                            height={50}
+                                            width={50}
+                                            alt=""
+                                            className={` cursor-pointer`}
+                                            onClick={() => setIsSearchActive(true)}
+                                        />
+
+                                        {isSearchActive && (
+                                            <input
+                                                type="text"
+                                                className={` w-[200px] text-[16px] bg-transparent text-black py-2 pr-10 rounded-md focus:outline-none`}
+                                                placeholder=" অনুসন্ধান..."
+                                                autoComplete="off"
+                                                onChange={handleChange}
+                                                value={search}
+                                                onKeyDown={handleKeyDown}
+                                            />
+                                        )}
+                                        <div
+                                            className={`search_result ${isSearchActive ? "visible" : "hidden"
+                                                }`}
+                                        >
+                                            {searchData.map((data, index) => {
+                                                return (
+                                                    <button
+                                                        onClick={() => goToSearchPost(data._id)}
+                                                        className={
+                                                            selectedIteam === index
+                                                                ? "search_suggestion_line active"
+                                                                : "search_suggestion_line"
+                                                        }
+                                                        key={index}
+                                                    >
+                                                        {data.title}
+                                                    </button>
+                                                );
+                                            })}
+                                            {searchData.length === 0 && search !== "" && (
+                                                <h1>No Result Found</h1>
+                                            )}
+                                        </div>
+
+
+                                        {isSearchActive && (
+
+                                            <button
+                                                onClick={() => setIsSearchActive(false)}
+                                            >
+                                                <i class="ri-list-check"></i>
+                                            </button>
+
+                                        )}
+                                    </div>
+                                    <div className={`sidebar pl-[15px]`} ref={menuRef}>
+                                    
+
+                                        <ul className={`flex flex-row lg:space-x-[15px] text-center sm:space-x-2 xs:space-x-[0px] kangsa-font transition-all ease-in-out duration-2000`}>
                                             <li
                                                 onClick={() => { setSelectedNav("procchod"); closeMenu(); }}
                                                 className={`${selectedNav === "procchod"
@@ -200,7 +258,7 @@ export default function UpdatedNavBar() {
                                                     <FontAwesomeIcon icon={faAngleDown} className="ml-2 pt-1 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-4 sm:w-4 xs:h-4 xs:w-4 focus:text-[#F9A106]" />
                                                 {visibleItem === 0 && (
                                                     <ul
-                                                        className='absolute  lg:text-[16px] sm:text-[13px]
+                                                        className='absolute lg:text-[16px] sm:text-[13px]
                                                     lg:backdrop-blur-md md:backdrop-blur-md  
                                                      lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none 
                                                      lg:bg-[#FCF7E8] md:bg-[#FCF7E8] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none'>
@@ -345,62 +403,7 @@ export default function UpdatedNavBar() {
                                             }
                                         </ul>
                                     </div>
-                                    <div className="search__bar relative flex flex-row place-content-center">
-                                        <Image
-                                            src="/images/svgs/search.svg"
-                                            height={50}
-                                            width={50}
-                                            alt=""
-                                            className={` cursor-pointer`}
-                                            onClick={() => setIsSearchActive(true)}
-                                        />
-
-                                        {isSearchActive && (
-                                            <input
-                                                type="text"
-                                                className={` w-[200px] text-[16px] bg-transparent text-black py-2 pr-10 rounded-md focus:outline-none`}
-                                                placeholder=" অনুসন্ধান..."
-                                                autoComplete="off"
-                                                onChange={handleChange}
-                                                value={search}
-                                                onKeyDown={handleKeyDown}
-                                            />
-                                        )}
-                                        <div
-                                            className={`search_result ${isSearchActive ? "visible" : "hidden"
-                                                }`}
-                                        >
-                                            {searchData.map((data, index) => {
-                                                return (
-                                                    <button
-                                                        onClick={() => goToSearchPost(data._id)}
-                                                        className={
-                                                            selectedIteam === index
-                                                                ? "search_suggestion_line active"
-                                                                : "search_suggestion_line"
-                                                        }
-                                                        key={index}
-                                                    >
-                                                        {data.title}
-                                                    </button>
-                                                );
-                                            })}
-                                            {searchData.length === 0 && search !== "" && (
-                                                <h1>No Result Found</h1>
-                                            )}
-                                        </div>
-
-
-                                        {isSearchActive && (
-
-                                            <button
-                                                onClick={() => setIsSearchActive(false)}
-                                            >
-                                                <i class="ri-list-check"></i>
-                                            </button>
-
-                                        )}
-                                    </div>
+                                   
                                 </div>
                             </div>
                         </div>

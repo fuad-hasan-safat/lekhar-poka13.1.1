@@ -8,7 +8,7 @@ export default function Layout({ children }) {
     <>
       {/* <MyNavbar /> */}
       <UpdatedNavBar/>
-      <main>{children}</main>
+      <main onCopy={(e)=>{e.preventDefault(); alert('চুরি করা পাপ')}}>{children}</main>
       <MyFooter />
     </>
   )
