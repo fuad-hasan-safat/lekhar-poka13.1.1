@@ -128,7 +128,7 @@ export default function PostDetails() {
       </div>
 
 
-      {isAudioAvailable && (
+      {/* {isAudioAvailable && (
 
         <MusicPlayer songs={[{
           id: data?._id,
@@ -139,7 +139,7 @@ export default function PostDetails() {
 
         }]} />
 
-      )}
+      )} */}
     </>
   );
 }

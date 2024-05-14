@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 
 
 
-export default function UserInformationsAndBio() {
+export default function UserInformationsAndBio({ username, setUsername }) {
 
     const router = useRouter();
     // const [, ] = useState('')
@@ -35,7 +35,7 @@ export default function UserInformationsAndBio() {
 
     // get saved info
     const [status, setStatus] = useState("");
-    const [username, setUsername] = useState("");
+    // const [username, setUsername] = useState("");
     const [userUuid, setUserUuid] = useState("");
     const [userToken, setUserToken] = useState("");
     const [number, setnumber] = useState("");
@@ -76,10 +76,11 @@ export default function UserInformationsAndBio() {
             .then((data) => {
                 // console.log('pofile details --------------->>>>>>>', data);
                 setDesignation(data.object.profile?.designation || '')
-                setProfileStatus(data.object.profile?.profileStatus|| '')
+                setProfileStatus(data.object.profile?.profileStatus || '')
                 setGender(data.object.profile.gender)
                 setBirthOfDate(data.object.profile.dob)
-                setAddress(data.object.profile?.address|| '')
+                setUsername(data.object.profile.name)
+                setAddress(data.object.profile?.address || '')
                 setemail(data.object.profile.email)
                 setPhoneNumber(data.object.profile.phone)
                 setGender(data.object.profile.gender)
@@ -89,16 +90,16 @@ export default function UserInformationsAndBio() {
                 saveImageFromURL(`${apiBasePath}/${data.object.profile.image.slice(data.object.profile.image.indexOf("/") + 1)}`, 'profile.jpg')
 
                 console.log(`adress -------------------->>>>>>${data.object.profile.address}`)
-                if(data.object.profile.phone?.length >0) {
+                if (data.object.profile.phone?.length > 0) {
                     // console.log('------ issubmit')
                     isSubmit(true);
                 }
 
-               if(data.object.profile.email?.length>0) {
+                if (data.object.profile.email?.length > 0) {
                     // console.log('------ issubmit email')
                     setIsSubMitEmail(true)
                 }
-                
+
 
                 // console.log(' profile image----------->>>>', image)
             })
@@ -119,7 +120,7 @@ export default function UserInformationsAndBio() {
         fetchUserBioData();
 
 
-        console.log({address, phoneNumber})
+        console.log({ address, phoneNumber })
     }, []);
 
 
@@ -134,9 +135,7 @@ export default function UserInformationsAndBio() {
         // console.log("From submit ------------------------")
         // console.log(typeof(address))
 
-        if (!imageFile) {
-            alert('Upload your image')
-        } else if (!gender) {
+        if (!gender) {
             alert('Select your gender')
         } else if (!birthOfDate) {
             alert('Give your birth date')
@@ -146,6 +145,7 @@ export default function UserInformationsAndBio() {
 
             const formData = new FormData();
             // formData.append('file', imageFile);
+            formData.append('name', username)
             formData.append('designation', designation);
             formData.append('profileStatus', profileStatus);
             formData.append('gender', gender);
@@ -312,7 +312,7 @@ export default function UserInformationsAndBio() {
                                         src="/images/usericons/phone.svg"
                                     />
                                 </div>
-                                { isSubmit ? <>
+                                {isSubmit ? <>
                                     <p>{phoneNumber}</p>
                                 </> : <>
 
@@ -338,7 +338,7 @@ export default function UserInformationsAndBio() {
                                         src="/images/usericons/email.svg"
                                     />
                                 </div>
-                                { isSubmitEmail ? <>
+                                {isSubmitEmail ? <>
                                     <p>{email}</p>
                                 </> : <>
                                     <input
@@ -373,7 +373,7 @@ export default function UserInformationsAndBio() {
                                 name="address"
                                 placeholder='ঠিকানা'
                                 className='w-full border border-gray-200 rounded-2xl h-[100px] px-[15px] py-[5px]'
-                                value={`${address===('undefined' || undefined )? '' : address}`}
+                                value={`${address === ('undefined' || undefined) ? '' : address}`}
                                 onChange={(e) => setAddress(e.target.value)}
 
                             />
@@ -411,20 +411,20 @@ export default function UserInformationsAndBio() {
 
                                     <div className="flex flex-col md:mb-4 sm:mb-3 xs:mb-2">
                                         <label htmlFor="designation" className='text-[#ffa844] '> পদবী </label>
-                                        <input className='border h-[45px] p-3 rounded-[10px]' id="designation" type='text' 
-                                        value={`${designation==='undefined'? '': designation}`} 
-                                        onChange={(e) => setDesignation(e.target.value)} 
-                                        placeholder='পদবী' />
+                                        <input className='border h-[45px] p-3 rounded-[10px]' id="designation" type='text'
+                                            value={`${designation === 'undefined' ? '' : designation}`}
+                                            onChange={(e) => setDesignation(e.target.value)}
+                                            placeholder='পদবী' />
                                     </div>
 
                                 </div>
                                 <div className='lg:w-[50%]'>
                                     <div className="flex flex-col">
                                         <label htmlFor="ProfileStatus" className='text-[#ffa844]'> স্ট্যাটাস </label>
-                                        <input className='border h-[45px] p-3 rounded-[10px]' id='ProfileStatus' type='text' 
-                                        value={`${profileStatus==='undefined' ? '' : profileStatus}`} 
-                                        onChange={(e) => setProfileStatus(e.target.value)} 
-                                        placeholder='স্ট্যাটাস' />
+                                        <input className='border h-[45px] p-3 rounded-[10px]' id='ProfileStatus' type='text'
+                                            value={`${profileStatus === 'undefined' ? '' : profileStatus}`}
+                                            onChange={(e) => setProfileStatus(e.target.value)}
+                                            placeholder='স্ট্যাটাস' />
                                     </div>
 
                                 </div>

@@ -47,7 +47,7 @@ const CreateWriterModal = ({ showModal, handleClose, setIsWriterAdded }) => {
       <div className=" items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center block p-0">
         <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
         <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-        <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all my-2  max-w-lg w-full">
+        <div className="inline-block align-middle bg-white rounded-lg  overflow-hidden shadow-xl transform transition-all my-2  w-full">
           <div className="bg-white px-2 pt-9 pb-9 p-2 ">
             <div className="flex items-start">
               {/* <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-gray-100 sm:mx-0 sm:h-10 sm:w-10">
@@ -57,7 +57,7 @@ const CreateWriterModal = ({ showModal, handleClose, setIsWriterAdded }) => {
                 <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-title">
                   নতুন রাইটার ক্রিয়েট করুন
                 </h3>
-                <div className="mt-2">
+                <div className="mt-2 w-full">
                   <form onSubmit={handleSubmit}>
                     <div className="mb-4 profile__date">
                       <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
@@ -88,12 +88,12 @@ const CreateWriterModal = ({ showModal, handleClose, setIsWriterAdded }) => {
                       />
                       {/* <span className='absolute text-gray-700 right-[195px] pt-[8px] '>mm/dd /yyyy</span> */}
                     </div>
-                    <div className="mb-4 profile__date">
+                    <div className="mb-4 profile__date w-full">
                       <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="deathDate">
                         মৃত্যু তারিখ
                       </label>
                       <input
-                        className="shadow deathDateInput appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow deathDateInput bg-transparent appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="deathDate"
                         type="date"
                         placeholder='mm/dd/yyyy'

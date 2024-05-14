@@ -34,16 +34,8 @@ import UserInformationsAndBio from '../user/userInformationsAndBio';
 export default function UserProfile({ slug }) {
   // console.log("user profile main page---------------------->>>>>>>>>>>>><<<<<<<<<<<<<<<< SLUG ",slug)
 
-  // --------------- editor ----------
-
-  const editor = useRef(null);
-  const [content, setContent] = useState("");
-
-  // ---------------------
-
   //--------------- catagory -----------------
   const [selectedOption, setSelectedOption] = useState(null);
-  const [selectedWriter, setSelectedWriter] = useState(null);
 
   // determine writer and writer id
   const [writer, setWriter] = useState('');
@@ -63,26 +55,11 @@ export default function UserProfile({ slug }) {
 
   };
 
-  const writerhandleChange = (selected) => {
-    setSelectedWriter(selected); // Selected option object
-    setWriter(selected?.label)
-    setWriterId(selected?.value)
-  };
+ 
 
-  const customStyles = {
-    menu: (provided) => ({
-      ...provided,
-      backgroundColor: "#fff",
-      border: "1px solid #ccc",
-      color: "#000"
-    }),
-  };
-
+ 
   // --------------------------------------------
 
-  const router = useRouter();
-
-  const [title, setTitle] = useState("");
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -91,7 +68,6 @@ export default function UserProfile({ slug }) {
   const [userUuid, setUserUuid] = useState("");
   const [userPhone, setUserPhone] = useState("");
   const [userToken, setUserToken] = useState("");
-  const [userPost, setUserPost] = useState([]);
 
   //  category and writer fetch
   const [category, setCategory] = useState([]);
@@ -118,6 +94,7 @@ export default function UserProfile({ slug }) {
   const [follower, setFollower] = useState(0);
   const [approvedPostNum, setApprovedPostNum] = useState(0);
   const [unapprovedPostNum, setunApprovedPostNum] = useState(0);
+  const [profileUserName, setProfileuserName] = useState('')
 
   const [following, setFollowing] = useState(0);
   //
@@ -149,6 +126,7 @@ export default function UserProfile({ slug }) {
         setProfileStatus(data.object.profile.profileStatus)
         setGender(data.object.profile.gender)
         setDob(data.object.profile.dob)
+        setUsername(data.object.profile.name)
         setAddress(data.object.profile.address)
         setEmail(data.object.profile.email)
         setPhone(data.object.profile.phone)
@@ -227,6 +205,7 @@ export default function UserProfile({ slug }) {
                 follower={follower}
                 following={following}
                 username={username}
+                setUsername={setUsername}
                 designation={designation}
                 profileStatus={profileStatus}
               />
@@ -240,6 +219,8 @@ export default function UserProfile({ slug }) {
 
                       <div>
                         <UserInformationsAndBio
+                        username={username}
+                        setUsername={setUsername}
                           sex={gender}
                           birthdate={dob}
                           location={address}

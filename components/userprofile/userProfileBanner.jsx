@@ -4,9 +4,9 @@ import { apiBasePath } from '../../utils/constant'
 import ImageCrop from './cropComponents/ImageCrop'
 import ImageCropProvider from './cropComponents/ImageCropProvider'
 
-export default function UserProfileBanner({ image ='', username = '', designation = '', profileStatus = '', apprevedPost = 0, unApprovedPost = 0, follower = 0, following = 0 }) {
+export default function UserProfileBanner({ image = '', username = '', setUsername, designation = '', profileStatus = '', apprevedPost = 0, unApprovedPost = 0, follower = 0, following = 0 }) {
 
-     console.log('image --------- length >>>>>', image)
+    console.log('image --------- length >>>>>', image)
     return (
         <>
 
@@ -22,7 +22,7 @@ export default function UserProfileBanner({ image ='', username = '', designatio
                             src={image?.length > 0 ? `${apiBasePath}/${image.slice(image.indexOf("/") + 1)}` : '/images/defaultUserPic/profile.jpg'}
                         /> */}
                         <ImageCropProvider>
-                        <ImageCrop image={`${apiBasePath}/${image}`} />
+                            <ImageCrop image={`${apiBasePath}/${image}`} />
                         </ImageCropProvider>
                     </div>
 
@@ -32,8 +32,18 @@ export default function UserProfileBanner({ image ='', username = '', designatio
 
                         <div className="grid place-content-center  text-center space-y-4 ">
                             <h1 className="text-[#FCD200] lg:text-[35px] md:text-[34px] sm:text-[32px] xs:text-[30px]  items-center">
-                                {username}
+                                {/* {username} */}
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    placeholder="আপনার নাম লিখুন "
+                                    value={username} // Set the input value to the state variable 'name'
+                                    onChange={(e)=>setUsername(e.target.value)} // Attach the handleChange function on change
+                                />
+
                             </h1>
+
                             <h1 className="text-[#595D5B] lg:text-[22px] md:text-[21px] sm:text-[20px] xs:text-[17px] items-center">
                                 {designation}
                             </h1>
