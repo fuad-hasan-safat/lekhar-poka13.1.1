@@ -41,7 +41,7 @@ const ImageCropModalContent = ({ handleDone, handleClose }) => {
             Cancel
           </Button>
           <Button variant="primary" className="w-full" onClick={handleDone}>
-            Done & Save
+            Save
           </Button>
         </div>
       </div>

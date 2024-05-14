@@ -35,13 +35,14 @@ const SignUpPageBeforeOTP = () => {
     error: null,
     phoneError: null,
     isDisabled: true, // Button initially disabled
-});
+  });
 
 
-  const [uuid, setUuid] = useState("");
+  
   useEffect(() => {
-    setUuid(localStorage.getItem("uuid") || "");
-  }, [uuid]);
+ 
+    setUserUuid(localStorage.getItem("uuid") || "");
+  }, []);
 
 
   return (
@@ -59,26 +60,38 @@ const SignUpPageBeforeOTP = () => {
                 {/* right part */}
                 <div className="login__form__right bg-white rounded-l-[46px] text-black grid place-items-center ">
                   <div className="w-full">
-                    {/* <SigninForm logreg="Create Account" btntext="Sign Up" /> */}
-                    {!isOtpSucess && !isOtpVarified  && <SigninFormBeforeOTP logreg="Create Account" btntext="Sign Up" SetIsOtpSucess={SetIsOtpSucess}  setState={setState} state={state} otpStatus={otpStatus} setOtpStatus={setOtpStatus} otpProp='send-otp'/> }
-                    {isOtpSucess && !isOtpVarified && <OtpPage phonenumber={state.mobileNumber} setIsOtpSuccess={SetIsOtpSucess} setIsOtpVerified={setIsOtpVarified} otpStatus={otpStatus} setOtpStatus={setOtpStatus}/> }
-                    {isOtpVarified && <SigninFormAterOTP logreg="Create Account" btntext="Sign Up" phonenumber={state.mobileNumber}/> }
-                   
-                    <SignInOption
-                      user={user}
-                      setUser={setUser}
-                      profile={profile}
-                      setProfile={setProfile}
-                      setStatus={setStatus}
-                      setUsername={setUsername}
-                      setUserUuid={setUserUuid}
-                      setEmail={setEmail}
-                      title="অথবা সাইন ইন করুন"
-                      icon1="/images/loginOptionIcon/google.svg"
-                      lowermessege1="একাউন্ট আছে? "
-                      lowermessege2=" লগইন করুন ।"
-                      signLogLink="/account/login"
-                    />
+
+                    {userUuid?.length > 0 ?
+                      <>
+                        <div>
+                          <p className="text-black text-3xl">আপনি ইতিমধ্যেই লগইন করেছেন.<a href="/"> <span className="text-orange-500 cursor-pointer">প্রচ্ছদ পেজে যান </span></a></p>
+                        </div>
+                      </>
+                      : <>
+
+                        {!isOtpSucess && !isOtpVarified && <SigninFormBeforeOTP logreg="একাউন্ট তৈরি করুন" btntext="সাইন আপ" SetIsOtpSucess={SetIsOtpSucess} setState={setState} state={state} otpStatus={otpStatus} setOtpStatus={setOtpStatus} otpProp='send-otp' />}
+                        {isOtpSucess && !isOtpVarified && <OtpPage phonenumber={state.mobileNumber} setIsOtpSuccess={SetIsOtpSucess} setIsOtpVerified={setIsOtpVarified} otpStatus={otpStatus} setOtpStatus={setOtpStatus} />}
+                        {isOtpVarified && <SigninFormAterOTP logreg="একাউন্ট তৈরি করুন" btntext="সাইন আপ" phonenumber={state.mobileNumber} />}
+
+                        <SignInOption
+                          user={user}
+                          setUser={setUser}
+                          profile={profile}
+                          setProfile={setProfile}
+                          setStatus={setStatus}
+                          setUsername={setUsername}
+                          setUserUuid={setUserUuid}
+                          setEmail={setEmail}
+                          title="অথবা সাইন ইন করুন"
+                          icon1="/images/loginOptionIcon/google.svg"
+                          lowermessege1="একাউন্ট আছে? "
+                          lowermessege2=" লগইন করুন ।"
+                          signLogLink="/account/login"
+                        />
+
+
+                      </>}
+
                   </div>
 
                 </div>

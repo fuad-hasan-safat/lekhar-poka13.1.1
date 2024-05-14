@@ -33,7 +33,7 @@ const ContactForm = () => {
                 message: formData.message
             });
             // Handle successful signup response (e.g., redirect)
-            alert('Sucessfully Submit')
+            alert('ধন্যবাদ আপনার মন্তব্যের জন্য')
         } catch (error) {
             console.error('Signup error:', error);
             // Handle signup error (e.g., display error message)

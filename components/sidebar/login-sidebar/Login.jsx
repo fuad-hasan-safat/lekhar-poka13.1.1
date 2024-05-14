@@ -187,7 +187,7 @@ export default function Login() {
 
             </div>
             <a
-              className="pt-[12px] float-right mb-[15px] inline-block align-baseline font-bold text-xs text-gray-600 hover:text-black-800"
+              className="pt-[12px] float-right mb-[15px] inline-block align-baseline font-bold text-base text-gray-600 hover:text-black-800"
               href="/account/recoverpassword"
             >
               পাসওয়ার্ড ভুলে গেছেন?

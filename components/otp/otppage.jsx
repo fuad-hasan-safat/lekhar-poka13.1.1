@@ -93,11 +93,11 @@ const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus,
     <div className="w-full">
       <div className="grid place-items-center lg:pt-28 md:pt-26 sm:pt-20 xs:pt-15">
         <h1 className="text-black lg:text-5xl md:text-4xl sm:text-4xl xs:text-3xl lg:mb-[40px] md:mb-[40px] sm:mb-[30px] xs:mb-[20px]">
-          OTP Verification
+        ওটিপি যাচাই করুন
         </h1>
-        <p className="text-gray-500">We will send you a one-time password on</p>
+        <p className="text-gray-500">আমরা আপনাকে একটি এককালীন পাসওয়ার্ড পাঠাব</p>
         <p className="text-gray-500">
-          this <span className="font-semibold">Mobile Number:</span> +88 {phonenumber}
+           <span className="font-semibold">মোবাইল নাম্বার:</span> +88 {phonenumber}
         </p>
       </div>
       <div className="flex justify-center flex-row space-x-6 lg:mt-[70px] lg:mb-[70px] md:mt-[60px] md:mb-[60px] sm:mt-[50px] sm:mb-[50px] xs:mt-[30px] xs:mb-[20px] text-3xl font-semibold text-gray-700">
@@ -114,14 +114,14 @@ const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus,
         ))}
       </div>
       <div className="flex justify-center items-center flex-col">
-        {otpStatus === "SENT" && <p className="text-gray-500">{`Resend OTP in ${timer} seconds`}</p>}
+        {otpStatus === "SENT" && <p className="text-gray-500">{`ওটিপি  ${timer} সেকেন্ড পর আবার পাঠানো হবে`}</p>}
         <button
           onClick={sendOtp}
           disabled={isButtonDisabled}
-          className={`login__btn mt-8 px-5 bg-[#F9A106] rounded-full lg:text-[35px] md:text-[34px] sm:text-[33px] xs:text-[30px] text-white lg:h-[75px] md:h-[70px] sm:h-[65px] xs:h-[60px] ${isButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
+          className={`login__btn mt-8 lg:px-5 md:px- sm:px-3  bg-[#F9A106] rounded-full lg:text-[35px] md:text-[30px] sm:text-[25px] xs:text-[20px] text-white lg:h-[75px] md:h-[65px] sm:h-[60px] xs:h-[55px] ${isButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
             }`}
         >
-          Verify
+          ওটিপি যাচাই করুন
         </button>
         {timer <= 0 &&
 
@@ -129,7 +129,7 @@ const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus,
             onClick={handleSendOtpAgain}
             className="lg:pl-60 md:pl-50 sm:pl-40 xs:pl-10 pt-2 text-gray-400 font-semibold text-sm"
           >
-            Did not get OTP?
+           ওটিপি পাননি ?
           </button>
         }
 

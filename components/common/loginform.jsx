@@ -127,7 +127,7 @@ export default function LoginForm({ logreg, btntext }) {
               className="h-[62px] p-4 bg-[#FCF7E8] rounded-2xl text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="phone"
               type="number"
-              placeholder="Enter Phone Number (01-XXXXXXXXX)"
+              placeholder="নাম্বার দিন (01-XXXXXXXXX)"
               required
             />
             {error && <p className="error text-red-500">{error}</p>}
@@ -139,11 +139,11 @@ export default function LoginForm({ logreg, btntext }) {
               className="h-[62px] p-4 bg-[#FCF7E8]  rounded-2xl   text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
               id="password"
               type="password"
-              placeholder="Password"
+              placeholder="পাসওয়ার্ড দিন"
               required
             />
              <a
-              className="pt-[12px] float-right mb-[15px] inline-block align-baseline font-bold text-xs text-gray-600 hover:text-black-800"
+              className="pt-[12px] float-right mb-[15px] inline-block align-baseline font-bold text-base text-gray-600 hover:text-black-800"
               href="/account/recoverpassword"
             >
               পাসওয়ার্ড ভুলে গেছেন?

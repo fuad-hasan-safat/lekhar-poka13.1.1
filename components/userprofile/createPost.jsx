@@ -70,6 +70,8 @@ export default function CreatePost() {
 
     }, []);
 
+    
+
     useEffect(() => {
         setStatus(localStorage.getItem("status") || "");
     }, [status]);
@@ -328,12 +330,13 @@ export default function CreatePost() {
                         <Editor
                             value={content}
                             onChange={textEditorHandler}
-                            containerProps={{ style: { color: 'black' , height: '550px'} }}
+                            
+                            containerProps={{ style: { color: 'black' , height: '550px'}, className: 'auto-height-editor custom-editor' }}
 
                         >
                             <Toolbar>
-                                <BtnBold />
-                                <BtnItalic />
+                                {/* <BtnBold />
+                                <BtnItalic /> */}
                             </Toolbar>
                         </Editor>
                     </EditorProvider>

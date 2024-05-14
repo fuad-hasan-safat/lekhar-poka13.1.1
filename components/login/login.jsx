@@ -47,12 +47,12 @@ const LoginPage = () => {
                       userUuid?.length > 0 ?
                       <>
                       <div>
-                        <p className="text-black text-3xl">You are already logged in.<a href="/"> <span className="text-orange-500 cursor-pointer">Go to Home</span></a></p>
+                        <p className="text-black text-3xl">আপনি ইতিমধ্যেই লগইন করেছেন.<a href="/"> <span className="text-orange-500 cursor-pointer">প্রচ্ছদ পেজে যান </span></a></p>
                       </div>
                       </>
                       :
                       <>
-                        <LoginReg logreg="Log In" btntext="Log In" />
+                        <LoginReg logreg="লগইন করুন" btntext="লগইন" />
 
                         <SignInOption
                           user={user}

@@ -136,8 +136,8 @@ export default function SigninFormAterOTP({ logreg, btntext, phonenumber }) {
                         <input
                             id="username"
                             type="text"
-                            name="fullName"
-                            placeholder="Full Name"
+                            name="আপনার নাম"
+                            placeholder=""
                             value={state.fullName}
                             onChange={numberhandleChange}
                             className=" h-[62px] p-4 bg-[#FCF7E8] rounded-2xl text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -165,7 +165,7 @@ export default function SigninFormAterOTP({ logreg, btntext, phonenumber }) {
                             id="password"
                             type={showPassword ? 'text' : 'password'}
                             name="password"
-                            placeholder="Password"
+                            placeholder="পাসওয়ার্ড দিন"
                             value={state.password}
                             onChange={handleChange}
                             onBlur={validate}
@@ -182,7 +182,7 @@ export default function SigninFormAterOTP({ logreg, btntext, phonenumber }) {
                         <input
                             type={reshowPassword ? 'text' : 'password'}
                             name="retypePassword"
-                            placeholder="Retype Password"
+                            placeholder="আবার পাসওয়ার্ড দিন"
                             value={state.retypePassword}
                             onChange={handleChange}
                             onBlur={validate}

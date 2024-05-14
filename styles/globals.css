@@ -766,6 +766,25 @@ transition: all 0.5s !important;
 .joidcss p{
   color: black !important;
 }
+.auto-height-editor {
+  min-height: 100px; /* Set a minimum height */
+  max-height: 500px; /* Set a maximum height (optional) */
+  overflow: auto; /* Enable vertical scrolling */
+}
+
+.custom-editor {
+  border: 1px solid #ccc; /* Set border style, width, and color */
+  background-color: #FCF7E8; /* Set background color */
+  padding: 5px; /* Add optional padding around the content */
+}
+.rsw-ce{
+  height: 500px !important;
+}
+
+.custom-editor::placeholder { /* Style the placeholder text */
+  color: #999; /* Set placeholder text color */
+  opacity: 0.7; /* Adjust placeholder text opacity (optional) */
+}
 
 .admin__upload__wrap{
   max-width: 800px;

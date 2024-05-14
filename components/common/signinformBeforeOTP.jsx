@@ -107,7 +107,7 @@ export default function SigninFormBeforeOTP({type, logreg, btntext, SetIsOtpSuce
                     SetIsOtpSucess(false)
                     }
                 } catch (error) {
-                    alert(error.response.data.message);
+                    alert('এই ফোন নম্বর দিয়ে কোনো ব্যবহারকারী নিবন্ধিত নয়');
 
                 }
 
@@ -162,7 +162,7 @@ export default function SigninFormBeforeOTP({type, logreg, btntext, SetIsOtpSuce
                             id="phonenumber"
                             type="tel"
                             name="mobileNumber"
-                            placeholder="Enter Phone Number (01-XXXXXXXXX)"
+                            placeholder="ফোন নম্বর লিখুন (01-XXXXXXXXX)"
                             value={state.mobileNumber}
                             onChange={handleChange}
                             onBlur={validate}
@@ -175,7 +175,7 @@ export default function SigninFormBeforeOTP({type, logreg, btntext, SetIsOtpSuce
 
                     <button
                         onClick={handleSubmitBeforeOTP}
-                        className=" mt-8 px-[90px] bg-[#F9A106] rounded-full text-[35px] text-white h-[75px] "
+                        className=" mt-8 px-[90px] bg-[#F9A106] rounded-full lg:text-[35px] md:text-[30px] sm:text-[25px]  text-white lg:h-[75px] md:h-[70px] sm:h-[60px] xs:h-[55px] "
                     >
                         {btntext}
                     </button>

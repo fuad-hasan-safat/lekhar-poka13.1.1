@@ -93,7 +93,7 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
         <>
             <div className="login__form__dsc">
             <div className="text-[48px] mb-5  font-semibold text-yellow-500">
-                    Recovery Password
+            পাসওয়ার্ড রিসেট করুন
                 </div>
 
                 <div className="mb-5">
@@ -102,7 +102,7 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
                         id="password"
                         type="password"
                         name="password"
-                        placeholder="Password"
+                        placeholder="পাসওয়ার্ড দিন"
                         value={state.password}
                         onChange={handleChange}
                         onBlur={validate}
@@ -116,7 +116,7 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
                     <input
                         type="password"
                         name="retypePassword"
-                        placeholder="Retype Password"
+                        placeholder="আবার পাসওয়ার্ড দিন"
                         value={state.retypePassword}
                         onChange={handleChange}
                         onBlur={validate}
@@ -130,7 +130,7 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
                     onClick={handleUpdatePassword}
                     className="login__btn mt-8 px-5 bg-[#F9A106] rounded-full lg:text-[35px] md:text-[34px] sm:text-[33px] xs:text-[30px] text-white lg:h-[75px] md:h-[70px] sm:h-[65px] xs:h-[60px]"
                 >
-                    Update Password
+                    আপডেট পাসওয়ার্ড
                 </button>
             </div>
         </>
