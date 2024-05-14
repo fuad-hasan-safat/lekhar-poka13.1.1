@@ -142,7 +142,7 @@ const FullPostPaginationOthers = ({ logText, customclass }) => {
         {logLines
           ?.slice(startIndex, endIndex)
           .map((line, index) => (
-            <div key={startIndex + index} className={'text-[18px] text-justify'} dangerouslySetInnerHTML={{ __html: line }} ></div>
+            <div key={startIndex + index} className={`text-[18px] text-justify ${customclass}` } dangerouslySetInnerHTML={{ __html: line }} ></div>
             // parse(line, { replace: (domNode) => { // Add the replace option
             //   if (domNode.attribs && domNode.attribs.style) {
             //     delete domNode.attribs.style;

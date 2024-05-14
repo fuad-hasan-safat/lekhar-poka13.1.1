@@ -15,7 +15,7 @@ const FullPost = ({ content, title, writer, catagory, url }) => {
                 <div className="text-[22px] text-[#595D5B] mb-[10px]">{writer}</div>
                 {/* <div className="text-[22px] text-[#595D5B] " dangerouslySetInnerHTML={{__html:content}}></div> */}
                 <div>
-                <FullPostPagination customclass='text-[16px] text-gray-500' logText={content} />
+                <FullPostPagination customclass='text-[16px] text-[#595D5B]' logText={content} />
                 </div>
             </div>
 
