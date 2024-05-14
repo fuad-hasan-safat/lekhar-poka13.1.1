@@ -60,7 +60,7 @@ export default function SobGolpoLeftContent() {
 
   useEffect(() => {
     fetchPosts();
-  }, [totalPages]);
+  }, []);
 
 
   const loadnextPage = () => {
@@ -123,7 +123,7 @@ export default function SobGolpoLeftContent() {
                     </InfiniteScroll>
                   </div>
                 </div> :
-                <div className="pt-10">  এই মুহূর্তে কোনো লেখা নেই </div>
+                <div className="pt-10 text-black">  এই মুহূর্তে কোনো লেখা নেই </div>
 
               }
               {/* {totalPages > 1 && <div className="py-10 space-x-4">

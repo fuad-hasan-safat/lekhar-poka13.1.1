@@ -56,7 +56,7 @@ export default function UponnasList() {
 
     useEffect(() => {
         fetchPosts();
-    }, [totalPages]);
+    }, []);
 
 
     const loadnextPage = () => {
@@ -99,7 +99,7 @@ export default function UponnasList() {
                         </div>
 
                     </div> :
-                    <div className="pt-10"> এই মুহূর্তে কোনো লেখা নেই </div>
+                    <div className="pt-10 text-black"> এই মুহূর্তে কোনো লেখা নেই </div>
 
                 }
                 <InfiniteScroll
