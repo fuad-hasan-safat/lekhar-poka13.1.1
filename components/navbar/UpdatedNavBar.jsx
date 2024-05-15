@@ -57,7 +57,7 @@ export default function UpdatedNavBar() {
         };
 
         fetchUserPhoto();
-        
+
     }, []);
 
 
@@ -97,7 +97,7 @@ export default function UpdatedNavBar() {
                 // window.open(searchData[selectedIteam]?.link);
                 setSearch('')
                 router.push(`/post/${searchData[selectedIteam]?._id}`)
-                
+
             }
         } else {
             setSelectedIteam(-1);
@@ -140,20 +140,20 @@ export default function UpdatedNavBar() {
     //   logout
 
     function Logout() {
-        const confirmLogout =  window.confirm('আপনি কি আসলেই লগ আউট করতে চান?');
+        const confirmLogout = window.confirm('আপনি কি আসলেই লগ আউট করতে চান?');
         if (confirmLogout) {
-          // alert('Logging out...'); 
-          localStorage.removeItem("status");
-          localStorage.removeItem("name");
-          localStorage.removeItem("uuid");
-          localStorage.removeItem("phone");
-          localStorage.removeItem("token");
-          localStorage.removeItem("usertype");
-          localStorage.removeItem("email");
-          
+            // alert('Logging out...'); 
+            localStorage.removeItem("status");
+            localStorage.removeItem("name");
+            localStorage.removeItem("uuid");
+            localStorage.removeItem("phone");
+            localStorage.removeItem("token");
+            localStorage.removeItem("usertype");
+            localStorage.removeItem("email");
+
             // setisLogOut(true)
 
-          router.push('/account/login');
+            router.push('/account/login');
         }
     }
 
@@ -177,10 +177,6 @@ export default function UpdatedNavBar() {
                                     </a>
                                 </div>
                                 <div className={`flex justify-between items-center text-black lg:text-[18px] sm:text-[15px] pt-1  place-content-center `}>
-                                    <div className="hambar__icon" onClick={toggleMenu}>
-                                        <i class="ri-menu-line"></i>
-                                        {/* <img src="/public/images/navbaricon/list.svg"/> */}
-                                    </div>
 
                                     <div className="search__bar relative flex flex-row place-content-center">
                                         <Image
@@ -231,6 +227,7 @@ export default function UpdatedNavBar() {
                                         {isSearchActive && (
 
                                             <button
+                                                className='px-[15px]'
                                                 onClick={() => setIsSearchActive(false)}
                                             >
                                                 <i class="ri-list-check"></i>
@@ -238,8 +235,14 @@ export default function UpdatedNavBar() {
 
                                         )}
                                     </div>
-                                    <div className={`sidebar pl-[15px]`} ref={menuRef}>
-                                    
+                                    <div className="hambar__icon" onClick={toggleMenu}>
+                                        <i class="ri-menu-line"></i>
+                                        {/* <img src="/public/images/navbaricon/list.svg"/> */}
+                                    </div>
+
+
+                                    <div className={`sidebar pl-[11px]`} ref={menuRef}>
+
 
                                         <ul className={`flex flex-row lg:space-x-[15px] text-center sm:space-x-2 xs:space-x-[0px] kangsa-font transition-all ease-in-out duration-2000`}>
                                             <li
@@ -258,7 +261,7 @@ export default function UpdatedNavBar() {
                                                         : "text-black"
                                                         }`}
                                                     href="#">সব লেখা</a>
-                                                    <FontAwesomeIcon icon={faAngleDown} className="ml-2 pt-1 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-4 sm:w-4 xs:h-4 xs:w-4 focus:text-[#F9A106]" />
+                                                <FontAwesomeIcon icon={faAngleDown} className="ml-2 pt-1 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-4 sm:w-4 xs:h-4 xs:w-4 focus:text-[#F9A106]" />
                                                 {visibleItem === 0 && (
                                                     <ul
                                                         className='absolute lg:text-[16px] sm:text-[13px]
@@ -266,55 +269,55 @@ export default function UpdatedNavBar() {
                                                      lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none 
                                                      lg:bg-[#FCF7E8] md:bg-[#FCF7E8] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none'>
                                                         <li
-                                                        
+
                                                             className="block px-4 py-2 hover:bg-[#F9A106]  hover:text-white"
-                                                            onClick={()=> closeMenu()}
+                                                            onClick={() => closeMenu()}
 
                                                         >
                                                             <a className='block' href="/kobita">কবিতা</a>
                                                             {/* <hr/> */}
                                                         </li>
-                                                        <hr/>
+                                                        <hr />
 
                                                         <li
                                                             className="block px-4 py-2  hover:bg-[#F9A106]  hover:text-white"
-                                                            onClick={()=> closeMenu()}
+                                                            onClick={() => closeMenu()}
 
                                                         >
                                                             <a className='block' href="/golpo">গল্প</a>
                                                         </li>
-                                                        <hr/>
+                                                        <hr />
 
                                                         <li
                                                             className="block px-4 py-2 hover:bg-[#F9A106]  hover:text-white"
-                                                            onClick={()=> closeMenu()}
+                                                            onClick={() => closeMenu()}
 
                                                         >
                                                             <a className='block' href="/onugolpo">অনুগল্প</a>
                                                         </li>
-                                                        <hr/>
+                                                        <hr />
 
                                                         <li
                                                             className="block px-4 py-2  hover:bg-[#F9A106]  hover:text-white"
-                                                            onClick={()=> closeMenu()}
+                                                            onClick={() => closeMenu()}
 
                                                         >
                                                             <a className='block' href="/probondho">প্রবন্ধ</a>
                                                         </li>
-                                                        <hr/>
+                                                        <hr />
 
                                                         <li
                                                             className="block px-4 py-2   hover:bg-[#F9A106]  hover:text-white"
-                                                            onClick={()=> closeMenu()}
+                                                            onClick={() => closeMenu()}
 
                                                         >
                                                             <a className='block' href="/jiboni">জীবনী</a>
                                                         </li>
-                                                        <hr/>
+                                                        <hr />
 
                                                         <li
                                                             className="block px-4 py-2   hover:bg-[#F9A106]  hover:text-white"
-                                                            onClick={()=> closeMenu()}
+                                                            onClick={() => closeMenu()}
 
                                                         >
                                                             <a className='block' href="/uponnas">উপন্যাস</a>
@@ -358,16 +361,16 @@ export default function UpdatedNavBar() {
                                                         <ul className='absolute lg:text-[16px] sm:text-[13px] lg:backdrop-blur-md md:backdrop-blur-md  lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none lg:bg-[#FCF7E8] md:bg-[#FCF7E8] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none'>
                                                             <li
                                                                 className="block cursor-pointer px-4 py-2  hover:bg-[#F9A106]  hover:text-white"
-                                                                onClick={()=> closeMenu()}
+                                                                onClick={() => closeMenu()}
 
                                                             >
                                                                 <a className='block' href="/user/alluserpost">সকল</a>
                                                             </li>
-                                                        <hr/>
+                                                            <hr />
 
                                                             <li
                                                                 className="block cursor-pointer px-4 py-2 hover:bg-[#F9A106]  hover:text-white"
-                                                                onClick={()=> closeMenu()}
+                                                                onClick={() => closeMenu()}
 
                                                             ><a className='block' href="/user/createpost">লিখুন</a></li>
                                                         </ul>
@@ -378,7 +381,7 @@ export default function UpdatedNavBar() {
                                                 userUuid.length > 0 &&
                                                 <li
                                                     className='relative cursor-pointer'
-                                                    onClick={() => { toggleVisibility(2);}}>
+                                                    onClick={() => { toggleVisibility(2); }}>
                                                     {userImage?.length > 0 ? <img src={`${apiBasePath}/${userImage.slice(userImage.indexOf("/") + 1)}`} alt={userImage} className='h-[35px] w-[35px] rounded-full' /> :
                                                         <img src='/images/user/deafultProfile.png' alt='profile pic' className='h-[35px] w-[35px] rounded-full' />}
 
@@ -386,16 +389,16 @@ export default function UpdatedNavBar() {
                                                         <ul className='absolute lg:text-[16px] sm:text-[13px] lg:backdrop-blur-md md:backdrop-blur-md  lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none lg:bg-[#FCF7E8] md:bg-[#FCF7E8] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none'>
                                                             <li
                                                                 className="block cursor-pointer px-4 py-2 hover:bg-[#F9A106]  hover:text-white"
-                                                                onClick={()=> closeMenu()}
+                                                                onClick={() => closeMenu()}
 
                                                             >
-                                                                <a  className='block' onClick={() => router.push(`/user/${localStorage.getItem("uuid")}`)} href='#'>প্রোফাইল</a>
+                                                                <a className='block' onClick={() => router.push(`/user/${localStorage.getItem("uuid")}`)} href='#'>প্রোফাইল</a>
                                                             </li>
-                                                        <hr/>
+                                                            <hr />
 
                                                             <li
                                                                 className="block cursor-pointer px-4 py-2   hover:bg-[#F9A106]  hover:text-white"
-                                                                onClick={()=> closeMenu()}
+                                                                onClick={() => closeMenu()}
 
                                                             >
                                                                 <a className='block' onClick={Logout} href="#">লগ আউট</a>
@@ -406,7 +409,7 @@ export default function UpdatedNavBar() {
                                             }
                                         </ul>
                                     </div>
-                                   
+
                                 </div>
                             </div>
                         </div>

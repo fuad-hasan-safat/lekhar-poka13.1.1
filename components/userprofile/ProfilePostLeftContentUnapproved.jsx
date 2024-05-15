@@ -95,7 +95,7 @@ useEffect(() => {
                           id={post._id} // Assuming '_id' is the unique identifier
                           title={post.title}
                           writer={post.writer}
-                          content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 70).join(" ")}` : `${post.content.split(/\s+/).slice(0, 100).join(" ")}`} // Truncate content
+                          content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 50).join(" ")}` : `${post.content.split(/\s+/).slice(0, 80).join(" ")}`} // Truncate content
                           category={post.category}
 
                         />
