@@ -67,7 +67,7 @@ const MyFooter = () => {
                         <SocialLink
                           title="Social"
                           links={[
-                            { label: "/images/footer/fb.svg",  url:'#' },
+                            { label: "/images/footer/fb.svg",  url:'https://www.facebook.com/profile.php?id=61559820926777' },
                             // { label: "/images/footer/ig.svg", url:'#' },
                             // { label: "/images/footer/tweet.svg",  url:'#' },
                             // { label: "/images/footer/youtube.svg",  url:'#' },
