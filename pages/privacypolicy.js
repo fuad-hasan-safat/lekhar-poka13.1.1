@@ -14,7 +14,7 @@ export default function Home() {
       {/* lg:pt-[95px] md:pt-[90px] sm:pt-[85px] xs:pt-[80px] */}
       <div className=" text-black">
         <Head>
-          <title>Privecy and Policy</title>
+          <title>Privacy and Policy</title>
         </Head>
 
         <section className="banner-sec-wrap">
