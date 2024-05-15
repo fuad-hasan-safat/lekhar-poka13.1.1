@@ -37,6 +37,7 @@ export default function UserProfileBanner({ image = '', username = '', setUserna
                                     type="text"
                                     id="name"
                                     name="name"
+                                    className='px-3 py-2'
                                     placeholder="আপনার নাম লিখুন "
                                     value={username} // Set the input value to the state variable 'name'
                                     onChange={(e)=>setUsername(e.target.value)} // Attach the handleChange function on change

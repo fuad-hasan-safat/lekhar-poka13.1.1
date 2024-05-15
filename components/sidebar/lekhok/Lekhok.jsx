@@ -62,7 +62,7 @@ const Lekhok = () => {
             {getVisibleWriters().length > 0 &&
               getVisibleWriters().map((item, index) => (
                 <>
-                  <div className="pb-3">
+                  <div key={index} className="pb-3">
                     <LekhokDetails
                       key={index}
                       image={`${apiBasePath}/${item.image.replace('/uploads/', '/')

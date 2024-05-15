@@ -84,19 +84,18 @@ export default function UserInformationsAndBio({ username, setUsername }) {
                 setemail(data.object.profile.email)
                 setPhoneNumber(data.object.profile.phone)
                 setGender(data.object.profile.gender)
-                setPreview(`${apiBasePath}/${data.object.profile.image.slice(data.object.profile.image.indexOf("/") + 1)}`)
+                // setPreview(`${apiBasePath}/${data.object.profile.image?.slice(data.object.profile.image.indexOf("/") + 1)}`)
 
-                setImage(`${apiBasePath}/${data.object.profile.image.slice(data.object.profile.image.indexOf("/") + 1)}`)
-                saveImageFromURL(`${apiBasePath}/${data.object.profile.image.slice(data.object.profile.image.indexOf("/") + 1)}`, 'profile.jpg')
-
-                console.log(`adress -------------------->>>>>>${data.object.profile.address}`)
+                // setImage(`${apiBasePath}/${data.object.profile.image?.slice(data.object.profile.image.indexOf("/") + 1)}`)
+                saveImageFromURL(`${apiBasePath}/${data.object.profile.image?.slice(data.object.profile.image.indexOf("/") + 1)}`, 'profile.jpg')
+                 
                 if (data.object.profile.phone?.length > 0) {
-                    // console.log('------ issubmit')
-                    isSubmit(true);
+                    console.log('------ issubmit')
+                    setIsSubMit(true);
                 }
 
                 if (data.object.profile.email?.length > 0) {
-                    // console.log('------ issubmit email')
+                    console.log('------ issubmit email')
                     setIsSubMitEmail(true)
                 }
 
@@ -144,7 +143,7 @@ export default function UserInformationsAndBio({ username, setUsername }) {
             //const formattedDate = moment(startDate).format('DD-MM-YYYY');
 
             const formData = new FormData();
-            // formData.append('file', imageFile);
+             formData.append('file', imageFile);
             formData.append('name', username)
             formData.append('designation', designation);
             formData.append('profileStatus', profileStatus);
@@ -449,7 +448,7 @@ export default function UserInformationsAndBio({ username, setUsername }) {
                     </div>
                     <button
                         onClick={handleSubmit}
-                        className='bg-[#fd9915] hover:bg-[#cf7b1b] text-black hover:text-white text-[22px] px-[25px] py-[5px] rounded-2xl mt-[25px] '
+                        className='bg-[#fd9915] hover:bg-[#cf7b1b] text-white hover:text-white text-[22px] px-[25px] py-[5px] rounded-2xl mt-[25px] '
                     >প্রোফাইল আপডেট</button>
                 </div>
             </div>
