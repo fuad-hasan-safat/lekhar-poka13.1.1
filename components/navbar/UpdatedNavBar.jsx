@@ -94,7 +94,10 @@ export default function UpdatedNavBar() {
             ) {
                 setSelectedIteam((prev) => prev + 1);
             } else if (e.key === "Enter") {
-                window.open(searchData[selectedIteam].link);
+                // window.open(searchData[selectedIteam]?.link);
+                setSearch('')
+                router.push(`/post/${searchData[selectedIteam]?._id}`)
+                
             }
         } else {
             setSelectedIteam(-1);
