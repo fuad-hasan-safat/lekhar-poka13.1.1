@@ -218,7 +218,12 @@ export default function CreatePost() {
 
     const handleSubmit = async () => {
         if (!canPostStatus) {
-            alert('দয়া করে প্রোফাইল তৈরি করুন')
+            // alert('দয়া করে প্রোফাইল তৈরি করুন')
+        const confirmLogout = window.confirm('দয়া করে প্রোফাইল তৈরি করুন');
+        if(confirmLogout){
+            router.push(`/user/${localStorage.getItem("uuid")}`)
+        }
+
         }
         else {
 
