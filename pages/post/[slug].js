@@ -117,9 +117,9 @@ export default function PostDetails() {
             )
 
             }
-            <div className="kobita__dsc__rgt lg:w-[30%]">
+            {/* <div className="kobita__dsc__rgt lg:w-[30%]">
               <Sidebar />
-            </div>
+            </div> */}
           </div>
         </div>
 
