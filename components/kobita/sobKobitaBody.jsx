@@ -17,7 +17,7 @@ const SobKobitaBody = ({
   return (
     <>
       {category === 'কবিতা' ? (
-        <div className="text-center">
+        <div className="">
           <div className="pb-3">
             <div className="text-3xl text-yellow-400 font-bold">{title}</div>
           </div>
@@ -25,11 +25,11 @@ const SobKobitaBody = ({
             <div className="text-xl text-gray-800 font-semibold ">{writer}</div>
           </div>
           <div className="pb-3">
-            {/* <div
+            <div
               className="text-[16px] text-gray-500 "
               dangerouslySetInnerHTML={{ __html: content }}
-            /> */}
-            {content && (
+            />
+            {/* {content && (
               <div className="text-[16px] text-gray-500">
                 {parse(content, {
                   replace: (domNode) => {
@@ -43,7 +43,7 @@ const SobKobitaBody = ({
                   },
                 })}
               </div>
-            )}
+            )} */}
           </div>
           <div className="text-center">
             <button
