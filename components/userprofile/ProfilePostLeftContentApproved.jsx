@@ -86,7 +86,7 @@ useEffect(() => {
           {/* <div className='container'> */}
           {postList.length > 0 ?
             <div className='flex'>
-              <div className="lakha__main__content pt-20 text-3xl lg:mr-[100px] md:mr-[50px]">
+              <div className="lakha__main__content pt-[35px] text-3xl lg:mr-[100px] md:mr-[50px]">
                 {displayedPosts.length && (
                   displayedPosts.map((post, index) => (
                     <>

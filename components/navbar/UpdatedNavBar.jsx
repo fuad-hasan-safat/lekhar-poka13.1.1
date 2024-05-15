@@ -191,7 +191,7 @@ export default function UpdatedNavBar() {
                                         {isSearchActive && (
                                             <input
                                                 type="text"
-                                                className={` w-[200px] text-[16px] bg-transparent text-black py-2 pr-10 rounded-md focus:outline-none`}
+                                                className={` lg:w-[200px] md:w-[200px] sm:w-[150px] sx:w-[150px] text-[16px] bg-transparent text-black py-2 pr-10 rounded-md focus:outline-none`}
                                                 placeholder=" অনুসন্ধান..."
                                                 autoComplete="off"
                                                 onChange={handleChange}
@@ -227,7 +227,7 @@ export default function UpdatedNavBar() {
                                         {isSearchActive && (
 
                                             <button
-                                                className='px-[15px]'
+                                                className='lg:px-[15px] md:px-[15px] sm:px-[10px] xs:px-[10px]'
                                                 onClick={() => setIsSearchActive(false)}
                                             >
                                                 <i class="ri-list-check"></i>

@@ -2,7 +2,7 @@
 import { apiBasePath } from "../../utils/constant";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Loading from "./loading";
 
 // type logreg = {
@@ -27,6 +27,11 @@ export default function LoginForm({ logreg, btntext }) {
   const [error, setError] = useState(null); 
   const [numberPrefix, setNumberPrefix] = useState('88');
 
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleNumberhange = (e) => {
      // Allow only numbers and backspace key
@@ -132,16 +137,19 @@ export default function LoginForm({ logreg, btntext }) {
             />
             {error && <p className="error text-red-500">{error}</p>}
           </div>
-          <div className="">
+          <div className="relative">
             <input
               onChange={handlePasswordChange}
               value={password}
-              className="h-[62px] p-4 bg-[#FCF7E8]  rounded-2xl   text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
+              className="h-[62px] p-4 pr-[40px] bg-[#FCF7E8]  rounded-2xl   text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
               id="password"
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               placeholder="পাসওয়ার্ড দিন"
               required
             />
+             <button className="absolute right-[20px]  pt-[18px]" type="button" onClick={togglePasswordVisibility}>
+                {showPassword ? <i class="ri-eye-off-line"></i> : <i class="ri-eye-line"></i>}
+              </button>
              <a
               className="pt-[12px] float-right mb-[15px] inline-block align-baseline font-bold text-base text-gray-600 hover:text-black-800"
               href="/account/recoverpassword"

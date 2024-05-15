@@ -44,39 +44,17 @@ export default function SigninFormAterOTP({ logreg, btntext, phonenumber }) {
         setState((prevState) => ({
             ...prevState,
             [name]: value,
-            // Validate phone number on every change for inline error display
-            // phoneError: validateMobileNumber(value) ? null : 'Mobile number is invalid.',
+    
         }));
 
     };
 
-    // validate phone number 
-    // Validate phone number
-    // const validateMobileNumber = (mobileNumber) => {
-    //     // Enforce exactly 11 digits after '01' using positive lookahead assertion
-    //     const regex = /^01[ \-\d]{9}$/;
-    //     return regex.test(mobileNumber);
-    // };
+
 
     const validate = () => {
         let isValid = true;
         setState((prevState) => ({ ...prevState, error: null }));
 
-        // if (!state.mobileNumber) {
-        //     setState((prevState) => ({ ...prevState, phoneError: 'Mobile number is required.' }));
-        //     isValid = false;
-        // } else if (!validateMobileNumber(state.mobileNumber)) {
-        //     let errorMessage = 'Mobile number must start with 01 and be 11 digits long.';
-        //     if (state.mobileNumber.length < 3) {
-        //         errorMessage = 'Mobile number is too short.';
-        //     } else if (state.mobileNumber.length > 11) {
-        //         errorMessage = 'Mobile number is too long.';
-        //     } else if (!state.mobileNumber.startsWith('01')) {
-        //         errorMessage = 'Mobile number must start with 01.';
-        //     }
-        //     setState((prevState) => ({ ...prevState, phoneError: errorMessage }));
-        //     isValid = false;
-        // }
 
         if (!state.password) {
             setState((prevState) => ({ ...prevState, error: 'Password is required.' }));
@@ -144,21 +122,7 @@ export default function SigninFormAterOTP({ logreg, btntext, phonenumber }) {
                             required
                         />
                     </div>
-                    {/* <div className="mb-4 ">
 
-                        <input
-                            id="phonenumber"
-                            type="number"
-                            name="mobileNumber"
-                            placeholder="Enter Phone Number (01-XXXXXXXXX)"
-                            value={state.mobileNumber}
-                            onChange={handleChange}
-                            onBlur={validate}
-                            className="h-[62px] p-4 bg-[#FCF7E8] rounded-2xl text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            required
-                        />
-                        {state.phoneError && state.mobileNumber && <p className="error text-red-500">{state.phoneError}</p>}
-                    </div> */}
                     <div className="mb-5 relative">
 
                         <input

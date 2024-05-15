@@ -35,25 +35,25 @@ export default function UserProfile({ slug }) {
   // console.log("user profile main page---------------------->>>>>>>>>>>>><<<<<<<<<<<<<<<< SLUG ",slug)
 
   //--------------- catagory -----------------
-  const [selectedOption, setSelectedOption] = useState(null);
+  // const [selectedOption, setSelectedOption] = useState(null);
 
   // determine writer and writer id
   const [writer, setWriter] = useState('');
-  const [writerId, setWriterId] = useState(null);
+  // const [writerId, setWriterId] = useState(null);
 
   // check box ---- (writer creation)
-  const [checkboxValue, setCheckboxValue] = useState(false);
+  // const [checkboxValue, setCheckboxValue] = useState(false);
 
-  const handleCheckboxChange = (isChecked) => {
-    setCheckboxValue(isChecked);
-    // Handle the changed checkbox value in your application logic here
-  };
+  // const handleCheckboxChange = (isChecked) => {
+  //   setCheckboxValue(isChecked);
+  //   // Handle the changed checkbox value in your application logic here
+  // };
 
-  const categoryhandleChange = (selected) => {
-    setSelectedOption(selected); // Selected option object
+  // const categoryhandleChange = (selected) => {
+  //   setSelectedOption(selected); // Selected option object
 
 
-  };
+  // };
 
  
 
@@ -80,7 +80,7 @@ export default function UserProfile({ slug }) {
 
 
   // summary
-  const [summary, setSummary] = useState('')
+  // const [summary, setSummary] = useState('')
 
   // profile information fetch
   const [designation, setDesignation] = useState('');

@@ -84,9 +84,10 @@ useEffect(() => {
       ) : (
         <>
           {/* <div className='container'> */}
-          {postList.length > 0 ?
+          {postList.length > 0 &&
             <div className='flex'>
               <div className="lakha__main__content pt-20 text-3xl lg:mr-[100px] md:mr-[50px]">
+             <h1 className='lg:text-5xl md:text-3xl sm:text-xl xs:text-2xl text-black mb-[35px]'>অনুমোদনহীন  পোস্ট </h1>
                 {displayedPosts.length && (
                   displayedPosts.map((post, index) => (
                     <>
@@ -105,8 +106,7 @@ useEffect(() => {
                   ))
                 )}
               </div>
-            </div> :
-            <div className="pt-10"> এই মুহূর্তে কোনো লেখা নেই </div>
+            </div> 
 
           }
           {totalPages > 1 && <div className="py-10 space-x-4"> {/* Add a class for styling */}

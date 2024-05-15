@@ -15,12 +15,13 @@ export default function AllUserPost() {
           <div className="lg:flex lg:flex-row lg:pt-[110px] md:pt-[110px] sm:pt-[110px] xs:pt-[110px]">
             <div className="lg:w-[70%]">
               <div>
-              <h1 className='text-5xl text-black'>অনুমোদনহীন  পোস্ট </h1>
+              {/* <h1 className='text-5xl text-black'>অনুমোদনহীন  পোস্ট </h1> */}
               <ProfilePostLeftContentUnApproved />
 
               </div>
-              <div className='mt-[110px]'>
-              <h1 className='text-5xl text-black'>অনুমোদিত পোস্ট </h1>
+              <div className='mt-[10px]'>
+             <h1 className='lg:text-5xl md:text-3xl sm:text-xl xs:text-2xl text-black'>অনুমোদিত  পোস্ট </h1>
+
               <ProfilePostLeftContentApproved />
 
               </div>

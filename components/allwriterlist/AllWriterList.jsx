@@ -34,11 +34,11 @@ export default function AllWriterList() {
                                     <div className="pb-3">
                                         <LekhokDetails
                                             key={index}
-                                            image={`${apiBasePath}/${item.image.slice(item.image.indexOf("/") + 1)}`}
+                                            image={`${apiBasePath}/${item.image?.slice(item.image.indexOf("/") + 1)}`}
                                             writer={item.name}
                                             id={item._id}
                                             user_id={item.user_id}
-                                            lifeCycle={`  ${item.birth_date === null ? `বর্তমান` : `${item.birth_date} `} থেকে  ${item.expiry_date === null? '' : ` ${item.expiry_date}` } `}
+                                            lifeCycle={`  ${item.birth_date === null ? `` : `${item.birth_date} `} থেকে  ${item.expiry_date === null? 'বর্তমান' : ` ${item.expiry_date}` } `}
 
                                         />
                                     </div>

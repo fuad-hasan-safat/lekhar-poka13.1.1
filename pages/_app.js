@@ -57,7 +57,7 @@ export default function MyApp({ Component, pageProps }) {
     <>
 
       <script async defer
-        src="https://connect.facebook.net/en_US/sdk.js/xfbml.js?appId=YOUR_FACEBOOK_APP_ID&version=v16.0"
+        src="https://connect.facebook.net/en_US/sdk.js/xfbml.js?appId=1103079424285739&version=v16.0"
         crossOrigin="anonymous"
       />
       <GoogleOAuthProvider clientId="854926132475-sm4btto49sresu4g5o9qpuk9lgtqor9f.apps.googleusercontent.com">

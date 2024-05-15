@@ -13,6 +13,7 @@ import { fetchData } from "../../function/api";
 import { apiBasePath } from "../../utils/constant";
 import MusicPlayer from "../../components/musicbar/MusicPlayer";
 import ShareOnFacebook from "../../components/share/share";
+import { FacebookShareButton } from "react-share";
 
 export default function PostDetails() {
   const router = useRouter();
@@ -24,6 +25,16 @@ export default function PostDetails() {
   const [error, setError] = useState(null); // State to store any errors
   const [isAudioAvailable, setIsAudioAvailAble] = useState(false);
   const [isdataFetch, setisDataFetch] = useState(false)
+
+
+  // face book ---------------
+  // const shareUrl = `lekharpoka.com/post/${slug}`
+  // const postTitle = '';
+  // const postDescription = 'Your Post Description';
+  // const postImageUrl = 'https://your-website.com/post-image.jpg'; /
+
+
+  // ..................
 
 
   const [rating, setRating] = useState(0);
@@ -66,80 +77,106 @@ export default function PostDetails() {
 
 
 
+const image = '/images/footerlogo.png'
+
+
   return (
     router.isReady &&
 
     <>
+
       {/* <CustomHead title={data?.title} description={data?.writer} image={''} /> */}
 
       <div>
         <Head>
+
           <title>{data?.title}</title>
+          <meta property="og:url" content={`lekharpoka.com/post/${slug}`} />
+          <meta property="og:title" content={data?.title} />
+          <meta property="og:description" content={'লেখার পোকা'} />
+          <meta property="og:image" content={image} />
+          {/* 
+          <meta property="og:url" content={'.....'} />
+          <meta property="og:title" content={'amar title'} />
+          <meta property="og:description" content="Your content description" />
+          <meta property="og:image" content="https://your-image.com/image.jpg" /> */}
+
         </Head>
       </div>
-      <div className="all__post__content__overlay">
-      <section className="banner-sec-wrap">
-        <div className="relative w-full xl:h-[380px] lg:h-[360px] md:h-[340px] sm:h-[280px] xs:h-[260px]  overflow-hidden" style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat` }}>
-          {<h2 className=" absolute top-[50%] left-[50%] text-[40px] text-[#F9A106] -translate-x-[50%] -translate-y-[50%] max-h-[0px]">{data?.category}</h2>}
-        </div>
-      </section>
-      <section className="all__post__main__content">
-        <div className="container">
-          <div className="lg:flex lg:flex-row">
-            {(
-              <div className="flex flex-col w-full relative z-50">
-                {isdataFetch &&
-                  <>
-                    <div className="kobita__dsc__lft lg:mb-[110px] md:mb-[84px]">
-                      <FullPost
-                        content={data?.content}
-                        title={data?.title}
-                        writer={data?.writer}
-                        catagory={data?.category}
-                        url={asPath}
-                      />
-                    </div>
-                    <div className="rating__share__wrap">
-                      <ShareOnFacebook url={asPath} title={data?.title} description={data?.writer} image={' '} />
-                      <RatingComponent setRating={setRating} rating={rating} post_id={data?._id} />
-                    </div>
-                  </>
-                }
-                {! isdataFetch && 
-                <>
-                <div className="text-black text-2xl mb-[75px]">
-                  আপনার অনুসন্ধানকৃত লেখাটি পাওয়া যাচ্ছে না !   
-                </div>
-                </>
-                }
-              </div>
+      <body className=" body__control">
+        <div className="all__post__content__overlay">
+          <section className="banner-sec-wrap">
+            <div className="relative w-full xl:h-[380px] lg:h-[360px] md:h-[340px] sm:h-[280px] xs:h-[260px]  overflow-hidden" style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat` }}>
+              {<h2 className=" absolute top-[50%] left-[50%] text-[40px] text-[#F9A106] -translate-x-[50%] -translate-y-[50%] max-h-[0px]">{data?.category}</h2>}
+            </div>
+          </section>
+          <section className="all__post__main__content">
+            <div className="container">
+              <div className="lg:flex lg:flex-row">
+                {(
+                  <div className="flex flex-col w-full relative z-50">
+                    {isdataFetch &&
+                      <>
+                        <div className="kobita__dsc__lft lg:mb-[110px] md:mb-[84px]">
+                          <FullPost
+                            content={data?.content}
+                            title={data?.title}
+                            writer={data?.writer}
+                            catagory={data?.category}
+                            url={asPath}
+                          />
+                        </div>
+                        <div className="rating__share__wrap">
+                          <ShareOnFacebook url={`lekharpoka.com/post/${slug}`}  title={data?.title} image={image} />
+                          {/* <FacebookShareButton
+                            url={`lekharpoka.com/post/${slug}`}
+                            quote={data?.title} // Use shareTitle for Facebook's quote preview
+                            hashtag={'#lekharpoka'}
+                            className="facebook-share-button"
+                          >
+                            Share on Facebook
+                          </FacebookShareButton> */}
 
-            )
+                          <RatingComponent setRating={setRating} rating={rating} post_id={data?._id} />
+                        </div>
+                      </>
+                    }
+                    {!isdataFetch &&
+                      <>
+                        <div className="text-black text-2xl mb-[75px]">
+                          আপনার অনুসন্ধানকৃত লেখাটি পাওয়া যাচ্ছে না !
+                        </div>
+                      </>
+                    }
+                  </div>
 
-            }
-            {/* <div className="kobita__dsc__rgt lg:w-[30%]">
+                )
+
+                }
+                {/* <div className="kobita__dsc__rgt lg:w-[30%]">
               <Sidebar />
             </div> */}
-          </div>
+              </div>
+            </div>
+
+
+          </section>
         </div>
 
 
-      </section>
-      </div>
+        {isAudioAvailable && (
 
+          <MusicPlayer songs={[{
+            id: data?._id,
+            title: data?.title,
+            src: `${apiBasePath}/${data?.audio.slice(data.audio.indexOf("/") + 1)}`,
+            writer: data?.writer,
+            image: `${apiBasePath}/${writerImage.slice(writerImage.indexOf("/") + 1)}`,
 
-      {isAudioAvailable && (
+          }]} />
 
-        <MusicPlayer songs={[{
-          id: data?._id,
-          title: data?.title,
-          src: `${apiBasePath}/${data?.audio.slice(data.audio.indexOf("/") + 1)}`,
-          writer: data?.writer,
-          image: `${apiBasePath}/${writerImage.slice(writerImage.indexOf("/")+1)}`,
-
-        }]} />
-
-      )}
+        )}
+      </body>
     </>
   );
 }
