@@ -288,7 +288,7 @@ export default function UserInformationsAndBio({ username, setUsername }) {
 
                         <div className="lg:w-[50%]">
                             <div className='flex justify-left align-items-center flex-row space-x-2'>
-                                <div htmlFor="birthDate">
+                                <div htmlFor="birthDate py-2">
                                     <img
                                         src="/images/usericons/birthdate.svg"
                                     />
@@ -296,6 +296,8 @@ export default function UserInformationsAndBio({ username, setUsername }) {
                                 <DatePicker
                                     selected={birthOfDate}
                                     dateFormat="MM-dd-yyyy"
+                                    placeholderText='মাস - দিন - বছর '
+                                    className='px-1 '
                                     onChange={handleDate}
                                 />
                             </div>
