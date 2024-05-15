@@ -12,7 +12,7 @@ export default function AllUserPost() {
       <section className="all__page__main__content">
         <div className="container">
 
-          <div className="lg:flex lg:flex-row lg:pt-[110px] md:pt-[90px] sm:pt-[40px] xs:pt-[40px]">
+          <div className="lg:flex lg:flex-row lg:pt-[110px] md:pt-[110px] sm:pt-[110px] xs:pt-[110px]">
             <div className="lg:w-[70%]">
               <div>
               <h1 className='text-5xl text-black'>অনুমোদনহীন  পোস্ট </h1>
