@@ -130,7 +130,7 @@ export default function UserProfile({ slug }) {
         setAddress(data.object.profile.address)
         setEmail(data.object.profile.email)
         setPhone(data.object.profile.phone)
-        setImage(data.object.profile.image?.slice(data.object.profile.image?.indexOf("/")+1) || '')
+        setImage(data.object.profile.image || '')
         setFollower(data.object.stats.follower)
         setFollowing(data.object.stats.following)
         setApprovedPostNum(data.object.approved_post)

@@ -21,12 +21,16 @@ const ImageCrop = ({ image, type = "profilePic", setWriterImage}) => {
     const { getProcessedImage, setImage, resetStates } = useImageCropContext();
 
     useEffect(() => {
-        setPreview(image)
         setUsername(localStorage.getItem("name") || "");
         setUserToken(localStorage.getItem("token") || "");
         setUserUuid(localStorage.getItem("uuid") || "");
 
-    }, [image])
+    }, [])
+    useEffect(()=>{
+        setPreview(image)
+
+
+    },[image.length])
 
     const handleDone = async () => {
         const avatar = await getProcessedImage();

@@ -22,7 +22,7 @@ export default function UserProfileBanner({ image = '', username = '', setUserna
                             src={image?.length > 0 ? `${apiBasePath}/${image.slice(image.indexOf("/") + 1)}` : '/images/defaultUserPic/profile.jpg'}
                         /> */}
                         <ImageCropProvider>
-                            <ImageCrop image={`${apiBasePath}/${image}`} />
+                            <ImageCrop image={image=== '' ? '/images/defaultUserPic/profile.jpg'  : `${apiBasePath}/${image.slice(image.indexOf('/')+1)}`} />
                         </ImageCropProvider>
                     </div>
 
