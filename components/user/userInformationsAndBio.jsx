@@ -32,8 +32,6 @@ export default function UserInformationsAndBio({ username, setUsername }) {
     const [isSubmitEmail, setIsSubMitEmail] = useState(false)
 
     // get saved info
-
-    // get saved info
     const [status, setStatus] = useState("");
     // const [username, setUsername] = useState("");
     const [userUuid, setUserUuid] = useState("");
@@ -79,28 +77,23 @@ export default function UserInformationsAndBio({ username, setUsername }) {
                 setProfileStatus(data.object.profile?.profileStatus || '')
                 setGender(data.object.profile.gender)
                 setBirthOfDate(data.object.profile.dob)
-                setUsername(data.object.profile.name)
+                setUsername(data.object.profile.name || '')
                 setAddress(data.object.profile?.address || '')
                 setemail(data.object.profile.email)
                 setPhoneNumber(data.object.profile.phone)
                 setGender(data.object.profile.gender)
-                // setPreview(`${apiBasePath}/${data.object.profile.image?.slice(data.object.profile.image.indexOf("/") + 1)}`)
 
-                // setImage(`${apiBasePath}/${data.object.profile.image?.slice(data.object.profile.image.indexOf("/") + 1)}`)
                 saveImageFromURL(`${apiBasePath}/${data.object.profile.image?.slice(data.object.profile.image.indexOf("/") + 1)}`, 'profile.jpg')
                  
                 if (data.object.profile.phone?.length > 0) {
-                    console.log('------ issubmit')
                     setIsSubMit(true);
                 }
 
                 if (data.object.profile.email?.length > 0) {
-                    console.log('------ issubmit email')
                     setIsSubMitEmail(true)
                 }
 
 
-                // console.log(' profile image----------->>>>', image)
             })
             .catch((error) => console.error("Error fetching profile:", error));
 
@@ -112,12 +105,11 @@ export default function UserInformationsAndBio({ username, setUsername }) {
             const data = await response.json();
             setBio(data?.content)
             setBioId(data?._id)
-            console.log('------------>>> BIO  <<<-------------', data)
+            // console.log('------------>>> BIO  <<<-------------', data)
 
         };
 
         fetchUserBioData();
-
 
         console.log({ address, phoneNumber })
     }, []);
@@ -162,7 +154,6 @@ export default function UserInformationsAndBio({ username, setUsername }) {
                     },
                     body: formData
                 });
-                // setIsProfileUpdated(true)
 
                 // console.log('------>>>> PROFILE RESPONSE <<<<<<--------', response)
 
@@ -175,10 +166,10 @@ export default function UserInformationsAndBio({ username, setUsername }) {
                     router.reload()
 
                 } else {
-                    // console.error('Failed to update profile:', response.statusText);
+                    console.error('Failed to update profile:', response.statusText);
                 }
             } catch (error) {
-                // console.error('Error updating profile:', error);
+                console.error('Error updating profile:', error);
             }
 
         }
@@ -197,11 +188,6 @@ export default function UserInformationsAndBio({ username, setUsername }) {
                     },
                 }
             );
-
-            // setIsProfileUpdated(true)
-
-            console.log('------>>>> Bio RESPONSE <<<<<<--------', response)
-
 
         } catch (error) {
             console.error('Error updating profile:', error);
@@ -223,36 +209,8 @@ export default function UserInformationsAndBio({ username, setUsername }) {
                 }
             );
 
-            // setIsProfileUpdated(true)
-
-            console.log('------>>>> Bio RESPONSE <<<<<<--------', response)
-
-
         } catch (error) {
             console.error('Error updating profile:', error);
-        }
-
-
-
-
-
-    };
-
-
-
-
-    const handleUpload = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setHighlight(false);
-        const file = e.target.files[0];
-        if (file) {
-            setImageFile(file);
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setPreview(reader.result); // Set preview image
-            };
-            reader.readAsDataURL(file);
         }
     };
 
@@ -385,27 +343,7 @@ export default function UserInformationsAndBio({ username, setUsername }) {
                     <div className='mt-[60px] pt-5'>
                         {/* <label className='mb-[20px]' htmlFor="profilePic">প্রোফাইল স্থিরচিত্র:</label> */}
                         <div className='profile__image__upload'>
-                            {/* <div
-                                onDragEnter={(e) => setHighlight(true)}
-                                onDragLeave={(e) => setHighlight(false)}
-                                onDragOver={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                }}
-                                onDrop={(e) => handleUpload(e)} className={`${Classes.upload}${highlight ? ' is-highlight' : ''}`} style={{ backgroundImage: `url(${preview || '/default-image.jpg'})` }}>
-                                <form className='my__form'>
-                                    <div className='upload__button'>
-                                        <input
-                                            type='file'
-                                            className='upload__file'
-                                            accept='image/*'
-                                            onChange={(e) => handleUpload(e)}
-                                        />
-
-                                        <button className='button'><i className='ri-camera-line'></i></button>
-                                    </div>
-                                </form>
-                            </div> */}
+                           
 
                             <div className=' lg:flex lg:flex-row lg:space-x-[15px] w-full mt-[30px]'>
                                 <div className='lg:w-[50%]'>

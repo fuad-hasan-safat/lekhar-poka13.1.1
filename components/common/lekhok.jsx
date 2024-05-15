@@ -13,6 +13,7 @@ const LekhokDetails = ({
             <div className="flex">
                 <div className="lekhokIteam">
                     <img
+                    className=""
                         src={image}
                         alt={`img ${id}`}
                     />

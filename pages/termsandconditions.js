@@ -27,7 +27,7 @@ export default function Home() {
           <div className="container">
 
             <div className="flex flex-col text-gray-700 space-y-[12px] text-justify">
-              <h1 className="text-xl">Effective as of April 01, 202d.</h1>
+              <h1 className="text-xl">Effective as of April 01, 2024.</h1>
               <p>The website,<a href="https://lekharpoka.com/" className="text-blue-500"> LEKHARPOKA</a>  and its website and Application is owned, operated and maintained by Live Technologies Ltd. (“Company”, “We”, “Us”, “Our”).</p>
               <p>PLEASE READ THE TERMS CAREFULLY BEFORE USE OF THE LEKHARPOKA SERVICES. THESE TERMS CONSTITUTE A LEGAL AND BINDING AGREEMENT BETWEEN YOU (THE END USER OF LEKHARPOKA) AND COMPANY (THE OWNER OF LEKHARPOKA), AND GOVERN YOUR USE OF THE LEKHARPOKA. BY CHECKING/CLICKING ON THE ‘I AGREE’ LINK AND/OR BY DOWNLOADING AND/OR INSTALLING AND/OR BROWSING OR USING LEKHARPOKA, YOU EXPRESSLY ACCEPT THE TERMS. IF YOU DO NOT ACCEPT TO THE TERMS, PLEASE DO NOT BROWSE AND/OR DOWNLOAD AND/OR INSTALL AND/OR USE LEKHARPOKA.</p>
               <p>For the purpose of these Terms of Use, the terms "You" “Your” or "User" shall mean any person, natural or legal who uses or browses LEKHARPOKA. The term "We", "Us", "Our" shall mean Company.</p>
