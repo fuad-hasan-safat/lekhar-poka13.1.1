@@ -99,10 +99,22 @@ export function ImageSlider() {
                         {data.map(({ _id, title, caption, image, content }, index) => (
 
                             <div className="slider__bg__img img-slider-img"
-                            key={_id}
-                            aria-hidden={imageIndex !== index}
-                            style={{background: `url(${apiBasePath}/${image.slice(image.indexOf("/") + 1)})`, translate: `${-100 * imageIndex}%`}}
+                                key={_id}
+                                aria-hidden={imageIndex !== index}
+                                style={{ background: `url(${apiBasePath}/${image.slice(image.indexOf("/") + 1)})`, translate: `${-100 * imageIndex}%` }}
                             >
+                                <div className="slider__desc container">
+                                    <h1 className="lg:text-[52px] md:text-[48px] sm:text-[44px] xs:text-[38px] text-[#86312F]" >{title}</h1>
+                                    <h2 className="lg:text-[28px] md:text-[26px] sm:text-[24px] xs:text-[22px] text-[#595D5B]">{caption}</h2>
+                                    <p className="text-[16px] text-[#595D5B] w-[90%]">{content}</p>
+
+                                    <button
+                                        onClick={() => featureHandler(_id)}
+                                        className="w-[176px] inline-block mt-[30px] bg-orange-400 px-2 h-[56px] rounded-md text-[19px]  text-white"
+                                    >
+                                        বিস্তারিত
+                                    </button>
+                                </div>
 
                             </div>
                             // <img
@@ -124,7 +136,7 @@ export function ImageSlider() {
                             overflow: "hidden",
                         }}
                     >
-                        {data.map(({ _id, title, caption, image, content }, index) => (
+                        {/* {data.map(({ _id, title, caption, image, content }, index) => (
 
                             <div
                                 aria-hidden={imageIndex !== index}
@@ -154,14 +166,14 @@ export function ImageSlider() {
 
 
 
-                        ))}
+                        ))} */}
                     </div>
 
 
                 </div>
                 :
                 <div>
-                        <p></p>
+                    <p></p>
                 </div>
             }
 
