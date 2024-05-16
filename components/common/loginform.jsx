@@ -159,11 +159,11 @@ export default function LoginForm({ logreg, btntext }) {
             </a>
           </div>
 
-          <div className="w-full">
+          <div className="w-full table m-auto">
             <button
               type="button"
               onClick={submitLogin}
-              className=" mt-8 px-[90px] bg-[#F9A106] rounded-full text-[30px] text-white  h-[60px] text-center place-content-center"
+              className=" px-[90px] bg-[#F9A106] rounded-full text-[30px] text-white  h-[60px] text-center place-content-center"
             >
               {btntext}
             </button>
