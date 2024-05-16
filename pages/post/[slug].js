@@ -119,7 +119,7 @@ export default function PostDetails() {
 
                           </div>
                           <div>
-                          <button onMouse className="absolute  px-[15px] py-[5px] right-2 text-white rounded-xl bg-orange-400" onClick={()=>readMoodHandler(data?._id)}><i class="ri-book-read-fill"></i></button>
+                          <button onMouse className="absolute  w-[35px] h-[35px] right-2 mt-[5px] text-white rounded-xl bg-orange-400" onClick={()=>readMoodHandler(data?._id)}><i class="ri-book-read-fill text-[22px]"></i></button>
                           </div>
                         
                          
