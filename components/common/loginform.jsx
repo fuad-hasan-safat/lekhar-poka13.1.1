@@ -137,7 +137,7 @@ export default function LoginForm({ logreg, btntext }) {
             />
             {error && <p className="error text-red-500">{error}</p>}
           </div>
-          <div className="relative ">
+          <div className="relative w-full">
             <input
               onChange={handlePasswordChange}
               value={password}
@@ -147,9 +147,13 @@ export default function LoginForm({ logreg, btntext }) {
               placeholder="পাসওয়ার্ড দিন"
               required
             />
-             <button className="absolute right-[20px]  pt-[18px]" type="button" onClick={togglePasswordVisibility}>
+            <div className="w-full">
+            <button className="absolute right-[20px]  pt-[18px]" type="button" onClick={togglePasswordVisibility}>
                 {showPassword ? <i class="ri-eye-off-line"></i> : <i class="ri-eye-line"></i>}
               </button>
+
+            </div>
+            
              <a
               className="pt-[12px] float-right mb-[15px] inline-block align-baseline font-bold text-base text-gray-600 hover:text-black-800"
               href="/account/recoverpassword"
