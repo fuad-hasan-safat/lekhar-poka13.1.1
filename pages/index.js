@@ -19,7 +19,7 @@ export default function Home() {
           <title>প্রচ্ছদ</title>
         </Head>
 
-        <div className="lg:pt-[95px] md:pt-[76px] sm:pt-[92px] text-black " oncontextmenu="return false;">
+        <div className="hm__slider__wrp lg:pt-[95px] md:pt-[90px] sm:pt-[92px] text-black " oncontextmenu="return false;">
 
 
           <ImageSlider />

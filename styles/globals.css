@@ -1183,7 +1183,7 @@ transition: all 0.5s !important;
 }
 @media(max-width:1599px) {
   .slider__desc__innr {
-      padding: 140px 0 100px;
+    padding: 120px 0 90px;
   }
 }
 @media(max-width:1499px){
@@ -1205,7 +1205,7 @@ transition: all 0.5s !important;
     border-right: 135px solid transparent;
   }
   .slider__desc__innr {
-      padding: 80px 0 60px;
+      padding: 70px 0 60px;
   }
 }
 
@@ -1257,7 +1257,7 @@ transition: all 0.5s !important;
   }
 
   .slider__desc h1 {
-    font-size: 50px;
+    font-size: 45px;
   }
 
   .procchod__button button {
@@ -1314,21 +1314,39 @@ transition: all 0.5s !important;
   .about__text__tp p br {
     display: none;
   }
+  .slider__desc__innr {
+      padding: 50px 0 40px;
+  }
 }
 
 @media(max-width:991px) {
   .logo {
     padding: 10px 25px 10px 0;
   }
-
+  .hm__slider__wrp{
+    padding-top: 80px !important;
+  }
+  .slider__desc {
+      max-width: 850px;
+      width: 100%;
+      height: 250px;
+  }
   .slider__bg__img img {
     height: 640px;
   }
-
-  .slider__desc h1 {
-    font-size: 46px;
+  .slider__desc__innr {
+      padding: 45px 0 35px;
   }
-
+  .slider__desc h1 {
+    font-size: 45px;
+    line-height: 1.2;
+  }
+  .slider__desc p{
+    font-size: 15px;
+  }
+  .slider__pagination{
+    bottom: 1rem !important;
+  }
   .all__post__content {
     display: block;
   }
@@ -1577,12 +1595,12 @@ transition: all 0.5s !important;
   }
 
   .slider__desc h1 {
-    font-size: 42px;
+    font-size: 40px;
   }
 
   .slider__pagination {
-    bottom: 5rem !important;
-    left: 8% !important;
+      bottom: 1rem !important;
+      left: 50% !important;
   }
 
   .procchod__button button {
@@ -1729,10 +1747,22 @@ transition: all 0.5s !important;
   .rating__share__wrap {
     padding-bottom: 50px;
   }
-
+  .slider__desc {
+      height: 220px;
+  }
   .sidebar ul li img {
     display: table;
     margin: 0 auto;
+  }
+  .slider__desc p {
+      font-size: 14px;
+      line-height: 1.3;
+  }
+  .slider__desc button {
+      width: 140px;
+      height: 40px;
+      font-size: 16px;
+      margin-top: 15px;
   }
 }
 
@@ -1740,13 +1770,27 @@ transition: all 0.5s !important;
   .slider__bg__img img {
     height: 550px;
   }
-
+  .hm__slider__wrp {
+      padding-top: 85px !important;
+  }
   .slider__pt__wrap {
     padding-top: 70px;
   }
-
+  .slider__desc h1 {
+      font-size: 36px;
+  }
   .procchod__button button {
     font-size: 13px;
+  }
+  .slider__desc p {
+      font-size: 13px;
+      line-height: 1.2;
+  }
+  .slider__desc {
+      height: 200px;
+  }
+  .slider__desc__innr {
+      padding: 30px 0 30px;
   }
 
   .OTP__text {
@@ -1812,7 +1856,9 @@ transition: all 0.5s !important;
     top: 36px;
     width: 100%;
   }
-
+  .hm__slider__wrp {
+      padding-top: 64px !important;
+  }
   .search__bar {
     margin-left: 5px !important;
   }
@@ -1827,22 +1873,33 @@ transition: all 0.5s !important;
   }
 
   .slider__desc h1 {
-    font-size: 30px;
+    font-size: 26px;
   }
 
   .slider__desc h2 {
-    font-size: 20px;
+      font-size: 16px;
+  }
+  .slider__desc {
+      height: 180px;
+  }
+  .slider__desc p {
+      font-size: 12px;
+      line-height: 1.1;
+  }
+  .slider__desc__innr {
+      padding: 20px 0 20px;
+  }
+  .img-slider-btn img{
+    width: 25px !important;
+    height: 25px !important;
   }
 
-  .slider__desc p {
-    font-size: 14px;
-  }
 
   .slider__desc button {
-    font-size: 17px;
-    width: 150px;
-    height: 45px;
-    margin-top: 20px;
+      font-size: 14px;
+      width: 100px;
+      height: 35px;
+      margin-top: 10px;
   }
 
   .slider__pagination {
@@ -1860,12 +1917,12 @@ transition: all 0.5s !important;
 
   .img-slider-btn-lft {
     top: auto !important;
-    left: 35% !important;
+    left: 36% !important;
   }
 
   .img-slider-btn-rgt {
     top: auto !important;
-    right: 35% !important;
+    right: 36% !important;
   }
 
   .slider__pagination {
