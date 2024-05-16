@@ -127,7 +127,7 @@ const image = '/images/footerlogo.png'
                           />
                         </div>
                         <div className="rating__share__wrap">
-                          <ShareOnFacebook url={`lekharpoka.com/post/${slug}`}  title={data?.title} image={image} />
+                          <ShareOnFacebook url={`lekharpoka.com/post/${slug}`}  title={'লেখার পোকায় আপনাকে স্বাগতম'} image={image} />
                           {/* <FacebookShareButton
                             url={`lekharpoka.com/post/${slug}`}
                             quote={data?.title} // Use shareTitle for Facebook's quote preview

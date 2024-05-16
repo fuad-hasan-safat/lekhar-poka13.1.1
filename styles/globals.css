@@ -365,9 +365,10 @@ input[type="number"] {
  Slider Img
 -------------------
 */
-.slider__bg__img img{
+.slider__bg__img{
   width: 100%;
-  height: 700px;
+  /* height: 700px; */
+
 }
 /* / carosal / */
 

@@ -130,7 +130,7 @@ export function ImageSlider() {
                                             <div className="slider__desc">
                                                 <h1 className="lg:text-[52px] md:text-[48px] sm:text-[44px] xs:text-[38px] text-[#86312F]" >{title}</h1>
                                                 <h2 className="lg:text-[28px] md:text-[26px] sm:text-[24px] xs:text-[22px] text-[#595D5B]">{caption}</h2>
-                                                <p className="text-[16px] text-[#595D5B] w-[50%]">{content}</p>
+                                                <p className="text-[16px] text-[#595D5B] w-[90%]">{content}</p>
 
                                                 <button
                                                     onClick={() => featureHandler(_id)}
@@ -181,11 +181,12 @@ export function ImageSlider() {
                 className="slider__pagination"
                 style={{
                     position: "absolute",
-                    bottom: "8rem",
-                    left: "16%",
-                    translate: "-50%",
+                    bottom: "2rem",
+                    left: "48.7%",
+                    // right: "50%",
+                    // translatex: "-50%",
                     display: "flex",
-                    gap: ".5rem",
+                    gap: ".3rem",
                 }}
             >
                 {data.map((_, index) => (
