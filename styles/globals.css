@@ -393,13 +393,20 @@ input[type="number"] {
 */
 .slider__bg__img {
   width: 100%;
-  height: 700px !important;
+  /* height: 700px !important; */
   background-repeat: no-repeat !important;
   background-size: cover !important;
   background-position: center center !important;
   position: relative;
   overflow: hidden;
-
+}
+.slider__desc__innr {
+  padding: 200px 0 170px;
+}
+.slider__desc {
+  max-width: 700px;
+  width: 100%;
+  height: 330px;
 }
 
 /* / carosal / */
@@ -1086,11 +1093,6 @@ transition: all 0.5s !important;
   width: 55%;
 }
 
-.slider__desc {
-  max-width: 700px;
-  width: 100%;
-}
-
 .sidebar__bdr__btm span {
   display: block;
   width: 100%;
@@ -1169,11 +1171,41 @@ transition: all 0.5s !important;
  Resposnive Css
 ---------------------- 
 */
+@media(max-width:1799px) {
+  .slider__desc__innr {
+      padding: 170px 0 140px;
+  }
+}
+@media(max-width:1699px) {
+  .slider__desc__innr {
+    padding: 140px 0 120px;
+  }
+}
+@media(max-width:1599px) {
+  .slider__desc__innr {
+      padding: 140px 0 100px;
+  }
+}
+@media(max-width:1499px){
+  .slider__desc__innr {
+      padding: 130px 0 70px;
+  }
+}
+@media(max-width:1299px){
+  .slider__desc {
+      max-width: 850px;
+      width: 100%;
+      height: 300px;
+  }
+}
 @media(max-width:1399px) {
   .logo:after {
     right: -145px;
     border-top: 92px solid #ffd700;
     border-right: 135px solid transparent;
+  }
+  .slider__desc__innr {
+      padding: 80px 0 60px;
   }
 }
 
