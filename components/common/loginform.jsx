@@ -137,7 +137,7 @@ export default function LoginForm({ logreg, btntext }) {
             />
             {error && <p className="error text-red-500">{error}</p>}
           </div>
-          <div className="relative">
+          <div className="relative ">
             <input
               onChange={handlePasswordChange}
               value={password}
@@ -161,7 +161,7 @@ export default function LoginForm({ logreg, btntext }) {
           <button
             type="button"
             onClick={submitLogin}
-            className=" mt-8 px-[90px] bg-[#F9A106] rounded-full text-[35px] text-white  h-[75px] "
+            className=" mt-8 px-[90px] bg-[#F9A106] rounded-full text-[35px] text-white  h-[75px] text-center place-content-center"
           >
             {btntext}
           </button>

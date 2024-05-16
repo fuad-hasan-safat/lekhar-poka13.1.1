@@ -17,9 +17,11 @@ export default function AllUserPost() {
               <div>
               {/* <h1 className='text-5xl text-black'>অনুমোদনহীন  পোস্ট </h1> */}
               <ProfilePostLeftContentUnApproved />
+             
+
 
               </div>
-              <div className='mt-[10px]'>
+              <div className='mt-[50px]'>
              <h1 className='lg:text-5xl md:text-3xl sm:text-xl xs:text-2xl text-black'>অনুমোদিত  পোস্ট </h1>
 
               <ProfilePostLeftContentApproved />
