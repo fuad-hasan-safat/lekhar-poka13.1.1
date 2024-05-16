@@ -107,7 +107,7 @@ export default function PostDetails() {
                   <div className="flex flex-col w-full relative z-50">
                     {isdataFetch &&
                       <>
-                        <div className="kobita__dsc__lft flex lg:mb-[110px] md:mb-[84px]">
+                        <div className="kobita__dsc__lft relative flex lg:mb-[110px] md:mb-[84px]">
                           <div>
                           <FullPost
                             content={data?.content}
@@ -119,7 +119,7 @@ export default function PostDetails() {
 
                           </div>
                           <div>
-                          <button className="px-[15px] py-[5px] right-[10%] text-white rounded-xl bg-orange-400" onClick={()=>readMoodHandler(data?._id)}>Read Mood</button>
+                          <button onMouse className="absolute  px-[15px] py-[5px] right-2 text-white rounded-xl bg-orange-400" onClick={()=>readMoodHandler(data?._id)}><i class="ri-book-read-fill"></i></button>
                           </div>
                         
                          
