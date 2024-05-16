@@ -87,7 +87,7 @@ export function ImageSlider() {
             {data.length > 0 ?
 
                 <div>
-                    {/* <div
+                    <div
                         className="relative slider__bg__img"
                         style={{
                             width: "100%",
@@ -95,12 +95,13 @@ export function ImageSlider() {
                             display: "flex",
                             overflow: "hidden",
                         }}
-                    > */}
+                    >
                         {data.map(({ _id, title, caption, image, content }, index) => (
 
                             <div className="slider__bg__img img-slider-img"
                             key={_id}
-                            style={{background: `url(${apiBasePath}/${image.slice(image.indexOf("/") + 1)})`}}
+                            aria-hidden={imageIndex !== index}
+                            style={{background: `url(${apiBasePath}/${image.slice(image.indexOf("/") + 1)})`, translate: `${-100 * imageIndex}%`}}
                             >
 
                             </div>
@@ -113,7 +114,7 @@ export function ImageSlider() {
                             //     style={{ translate: `${-100 * imageIndex}%` }}
                             // />
                         ))}
-                    {/* </div> */}
+                    </div>
                     <div
                         className="absolute left-0 top-[50%] -translate-y-1/2"
                         style={{
