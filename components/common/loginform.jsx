@@ -24,7 +24,7 @@ export default function LoginForm({ logreg, btntext }) {
   const [status, setStatus] = useState("");
   const [username, setUsername] = useState("");
   const [userUuid, setUserUuid] = useState("");
-  const [error, setError] = useState(null); 
+  const [error, setError] = useState(null);
   const [numberPrefix, setNumberPrefix] = useState('88');
 
   const [showPassword, setShowPassword] = useState(false);
@@ -34,20 +34,20 @@ export default function LoginForm({ logreg, btntext }) {
   };
 
   const handleNumberhange = (e) => {
-     // Allow only numbers and backspace key
-     const newValue = e.target.value.replace(/[^0-9\b]/g, "");
-     // Enforce maximum length of 11 digits
-     if (newValue.length > 11) {
-       setError("Phone number cannot exceed 11 digits.");
-       return;
-     }
-     // Enforce starting with "01"
-     if (newValue.length > 1 && newValue.slice(0, 2) !== "01") {
-       setError("Phone number must start with 01.");
-       return;
-     }
-     setnumber(newValue);
-     setError(null); // Clear error if valid input
+    // Allow only numbers and backspace key
+    const newValue = e.target.value.replace(/[^0-9\b]/g, "");
+    // Enforce maximum length of 11 digits
+    if (newValue.length > 11) {
+      setError("Phone number cannot exceed 11 digits.");
+      return;
+    }
+    // Enforce starting with "01"
+    if (newValue.length > 1 && newValue.slice(0, 2) !== "01") {
+      setError("Phone number must start with 01.");
+      return;
+    }
+    setnumber(newValue);
+    setError(null); // Clear error if valid input
   };
 
   const handlePasswordChange = (e) => {
@@ -91,7 +91,7 @@ export default function LoginForm({ logreg, btntext }) {
         //localStorage.setItem('user', data);
 
 
-        console.log('user type,_____',data.usertype )
+        console.log('user type,_____', data.usertype)
 
         setnumber('')
         setPassword('')
@@ -107,14 +107,14 @@ export default function LoginForm({ logreg, btntext }) {
   }
 
 
-   useEffect(() => {
+  useEffect(() => {
     setStatus(localStorage.getItem("status") || "");
 
   }, [status]);
 
   useEffect(() => {
-    setUsername(localStorage.getItem('name')|| '');
-    setUserUuid(localStorage.getItem('uuid')|| '')
+    setUsername(localStorage.getItem('name') || '');
+    setUserUuid(localStorage.getItem('uuid') || '')
   }, []);
 
 
@@ -147,14 +147,11 @@ export default function LoginForm({ logreg, btntext }) {
               placeholder="পাসওয়ার্ড দিন"
               required
             />
-            <div className="w-full">
-            <button className="absolute right-[20px]  pt-[18px]" type="button" onClick={togglePasswordVisibility}>
-                {showPassword ? <i class="ri-eye-off-line"></i> : <i class="ri-eye-line"></i>}
-              </button>
 
-            </div>
-            
-             <a
+            <button className="absolute right-[20px]  pt-[18px]" type="button" onClick={togglePasswordVisibility}>
+              {showPassword ? <i class="ri-eye-off-line"></i> : <i class="ri-eye-line"></i>}
+            </button>
+            <a
               className="pt-[12px] float-right mb-[15px] inline-block align-baseline font-bold text-base text-gray-600 hover:text-black-800"
               href="/account/recoverpassword"
             >
@@ -162,13 +159,17 @@ export default function LoginForm({ logreg, btntext }) {
             </a>
           </div>
 
-          <button
-            type="button"
-            onClick={submitLogin}
-            className=" mt-8 px-[90px] bg-[#F9A106] rounded-full text-[35px] text-white  h-[75px] text-center place-content-center"
-          >
-            {btntext}
-          </button>
+          <div className="w-full">
+            <button
+              type="button"
+              onClick={submitLogin}
+              className=" mt-8 px-[90px] bg-[#F9A106] rounded-full text-[30px] text-white  h-[60px] text-center place-content-center"
+            >
+              {btntext}
+            </button>
+
+          </div>
+
         </div>
       </div>
     </>
