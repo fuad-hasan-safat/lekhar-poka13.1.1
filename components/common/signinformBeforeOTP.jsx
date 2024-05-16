@@ -175,7 +175,7 @@ export default function SigninFormBeforeOTP({type, logreg, btntext, SetIsOtpSuce
 
                     <button
                         onClick={handleSubmitBeforeOTP}
-                        className=" mt-8 px-[90px] bg-[#F9A106] rounded-full lg:text-[35px] md:text-[30px] sm:text-[25px]  text-white lg:h-[75px] md:h-[70px] sm:h-[60px] xs:h-[55px] "
+                        className=" mt-8 px-[90px] bg-[#F9A106] rounded-full lg:text-[35px] md:text-[30px] sm:text-[25px]  text-white lg:h-[70px] md:h-[70px] sm:h-[60px] xs:h-[55px] "
                     >
                         {btntext}
                     </button>
