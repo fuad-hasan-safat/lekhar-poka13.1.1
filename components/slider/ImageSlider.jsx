@@ -103,17 +103,21 @@ export function ImageSlider() {
                                 aria-hidden={imageIndex !== index}
                                 style={{ background: `url(${apiBasePath}/${image.slice(image.indexOf("/") + 1)})`, translate: `${-100 * imageIndex}%` }}
                             >
-                                <div className="slider__desc container">
-                                    <h1 className="lg:text-[52px] md:text-[48px] sm:text-[44px] xs:text-[38px] text-[#86312F]" >{title}</h1>
-                                    <h2 className="lg:text-[28px] md:text-[26px] sm:text-[24px] xs:text-[22px] text-[#595D5B]">{caption}</h2>
-                                    <p className="text-[16px] text-[#595D5B] w-[90%]">{content}</p>
+                                <div className="container">
+                                    <div className="slider__desc__innr">
+                                        <div className="slider__desc">
+                                            <h1 className="lg:text-[52px] md:text-[48px] sm:text-[44px] xs:text-[38px] text-[#86312F]" >{title}</h1>
+                                            <h2 className="lg:text-[28px] md:text-[26px] sm:text-[24px] xs:text-[22px] text-[#595D5B]">{caption}</h2>
+                                            <p className="text-[16px] text-[#595D5B] w-[90%]">{content}</p>
 
-                                    <button
-                                        onClick={() => featureHandler(_id)}
-                                        className="w-[176px] inline-block mt-[30px] bg-orange-400 px-2 h-[56px] rounded-md text-[19px]  text-white"
-                                    >
-                                        বিস্তারিত
-                                    </button>
+                                            <button
+                                                onClick={() => featureHandler(_id)}
+                                                className="w-[176px] inline-block mt-[30px] bg-orange-400 px-2 h-[56px] rounded-md text-[19px]  text-white"
+                                            >
+                                                বিস্তারিত
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
 
                             </div>
@@ -201,7 +205,7 @@ export function ImageSlider() {
                 className="slider__pagination"
                 style={{
                     position: "absolute",
-                    bottom: "2rem",
+                    bottom: "3rem",
                     left: "48.7%",
                     // right: "50%",
                     // translatex: "-50%",
