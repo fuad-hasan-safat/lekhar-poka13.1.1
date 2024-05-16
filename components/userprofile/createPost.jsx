@@ -56,6 +56,10 @@ export default function CreatePost() {
     const [isProfileUpdated, setIsProfileUpdated] = useState(false)
     const [canPostStatus, setCanPostStatus] = useState(false)
 
+    // ------------
+
+    const [isCheckClicked, setIsChekClicked] = useState(false)
+
 
 
     // summary
@@ -70,7 +74,7 @@ export default function CreatePost() {
 
     }, []);
 
-    
+
 
     useEffect(() => {
         setStatus(localStorage.getItem("status") || "");
@@ -175,38 +179,38 @@ export default function CreatePost() {
     // audio file 
     const [selectedFile, setSelectedFile] = useState(null);
 
-    
+
     function extractText(poemText) {
         var isContinousBr = true;
-        console.log({isContinousBr})
+        console.log({ isContinousBr })
         const formattedLines = poemText.split(/<[^>]+>/).map(line => {
-          // Extract text content (excluding tags)
-          const text = line.trim();
+            // Extract text content (excluding tags)
+            const text = line.trim();
 
-          if(text?.length>0){
-            isContinousBr =false
-            return `<p>${line.trim()}</p>\n`;
-          }else{
-            console.log(" inside ------ ", isContinousBr)
-            if(!isContinousBr){
-                isContinousBr = true;
-            return `<p><br></p>\n`;
+            if (text?.length > 0) {
+                isContinousBr = false
+                return `<p>${line.trim()}</p>\n`;
+            } else {
+                console.log(" inside ------ ", isContinousBr)
+                if (!isContinousBr) {
+                    isContinousBr = true;
+                    return `<p><br></p>\n`;
+                }
+
+
             }
-            
+            return;
 
-          }
-          return ;
-      
-       
+
             // Wrap non-extracted lines in <p> with newline
-          
+
         });
-      
+
         // Join formatted lines with double newlines
         const formattedPoem = formattedLines.join('');
-      
+
         return formattedPoem;
-      }
+    }
 
 
     function textEditorHandler(e) {
@@ -219,10 +223,10 @@ export default function CreatePost() {
     const handleSubmit = async () => {
         if (!canPostStatus) {
             // alert('দয়া করে প্রোফাইল তৈরি করুন')
-        const confirmLogout = window.confirm('দয়া করে প্রোফাইল তৈরি করুন');
-        if(confirmLogout){
-            router.push(`/user/${localStorage.getItem("uuid")}`)
-        }
+            const confirmLogout = window.confirm('দয়া করে প্রোফাইল তৈরি করুন');
+            if (confirmLogout) {
+                router.push(`/user/${localStorage.getItem("uuid")}`)
+            }
 
         }
         else {
@@ -240,7 +244,7 @@ export default function CreatePost() {
             }
             else {
 
-                const formated_text= extractText(content)
+                const formated_text = extractText(content)
                 console.log('FORMATED Text ----------------->>>>>', formated_text)
 
                 const formData = new FormData();
@@ -282,7 +286,7 @@ export default function CreatePost() {
                             setContent('');
                             setSummary('');
                             router.push('/user/alluserpost')
-                            
+
                         } else {
                             console.error("Failed to update profile:", response.statusText);
                             alert(response.statusText);
@@ -304,7 +308,7 @@ export default function CreatePost() {
     return (
         <>
             <div className="lg:pr-6 md:pr-0 sm:pr-0 space-y-4 ">
-            <div className="text-yellow-800 text-[22px]">শিরোনাম</div>
+                <div className="text-yellow-800 text-[22px]">শিরোনাম</div>
 
                 <input
                     onChange={handleTitle}
@@ -315,7 +319,7 @@ export default function CreatePost() {
                     placeholder="শিরোনাম"
                     required
                 />
-            <div className="text-yellow-800 text-[22px]">সারসংক্ষেপ(আপনার মূল লেখার ভাবার্থ)</div>
+                <div className="text-yellow-800 text-[22px]">সারসংক্ষেপ(আপনার মূল লেখার ভাবার্থ)</div>
 
                 <textarea
                     onChange={handleSummary}
@@ -335,8 +339,8 @@ export default function CreatePost() {
                         <Editor
                             value={content}
                             onChange={textEditorHandler}
-                            
-                            containerProps={{ style: { color: 'black' , height: '550px'}, className: 'auto-height-editor custom-editor' }}
+
+                            containerProps={{ style: { color: 'black', height: '550px' }, className: 'auto-height-editor custom-editor' }}
 
                         >
                             <Toolbar>
@@ -364,32 +368,33 @@ export default function CreatePost() {
 
                 </div>
 
-                <div className="text-yellow-800 text-[22px]">লেখক নির্বাচন করুন(<span className="text-red-500">যদি আপনার নাম তালিকায় থাকে</span>)</div>
-                <div className=" place-content-center justify-center ">
+                <div className="pt-[10px]">
 
-                    <div className="">
-                        <Select
-                            value={selectedWriter}
-                            onChange={writerhandleChange}
-                            styles={customStyles}
-                            options={writersOptions}
-                        />
-
-                    </div>
-                    <div className='profile__btn__midl'>
-                        <CreateWriter setIsWriterAdded={setIsWriterAdded} />
-                    </div>
-
-                    <div className="pt-[10px]">
-
-                        <h1 className="text-black text-[16px]">নিচের বক্সটি চেক করুন (<span className="text-red-500"> যদি আপনার নাম তালিকায় না থাকে</span>) </h1>
-                        <Checkbox label="" name="myCheckbox" onChange={handleCheckboxChange} />
-                        {/* <p className="text-black">Checkbox value: {checkboxValue.toString()}</p> */}
-
-                    </div>
-
+                    <h1 className="text-black text-[16px]">নিচের বক্সটি চেক করুন (<span className="text-red-500"> যদি আপনার নাম তালিকায় না থাকে</span>) </h1>
+                    <Checkbox label="" name="myCheckbox" onChange={handleCheckboxChange} />
+                    {/* <p className="text-black">Checkbox value: {checkboxValue.toString()}</p> */}
 
                 </div>
+
+               {!checkboxValue && <>
+                    <div className="text-yellow-800 text-[22px]">লেখক নির্বাচন করুন(<span className="text-red-500">যদি আপনার নাম তালিকায় থাকে</span>)</div>
+                    <div className=" place-content-center justify-center ">
+
+                        <div className="">
+                            <Select
+                                value={selectedWriter}
+                                onChange={writerhandleChange}
+                                styles={customStyles}
+                                options={writersOptions}
+                            />
+
+                        </div>
+                        <div className='profile__btn__midl'>
+                            <CreateWriter setIsWriterAdded={setIsWriterAdded} />
+                        </div>
+                    </div>
+
+                </>}
 
 
 
