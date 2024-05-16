@@ -11,7 +11,7 @@ const FullPost = ({ content, title, writer, catagory, url }) => {
         return (
             <>
             <div className="kobita__content text-black">
-                <div className="font-semibold text-[35px] text-yellow-400">{title}</div>
+                <div className="font-semibold text-[35px] pr-[70px] text-yellow-400">{title}</div>
                 <div className="text-[22px] text-[#595D5B] mb-[10px]">{writer}</div>
                 {/* <div className="text-[22px] text-[#595D5B] " dangerouslySetInnerHTML={{__html:content}}></div> */}
                 <div>
