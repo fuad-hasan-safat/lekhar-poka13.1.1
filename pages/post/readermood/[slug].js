@@ -87,22 +87,12 @@ export default function PostDetailsReaderMood() {
 
             <section>
                 <div className="container">
-                    <div className="flex">
-                        <div className="lg:w-[20%] sm:w-[10%] mt-[70px]">
-                            <div className=" fixed flex flex-col space-y-6">
-                            <button className=" px-[8px] py-[8px]   text-white rounded-full bg-orange-400" onClick={() => readMoodHandler(data?._id)}><i class="ri-close-large-fill"></i></button>
-                            {/* <button className=" px-[8px] py-[8px]  text-white rounded-full bg-orange-400" onClick={() => setFontSize(fontSize+2)}><i class="ri-add-fill"></i></button>
-                            <button className=" px-[8px] py-[8px]  text-white rounded-full bg-orange-400" onClick={() => setFontSize(fontSize-3)}><i class="ri-subtract-fill"></i></button> */}
-                            </div>
+                    <div className="read__mod__wrap">
+                        <div className="read__mod__btn">
+                            <button className="w-[40px] h-[40px] text-white rounded-full bg-orange-400" onClick={() => readMoodHandler(data?._id)}><i class="ri-close-large-fill"></i></button>
                         </div>
-                        <div className="lg:w-[60%] sm:w-[70%] mt-[70px] mb-[70px]" >
-                            <FullPostReaderMod title={data?.title} writer={data?.writer} content={data?.content} fontSize={fontSize}/>
-
-                        </div>
-
+                        <FullPostReaderMod title={data?.title} writer={data?.writer} content={data?.content} fontSize={fontSize}/>
                     </div>
-
-
                 </div>
             </section>
 

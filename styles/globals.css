@@ -1164,6 +1164,27 @@ transition: all 0.5s !important;
   justify-content: center;
   align-items: center;
 }
+/*
+------------------------
+ Read Mod Css
+------------------------ 
+*/
+.read__mod__wrap{
+  padding: 100px 0;
+  position: relative;
+}
+.read__mod__content {
+  max-width: 1000px;
+  width: 100%;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding: 30px 30px 20px !important;
+}
+.read__mod__btn {
+  position: fixed;
+  right: 100px;
+  top: 30px;
+}
 
 
 /*
@@ -1242,7 +1263,11 @@ transition: all 0.5s !important;
     border-top: 92px solid #ffd700;
     border-right: 145px solid transparent;
   }
-
+  .read__mod__btn {
+      position: fixed;
+      right: 20px;
+      top: 25px;
+  }
   .search__bar input {
     width: 180px !important;
   }
@@ -1830,6 +1855,9 @@ transition: all 0.5s !important;
     margin-bottom: 0;
     margin-left: 0;
     margin-right: 0;
+  }
+  .read__mod__content {
+      padding: 30px 20px 20px !important;
   }
 }
 
