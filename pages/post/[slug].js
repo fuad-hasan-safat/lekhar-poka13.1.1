@@ -26,15 +26,8 @@ export default function PostDetails() {
   const [isAudioAvailable, setIsAudioAvailAble] = useState(false);
   const [isdataFetch, setisDataFetch] = useState(false)
 
+  //  focus mood ----
 
-  // face book ---------------
-  // const shareUrl = `lekharpoka.com/post/${slug}`
-  // const postTitle = '';
-  // const postDescription = 'Your Post Description';
-  // const postImageUrl = 'https://your-website.com/post-image.jpg'; /
-
-
-  // ..................
 
 
   const [rating, setRating] = useState(0);
@@ -76,8 +69,9 @@ export default function PostDetails() {
   }, [router.query]);
 
 
-
-const image = '/images/footerlogo.png'
+  function readMoodHandler(postId){
+    router.push(`/post/readermood/${postId}`)
+  }
 
 
   return (
@@ -94,12 +88,8 @@ const image = '/images/footerlogo.png'
           <meta property="og:url" content={`lekharpoka.com/post/${slug}`} />
           <meta property="og:title" content={data?.title} />
           <meta property="og:description" content={'লেখার পোকা'} />
-          <meta property="og:image" content={image} />
-          {/* 
-          <meta property="og:url" content={'.....'} />
-          <meta property="og:title" content={'amar title'} />
-          <meta property="og:description" content="Your content description" />
-          <meta property="og:image" content="https://your-image.com/image.jpg" /> */}
+          <meta property="og:image" content={''} />
+  
 
         </Head>
       </div>
@@ -117,7 +107,8 @@ const image = '/images/footerlogo.png'
                   <div className="flex flex-col w-full relative z-50">
                     {isdataFetch &&
                       <>
-                        <div className="kobita__dsc__lft lg:mb-[110px] md:mb-[84px]">
+                        <div className="kobita__dsc__lft flex lg:mb-[110px] md:mb-[84px]">
+                          <div>
                           <FullPost
                             content={data?.content}
                             title={data?.title}
@@ -125,18 +116,16 @@ const image = '/images/footerlogo.png'
                             catagory={data?.category}
                             url={asPath}
                           />
+
+                          </div>
+                          <div>
+                          <button className="px-[15px] py-[5px] right-[10%] text-white rounded-xl bg-orange-400" onClick={()=>readMoodHandler(data?._id)}>Read Mood</button>
+                          </div>
+                        
+                         
                         </div>
                         <div className="rating__share__wrap">
-                          <ShareOnFacebook url={`lekharpoka.com/post/${slug}`}  title={'লেখার পোকায় আপনাকে স্বাগতম'} image={image} />
-                          {/* <FacebookShareButton
-                            url={`lekharpoka.com/post/${slug}`}
-                            quote={data?.title} // Use shareTitle for Facebook's quote preview
-                            hashtag={'#lekharpoka'}
-                            className="facebook-share-button"
-                          >
-                            Share on Facebook
-                          </FacebookShareButton> */}
-
+                          <ShareOnFacebook url={`lekharpoka.com/post/${slug}`}  title={'লেখার পোকায় আপনাকে স্বাগতম'} image={''} />
                           <RatingComponent setRating={setRating} rating={rating} post_id={data?._id} />
                         </div>
                       </>
