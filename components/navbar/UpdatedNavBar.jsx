@@ -140,7 +140,7 @@ export default function UpdatedNavBar() {
     //   logout
 
     function Logout() {
-        const confirmLogout = window.confirm('আপনি কি আসলেই লগ আউট করতে চান?');
+        const confirmLogout = window.confirm('আপনি কি লগ আউট করতে চান?');
         if (confirmLogout) {
             // alert('Logging out...'); 
             localStorage.removeItem("status");

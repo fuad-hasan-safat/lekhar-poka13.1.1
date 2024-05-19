@@ -39,7 +39,10 @@ const FullPostPagination = ({ logText, customclass }) => {
   }, [router.query])
 
   useEffect(() => {
-    saveCurrentPage();
+    if (currentPage !== 0) {
+      saveCurrentPage();
+
+    }
 
 
   }, [currentPage, router.query])
@@ -142,7 +145,7 @@ const FullPostPagination = ({ logText, customclass }) => {
           ))}
       </div>
 
-      {totalPages>1 && <ReactPaginate
+      {totalPages > 1 && <ReactPaginate
         pageCount={totalPages}
         pageRangeDisplayed={5}
         marginPagesDisplayed={2}

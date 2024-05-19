@@ -40,7 +40,7 @@ export default function PostDetails() {
         );
         setData(result.object);
         setWriterImage(result.writer_image)
-        // console.log('post page ====================>>>>>>>>>>>>>>>>>>>>', result.object)
+         console.log('post page ====================>>>>>>>>>>>>>>>>>>>>', result.object)
         if (result.object.audio?.length > 0) {
           setIsAudioAvailAble(true);
         } else {

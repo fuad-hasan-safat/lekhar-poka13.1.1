@@ -80,7 +80,7 @@ useEffect(() => {
       {isLoading ? (
         <Loading />
       ) : error ? (
-        <div className="mt-[70px]">আপনার লেখা খুঁজে পাওয়া যাচ্ছে না । </div>
+        <div className="mt-[70px]"></div>
       ) : (
         <>
           {/* <div className='container'> */}
