@@ -1175,6 +1175,16 @@ transition: all 0.5s !important;
  Read Mod Css
 ------------------------ 
 */
+.read__mod__sec__wrap{
+  background: rgba(0, 0, 0, 0.8);
+}
+.read__mod__innr {
+  background-color: #fff;
+  border-radius: 20px;
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+}
 .read__mod__wrap{
   padding: 100px 0;
   position: relative;
