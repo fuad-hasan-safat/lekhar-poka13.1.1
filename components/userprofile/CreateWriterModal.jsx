@@ -22,12 +22,20 @@ const CreateWriterModal = ({ showModal, handleClose, setIsWriterAdded }) => {
     formData.append('expiry_date', deathDate);
     formData.append('file', image);
 
+
+    setName('')
+    setBirthDate('')
+    setDeathDate('')
+    setImage(null)
+
     try {
       const response = await fetch(`${apiBasePath}/writers`, {
         method: 'POST',
         body: formData
       });
       setIsWriterAdded(true)
+
+     
 
       handleClose();
 

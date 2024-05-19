@@ -1182,10 +1182,10 @@ transition: all 0.5s !important;
   background-color: #fff;
   border-radius: 20px;
   max-width: 1000px;
-  /* width: 100%; */
+  width: 100%;
   margin: 0 auto;
-  margin-left: 15px;
-  margin-right: 15px;
+  /* margin-left: 15px;
+  margin-right: 15px; */
 }
 .read__mod__wrap{
   padding: 100px 0;
@@ -1557,6 +1557,15 @@ transition: all 0.5s !important;
 
   .profile__image__upload {
     padding-bottom: 15px;
+  }
+  .read__mod__innr {
+    background-color: #fff;
+    border-radius: 20px;
+    max-width: 1000px;
+    /* width: 100%; */
+    /* margin: 0 auto; */
+    margin-left: 15px;
+    margin-right: 15px;
   }
 }
 

@@ -37,6 +37,7 @@ const ImageCrop = ({ image, type = "profilePic", setWriterImage}) => {
         setPreview(window.URL.createObjectURL(avatar));
         resetStates();
         setOpenModal(false);
+        
 
         //  sent data to backend 
 

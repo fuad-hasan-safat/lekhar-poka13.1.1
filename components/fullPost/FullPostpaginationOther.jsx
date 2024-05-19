@@ -11,7 +11,7 @@ const FullPostPaginationOthers = ({ logText, customclass }) => {
   console.log(router.query)
   const slug = router.query.slug
   const [currentPage, setCurrentPage] = useState(0);
-  const linesPerPage = 60;
+  const linesPerPage = 40;
 
 
   const logLines = logText?.split('\n');
@@ -142,7 +142,7 @@ const FullPostPaginationOthers = ({ logText, customclass }) => {
         {logLines
           ?.slice(startIndex, endIndex)
           .map((line, index) => (
-            <div key={startIndex + index} className={`text-[18px] text-justify ${customclass}` } dangerouslySetInnerHTML={{ __html: line }} ></div>
+            <div key={startIndex + index} className={`lg:text-[18px] md:text-[17px] sm:text-[16px] xs:text-[14px] text-justify ${customclass}` } dangerouslySetInnerHTML={{ __html: line }} ></div>
             // parse(line, { replace: (domNode) => { // Add the replace option
             //   if (domNode.attribs && domNode.attribs.style) {
             //     delete domNode.attribs.style;

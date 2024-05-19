@@ -22,8 +22,8 @@ const ImageCropModalContent = ({ handleDone, handleClose }) => {
             <Cropper />
           </div>
         </div>
-        <ZoomSlider className="mb-4" />
-        <RotationSlider className="mb-4" />
+        {/* <ZoomSlider className="mb-4" />
+        <RotationSlider className="mb-4" /> */}
         <input
           type="file"
           multiple
