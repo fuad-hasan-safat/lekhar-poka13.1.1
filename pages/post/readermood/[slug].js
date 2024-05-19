@@ -86,12 +86,12 @@ export default function PostDetailsReaderMood() {
             </div>
 
             <section className="read__mod__sec__wrap">
-                <div className="read__mod__wrap">
+                <div className="read__mod__wrap  ">
                     <div className="read__mod__btn">
                         <button className="w-[40px] h-[40px] text-white rounded-full bg-orange-400" onClick={() => readMoodHandler(data?._id)}><i class="ri-close-large-fill"></i></button>
                     </div>
                     <div className="read__mod__innr">
-                        <FullPostReaderMod title={data?.title} writer={data?.writer} content={data?.content} fontSize={fontSize}/>
+                        <FullPostReaderMod title={data?.title} writer={data?.writer} catagory={data?.category} content={data?.content} fontSize={fontSize}/>
                     </div>
                  </div>
             </section>

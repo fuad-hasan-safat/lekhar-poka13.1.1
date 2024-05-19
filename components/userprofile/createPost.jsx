@@ -186,37 +186,18 @@ export default function CreatePost() {
     const [selectedFile, setSelectedFile] = useState(null);
 
 
-    // function extractText(poemText) {
-    //     var isContinousBr = true;
-    //     console.log({ isContinousBr })
-    //     const formattedLines = poemText.split(/<[^>]+>/).map(line => {
-    //         // Extract text content (excluding tags)
-    //         const text = line.trim();
+    function extractText(htmlString) {
+        // Split the string by the opening `<p>` tag
+        const paragraphs = htmlString.split(/<p>/);
 
-    //         if (text?.length > 0) {
-    //             isContinousBr = false
-    //             return `<p>${line.trim()}</p>\n`;
-    //         } else {
-    //             console.log(" inside ------ ", isContinousBr)
-    //             if (!isContinousBr) {
-    //                 isContinousBr = true;
-    //                 return `<p><br></p>\n`;
-    //             }
+        // Loop through each paragraph except the first one
+        let modifiedString = paragraphs[0]; // Keep the first paragraph as-is
+        for (let i = 1; i < paragraphs.length; i++) {
+            modifiedString += `\n<p>${paragraphs[i]}</p>`; // Add newline and re-join with opening tag
+        }
 
-
-    //         }
-    //         return;
-
-
-    //         // Wrap non-extracted lines in <p> with newline
-
-    //     });
-
-    //     // Join formatted lines with double newlines
-    //     const formattedPoem = formattedLines.join('');
-
-    //     return formattedPoem;
-    // }
+        return modifiedString;
+    }
 
 
     // function textEditorHandler(e) {

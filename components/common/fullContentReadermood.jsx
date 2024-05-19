@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import FullPostPaginationReadermodeKobita from "../fullPost/FullPostpaginationReaderModeKobita";
-import FullPostPaginationReadermodeOthers from "../fullPost/FullPostpaginationReaderModeOthers";
+import FullPostPagination from "../fullPost/FullPostpagination";
+import FullPostPaginationOthers from "../fullPost/FullPostpaginationOther";
 
 const FullPostReaderMode = ({ content, title, writer, catagory, url }) => {
+
+    console.log({catagory})
 
 
     if (catagory === 'কবিতা') {
@@ -13,7 +15,7 @@ const FullPostReaderMode = ({ content, title, writer, catagory, url }) => {
                         <div className="font-semibold lg:text-[35px] md:text-[33px] sm:text-[30px] xs:text-[28px] text-yellow-400">{title}</div>
                         <div className="lg:text-[22px] md:text-[22px] sm:text-[20px] xs:text-[18px] text-[#595D5B] mb-[10px]">{writer}</div>
                         {/* <div className={`lg:text-[20px] md:text-[20px] sm:text-[18px] xs:text-[17px] text-justify text-[#595D5B] `} dangerouslySetInnerHTML={{ __html: content }}></div> */}
-                        <FullPostPaginationReadermodeKobita logText={content} />
+                        <FullPostPagination logText={content} />
 
                     </div>
                 </div>
@@ -27,7 +29,7 @@ const FullPostReaderMode = ({ content, title, writer, catagory, url }) => {
                     <div className="font-semibold lg:text-[35px] md:text-[33px] sm:text-[30px] xs:text-[28px] text-yellow-400">{title}</div>
                     <div className="lg:text-[22px] md:text-[22px] sm:text-[20px] xs:text-[18px] text-[#595D5B] mb-[10px]">{writer}</div>
                     {/* <div className= {`lg:text-[20px] md:text-[20px] sm:text-[18px] xs:text-[17px] text-justify text-[#595D5B] `} dangerouslySetInnerHTML={{ __html: content }}></div> */}
-                    <FullPostPaginationReadermodeOthers logText={content} />
+                    <FullPostPaginationOthers logText={content} />
 
                 </div>
 

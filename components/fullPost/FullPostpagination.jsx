@@ -14,7 +14,7 @@ const FullPostPagination = ({ logText, customclass }) => {
   const linesPerPage = 20;
 
 
-  const logLines = logText?.split('\n');
+  const logLines = logText?.split('</p>');
 
   const totalLines = logLines?.length;
   const totalPages = Math.ceil(totalLines / linesPerPage);

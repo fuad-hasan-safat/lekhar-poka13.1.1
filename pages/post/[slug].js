@@ -1,6 +1,4 @@
 "use client";
-import Sidebar from "../../components/sidebar/Sidebar";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Head from 'next/head';
@@ -8,7 +6,6 @@ import Head from 'next/head';
 
 import FullPost from '../../components/common/fullContent'
 import RatingComponent from '../../components/common/starRating'
-import AudioPlayer from '../../components/musicbar/AudioPlayer'
 import { fetchData } from "../../function/api";
 import { apiBasePath } from "../../utils/constant";
 import MusicPlayer from "../../components/musicbar/MusicPlayer";
