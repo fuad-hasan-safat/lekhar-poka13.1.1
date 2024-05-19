@@ -11,10 +11,10 @@ const FullPostPaginationOthers = ({ logText, customclass }) => {
   console.log(router.query)
   const slug = router.query.slug
   const [currentPage, setCurrentPage] = useState(0);
-  const linesPerPage = 0;
+  const linesPerPage = 60;
 
 
-  const logLines = logText?.split('\n');
+  const logLines = logText?.split('</p>');
 
   const totalLines = logLines?.length;
   const totalPages = Math.ceil(totalLines / linesPerPage);

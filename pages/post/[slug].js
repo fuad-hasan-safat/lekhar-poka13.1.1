@@ -11,6 +11,7 @@ import { apiBasePath } from "../../utils/constant";
 import MusicPlayer from "../../components/musicbar/MusicPlayer";
 import ShareOnFacebook from "../../components/share/share";
 import { FacebookShareButton } from "react-share";
+import axios from "axios";
 
 export default function PostDetails() {
   const router = useRouter();
@@ -35,21 +36,21 @@ export default function PostDetails() {
     async function fetchDataAsync() {
 
       try {
-        const result = await fetchData(
+        const result = await axios.get(
           `${apiBasePath}/getpost/${slug}`
         );
-        setData(result.object);
-        setWriterImage(result.writer_image)
-         console.log('post page ====================>>>>>>>>>>>>>>>>>>>>', result.object)
-        if (result.object.audio?.length > 0) {
+        setData(result.data.object);
+        setWriterImage(result.data.writer_image)
+         console.log('post page ====================>>>>>>>>>>>>>>>>>>>>', result)
+        if (result.data.object.audio?.length > 0) {
           setIsAudioAvailAble(true);
         } else {
           setIsAudioAvailAble(false)
         }
 
-        if (result.status === 'success') {
+        if (result.data.status === 'success') {
           setisDataFetch(true)
-        } else if (result.status === 'failed') {
+        } else if (result.data.status === 'failed') {
           setisDataFetch(false)
         }
 
