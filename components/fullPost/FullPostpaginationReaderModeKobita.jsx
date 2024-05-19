@@ -6,7 +6,7 @@ import parse from 'html-react-parser';
 import { apiBasePath } from '../../utils/constant';
 import axios from 'axios';
 
-const FullPostPagination = ({ logText, customclass }) => {
+const FullPostPaginationReadermodeKobita = ({ logText, customclass }) => {
   const router = useRouter()
   console.log(router.query)
   const slug = router.query.slug
@@ -167,4 +167,4 @@ const FullPostPagination = ({ logText, customclass }) => {
   );
 };
 
-export default FullPostPagination;
+export default FullPostPaginationReadermodeKobita;

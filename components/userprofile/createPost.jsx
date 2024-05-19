@@ -16,6 +16,12 @@ import Checkbox from '../common/Checkbox'
 import AudioFileUpload from './AudiofileUpload';
 import { useRouter } from 'next/router';
 
+import dynamic from 'next/dynamic';
+
+const CustomEditor = dynamic(() => {
+    return import('../../components/custom-editor');
+}, { ssr: false });
+
 
 
 export default function CreatePost() {
@@ -180,45 +186,45 @@ export default function CreatePost() {
     const [selectedFile, setSelectedFile] = useState(null);
 
 
-    function extractText(poemText) {
-        var isContinousBr = true;
-        console.log({ isContinousBr })
-        const formattedLines = poemText.split(/<[^>]+>/).map(line => {
-            // Extract text content (excluding tags)
-            const text = line.trim();
+    // function extractText(poemText) {
+    //     var isContinousBr = true;
+    //     console.log({ isContinousBr })
+    //     const formattedLines = poemText.split(/<[^>]+>/).map(line => {
+    //         // Extract text content (excluding tags)
+    //         const text = line.trim();
 
-            if (text?.length > 0) {
-                isContinousBr = false
-                return `<p>${line.trim()}</p>\n`;
-            } else {
-                console.log(" inside ------ ", isContinousBr)
-                if (!isContinousBr) {
-                    isContinousBr = true;
-                    return `<p><br></p>\n`;
-                }
-
-
-            }
-            return;
+    //         if (text?.length > 0) {
+    //             isContinousBr = false
+    //             return `<p>${line.trim()}</p>\n`;
+    //         } else {
+    //             console.log(" inside ------ ", isContinousBr)
+    //             if (!isContinousBr) {
+    //                 isContinousBr = true;
+    //                 return `<p><br></p>\n`;
+    //             }
 
 
-            // Wrap non-extracted lines in <p> with newline
-
-        });
-
-        // Join formatted lines with double newlines
-        const formattedPoem = formattedLines.join('');
-
-        return formattedPoem;
-    }
+    //         }
+    //         return;
 
 
-    function textEditorHandler(e) {
-        setContent(e.target.value);
-        // console.log(e.target.value);
-        console.log(content);
+    //         // Wrap non-extracted lines in <p> with newline
 
-    }
+    //     });
+
+    //     // Join formatted lines with double newlines
+    //     const formattedPoem = formattedLines.join('');
+
+    //     return formattedPoem;
+    // }
+
+
+    // function textEditorHandler(e) {
+    //     setContent(e.target.value);
+    //     // console.log(e.target.value);
+    //     console.log(content);
+
+    // }
 
     const handleSubmit = async () => {
         if (!canPostStatus) {
@@ -244,8 +250,8 @@ export default function CreatePost() {
             }
             else {
 
-                const formated_text = extractText(content)
-                console.log('FORMATED Text ----------------->>>>>', formated_text)
+                // const formated_text = extractText(content)
+                // console.log('FORMATED Text ----------------->>>>>', formated_text)
 
                 const formData = new FormData();
                 formData.append("file", selectedFile);
@@ -255,7 +261,7 @@ export default function CreatePost() {
                 formData.append("writer_id", writerId);
                 formData.append("title", title);
                 formData.append("summary", summary);
-                formData.append("content", formated_text);
+                formData.append("content", content);
                 formData.append("rating", 1);
                 formData.append("status", false);
                 formData.append("uploaded_by", userUuid);
@@ -333,7 +339,14 @@ export default function CreatePost() {
 
                 <div className="text-yellow-800 text-[22px]">আপনার মূল লেখা নিচে লিখুন</div>
 
-                <div className="joidcss">
+
+                <div>
+                    <CustomEditor
+                        initialData=''
+                        setContent={setContent}
+                    />
+                </div>
+                {/* <div className="joidcss">
 
                     <EditorProvider>
                         <Editor
@@ -344,13 +357,12 @@ export default function CreatePost() {
 
                         >
                             <Toolbar>
-                                {/* <BtnBold />
-                                <BtnItalic /> */}
+                            
                             </Toolbar>
                         </Editor>
                     </EditorProvider>
 
-                </div>
+                </div> */}
 
                 <div className="text-yellow-800 text-[22px]">আপনার লেখার ধরণ নির্বাচন করুন</div>
 
@@ -376,7 +388,7 @@ export default function CreatePost() {
 
                 </div>
 
-               {!checkboxValue && <>
+                {!checkboxValue && <>
                     <div className="text-yellow-800 text-[22px]">লেখক নির্বাচন করুন(<span className="text-red-500">যদি আপনার নাম তালিকায় থাকে</span>)</div>
                     <div className=" place-content-center justify-center ">
 

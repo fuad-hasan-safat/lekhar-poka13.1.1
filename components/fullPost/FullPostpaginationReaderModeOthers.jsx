@@ -6,12 +6,12 @@ import parse from 'html-react-parser';
 import { apiBasePath } from '../../utils/constant';
 import axios from 'axios';
 
-const FullPostPagination = ({ logText, customclass }) => {
+const FullPostPaginationReadermodeOthers = ({ logText, customclass }) => {
   const router = useRouter()
   console.log(router.query)
   const slug = router.query.slug
   const [currentPage, setCurrentPage] = useState(0);
-  const linesPerPage = 20;
+  const linesPerPage = 60;
 
 
   const logLines = logText?.split('\n');
@@ -167,4 +167,4 @@ const FullPostPagination = ({ logText, customclass }) => {
   );
 };
 
-export default FullPostPagination;
+export default FullPostPaginationReadermodeOthers;

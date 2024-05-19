@@ -40,7 +40,13 @@ body {
 
 
 /* full post red mood body control */
-.body__control {}
+.ck-content {
+  color: black; /* Set the default text color to black */
+}
+.ck-editor__editable {
+height: 700px;
+background-color: #FCF7E8;
+}
 
 
 

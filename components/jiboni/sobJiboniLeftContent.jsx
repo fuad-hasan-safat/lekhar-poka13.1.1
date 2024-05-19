@@ -59,7 +59,7 @@ export default function SobJiboniLeftContent() {
 
   useEffect(() => {
     fetchPosts();
-  }, [totalPages]);
+  }, []);
 
 
   const loadnextPage = () => {
