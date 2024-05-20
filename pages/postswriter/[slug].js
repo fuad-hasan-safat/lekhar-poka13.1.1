@@ -90,7 +90,7 @@ export default function PostOfWriterPage() {
                         ) : (
                             <>
                                 {postList.length > 0 ?
-                                    <div className="pt-20  text-3xl lg:mr-[100px] md:mr-[70px]">
+                                    <div className="py-[55px]  text-3xl lg:mr-[100px] md:mr-[70px]">
                                         {displayedPosts.length && (
                                             displayedPosts.map((post, index) => (
                                                 <>
