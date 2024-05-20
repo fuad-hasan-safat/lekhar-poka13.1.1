@@ -45,10 +45,9 @@ useEffect(() => {
         <div className="pt-[23px]">
           {somosamoyikPost.length &&
             somosamoyikPost.map((item, index) => (
-              <>
-                <div className="pb-1 ">
+              <div key={index}>
+                <div key={index} className="pb-1 ">
                   <LekhaPokaProfile
-                   key={index}
                    image={item.image}
                    title={item.title}
                    writer={item.writer}
@@ -63,7 +62,7 @@ useEffect(() => {
                     ""
                   )}
                 </div>
-              </>
+              </div>
             ))}
         </div>:
                 <div className="pt-10"> এই মুহূর্তে কোনো লেখা নেই

@@ -43,10 +43,9 @@ const Samprotik = () => {
           <div className="pt-[23px]">
             {samprotikPost.length &&
               samprotikPost.map((item, index) => (
-                <>
-                  <div className="pb-1">
+                <div key={index}>
+                  <div key={index} className="pb-1">
                     <LekhaPokaProfile
-                      key={index}
                       image={item.image}
                       title={item.title}
                       writer={item.writer}
@@ -61,7 +60,7 @@ const Samprotik = () => {
                       ""
                     )}
                   </div>
-                </>
+                </div>
 
               ))}
           </div> :

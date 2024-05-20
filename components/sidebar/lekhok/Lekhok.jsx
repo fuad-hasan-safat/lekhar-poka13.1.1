@@ -61,10 +61,9 @@ const Lekhok = () => {
 
             {getVisibleWriters().length > 0 &&
               getVisibleWriters().map((item, index) => (
-                <>
-                  <div key={index} className="pb-3">
+                <div key={index}>
+                  <div className="pb-3">
                     <LekhokDetails
-                      key={index}
                       image={`${apiBasePath}/${item.image.replace('/uploads/', '/')
                         }`}
                       writer={item.name}
@@ -80,7 +79,7 @@ const Lekhok = () => {
                       ""
                     )}
                   </div>
-                </>
+                </div>
               ))}
           </div> :
           <div className="pt-10"> লেখক নেই </div>

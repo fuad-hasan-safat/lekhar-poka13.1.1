@@ -42,11 +42,10 @@ const Jonopriyo = () => {
           <div className="pt-[23px]">
             {jonopriyoData.length &&
               jonopriyoData.map((item, index) => (
-                <>
+                <div key={index}>
 
                   <div className="pb-1">
                     <LekhaPokaProfile
-                      key={index}
                       image={item.image}
                       title={item.title}
                       writer={item.writer}
@@ -61,7 +60,7 @@ const Jonopriyo = () => {
                       ""
                     )}
                   </div>
-                </>
+                </div>
 
 
               ))}
