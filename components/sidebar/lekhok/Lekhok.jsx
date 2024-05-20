@@ -18,7 +18,7 @@ const Lekhok = () => {
       .then((response) => response.json())
       .then((data) => {
         setLekhokList(data);
-        // console.log("-----------", data);
+        console.log(" user id-----------", data.user_id);
         // console.log("-----------", setLekhokList);
         // console.log('lekhok ----- data=================>>>>>', data)
       })

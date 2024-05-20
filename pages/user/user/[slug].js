@@ -5,6 +5,7 @@ import UserProfileBanner from '../../../components/userprofile/userProfileBanner
 import { apiBasePath } from '../../../utils/constant';
 import ProfilePostLeftContent from '../../../components/userprofile/ProfilePostLeftContent';
 import axios from 'axios';
+import Head from 'next/head';
 
 export default function WriterProfile() {
     const router = useRouter()
@@ -171,6 +172,11 @@ export default function WriterProfile() {
         router.isReady &&
         <>
             {/* main section */}
+            <div>
+                <Head>
+                    <title>{username}</title>
+                </Head>
+            </div>
             <section className=' text-black' >
                 {/* profile header */}
                 <section>

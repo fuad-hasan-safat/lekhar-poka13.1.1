@@ -7,7 +7,7 @@ const LekhokDetails = ({
     writer,
     lifeCycle,
 }) => {
-    console.log(' user id --------', user_id)
+    console.log(' user id --------', user_id, writer)
     return (
         <>
             <div className="flex">
