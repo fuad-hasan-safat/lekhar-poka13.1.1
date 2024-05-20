@@ -61,7 +61,7 @@ export default function CreatePost() {
     const [isCategoryAdded, setIsCategoryAdded] = useState(false)
     const [isProfileUpdated, setIsProfileUpdated] = useState(false)
     const [canPostStatus, setCanPostStatus] = useState(false)
-
+    const [userType, setUserType] = useState('')
     // ------------
 
     const [isCheckClicked, setIsChekClicked] = useState(false)
@@ -77,6 +77,7 @@ export default function CreatePost() {
         setUserToken(localStorage.getItem("token") || "");
         setUserUuid(localStorage.getItem("uuid") || "");
         setUserPhone(localStorage.getItem("phone") || "");
+        setUserType(localStorage.getItem("usertype") || "");
 
     }, []);
 
@@ -130,10 +131,10 @@ export default function CreatePost() {
     }, [isWriterAdded, isCategoryAdded])
 
 
-    const handleCheckboxChange = (isChecked) => {
-        setCheckboxValue(isChecked);
-        // Handle the changed checkbox value in your application logic here
-    };
+    // const handleCheckboxChange = (isChecked) => {
+    //     setCheckboxValue(isChecked);
+    //     // Handle the changed checkbox value in your application logic here
+    // };
 
     const categoryhandleChange = (selected) => {
         setSelectedOption(selected); // Selected option object
@@ -226,13 +227,16 @@ export default function CreatePost() {
             }
             else if (!summary) {
                 alert('দয়া করে আপনার লেখার সারমর্ম লিখুন')
-            } else if (!writer && !checkboxValue) {
-                alert('দয়া করে লেখক নির্বাচন করুন ')
-            }
+            } 
             else {
 
                 // const formated_text = extractText(content)
-                // console.log('FORMATED Text ----------------->>>>>', formated_text)
+                console.log({userUuid, isWriter,writer, writerId})
+                var isWriter = true;
+
+                if(userType === 'admin'){
+                    isWriter = false;
+                }
 
                 const formData = new FormData();
                 formData.append("file", selectedFile);
@@ -246,7 +250,7 @@ export default function CreatePost() {
                 formData.append("rating", 1);
                 formData.append("status", false);
                 formData.append("uploaded_by", userUuid);
-                formData.append("new_writer", checkboxValue);
+                formData.append("new_writer", isWriter);
 
                 if (title && selectedOption && summary) {
 
@@ -355,46 +359,57 @@ export default function CreatePost() {
                         options={Categoryoptions}
                     />
                 </div>
-                <div className='profile__btn__midl'>
+                {userType === 'admin' &&
+                    <div className='profile__btn__midl'>
 
-                    <CreateCategory setIsCategoryAdded={setIsCategoryAdded} />
+                        <CreateCategory setIsCategoryAdded={setIsCategoryAdded} />
 
-                </div>
+                    </div>}
 
-                <div className="pt-[10px]">
+                {/* <div className="pt-[10px]">
 
                     <h1 className="text-black text-[16px]">নিচের বক্সটি চেক করুন (<span className="text-red-500"> যদি আপনার নাম তালিকায় না থাকে</span>) </h1>
                     <Checkbox label="" name="myCheckbox" onChange={handleCheckboxChange} />
-                    {/* <p className="text-black">Checkbox value: {checkboxValue.toString()}</p> */}
 
-                </div>
+                </div> */}
 
-                {!checkboxValue && <>
-                    <div className="text-yellow-800 text-[22px]">লেখক নির্বাচন করুন(<span className="text-red-500">যদি আপনার নাম তালিকায় থাকে</span>)</div>
-                    <div className=" place-content-center justify-center ">
+                {userType === 'admin' &&
+                    <>
+                        <div className="text-yellow-800 text-[22px]">লেখক নির্বাচন করুন</div>
+                        <div className=" place-content-center justify-center ">
 
-                        <div className="">
-                            <Select
-                                value={selectedWriter}
-                                onChange={writerhandleChange}
-                                styles={customStyles}
-                                options={writersOptions}
-                            />
+                            <div className="">
+                                <Select
+                                    value={selectedWriter}
+                                    onChange={writerhandleChange}
+                                    styles={customStyles}
+                                    options={writersOptions}
+                                />
 
+                            </div>
+
+
+                            <div className='profile__btn__midl'>
+                                <CreateWriter setIsWriterAdded={setIsWriterAdded} />
+                            </div>
                         </div>
-                        <div className='profile__btn__midl'>
-                            <CreateWriter setIsWriterAdded={setIsWriterAdded} />
-                        </div>
-                    </div>
-
-                </>}
+                    </>
+                }
 
 
 
 
-                <div>
+
+
+                <div className='text-black'>
+                    <h >অডিও আপলোড করুন (যদি থাকে)</h>
                     <AudioFileUpload selectedFile={selectedFile} setSelectedFile={setSelectedFile} />
                 </div>
+
+                {/* <div className='text-black'>
+                    <h >ছবি আপলোড করুন (যদি থাকে)</h>
+                </div> */}
+
                 <button
                     onClick={handleSubmit}
                     className="px-[20px] h-[43px] bg-[#F9A106] rounded-md text-[16px] text-white items-center profile__btn__midl"

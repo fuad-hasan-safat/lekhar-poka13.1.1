@@ -53,8 +53,8 @@ const AudioFileUpload = ({ selectedFile, setSelectedFile }) => {
 
             {/* Button to trigger the file input dialog */}
             {!selectedFile && (
-                <button className="file-btn" onClick={onChooseFile}>
-                    <span className="material-symbols-outlined">অডিও</span> আপলোড করুন
+                <button className="file-btn w-[150px] text-[22px] " onClick={onChooseFile}>
+                    <i class="ri-folder-music-line"></i>
                 </button>
             )}
 
@@ -85,7 +85,7 @@ const AudioFileUpload = ({ selectedFile, setSelectedFile }) => {
                             </button>
                         </div>
                     </div>
-                    <button className="upload-btn" onClick={simulateUpload}>
+                    <button className="upload-btn w-[150px] " onClick={simulateUpload}>
                         {progress === 100 ? "আপলোড সম্পন্ন" : "আপলোড করুন"}
                     </button>
                 </>

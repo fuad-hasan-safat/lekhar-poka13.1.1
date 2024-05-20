@@ -5,9 +5,13 @@ import axios from 'axios';
 import { apiBasePath } from '../../utils/constant';
 import { useRouter } from 'next/router';
 
+// import { LoginSocialFacebook } from "reactjs-social-login";
+// import { FacebookLoginButton } from "react-social-login-buttons";
+
 export default function SignInOption({
     title,
     icon1,
+    icon2,
     lowermessege1,
     lowermessege2,
     signLogLink,
@@ -29,6 +33,11 @@ export default function SignInOption({
         },
         onError: (error) => console.log('Login Failed:', error)
     });
+
+
+    function fblogin() {
+
+    }
 
     async function sendDataToBackend(id, email, name, picture, access_token) {
         try {
@@ -66,7 +75,7 @@ export default function SignInOption({
 
                 router.reload();
 
-                
+
             }
 
         } catch (error) {
@@ -132,7 +141,7 @@ export default function SignInOption({
 
 
             {icon1?.length &&
-                <div className="flex place-content-center justify-center">
+                <div className="flex place-content-center justify-center space-x-[8px]">
 
                     <button
                         className="flex border border-solid rounded-md shadow-md p-1 py-[9px] px-[5px]"
@@ -147,6 +156,8 @@ export default function SignInOption({
                         />
 
                     </button>
+                   
+
                 </div>
             }
             <div className="flex space-x-3 pt-5  items-center justify-center">

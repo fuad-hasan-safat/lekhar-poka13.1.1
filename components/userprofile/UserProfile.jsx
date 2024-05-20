@@ -215,7 +215,7 @@ export default function UserProfile({ slug }) {
                 <div className="row">
                   <div className="col-md-12"></div>
                   <div className="lg:flex lg:flex-row lg:pt-[80px] md:pt-[60px] sm:pt-[40px] xs:pt-[40px]">
-                    <div className="lg:w-[70%]">
+                    <div className="w-full">
 
                       <div>
                         <UserInformationsAndBio
@@ -243,12 +243,9 @@ export default function UserProfile({ slug }) {
 
 
                     </div>
-                    <div className="lg:w-[30%] flex flex-col ">
-
-
-
+                    {/* <div className="lg:w-[30%] flex flex-col ">
                       <Sidebar />
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

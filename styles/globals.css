@@ -47,7 +47,9 @@ body {
 height: 700px;
 background-color: #FCF7E8;
 }
-
+.ck-focused{
+  /* display: none; */
+}
 
 
 .progress-bar {

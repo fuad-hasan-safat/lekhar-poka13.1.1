@@ -213,6 +213,7 @@ export default function Login() {
               setEmail={setEmail}
               title="অথবা সাইন ইন করুন"
               icon1="/images/loginOptionIcon/google.svg"
+              icon2='/images/loginOptionIcon/facebook_squre.svg'
               lowermessege1="একাউন্ট নেই? "
               lowermessege2="একাউন্ট তৈরী করুন ।"
               signLogLink="/account/signup"

@@ -62,13 +62,16 @@ module.exports = {
 	},
 
 	module: {
-		rules: [ {
+		rules: [ 
+			{
 			test: /\.svg$/,
 			use: [ 'raw-loader' ]
-		}, {
+		}, 
+		{
 			test: /\.ts$/,
 			use: 'ts-loader'
-		}, {
+		},
+		 {
 			test: /\.css$/,
 			use: [ {
 				loader: 'style-loader',
@@ -78,7 +81,8 @@ module.exports = {
 						'data-cke': true
 					}
 				}
-			}, {
+			}, 
+			{
 				loader: 'css-loader'
 			}, {
 				loader: 'postcss-loader',
@@ -91,6 +95,7 @@ module.exports = {
 					} )
 				}
 			} ]
-		} ]
+		} 
+	]
 	}
 };
