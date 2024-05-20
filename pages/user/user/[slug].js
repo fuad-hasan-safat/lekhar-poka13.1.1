@@ -6,6 +6,7 @@ import { apiBasePath } from '../../../utils/constant';
 import ProfilePostLeftContent from '../../../components/userprofile/ProfilePostLeftContent';
 import axios from 'axios';
 import Head from 'next/head';
+import WriterProfileBanner from '../../../components/userprofile/writerProfileBanner';
 
 export default function WriterProfile() {
     const router = useRouter()
@@ -82,7 +83,7 @@ export default function WriterProfile() {
         fetch(`${apiBasePath}/getprofile/${slug}`)
             .then((response) => response.json())
             .then((data) => {
-                // console.log('pofile details on user profile--------------->>>>>>>', data);
+                 console.log('pofile details on writer---- profile--------------->>>>>>>', data);
                 setDesignation(data.object.profile.designation)
                 setProfileStatus(data.object.profile.profileStatus)
                 setGender(data.object.profile.gender)
@@ -183,7 +184,7 @@ export default function WriterProfile() {
 
                     <div>
                         <div>
-                            <UserProfileBanner
+                            <WriterProfileBanner
                                 image={image}
                                 post={post}
                                 follower={follower}
