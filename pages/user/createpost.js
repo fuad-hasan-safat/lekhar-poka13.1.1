@@ -1,10 +1,16 @@
 import React from 'react'
 import Sidebar from '../../components/sidebar/Sidebar'
 import CreatePost from '../../components/userprofile/createPost'
+import Head from 'next/head'
 
 export default function Createpost() {
   return (
     <>
+     <div>
+      <Head>
+        <title>লিখুন</title>
+      </Head>
+      </div>
      <section className="all__page__main__content">
         <div className="container">
 

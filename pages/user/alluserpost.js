@@ -3,12 +3,18 @@ import React, { useEffect, useState } from 'react'
 import Sidebar from '../../components/sidebar/Sidebar';
 import ProfilePostLeftContentApproved from '../../components/userprofile/ProfilePostLeftContentApproved';
 import ProfilePostLeftContentUnApproved from '../../components/userprofile/ProfilePostLeftContentUnapproved';
+import Head from 'next/head';
 
 export default function AllUserPost() {
 
 
   return (
     <>
+    <div>
+      <Head>
+        <title>সকল</title>
+      </Head>
+    
       <section className="all__page__main__content">
         <div className="container">
 
@@ -36,6 +42,7 @@ export default function AllUserPost() {
           </div>
           </div>
       </section>
+      </div>
     </>
   )
 }
