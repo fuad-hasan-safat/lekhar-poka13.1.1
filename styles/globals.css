@@ -1183,6 +1183,7 @@ transition: all 0.5s !important;
 */
 .read__mod__sec__wrap{
   background: rgba(0, 0, 0, 0.8);
+  height: 100vh;
 }
 .read__mod__innr {
   background-color: #fff;
