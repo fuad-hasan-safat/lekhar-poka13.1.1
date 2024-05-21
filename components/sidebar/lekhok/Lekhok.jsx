@@ -67,7 +67,7 @@ const Lekhok = () => {
                       image={`${apiBasePath}/${item.image.replace('/uploads/', '/')
                         }`}
                       writer={item.name}
-                      writer_id={item.writer_id}
+                      writer_id={item._id}
                       id={item._id}
                       user_id={item.user_id}
                       lifeCycle={`  ${item.birth_date === null ? `বর্তমান` : `${item.birth_date} `} থেকে  ${item.expiry_date === null? '' : ` ${item.expiry_date}` } `}
