@@ -2,9 +2,7 @@
 import Loading from '../common/loading'
 import { useRouter } from "next/navigation";
 import { Suspense, useEffect, useState, useRef, useMemo } from "react";
-// import JoditEditor from "jodit-react";
-// import dynamic from 'next/dynamic';
-// const JoditEditor = dynamic(() => import('jodit-react'), { ssr: false });
+
 import {
   BtnBold,
   BtnItalic,
@@ -19,43 +17,15 @@ import Select from "react-select";
 
 import UserDetails from '../user/userdetails'
 import UserProfileBanner from '../userprofile/userProfileBanner'
-import Sidebar from '../sidebar/Sidebar'
-import { fetchData } from "../../function/api";
 import { apiBasePath } from "../../utils/constant";
 import Link from "next/link";
 
-import Checkbox from '../common/Checkbox'
-import AudioFileUpload from '../userprofile/AudiofileUpload'
-import ProfilePostLeftContent from './ProfilePostLeftContentApproved';
-import CreateWriter from './createWriter';
-import CreateCategory from './createCategory';
+
 import UserInformationsAndBio from '../user/userInformationsAndBio';
 
 export default function UserProfile({ slug }) {
-  // console.log("user profile main page---------------------->>>>>>>>>>>>><<<<<<<<<<<<<<<< SLUG ",slug)
 
-  //--------------- catagory -----------------
-  // const [selectedOption, setSelectedOption] = useState(null);
-
-  // determine writer and writer id
   const [writer, setWriter] = useState('');
-  // const [writerId, setWriterId] = useState(null);
-
-  // check box ---- (writer creation)
-  // const [checkboxValue, setCheckboxValue] = useState(false);
-
-  // const handleCheckboxChange = (isChecked) => {
-  //   setCheckboxValue(isChecked);
-  //   // Handle the changed checkbox value in your application logic here
-  // };
-
-  // const categoryhandleChange = (selected) => {
-  //   setSelectedOption(selected); // Selected option object
-
-
-  // };
-
- 
 
  
   // --------------------------------------------
@@ -77,10 +47,6 @@ export default function UserProfile({ slug }) {
   const [isCategoryAdded, setIsCategoryAdded] = useState(false)
   const [isProfileUpdated, setIsProfileUpdated] = useState(false)
 
-
-
-  // summary
-  // const [summary, setSummary] = useState('')
 
   // profile information fetch
   const [designation, setDesignation] = useState('');

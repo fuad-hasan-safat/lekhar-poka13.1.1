@@ -64,7 +64,8 @@ export default function CreatePost() {
     const [userType, setUserType] = useState('')
     // ------------
 
-    const [isCheckClicked, setIsChekClicked] = useState(false)
+    const [image, setImage] = useState(null);
+    const [preview, setPreview] = useState('');
 
 
 
@@ -201,14 +202,8 @@ export default function CreatePost() {
     }
 
 
-    // function textEditorHandler(e) {
-    //     setContent(e.target.value);
-    //     // console.log(e.target.value);
-    //     console.log(content);
-
-    // }
-
     const handleSubmit = async () => {
+        console.log("INSIDE HANDLE")
         if (!canPostStatus) {
             // alert('দয়া করে প্রোফাইল তৈরি করুন')
             const confirmLogout = window.confirm('দয়া করে প্রোফাইল তৈরি করুন');
@@ -227,19 +222,20 @@ export default function CreatePost() {
             }
             else if (!summary) {
                 alert('দয়া করে আপনার লেখার সারমর্ম লিখুন')
-            } 
+            }
             else {
 
                 // const formated_text = extractText(content)
-                console.log({userUuid, isWriter,writer, writerId})
+                console.log({ userUuid, isWriter, writer, writerId })
                 var isWriter = true;
 
-                if(userType === 'admin'){
+                if (userType === 'admin') {
                     isWriter = false;
                 }
 
                 const formData = new FormData();
                 formData.append("file", selectedFile);
+                formData.append("image", image);
                 formData.append("category", selectedOption?.label);
                 formData.append("cat_id", selectedOption?.value);
                 formData.append("writer", writer);
@@ -252,11 +248,16 @@ export default function CreatePost() {
                 formData.append("uploaded_by", userUuid);
                 formData.append("new_writer", isWriter);
 
+                console.log(formData)
+
                 if (title && selectedOption && summary) {
 
                     console.log(writer, writerId)
 
                     try {
+                    console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&   inside first &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+
+
                         const response = await fetch(`${apiBasePath}/posts`, {
                             method: "POST",
                             headers: {
@@ -264,7 +265,9 @@ export default function CreatePost() {
                             },
                             body: formData,
                         });
+                    console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&   inside last &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
 
+                        console.log("LIKHUN data save ----- response", response)
                         if (response.ok) {
                             const data = await response.json();
                             console.log("sucessfully sent:", data);
@@ -279,12 +282,12 @@ export default function CreatePost() {
                             router.push('/user/alluserpost')
 
                         } else {
-                            console.error("Failed to update profile:", response.statusText);
+                            console.error("Failed to update writing:", response.statusText);
                             alert(response.statusText);
                         }
                     } catch (error) {
-                        console.error("Error updating profile:", error);
-                        alert(error);
+                        console.error("Error creating post:", error);
+                         alert(error);
                     }
                 } else {
                     alert('শিরোনাম, লেখার ধরণ ও সারসংক্ষেপ লিখুন')
@@ -293,6 +296,22 @@ export default function CreatePost() {
 
         }
 
+
+    };
+
+
+    //  image handle
+    const handleFileChange = async ({ target: { files } }) => {
+        const file = files && files[0];
+        if (file) {
+            setImage(file);
+            console.log({ file })
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreview(reader.result); // Set preview image
+            };
+            reader.readAsDataURL(file);
+        }
 
     };
 
@@ -406,13 +425,39 @@ export default function CreatePost() {
                     <AudioFileUpload selectedFile={selectedFile} setSelectedFile={setSelectedFile} />
                 </div>
 
-                {/* <div className='text-black'>
-                    <h >ছবি আপলোড করুন (যদি থাকে)</h>
-                </div> */}
+                <div className='text-black'>
+                    <div className='mb-[15px]'>
+                        <h >ছবি আপলোড করুন (যদি থাকে)</h>
+                    </div>
+
+                    <div className='flex border border-solid border-gray-200 rounded-md h-[215px] items-center place-content-center text-center justify-center' >
+                        <input
+                            type="file"
+                            onChange={handleFileChange}
+                            className="hidden"
+                            id="postbaner"
+                            accept="image/*"
+                        />
+
+                        <label htmlFor='postbaner' className=" cursor-pointer" >
+                            {preview.length > 0 && <img
+                                src={preview}
+                                height={100}
+                                width={100}
+                                // className="object-cover "
+                                alt={preview}
+                            />
+                            }
+                            <div className=" mt-[15px]  file-btn w-[70px] text-[22px] " onClick={handleFileChange}> <i className='ri-camera-line'></i></div>
+
+                        </label>
+                    </div>
+
+                </div>
 
                 <button
                     onClick={handleSubmit}
-                    className="px-[20px] h-[43px] bg-[#F9A106] rounded-md text-[16px] text-white items-center profile__btn__midl"
+                    className="w-full px-[20px] h-[43px] bg-[#FCA000] rounded-md text-[16px] text-white items-center profile__btn__midl"
                 >
                     পোস্ট করুন
                 </button>

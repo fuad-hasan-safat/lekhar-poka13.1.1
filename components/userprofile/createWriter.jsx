@@ -11,7 +11,7 @@ export default function CreateWriter({setIsWriterAdded}) {
     return (
         <div>
             <button
-                className="bg-[#F9A106] hover:bg-[#f3ad57] text-white py-2 px-4 rounded mt-[20px]"
+                className="bg-[#FCA000] hover:bg-[#f3ad57] text-white py-2 px-4 rounded mt-[20px]"
                 onClick={handleShow}
             >
                 নতুন রাইটার ক্রিয়েট করুন

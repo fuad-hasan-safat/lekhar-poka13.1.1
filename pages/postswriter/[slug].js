@@ -34,7 +34,7 @@ export default function PostOfWriterPage() {
                 const data = await response.json();
                 setPostList(data.object);
 
-                console.log('posts of writer ----------------------------------', data.object)
+                console.log('posts of writer ----------------------------------', data)
 
                 // Calculate total pages based on posts and postsPerPage
                 setTotalPages(Math.ceil(data.object.length / postsPerPage));

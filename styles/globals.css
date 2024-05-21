@@ -77,6 +77,10 @@ background-color: #FCF7E8;
   display: table;
 }
 
+/* divider color */
+.deviderColor{
+  color: gray;
+}
 
 /* 
 --------------------------

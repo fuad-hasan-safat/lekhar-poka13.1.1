@@ -5,9 +5,10 @@ const LekhokDetails = ({
     id,
     user_id,
     writer,
+    writer_id,
     lifeCycle,
 }) => {
-    console.log(' user id --------', user_id, writer)
+    console.log(' user id --------', user_id, writer, writer_id)
     return (
         <>
             <div className="flex">
@@ -25,8 +26,7 @@ const LekhokDetails = ({
                     </Link>}
 
                     {!user_id && <Link
-                        href={`/postswriter/${writer}`}
-                    // href={`/user/user/${id}`}
+                        href={`/postswriter/${writer_id}`}
                     >
                         {writer}
                     </Link>

@@ -6,6 +6,7 @@ import { apiBasePath } from "../../utils/constant";
 import SobUserPostBody from "./SobUserPostBody";
 import Loading from "../common/loading";
 import axios from "axios";
+import { countWords } from "../../function/api";
 
 export default function ProfilePostLeftContent({ slug }) {
   //   const [selectedId, setSelectedId] = useState("sob");
@@ -71,7 +72,7 @@ export default function ProfilePostLeftContent({ slug }) {
         <>
           {/* <div className='container'> */}
           {postList.length > 0 ?
-            <div className='flex justify-center'>
+            <div className='flex'>
               <div className="lakha__main__content pt-20 text-3xl lg:mr-[100px] md:mr-[50px]">
                 {displayedPosts.length && (
                   displayedPosts.map((post, index) => (
@@ -81,8 +82,9 @@ export default function ProfilePostLeftContent({ slug }) {
                           id={post._id} // Assuming '_id' is the unique identifier
                           title={post.title}
                           writer={post.writer}
-                          content={post.category === 'কবিতা' ? `${post.content.split('</p>').slice(0, 50).join(" ")}` : `${post.content.split('</p>').slice(0, 100).join(" ")}`} // Truncate content
                           category={post.category}
+                          content={post.category === 'কবিতা' ? countWords(post.content, 20) : countWords(post.content, 50)}
+
 
                         />
                       </div>

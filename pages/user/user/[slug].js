@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import Sidebar from '../../../components/sidebar/Sidebar';
-import UserProfileBanner from '../../../components/userprofile/userProfileBanner';
 import { apiBasePath } from '../../../utils/constant';
 import ProfilePostLeftContent from '../../../components/userprofile/ProfilePostLeftContent';
 import axios from 'axios';
@@ -37,12 +36,9 @@ export default function WriterProfile() {
 
 
     //  fetch data from local store
-    const [isLoading, setIsLoading] = useState(true);
 
-    const [status, setStatus] = useState("");
     const [loggedInUser, setLoggedInUser] = useState("");
     const [userUuid, setUserUuid] = useState("");
-    const [userPhone, setUserPhone] = useState("");
     const [userToken, setUserToken] = useState("");
 
 
@@ -95,7 +91,7 @@ export default function WriterProfile() {
                 setFollower(data.object.stats.follower)
                 setFollowing(data.object.stats.following)
                 setPost(data.object.stats.post)
-                setUserName(data.object.name)
+                setUserName(data.object.profile.name)
 
 
                 // console.log(' profile image----------->>>>', image)
@@ -178,7 +174,7 @@ export default function WriterProfile() {
                     <title>{username}</title>
                 </Head>
             </div>
-            <section className=' text-black' >
+            <section className=' text-black mb-[110px]' >
                 {/* profile header */}
                 <section>
 
@@ -196,9 +192,9 @@ export default function WriterProfile() {
 
                         </div>
                         {isAlreadyFollowing === false ?
-                            <div className='container  '>
+                            <div className='container relative '>
                                 <button
-                                    className='mt-[30px] ml-[12.5%] h-[43px] bg-[#F9A106] hover:bg-[#c67256] px-[48px] p-1 rounded-lg text-white text-[16px]'
+                                    className='absolute mt-[70px] ml-[12.5%] h-[43px] bg-[#F9A106] hover:bg-[#c67256] px-[48px] p-1 rounded-lg text-white text-[16px]'
                                     onClick={() => followUserhandler(slug, userUuid)}
                                 >
                                     অনুসরণ করুন
@@ -228,14 +224,12 @@ export default function WriterProfile() {
                     <div className='all__post__sec__wrap'>
                         <div className='container'>
                             <div className='lg:flex lg:flex-row'>
-                                {/* body */}
-                                <div className='lg:w-[70%]'>
+                                {/* <div className='lg:w-[70%]'>
                                     {<ProfilePostLeftContent slug={slug} />}
                                 </div>
-                                {/* sidebar */}
                                 <div className='lg:w-[30%]'>
                                     <Sidebar />
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

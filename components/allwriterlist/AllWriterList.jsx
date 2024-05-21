@@ -14,7 +14,7 @@ export default function AllWriterList() {
             .then((data) => {
                 setLekhokList(data);
                 console.log("----------->>>>>>>>>>>>>>>>>   Lekhok list ------------------->>>>>>>>>>>", data);
-                console.log("-----------", setLekhokList);
+                // console.log("-----------", setLekhokList);
             })
             .catch((error) => console.error("Error fetching data:", error));
     }, []);
@@ -36,6 +36,7 @@ export default function AllWriterList() {
                                             key={index}
                                             image={`${apiBasePath}/${item.image?.slice(item.image.indexOf("/") + 1)}`}
                                             writer={item.name}
+                                            writer_id={item._id}
                                             id={item._id}
                                             user_id={item.user_id}
                                             lifeCycle={`  ${item.birth_date === null ? `` : `${item.birth_date} `} থেকে  ${item.expiry_date === null? 'বর্তমান' : ` ${item.expiry_date}` } `}

@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 
 const ImageCrop = ({ image, type = "profilePic", setWriterImage}) => {
     const router = useRouter();
-    console.log({ image })
+    // console.log({ image })
 
     const [username, setUsername] = useState("");
     const [userUuid, setUserUuid] = useState("");

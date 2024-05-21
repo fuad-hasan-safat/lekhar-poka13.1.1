@@ -145,8 +145,9 @@ export default function ProcchodLeftContent() {
                           buttons={buttons}
                           title={post.title}
                           writer={post.writer}
+                          writer_id={post.writer_id}
                           category={post.category}
-                          content={post.category === 'কবিতা' ? countWords(post.content, 30) : countWords(post.content, 70)}
+                          content={post.category === 'কবিতা' ? countWords(post.content, 20) : countWords(post.content, 50)}
                         />
                       </div>
                       {index < postList?.length && <MainContentDivider />}

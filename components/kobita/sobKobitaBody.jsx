@@ -45,7 +45,7 @@ const SobKobitaBody = ({
               </div>
             )} */}
           </div>
-          <div className="text-center">
+          <div className="text-left">
             <button
               onClick={() => handleClick(id)}
               className="text-yellow-500 text-xs"

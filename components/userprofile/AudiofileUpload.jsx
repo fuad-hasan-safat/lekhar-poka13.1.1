@@ -42,8 +42,9 @@ const AudioFileUpload = ({ selectedFile, setSelectedFile }) => {
     };
 
     return (
-        <div className="audio-upload text-black">
+        <div className="audio-upload text-black border border-solid border-gray-200 rounded-md h-[215px] items-center place-content-center">
             <input
+            id="audio"
                 ref={inputRef}
                 type="file"
                 accept="audio/*"
@@ -53,7 +54,7 @@ const AudioFileUpload = ({ selectedFile, setSelectedFile }) => {
 
             {/* Button to trigger the file input dialog */}
             {!selectedFile && (
-                <button className="file-btn w-[150px] text-[22px] " onClick={onChooseFile}>
+                <button className="file-btn w-[60px] text-[22px] " onClick={onChooseFile}>
                     <i class="ri-folder-music-line"></i>
                 </button>
             )}

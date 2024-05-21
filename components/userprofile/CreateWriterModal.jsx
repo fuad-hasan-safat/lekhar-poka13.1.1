@@ -137,7 +137,7 @@ const CreateWriterModal = ({ showModal, handleClose, setIsWriterAdded }) => {
                     </button>
                     <button
                       type="submit"
-                      className="bg-[#F9A106] hover:bg-[#f98806] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                      className="bg-[#FCA000] hover:bg-[#e3a230] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     >
                       সাবমিট
                     </button>
