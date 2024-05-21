@@ -50,6 +50,9 @@ export default function MyApp({ Component, pageProps }) {
   else if (pathname == "/post/readermood/[slug]") {
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
   }
+  else if (pathname == "/admin/alldesignation"){
+    result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
+  }
   else {
     result = <Layout><Component {...pageProps} /></Layout>
   }

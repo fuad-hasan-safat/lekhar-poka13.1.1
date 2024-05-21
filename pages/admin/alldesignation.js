@@ -7,6 +7,8 @@ import NotFound from "../../components/common/nofFound"
 import axios from "axios";
 import AdminLayOut from "./admin";
 import { useRouter } from "next/router";
+import CreateDesignation from "../../components/userprofile/createCategory";
+import CreateDesignationModal from "../../components/admin/createDesignationModal";
 
 const SliderTable = () => {
     const router = useRouter();
@@ -17,8 +19,13 @@ const SliderTable = () => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [selectedContent, setSelectedContent] = useState(null);
+    const [isCategoryAdded, setIsCategoryAdded] = useState(false)
 
-  
+    const [showModal, setShowModal] = useState(false);
+
+
+
+
 
     useEffect(() => {
         setUserType(localStorage.getItem("usertype") || "");
@@ -37,20 +44,23 @@ const SliderTable = () => {
 
     }, []);
 
+    const handleClose = () => setShowModal(false);
+    const handleShow = () => setShowModal(true);
+
 
     async function deleteData(id) {
         try {
-          const response = await axios.delete(`${apiBasePath}/designation/${id}`);
-          console.log('Delete successful:', response.data);
-          return response.data;
+            const response = await axios.delete(`${apiBasePath}/designation/${id}`);
+            console.log('Delete successful:', response.data);
+            return response.data;
         } catch (error) {
-          console.error('Error deleting data:', error);
-          throw error;
+            console.error('Error deleting data:', error);
+            throw error;
         }
-      }
+    }
 
 
-      async  function deleteCategory(id) {
+    async function deleteCategory(id) {
 
 
 
@@ -58,11 +68,11 @@ const SliderTable = () => {
             await deleteData(id);
             // If successful, update state or do something else
             alert('Delete Sucessfully')
-          } catch (error) {
+        } catch (error) {
             // Handle error
             alert('Failed to Delete')
 
-          }
+        }
 
 
 
@@ -76,37 +86,46 @@ const SliderTable = () => {
 
         return (
             <AdminLayOut>
-            <div className="pt-[115px]  text-black mx-10">
-                <div className="flex flex-row">
-                    <div className="w-1/2">
-                        <div className="text-5xl pb-4">Designation List</div>
-                        <ContentList content={sliderList} isSlider={true} />
-
+                <div className="pt-[115px]  text-black mx-10">
+                    <div>
+                        <button
+                            className="bg-[#FCA000] hover:bg-[#eeb249] text-white py-2 px-[25px] rounded mt-[20px]"
+                            onClick={handleShow}
+                        >
+                            নতুন লেখার ধরণ করুন
+                        </button>
+                        <CreateDesignationModal showModal={showModal} handleClose={handleClose} setIsCategoryAdded={setIsCategoryAdded} />
                     </div>
-                    <div className="w-1/2">
-                        <div className="text-5xl pb-4 ">Designation</div>
-                        <ul>
-                            {sliderList.length &&
-                                sliderList.map((post, index) => (
+                    <div className="flex flex-row">
+                        <div className="w-1/2">
+                            <div className="text-5xl pb-4">Designation List</div>
+                            <ContentList content={sliderList} isSlider={true} />
 
-                                    <li key={index}>
-                                        {/* {setToggleStatus(post.status)} */}
-                                        <button
-                                            id={index}
-                                            className={`text-green-500`}
+                        </div>
+                        <div className="w-1/2">
+                            <div className="text-5xl pb-4 ">Designation</div>
+                            <ul>
+                                {sliderList.length &&
+                                    sliderList.map((post, index) => (
 
-                                            onClick={() => { deleteCategory(post._id) }}
-                                        >
-                                            Delete 
-                                        </button>
-                                        <hr />
+                                        <li key={index}>
+                                            {/* {setToggleStatus(post.status)} */}
+                                            <button
+                                                id={index}
+                                                className={`text-green-500`}
 
-                                    </li>
-                                ))}
-                        </ul>
+                                                onClick={() => { deleteCategory(post._id) }}
+                                            >
+                                                Delete
+                                            </button>
+                                            <hr />
+
+                                        </li>
+                                    ))}
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </div >
+                </div >
             </AdminLayOut>
         )
     } else {

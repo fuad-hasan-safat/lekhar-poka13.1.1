@@ -7,6 +7,7 @@ import MainContentDivider from '../../components/common/mainContentDivider'
 import SobPostsOfWriterBody from '../../components/postOfWriter/sobPostsOfWriterBody'
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import { countWords } from '../../function/api';
 
 
 export default function PostOfWriterPage() {
@@ -100,7 +101,9 @@ export default function PostOfWriterPage() {
                                                             title={post.title}
                                                             writer={post.writer}
                                                             category={post.category}
-                                                            content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 200).join(" ")}` : `${post.content.split(/\s+/).slice(0, 200).join(" ")}`} // Truncate content
+                                                            // content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 200).join(" ")}` : `${post.content.split(/\s+/).slice(0, 200).join(" ")}`} // Truncate content
+                                                            content={post.category === 'কবিতা' ? countWords(post.content, 20) : countWords(post.content, 50)}
+
 
                                                         />
                                                     </div>

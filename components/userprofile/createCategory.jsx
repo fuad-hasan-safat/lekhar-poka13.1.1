@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import CreatecategoryModal from './createCategoryModal';
 
-export default function CreateCategory({setIsCategoryAdded}) {
+export default function CreateDesignation({setIsCategoryAdded}) {
     const [showModal, setShowModal] = useState(false);
 
     const handleClose = () => setShowModal(false);
