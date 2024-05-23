@@ -7,6 +7,7 @@ import Loading from "../common/loading";
 import SobJiboniBody from "./sobJiboniBody";
 import { apiBasePath } from "../../utils/constant";
 import { countWords } from "../../function/api";
+import SinglePostConponent from "../common/singlePostComponent";
 
 export default function SobJiboniLeftContent() {
 
@@ -92,10 +93,11 @@ export default function SobJiboniLeftContent() {
                     postList?.map((post, index) => (
                       <>
                         <div key={index}>
-                          <SobJiboniBody
+                          <SinglePostConponent
                             id={post._id}
                             title={post.title}
                             writer={post.writer}
+                            writer_id={post.writer_id}
                             content={countWords(post.content, 70)}
                           />
                         </div>
@@ -116,7 +118,7 @@ export default function SobJiboniLeftContent() {
         next={loadnextPage}
         hasMore={isHasMore}
         loader={<h6>ডাটা লোড হচ্ছে ...</h6>}
-        scrollThreshold= {0.5}
+        scrollThreshold={0.5}
 
 
       >

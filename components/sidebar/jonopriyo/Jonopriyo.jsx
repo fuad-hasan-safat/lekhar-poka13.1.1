@@ -19,7 +19,7 @@ const Jonopriyo = () => {
         const result = await fetchData(
           `${apiBasePath}/popularpost`
         );
-        // console.log("result         ->>>>>>>>>>>>>>>>", result.object);
+        console.log("result     জনপ্রিয়    ->>>>>>>>>>>>>>>>", result);
         setJanapriyoData(result.posts);
       } catch (error) {
         //alert(error)
@@ -49,6 +49,7 @@ const Jonopriyo = () => {
                       image={item.image}
                       title={item.title}
                       writer={item.writer}
+                      writer_id={item.writer_id}
                       id={item._id}
                       star={item.rating}
                     />

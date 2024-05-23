@@ -19,24 +19,7 @@ const MaincontentBody = ({
   console.log({content})
 
   const elementRef = useRef(null);
-  // useEffect(() => {
-  //   const element = elementRef.current;
 
-  //   const handleRightClick = (event) => {
-  //     event.preventDefault(); // Prevent default context menu
-  //     // Implement custom logic here (e.g., display an alert)
-  //     alert('Right-click detected!');
-  //   };
-
-  //   element.addEventListener('contextmenu', handleRightClick);
-
-  //   return () => {
-  //     element.removeEventListener('contextmenu', handleRightClick);
-  //   };
-  // }, []);
-
-
-  // const [html, setHTML] = useState({ __html: content });
 
 
   function handleClick(postId) {

@@ -7,6 +7,7 @@ import SobGolpoBody from "./sobGolpoBody";
 import Loading from "../common/loading";
 import { apiBasePath } from "../../utils/constant";
 import { countWords } from "../../function/api";
+import SinglePostConponent from "../common/singlePostComponent";
 export default function SobGolpoLeftContent() {
 
   //   const [selectedId, setSelectedId] = useState("sob");
@@ -99,10 +100,11 @@ export default function SobGolpoLeftContent() {
                       postList?.map((post, index) => (
                         <>
                           <div key={index}>
-                            <SobGolpoBody
+                            <SinglePostConponent
                               id={post._id}
                               title={post.title}
                               writer={post.writer}
+                              writer_id={post.writer_id}
                               content={countWords(post.content, 70)}
 
                             // content={post.content.split(/\s+/).slice(0, 200).join(" ")}
@@ -117,7 +119,7 @@ export default function SobGolpoLeftContent() {
                       next={loadnextPage}
                       hasMore={isHasMore}
                       loader={<h6>ডাটা লোড হচ্ছে ...</h6>}
-                      scrollThreshold= {0.5}
+                      scrollThreshold={0.5}
 
                     >
                     </InfiniteScroll>

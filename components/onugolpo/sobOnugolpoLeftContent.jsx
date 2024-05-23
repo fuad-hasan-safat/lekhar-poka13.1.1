@@ -8,6 +8,7 @@ import Loading from "../common/loading";
 import SobOnugolpoBody from "./sobOnugolpoBody";
 import { apiBasePath } from "../../utils/constant";
 import { countWords } from "../../function/api";
+import SinglePostConponent from "../common/singlePostComponent";
 
 export default function SobOnugolpoLeftContent() {
 
@@ -102,10 +103,11 @@ export default function SobOnugolpoLeftContent() {
                     postList?.map((post, index) => (
                       <>
                         <div key={index}>
-                          <SobOnugolpoBody
+                          <SinglePostConponent
                             id={post._id} // Assuming '_id' is the unique identifier
                             title={post.title}
                             writer={post.writer}
+                            writer_id={post.writer_id}
                             content={countWords(post.content, 70)}
 
                           // content={post.content.split(/\s+/).slice(0, 200).join(" ")}

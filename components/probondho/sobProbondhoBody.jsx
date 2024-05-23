@@ -8,6 +8,7 @@ const SobProbondhoBody = ({
   id,
   title,
   writer,
+  writer_id,
   content,
 }) => {
   const router = useRouter();
@@ -23,7 +24,7 @@ const SobProbondhoBody = ({
         <div className="text-3xl text-yellow-400 font-bold">{title}</div>
       </div>
       <div className="pb-4">
-        <div className="text-xl text-gray-800 font-semibold ">{writer}</div>
+        <a className="text-xl text-gray-800 font-semibold " href={`/postswriter/${writer_id}`}>{writer}</a>
       </div>
       <div className="pb-3">
         {/* <div

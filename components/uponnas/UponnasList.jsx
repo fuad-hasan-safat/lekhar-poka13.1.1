@@ -6,6 +6,7 @@ import SobGolpoBody from '../golpo/sobGolpoBody'
 import { apiBasePath } from '../../utils/constant';
 import MainContentDivider from '../common/mainContentDivider';
 import { countWords } from '../../function/api';
+import SinglePostConponent from '../common/singlePostComponent';
 
 export default function UponnasList() {
 
@@ -82,10 +83,11 @@ export default function UponnasList() {
                                 postList?.map((post, index) => (
                                     <>
                                         <div key={index}>
-                                            <SobGolpoBody
+                                            <SinglePostConponent
                                                 id={post._id}
                                                 title={post.title}
                                                 writer={post.writer}
+                                                writer_id={post.writer_id}
                                                 content={countWords(post.content, 70)}
 
                                             // content={post.content.split(/\s+/).slice(0, 200).join(" ")}

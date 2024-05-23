@@ -13,15 +13,17 @@ const LekhokDetails = ({
         <>
             <div className="flex">
                 <div className="lekhokIteam">
-                    <img
-                    className=""
-                        src={image}
-                        alt={`img ${id}`}
-                    />
+                    <a  href={`/postswriter/${writer_id}`}>
+                        <img
+                            className=""
+                            src={image}
+                            alt={`img ${id}`}
+                        />
+                    </a>
                 </div>
                 <div className="pl-4 text-[20px] text-gray-900">
                     {user_id?.length > 0 && <Link
-                     href={`/user/user/${user_id}`}>
+                        href={`/user/user/${user_id}`}>
                         {writer}
                     </Link>}
 

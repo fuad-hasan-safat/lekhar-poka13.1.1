@@ -9,6 +9,7 @@ import axios from "axios";
 import Loading from "../common/loading";
 import { apiBasePath } from "../../utils/constant";
 import { countWords } from "../../function/api";
+import SinglePostConponent from "../common/singlePostComponent";
 
 export default function SobKobitaLeftContent() {
 
@@ -100,13 +101,14 @@ export default function SobKobitaLeftContent() {
                     postList?.map((post, index) => (
                       <>
                         <div key={index}>
-                          <SobKobitaBody
-                            id={post._id} // Assuming '_id' is the unique identifier
+                          <SinglePostConponent
+                            id={post._id} 
                             title={post.title}
                             writer={post.writer}
+                            writer_id={post.writer_id}
                             category={post.category}
                             // content={post.content.split(/\s+/).slice(0, 180).join(" ")}
-                            content={countWords(post.content, 30)}
+                            content={countWords(post.content, 20)}
 
                           />
                         </div>

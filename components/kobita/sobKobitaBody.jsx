@@ -6,6 +6,7 @@ const SobKobitaBody = ({
   id,
   title,
   writer,
+  writer_id,
   content,
   category
 }) => {
@@ -22,28 +23,14 @@ const SobKobitaBody = ({
             <div className="text-3xl text-yellow-400 font-bold">{title}</div>
           </div>
           <div className="pb-4">
-            <div className="text-xl text-gray-800 font-semibold ">{writer}</div>
+            <a className="text-xl text-gray-800 font-semibold " href={`/postswriter/${writer_id}`}>{writer}</a>
           </div>
           <div className="pb-3">
             <div
               className="text-[16px] text-gray-500 "
               dangerouslySetInnerHTML={{ __html: content }}
             />
-            {/* {content && (
-              <div className="text-[16px] text-gray-500">
-                {parse(content, {
-                  replace: (domNode) => {
-                    if (domNode.attribs && domNode.attribs.style) {
-                      delete domNode.attribs.style;
-                    }
-                    return domNode;
-                  },
-                  onError: (error) => {
-                    console.error('Error parsing content:', error);
-                  },
-                })}
-              </div>
-            )} */}
+          
           </div>
           <div className="text-left">
             <button

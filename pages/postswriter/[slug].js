@@ -8,6 +8,7 @@ import SobPostsOfWriterBody from '../../components/postOfWriter/sobPostsOfWriter
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { countWords } from '../../function/api';
+import SinglePostConponent from '../../components/common/singlePostComponent';
 
 
 export default function PostOfWriterPage() {
@@ -96,7 +97,7 @@ export default function PostOfWriterPage() {
                                             displayedPosts.map((post, index) => (
                                                 <>
                                                     <div key={index}>
-                                                        <SobPostsOfWriterBody
+                                                        <SinglePostConponent
                                                             id={post._id}
                                                             title={post.title}
                                                             writer={post.writer}

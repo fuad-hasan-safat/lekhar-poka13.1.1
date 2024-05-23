@@ -51,6 +51,7 @@ useEffect(() => {
                    image={item.image}
                    title={item.title}
                    writer={item.writer}
+                   writer_id={item.writer_id}
                    id={item._id}
                    star={item.rating}
                   />

@@ -4,7 +4,7 @@ import Image from "next/image";
 import parse from 'html-react-parser';
 import { useRouter } from "next/navigation";
 
-const SobGolpoBody = ({id, title, writer, content}) => {
+const SobGolpoBody = ({id, title, writer,writer_id, content}) => {
   const router = useRouter();
 
   const [html, setHTML] = useState({ __html: content });
@@ -19,14 +19,14 @@ const SobGolpoBody = ({id, title, writer, content}) => {
         <div className="text-3xl text-yellow-400 font-bold">{title}</div>
       </div>
       <div className="pb-4">
-        <div className="text-xl text-gray-800 font-semibold ">{writer}</div>
+        <a className="text-xl text-gray-800 font-semibold " href={`/postswriter/${writer_id}`} >{writer}</a>
       </div>
       <div className="pb-3">
-        {/* <div
+        <div
           className="text-[16px] text-gray-500 text-justify"
           dangerouslySetInnerHTML={html}
-        /> */}
-         {content && (
+        />
+         {/* {content && (
           <div className="text-[16px] text-gray-500">
             {parse(content, {
               replace: (domNode) => {
@@ -40,7 +40,7 @@ const SobGolpoBody = ({id, title, writer, content}) => {
               },
             })}
           </div>
-        )}
+        )} */}
       </div>
 
       {/* button -- it would be conditionally appaer */}
