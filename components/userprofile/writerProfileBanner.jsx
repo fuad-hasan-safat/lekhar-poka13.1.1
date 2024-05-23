@@ -43,26 +43,26 @@ export default function WriterProfileBanner({
 
                     <div className='md:flex md:flex-row pt-[20px] md:lg:pl-[6%] ]'>
 
-                        <div className="grid place-content-center  text-center  ">
-                            <h1 className="text-[#FCD200] lg:text-[35px] md:text-[34px] sm:text-[32px] xs:text-[30px]  items-center">
+                        <div className="grid place-content-center  text-left  ">
+                            <h1 className="text-[#FCD200] lg:text-[35px] md:text-[34px] sm:text-[32px] xs:text-[30px]  ">
                                 <h2 className='px-3 py-2 text-center'>  {username} </h2>
                             </h1>
 
                             {designation.length > 0 &&
-                                <h1 className="text-[#595D5B] lg:text-[22px] md:text-[21px] sm:text-[20px] xs:text-[17px] items-center">
+                                <h1 className="text-[#595D5B] lg:text-[22px] md:text-[21px] sm:text-[20px] xs:text-[17px]">
                                     {designation}
                                 </h1>
                             }
 
                             {profileStatus.length > 0 &&
-                                <h1 className="text-[#737373] lg:text-[22px] md:text-[21px] sm:text-[20px] xs:text-[17px]  items-center">
+                                <h1 className="text-[#737373] lg:text-[22px] md:text-[21px] sm:text-[20px] xs:text-[17px]">
                                     {profileStatus}
                                 </h1>
                             }
-                            <h1 className="text-[#737373] lg:text-[22px] md:text-[21px] sm:text-[20px] xs:text-[17px]  items-center">
+                            <h1 className="text-[#737373] lg:text-[22px] md:text-[21px] sm:text-[20px] xs:text-[17px]">
                                 {bio}
                             </h1>
-                            <h1 className="text-[#737373] lg:text-[22px] md:text-[21px] sm:text-[20px] xs:text-[17px]  items-center">
+                            <h1 className="text-[#737373] lg:text-[22px] md:text-[21px] sm:text-[20px] xs:text-[17px]">
                                 {birth_date} থেকে {expiry_date?.length > 0 ? expiry_date : 'বর্তমান'}
                             </h1>
                         </div>
