@@ -61,7 +61,11 @@ const CreateWriterBioModal = ({ showModal, handleClose, setIsCategoryAdded }) =>
        });
       setIsCategoryAdded(true)
 
-      console.log(' category response ---', response)
+      if(response.data.status === "failed"){
+        alert(response.data.msg)
+      }
+
+      console.log(' BIOOOOOO response ---', response)
 
       handleClose();
 
