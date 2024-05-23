@@ -7,6 +7,7 @@ import SobUserPostBody from "./SobUserPostBody";
 import Loading from "../common/loading";
 import axios from "axios";
 import { countWords } from "../../function/api";
+import SinglePostConponent from "../common/singlePostComponent";
 
 export default function ProfilePostLeftContent({ slug }) {
   //   const [selectedId, setSelectedId] = useState("sob");
@@ -31,7 +32,7 @@ export default function ProfilePostLeftContent({ slug }) {
         const data = response.data; // Assuming the response structure
         setPostList(data.object);
 
-        console.log("user profile post---------------------->>>>>>>>>>>>><<<<<<<<<<<<<<<< data ", data.object)
+        console.log("user profile post writer---------------------->>>>>>>>>>>>><<<<<<<<<<<<<<<< data ", data.object)
 
 
         // Calculate total pages based on posts and postsPerPage
@@ -78,10 +79,11 @@ export default function ProfilePostLeftContent({ slug }) {
                   displayedPosts.map((post, index) => (
                     <>
                       <div key={index}>
-                        <SobUserPostBody
+                        <SinglePostConponent
                           id={post._id} // Assuming '_id' is the unique identifier
                           title={post.title}
                           writer={post.writer}
+                          writer_id={post?.writer_id}
                           category={post.category}
                           content={post.category === 'কবিতা' ? countWords(post.content, 20) : countWords(post.content, 50)}
 

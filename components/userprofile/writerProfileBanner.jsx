@@ -4,7 +4,19 @@ import { apiBasePath } from '../../utils/constant'
 import ImageCrop from './cropComponents/ImageCrop'
 import ImageCropProvider from './cropComponents/ImageCropProvider'
 
-export default function WriterProfileBanner({ image = '', username = '', setUsername, designation = '', profileStatus = '', apprevedPost = 0, unApprovedPost = 0, follower = 0, following = 0 }) {
+export default function WriterProfileBanner({
+    image = '',
+    username = '',
+    birth_date,
+    expiry_date,
+    setUsername,
+    designation = '',
+    profileStatus = '',
+    apprevedPost = 0,
+    unApprovedPost = 0,
+    follower = 0,
+    following = 0,
+}) {
 
     console.log('image --------- length >>>>>', image)
     return (
@@ -30,49 +42,28 @@ export default function WriterProfileBanner({ image = '', username = '', setUser
 
                     <div className='md:flex md:flex-row pt-[20px] md:lg:pl-[6%] ]'>
 
-                        <div className="grid place-content-center  text-center space-y-4 ">
+                        <div className="grid place-content-center  text-center  ">
                             <h1 className="text-[#FCD200] lg:text-[35px] md:text-[34px] sm:text-[32px] xs:text-[30px]  items-center">
-                              <h2 className='px-3 py-2 text-center'>  {username} </h2>
-                                {/* <input
-                                    type="text"
-                                    id="name"
-                                    name="name"
-                                    className='px-3 py-2 text-center'
-                                    placeholder="আপনার নাম লিখুন "
-                                    value={username} // Set the input value to the state variable 'name'
-                                    onChange={(e)=>setUsername(e.target.value)} // Attach the handleChange function on change
-                                /> */}
-
+                                <h2 className='px-3 py-2 text-center'>  {username} </h2>
                             </h1>
 
-                            <h1 className="text-[#595D5B] lg:text-[22px] md:text-[21px] sm:text-[20px] xs:text-[17px] items-center">
-                                {designation}
-                            </h1>
+                            {designation.length > 0 &&
+                                <h1 className="text-[#595D5B] lg:text-[22px] md:text-[21px] sm:text-[20px] xs:text-[17px] items-center">
+                                    {designation}
+                                </h1>
+                            }
+
+                            {profileStatus.length > 0 &&
+                                <h1 className="text-[#737373] lg:text-[22px] md:text-[21px] sm:text-[20px] xs:text-[17px]  items-center">
+                                    {profileStatus}
+                                </h1>
+                            }
+
                             <h1 className="text-[#737373] lg:text-[22px] md:text-[21px] sm:text-[20px] xs:text-[17px]  items-center">
-                                {profileStatus}
+                                {birth_date} থেকে {expiry_date?.length> 0 ? expiry_date : 'বর্তমান'}
                             </h1>
                         </div>
-                        <div className="flex flex-row text-[#484848] lg:text-[18px] md:text-[14px] sm:text-[14px] xs:text-[12px] justify-items-center  m-auto divide-x-2 space-x-3 pt-4 lg:pl-[130px] 
-                    place-content-center">
 
-                            <div className="text-center">
-                                <h1>{apprevedPost}</h1>
-                                <h1>অনুমোদিত পোস্ট</h1>
-                            </div>
-
-                            <div className="pl-2 text-center">
-                                <h1>{follower}</h1>
-                                <h1>ফলোয়ার</h1>
-                            </div>
-                            <div className="pl-2 text-center">
-                                <h1>{following}</h1>
-                                <h1>ফলোয়িং</h1>
-                            </div>
-                            <div className="pl-2 text-center">
-                                <h1>{unApprovedPost}</h1>
-                                <h1>অনুমোদনহীন পোস্ট</h1>
-                            </div>
-                        </div>
 
                     </div>
 
