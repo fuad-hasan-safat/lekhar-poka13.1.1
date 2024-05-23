@@ -265,226 +265,190 @@ export default function UserInformationsAndBio({ username, setUsername }) {
 
     return (
         <>
-            <div className='edit__btn__wrap m-auto lg:pt-0 md:pt-[40px] sm:pt-[50px] xs:pt-[70px] text-black mx-[110px]'>
+            <div className='edit__btn__wrap clearfix m-auto lg:pt-0 md:pt-[40px] sm:pt-[50px] xs:pt-[70px] text-black mx-[110px]'>
                 <div className="text-[28px] mb-2 text-[#F9A106]">বিস্তারিত</div>
                 <div className="text-[20px] text-[#737373] space-y-3 ">
-                    <div className=' lg:flex lg:flex-row w-full'>
-                        <div className="lg:w-[50%]">
-                            <div>
-                                <label className='text-[#ffa844] '> লিঙ্গ </label>
-                                <div className='flex justify-left align-items-center items-center flex-row space-x-2'>
-                                    <div htmlFor="sex">
-                                        <img
-                                            className='w-[15px] h-[15px]'
-
-                                            src="/images/usericons/sexicon.svg"
-                                        />
+                    <div className='profile__edit__lft'>
+                        <div className='lg:flex-row w-full'>
+                            <div className="w-full">
+                                <div>
+                                    <label className='text-[#ffa844] '> লিঙ্গ </label>
+                                    <div className='flex justify-left align-items-center items-center flex-row space-x-2'>
+                                        {/* <div htmlFor="sex">
+                                            <img
+                                                className='w-[15px] h-[15px]'
+                                                src="/images/usericons/sexicon.svg"
+                                            />
+                                        </div> */}
+                                        <select
+                                            id="sex"
+                                            name="sex"
+                                            className='bg-transparent w-[90%]'
+                                            required
+                                            value={gender}
+                                            onChange={(e) => setGender(e.target.value)}>
+                                            <option value="">নির্বাচন করুন</option>
+                                            <option value="male">পুরুষ</option>
+                                            <option value="female">নারী</option>
+                                        </select>
                                     </div>
+                                </div>
+                            </div>
+                            <div className="w-full lg:mt-0 md:mt-0 sm:mt-[15px] xs:mt-[15px]">
+                                <div>
+                                    <label className='text-[#ffa844] '> মোবাইল নাম্বার </label>
+                                    <div className="flex justify-left align-items-center items-center flex-row space-x-2 ">
+                                        {/* <div htmlFor="phoneNumber">
+                                            <img
+                                                className='w-[15px] h-[15px]'
+                                                src="/images/usericons/phone.svg"
+                                            />
+                                        </div> */}
+                                        {isSubmit ? <>
+                                            <p>{phoneNumber}</p>
+                                        </> : <>
+
+                                            <input
+                                                type="tel"
+                                                id="phoneNumber"
+                                                name="phoneNumber"
+                                                className='w-[90%] px-4 py-1'
+                                                placeholder='8801XXXXXXXXX'
+                                                required
+                                                value={phoneNumber}
+                                                onChange={(e) => setPhoneNumber(e.target.value)}
+                                            />
+                                        </>}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='w-full pt-[15px]'>
+                            <div className='w-full'>
+                                <div className='W-[100%] mb-[15px] flex flex-col'>
+                                    <label className='text-[#ffa844] '> পদবী </label>
                                     <select
-                                        id="sex"
-                                        name="sex"
-                                        className='bg-transparent w-[90%]'
+                                        id="designation"
+                                        name="designation"
+                                        className='bg-transparent w-[93%]'
                                         required
-                                        value={gender}
-                                        onChange={(e) => setGender(e.target.value)}>
+                                        value={designation}
+                                        onChange={(e) => setDesignation(e.target.value)}>
                                         <option value="">নির্বাচন করুন</option>
-                                        <option value="male">পুরুষ</option>
-                                        <option value="female">নারী</option>
+                                        {designationFromApi.map((category) => (
+                                            <option key={category._id} value={category.title}>
+                                                {category.title}
+                                            </option>
+                                        ))}
+
                                     </select>
+                                    {/* <Select
+                                        className='w-[95%]'
+                                        value={selectedDesignation}
+                                        onChange={designationChange}
+                                        styles={customStyles}
+                                        options={designationOptions}
+                                    /> */}
                                 </div>
-                            </div>
+                                <div>
+                                    <label className='text-[#ffa844] '> জন্ম তারিখ </label>
+                                    <div className='w-[95%] flex justify-left  align-items-center flex-row space-x-2'>
+                                        {/* <div htmlFor="birthDate py-2">
+                                            <img
+                                                className='w-[23px] h-[23px] -ml-[2px]'
+                                                src="/images/usericons/birthdate.svg"
+                                            />
+                                        </div> */}
+                                        <input
+                                            className="shadow appearance-none border rounded bg-transparent  w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            id="birthDate"
+                                            type="date"
+                                            value={birthOfDate}
+                                            onChange={(e) => setBirthOfDate(e.target.value)}
 
-
-                        </div>
-
-                        <div className="lg:w-[50%] lg:mt-0 md:mt-0 sm:mt-[15px] xs:mt-[15px]">
-                            <div>
-                                <label className='text-[#ffa844] '> মোবাইল নাম্বার </label>
-                                <div className="flex justify-left align-items-center items-center flex-row space-x-2 ">
-                                    <div htmlFor="phoneNumber">
-                                        <img
-                                            className='w-[15px] h-[15px]'
-
-                                            src="/images/usericons/phone.svg"
+                                            required
                                         />
                                     </div>
-                                    {isSubmit ? <>
-                                        <p>{phoneNumber}</p>
-                                    </> : <>
-
-                                        <input
-                                            type="tel"
-                                            id="phoneNumber"
-                                            name="phoneNumber"
-                                            className='w-[90%] px-4 py-1'
-                                            placeholder='8801XXXXXXXXX'
-                                            required
-                                            value={phoneNumber}
-                                            onChange={(e) => setPhoneNumber(e.target.value)}
-                                        />
-                                    </>}
-
                                 </div>
-
                             </div>
+                            <div className='w-full lg:mt-0 md:mt-0 sm:mt-[15px] xs:mt-[15px]'>
+                                <div>
+                                    <label className='text-[#ffa844] '> ইমেইল </label>
+                                    <div className="flex justify-left align-items-center items-center flex-row space-x-2">
+                                        {/* <div htmlFor="email">
+                                            <img
+                                                className='w-[15px] h-[15px] '
+                                                src="/images/usericons/email.svg"
+                                            />
+                                        </div> */}
+                                        {isSubmitEmail ? <>
+                                            <p>{email}</p>
+                                        </> : <>
+                                            <input
+                                                type="email"
+                                                id="email"
+                                                name="email"
+                                                className='w-full px-4 py-1'
+                                                placeholder='mail@domain.com'
+                                                required
+                                                value={email}
+                                                onChange={(e) => setemail(e.target.value)}
 
-
-
+                                            />
+                                        </>}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <div className=' lg:flex lg:flex-row w-full pt-[15px]'>
-                        <div className='lg:w-[50%]'>
-
-                            <div className='W-[90%] mb-[15px] flex flex-col'>
-                                <label className='text-[#ffa844] '> পদবী </label>
-
-                                <select
-                                    id="designation"
-                                    name="designation"
-                                    className='bg-transparent w-[93%]'
-                                    required
-                                    value={designation}
-                                    onChange={(e) => setDesignation(e.target.value)}>
-                                    <option value="">নির্বাচন করুন</option>
-                                    {designationFromApi.map((category) => (
-                                        <option key={category._id} value={category.title}>
-                                            {category.title}
-                                        </option>
-                                    ))}
-
-                                </select>
-                                {/* <Select
-                                    className='w-[95%]'
-                                    value={selectedDesignation}
-                                    onChange={designationChange}
-                                    styles={customStyles}
-                                    options={designationOptions}
-                                /> */}
-
-                            </div>
-
-
-                            <div>
-                                <label className='text-[#ffa844] '> জন্ম তারিখ </label>
-                                <div className='w-[95%] flex justify-left  align-items-center flex-row space-x-2'>
-                                    <div htmlFor="birthDate py-2">
-                                        <img
-                                            className='w-[23px] h-[23px] -ml-[2px]'
-                                            src="/images/usericons/birthdate.svg"
-                                        />
-                                    </div>
-
-                                    <input
-                                        className="shadow appearance-none border rounded bg-transparent  w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                        id="birthDate"
-                                        type="date"
-                                        value={birthOfDate}
-                                        onChange={(e) => setBirthOfDate(e.target.value)}
-
-                                        required
-
-                                    />
-                                </div>
-
-                            </div>
-
-
-
-
-
-                        </div>
-                        <div className='lg:w-[50%] lg:mt-0 md:mt-0 sm:mt-[15px] xs:mt-[15px]'>
-                            <div>
-                                <label className='text-[#ffa844] '> ইমেইল </label>
-                                <div className="flex justify-left align-items-center items-center flex-row space-x-2">
-                                    <div htmlFor="email">
-                                        <img
-                                            className='w-[15px] h-[15px] '
-
-                                            src="/images/usericons/email.svg"
-                                        />
-                                    </div>
-                                    {isSubmitEmail ? <>
-                                        <p>{email}</p>
-                                    </> : <>
-                                        <input
-                                            type="email"
-                                            id="email"
-                                            name="email"
-                                            className='w-full px-4 py-1'
-                                            placeholder='mail@domain.com'
-                                            required
-                                            value={email}
-                                            onChange={(e) => setemail(e.target.value)}
-
-                                        />
-                                    </>}
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div className='my-[15px] w-full'>
+                    {/* <div className='my-[15px] w-full'>
                         <hr></hr>
-                    </div>
-
-                    <div className='lg:flex lg:flex-col'>
-
-                        <div>
-                            <label className='text-[#ffa844] '> ঠিকানা </label>
-                            <div className="flex justify-left items-center flex-row w-full space-x-2 pt-2">
-                                <div htmlFor="address">
-                                    <img
-                                        className='h-[18px]'
-                                        src="/images/usericons/location.svg"
+                    </div> */}
+                    <div className='profile__edit__right'>
+                        <div className='lg:flex lg:flex-col'>
+                            <div>
+                                <label className='text-[#ffa844] '> ঠিকানা </label>
+                                <div className="flex justify-left items-center flex-row w-full space-x-2 pt-2">
+                                    {/* <div htmlFor="address">
+                                        <img
+                                            className='h-[18px]'
+                                            src="/images/usericons/location.svg"
+                                        />
+                                    </div> */}
+                                    <textarea
+                                        id="address"
+                                        name="address"
+                                        placeholder='ঠিকানা'
+                                        className='w-full border border-gray-200 rounded-[10px] px-[15px] py-[5px]'
+                                        value={`${address === ('undefined' || undefined) ? '' : address}`}
+                                        onChange={(e) => setAddress(e.target.value)}
                                     />
                                 </div>
-                                <textarea
-                                    id="address"
-                                    name="address"
-                                    placeholder='ঠিকানা'
-                                    className='w-full border border-gray-200 rounded-[10px] px-[15px] py-[5px]'
-                                    value={`${address === ('undefined' || undefined) ? '' : address}`}
-                                    onChange={(e) => setAddress(e.target.value)}
-
-                                />
                             </div>
-
                         </div>
-
+                        <div className='flex flex-col'>
+                            <label htmlFor="ProfileStatus" className='text-[#ffa844]'> স্ট্যাটাস </label>
+                            <input className='border h-[45px] p-3 rounded-[10px]' id='ProfileStatus' type='text'
+                                value={`${profileStatus === 'undefined' ? '' : profileStatus}`}
+                                onChange={(e) => setProfileStatus(e.target.value)}
+                                placeholder='স্ট্যাটাস' />
+                        </div>
+                        <div className='w-full'>
+                            <h1 htmlFor="bio" className="text-[20px] mt-5 text-[#F9A106]">জীবন বৃত্তান্ত</h1>
+                            <textarea
+                                id="bio"
+                                name="bio"
+                                placeholder='জীবন বৃত্তান্ত'
+                                className='w-full border border-gray-200 rounded-2xl h-[120px] px-[10px] py-[5px] text-black'
+                                value={bio}
+                                onChange={(e) => setBio(e.target.value)}
+                            />
+                        </div>
+                        <button
+                            onClick={handleSubmit}
+                            className='bg-[#fd9915] hover:bg-[#cf7b1b] text-white hover:text-white text-[22px] px-[25px] py-[5px] rounded-2xl mt-[25px] '
+                        >প্রোফাইল আপডেট</button>
                     </div>
-
-                    <div className='flex flex-col'>
-                        <label htmlFor="ProfileStatus" className='text-[#ffa844]'> স্ট্যাটাস </label>
-                        <input className='border h-[45px] p-3 rounded-[10px]' id='ProfileStatus' type='text'
-                            value={`${profileStatus === 'undefined' ? '' : profileStatus}`}
-                            onChange={(e) => setProfileStatus(e.target.value)}
-                            placeholder='স্ট্যাটাস' />
-
-
-                    </div>
-
-
-                    <div className='mt-[80px] w-full'>
-                        <h1 htmlFor="bio" className="text-[20px] mt-5 text-[#F9A106]">জীবন বৃত্তান্ত</h1>
-                        <textarea
-                            id="bio"
-                            name="bio"
-                            placeholder='জীবন বৃত্তান্ত'
-                            className='w-full border border-gray-200 rounded-2xl h-[120px] px-[10px] py-[5px] text-black'
-                            value={bio}
-                            onChange={(e) => setBio(e.target.value)}
-                        />
-                    </div>
-                    <button
-                        onClick={handleSubmit}
-                        className='bg-[#fd9915] hover:bg-[#cf7b1b] text-white hover:text-white text-[22px] px-[25px] py-[5px] rounded-2xl mt-[25px] '
-                    >প্রোফাইল আপডেট</button>
                 </div>
             </div>
         </>
