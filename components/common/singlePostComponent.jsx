@@ -9,6 +9,7 @@ const SinglePostConponent = ({
   writer,
   writer_id,
   content,
+  image,
 }) => {
   const router = useRouter();
 
@@ -23,6 +24,7 @@ const SinglePostConponent = ({
      title={title}
      writer={writer}
      writer_id={writer_id}
+     image={image}
      />
 
       <div className=" pt-[30px] pb-3">

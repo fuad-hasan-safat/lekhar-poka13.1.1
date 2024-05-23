@@ -80,8 +80,8 @@ export default function WriterProfile() {
             .then((response) => response.json())
             .then((data) => {
                  console.log('pofile details on writer---- profile--------------->>>>>>>', data);
-                setDesignation(data.object.profile.designation)
-                setProfileStatus(data.object.profile.profileStatus)
+                setDesignation(data.object.profile?.designation)
+                setProfileStatus(data.object.profile?.profileStatus)
                 setGender(data.object.profile.gender)
                 setDob(data.object.profile.dob)
                 setAddress(data.object.profile.address)
@@ -224,10 +224,10 @@ export default function WriterProfile() {
                     <div className='all__post__sec__wrap'>
                         <div className='container'>
                             <div className='lg:flex lg:flex-row'>
-                                {/* <div className='lg:w-[70%]'>
+                                <div className='lg:w-[70%]'>
                                     {<ProfilePostLeftContent slug={slug} />}
                                 </div>
-                                <div className='lg:w-[30%]'>
+                                {/* <div className='lg:w-[30%]'>
                                     <Sidebar />
                                 </div> */}
                             </div>

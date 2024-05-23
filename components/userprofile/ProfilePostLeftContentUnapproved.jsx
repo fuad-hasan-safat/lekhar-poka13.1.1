@@ -98,6 +98,7 @@ useEffect(() => {
                           title={post.title}
                           writer={post.writer}
                           writer_id={post?.writer_id}
+                          image={post?.image}
                           content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 50).join(" ")}` : `${post.content.split(/\s+/).slice(0, 80).join(" ")}`} // Truncate content
                           category={post.category}
 

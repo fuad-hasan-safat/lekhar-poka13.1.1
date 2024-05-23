@@ -107,6 +107,7 @@ export default function SobKobitaLeftContent() {
                             writer={post.writer}
                             writer_id={post.writer_id}
                             category={post.category}
+                            image={post?.image}
                             // content={post.content.split(/\s+/).slice(0, 180).join(" ")}
                             content={countWords(post.content, 20)}
 

@@ -98,6 +98,7 @@ export default function SobJiboniLeftContent() {
                             title={post.title}
                             writer={post.writer}
                             writer_id={post.writer_id}
+                            image={post?.image}
                             content={countWords(post.content, 70)}
                           />
                         </div>

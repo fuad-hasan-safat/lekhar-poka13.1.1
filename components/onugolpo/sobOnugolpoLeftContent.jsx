@@ -109,6 +109,7 @@ export default function SobOnugolpoLeftContent() {
                             writer={post.writer}
                             writer_id={post.writer_id}
                             content={countWords(post.content, 70)}
+                            image={post?.image}
 
                           // content={post.content.split(/\s+/).slice(0, 200).join(" ")}
                           />

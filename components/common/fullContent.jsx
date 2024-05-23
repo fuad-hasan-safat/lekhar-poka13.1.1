@@ -11,7 +11,7 @@ const FullPost = ({ id, content, title, writer, writer_id, catagory, url }) => {
     if (catagory === 'কবিতা') {
         return (
             <>
-                <div className="kobita__content text-black">
+                <div className="kobita__content text-[#737373]">
                     <UserPostTitleAndcover
                         id={id}
                         title={title}
@@ -31,7 +31,7 @@ const FullPost = ({ id, content, title, writer, writer_id, catagory, url }) => {
     } else {
         return (
             <>
-                <div className="kobita__content text-black">
+                <div className="kobita__content text-[#737373]">
                     <UserPostTitleAndcover
                         id={id}
                         title={title}

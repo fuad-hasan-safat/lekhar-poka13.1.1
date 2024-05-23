@@ -73,7 +73,7 @@ export default function ProcchodLeftContent() {
       
       preparePostList(data)
 
-      console.log('main post by per page inside loader-------->>', data)
+      console.log('main post by per page inside loader CURRENT PAGEEEEE-------->>', data)
     } catch (error) {
       setError(error);
     } finally {
@@ -144,6 +144,7 @@ export default function ProcchodLeftContent() {
                         <SinglePostConponent
                           id={post._id}
                           // buttons={buttons}
+                          image={post?.image}
                           title={post.title}
                           writer={post.writer}
                           writer_id={post.writer_id}

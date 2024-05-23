@@ -439,7 +439,7 @@ export default function UserInformationsAndBio({ username, setUsername }) {
                                 id="bio"
                                 name="bio"
                                 placeholder='জীবন বৃত্তান্ত'
-                                className='w-full border border-gray-200 rounded-2xl h-[120px] px-[10px] py-[5px] text-black'
+                                className='w-full border border-gray-200 rounded-2xl h-[120px] px-[10px] py-[5px] text-[#737373]'
                                 value={bio}
                                 onChange={(e) => setBio(e.target.value)}
                             />

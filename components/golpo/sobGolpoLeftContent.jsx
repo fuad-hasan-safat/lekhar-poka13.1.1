@@ -105,6 +105,7 @@ export default function SobGolpoLeftContent() {
                               title={post.title}
                               writer={post.writer}
                               writer_id={post.writer_id}
+                              image={post?.image}
                               content={countWords(post.content, 70)}
 
                             // content={post.content.split(/\s+/).slice(0, 200).join(" ")}

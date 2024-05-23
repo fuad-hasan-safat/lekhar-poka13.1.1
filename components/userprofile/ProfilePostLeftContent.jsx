@@ -84,6 +84,7 @@ export default function ProfilePostLeftContent({ slug }) {
                           title={post.title}
                           writer={post.writer}
                           writer_id={post?.writer_id}
+                          image={post?.image}
                           category={post.category}
                           content={post.category === 'কবিতা' ? countWords(post.content, 20) : countWords(post.content, 50)}
 

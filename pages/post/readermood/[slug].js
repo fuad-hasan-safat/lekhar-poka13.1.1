@@ -70,22 +70,8 @@ export default function PostDetailsReaderMood() {
 
         <>
 
-            {/* <CustomHead title={data?.title} description={data?.writer} image={''} /> */}
 
-            <div>
-                <Head>
-
-                    <title>{data?.title}</title>
-                    <meta property="og:url" content={`lekharpoka.com/post/${slug}`} />
-                    <meta property="og:title" content={data?.title} />
-                    <meta property="og:description" content={'লেখার পোকা'} />
-                    <meta property="og:image" content={''} />
-
-
-                </Head>
-            </div>
-
-            <section className="read__mod__sec__wrap py-[100px] pb-[300px]">
+            <section className="read__mod__sec__wrap py-[100px] pb-[470px]">
                 <div className="read__mod__wrap">
                     <div className="read__mod__btn">
                         <button className="w-[40px] h-[40px] text-white rounded-full bg-orange-400" onClick={() => readMoodHandler(data?._id)}><i class="ri-close-large-fill"></i></button>
