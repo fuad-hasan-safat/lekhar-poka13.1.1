@@ -41,7 +41,7 @@ export default function UserProfileBanner({ image = '',
 
                     <div className='md:flex md:flex-row pt-[20px] md:lg:pl-[6%] ]'>
 
-                        <div className="grid place-content-center  text-center">
+                        <div className="grid place-content-center  text-left">
                             <h1 className="text-[#FCD200] lg:text-[35px] md:text-[34px] sm:text-[32px] xs:text-[30px]  items-center">
                                 {/* {username} */}
                                 <input
