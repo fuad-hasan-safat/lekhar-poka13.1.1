@@ -9,6 +9,7 @@ import { apiBasePath } from "../../utils/constant";
 
 import { countWords } from "../../function/api";
 import Loading from "../common/loading";
+import SinglePostConponent from "../common/singlePostComponent";
 
 export default function ProcchodLeftContent() {
 
@@ -140,13 +141,13 @@ export default function ProcchodLeftContent() {
                   {postList?.map((post, index) => (
                     <>
                       <div key={index}>
-                        <MaincontentBody
+                        <SinglePostConponent
                           id={post._id}
-                          buttons={buttons}
+                          // buttons={buttons}
                           title={post.title}
                           writer={post.writer}
                           writer_id={post.writer_id}
-                          category={post.category}
+                          // category={post.category}
                           content={post.category === 'কবিতা' ? countWords(post.content, 20) : countWords(post.content, 50)}
                         />
                       </div>
