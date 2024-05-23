@@ -10,6 +10,7 @@ export default function WriterProfileBanner({
     birth_date,
     expiry_date,
     setUsername,
+    bio,
     designation = '',
     profileStatus = '',
     apprevedPost = 0,
@@ -58,9 +59,11 @@ export default function WriterProfileBanner({
                                     {profileStatus}
                                 </h1>
                             }
-
                             <h1 className="text-[#737373] lg:text-[22px] md:text-[21px] sm:text-[20px] xs:text-[17px]  items-center">
-                                {birth_date} থেকে {expiry_date?.length> 0 ? expiry_date : 'বর্তমান'}
+                                {bio}
+                            </h1>
+                            <h1 className="text-[#737373] lg:text-[22px] md:text-[21px] sm:text-[20px] xs:text-[17px]  items-center">
+                                {birth_date} থেকে {expiry_date?.length > 0 ? expiry_date : 'বর্তমান'}
                             </h1>
                         </div>
 

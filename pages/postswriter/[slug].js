@@ -20,6 +20,7 @@ export default function PostOfWriterPage() {
     const [follower, setFollower] = useState(0);
     const [post, setPost] = useState(0);
     const [following, setFollowing] = useState(0);
+    const [bio, setBio] = useState('')
     const [designation, setDesignation] = useState('');
     const [profileStatus, setProfileStatus] = useState('');
     const [isLoading, setIsLoading] = useState(true);
@@ -41,9 +42,11 @@ export default function PostOfWriterPage() {
             try {
                 const response = await fetch(`${apiBasePath}/postswriter/${slug}`);
                 const data = await response.json();
-                setPostList(data.object);
+                setPostList(data    .object);
                 setWriterInfo(data.writer_info)
-
+                setProfileStatus(data.user_profile?.profileStatus)
+                setDesignation(data.user_profile?.designation)
+                setBio(data.writer_bio?.content)
 
                 console.log('posts of writer ----------------------------------', data)
 
@@ -52,7 +55,10 @@ export default function PostOfWriterPage() {
 
             } catch (error) {
                 setError(error);
+                console.log('writer post ---', error)
             } finally {
+               
+
                 setIsLoading(false)
             }
         };
@@ -83,6 +89,7 @@ export default function PostOfWriterPage() {
     if (isLoading) {
         return <Loading />;
     } else {
+        
 
         return (
 
@@ -100,6 +107,7 @@ export default function PostOfWriterPage() {
                             post={post}
                             follower={follower}
                             following={following}
+                            bio={bio}
                             designation={designation}
                             profileStatus={profileStatus}
                         />
