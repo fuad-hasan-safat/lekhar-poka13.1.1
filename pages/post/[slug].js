@@ -41,7 +41,7 @@ export default function PostDetails() {
         );
         setData(result.data.object);
         setWriterImage(result.data.writer_image)
-         console.log('post page ====================>>>>>>>>>>>>>>>>>>>>', result)
+        console.log('post page ====================>>>>>>>>>>>>>>>>>>>>', result)
         if (result.data.object.audio?.length > 0) {
           setIsAudioAvailAble(true);
         } else {
@@ -67,7 +67,7 @@ export default function PostDetails() {
   }, [router.query]);
 
 
-  function readMoodHandler(postId){
+  function readMoodHandler(postId) {
     router.push(`/post/readermood/${postId}`)
   }
 
@@ -87,7 +87,7 @@ export default function PostDetails() {
           <meta property="og:title" content={data?.title} />
           <meta property="og:description" content={'লেখার পোকা'} />
           <meta property="og:image" content={''} />
-  
+
 
         </Head>
       </div>
@@ -107,23 +107,25 @@ export default function PostDetails() {
                       <>
                         <div className="kobita__dsc__lft relative flex lg:mb-[110px] md:mb-[84px]">
                           <div>
-                          <FullPost
-                            content={data?.content}
-                            title={data?.title}
-                            writer={data?.writer}
-                            catagory={data?.category}
-                            url={asPath}
-                          />
+                            <FullPost
+                              id={slug}
+                              content={data?.content}
+                              title={data?.title}
+                              writer={data?.writer}
+                              writer_id={data?.writer_id}
+                              catagory={data?.category}
+                              url={asPath}
+                            />
 
                           </div>
                           <div>
-                          <button onMouse className="absolute  w-[35px] h-[35px] right-2 mt-[5px] text-white rounded-xl bg-orange-400" onClick={()=>readMoodHandler(data?._id)}><i class="ri-book-read-fill text-[22px]"></i></button>
+                            <button onMouse className="absolute  w-[35px] h-[35px] right-2 mt-[5px] text-white rounded-xl bg-orange-400" onClick={() => readMoodHandler(data?._id)}><i class="ri-book-read-fill text-[22px]"></i></button>
                           </div>
-                        
-                         
+
+
                         </div>
                         <div className="rating__share__wrap">
-                          <ShareOnFacebook url={`lekharpoka.com/post/${slug}`}  title={'লেখার পোকায় আপনাকে স্বাগতম'} image={''} />
+                          <ShareOnFacebook url={`lekharpoka.com/post/${slug}`} title={'লেখার পোকায় আপনাকে স্বাগতম'} image={''} />
                           <RatingComponent setRating={setRating} rating={rating} post_id={data?._id} />
                         </div>
                       </>
