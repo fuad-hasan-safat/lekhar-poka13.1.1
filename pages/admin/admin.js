@@ -13,6 +13,8 @@ export default function AdminLayOut({children}) {
             <Link className=' hover:text-red-500' href={`/admin/writerlist`}>All writer</Link>
             <Link className=' hover:text-red-500' href={`/admin/allslidertable`}>Slider List</Link>
             <Link className=' hover:text-red-500' href={`/admin/alldesignation`}>Designation List</Link>
+            <Link className=' hover:text-red-500' href={`/admin/allWriterBio`}>Bio List</Link>
+
             <Link className=' hover:text-red-500' href={`/`}>Website</Link>
 
         </div>

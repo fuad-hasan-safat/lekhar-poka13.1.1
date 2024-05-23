@@ -1,13 +1,29 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { apiBasePath } from '../../utils/constant';
 
-const CreateDesignationModal = ({ showModal, handleClose, setIsCategoryAdded }) => {
+const CreateWriterBioModal = ({ showModal, handleClose, setIsCategoryAdded }) => {
   const [title, setTitle] = useState('');
   const [submitting, setSubmitting] = useState(false);
   //  image 
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState('');
+
+  //  select writer
+  const [writerId, setWriterId] = useState('');
+  const [designationFromApi, setDesignationFromApi] = useState([])
+
+
+  useEffect(()=>{
+    fetch(`${apiBasePath}/writers`)
+    .then((response) => response.json())
+    .then((data) => {
+        setDesignationFromApi(data);
+        console.log('DESIGNATION 000000000000000000 )', data)
+    })
+    .catch((error) => console.error("Error fetching data:", error));
+
+  },[])
 
   //  image handle
   const handleFileChange = async ({ target: { files } }) => {
@@ -34,12 +50,15 @@ const CreateDesignationModal = ({ showModal, handleClose, setIsCategoryAdded }) 
     // formData.append("title", title)
 
     try {
-      let data = { 
+      let data = {
         title: title
       }
-      console.log("DESIGNATION DATA : ", data)
+  
       // const response = await axios.post(`${apiBasePath}/categories`, formData);
-      const response = await axios.post(`${apiBasePath}/designation`,{ title });
+      const response = await axios.post(`${apiBasePath}/addwriterbio`, { writer_id: writerId,
+        content:title,
+
+       });
       setIsCategoryAdded(true)
 
       console.log(' category response ---', response)
@@ -71,13 +90,31 @@ const CreateDesignationModal = ({ showModal, handleClose, setIsCategoryAdded }) 
                     <div>
 
                       <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">
-                        পদবী
+                        Bio
                       </label>
+
+                      <select
+                        id="designation"
+                        name="designation"
+                        className='bg-transparent w-[93%]'
+                        required
+                        value={writerId}
+                        onChange={(e) => setWriterId(e.target.value)}>
+                        <option value="">নির্বাচন করুন</option>
+                        {designationFromApi.map((writer) => (
+                          <option key={writer._id} value={writer._id}>
+                            {writer.name}
+                          </option>
+                        ))}
+
+                      </select>
+
+
                       <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="title"
+                        className="mt-[10px] shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="bio"
                         type="text"
-                        placeholder="পদবী"
+                        placeholder="Bio"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         required
@@ -87,38 +124,7 @@ const CreateDesignationModal = ({ showModal, handleClose, setIsCategoryAdded }) 
 
 
 
-                    {/* <div className='text-black'>
-                      <div className='mb-[15px]'>
-                        <h >ছবি আপলোড করুন (যদি থাকে)</h>
-                      </div> */}
 
-                      {/* <div className='flex border border-solid border-gray-200 rounded-md h-[215px] items-center place-content-center text-center justify-center' >
-                        <input
-                          type="file"
-                          onChange={handleFileChange}
-                          className="hidden"
-                          id="categoryBaner"
-                          accept="image/*"
-                        />
-
-                        <label htmlFor='categoryBaner' className=" cursor-pointer" >
-                          {preview.length > 0 &&
-                            <img
-                              src={preview}
-                              height={100}
-                              width={100}
-                              className="object-cover "
-                              alt={preview}
-                            />
-                          }
-                          <div className=" mt-[15px]  file-btn w-[70px] text-[22px] "
-                           onClick={handleFileChange}
-                          > <i className='ri-camera-line'></i></div>
-
-                        </label>
-                      </div>
-
-                    </div> */}
                   </div>
                   <div className="flex items-center justify-end">
                     <button
@@ -148,4 +154,4 @@ const CreateDesignationModal = ({ showModal, handleClose, setIsCategoryAdded }) 
   );
 };
 
-export default CreateDesignationModal;
+export default CreateWriterBioModal;

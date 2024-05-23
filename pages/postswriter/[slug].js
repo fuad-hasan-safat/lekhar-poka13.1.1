@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { countWords } from '../../function/api';
 import SinglePostConponent from '../../components/common/singlePostComponent';
+import WriterProfileBanner from '../../components/userprofile/writerProfileBanner';
 
 
 export default function PostOfWriterPage() {
@@ -16,7 +17,14 @@ export default function PostOfWriterPage() {
     const slug = router.query.slug;
 
     const [postList, setPostList] = useState([])
+    const [follower, setFollower] = useState(0);
+    const [post, setPost] = useState(0);
+    const [following, setFollowing] = useState(0);
+    const [bio, setBio] = useState('')
+    const [designation, setDesignation] = useState('');
+    const [profileStatus, setProfileStatus] = useState('');
     const [isLoading, setIsLoading] = useState(true);
+    const [writerInfo, setWriterInfo] = useState([])
 
 
     const [error, setError] = useState(null); // State to store any errors
@@ -34,7 +42,11 @@ export default function PostOfWriterPage() {
             try {
                 const response = await fetch(`${apiBasePath}/postswriter/${slug}`);
                 const data = await response.json();
-                setPostList(data.object);
+                setPostList(data    .object);
+                setWriterInfo(data.writer_info)
+                setProfileStatus(data.user_profile?.profileStatus)
+                setDesignation(data.user_profile?.designation)
+                setBio(data.writer_bio?.content)
 
                 console.log('posts of writer ----------------------------------', data)
 
@@ -43,7 +55,10 @@ export default function PostOfWriterPage() {
 
             } catch (error) {
                 setError(error);
+                console.log('writer post ---', error)
             } finally {
+               
+
                 setIsLoading(false)
             }
         };
@@ -74,6 +89,7 @@ export default function PostOfWriterPage() {
     if (isLoading) {
         return <Loading />;
     } else {
+        
 
         return (
 
@@ -81,6 +97,23 @@ export default function PostOfWriterPage() {
                 <Head>
                     <title>লেখক পোস্ট</title>
                 </Head>
+                <section>
+                    <div>
+                        <WriterProfileBanner
+                            image={writerInfo?.image}
+                            username={writerInfo.name}
+                            birth_date={writerInfo?.birth_date}
+                            expiry_date={writerInfo.expiry_date}
+                            post={post}
+                            follower={follower}
+                            following={following}
+                            bio={bio}
+                            designation={designation}
+                            profileStatus={profileStatus}
+                        />
+
+                    </div>
+                </section>
                 <div className='container lg:flex lg:flex-row pt-[94px]'>
                     <div className="pt-20 text-3xl lg:w-[70%]">
 
@@ -91,6 +124,7 @@ export default function PostOfWriterPage() {
                             <div className='text-black'>এই লেখক নেই</div>
                         ) : (
                             <>
+
                                 {postList.length > 0 ?
                                     <div className="py-[55px]  text-3xl lg:mr-[100px] md:mr-[70px]">
                                         {displayedPosts.length && (
