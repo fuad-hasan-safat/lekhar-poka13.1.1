@@ -17,12 +17,20 @@ const SinglePostConponent = ({
   }
   return (
     <>
-      <div className="pb-3">
-        <div className="text-3xl text-yellow-400 font-bold">{title}</div>
-      </div>
-      <div className="pb-4">
-        <a className="text-xl text-gray-800 font-semibold " href={`/postswriter/${writer_id}`} >{writer}</a>
-      </div>
+     <div className="flex space-x-1">
+        <div className="profile__auth__img">
+          <img src="/images/user/deafultProfile.png" alt="" />
+        </div>
+        <div className="">
+            <div className="pb-3">
+                <div className="text-3xl text-yellow-400 font-bold">{title}</div>
+              </div>
+              <div className="pb-4">
+                <a className="text-xl text-gray-800 font-semibold " href={`/postswriter/${writer_id}`} >{writer}</a>
+              </div>
+          </div>
+     </div>
+
       <div className="pb-3">
         <div
           className="text-[16px] text-gray-500 text-justify"
