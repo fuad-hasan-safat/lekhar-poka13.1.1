@@ -28,6 +28,11 @@ export default function UserInformationsAndBio({ username, setUsername }) {
     const [bioId, setBioId] = useState('')
     const [isSubmit, setIsSubMit] = useState(false)
     const [isSubmitEmail, setIsSubMitEmail] = useState(false)
+    //  ---- 
+    const [follower, setFollower] = useState(0);
+    const [following, setFollowing] = useState(0);
+    const [approvedPostNum, setApprovedPostNum] = useState(0);
+    const [unapprovedPostNum, setunApprovedPostNum] = useState(0);
 
     // get saved info
     const [status, setStatus] = useState("");
@@ -90,6 +95,11 @@ export default function UserInformationsAndBio({ username, setUsername }) {
                 setemail(data.object.profile.email)
                 setPhoneNumber(data.object.profile.phone)
                 setGender(data.object.profile.gender)
+
+                setFollower(data.object.stats.follower)
+                setFollowing(data.object.stats.following)
+                setApprovedPostNum(data.object.approved_post)
+                setunApprovedPostNum(data.object.unapproved_post)
 
                 saveImageFromURL(`${apiBasePath}/${data.object.profile.image?.slice(data.object.profile.image.indexOf("/") + 1)}`, 'profile.jpg')
 

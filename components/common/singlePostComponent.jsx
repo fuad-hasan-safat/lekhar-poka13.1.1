@@ -28,7 +28,6 @@ const SinglePostConponent = ({
           className="text-[16px] text-gray-500 text-justify"
           dangerouslySetInnerHTML={{__html:content}}
         />
-       
       </div>
 
       {/* button -- it would be conditionally appaer */}
