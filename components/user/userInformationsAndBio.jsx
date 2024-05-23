@@ -273,7 +273,7 @@ export default function UserInformationsAndBio({ username, setUsername }) {
                             <div className="w-full">
                                 <div>
                                     <label className='text-[#ffa844] '> লিঙ্গ </label>
-                                    <div className='flex justify-left align-items-center items-center flex-row space-x-2'>
+                                    <div className='profile__input__fld mb-[15px] flex justify-left align-items-center items-center flex-row space-x-2'>
                                         {/* <div htmlFor="sex">
                                             <img
                                                 className='w-[15px] h-[15px]'
@@ -297,7 +297,7 @@ export default function UserInformationsAndBio({ username, setUsername }) {
                             <div className="w-full lg:mt-0 md:mt-0 sm:mt-[15px] xs:mt-[15px]">
                                 <div>
                                     <label className='text-[#ffa844] '> মোবাইল নাম্বার </label>
-                                    <div className="flex justify-left align-items-center items-center flex-row space-x-2 ">
+                                    <div className="profile__input__fld">
                                         {/* <div htmlFor="phoneNumber">
                                             <img
                                                 className='w-[15px] h-[15px]'
@@ -325,7 +325,7 @@ export default function UserInformationsAndBio({ username, setUsername }) {
                         </div>
                         <div className='w-full pt-[15px]'>
                             <div className='w-full'>
-                                <div className='W-[100%] mb-[15px] flex flex-col'>
+                                <div className='profile__input__fld W-[100%] mb-[15px] flex flex-col'>
                                     <label className='text-[#ffa844] '> পদবী </label>
                                     <select
                                         id="designation"
@@ -352,7 +352,7 @@ export default function UserInformationsAndBio({ username, setUsername }) {
                                 </div>
                                 <div>
                                     <label className='text-[#ffa844] '> জন্ম তারিখ </label>
-                                    <div className='w-[95%] flex justify-left  align-items-center flex-row space-x-2'>
+                                    <div className='profile__input__fld mb-[15px] w-full flex justify-left  align-items-center flex-row space-x-2'>
                                         {/* <div htmlFor="birthDate py-2">
                                             <img
                                                 className='w-[23px] h-[23px] -ml-[2px]'
@@ -374,7 +374,7 @@ export default function UserInformationsAndBio({ username, setUsername }) {
                             <div className='w-full lg:mt-0 md:mt-0 sm:mt-[15px] xs:mt-[15px]'>
                                 <div>
                                     <label className='text-[#ffa844] '> ইমেইল </label>
-                                    <div className="flex justify-left align-items-center items-center flex-row space-x-2">
+                                    <div className="profile__input__fld flex justify-left align-items-center items-center flex-row space-x-2">
                                         {/* <div htmlFor="email">
                                             <img
                                                 className='w-[15px] h-[15px] '
@@ -408,7 +408,7 @@ export default function UserInformationsAndBio({ username, setUsername }) {
                         <div className='lg:flex lg:flex-col'>
                             <div>
                                 <label className='text-[#ffa844] '> ঠিকানা </label>
-                                <div className="flex justify-left items-center flex-row w-full space-x-2 pt-2">
+                                <div className="profile__input__fld mb-[15px] flex justify-left items-center flex-row w-full space-x-2 pt-2">
                                     {/* <div htmlFor="address">
                                         <img
                                             className='h-[18px]'
