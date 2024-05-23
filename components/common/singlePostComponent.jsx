@@ -25,7 +25,7 @@ const SinglePostConponent = ({
      writer_id={writer_id}
      />
 
-      <div className="pb-3">
+      <div className=" pt-[30px] pb-3">
         <div
           className="text-[16px] text-gray-500 text-justify"
           dangerouslySetInnerHTML={{ __html: content }}
