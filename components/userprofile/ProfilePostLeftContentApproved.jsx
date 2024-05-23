@@ -6,6 +6,7 @@ import { apiBasePath } from "../../utils/constant";
 import SobUserPostBody from "./SobUserPostBody";
 import Loading from "../common/loading";
 import axios from "axios";
+import SinglePostConponent from "../common/singlePostComponent";
 
 export default function ProfilePostLeftContentApproved() {
   //   const [selectedId, setSelectedId] = useState("sob");
@@ -92,10 +93,11 @@ useEffect(() => {
                   displayedPosts.map((post, index) => (
                     <>
                       <div key={index}>
-                        <SobUserPostBody
+                        <SinglePostConponent
                           id={post._id} // Assuming '_id' is the unique identifier
                           title={post.title}
                           writer={post.writer}
+                          writer_id={post.writer_id}
                           content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 50).join(" ")}` : `${post.content.split(/\s+/).slice(0, 80).join(" ")}`} // Truncate content
                           category={post.category}
 

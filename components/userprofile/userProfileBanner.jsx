@@ -5,7 +5,17 @@ import ImageCrop from './cropComponents/ImageCrop'
 import ImageCropProvider from './cropComponents/ImageCropProvider'
 import UserAchivement from './userAchivement'
 
-export default function UserProfileBanner({ image = '', username = '', setUsername, designation = '', profileStatus = '', apprevedPost = 0, unApprovedPost = 0, follower = 0, following = 0 }) {
+export default function UserProfileBanner({ image = '',
+ username = '',
+  setUsername, 
+  designation = '', 
+  profileStatus = '', 
+  apprevedPost = 0, 
+  unApprovedPost = 0, 
+  follower = 0, 
+  following = 0,
+  setProfileController,
+ }) {
 
     console.log('image --------- length >>>>>', image)
     return (
@@ -54,6 +64,7 @@ export default function UserProfileBanner({ image = '', username = '', setUserna
                             </h1>
                         </div>
                        <UserAchivement 
+                       setProfileController={setProfileController}
                        follower={follower} 
                        following={following} 
                        apprevedPost={apprevedPost} 

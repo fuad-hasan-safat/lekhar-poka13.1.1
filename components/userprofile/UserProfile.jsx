@@ -22,12 +22,14 @@ import Link from "next/link";
 
 
 import UserInformationsAndBio from '../user/userInformationsAndBio';
+import FollowerList from './followerList';
+import FollowingList from './followingList';
 
 export default function UserProfile({ slug }) {
 
   const [writer, setWriter] = useState('');
 
- 
+
   // --------------------------------------------
 
 
@@ -66,6 +68,10 @@ export default function UserProfile({ slug }) {
   //
   const [canPostStatus, setCanPostStatus] = useState(false)
 
+  //  follow/ follower and profile controller [profile/ following/ follower]
+  const [profileController, setProfileController] = useState("profile")
+  const handleClose = () => setProfileController('profile');
+
   useEffect(() => {
     setUsername(localStorage.getItem("name") || "");
     setUserToken(localStorage.getItem("token") || "");
@@ -103,7 +109,7 @@ export default function UserProfile({ slug }) {
         setunApprovedPostNum(data.object.unapproved_post)
 
 
-       console.log('pofile get PROFILE post )()()() details on user profile--------------->>>>>>>', data.object);
+        console.log('pofile get PROFILE post )()()() details on user profile--------------->>>>>>>', data.object);
 
 
         if (!data.object.stats) {
@@ -154,7 +160,7 @@ export default function UserProfile({ slug }) {
     writersOptions.push(data);
   }
 
- 
+
 
   if (isLoading) {
     return <Loading />;
@@ -174,6 +180,7 @@ export default function UserProfile({ slug }) {
                 setUsername={setUsername}
                 designation={designation}
                 profileStatus={profileStatus}
+                setProfileController={setProfileController}
               />
             </div>
             <section className="all__page__main__content">
@@ -184,17 +191,29 @@ export default function UserProfile({ slug }) {
                     <div className="w-full">
 
                       <div>
-                        <UserInformationsAndBio
-                        username={username}
-                        setUsername={setUsername}
-                          sex={gender}
-                          birthdate={dob}
-                          location={address}
-                          mail={email}
-                          phone={phone}
-                          userID={userUuid}
-                          setIsProfileUpdated={setIsProfileUpdated}
-                        />
+                        {true &&
+                          <UserInformationsAndBio
+                            username={username}
+                            setUsername={setUsername}
+                            sex={gender}
+                            birthdate={dob}
+                            location={address}
+                            mail={email}
+                            phone={phone}
+                            userID={userUuid}
+                            setIsProfileUpdated={setIsProfileUpdated}
+                          />
+
+                        }
+                        {
+                          profileController === 'follower' &&
+                          <FollowerList showModal={'follower'} handleClose={handleClose} />
+                        }
+
+                        {
+                          profileController === 'following' &&
+                          <FollowingList  showModal={'following'} handleClose={handleClose} />
+                        }
 
                         {/* <UserDetails
                           sex={gender}

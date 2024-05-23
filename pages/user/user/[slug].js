@@ -224,12 +224,12 @@ export default function WriterProfile() {
                     <div className='all__post__sec__wrap'>
                         <div className='container'>
                             <div className='lg:flex lg:flex-row'>
-                                <div className='lg:w-[70%]'>
+                                {/* <div className='lg:w-[70%]'>
                                     {<ProfilePostLeftContent slug={slug} />}
                                 </div>
                                 <div className='lg:w-[30%]'>
                                     <Sidebar />
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
