@@ -1176,6 +1176,34 @@ transition: all 0.5s !important;
   justify-content: center;
   align-items: center;
 }
+/* .edit__btn__wrap{
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+} */
+.edit__btn__wrap {
+  padding-right: 0;
+  border: 1px solid#ddd;
+  padding: 20px !important;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0px 3px 15px 0px rgb(0 0 0 / 10%);
+  border-style: solid;
+  border-width: 0px 0px 0px 0px;
+}
+
+.profile__edit__lft{
+  width: 50%;
+  float: left;
+  padding-right: 20px;
+}
+.profile__edit__right{
+  width: 50%;
+  float: right;
+  padding-left: 20px;
+  border-left: 1px solid#ddd;
+}
+
 /*
 ------------------------
  Read Mod Css
