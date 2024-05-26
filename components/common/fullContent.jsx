@@ -17,6 +17,7 @@ const FullPost = ({ id, content, title, writer, writer_id, catagory, url, image 
                         title={title}
                         writer={writer}
                         writer_id={writer_id}
+                        image={image}
                     />
                     {/* <div className="font-semibold  w-full lg:text-[35px] md:text-[32px] sm:text-[29px] xs:text-[26px] pr-[115px] text-yellow-400">{title}</div>
                 <div className="text-[22px] text-[#595D5B] mb-[10px]">{writer}</div> */}
@@ -37,6 +38,7 @@ const FullPost = ({ id, content, title, writer, writer_id, catagory, url, image 
                         title={title}
                         writer={writer}
                         writer_id={writer_id}
+                        image={image}
                     />
                     {/* <div className="font-semibold  w-full lg:text-[35px] md:text-[32px] sm:text-[29px] xs:text-[26px] pr-[115px] text-yellow-400">{title}</div>
                     <div className="text-[22px] text-[#595D5B] mb-[10px]">{writer}</div> */}

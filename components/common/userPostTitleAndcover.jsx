@@ -12,7 +12,7 @@ export default function UserPostTitleAndcover({id, title, writer, writer_id, ima
         </div>
         <div className="">
           <div className="pb-[8px]">
-            <div className="text-3xl text-yellow-400 font-bold">{title}</div>
+            <div className="lg:text-[32] md:text-[28px] sm:text-[28px] xs:text-[28px] pr-[50px] text-yellow-400 font-bold">{title}</div>
           </div>
           <div className="">
             <a className="text-xl text-[#595D5B] font-semibold " href={`/postswriter/${writer_id}`} >{writer}</a>
