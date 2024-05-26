@@ -5,7 +5,7 @@ import ShareOnFacebook from "../share/share";
 import FullPostPaginationOthers from "../fullPost/FullPostpaginationOther";
 import UserPostTitleAndcover from "./userPostTitleAndcover";
 
-const FullPost = ({ id, content, title, writer, writer_id, catagory, url }) => {
+const FullPost = ({ id, content, title, writer, writer_id, catagory, url, image }) => {
 
 
     if (catagory === 'কবিতা') {

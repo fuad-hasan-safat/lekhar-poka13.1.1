@@ -41,7 +41,7 @@ export default function PostDetails() {
         );
         setData(result.data.object);
         setWriterImage(result.data.writer_image)
-        console.log('post page ====================>>>>>>>>>>>>>>>>>>>>', result)
+        console.log('post page ====================>>>>>>>>>>>>>>>>>>>>', result.data)
         if (result.data.object.audio?.length > 0) {
           setIsAudioAvailAble(true);
         } else {
@@ -113,6 +113,7 @@ export default function PostDetails() {
                               title={data?.title}
                               writer={data?.writer}
                               writer_id={data?.writer_id}
+                              image={writerImage}
                               catagory={data?.category}
                               url={asPath}
                             />
