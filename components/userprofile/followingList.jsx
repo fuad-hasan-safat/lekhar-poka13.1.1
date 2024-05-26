@@ -8,19 +8,19 @@ export default function FollowingList({ showModal, handleClose }) {
     const router = useRouter()
     const slug = router.query.slug;
     const [followingList, setFollowingList] = useState([])
-    useEffect(()=>{
+    useEffect(() => {
         fetch(`${apiBasePath}/followings/${slug}`)
-        .then((response) => response.json())
-        .then((data) => {
-            setFollowingList(data.following_list);
-            console.log("----------->>>>>>>>>>>>>>>>>   FOLLOWING list ------------------->>>>>>>>>>>", data.following_list);
-            // console.log("-----------", setLekhokList);
-        })
-        .catch((error) => console.error("Error fetching data:", error));
+            .then((response) => response.json())
+            .then((data) => {
+                setFollowingList(data.following_list);
+                console.log("----------->>>>>>>>>>>>>>>>>   FOLLOWING list ------------------->>>>>>>>>>>", data.following_list);
+                // console.log("-----------", setLekhokList);
+            })
+            .catch((error) => console.error("Error fetching data:", error));
 
-    },[router.query])
+    }, [router.query])
     return (
-router.isReady &&
+        router.isReady &&
         <div className={`${showModal === 'following' ? 'block' : 'hidden'} fixed z-10 inset-0 overflow-y-auto flex items-center justify-center`} aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
             <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
@@ -33,19 +33,22 @@ router.isReady &&
                                 আপনার ফলোয়িং তালিকা
                             </h3>
                             <div className="my-[25px] text-black">
-                                {followingList.map((item, index)=>
-                              
-                                    <LekhokDetails
-                                            key={index}
+                                {followingList.map((item, index) =>
+
+                                    <div key={index} className='pt-[11px]'>
+                                        <LekhokDetails
+                                            
                                             image={`${apiBasePath}/${item.writer.image?.slice(item.writer.image.indexOf("/") + 1)}`}
                                             writer={item.writer.name}
                                             writer_id={item.writer._id}
                                             id={item.writer._id}
-                                            lifeCycle={`  ${item.writer.birth_date === null ? `` : `${item.writer.birth_date} `} থেকে  ${item.writer.expiry_date === null? 'বর্তমান' : ` ${item.writer.expiry_date}` } `}
+                                            lifeCycle={`  ${item.writer.birth_date === null ? `` : `${item.writer.birth_date} `} থেকে  ${item.writer.expiry_date === null ? 'বর্তমান' : ` ${item.writer.expiry_date}`} `}
 
                                         />
+                                    </div>
+
                                 )}
-                            
+
                             </div>
                             <button
                                 type="button"
