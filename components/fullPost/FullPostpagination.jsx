@@ -147,8 +147,8 @@ const FullPostPagination = ({ logText, customclass }) => {
 
       {totalPages > 1 && <ReactPaginate
         pageCount={totalPages}
-        pageRangeDisplayed={5}
-        marginPagesDisplayed={2}
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={3}
         onPageChange={handlePageChange}
         forcePage={currentPage}
         containerClassName="pagination"

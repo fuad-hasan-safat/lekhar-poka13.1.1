@@ -1,8 +1,10 @@
-
-import React from 'react'
+'use client'
+import React, { useEffect, useState } from 'react'
 import { apiBasePath } from '../../utils/constant'
 import ImageCrop from './cropComponents/ImageCrop'
 import ImageCropProvider from './cropComponents/ImageCropProvider'
+import UserAchivement from './userAchivement'
+import { useRouter } from 'next/router'
 
 export default function WriterProfileBanner({
     image = '',
@@ -17,61 +19,112 @@ export default function WriterProfileBanner({
     unApprovedPost = 0,
     follower = 0,
     following = 0,
+    setProfileController,
 }) {
+    const router = useRouter()
+    const slug = router.query.slug;
+
+    const [loggedInUser, setLoggedInUser] = useState("");
+    const [userUuid, setUserUuid] = useState("");
+    const [userToken, setUserToken] = useState("");
+
+    useEffect(() => {
+        setLoggedInUser(localStorage.getItem("name") || "");
+        setUserToken(localStorage.getItem("token") || "");
+        setUserUuid(localStorage.getItem("uuid") || "");
+        // setUserPhone(localStorage.getItem("phone") || "");
+
+    }, []);
+
+
+    async function followUserhandler(user_id, following) {
+        try {
+            const response = await axios.post(
+                `${apiBasePath}/follow`,
+                {
+                    user_id: following,
+                    following: user_id,
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+
+
+            console.log('following ------------------------- writer in response message---------------->>>>>>', response)
+
+
+
+
+
+
+        } catch (error) {
+            // console.log("inside catch ----------------", error);
+        }
+
+
+    }
 
     console.log('image --------- length >>>>>', image)
     return (
         <>
-
             <section className="all__post__sec__wrap">
-                <div className="relative w-full xl:h-[380px] lg:h-[360px] md:h-[340px] sm:h-[280px] xs:h-[220px]  overflow-hidden" style={{ background: `url('/images/usericons/userbanner.svg')center center / cover no-repeat` }}>
+                <div className="relative w-full xl:h-[380px] lg:h-[360px] md:h-[340px] sm:h-[280px] xs:h-[220px] -z-10  overflow-hidden" style={{ background: `url('/images/usericons/userbanner.svg')center center / cover no-repeat` }}>
                 </div>
             </section>
-            <section>
-                <div className="profile-img__wrap md:flex md:flex-row relative container">
-                    <div className="profile-img">
-                        <img
-                            className="w-[264px] h-[264px] rounded-full  border-4 border-solid border-white -mt-[110px]  "
-                            src={image?.length > 0 ? `${apiBasePath}/${image.slice(image.indexOf("/") + 1)}` : '/images/defaultUserPic/profile.jpg'}
-                        />
-                        {/* <ImageCropProvider>
-                            <ImageCrop image={image=== '' ? '/images/defaultUserPic/profile.jpg'  : `${apiBasePath}/${image.slice(image.indexOf('/')+1)}`} />
-                        </ImageCropProvider> */}
-                    </div>
-
-
-
-                    <div className='md:flex md:flex-row pt-[20px] md:lg:pl-[6%] ]'>
-
-                        <div className="grid place-content-center  text-left  ">
-                            <h1 className="text-[#FCD200] lg:text-[35px] md:text-[34px] sm:text-[32px] xs:text-[30px]  ">
-                                <h2 className='px-3 py-2 text-center'>  {username} </h2>
-                            </h1>
-
-                            {designation.length > 0 &&
-                                <h1 className="text-[#595D5B] lg:text-[22px] md:text-[21px] sm:text-[20px] xs:text-[17px]">
-                                    {designation}
-                                </h1>
-                            }
-
-                            {profileStatus.length > 0 &&
-                                <h1 className="text-[#737373] lg:text-[22px] md:text-[21px] sm:text-[20px] xs:text-[17px]">
-                                    {profileStatus}
-                                </h1>
-                            }
-                            <h1 className="text-[#737373] lg:text-[22px] md:text-[21px] sm:text-[20px] xs:text-[17px]">
-                                {bio}
-                            </h1>
-                            <h1 className="text-[#737373] lg:text-[22px] md:text-[21px] sm:text-[20px] xs:text-[17px]">
-                                {birth_date} থেকে {expiry_date?.length > 0 ? expiry_date : 'বর্তমান'}
-                            </h1>
+            <section className='text-gray-600'>
+                <div className="container lg:flex lg:flex-row">
+                    <div className='w-[23%]'>
+                        <div className="">
+                            <img
+                                className="w-[264px] h-[264px] rounded-full  border-4 border-solid border-white -mt-[110px]  "
+                                src={image?.length > 0 ? `${apiBasePath}/${image.slice(image.indexOf("/") + 1)}` : '/images/defaultUserPic/profile.jpg'}
+                            />
                         </div>
 
+                        <div>
+                            <UserAchivement
+                                setProfileController={setProfileController}
+                                follower={follower}
+                                following={following}
+                                apprevedPost={apprevedPost}
+                                unApprovedPost={unApprovedPost} />
+                        </div>
+
+                        <button
+                            className='py-[5px] bg-[#F9A106] hover:bg-[#c67256] px-[48px] p-1 rounded-md text-white text-[16px]'
+                            onClick={() => followUserhandler(slug, userUuid)}
+                        >
+                            অনুসরণ করুন
+                        </button>
+
+                    </div>
+
+                    <div className='w-[70%] py-[25px] '>
+
+                        <h1><span className='text-[35px] text-[#FCD200]'>{username}</span> <span className='text-[#595D5B] text-[22px]'>{designation}</span></h1>
+                        <ul className='flex flex-row space-x-[25px] text-[#737373] text-[20px]'>
+                            {/* <li>
+                                <span className='text-[#F9A106]'><i class="ri-map-pin-line"></i></span> <span className='text-[#737373]'>{address}</span>
+                            </li> */}
+                            <li>
+                                <span className='text-[#F9A106]'><i class="ri-calendar-2-line"></i></span> <span className='text-[#737373]'>{birth_date}</span>
+                            </li>
+                            {/* <li>
+                                <span className='text-[#F9A106]'>{gender === 'male' ? <i class="ri-men-line"></i> : <i class="ri-women-line"></i>}</span> <span className='capitalize text-[#737373]'>{gender}</span>
+                            </li> */}
+                        </ul>
+                        <p className='text-[20px] text-[#737373] mt-[15px]'>{bio}</p>
+
+
 
                     </div>
 
                 </div>
             </section>
+
         </>
     )
 }

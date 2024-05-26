@@ -385,12 +385,6 @@ export default function CreatePost() {
 
                     </div>}
 
-                {/* <div className="pt-[10px]">
-
-                    <h1 className="text-black text-[16px]">নিচের বক্সটি চেক করুন (<span className="text-red-500"> যদি আপনার নাম তালিকায় না থাকে</span>) </h1>
-                    <Checkbox label="" name="myCheckbox" onChange={handleCheckboxChange} />
-
-                </div> */}
 
                 {userType === 'admin' &&
                     <>

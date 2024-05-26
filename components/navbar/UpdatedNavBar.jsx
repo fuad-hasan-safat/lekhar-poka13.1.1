@@ -378,7 +378,7 @@ export default function UpdatedNavBar() {
                                                 </li>
                                             }
                                             {
-                                                userUuid.length > 0 &&
+                                                userUuid.length > 0 ?
                                                 <li
                                                     className='relative cursor-pointer'
                                                     onClick={() => { toggleVisibility(2); }}>
@@ -405,6 +405,9 @@ export default function UpdatedNavBar() {
                                                             </li>
                                                         </ul>
                                                     )}
+                                                </li> :
+                                                <li>
+                                                    <button onClick={()=> router.push('/account/login')}><i class="ri-account-circle-fill"></i></button>
                                                 </li>
                                             }
                                         </ul>

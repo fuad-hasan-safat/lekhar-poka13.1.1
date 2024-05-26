@@ -63,6 +63,8 @@ export default function UserProfile({ slug }) {
   const [approvedPostNum, setApprovedPostNum] = useState(0);
   const [unapprovedPostNum, setunApprovedPostNum] = useState(0);
   const [profileUserName, setProfileuserName] = useState('')
+  const [bio, setBio] = useState('')
+  const [bioId, setBioId] = useState('')
 
   const [following, setFollowing] = useState(0);
   //
@@ -138,6 +140,18 @@ export default function UserProfile({ slug }) {
       .finally(setIsLoading(false));
 
 
+    const fetchUserBioData = async () => {
+      const response = await fetch(`${apiBasePath}/bio/${localStorage.getItem("uuid")}`);
+      const data = await response.json();
+      setBio(data?.content)
+      setBioId(data?._id)
+      // console.log('------------>>> BIO  <<<-------------', data)
+
+    };
+
+    fetchUserBioData();
+
+
     setIsCategoryAdded(false)
     setIsWriterAdded(false)
     setIsProfileUpdated(false)
@@ -177,11 +191,20 @@ export default function UserProfile({ slug }) {
                 follower={follower}
                 following={following}
                 username={username}
+                phone={phone}
+                email={email}
+                address={address}
+                dob={dob}
+                gender={gender}
+                bio={bio}
                 setUsername={setUsername}
                 designation={designation}
                 profileStatus={profileStatus}
                 setProfileController={setProfileController}
               />
+            </div>
+            <div className='container'>
+              <hr className='my-[40px]'></hr>
             </div>
             <section className="all__page__main__content">
               <div className="container">
@@ -212,7 +235,7 @@ export default function UserProfile({ slug }) {
 
                         {
                           profileController === 'following' &&
-                          <FollowingList  showModal={'following'} handleClose={handleClose} />
+                          <FollowingList showModal={'following'} handleClose={handleClose} />
                         }
 
                         {/* <UserDetails

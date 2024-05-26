@@ -22,17 +22,17 @@ const LekhokDetails = ({
                     </a>
                 </div>
                 <div className="pl-4 text-[20px] text-gray-900">
-                    {user_id?.length > 0 && <Link
+                    {/* {user_id?.length > 0 && <Link
                         href={`/user/user/${user_id}`}>
                         {writer}
-                    </Link>}
+                    </Link>} */}
 
-                    {!user_id && <Link
+                     <Link
                         href={`/postswriter/${writer_id}`}
                     >
                         {writer}
                     </Link>
-                    }
+                    
                     <h1 className="text-[16px] text-gray-600">{lifeCycle}</h1>
                 </div>
             </div>

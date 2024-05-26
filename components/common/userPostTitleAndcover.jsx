@@ -7,7 +7,7 @@ export default function UserPostTitleAndcover({id, title, writer, writer_id, ima
      <div className="profile__auth__wrap space-x-[15px]">
         <div className="profile__auth__img">
           <a href={`/post/${id}`} >
-            <img className="w-[100px] h-[100px] rounded-[10px] block m-auto shadow-lg" src={image === ''? `/images/user/coverimage.jpg` : `${apiBasePath}/${image.slice(image.indexOf('/')+1)}`} alt="" />
+            <img className="w-[100px] h-[100px] rounded-[10px] block m-auto shadow-lg" src={image === ''? `/images/user/coverimage.jpg` : `${apiBasePath}/${image?.slice(image.indexOf('/')+1)}`} alt="" />
           </a>
         </div>
         <div className="">

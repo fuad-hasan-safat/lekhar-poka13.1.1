@@ -6,6 +6,8 @@ import ProfilePostLeftContent from '../../../components/userprofile/ProfilePostL
 import axios from 'axios';
 import Head from 'next/head';
 import WriterProfileBanner from '../../../components/userprofile/writerProfileBanner';
+import FollowerList from '../../../components/userprofile/followerList';
+import FollowingList from '../../../components/userprofile/followingList';
 
 export default function WriterProfile() {
     const router = useRouter()
@@ -30,6 +32,8 @@ export default function WriterProfile() {
     const [follower, setFollower] = useState(0);
     const [post, setPost] = useState(0);
     const [following, setFollowing] = useState(0);
+
+    const [profileController, setProfileController] = useState("")
 
     //  following status check
     const [isAlreadyFollowing, setIsAlreadyFollowing] = useState(false)
@@ -79,7 +83,7 @@ export default function WriterProfile() {
         fetch(`${apiBasePath}/getprofile/${slug}`)
             .then((response) => response.json())
             .then((data) => {
-                 console.log('pofile details on writer---- profile--------------->>>>>>>', data);
+                console.log('pofile details on writer---- profile--------------->>>>>>>', data);
                 setDesignation(data.object.profile?.designation)
                 setProfileStatus(data.object.profile?.profileStatus)
                 setGender(data.object.profile.gender)
@@ -94,7 +98,7 @@ export default function WriterProfile() {
                 setUserName(data.object.profile.name)
 
 
-                // console.log(' profile image----------->>>>', image)
+                console.log(' profile ----------->>>>', data)
             })
             .catch((error) => console.error("Error fetching data:", error));
 
@@ -165,6 +169,8 @@ export default function WriterProfile() {
 
     }
 
+    const handleClose = () => setProfileController('profile');
+
     return (
         router.isReady &&
         <>
@@ -188,6 +194,7 @@ export default function WriterProfile() {
                                 username={username}
                                 designation={designation}
                                 profileStatus={profileStatus}
+                                setProfileController={setProfileController}
                             />
 
                         </div>
@@ -226,6 +233,16 @@ export default function WriterProfile() {
                             <div className='lg:flex lg:flex-row'>
                                 <div className='lg:w-[70%]'>
                                     {<ProfilePostLeftContent slug={slug} />}
+
+                                    {
+                          profileController === 'follower' &&
+                          <FollowerList showModal={'follower'} handleClose={handleClose} />
+                        }
+
+                        {
+                          profileController === 'following' &&
+                          <FollowingList showModal={'following'} handleClose={handleClose} />
+                        }
                                 </div>
                                 {/* <div className='lg:w-[30%]'>
                                     <Sidebar />

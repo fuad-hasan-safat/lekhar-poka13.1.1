@@ -42,7 +42,7 @@ export default function PostOfWriterPage() {
             try {
                 const response = await fetch(`${apiBasePath}/postswriter/${slug}`);
                 const data = await response.json();
-                setPostList(data    .object);
+                setPostList(data.object);
                 setWriterInfo(data.writer_info)
                 setProfileStatus(data.user_profile?.profileStatus)
                 setDesignation(data.user_profile?.designation)
@@ -57,7 +57,7 @@ export default function PostOfWriterPage() {
                 setError(error);
                 console.log('writer post ---', error)
             } finally {
-               
+
 
                 setIsLoading(false)
             }
@@ -89,7 +89,7 @@ export default function PostOfWriterPage() {
     if (isLoading) {
         return <Loading />;
     } else {
-        
+
 
         return (
 
@@ -114,6 +114,9 @@ export default function PostOfWriterPage() {
 
                     </div>
                 </section>
+                <div className='container'>
+                    <hr className='my-[40px]'></hr>
+                </div>
                 <div className='container lg:flex lg:flex-row pt-[94px]'>
                     <div className="pt-20 text-3xl lg:w-[70%]">
 
