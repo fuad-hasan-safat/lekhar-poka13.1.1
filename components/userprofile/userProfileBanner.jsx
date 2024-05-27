@@ -1,10 +1,11 @@
 
-import React from 'react'
+import React, { useState } from 'react'
 import { apiBasePath } from '../../utils/constant'
 import ImageCrop from './cropComponents/ImageCrop'
 import ImageCropProvider from './cropComponents/ImageCropProvider'
 import UserAchivement from './userAchivement'
 import { countWords } from '../../function/api'
+import ProfileModal from './profileUpdate/ProfileModal'
 
 export default function UserProfileBanner({ image = '',
     username = '',
@@ -24,6 +25,10 @@ export default function UserProfileBanner({ image = '',
     setProfileController,
 }) {
     const selectedBio = countWords(bio, 55);
+
+    const [showModal, setShowModal] = useState(false);
+
+    const handleClose = () => setShowModal(false);
 
     return (
         <>
@@ -78,7 +83,8 @@ export default function UserProfileBanner({ image = '',
                         </ul>
                         <p className='text-[20px] text-[#737373] mt-[15px]'>{selectedBio}</p>
 
-                        <button className='bg-[#F9A106] text-white hover:bg-[#FCD200] rounded-[5px] px-[75px] py-[10px] mt-[15px]'>সম্পাদন করুন</button>
+                        <button onClick={()=> setShowModal(true)} className='bg-[#F9A106] text-white hover:bg-[#FCD200] rounded-[5px] px-[75px] py-[10px] mt-[15px]'>সম্পাদন করুন</button>
+                        {<ProfileModal showModal={showModal} handleClose={handleClose} />}
 
 
                     </div>
