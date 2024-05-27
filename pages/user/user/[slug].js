@@ -61,21 +61,11 @@ export default function WriterProfile() {
                 }
             );
 
-
             setIsAlreadyFollowing(followingResponse.data.status)
-
-
             console.log('followingResponse ------------------------- writer in response message---------------->>>>>>', followingResponse.data.status)
-
-
-
-
-
-
         } catch (error) {
             // console.log("inside catch ----------------", error);
         }
-
     }
 
     useEffect(() => {
@@ -153,20 +143,11 @@ export default function WriterProfile() {
                     },
                 }
             );
-
-
             console.log('following ------------------------- writer in response message---------------->>>>>>', response)
-
-
-
-
-
 
         } catch (error) {
             // console.log("inside catch ----------------", error);
         }
-
-
     }
 
     const handleClose = () => setProfileController('profile');

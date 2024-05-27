@@ -10,6 +10,8 @@ import Head from 'next/head';
 import { countWords } from '../../function/api';
 import SinglePostConponent from '../../components/common/singlePostComponent';
 import WriterProfileBanner from '../../components/userprofile/writerProfileBanner';
+import FollowerList from '../../components/userprofile/followerList';
+import FollowingList from '../../components/userprofile/followingList';
 
 
 export default function PostOfWriterPage() {
@@ -25,12 +27,18 @@ export default function PostOfWriterPage() {
     const [profileStatus, setProfileStatus] = useState('');
     const [isLoading, setIsLoading] = useState(true);
     const [writerInfo, setWriterInfo] = useState([])
+    const [writerBio, setWriterBio] = useState([])
+    const [profileInfo, setProfileInfo] = useState([])
+    const [isSelfWriter, setIsSelfWriter] = useState(false)
 
 
     const [error, setError] = useState(null); // State to store any errors
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const postsPerPage = 5; // Number of posts to display per page
+
+    const [profileController, setProfileController] = useState("profile")
+    const handleClose = () => setProfileController('profile');
 
 
 
@@ -44,9 +52,12 @@ export default function PostOfWriterPage() {
                 const data = await response.json();
                 setPostList(data.object);
                 setWriterInfo(data.writer_info)
-                setProfileStatus(data.user_profile?.profileStatus)
-                setDesignation(data.user_profile?.designation)
+                setProfileInfo(data?.user_profile)
+                setWriterBio(data?.writer_bio)
+                // setProfileStatus(data.user_profile?.profileStatus)
+                // setDesignation(data.user_profile?.designation)
                 setBio(data.writer_bio?.content)
+                setIsSelfWriter(data.self_writer)
 
                 console.log('posts of writer ----------------------------------', data)
 
@@ -100,17 +111,35 @@ export default function PostOfWriterPage() {
                 <section>
                     <div>
                         <WriterProfileBanner
-                            image={writerInfo?.image}
-                            username={writerInfo.name}
-                            birth_date={writerInfo?.birth_date}
-                            expiry_date={writerInfo.expiry_date}
-                            post={post}
-                            follower={follower}
-                            following={following}
-                            bio={bio}
-                            designation={designation}
-                            profileStatus={profileStatus}
+                            // image={writerInfo?.image}
+                            // username={writerInfo.name}
+                            // birth_date={writerInfo?.birth_date}
+                            // expiry_date={writerInfo.expiry_date}
+                            // post={post}
+                            // follower={follower}
+                            // following={following}
+                            // bio={bio}
+                            // designation={designation}
+                            // profileStatus={profileStatus}
+                            setProfileController={setProfileController}
+                            writerInfo={writerInfo}
+                            writerBio={writerBio}
+                            profileInfo={profileInfo}
+                            isSelfWriter={isSelfWriter}
                         />
+
+
+                        {
+                            profileController === 'follower' &&
+                            <FollowerList showModal={'follower'} handleClose={handleClose} />
+                        }
+
+                        {
+                            profileController === 'following' &&
+                            <FollowingList showModal={'following'} handleClose={handleClose} />
+                        }
+
+
 
                     </div>
                 </section>

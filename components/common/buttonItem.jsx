@@ -51,7 +51,7 @@ const ButtonItem = ({
       >
         <button
           onClick={() => handleButton(title)}
-          className={`w-full py-1 rounded-md border border-gray-300  text-gray-600 font-semibold ${selectedId === id ? " bg-yellow-400 shadow-md" : "bg-gray-300"
+          className={`w-full py-1 hover:bg-[#F9A106] hover:text-white rounded-md border border-gray-300  text-gray-600 font-semibold hover:font-normal ${selectedId === id ? " bg-[#F9A106] text-white font-normal shadow-md" : "bg-gray-300"
             }`}
         >
           {title}

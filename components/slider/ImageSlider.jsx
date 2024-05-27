@@ -131,7 +131,7 @@ export function ImageSlider() {
                             // />
                         ))}
                     </div>
-                    <div
+                    {/* <div
                         className="absolute left-0 top-[50%] -translate-y-1/2"
                         style={{
                             width: "100%",
@@ -140,38 +140,8 @@ export function ImageSlider() {
                             overflow: "hidden",
                         }}
                     >
-                        {/* {data.map(({ _id, title, caption, image, content }, index) => (
-
-                            <div
-                                aria-hidden={imageIndex !== index}
-                                className="img-slider-img space-y-4"
-                                style={{ translate: `${-100 * imageIndex}%` }}
-                                key={index}
-                            >
-                                <div className="container">
-                                    <div className="row">
-                                        <div className="col-md-12">
-                                            <div className="slider__desc">
-                                                <h1 className="lg:text-[52px] md:text-[48px] sm:text-[44px] xs:text-[38px] text-[#86312F]" >{title}</h1>
-                                                <h2 className="lg:text-[28px] md:text-[26px] sm:text-[24px] xs:text-[22px] text-[#595D5B]">{caption}</h2>
-                                                <p className="text-[16px] text-[#595D5B] w-[90%]">{content}</p>
-
-                                                <button
-                                                    onClick={() => featureHandler(_id)}
-                                                    className="w-[176px] inline-block mt-[30px] bg-orange-400 px-2 h-[56px] rounded-md text-[19px]  text-white"
-                                                >
-                                                    বিস্তারিত
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                        ))} */}
-                    </div>
+                    
+                    </div> */}
 
 
                 </div>
@@ -181,7 +151,7 @@ export function ImageSlider() {
                 </div>
             }
 
-            <button
+            {/* <button
                 onClick={showPrevImage}
                 className="img-slider-btn img-slider-btn-lft"
                 style={{ left: 0 }}
@@ -200,13 +170,13 @@ export function ImageSlider() {
                 <img
                     src="/images/svgs/next.svg"
                 />
-            </button>
+            </button> */}
             <div
                 className="slider__pagination"
                 style={{
                     position: "absolute",
                     bottom: "3rem",
-                    left: "48.7%",
+                    left: "6%",
                     // right: "50%",
                     // translatex: "-50%",
                     display: "flex",

@@ -11,19 +11,19 @@ export default function UserProfileBanner({ image = '',
     setUsername,
     phone = '',
     email = '',
-    address='',
-    dob='',
-    gender='',
+    address = '',
+    dob = '',
+    gender = '',
     designation = '',
     profileStatus = '',
-    bio= '',
+    bio = '',
     apprevedPost = 0,
     unApprovedPost = 0,
     follower = 0,
     following = 0,
     setProfileController,
 }) {
-   const selectedBio =  countWords(bio, 55);
+    const selectedBio = countWords(bio, 55);
 
     return (
         <>
@@ -73,12 +73,12 @@ export default function UserProfileBanner({ image = '',
                                 <span className='text-[#F9A106]'><i class="ri-calendar-2-line"></i></span> <span className='text-[#737373]'>{dob}</span>
                             </li>
                             <li>
-                                <span className='text-[#F9A106]'>{gender==='male' ? <i class="ri-men-line"></i> : <i class="ri-women-line"></i>}</span> <span className='capitalize text-[#737373]'>{gender}</span>
+                                <span className='text-[#F9A106]'>{gender === 'male' ? <i class="ri-men-line"></i> : <i class="ri-women-line"></i>}</span> <span className='capitalize text-[#737373]'>{gender}</span>
                             </li>
                         </ul>
                         <p className='text-[20px] text-[#737373] mt-[15px]'>{selectedBio}</p>
 
-                        <button className='bg-[#EBEBEB] text-[#515151] hover:bg-[#FCD200] rounded-[5px] px-[25px] py-[5px] mt-[15px]'>সম্পাদন করুন</button>
+                        <button className='bg-[#F9A106] text-white hover:bg-[#FCD200] rounded-[5px] px-[75px] py-[10px] mt-[15px]'>সম্পাদন করুন</button>
 
 
                     </div>

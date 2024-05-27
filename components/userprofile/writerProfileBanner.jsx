@@ -5,21 +5,27 @@ import ImageCrop from './cropComponents/ImageCrop'
 import ImageCropProvider from './cropComponents/ImageCropProvider'
 import UserAchivement from './userAchivement'
 import { useRouter } from 'next/router'
+import axios from 'axios'
 
 export default function WriterProfileBanner({
-    image = '',
-    username = '',
-    birth_date,
-    expiry_date,
-    setUsername,
-    bio,
-    designation = '',
-    profileStatus = '',
+    // image = '',
+    // username = '',
+    // birth_date,
+    // expiry_date,
+    // setUsername,
+    // bio,
+    // designation = '',
+    // profileStatus = '',
     apprevedPost = 0,
     unApprovedPost = 0,
     follower = 0,
     following = 0,
     setProfileController,
+    writerInfo,
+    writerBio,
+    profileInfo,
+    isSelfWriter,
+
 }) {
     const router = useRouter()
     const slug = router.query.slug;
@@ -27,6 +33,12 @@ export default function WriterProfileBanner({
     const [loggedInUser, setLoggedInUser] = useState("");
     const [userUuid, setUserUuid] = useState("");
     const [userToken, setUserToken] = useState("");
+    // const [bio, setBio] = useState('')
+
+    const [isAlreadyFollowing, setIsAlreadyFollowing] = useState(false)
+
+    const [bio, setBio] = useState('')
+    const [bioId, setBioId] = useState('')
 
     useEffect(() => {
         setLoggedInUser(localStorage.getItem("name") || "");
@@ -34,13 +46,29 @@ export default function WriterProfileBanner({
         setUserUuid(localStorage.getItem("uuid") || "");
         // setUserPhone(localStorage.getItem("phone") || "");
 
+        if (isSelfWriter) {
+            const fetchUserBioData = async () => {
+                const response = await fetch(`${apiBasePath}/bio/${profileInfo?.user_id}`);
+                const data = await response.json();
+                setBio(data?.content)
+                setBioId(data?._id)
+                // console.log('------------>>> BIO  <<<-------------', data)
+
+            };
+
+            fetchUserBioData();
+
+            getFollowingStatus(profileInfo?.user_id, localStorage.getItem("uuid"))
+
+        }
+
+
     }, []);
 
-
-    async function followUserhandler(user_id, following) {
+    async function getFollowingStatus(user_id, following) {
         try {
-            const response = await axios.post(
-                `${apiBasePath}/follow`,
+            const followingResponse = await axios.post(
+                `${apiBasePath}/followstatus`,
                 {
                     user_id: following,
                     following: user_id,
@@ -52,22 +80,49 @@ export default function WriterProfileBanner({
                 }
             );
 
-
-            console.log('following ------------------------- writer in response message---------------->>>>>>', response)
-
-
-
-
-
-
+            setIsAlreadyFollowing(followingResponse.data.status)
+            console.log('followingResponse ------------------------- writer in response message---------------->>>>>>', followingResponse)
         } catch (error) {
             // console.log("inside catch ----------------", error);
         }
-
-
     }
 
-    console.log('image --------- length >>>>>', image)
+    let image = ''
+    let rendredBio = ''
+
+    if (isSelfWriter) {
+        image = profileInfo?.image;
+        rendredBio = bio;
+    } else {
+        image = writerInfo?.image;
+        rendredBio = writerBio?.content
+    }
+
+    async function followUserhandler(user_id, following) {
+        if (!isAlreadyFollowing) {
+            try {
+                const response = await axios.post(
+                    `${apiBasePath}/follow`,
+                    {
+                        user_id: following,
+                        following: user_id,
+                    },
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    }
+                );
+                console.log('following ------------------------- writer in response message---------------->>>>>>', response)
+            } catch (error) {
+                // console.log("inside catch ----------------", error);
+            }
+        } else {
+            alert(`আপনি ইতিমধ্যেই ${writerInfo.name} কে অনুসরণ করছেন `)
+        }
+    }
+
+    console.log('image --------- length >>>>>', profileInfo?.image)
     return (
         <>
             <section className="all__post__sec__wrap">
@@ -79,12 +134,13 @@ export default function WriterProfileBanner({
                     <div className='w-[23%]'>
                         <div className="">
                             <img
-                                className="w-[264px] h-[264px] rounded-full  border-4 border-solid border-white -mt-[110px]  "
+
+                                className="rounded-full w-[250px] h-[250px]  border-4 border-solid border-white -mt-[110px]  "
                                 src={image?.length > 0 ? `${apiBasePath}/${image.slice(image.indexOf("/") + 1)}` : '/images/defaultUserPic/profile.jpg'}
                             />
                         </div>
 
-                        <div>
+                        {isSelfWriter && <>  <div>
                             <UserAchivement
                                 setProfileController={setProfileController}
                                 follower={follower}
@@ -93,30 +149,32 @@ export default function WriterProfileBanner({
                                 unApprovedPost={unApprovedPost} />
                         </div>
 
-                        <button
-                            className='py-[5px] bg-[#F9A106] hover:bg-[#c67256] px-[48px] p-1 rounded-md text-white text-[16px]'
-                            onClick={() => followUserhandler(slug, userUuid)}
-                        >
-                            অনুসরণ করুন
-                        </button>
+                            <button
+                                className='py-[13px] bg-[#F9A106] hover:bg-[#c67256] px-[75px] p-1 rounded-md text-white text-[16px]'
+                                onClick={() => followUserhandler(profileInfo?.user_id, userUuid)}
+                            >
+                                <span><i class="ri-add-box-fill"></i></span> <span> {isAlreadyFollowing ? 'অনুসরণ করছেন' : 'অনুসরণ করুন'}</span>
+                            </button>
+                        </>
+                        }
 
                     </div>
 
                     <div className='w-[70%] py-[25px] '>
 
-                        <h1><span className='text-[35px] text-[#FCD200]'>{username}</span> <span className='text-[#595D5B] text-[22px]'>{designation}</span></h1>
+                        <h1><span className='text-[35px] text-[#FCD200]'>{isSelfWriter && profileInfo.name ? profileInfo.name : writerInfo.name}</span> <span className='text-[#595D5B] text-[22px]'>{isSelfWriter && profileInfo.designation}</span></h1>
                         <ul className='flex flex-row space-x-[25px] text-[#737373] text-[20px]'>
-                            {/* <li>
-                                <span className='text-[#F9A106]'><i class="ri-map-pin-line"></i></span> <span className='text-[#737373]'>{address}</span>
-                            </li> */}
+                            {isSelfWriter && <li>
+                                <span className='text-[#F9A106]'><i class="ri-map-pin-line"></i></span> <span className='text-[#737373]'>{profileInfo.address}</span>
+                            </li>}
                             <li>
-                                <span className='text-[#F9A106]'><i class="ri-calendar-2-line"></i></span> <span className='text-[#737373]'>{birth_date}</span>
+                                <span className='text-[#F9A106]'><i class="ri-calendar-2-line"></i></span> <span className='text-[#737373]'>{writerInfo?.birth_date}</span>
                             </li>
-                            {/* <li>
-                                <span className='text-[#F9A106]'>{gender === 'male' ? <i class="ri-men-line"></i> : <i class="ri-women-line"></i>}</span> <span className='capitalize text-[#737373]'>{gender}</span>
-                            </li> */}
+                            {isSelfWriter && <li>
+                                <span className='text-[#F9A106]'>{profileInfo.gender === 'male' ? <i class="ri-men-line"></i> : <i class="ri-women-line"></i>}</span> <span className='capitalize text-[#737373]'>{profileInfo.gender}</span>
+                            </li>}
                         </ul>
-                        <p className='text-[20px] text-[#737373] mt-[15px]'>{bio}</p>
+                        <p className='text-[20px] text-[#737373] mt-[15px]'>{rendredBio}</p>
 
 
 
