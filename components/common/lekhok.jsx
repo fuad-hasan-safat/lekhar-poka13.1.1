@@ -8,35 +8,38 @@ const LekhokDetails = ({
     writer_id,
     lifeCycle,
 }) => {
-    console.log(' user id --------', user_id, writer, writer_id, localStorage.getItem('uuid'))
+    let redirectAddress = `/postswriter/${writer_id}`;
+    if (user_id === localStorage.getItem('uuid')) {
+        redirectAddress = `/user/${user_id}`;
+    }
+
     return (
         <>
             <div className="flex">
+
                 <div className="lekhokIteam">
-                    <a href={`/postswriter/${writer_id}`}>
+
+                    <a href={redirectAddress}>
+
                         <img
-                            className=""
                             src={image}
                             alt={`img ${id}`}
                         />
+
                     </a>
+
                 </div>
+
                 <div className="pl-4 text-[20px] text-gray-900">
-                    {user_id === localStorage.getItem('uuid') ? <Link
-                        href={`/user/${user_id}`}>
+
+                    <Link href={redirectAddress}>
                         {writer}
-                    </Link> :
-                        <Link
-                            href={`/postswriter/${writer_id}`}
-                        >
-                            {writer}
-                        </Link>
-                    }
-
-
+                    </Link>
 
                     <h1 className="text-[16px] text-gray-600">{lifeCycle}</h1>
+
                 </div>
+
             </div>
 
         </>

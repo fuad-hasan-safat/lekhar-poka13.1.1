@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import ReactPaginate from 'react-paginate'; // Import ReactPaginate
+import ReactPaginate from 'react-paginate'; 
 
 const LogViewer = ({ logText }) => {
+
   const [currentPage, setCurrentPage] = useState(1);
-//   const [pageSize] = useState(10); // Lines per page
-const pageSize = 10;
+  const pageSize = 10;
 
   const handlePageClick = (data) => {
-    setCurrentPage(data.selected + 1); // Adjust for 0-based indexing
+    setCurrentPage(data.selected + 1); 
   };
 
-  // ... existing pagination logic (can be simplified)
 
   const logLines = logText.split(/(\r?\n|<br\/>)/);
   const totalPages = Math.ceil(logLines.length / pageSize);
@@ -24,12 +23,15 @@ const pageSize = 10;
   const currentLogLines = getLogLinesForPage();
 
   return (
+
     <div className="page-wrapper">
+
       <div className="log-content">
         {currentLogLines.map((line) => (
           <p key={line} dangerouslySetInnerHTML={{ __html: line }}></p>
         ))}
       </div>
+      
       <ReactPaginate
         previousLabel={'previous'} // Customize labels if needed
         nextLabel={'next'}
@@ -41,7 +43,9 @@ const pageSize = 10;
         containerClassName={'pagination-wrapper'} // Apply custom CSS classes
         activeClassName={'active'} // Apply CSS class to active page button
       />
+      
     </div>
+
   );
 };
 

@@ -1,13 +1,13 @@
 "use client"
+
 import { useEffect, useState } from "react";
 import InfiniteScroll from 'react-infinite-scroll-component';
-
 import MainContentDivider from "../common/mainContentDivider";
 import Loading from "../common/loading";
-import SobJiboniBody from "./sobJiboniBody";
 import { apiBasePath } from "../../utils/constant";
 import { countWords } from "../../function/api";
 import SinglePostConponent from "../common/singlePostComponent";
+
 
 export default function SobJiboniLeftContent() {
 
@@ -16,26 +16,30 @@ export default function SobJiboniLeftContent() {
   const [error, setError] = useState(null); // State to store any errors
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  const postsPerPage = 5; // Number of posts to display per page
   const [isHasMore, setisHasMore] = useState(false);
 
 
   useEffect(() => {
 
     const fetchTotalPage = async () => {
+
       try {
+
         const response = await fetch(`${apiBasePath}/categorypostpages/জীবনী`);
         const data = await response.json();
+
         setTotalPages(data?.length);
+
         if (data?.length > 1) {
           setisHasMore(true)
         }
-        console.log('total page ----->>>>', data.length)
+
       } catch (error) {
         setError(error);
       } finally {
         // setIsLoading(false)
       }
+
     };
 
     fetchTotalPage();
@@ -44,18 +48,20 @@ export default function SobJiboniLeftContent() {
 
 
   const fetchPosts = async () => {
-    console.log('fetch post called for page -----', currentPage)
+
     try {
+
       const response = await fetch(`${apiBasePath}/categoryposts/জীবনী/${currentPage}`);
       const data = await response.json();
+
       setPostList(postList.concat(data));
 
-      console.log('main post by per page inside loader-------->>', data)
     } catch (error) {
       setError(error);
     } finally {
       setIsLoading(false)
     }
+
   };
 
   useEffect(() => {
@@ -65,7 +71,6 @@ export default function SobJiboniLeftContent() {
 
   const loadnextPage = () => {
 
-    console.log({ currentPage, totalPages })
     setCurrentPage(currentPage + 1)
 
     if (currentPage <= totalPages) {
@@ -73,8 +78,8 @@ export default function SobJiboniLeftContent() {
     } else {
       setisHasMore(false)
     }
-  }
 
+  }
 
 
   return (
@@ -114,6 +119,8 @@ export default function SobJiboniLeftContent() {
           </div>
         </>
       )}
+
+
       <InfiniteScroll
         dataLength={postList?.length} //This is important field to render the next data
         next={loadnextPage}
@@ -124,6 +131,8 @@ export default function SobJiboniLeftContent() {
 
       >
       </InfiniteScroll>
+
+      
     </div>
   );
 

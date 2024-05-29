@@ -248,14 +248,13 @@ export default function CreatePost() {
                 formData.append("uploaded_by", userUuid);
                 formData.append("new_writer", isWriter);
 
-                console.log(formData)
 
                 if (title && selectedOption && summary) {
 
                     console.log(writer, writerId)
 
                     try {
-                    console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&   inside first &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+                    // console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&   inside first &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
 
 
                         const response = await fetch(`${apiBasePath}/posts`, {
@@ -265,12 +264,12 @@ export default function CreatePost() {
                             },
                             body: formData,
                         });
-                    console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&   inside last &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+                    // console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&   inside last &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
 
-                        console.log("LIKHUN data save ----- response", response)
+                        // console.log("LIKHUN data save ----- response", response)
                         if (response.ok) {
                             const data = await response.json();
-                            console.log("sucessfully sent:", data);
+                            // console.log("sucessfully sent:", data);
                             alert("আপনার লেখাটি অনুমোদনের জন্য এডমিনের কাছে পাঠানো হয়েছে। লেখাটি শীঘ্রই প্রকাশিত হবে। ধন্যবাদ");
 
                             setSelectedFile(null);
@@ -279,6 +278,7 @@ export default function CreatePost() {
                             setWriters('');
                             setContent('');
                             setSummary('');
+                            
                             router.push('/user/alluserpost')
 
                         } else {

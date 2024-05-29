@@ -22,13 +22,11 @@ const ProcchodButtonList = ({
 }) => {
 
 
-   useEffect(() => {
- 
+  useEffect(() => {
 
     async function fetchDataAsync() {
       try {
         const result = await fetchData(`${apiBasePath}/categories`);
-        //console.log("result         ->>>>>>>>>>>>>>>>", result.object);
         setButtons(result);
       } catch (error) {
         alert(error)
@@ -36,11 +34,13 @@ const ProcchodButtonList = ({
     }
 
     fetchDataAsync();
+
   }, []);
 
   return (
+
     <div className="all__button__list pt-16 clearfix">
-    
+
       {buttons.length &&
         buttons.map((button, index) => (
           <ButtonItem
@@ -64,7 +64,7 @@ const ProcchodButtonList = ({
             buttons={buttons}
           />
         ))}
-        </div>
+    </div>
   );
 };
 

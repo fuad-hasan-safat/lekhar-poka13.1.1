@@ -1,27 +1,28 @@
 'use client'
+
 import React, { useEffect, useState } from "react";
-
-
 import LekhaPokaProfile from "../../common/lekhaProfile";
 import SidebarPostDivider from "../../common/sidebarpostdivider";
 import { fetchData } from "../../../function/api";
 import { apiBasePath } from "../../../utils/constant";
 
-const Somosamoyik = () => {
 
+const Somosamoyik = () => {
     
 const [somosamoyikPost, setSomosamoyikPost] = useState([])
 
 useEffect(() => {
-  console.log("in side use effect");
 
   async function fetchDataAsync() {
+
     try {
       const result = await fetchData(
         `${apiBasePath}/contemporarypost`
       );
-      console.log("result         ->>>>>>>>>>>>>>>>", result.object);
+
+      console.log('somosamoyik ---->>', result);
       setSomosamoyikPost(result.posts);
+
     } catch (error) {
       //alert(error)
       console.log(error)
@@ -29,6 +30,7 @@ useEffect(() => {
   }
 
   fetchDataAsync();
+
 }, []);
 
 
@@ -46,6 +48,7 @@ useEffect(() => {
           {somosamoyikPost.length &&
             somosamoyikPost.map((item, index) => (
               <div key={index}>
+               
                 <div key={index} className="pb-1 ">
                   <LekhaPokaProfile
                    image={item.image}
@@ -56,6 +59,7 @@ useEffect(() => {
                    star={item.rating}
                   />
                 </div>
+
                 <div className="pb-3">
                   {index <= somosamoyikPost.length - 2 ? (
                     <SidebarPostDivider />
@@ -63,6 +67,7 @@ useEffect(() => {
                     ""
                   )}
                 </div>
+                
               </div>
             ))}
         </div>:

@@ -1,15 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
 import InfiniteScroll from 'react-infinite-scroll-component';
-
-import MaincontentBody from "../common/maincontentBody";
 import MainContentDivider from "../common/mainContentDivider";
 import ProcchodButtonList from "./ProcchodButtonList";
 import { apiBasePath } from "../../utils/constant";
-
 import { countWords } from "../../function/api";
 import Loading from "../common/loading";
 import SinglePostConponent from "../common/singlePostComponent";
+
 
 export default function ProcchodLeftContent() {
 
@@ -21,9 +19,7 @@ export default function ProcchodLeftContent() {
   const [totalPages, setTotalPages] = useState(0);
   const postsPerPage = 5; // Number of posts to display per page
   const [isHasMore, setisHasMore] = useState(false);
-
   const [selectedCategory, setSelectedCategory] = useState(null)
-
   const [buttons, setButtons] = useState([
     {
       _id: "",
@@ -34,16 +30,20 @@ export default function ProcchodLeftContent() {
 
 
   useEffect(() => {
+
     const fetchTotalPage = async () => {
 
       try {
+
         const response = await fetch(`${apiBasePath}/postpages`);
         const data = await response.json();
+
         setTotalPages(data?.length);
+
         if(data?.length> 1){
           setisHasMore(true)
         }
-        console.log('total page ----->>>>', data.length)
+
       } catch (error) {
         setError(error);
       } finally {
@@ -56,51 +56,52 @@ export default function ProcchodLeftContent() {
 
 
   const preparePostList = (newData = []) => {
-    console.log("==========preparePostList========= 63", currentPage)
+    
     if (currentPage === 1) {
       setPostList(newData);
     } else {
       setPostList(postList.concat(newData));
     }
+
   }
 
   
   const fetchPosts = async () => {
-    console.log('fetch post called for page -----', currentPage)
+    
     try {
+
       const response = await fetch(`${apiBasePath}/posts/${currentPage}`);
       const data = await response.json();
-      
+      console.log('main page post,', data)
       preparePostList(data)
 
-      console.log('main post by per page inside loader CURRENT PAGEEEEE-------->>', data)
     } catch (error) {
       setError(error);
     } finally {
       setIsLoading(false)
     }
+
   };
 
   const fetcCategoryhPosts = async () => {
     try {
       const response = await fetch(`${apiBasePath}/categoryposts/${selectedCategory}/${currentPage}`);
       const data = await response.json();
-      
+      console.log('main page category post,', data)
+
       preparePostList(data)
 
-      console.log('main post category_______>>>>> by per page inside loader-------->>', data)
     } catch (error) {
       setError(error);
     } finally {
       setIsLoading(false)
     }
+    
   };
 
 
   useEffect(() => {
- 
-    // setPostList([])
-    
+     
     if(!selectedCategory){
       fetchPosts();
       }else{
@@ -113,11 +114,9 @@ export default function ProcchodLeftContent() {
 
   const loadnextPage = () => {
 
-    console.log({ currentPage, totalPages })
     setCurrentPage(currentPage + 1)
 
     if (currentPage >= totalPages) {
-
       setisHasMore(false)
     }
   }

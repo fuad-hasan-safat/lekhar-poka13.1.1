@@ -23,7 +23,7 @@ const StyledModal = ({ isOpen, selectedContent, onClose }) => {
               <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                 <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-title">{selectedContent.title}</h3>
                 <div className="mt-2">
-                  <p className="text-sm text-gray-500">{`Written by: ${selectedContent.writer}`}</p>
+                  <p className="text-sm text-gray-500">{`Written by: ${selectedContent.writer || 'admin'}`}</p>
                   <p 
                   dangerouslySetInnerHTML={{__html:selectedContent.content}}
                   className="text-sm text-gray-500"></p>

@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import FullPostPagination from "../fullPost/FullPostpagination";
-import LogViewer from "../fullPost/FullPostpag";
-import ShareOnFacebook from "../share/share";
 import FullPostPaginationOthers from "../fullPost/FullPostpaginationOther";
 import UserPostTitleAndcover from "./userPostTitleAndcover";
 
@@ -12,6 +10,7 @@ const FullPost = ({ id, content, title, writer, writer_id, catagory, url, image 
         return (
             <>
                 <div className="kobita__content text-[#737373]">
+
                     <UserPostTitleAndcover
                         id={id}
                         title={title}
@@ -19,12 +18,11 @@ const FullPost = ({ id, content, title, writer, writer_id, catagory, url, image 
                         writer_id={writer_id}
                         image={image}
                     />
-                    {/* <div className="font-semibold  w-full lg:text-[35px] md:text-[32px] sm:text-[29px] xs:text-[26px] pr-[115px] text-yellow-400">{title}</div>
-                <div className="text-[22px] text-[#595D5B] mb-[10px]">{writer}</div> */}
-                    {/* <div className="text-[22px] text-[#595D5B] " dangerouslySetInnerHTML={{__html:content}}></div> */}
+              
                     <div className="pt-[30px]">
                         <FullPostPagination customclass='text-[16px] text-[#595D5B]' logText={content} />
                     </div>
+
                 </div>
 
             </>
@@ -33,6 +31,7 @@ const FullPost = ({ id, content, title, writer, writer_id, catagory, url, image 
         return (
             <>
                 <div className="kobita__content text-[#737373]">
+
                     <UserPostTitleAndcover
                         id={id}
                         title={title}
@@ -40,12 +39,11 @@ const FullPost = ({ id, content, title, writer, writer_id, catagory, url, image 
                         writer_id={writer_id}
                         image={image}
                     />
-                    {/* <div className="font-semibold  w-full lg:text-[35px] md:text-[32px] sm:text-[29px] xs:text-[26px] pr-[115px] text-yellow-400">{title}</div>
-                    <div className="text-[22px] text-[#595D5B] mb-[10px]">{writer}</div> */}
-                    {/* <div className="text-[22px] text-[#595D5B] " dangerouslySetInnerHTML={{__html:content}}></div> */}
+                 
                     <div className="pt-[30px]">
                         <FullPostPaginationOthers customclass='text-[16px] text-gray-500' logText={content} />
                     </div>
+
                 </div>
 
             </>

@@ -7,7 +7,7 @@ import { useImageCropContext } from './ImageCropProvider';
 import { apiBasePath } from '../../../utils/constant';
 import { useRouter } from 'next/router';
 
-const ImageCrop = ({ image, type = "profilePic", setWriterImage}) => {
+const ImageCrop = ({setImageFile, image, type = "profilePic", setWriterImage}) => {
     const router = useRouter();
     // console.log({ image })
 
@@ -44,42 +44,45 @@ const ImageCrop = ({ image, type = "profilePic", setWriterImage}) => {
         if (type === "createWriter") {
             setWriterImage(avatar)
 
-        } else {
-
-            console.log(' call in profile image crop                    CROP     VROP')
-
-            const formData = new FormData();
-            formData.append('file', avatar);
-            formData.append('user_id', localStorage.getItem("uuid"));
-
-            try {
-                const response = await fetch(`${apiBasePath}/profile-pic`, {
-                    method: 'PUT',
-                    headers: {
-                        // 'x-access-token': token,
-                    },
-                    body: formData
-                });
-                // setIsProfileUpdated(true)
-
-                // console.log('------>>>> PROFILE PICCCCCCCC RESPONSE <<<<<<--------', response)
-
-                if (response.ok) {
-                    const data = await response.json();
-                    alert('প্রোফাইল সফলভাবে আপডেট হয়েছে')
-
-
-
-
-                } else {
-                    console.error('Failed to update profile:', response.statusText);
-                }
-                router.reload()
-            } catch (error) {
-                console.error('Error updating profile:', error);
-            }
-
+        } else{
+            setImageFile(avatar)
         }
+        // else {
+
+        //     console.log(' call in profile image crop                    CROP     VROP')
+
+        //     const formData = new FormData();
+        //     formData.append('file', avatar);
+        //     formData.append('user_id', localStorage.getItem("uuid"));
+
+        //     try {
+        //         const response = await fetch(`${apiBasePath}/profile-pic`, {
+        //             method: 'PUT',
+        //             headers: {
+        //                 // 'x-access-token': token,
+        //             },
+        //             body: formData
+        //         });
+        //         // setIsProfileUpdated(true)
+
+        //         // console.log('------>>>> PROFILE PICCCCCCCC RESPONSE <<<<<<--------', response)
+
+        //         if (response.ok) {
+        //             const data = await response.json();
+        //             alert('প্রোফাইল সফলভাবে আপডেট হয়েছে')
+
+
+
+
+        //         } else {
+        //             console.error('Failed to update profile:', response.statusText);
+        //         }
+        //         router.reload()
+        //     } catch (error) {
+        //         console.error('Error updating profile:', error);
+        //     }
+
+        // }
 
 
 
@@ -93,7 +96,7 @@ const ImageCrop = ({ image, type = "profilePic", setWriterImage}) => {
     };
 
     return (
-        <div className="-mt-[110px]">
+        <div className="flex justify-center items-center pb-[20px]">
             <input
                 type="file"
                 onChange={handleFileChange}
@@ -106,10 +109,12 @@ const ImageCrop = ({ image, type = "profilePic", setWriterImage}) => {
                     src={preview}
                     height={192}
                     width={192}
-                    className="object-cover rounded-full h-48 w-48"
+                    className="object-cover rounded-full h-48 w-48 border-[5px] border-white mb-[15px]"
                     alt={preview}
                 />
-                <div onClick={handleFileChange} className='button -mt-[53px]'><i className='ri-camera-line'></i></div>
+                {/* <div onClick={handleFileChange} className='button -mt-[53px]'><i className='ri-camera-line'></i></div> */}
+
+                <span onClick={handleFileChange} className='inline-block px-[50px] py-[8px] bg-[#F9A106] text-white rounded'><i class="ri-image-add-fill"></i> ছবি পরিবর্তন</span>
 
             </label>
 

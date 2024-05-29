@@ -1,24 +1,21 @@
 'use client'
+
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Circle } from 'lucide-react';
 import { apiBasePath } from "../../utils/constant";
 import { fetchData } from "../../function/api";
-// import '/public/assets/css/image-slider.css'
-// import './image-slider.css'
-// import { apiBasePath } from "@/utils/constant";
+
 
 export function ImageSlider() {
     const [data, setData] = useState([])
 
-    // api call 
     useEffect(() => {
 
         fetch(`${apiBasePath}/sliders`)
             .then(response => response.json())
             .then(data => {
                 setData(data)
-                console.log('slider data ------------>>>>', data)
             }).catch(error => console.log("Error fetching --------------- slider -------------- data"))
 
 
@@ -28,34 +25,22 @@ export function ImageSlider() {
     const router = useRouter();
 
     async function fetchDataAsync(postId) {
-        console.log('__________________(((((((((((((<<<<<<<<<<<<<<<<<------->>>>>>>>>>>>>>>>>)))))))))))))______', postId)
         try {
             const result = await fetchData(
                 `${apiBasePath}/getslider/${postId}`
             );
-            console.log("slider result          ->>>>>>>>>>>>>>>>", result.object.post);
-            //   console.log({slug, result})
-            //   setData(result.object.post);
-            //   setIsLoading(false)
+        
             router.push(`/post/${result.object.post._id}`)
-            //   setIsLoading(false)
-            //   console.log('data -------------- slider  -------------- slider >>>>>', data)
+          
         } catch (error) {
 
             console.log(error)
         } finally {
-            //   setIsLoading(false)
         }
     }
 
     function featureHandler(postId) {
-        console.log('features handler ------>>>>>>>>>>>>', postId)
-
-
-
         fetchDataAsync(postId);
-
-        // router.push(`/feature/${postId}`);
     }
 
 
@@ -80,9 +65,6 @@ export function ImageSlider() {
 
     return (
         <section aria-label="Image Slider" style={{ width: "100%", height: "100%", position: "relative" }}>
-            {/* <a href="#after-image-slider-controls" className="skip-link">
-                Skip Image Slider Controls
-            </a> */}
 
             {data.length > 0 ?
 
@@ -121,28 +103,9 @@ export function ImageSlider() {
                                 </div>
 
                             </div>
-                            // <img
-                            //     key={_id}
-                            //     src={`${apiBasePath}/${image.slice(image.indexOf("/") + 1)}`}
-                            //     alt={image}
-                            //     aria-hidden={imageIndex !== index}
-                            //     className="img-slider-img"
-                            //     style={{ translate: `${-100 * imageIndex}%` }}
-                            // />
+                         
                         ))}
                     </div>
-                    {/* <div
-                        className="absolute left-0 top-[50%] -translate-y-1/2"
-                        style={{
-                            width: "100%",
-
-                            display: "flex",
-                            overflow: "hidden",
-                        }}
-                    >
-                    
-                    </div> */}
-
 
                 </div>
                 :

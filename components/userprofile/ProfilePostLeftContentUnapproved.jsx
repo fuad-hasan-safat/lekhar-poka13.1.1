@@ -1,56 +1,48 @@
-
 "use client";
+
 import { useEffect, useState } from "react";
 import MainContentDivider from "../common/mainContentDivider";
 import { apiBasePath } from "../../utils/constant";
-import SobUserPostBody from "./SobUserPostBody";
 import Loading from "../common/loading";
 import axios from "axios";
 import SinglePostConponent from "../common/singlePostComponent";
 
+
 export default function ProfilePostLeftContentUnApproved() {
-  //   const [selectedId, setSelectedId] = useState("sob");
   const [postList, setPostList] = useState([])
   const [isLoading, setIsLoading] = useState(true);
-
-
   const [data, setData] = useState(null); // State to store fetched data
   const [error, setError] = useState(null); // State to store any errors
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const postsPerPage = 5; // Number of posts to display per page
-
   const [username, setUsername] = useState("");
   const [slug, setUserUuid] = useState("");
   const [userToken, setUserToken] = useState("");
   
 useEffect(() => {
+
   setUsername(localStorage.getItem("name") || "");
   setUserToken(localStorage.getItem("token") || "");
   setUserUuid(localStorage.getItem("uuid") || "");
-
-  console.log({username, slug, userToken})
 
 }, []);
 
 
   useEffect(() => {
 
-    console.log("user profile post---------------------->>>>>>>>>>>>><<<<<<<<<<<<<<<< SLUG ", localStorage.getItem("uuid"))
-
     const fetchPosts = async () => {
       try {
+
         const response = await axios.get(`${apiBasePath}/unverifiedpostsbyuser/${localStorage.getItem("uuid")}`); // Use Axios
-        const data = response.data; // Assuming the response structure
+        const data = response.data; 
+        console.log('UN-APPROVED POST----->>', response)
+
+
         setPostList(data.object);
-
-        console.log("user profile post---------------------->>>>>>>>>>>>><<<<<<<<<<<<<<<< data ", data.object)
-
-
-        // Calculate total pages based on posts and postsPerPage
         setTotalPages(Math.ceil(data.object.length / postsPerPage));
-      } catch (error) {
 
+      } catch (error) {
         setError(error);
       } finally {
         setIsLoading(false);
@@ -58,7 +50,6 @@ useEffect(() => {
     };
 
     fetchPosts();
-
 
   }, []);
 
@@ -71,9 +62,7 @@ useEffect(() => {
 
   const startIndex = (currentPage - 1) * postsPerPage;
   const endIndex = Math.min(startIndex + postsPerPage, postList.length); // Ensure endIndex doesn't exceed posts length
-
   const displayedPosts = postList.slice(startIndex, endIndex);
-
 
   return (
 
@@ -88,7 +77,9 @@ useEffect(() => {
           {postList.length > 0 &&
             <div className='flex'>
               <div className="lakha__main__content pt-20 text-3xl lg:mr-[100px] md:mr-[50px]">
+
                   <h1 className='lg:text-5xl md:text-3xl sm:text-xl xs:text-2xl text-black mb-[35px]'>অনুমোদনহীন  পোস্ট </h1>
+
                 {displayedPosts.length && (
                   displayedPosts.map((post, index) => (
                     <>
@@ -104,12 +95,15 @@ useEffect(() => {
 
                         />
                       </div>
+
                       {index < displayedPosts.length - 1 && <MainContentDivider />}
+
                     </>
                   ))
                   
                 )}
               </div>
+
               <hr></hr>
 
             </div> 
@@ -117,12 +111,14 @@ useEffect(() => {
 
           }
           {totalPages > 1 && <div className="py-10 space-x-4"> {/* Add a class for styling */}
+
             <button
               className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
 
               onClick={() => handlePageChange(1)} disabled={currentPage === 1}>
               প্রথম পৃষ্ঠা
             </button>
+
             <button
               className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
 
@@ -132,21 +128,24 @@ useEffect(() => {
             <span
               className="text-sm "
             >পৃষ্ঠা {currentPage} এর {totalPages}</span>
+
             <button
               className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
 
               onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
               পরবর্তী পৃষ্ঠা
             </button>
+
             <button
               className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
 
               onClick={() => handlePageChange(totalPages)} disabled={currentPage === totalPages}>
               শেষ পৃষ্ঠা
             </button>
+
           </div>
           }
-          {/* </div> */}
+        
         </>
       )}
     </div>

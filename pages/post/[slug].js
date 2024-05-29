@@ -41,7 +41,7 @@ export default function PostDetails() {
         );
         setData(result.data.object);
         setWriterImage(result.data.writer_image)
-        console.log('post page single postss ====================>>>>>>>>>>>>>>>>>>>>', result.data.writer_image)
+        console.log('post page single postss ====================>>>>>>>>>>>>>>>>>>>>', result)
         if (result.data.object.audio?.length > 0) {
           setIsAudioAvailAble(true);
         } else {
@@ -72,6 +72,15 @@ export default function PostDetails() {
   }
 
 
+  // select image
+
+  let selectedcoverImage = writerImage;
+
+  if(data?.image?.length>0){
+    selectedcoverImage = data?.image;
+  }
+
+
   return (
     router.isReady &&
 
@@ -91,7 +100,7 @@ export default function PostDetails() {
 
         </Head>
       </div>
-      <body className=" body__control">
+      <body className=" body__control" >
         <div className="all__post__content__overlay">
           <section className="banner-sec-wrap place-content-center">
             <div className="relative w-full xl:h-[190px] lg:h-[180px] md:h-[180px] sm:h-[180px] xs:h-[170px]  overflow-hidden" style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat` }}>
@@ -113,7 +122,7 @@ export default function PostDetails() {
                               title={data?.title}
                               writer={data?.writer}
                               writer_id={data?.writer_id}
-                              image={writerImage}
+                              image={selectedcoverImage}
                               catagory={data?.category}
                               url={asPath}
                             />
@@ -159,9 +168,9 @@ export default function PostDetails() {
           <MusicPlayer songs={[{
             id: data?._id,
             title: data?.title,
-            src: `${apiBasePath}/${data?.audio.slice(data.audio.indexOf("/") + 1)}`,
+            src: `${apiBasePath}/${data?.audio?.slice(data.audio.indexOf("/") + 1)}`,
             writer: data?.writer,
-            image: `${apiBasePath}/${writerImage.slice(writerImage.indexOf("/") + 1)}`,
+            image: `${apiBasePath}/${writerImage?.slice(writerImage.indexOf("/") + 1)}`,
 
           }]} />
 

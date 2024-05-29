@@ -3,22 +3,25 @@ import axios from 'axios';
 import { apiBasePath } from '../../utils/constant';
 
 const CreateDesignationModal = ({ showModal, handleClose, setIsCategoryAdded }) => {
+  
   const [title, setTitle] = useState('');
   const [submitting, setSubmitting] = useState(false);
-  //  image 
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState('');
 
-  //  image handle
+
   const handleFileChange = async ({ target: { files } }) => {
+
     const file = files && files[0];
+
     if (file) {
       setImage(file);
-      console.log({ file })
       const reader = new FileReader();
+
       reader.onloadend = () => {
         setPreview(reader.result); // Set preview image
       };
+
       reader.readAsDataURL(file);
     }
 
@@ -28,28 +31,24 @@ const CreateDesignationModal = ({ showModal, handleClose, setIsCategoryAdded }) 
     e.preventDefault();
     setSubmitting(true);
 
-    // const formData = new FormData();
-
-    // formData.append("file", image);
-    // formData.append("title", title)
-
     try {
       let data = { 
         title: title
       }
-      console.log("DESIGNATION DATA : ", data)
-      // const response = await axios.post(`${apiBasePath}/categories`, formData);
       const response = await axios.post(`${apiBasePath}/designation`,{ title });
-      setIsCategoryAdded(true)
 
-      console.log(' category response ---', response)
+      setIsCategoryAdded(true)
 
       handleClose();
 
     } catch (error) {
+
       console.error('Error creating writer:', error);
+
     } finally {
+
       setSubmitting(false);
+
     }
   };
 
@@ -62,10 +61,13 @@ const CreateDesignationModal = ({ showModal, handleClose, setIsCategoryAdded }) 
           <div className="sm:flex sm:items-start">
 
             <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+
               <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-title">
                 নতুন পদবী ক্রিয়েট করুন
               </h3>
+
               <div className="mt-2">
+
                 <form onSubmit={handleSubmit}>
                   <div className="mb-4">
                     <div>
@@ -73,6 +75,7 @@ const CreateDesignationModal = ({ showModal, handleClose, setIsCategoryAdded }) 
                       <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">
                         পদবী
                       </label>
+
                       <input
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="title"
@@ -85,42 +88,10 @@ const CreateDesignationModal = ({ showModal, handleClose, setIsCategoryAdded }) 
 
                     </div>
 
-
-
-                    {/* <div className='text-black'>
-                      <div className='mb-[15px]'>
-                        <h >ছবি আপলোড করুন (যদি থাকে)</h>
-                      </div> */}
-
-                      {/* <div className='flex border border-solid border-gray-200 rounded-md h-[215px] items-center place-content-center text-center justify-center' >
-                        <input
-                          type="file"
-                          onChange={handleFileChange}
-                          className="hidden"
-                          id="categoryBaner"
-                          accept="image/*"
-                        />
-
-                        <label htmlFor='categoryBaner' className=" cursor-pointer" >
-                          {preview.length > 0 &&
-                            <img
-                              src={preview}
-                              height={100}
-                              width={100}
-                              className="object-cover "
-                              alt={preview}
-                            />
-                          }
-                          <div className=" mt-[15px]  file-btn w-[70px] text-[22px] "
-                           onClick={handleFileChange}
-                          > <i className='ri-camera-line'></i></div>
-
-                        </label>
-                      </div>
-
-                    </div> */}
                   </div>
+
                   <div className="flex items-center justify-end">
+
                     <button
                       type="button"
                       className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
@@ -129,6 +100,7 @@ const CreateDesignationModal = ({ showModal, handleClose, setIsCategoryAdded }) 
                     >
                       বাতিল
                     </button>
+
                     <button
                       type="submit"
                       className={`${submitting ? 'bg-[#F9A106] cursor-not-allowed' : 'bg-[#F9A106] hover:bg-[#f98806]'} text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
@@ -136,8 +108,11 @@ const CreateDesignationModal = ({ showModal, handleClose, setIsCategoryAdded }) 
                     >
                       {submitting ? 'সাবমিট হচ্ছে...' : 'সাবমিট'}
                     </button>
+
                   </div>
+
                 </form>
+
               </div>
             </div>
           </div>

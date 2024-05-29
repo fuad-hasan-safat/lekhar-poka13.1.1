@@ -6,16 +6,20 @@ import Link from 'next/link';
 
 
 const SobLekha = ({ sobClass, closeMenu, visibleItem }) => {
+
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const [soblekhaSelect, setSoblekhaSelect] = useState('সব লেখা');
 
   useEffect(() => {
     sobClass = 'text-[#F9A106] font-semibold underline';
+
     const handleClickOutside = (event) => {
+
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsOpen(false);
       }
+
     };
 
     document.addEventListener('click', handleClickOutside);
@@ -24,6 +28,8 @@ const SobLekha = ({ sobClass, closeMenu, visibleItem }) => {
       document.removeEventListener('click', handleClickOutside);
       setSoblekhaSelect('সব লেখা');
     };
+
+
   }, []);
 
 
@@ -57,6 +63,7 @@ const SobLekha = ({ sobClass, closeMenu, visibleItem }) => {
         tabIndex={-1}
         >
           <div className="text-black" role="none">
+           
             <Link
               href="/kobita"
               className="block px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
@@ -67,6 +74,7 @@ const SobLekha = ({ sobClass, closeMenu, visibleItem }) => {
             >
               কবিতা
             </Link>
+           
             <Link
               href="/golpo"
               className="block px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
@@ -77,6 +85,7 @@ const SobLekha = ({ sobClass, closeMenu, visibleItem }) => {
             >
               গল্প
             </Link>
+           
             <Link
               href="/onugolpo"
               className="block px-4 py-2 text-sm hover:bg-white  hover:text-gray-700"
@@ -87,6 +96,7 @@ const SobLekha = ({ sobClass, closeMenu, visibleItem }) => {
             >
               অনুগল্প
             </Link>
+            
             <Link
               href="/probondho"
               className="block px-4 py-2 text-sm  hover:bg-white  hover:text-gray-700"
@@ -98,6 +108,7 @@ const SobLekha = ({ sobClass, closeMenu, visibleItem }) => {
             >
               প্রবন্ধ
             </Link>
+           
             <Link
               href="/jiboni"
               className="block px-4 py-2 text-sm hover:bg-white  hover:text-gray-700"
@@ -109,6 +120,7 @@ const SobLekha = ({ sobClass, closeMenu, visibleItem }) => {
             >
               জীবনী
             </Link>
+           
             <Link
               href="/uponnas"
               className="block px-4 py-2 text-sm hover:bg-white  hover:text-gray-700"
@@ -120,6 +132,7 @@ const SobLekha = ({ sobClass, closeMenu, visibleItem }) => {
             >
               উপন্যাস
             </Link>
+            
           </div>
         </div>
       )}

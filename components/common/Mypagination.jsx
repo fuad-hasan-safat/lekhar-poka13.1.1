@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Pagination } from "react-paginate";
 
-  const MyPagination = ({ postsPerPage, totalPosts, handlePageChange }) => {
+const MyPagination = ({ postsPerPage, totalPosts, handlePageChange }) => {
+
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    setCurrentPage(1); // Reset current page on data change
+    setCurrentPage(1); 
   }, [totalPosts]);
 
   const handlePaginationClick = (data) => {
@@ -16,14 +17,16 @@ import { Pagination } from "react-paginate";
   const pageCount = Math.ceil(totalPosts / postsPerPage);
 
   return (
+
     <Pagination
       pageCount={pageCount}
-      initialPage={currentPage - 1} // Selected index starts from 0
+      initialPage={currentPage - 1} 
       onPageChange={handlePaginationClick}
-      className="pagination justify-center mt-4" // Add your desired styles
-      forcePage={currentPage - 1} // Maintain current page on re-render
-      renderOnZeroPageCount={null} // Hide pagination if no pages
+      className="pagination justify-center mt-4" 
+      forcePage={currentPage - 1} 
+      renderOnZeroPageCount={null} 
     />
+    
   );
 };
 

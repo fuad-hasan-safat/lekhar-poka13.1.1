@@ -1,12 +1,12 @@
 'use client'
+
 import React, { useState, useEffect } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component';
-
-import SobGolpoBody from '../golpo/sobGolpoBody'
 import { apiBasePath } from '../../utils/constant';
 import MainContentDivider from '../common/mainContentDivider';
 import { countWords } from '../../function/api';
 import SinglePostConponent from '../common/singlePostComponent';
+
 
 export default function UponnasList() {
 
@@ -20,14 +20,18 @@ export default function UponnasList() {
 
     useEffect(() => {
         const fetchTotalPage = async () => {
+
             try {
+
                 const response = await fetch(`${apiBasePath}/categorypostpages/উপন্যাস`);
                 const data = await response.json();
+
                 setTotalPages(data?.length);
+
                 if (data?.length > 1) {
                     setisHasMore(true)
                 }
-                console.log('total page ----->>>>', data.length)
+
             } catch (error) {
                 setError(error);
             } finally {
@@ -41,13 +45,14 @@ export default function UponnasList() {
 
 
     const fetchPosts = async () => {
-        console.log('fetch post called for page -----', currentPage)
+
         try {
+
             const response = await fetch(`${apiBasePath}/categoryposts/উপন্যাস/${currentPage}`);
             const data = await response.json();
+
             setPostList(postList.concat(data));
 
-            console.log('main post by per page inside loader-------->>', data)
         } catch (error) {
             setError(error);
         } finally {
@@ -89,11 +94,7 @@ export default function UponnasList() {
                                                 writer={post.writer}
                                                 writer_id={post.writer_id}
                                                 image={post?.image}
-
                                                 content={countWords(post.content, 70)}
-
-                                            // content={post.content.split(/\s+/).slice(0, 200).join(" ")}
-
                                             />
                                         </div>
                                         {index < postList?.length - 1 && <MainContentDivider />}
@@ -106,6 +107,7 @@ export default function UponnasList() {
                     <div className="pt-10 text-black"> এই মুহূর্তে কোনো লেখা নেই </div>
 
                 }
+
                 <InfiniteScroll
                     dataLength={postList?.length} //This is important field to render the next data
                     next={loadnextPage}
@@ -114,6 +116,7 @@ export default function UponnasList() {
                     scrollThreshold={0.5}
                 >
                 </InfiniteScroll>
+                
             </div>
         </>
     )

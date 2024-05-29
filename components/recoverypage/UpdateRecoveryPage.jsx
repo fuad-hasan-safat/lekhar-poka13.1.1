@@ -1,15 +1,12 @@
 "use client"
+
 import LoginSignInOtpLeftPartDesign from "../common/login-signup-otp-left-design";
-// import { arial } from "../fonts/arial";
 import SignInOption from "../signInOption/SignInOption";
-import DropDown from "../common/dropDown";
-import SigninForm from "../common/signinfornAfterOtp";
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import SigninFormBeforeOTP from "../common/signinformBeforeOTP";
 import OtpPage from "../otp/otppage";
-import SigninFormAterOTP from "../common/signinfornAfterOtp";
 import PassRecovertFormAterOTP from "../common/recoveryFormAfterOtp";
+
 
 const PassRecoveryPageBeforeOTP = () => {
 
@@ -22,12 +19,8 @@ const PassRecoveryPageBeforeOTP = () => {
   const [email, setEmail] = useState('')
   const [isOtpSucess, SetIsOtpSucess] = useState(false)
   const [isOtpVarified, setIsOtpVarified] = useState(false)
-
   // save get otp status 
   const [otpStatus, setOtpStatus] = useState('')
-
-
-
   const [state, setState] = useState({
     fullName: '',
     mobileNumber: '',
@@ -37,9 +30,8 @@ const PassRecoveryPageBeforeOTP = () => {
     phoneError: null,
     isDisabled: true, // Button initially disabled
 });
+const [uuid, setUuid] = useState("");
 
-
-  const [uuid, setUuid] = useState("");
   useEffect(() => {
     setUuid(localStorage.getItem("uuid") || "");
   }, [uuid]);

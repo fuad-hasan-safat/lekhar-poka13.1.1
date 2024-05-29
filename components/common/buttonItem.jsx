@@ -1,7 +1,6 @@
 "use client";
-import react, { useEffect } from "react";
+
 import { apiBasePath } from "../../utils/constant";
-// import { useEffect, useState } from "react";
 
 const ButtonItem = ({
   id,
@@ -24,10 +23,10 @@ const ButtonItem = ({
 }) => {
 
   function handleButton(title) {
+
     setSelectedId(id)
     setCurrentPage(1)
     setSelectedCategory(title)
-
 
       fetch(`${apiBasePath}/categorypostpages/${title}`)
         .then(response => response.json())
@@ -38,7 +37,6 @@ const ButtonItem = ({
           }else{
             setisHasMore(false)
           }
-
         })
         .catch(error => console.error("Error fetching data:", error));
 
@@ -56,6 +54,7 @@ const ButtonItem = ({
         >
           {title}
         </button>
+        
       </div>
     </>
   );

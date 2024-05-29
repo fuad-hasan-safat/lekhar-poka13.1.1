@@ -281,8 +281,8 @@ export default function UserInformationsAndBio({ username, setUsername }) {
                                             />
                                         </div> */}
                                         <select
-                                            id="sex"
-                                            name="sex"
+                                            id="sex1"
+                                            name="sex1"
                                             className='bg-transparent w-[90%]'
                                             required
                                             value={gender}

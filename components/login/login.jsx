@@ -2,9 +2,7 @@
 import React, { useState, useEffect } from "react";
 import LoginReg from '../common/loginform'
 import LoginSignInOtpLeftPartDesign from '../common/login-signup-otp-left-design'
-// import { arial } from "../fonts/arial";
 import SignInOption from "../signInOption/SignInOption";
-import DropDown from "../common/dropDown";
 
 const LoginPage = () => {
 
@@ -13,11 +11,8 @@ const LoginPage = () => {
   const [status, setStatus] = useState("");
   const [username, setUsername] = useState("");
   const [userUuid, setUserUuid] = useState("");
-  // google login state start
   const [profile, setProfile] = useState([]);
   const [email, setEmail] = useState('')
-
-
 
   useEffect(() => {
     setStatus(localStorage.getItem("status") || "");
@@ -35,20 +30,22 @@ const LoginPage = () => {
           <div className="row">
             <div className="col-md-12">
               <div className="login__form__wrap flex flex-row bg-[#FCF7E8] shadow-md">
-                {/* left part */}
+              
                 <div className="login__form__left">
                   <LoginSignInOtpLeftPartDesign />
                 </div>
-                {/* right part */}
+               
                 <div className="login__form__right relative bg-white rounded-l-[46px] text-black grid place-items-center ">
 
                   <div className="w-full">
                     {
                       userUuid?.length > 0 ?
                       <>
+
                       <div>
                         <p className="text-black text-3xl">আপনি ইতিমধ্যেই লগইন করেছেন.<a href="/"> <span className="text-orange-500 cursor-pointer">প্রচ্ছদ পেজে যান </span></a></p>
                       </div>
+                      
                       </>
                       :
                       <>

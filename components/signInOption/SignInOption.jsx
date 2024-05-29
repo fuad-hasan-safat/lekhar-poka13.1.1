@@ -36,7 +36,7 @@ export default function SignInOption({
 
 
     function fblogin() {
-
+        //  need to implement
     }
 
     async function sendDataToBackend(id, email, name, picture, access_token) {
@@ -57,14 +57,15 @@ export default function SignInOption({
                 }
             );
 
-            console.log('google log in backend res ----', response)
 
             if (response.data.status === 'success') {
+
                 const data = await response.data;
-                console.log(data);
+
                 setStatus(data.status);
                 setUserUuid(data.uuid);
                 setUser(data);
+
                 localStorage.setItem("status", data.status);
                 localStorage.setItem("name", data.name);
                 localStorage.setItem("uuid", data.uuid);
@@ -74,7 +75,6 @@ export default function SignInOption({
                 localStorage.setItem("phone", data.phone);
 
                 router.reload();
-
 
             }
 
@@ -93,6 +93,7 @@ export default function SignInOption({
                         }
                     })
                     .then((res) => {
+
                         setProfile(res.data);
                         setUserUuid(res.data.id)
                         setUsername(res.data.name)
@@ -107,7 +108,7 @@ export default function SignInOption({
                         localStorage.setItem("usertype", 'user');
                         localStorage.setItem("phone", '');
                         localStorage.setItem("email", res.data.email);
-                        console.log('google response data ------>>>>', res.data)
+
                         sendDataToBackend(res.data.id, res.data.email, res.data.name, res.data.picture, user.access_token)
 
                         router.push('/')
@@ -119,12 +120,6 @@ export default function SignInOption({
         [user]
     );
 
-
-
-    // const logOut = () => {
-    //     googleLogout();
-    //     setProfile(null);
-    // };
 
 
     return (
@@ -156,7 +151,7 @@ export default function SignInOption({
                         />
 
                     </button>
-                   
+
 
                 </div>
             }

@@ -1,35 +1,51 @@
 'use client'
 import { useRouter } from 'next/router';
 import React, { useState, useRef, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+
 
 const ProfileDropDown = ({ options, selected, onSelect, lebel, sobClass, visibleItem }) => {
+
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isLogOut, setisLogOut] = useState(false)
   const dropdownRef1 = useRef(null); // Ref to hold the dropdown element
 
+
+  useEffect(() => {
+    if (isOpen) {
+      const listener = document.addEventListener('click', handleClickOutside);
+      return () => document.removeEventListener('click', listener); // Cleanup
+    }
+  }, [isOpen]);
+
   const handleClickOutside = (event) => {
+
     if (isOpen && dropdownRef1.current && !dropdownRef1.current.contains(event.target)) {
       setIsOpen(false);
     }
+
   };
 
   const toggleDropdown = (event) => {
+
     setIsOpen(!isOpen);
     event.stopPropagation(); // Prevent bubbling
+
   };
 
   const handleSelect = (option) => {
+
     onSelect && onSelect(option);  // Call optional onSelect prop
     setIsOpen(false);
 
     if (option.action) {
+
       try {
-        const confirmLogout =  window.confirm('Do you really want to log out?');
+
+        const confirmLogout = window.confirm('Do you really want to log out?');
+
         if (confirmLogout) {
-          // alert('Logging out...'); 
+
           localStorage.removeItem("status");
           localStorage.removeItem("name");
           localStorage.removeItem("uuid");
@@ -37,31 +53,27 @@ const ProfileDropDown = ({ options, selected, onSelect, lebel, sobClass, visible
           localStorage.removeItem("token");
           localStorage.removeItem("usertype");
           localStorage.removeItem("email");
-          
-            setisLogOut(true)
+
+          setisLogOut(true)
 
           router.push('/account/login');
+
         }
       } catch (error) {
         console.error('Error displaying confirmation dialog:', error);
       }
     } else {
-      router.push(option.path); 
+      router.push(option.path);
     }
+
   };
 
 
 
-  // Add event listener on document click only when isOpen is true
-  useEffect(() => {
-    if (isOpen) {
-      const listener = document.addEventListener('click', handleClickOutside);
-      return () => document.removeEventListener('click', listener); // Cleanup
-    }
-  }, [isOpen]); // Only add/remove listener when isOpen changes
 
   return (
     <div className="relative inline-block lg:text-left md:text-left sm:text-center">
+     
       <button
         type="button"
         onClick={toggleDropdown}
@@ -69,8 +81,9 @@ const ProfileDropDown = ({ options, selected, onSelect, lebel, sobClass, visible
         aria-haspopup="true"
       >
         {/* {lebel} */}
-        <img src='/images/user/deafultProfile.png' alt='profile pic' className='h-[35px] w-[35px] rounded-full'/>
+        <img src='/images/user/deafultProfile.png' alt='profile pic' className='h-[35px] w-[35px] rounded-full' />
         {/* <FontAwesomeIcon icon={faAngleDown} className="ml-2 pt-1 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-4 sm:w-4 xs:h-4 xs:w-4 focus:text-[#F9A106]" /> */}
+      
       </button>
       {isOpen && (
         <ul

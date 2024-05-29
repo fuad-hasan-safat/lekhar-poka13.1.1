@@ -1,28 +1,29 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import LekhokDetails from "../../common/lekhok";
 import SidebarPostDivider from '../../common/sidebarpostdivider'
 import { apiBasePath } from "../../../utils/constant";
 import { useRouter } from "next/navigation";
 
+
 const Lekhok = () => {
+
   const router = useRouter()
 
   const [lekhokList, setLekhokList] = useState([]);
-  const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1); // Track current page
   const [writersPerPage, setWritersPerPage] = useState(3); // Number of writers per page
 
   useEffect(() => {
+
     fetch(`${apiBasePath}/writers`)
       .then((response) => response.json())
       .then((data) => {
         setLekhokList(data);
-        console.log(" user id-----------", data.user_id);
-        // console.log("-----------", setLekhokList);
-        // console.log('lekhok ----- data=================>>>>>', data)
       })
       .catch((error) => console.error("Error fetching data:", error));
+      
   }, []);
 
 

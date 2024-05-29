@@ -3,76 +3,74 @@ import axios from 'axios';
 import { apiBasePath } from '../../utils/constant';
 
 const CreateWriterBioModal = ({ showModal, handleClose, setIsCategoryAdded }) => {
+
   const [title, setTitle] = useState('');
   const [submitting, setSubmitting] = useState(false);
-  //  image 
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState('');
-
-  //  select writer
   const [writerId, setWriterId] = useState('');
   const [designationFromApi, setDesignationFromApi] = useState([])
 
 
   useEffect(()=>{
+
     fetch(`${apiBasePath}/writers`)
     .then((response) => response.json())
     .then((data) => {
         setDesignationFromApi(data);
-        console.log('DESIGNATION 000000000000000000 )', data)
     })
     .catch((error) => console.error("Error fetching data:", error));
 
   },[])
 
-  //  image handle
   const handleFileChange = async ({ target: { files } }) => {
+
     const file = files && files[0];
+    
     if (file) {
+
       setImage(file);
-      console.log({ file })
+
       const reader = new FileReader();
+
       reader.onloadend = () => {
-        setPreview(reader.result); // Set preview image
+        setPreview(reader.result); 
       };
+
       reader.readAsDataURL(file);
     }
 
   };
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
+
     setSubmitting(true);
 
-    // const formData = new FormData();
-
-    // formData.append("file", image);
-    // formData.append("title", title)
-
     try {
-      let data = {
-        title: title
-      }
-  
-      // const response = await axios.post(`${apiBasePath}/categories`, formData);
-      const response = await axios.post(`${apiBasePath}/addwriterbio`, { writer_id: writerId,
-        content:title,
 
+      const response = await axios.post(`${apiBasePath}/addwriterbio`, 
+      { writer_id: writerId,
+        content:title,
        });
+
       setIsCategoryAdded(true)
 
       if(response.data.status === "failed"){
         alert(response.data.msg)
       }
 
-      console.log(' BIOOOOOO response ---', response)
-
       handleClose();
 
     } catch (error) {
+
       console.error('Error creating writer:', error);
+
     } finally {
+
       setSubmitting(false);
+
     }
   };
 
@@ -90,7 +88,9 @@ const CreateWriterBioModal = ({ showModal, handleClose, setIsCategoryAdded }) =>
               </h3>
               <div className="mt-2">
                 <form onSubmit={handleSubmit}>
+
                   <div className="mb-4">
+
                     <div>
 
                       <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">
@@ -126,11 +126,9 @@ const CreateWriterBioModal = ({ showModal, handleClose, setIsCategoryAdded }) =>
 
                     </div>
 
-
-
-
                   </div>
                   <div className="flex items-center justify-end">
+
                     <button
                       type="button"
                       className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
@@ -139,6 +137,7 @@ const CreateWriterBioModal = ({ showModal, handleClose, setIsCategoryAdded }) =>
                     >
                       বাতিল
                     </button>
+
                     <button
                       type="submit"
                       className={`${submitting ? 'bg-[#F9A106] cursor-not-allowed' : 'bg-[#F9A106] hover:bg-[#f98806]'} text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
@@ -146,7 +145,9 @@ const CreateWriterBioModal = ({ showModal, handleClose, setIsCategoryAdded }) =>
                     >
                       {submitting ? 'সাবমিট হচ্ছে...' : 'সাবমিট'}
                     </button>
+
                   </div>
+                  
                 </form>
               </div>
             </div>

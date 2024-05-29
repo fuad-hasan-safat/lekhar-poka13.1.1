@@ -92,7 +92,12 @@ export default function WriterProfileBanner({
 
     if (isSelfWriter) {
         image = profileInfo?.image;
-        rendredBio = bio;
+        if(bio?.length>0){
+            rendredBio = bio;
+
+        }else{
+            rendredBio = writerBio?.content;
+        }
     } else {
         image = writerInfo?.image;
         rendredBio = writerBio?.content

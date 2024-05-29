@@ -36,28 +36,24 @@ useEffect(() => {
 
   useEffect(() => {
 
-    console.log("user profile post---------------------->>>>>>>>>>>>><<<<<<<<<<<<<<<< SLUG ", localStorage.getItem("uuid"))
-
     const fetchPosts = async () => {
       try {
+
         const response = await axios.get(`${apiBasePath}/postsbyuser/${localStorage.getItem("uuid")}`); // Use Axios
         const data = response.data; // Assuming the response structure
+        console.log('APPROVED POST----->>', response)
         setPostList(data.object);
-
-        console.log("user profile post---------------------->>>>>>>>>>>>><<<<<<<<<<<<<<<< data ", data.object)
-
-
-        // Calculate total pages based on posts and postsPerPage
         setTotalPages(Math.ceil(data.object.length / postsPerPage));
+
       } catch (error) {
         setError(error);
       } finally {
         setIsLoading(false);
       }
+
     };
 
     fetchPosts();
-
 
   }, []);
 
@@ -70,7 +66,6 @@ useEffect(() => {
 
   const startIndex = (currentPage - 1) * postsPerPage;
   const endIndex = Math.min(startIndex + postsPerPage, postList.length); // Ensure endIndex doesn't exceed posts length
-
   const displayedPosts = postList.slice(startIndex, endIndex);
 
 
@@ -143,7 +138,7 @@ useEffect(() => {
             </button>
           </div>
           }
-          {/* </div> */}
+        
         </>
       )}
     </div>

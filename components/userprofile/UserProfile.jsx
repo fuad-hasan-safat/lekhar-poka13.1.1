@@ -1,26 +1,9 @@
 "use client";
 import Loading from '../common/loading'
-import { useRouter } from "next/navigation";
-import { Suspense, useEffect, useState, useRef, useMemo } from "react";
-
-import {
-  BtnBold,
-  BtnItalic,
-  Editor,
-  EditorProvider,
-  Toolbar
-} from 'react-simple-wysiwyg';
-
-
-
-import Select from "react-select";
-
-import UserDetails from '../user/userdetails'
+import { useEffect, useState } from "react";
 import UserProfileBanner from '../userprofile/userProfileBanner'
 import { apiBasePath } from "../../utils/constant";
 import Link from "next/link";
-
-
 import UserInformationsAndBio from '../user/userInformationsAndBio';
 import FollowerList from './followerList';
 import FollowingList from './followingList';
@@ -28,13 +11,7 @@ import FollowingList from './followingList';
 export default function UserProfile({ slug }) {
 
   const [writer, setWriter] = useState('');
-
-
-  // --------------------------------------------
-
-
   const [isLoading, setIsLoading] = useState(true);
-
   const [status, setStatus] = useState("");
   const [username, setUsername] = useState("");
   const [userUuid, setUserUuid] = useState("");
@@ -44,11 +21,11 @@ export default function UserProfile({ slug }) {
   //  category and writer fetch
   const [category, setCategory] = useState([]);
   const [writers, setWriters] = useState([]);
+
   // -------
   const [isWriterAdded, setIsWriterAdded] = useState(false)
   const [isCategoryAdded, setIsCategoryAdded] = useState(false)
   const [isProfileUpdated, setIsProfileUpdated] = useState(false)
-
 
   // profile information fetch
   const [designation, setDesignation] = useState('');
@@ -65,13 +42,12 @@ export default function UserProfile({ slug }) {
   const [profileUserName, setProfileuserName] = useState('')
   const [bio, setBio] = useState('')
   const [bioId, setBioId] = useState('')
-
   const [following, setFollowing] = useState(0);
-  //
   const [canPostStatus, setCanPostStatus] = useState(false)
 
   //  follow/ follower and profile controller [profile/ following/ follower]
   const [profileController, setProfileController] = useState("profile")
+
   const handleClose = () => setProfileController('profile');
 
   useEffect(() => {
@@ -80,22 +56,18 @@ export default function UserProfile({ slug }) {
     setUserUuid(localStorage.getItem("uuid") || "");
     setUserPhone(localStorage.getItem("phone") || "");
     setWriter(localStorage.getItem("name"));
-
   }, []);
 
   useEffect(() => {
     setStatus(localStorage.getItem("status") || "");
   }, [status]);
 
-
-
-
   useEffect(() => {
 
     fetch(`${apiBasePath}/getprofile/${slug}`)
       .then((response) => response.json())
       .then((data) => {
-        // console.log('pofile details on user profile--------------->>>>>>>', data);
+         console.log('pofile details on user profile--------------->>>>>>>', data);
         setDesignation(data.object.profile.designation || '')
         setProfileStatus(data.object.profile.profileStatus || '')
         setGender(data.object.profile.gender || '')
@@ -109,10 +81,7 @@ export default function UserProfile({ slug }) {
         setFollowing(data.object.stats.following)
         setApprovedPostNum(data.object.approved_post)
         setunApprovedPostNum(data.object.unapproved_post)
-
-
-        console.log('pofile get PROFILE post )()()() details on user profile--------------->>>>>>>', data.object);
-
+        // console.log('pofile get PROFILE post )()()() details on user profile--------------->>>>>>>', data.object);
 
         if (!data.object.stats) {
           setCanPostStatus(false)
@@ -124,12 +93,14 @@ export default function UserProfile({ slug }) {
       })
       .catch((error) => console.error("Error fetching data:", error));
 
+
     fetch(`${apiBasePath}/writers`)
       .then((response) => response.json())
       .then((data) => {
         setWriters(data);
       })
       .catch((error) => console.error("Error fetching data:", error));
+
 
     fetch(`${apiBasePath}/categories`)
       .then((response) => response.json())
@@ -150,8 +121,6 @@ export default function UserProfile({ slug }) {
     };
 
     fetchUserBioData();
-
-
     setIsCategoryAdded(false)
     setIsWriterAdded(false)
     setIsProfileUpdated(false)
@@ -162,16 +131,21 @@ export default function UserProfile({ slug }) {
   // Drop down category
   let Categoryoptions = [];
   let writersOptions = [];
+
   for (let i = 0; i < category.length; i++) {
+
     let data = { value: category[i]._id, label: category[i].title };
-    // console.log('---data -----------'. data)
+
     Categoryoptions.push(data);
+
   }
 
   for (let i = 0; i < writers.length; i++) {
+
     let data = { value: writers[i]._id, label: writers[i].name };
-    // console.log('---data -----------'. data)
+
     writersOptions.push(data);
+
   }
 
 
@@ -203,9 +177,11 @@ export default function UserProfile({ slug }) {
                 setProfileController={setProfileController}
               />
             </div>
+
             <div className='container'>
               <hr className='my-[40px]'></hr>
             </div>
+
             <section className="all__page__main__content">
               <div className="container">
                 <div className="row">
@@ -214,7 +190,7 @@ export default function UserProfile({ slug }) {
                     <div className="w-full">
 
                       <div>
-                        {true &&
+                        {/* {true &&
                           <UserInformationsAndBio
                             username={username}
                             setUsername={setUsername}
@@ -227,7 +203,7 @@ export default function UserProfile({ slug }) {
                             setIsProfileUpdated={setIsProfileUpdated}
                           />
 
-                        }
+                        } */}
                         {
                           profileController === 'follower' &&
                           <FollowerList showModal={'follower'} handleClose={handleClose} />
@@ -251,9 +227,7 @@ export default function UserProfile({ slug }) {
 
 
                     </div>
-                    {/* <div className="lg:w-[30%] flex flex-col ">
-                      <Sidebar />
-                    </div> */}
+            
                   </div>
                 </div>
               </div>

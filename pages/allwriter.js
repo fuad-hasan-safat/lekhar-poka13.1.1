@@ -7,11 +7,6 @@ import Head from 'next/head'
 export default function AllWriterPage() {
     return (
         <>
-            {/* <div>
-                <head>
-                    <title>লেখক লিস্ট</title>
-                </head>
-            </div> */}
             <div>
                 <Head>
                     <title>লেখক লিস্ট</title>

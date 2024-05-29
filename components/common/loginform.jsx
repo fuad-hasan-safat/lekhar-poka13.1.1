@@ -1,16 +1,14 @@
 "use client"
+
 import { apiBasePath } from "../../utils/constant";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Loading from "./loading";
 
-// type logreg = {
-//   logreg: string;
-//   btntext: string;
-// };
 
 export default function LoginForm({ logreg, btntext }) {
+
   const router = useRouter();
 
   const [number, setnumber] = useState("");
@@ -26,28 +24,42 @@ export default function LoginForm({ logreg, btntext }) {
   const [userUuid, setUserUuid] = useState("");
   const [error, setError] = useState(null);
   const [numberPrefix, setNumberPrefix] = useState('88');
-
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+
+    setStatus(localStorage.getItem("status") || "");
+
+  }, [status]);
+
+  useEffect(() => {
+
+    setUsername(localStorage.getItem('name') || '');
+    setUserUuid(localStorage.getItem('uuid') || '')
+
+  }, []);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
   const handleNumberhange = (e) => {
-    // Allow only numbers and backspace key
+
     const newValue = e.target.value.replace(/[^0-9\b]/g, "");
-    // Enforce maximum length of 11 digits
+
     if (newValue.length > 11) {
       setError("Phone number cannot exceed 11 digits.");
       return;
     }
-    // Enforce starting with "01"
+
     if (newValue.length > 1 && newValue.slice(0, 2) !== "01") {
       setError("Phone number must start with 01.");
       return;
     }
+
     setnumber(newValue);
-    setError(null); // Clear error if valid input
+    setError(null);
+
   };
 
   const handlePasswordChange = (e) => {
@@ -56,8 +68,6 @@ export default function LoginForm({ logreg, btntext }) {
 
   async function submitLogin() {
 
-    console.log("Calling submitLogin---------------->>>>>>");
-    console.log(`${numberPrefix}${number}`);
     try {
       const response = await axios.post(
         `${apiBasePath}/login`,
@@ -72,15 +82,15 @@ export default function LoginForm({ logreg, btntext }) {
         }
       );
 
-      console.log('Log In page response--------', response);
 
       if (response.data.status === 'success') {
+
         const data = await response.data;
 
-        console.log(data)
         setStatus(data.status);
         setUserUuid(data.uuid);
         setUser(data);
+
         localStorage.setItem("status", data.status);
         localStorage.setItem("name", data.name);
         localStorage.setItem("uuid", data.uuid);
@@ -88,44 +98,34 @@ export default function LoginForm({ logreg, btntext }) {
         localStorage.setItem("token", data.access_token);
         localStorage.setItem("usertype", data.usertype);
         localStorage.setItem("phone", data.phone);
-        //localStorage.setItem('user', data);
-
-
-        console.log('user type,_____', data.usertype)
 
         setnumber('')
         setPassword('')
+
         router.push(`/`)
+
       } else {
-        //console.log("error res", response);
         alert('সঠিক নাম্বার দিন');
       }
     } catch (error) {
-      //console.log("inside catch", error);
       alert('সঠিক পাসওয়ার্ড দিন');
     }
+
   }
-
-
-  useEffect(() => {
-    setStatus(localStorage.getItem("status") || "");
-
-  }, [status]);
-
-  useEffect(() => {
-    setUsername(localStorage.getItem('name') || '');
-    setUserUuid(localStorage.getItem('uuid') || '')
-  }, []);
 
 
   return (
     <>
       <div className="login__form__dsc">
+
         <div className="text-[48px] mb-5  font-semibold text-yellow-500">
           {logreg}
         </div>
+
         <div className="login__form__fleds w-full ">
+
           <div className="mb-4 ">
+
             <input
               onChange={handleNumberhange}
               value={number}
@@ -136,8 +136,11 @@ export default function LoginForm({ logreg, btntext }) {
               required
             />
             {error && <p className="error text-red-500">{error}</p>}
+
           </div>
+
           <div className="relative w-full">
+
             <input
               onChange={handlePasswordChange}
               value={password}
@@ -151,15 +154,18 @@ export default function LoginForm({ logreg, btntext }) {
             <button className="absolute right-[20px]  pt-[18px]" type="button" onClick={togglePasswordVisibility}>
               {showPassword ? <i class="ri-eye-off-line"></i> : <i class="ri-eye-line"></i>}
             </button>
+
             <a
               className="pt-[12px] float-right mb-[15px] inline-block align-baseline font-bold text-base text-gray-600 hover:text-black-800"
               href="/account/recoverpassword"
             >
               পাসওয়ার্ড ভুলে গেছেন?
             </a>
+
           </div>
 
           <div className="w-full table m-auto">
+
             <button
               type="button"
               onClick={submitLogin}
@@ -169,8 +175,6 @@ export default function LoginForm({ logreg, btntext }) {
             </button>
 
           </div>
-
-        
 
         </div>
       </div>

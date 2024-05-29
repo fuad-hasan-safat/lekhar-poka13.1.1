@@ -2,42 +2,41 @@
 import { useEffect, useState } from "react";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import MainContentDivider from "../common/mainContentDivider";
-import SobKobitaBody from "./sobProbondhoBody";
-import axios from "axios";
 import Loading from "../common/loading";
 import { apiBasePath } from "../../utils/constant";
-import SobProbondhoBody from "./sobProbondhoBody";
 import { countWords } from "../../function/api";
 import SinglePostConponent from "../common/singlePostComponent";
 
+
 export default function SobProbondhoLeftContent() {
 
-  //   const [selectedId, setSelectedId] = useState("sob");
   const [postList, setPostList] = useState([])
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null); // State to store any errors
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  const postsPerPage = 5; // Number of posts to display per page
   const [isHasMore, setisHasMore] = useState(false);
 
 
   useEffect(() => {
 
-
     const fetchTotalPage = async () => {
+
       try {
+
         const response = await fetch(`${apiBasePath}/categorypostpages/প্রবন্ধ`);
         const data = await response.json();
+
         setTotalPages(data?.length);
+
         if (data?.length > 1) {
           setisHasMore(true)
         }
-        console.log('total page ----->>>>', data.length)
+
       } catch (error) {
         setError(error);
       } finally {
-        // setIsLoading(false)
+        setIsLoading(false)
       }
     };
 
@@ -47,18 +46,20 @@ export default function SobProbondhoLeftContent() {
 
 
   const fetchPosts = async () => {
-    console.log('fetch post called for page -----', currentPage)
+
     try {
+
       const response = await fetch(`${apiBasePath}/categoryposts/প্রবন্ধ/${currentPage}`);
       const data = await response.json();
+
       setPostList(postList.concat(data));
 
-      console.log('main post by per page inside loader-------->>', data)
     } catch (error) {
       setError(error);
     } finally {
       setIsLoading(false)
     }
+
   };
 
   useEffect(() => {
@@ -68,7 +69,6 @@ export default function SobProbondhoLeftContent() {
 
   const loadnextPage = () => {
 
-    console.log({ currentPage, totalPages })
     setCurrentPage(currentPage + 1)
 
     if (currentPage <= totalPages) {
@@ -76,6 +76,7 @@ export default function SobProbondhoLeftContent() {
     } else {
       setisHasMore(false)
     }
+
   }
 
 
@@ -97,14 +98,11 @@ export default function SobProbondhoLeftContent() {
                       <>
                         <div key={index}>
                           <SinglePostConponent
-                            id={post._id} // Assuming '_id' is the unique identifier
+                            id={post._id} 
                             title={post.title}
                             writer={post.writer}
                             writer_id={post.writer_id}
                             content={countWords(post.content, 70)}
-
-                          // content={post.content.split(/\s+/).slice(0, 200).join(" ")}
-
                           />
                         </div>
                         {index < postList.length - 1 && <MainContentDivider />}
@@ -116,14 +114,13 @@ export default function SobProbondhoLeftContent() {
               <div className="pt-10 text-black">  এই মুহূর্তে কোনো লেখা নেই </div>
 
             }
+            
             <InfiniteScroll
               dataLength={postList?.length} //This is important field to render the next data
               next={loadnextPage}
               hasMore={isHasMore}
               loader={<h6>ডাটা লোড হচ্ছে ...</h6>}
               scrollThreshold= {0.5}
-
-
             >
             </InfiniteScroll>
 

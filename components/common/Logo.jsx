@@ -1,7 +1,5 @@
 
 import Image from "next/image";
-
-// import { LogoProps } from "@/interfaces/Interfaces";
 import Link from "next/link";
   
 const Logo= ({icon, width, height, alt}) =>{
@@ -14,8 +12,6 @@ const Logo= ({icon, width, height, alt}) =>{
          height={height}
         
          />
-  
-       
     )
 }
 

@@ -2,15 +2,17 @@ import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import { apiBasePath } from "../../utils/constant";
 
+
 const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus, otpStatus }) => {
+
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [numberPrefix, setNumberPrefix] = useState('88');
-
-  const [timer, setTimer] = useState(60); // Initial timer value set to 60 seconds
+  const [timer, setTimer] = useState(60); 
   const inputRefs = useRef([]);
 
   useEffect(() => {
+
     const interval = setInterval(() => {
       if (timer > 0) {
         setTimer((prevTimer) => prevTimer - 1);
@@ -18,15 +20,19 @@ const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus,
     }, 1000);
 
     return () => clearInterval(interval);
+
   }, [timer]);
 
   const sendOtp = async () => {
+
     const formattedPhoneNumber = `88${phonenumber}`;
+
     try {
       const response = await axios.post(`${apiBasePath}/verify-otp`, {
         otp: Number(otp.join("")),
         phone: formattedPhoneNumber,
       });
+      
       if (response.data.status === "success") {
         setIsOtpVerified(true);
         setIsOtpSuccess(true);

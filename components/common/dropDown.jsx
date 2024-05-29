@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import Select, { ControlProps, DropdownIndicatorProps, StylesConfig, components } from "react-select";
+import Select, { components } from "react-select";
 
 
 const options = [
@@ -10,6 +10,7 @@ const options = [
 ]
 
 export default function DropDown() {
+
     const list = [
         {
             'language': 'English (U.K)'
@@ -25,12 +26,15 @@ export default function DropDown() {
 
     const DropdownIndicator=  props => {
         return (
+
           <components.DropdownIndicator {...props}>
+
             <img 
-        
             className='h-5 w-5'
             src="/images/svgs/dropDown.svg"/>
+
           </components.DropdownIndicator>
+          
         );
       };
 

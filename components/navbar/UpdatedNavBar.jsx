@@ -394,7 +394,7 @@ export default function UpdatedNavBar() {
                                                                 onClick={() => closeMenu()}
 
                                                             >
-                                                                <Link className='block' onClick={() => router.push(`/user/${localStorage.getItem("uuid")}`)} href='#'>প্রোফাইল</Link>
+                                                                <Link className='block' href={`/user/${localStorage.getItem("uuid")}`}>প্রোফাইল</Link>
                                                             </li>
                                                             <hr />
 
@@ -403,7 +403,7 @@ export default function UpdatedNavBar() {
                                                                 onClick={() => closeMenu()}
 
                                                             >
-                                                                <Link className='block' onClick={Logout} href="#">লগ আউট</Link>
+                                                                <button className=' w-full text-center' onClick={Logout}>লগ আউট</button>
                                                             </li>
                                                         </ul>
                                                     )}

@@ -7,21 +7,19 @@ import NotFound from "../../components/common/nofFound"
 import axios from "axios";
 import AdminLayOut from "./admin";
 import { useRouter } from "next/router";
-import CreateDesignation from "../../components/userprofile/createCategory";
-import CreateDesignationModal from "../../components/admin/createDesignationModal";
+import StyledModal from "./styleModal";
+
+
 import CreateWriterBioModal from "../../components/admin/createWriterBioModal";
 
 const SliderTable = () => {
     const router = useRouter();
     const [userType, setUserType] = useState("");
-
     const [sliderList, setSliderList] = useState([])
-
-
     const [isOpen, setIsOpen] = useState(false);
+    const [istitleClick, setIsTitleClick] = useState(false)
     const [selectedContent, setSelectedContent] = useState(null);
     const [isCategoryAdded, setIsCategoryAdded] = useState(false)
-
     const [showModal, setShowModal] = useState(false);
 
 
@@ -47,6 +45,17 @@ const SliderTable = () => {
 
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
+
+    const handleOpenModal = (item) => {
+        setSelectedContent(item);
+        setIsOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsOpen(false);
+        setIsTitleClick(false)
+        setSelectedContent(null);
+    };
 
 
     async function deleteData(id) {
@@ -100,8 +109,9 @@ const SliderTable = () => {
                     <div className="flex flex-row">
                         <div className="w-1/2">
                             <div className="text-5xl pb-4">Bio List</div>
-                            <ContentList content={sliderList} isSlider={true} />
-
+                            {/* <ContentList content={sliderList} isSlider={true} /> */}
+                            <ContentList content={sliderList} onOpenModal={handleOpenModal} setIsTitleClick={setIsTitleClick} />
+                            {istitleClick && <StyledModal isOpen={isOpen} selectedContent={selectedContent} onClose={handleCloseModal} />}
                         </div>
                         <div className="w-1/2">
                             <div className="text-5xl pb-4 ">Bio</div>
@@ -115,7 +125,7 @@ const SliderTable = () => {
                                                 id={index}
                                                 className={`text-green-500`}
 
-                                                onClick={() => {console.log(post) ; deleteCategory(post._id) }}
+                                                onClick={() => { console.log(post); deleteCategory(post._id) }}
                                             >
                                                 Delete
                                             </button>

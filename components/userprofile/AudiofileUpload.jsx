@@ -1,12 +1,10 @@
 import React, { useRef, useState } from "react";
 import ProgressBar from "@ramonak/react-progress-bar";
 
-// import './FileUpload.css'
-
 
 const AudioFileUpload = ({ selectedFile, setSelectedFile }) => {
+
     const inputRef = useRef();
-    //   const [selectedFile, setSelectedFile] = useState(null);
     const [progress, setProgress] = useState(0);
 
     const handleFileChange = (event) => {
@@ -29,10 +27,8 @@ const AudioFileUpload = ({ selectedFile, setSelectedFile }) => {
         for (let i = 0; i <= 100; i += 10) {
             await new Promise((resolve) => setTimeout(resolve, 100)); // Simulate delay
             setProgress(i);
-            console.log('---------', i)
         }
 
-        console.log("Simulated upload complete for:", selectedFile.name);
     };
 
     const clearFileInput = () => {
