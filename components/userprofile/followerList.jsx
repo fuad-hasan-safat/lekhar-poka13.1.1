@@ -3,12 +3,13 @@ import React, { useEffect, useState } from 'react'
 import { apiBasePath } from '../../utils/constant';
 import { useRouter } from 'next/router';
 import LekhokDetails from '../common/lekhok';
-export default function FollowerList({ showModal, handleClose }) {
+export default function FollowerList({ showModal, handleClose, userId }) {
     const router = useRouter()
     const slug = router.query.slug;
     const [followerList, setFollowerList] = useState([])
     useEffect(() => {
-        fetch(`${apiBasePath}/followers/${slug}`)
+        console.log('writer user id ---->>>', userId)
+        fetch(`${apiBasePath}/followers/${userId}`)
             .then((response) => response.json())
             .then((data) => {
                 setFollowerList(data.follower_list);

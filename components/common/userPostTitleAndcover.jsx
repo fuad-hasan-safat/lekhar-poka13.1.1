@@ -1,29 +1,125 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { apiBasePath } from '../../utils/constant'
+import { useRouter } from 'next/router'
+import axios from 'axios'
 
-export default function UserPostTitleAndcover({id, title, writer, writer_id, image =''}) {
+export default function UserPostTitleAndcover({ id, title, writer, writer_id, image = '', postStatus = false, isProfile = false }) {
+  const router = useRouter()
+  const [isMoreClick, setIsMoreClick] = useState(false)
+  function moreOptionHandler() {
+    setIsMoreClick((prevState) => !prevState)
+  }
+
+
+  async function deletePost(id) {
+    try {
+      const response = await axios.delete(`${apiBasePath}/posts/${id}`);
+      console.log('Delete successful:', response.data);
+      router.reload()
+
+      return response.data;
+    } catch (error) {
+      console.error('Error deleting data:', error);
+      throw error;
+    }
+
+  }
+
+
+  function revokeStatus(id, status) {
+    console.log('status before -----------------', status)
+
+    const data = {
+      status: !status
+    };
+
+
+    const jsonData = JSON.stringify(data);
+
+    console.log('status after -----------------', data)
+
+
+    fetch(`${apiBasePath}/posts/${id}`, {
+      method: 'PUT', // Specify PUT method for update
+      headers: {
+        'Content-Type': 'application/json' // Set content type as JSON
+      },
+      body: jsonData
+    })
+      .then(response => response.json()) // Parse the response as JSON
+      .then(updatedData => {
+        console.log('Data updated successfully:', updatedData);
+
+      })
+      .catch(error => {
+        console.error('Error updating data:', error);
+      });
+
+    // router.push(`/admin/allposttable`);
+    router.reload()
+
+  }
+
+
   return (
     <>
-     <div className="profile__auth__wrap space-x-[15px]">
+      <div className="profile__auth__wrap space-x-[15px]">
 
         <div className="profile__auth__img">
           <a href={`/post/${id}`} >
-            <img className="w-[100px] h-[100px] rounded-[10px] block m-auto shadow-lg" src={image === ''? `/images/user/coverimage.jpg` : `${apiBasePath}/${image?.slice(image.indexOf('/')+1)}`} alt="" />
+            <img className="w-[100px] h-[100px] rounded-[10px] block m-auto shadow-lg" src={image === '' ? `/images/user/coverimage.jpg` : `${apiBasePath}/${image?.slice(image.indexOf('/') + 1)}`} alt="" />
           </a>
         </div>
 
-        <div className="">
+        <div className="w-[400px] relative">
 
-          <div className="pb-[8px]">
-            <div className="lg:text-[32] md:text-[28px] sm:text-[28px] xs:text-[28px] pr-[50px] text-yellow-400 font-bold">{title}</div>
+          <div className="pb-[8px] ">
+            <h1 className="lg:text-[32] md:text-[28px] sm:text-[28px] xs:text-[28px] pr-[50px] text-yellow-400 font-bold">{title}</h1>
           </div>
+
 
           <div className="">
             <a className="text-xl text-[#595D5B] font-semibold " href={`/postswriter/${writer_id}`} >{writer}</a>
           </div>
 
+          {isProfile &&
+            <>
+              <button
+                onClick={moreOptionHandler}
+                className='absolute top-0 right-0 text-[20px] border rounded-full bg-[#EFEFEF] w-[35px]'><i class="ri-more-2-line"></i></button>
+              {isMoreClick &&
+                <ul className='mt-[15px] absolute top-[35px] right-0 lg:text-[15px] sm:text-[13px] lg:backdrop-blur-md md:backdrop-blur-md  lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none lg:bg-[#FCF7E8] md:bg-[#FCF7E8] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static w-[190px] rounded-md  ring-opacity-5 focus:outline-none'>
+                  <li
+                    className="block cursor-pointer hover:bg-[#F9A106]  hover:text-white"
+
+                  >
+                    <button className=' w-full text-center'>সম্পাদন</button>
+                  </li>
+                  <hr />
+
+                  {/* <li
+                    className="block cursor-pointer   hover:bg-[#F9A106]  hover:text-white"
+
+                  >
+                    <button
+                      onClick={() => revokeStatus(id, postStatus)}
+                      className=' w-full text-center'>{postStatus ? 'অপ্রকাশিত' : 'প্রকাশিত'}</button>
+                  </li>
+                  <hr /> */}
+                  <li
+                    className="block cursor-pointer  hover:bg-[#F9A106]  hover:text-white"
+
+                  >
+                    <button onClick={() => deletePost(id)} className=' w-full text-center'>মুছে ফেলুন</button>
+                  </li>
+
+
+                </ul>}
+            </>
+          }
+
         </div>
-        
+
       </div>
     </>
   )

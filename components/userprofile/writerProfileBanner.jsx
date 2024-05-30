@@ -8,14 +8,6 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 
 export default function WriterProfileBanner({
-    // image = '',
-    // username = '',
-    // birth_date,
-    // expiry_date,
-    // setUsername,
-    // bio,
-    // designation = '',
-    // profileStatus = '',
     apprevedPost = 0,
     unApprovedPost = 0,
     follower = 0,
@@ -33,12 +25,13 @@ export default function WriterProfileBanner({
     const [loggedInUser, setLoggedInUser] = useState("");
     const [userUuid, setUserUuid] = useState("");
     const [userToken, setUserToken] = useState("");
-    // const [bio, setBio] = useState('')
-
     const [isAlreadyFollowing, setIsAlreadyFollowing] = useState(false)
-
     const [bio, setBio] = useState('')
     const [bioId, setBioId] = useState('')
+    const [profileStats, setProfileStats] = useState([])
+    const [approvedPost, setApprovedPost] = useState(0)
+    const [unapprovedPost, setUnapprovedPost] = useState(0)
+
 
     useEffect(() => {
         setLoggedInUser(localStorage.getItem("name") || "");
@@ -59,6 +52,22 @@ export default function WriterProfileBanner({
             fetchUserBioData();
 
             getFollowingStatus(profileInfo?.user_id, localStorage.getItem("uuid"))
+
+
+            // 
+            let userid = profileInfo?.user_id;
+            fetch(`${apiBasePath}/getprofile/${userid}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log('pofile details writer profile--------------->>>>>>>', data);
+                    setProfileStats(data.object.stats)
+                    setApprovedPost(data.object.approved_post)
+                    setUnapprovedPost(data.object.unapproved_post)
+
+
+                    // console.log(' profile image----------->>>>', image)
+                })
+                .catch((error) => console.error("Error fetching data:", error));
 
         }
 
@@ -89,18 +98,24 @@ export default function WriterProfileBanner({
 
     let image = ''
     let rendredBio = ''
+    let birthDate = ''
 
     if (isSelfWriter) {
         image = profileInfo?.image;
-        if(bio?.length>0){
+
+        birthDate = profileInfo?.dob
+
+        if (bio?.length > 0) {
             rendredBio = bio;
 
-        }else{
+        } else {
             rendredBio = writerBio?.content;
         }
+
     } else {
         image = writerInfo?.image;
-        rendredBio = writerBio?.content
+        rendredBio = writerBio?.content;
+        birthDate = writerInfo?.birth_date;
     }
 
     async function followUserhandler(user_id, following) {
@@ -130,64 +145,74 @@ export default function WriterProfileBanner({
     console.log('image --------- length >>>>>', profileInfo?.image)
     return (
         <>
-            <section className="all__post__sec__wrap">
-                <div className="relative w-full xl:h-[380px] lg:h-[360px] md:h-[340px] sm:h-[280px] xs:h-[220px] -z-10  overflow-hidden" style={{ background: `url('/images/usericons/userbanner.svg')center center / cover no-repeat` }}>
+
+            <div className='container'>
+                <div className="flex justify-center">
+                    <img
+                        className="w-[264px] h-[264px] rounded-full  border-4 border-solid border-white -mt-[110px]  "
+                        src={image?.length > 0 ? `${apiBasePath}/${image.slice(image.indexOf("/") + 1)}` : '/images/defaultUserPic/profile.jpg'}
+                    />
                 </div>
-            </section>
-            <section className='text-gray-600'>
-                <div className="container lg:flex lg:flex-row">
-                    <div className='w-[23%]'>
-                        <div className="">
-                            <img
+                <h1><span className='text-[35px] text-[#FCD200]'>{writerInfo?.name}</span> <span className='text-[#595D5B] text-[22px]'>{profileInfo?.designation}</span></h1>
 
-                                className="rounded-full w-[250px] h-[250px]  border-4 border-solid border-white -mt-[110px]  "
-                                src={image?.length > 0 ? `${apiBasePath}/${image.slice(image.indexOf("/") + 1)}` : '/images/defaultUserPic/profile.jpg'}
-                            />
-                        </div>
-
-                        {isSelfWriter && <>  <div>
-                            <UserAchivement
-                                setProfileController={setProfileController}
-                                follower={follower}
-                                following={following}
-                                apprevedPost={apprevedPost}
-                                unApprovedPost={unApprovedPost} />
-                        </div>
-
-                            <button
-                                className='py-[13px] bg-[#F9A106] hover:bg-[#c67256] px-[75px] p-1 rounded-md text-white text-[16px]'
-                                onClick={() => followUserhandler(profileInfo?.user_id, userUuid)}
-                            >
-                                <span><i class="ri-add-box-fill"></i></span> <span> {isAlreadyFollowing ? 'অনুসরণ করছেন' : 'অনুসরণ করুন'}</span>
-                            </button>
-                        </>
-                        }
-
-                    </div>
-
-                    <div className='w-[70%] py-[25px] '>
-
-                        <h1><span className='text-[35px] text-[#FCD200]'>{isSelfWriter && profileInfo.name ? profileInfo.name : writerInfo.name}</span> <span className='text-[#595D5B] text-[22px]'>{isSelfWriter && profileInfo.designation}</span></h1>
-                        <ul className='flex flex-row space-x-[25px] text-[#737373] text-[20px]'>
-                            {isSelfWriter && <li>
-                                <span className='text-[#F9A106]'><i class="ri-map-pin-line"></i></span> <span className='text-[#737373]'>{profileInfo.address}</span>
-                            </li>}
-                            <li>
-                                <span className='text-[#F9A106]'><i class="ri-calendar-2-line"></i></span> <span className='text-[#737373]'>{writerInfo?.birth_date}</span>
-                            </li>
-                            {isSelfWriter && <li>
-                                <span className='text-[#F9A106]'>{profileInfo.gender === 'male' ? <i class="ri-men-line"></i> : <i class="ri-women-line"></i>}</span> <span className='capitalize text-[#737373]'>{profileInfo.gender}</span>
-                            </li>}
-                        </ul>
-                        <p className='text-[20px] text-[#737373] mt-[15px]'>{rendredBio}</p>
+                <ul className='flex flex-row space-x-[25px] text-[#737373] text-[20px] mt-[28px]'>
 
 
+                    <li>
+                        <span className='text-[#F9A106]'><i class="ri-calendar-2-line"></i></span> <span className='text-[#737373]'>{birthDate}</span>
+                    </li>
 
-                    </div>
+                    {isSelfWriter && <li>
+                        <span className='text-[#F9A106]'>{profileInfo?.gender === 'male' ? <i class="ri-men-line"></i> : <i class="ri-women-line"></i>}</span> <span className='capitalize text-[#737373]'>{profileInfo?.gender}</span>
+                    </li>}
 
-                </div>
-            </section>
+                </ul>
+                {isSelfWriter && <ul className={`text-[#737373] text-[20px] mt-[14px]  space-y-[14px] ${isSelfWriter ? '' : 'mb-[44px]'}`}>
 
+                    <li>
+                        <span className='text-[#F9A106]'><i class="ri-map-pin-line"></i></span> <span className='text-[#737373]'>{profileInfo?.address}</span>
+                    </li>
+
+                    <li>
+                        <span className='text-[#F9A106] '><i class="ri-phone-line"></i></span> <span className='text-[#737373] '>+{profileInfo?.phone}</span>
+                    </li>
+
+                    <li>
+                        <span className='text-[#F9A106]'><i class="ri-mail-line"></i></span> <span className='text-[#737373] '>{profileInfo?.email}</span>
+                    </li>
+                </ul>}
+
+             { isSelfWriter &&  <div className='flex justify-center mt-[44px] mb-[44px]'>
+                    <button
+                        className='py-[13px] bg-[#F9A106] hover:bg-[#c67256] px-[75px] p-1 rounded-md text-white text-[16px]'
+                        onClick={() => followUserhandler(profileInfo?.user_id, userUuid)}
+                    >
+                        <span><i class="ri-add-box-fill"></i></span> <span> {isAlreadyFollowing ? 'অনুসরণ করছেন' : 'অনুসরণ করুন'}</span>
+                    </button>
+                </div>}
+
+                <hr></hr>
+
+
+                {isSelfWriter && <div className='mt-[44px] mb-[44px] flex justify-center'>
+                    <UserAchivement
+                        setProfileController={setProfileController}
+                        follower={profileStats?.follower}
+                        following={profileStats?.following}
+                        apprevedPost={approvedPost}
+                        unApprovedPost={unapprovedPost} />
+                </div>}
+
+                <hr></hr>
+
+                {rendredBio?.length > 0 && <div className='mb-[25px]'>
+                    <h1 className='mt-[44px] text-[#F9A106] text-[20px]'>সংক্ষিপ্ত বায়ো</h1>
+                    <p className='text-[20px] text-[#737373] mt-[16px]'>{rendredBio}</p>
+                </div>}
+
+
+
+            </div>
         </>
     )
 }
