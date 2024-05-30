@@ -36,7 +36,7 @@ export default function ProfilePostLeftContentUnApproved() {
 
         const response = await axios.get(`${apiBasePath}/unverifiedpostsbyuser/${localStorage.getItem("uuid")}`); // Use Axios
         const data = response.data;
-        console.log('UN-APPROVED POST----->>', response)
+        console.log('UN-APPROVED POST----->>', data)
 
 
         setPostList(data.object);
@@ -92,13 +92,15 @@ export default function ProfilePostLeftContentUnApproved() {
                           image={post?.image}
                           content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 20).join(" ")}` : `${post.content.split(/\s+/).slice(0, 20).join(" ")}`} // Truncate content
                           category={post.category}
+                          postStatus={post.status}
+                          isProfile={true}
 
                         />
                         <span className='inline-block bg-[#F9A106] text-white rounded text-[13px] px-[10px]'> অনুমোদিত</span>
 
                       </div>
 
-                      {index < displayedPosts.length - 1 && <MainContentDivider />}
+                      {index < displayedPosts.length && <MainContentDivider />}
 
                     </>
                   ))

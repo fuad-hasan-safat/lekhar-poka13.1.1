@@ -161,7 +161,7 @@ export default function UpdatedNavBar() {
 
     return (
         <>
-            <div className="fixed w-full bg-white z-[100]">
+            <div className="fixed w-full bg-white z-[9900]">
                 <header className="header shadow-md">
                     {/* Logo */}
 

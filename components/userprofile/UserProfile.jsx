@@ -31,19 +31,6 @@ export default function UserProfile({ slug }) {
   const [isCategoryAdded, setIsCategoryAdded] = useState(false)
   const [isProfileUpdated, setIsProfileUpdated] = useState(false)
 
-  // profile information fetch
-  // const [designation, setDesignation] = useState('');
-  // const [profileStatus, setProfileStatus] = useState('');
-  // const [gender, setGender] = useState('');
-  // const [dob, setDob] = useState('');
-  // const [address, setAddress] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [phone, setPhone] = useState('');
-  // const [image, setImage] = useState('');
-  // const [follower, setFollower] = useState(0);
-  // const [approvedPostNum, setApprovedPostNum] = useState(0);
-  // const [unapprovedPostNum, setunApprovedPostNum] = useState(0);
-  // const [profileUserName, setProfileuserName] = useState('')
   const [bio, setBio] = useState('')
   const [bioId, setBioId] = useState('')
   const [following, setFollowing] = useState(0);
@@ -89,20 +76,6 @@ export default function UserProfile({ slug }) {
         setProfileName(data.object.name)
         setProfileStatus(data.object.status)
         setProfileStats(data.object.stats)
-        // setDesignation(data.object.profile.designation || '')
-        // setProfileStatus(data.object.profile.profileStatus || '')
-        // setGender(data.object.profile.gender || '')
-        // setDob(data.object.profile.dob || '')
-        // setUsername(data.object.profile.name || '')
-        // setAddress(data.object.profile.address || '')
-        // setEmail(data.object.profile.email || '')
-        // setPhone(data.object.profile.phone || '')
-        // setImage(data.object.profile.image || '')
-        // setFollower(data.object.stats.follower)
-        // setFollowing(data.object.stats.following)
-        // setApprovedPostNum(data.object.approved_post)
-        // setunApprovedPostNum(data.object.unapproved_post)
-        // console.log('pofile get PROFILE post )()()() details on user profile--------------->>>>>>>', data.object);
 
         if (!data.object.stats) {
           setCanPostStatus(false)

@@ -9,6 +9,8 @@ const SinglePostConponent = ({
   writer_id,
   content,
   image,
+  postStatus,
+  isProfile,
 }) => {
   const router = useRouter();
 
@@ -25,6 +27,8 @@ const SinglePostConponent = ({
         writer={writer}
         writer_id={writer_id}
         image={image}
+        postStatus={postStatus}
+        isProfile={isProfile}
       />
 
       <div className=" pt-[30px] pb-3">
@@ -45,8 +49,8 @@ const SinglePostConponent = ({
 
           <Image
             src={"/images/svgs/purotadekhun.svg"}
-            height={30}
-            width={190}
+            height={31}
+            width={130}
             alt="next"
           />
 

@@ -82,7 +82,7 @@ useEffect(() => {
           {/* <div className='container'> */}
           {postList.length > 0 ?
             <div className='flex'>
-              <div className="lakha__main__content pt-[35px] text-3xl lg:mr-[100px] md:mr-[50px]">
+              <div className="lakha__main__content pt-[15px] text-3xl lg:mr-[100px] md:mr-[50px]">
                 
                 {displayedPosts.length && (
                   displayedPosts.map((post, index) => (
@@ -96,6 +96,8 @@ useEffect(() => {
                           image={post?.image}
                           content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 50).join(" ")}` : `${post.content.split(/\s+/).slice(0, 80).join(" ")}`} // Truncate content
                           category={post.category}
+                          postStatus={post.status}
+                          isProfile={true}
 
                         />
                       </div>

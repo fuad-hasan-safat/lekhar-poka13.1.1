@@ -8,21 +8,6 @@ import { countWords } from '../../function/api'
 import ProfileModal from './profileUpdate/ProfileModal'
 
 export default function UserProfileBanner({
-    // image = '',
-    // username = '',
-    // setUsername,
-    // phone = '',
-    // email = '',
-    // address = '',
-    // dob = '',
-    // gender = '',
-    // designation = '',
-    // profileStatus = '',
-    // bio = '',
-    // apprevedPost = 0,
-    // unApprovedPost = 0,
-    // follower = 0,
-    // following = 0,
     bio,
     profileInfo,
     profileName,
@@ -59,7 +44,7 @@ export default function UserProfileBanner({
                 </li>
 
             </ul>
-            <ul className='text-[#737373] text-[20px] mt-[14px]  space-y-[14px]'>
+            <ul className='text-[#737373] text-[20px] mb-[44px] mt-[14px]  space-y-[14px]'>
 
                 <li>
                     <span className='text-[#F9A106]'><i class="ri-map-pin-line"></i></span> <span className='text-[#737373]'>{profileInfo?.address}</span>
@@ -74,9 +59,10 @@ export default function UserProfileBanner({
                 </li>
             </ul>
 
+            <hr></hr>
 
 
-            <div className='mt-[90px] flex justify-center'>
+            <div className='mt-[44px] mb-[44px] flex justify-center'>
                 <UserAchivement
                     setProfileController={setProfileController}
                     follower={profileStats?.follower}
@@ -85,9 +71,10 @@ export default function UserProfileBanner({
                     unApprovedPost={unapprovedPost} />
             </div>
 
+            <hr></hr>
 
             {selectedBio.length > 0 && <>
-                <h1 className=' mt-[88px] text-[#F9A106] text-[20px]'>সংক্ষিপ্ত বায়ো</h1>
+                <h1 className='mt-[44px] text-[#F9A106] text-[20px]'>সংক্ষিপ্ত বায়ো</h1>
                 <p className='text-[20px] text-[#737373] mt-[16px]'>{selectedBio}</p>
             </>}
 
