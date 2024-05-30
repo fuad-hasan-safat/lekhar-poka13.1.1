@@ -4,12 +4,12 @@ import { apiBasePath } from '../../utils/constant';
 import { useRouter } from 'next/router';
 import LekhokDetails from '../common/lekhok';
 
-export default function FollowingList({ showModal, handleClose }) {
+export default function FollowingList({ showModal, handleClose, userId }) {
     const router = useRouter()
     const slug = router.query.slug;
     const [followingList, setFollowingList] = useState([])
     useEffect(() => {
-        fetch(`${apiBasePath}/followings/${slug}`)
+        fetch(`${apiBasePath}/followings/${userId}`)
             .then((response) => response.json())
             .then((data) => {
                 setFollowingList(data.following_list);

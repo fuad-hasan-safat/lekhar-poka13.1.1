@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { apiBasePath } from '../../utils/constant'
 import { useRouter } from 'next/router'
+import axios from 'axios'
 
 export default function UserPostTitleAndcover({ id, title, writer, writer_id, image = '', postStatus = false, isProfile = false }) {
   const router = useRouter()

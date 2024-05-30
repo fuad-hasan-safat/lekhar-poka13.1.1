@@ -166,7 +166,9 @@ export default function UserProfile({ slug }) {
                   unapprovedPost={unapprovedPost}
                   profileStatus={profileStatus}
                   profileStats={profileStats}
+                  setProfileController={setProfileController}
                 />
+
               </div>
               <div className='w-[60%] p-[40px]'>
                 <div>
@@ -176,11 +178,21 @@ export default function UserProfile({ slug }) {
                   </button>
                 </div>
                 <div>
-                <ProfilePostLeftContentUnApproved />
+                  <ProfilePostLeftContentUnApproved />
                 </div>
                 <div>
-                <ProfilePostLeftContentApproved />
+                  <ProfilePostLeftContentApproved />
                 </div>
+
+                {
+                  profileController === 'follower' &&
+                  <FollowerList userId={slug} showModal={'follower'} handleClose={handleClose} />
+                }
+
+                {
+                  profileController === 'following' &&
+                  <FollowingList userId={slug} showModal={'following'} handleClose={handleClose} />
+                }
               </div>
 
             </div>
