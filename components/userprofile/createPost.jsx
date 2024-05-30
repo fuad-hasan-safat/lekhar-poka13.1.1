@@ -7,8 +7,8 @@ import {
     EditorProvider,
     Toolbar
 } from 'react-simple-wysiwyg';
-import Select from "react-select";
 import Link from "next/link";
+import Select from "react-select";
 import { apiBasePath } from '../../utils/constant';
 import CreateCategory from './createCategory';
 import CreateWriter from './createWriter';
@@ -317,144 +317,152 @@ export default function CreatePost() {
 
     return (
         <>
-            <div className="lg:pr-6 md:pr-0 sm:pr-0 space-y-4 ">
-                <div className="text-yellow-800 text-[22px]">শিরোনাম</div>
+            <div className="lg:pr-6 md:pr-0 sm:pr-0 space-y-4 flex">
+                <div className='create__post__lft pr-[100px] w-[75%]'>
+                  <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">লেখার শিরোনাম</div>
 
-                <input
-                    onChange={handleTitle}
-                    value={title}
-                    className="w-full h-[62px] p-4 bg-[#FCF7E8] border-solid border-slate-800 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="title"
-                    type="text"
-                    placeholder="শিরোনাম"
-                    required
-                />
-                <div className="text-yellow-800 text-[22px]">সারসংক্ষেপ(আপনার মূল লেখার ভাবার্থ)</div>
-
-                <textarea
-                    onChange={handleSummary}
-                    value={summary}
-                    className="w-full h-[200px] p-4 bg-[#FCF7E8] border-solid border-slate-800 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="summary"
-                    type="textarea"
-                    placeholder="সারসংক্ষেপ"
-                    required
-                />
-
-                <div className="text-yellow-800 text-[22px]">আপনার মূল লেখা নিচে লিখুন</div>
-
-
-                <div>
-                    <CustomEditor
-                        initialData=''
-                        setContent={setContent}
+                    <input style={{marginTop:'0'}}
+                        onChange={handleTitle}
+                        value={title}
+                        className="w-full h-[62px] !mt-0 p-4 bg-[#FCF7E8] border-solid border-slate-800 rounded-[8px] text-[#00000080] leading-tight focus:outline-none focus:shadow-outline"
+                        id="title"
+                        type="text"
+                        placeholder="শিরোনাম"
+                        required
                     />
-                </div>
-                {/* <div className="joidcss">
-
-                    <EditorProvider>
-                        <Editor
-                            value={content}
-                            onChange={textEditorHandler}
-
-                            containerProps={{ style: { color: 'black', height: '550px' }, className: 'auto-height-editor custom-editor' }}
-
-                        >
-                            <Toolbar>
-                            
-                            </Toolbar>
-                        </Editor>
-                    </EditorProvider>
-
-                </div> */}
-
-                <div className="text-yellow-800 text-[22px]">আপনার লেখার ধরণ নির্বাচন করুন</div>
-
-                <div>
-                    <Select
-                        value={selectedOption}
-                        onChange={categoryhandleChange}
-                        styles={customStyles}
-                        options={Categoryoptions}
+                    <div className="text-[#F9A106] font-bold text-[22px] !mt-[30px] !mb-[2px]">সারসংক্ষেপ</div>
+                    <textarea
+                        onChange={handleSummary}
+                        value={summary}
+                        className="w-full h-[200px] p-4 !mt-0 bg-[#FCF7E8] border-solid border-slate-800 text-gray-700 rounded-[8px] leading-tight focus:outline-none focus:shadow-outline"
+                        id="summary"
+                        type="textarea"
+                        placeholder="লেখার মূল ভাবার্থ লিখুন"
+                        required
                     />
-                </div>
-                {userType === 'admin' &&
-                    <div className='profile__btn__midl'>
 
-                        <CreateCategory setIsCategoryAdded={setIsCategoryAdded} />
-
-                    </div>}
+                    <div className="text-[#F9A106] font-bold text-[22px] !mt-[30px] !mb-[2px]">মূল লেখা</div>
 
 
-                {userType === 'admin' &&
-                    <>
-                        <div className="text-yellow-800 text-[22px]">লেখক নির্বাচন করুন</div>
-                        <div className=" place-content-center justify-center ">
-
-                            <div className="">
-                                <Select
-                                    value={selectedWriter}
-                                    onChange={writerhandleChange}
-                                    styles={customStyles}
-                                    options={writersOptions}
-                                />
-
-                            </div>
-
-
-                            <div className='profile__btn__midl'>
-                                <CreateWriter setIsWriterAdded={setIsWriterAdded} />
-                            </div>
-                        </div>
-                    </>
-                }
-
-
-
-
-
-
-                <div className='text-black'>
-                    <h >অডিও আপলোড করুন (যদি থাকে)</h>
-                    <AudioFileUpload selectedFile={selectedFile} setSelectedFile={setSelectedFile} />
-                </div>
-
-                <div className='text-black'>
-                    <div className='mb-[15px]'>
-                        <h >ছবি আপলোড করুন (যদি থাকে)</h>
-                    </div>
-
-                    <div className='flex border border-solid border-gray-200 rounded-md h-[215px] items-center place-content-center text-center justify-center' >
-                        <input
-                            type="file"
-                            onChange={handleFileChange}
-                            className="hidden"
-                            id="postbaner"
-                            accept="image/*"
+                    <div>
+                        <CustomEditor
+                            initialData=''
+                            setContent={setContent}
                         />
-
-                        <label htmlFor='postbaner' className=" cursor-pointer" >
-                            {preview.length > 0 && <img
-                                src={preview}
-                                height={100}
-                                width={100}
-                                // className="object-cover "
-                                alt={preview}
-                            />
-                            }
-                            <div className=" mt-[15px]  file-btn w-[70px] text-[22px] " onClick={handleFileChange}> <i className='ri-camera-line'></i></div>
-
-                        </label>
                     </div>
 
+                    <div className='submit__btn flex !mt-[40px]'>
+                        <div className='w-[50%] pr-[12px]'>
+                            <button
+                                onClick={handleSubmit}
+                                className="w-full px-[20px] h-[50px] text-[#FCA000] border border-[#FCA000] border-spacing-1 rounded-md text-[16px] items-center profile__btn__midl"
+                            >
+                                পোস্ট করুন
+                            </button>
+                        </div>
+                        <div className='w-[50%] pl-[12px]'>
+                            <button
+                                onClick={handleSubmit}
+                                className="w-full px-[20px] h-[50px] bg-[#FCA000] rounded-md text-[16px] text-white items-center profile__btn__midl"
+                            >
+                                পোস্ট করুন
+                            </button>
+                        </div>
+                    </div>
                 </div>
+                <div className='create__post__rgt w-[25%]'>
+                  <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">আপনার লেখার ধরণ নির্বাচন করুন</div>
 
-                <button
-                    onClick={handleSubmit}
-                    className="w-full px-[20px] h-[43px] bg-[#FCA000] rounded-md text-[16px] text-white items-center profile__btn__midl"
-                >
-                    পোস্ট করুন
-                </button>
+                    <div>
+                        <Select
+                            value={selectedOption}
+                            onChange={categoryhandleChange}
+                            styles={customStyles}
+                            options={Categoryoptions}
+                        />
+                    </div>
+                    {userType === 'admin' &&
+                        <div className='profile__btn__midl'>
+
+                            <CreateCategory setIsCategoryAdded={setIsCategoryAdded} />
+
+                        </div>}
+
+
+                    {userType === 'admin' &&
+                        <>
+                            <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">লেখক নির্বাচন করুন</div>
+                            <div className=" place-content-center justify-center ">
+
+                                <div className="">
+                                    <Select
+                                        value={selectedWriter}
+                                        onChange={writerhandleChange}
+                                        styles={customStyles}
+                                        options={writersOptions}
+                                    />
+
+                                </div>
+
+
+                                <div className='profile__btn__midl'>
+                                    <CreateWriter setIsWriterAdded={setIsWriterAdded} />
+                                </div>
+                            </div>
+                        </>
+                    }
+                    <hr class="my-5 border-gray-200" />
+                    <div className='text-black'>
+                        <div className='mb-[15px]'>
+                            <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">ছবি আপলোড করুন (যদি থাকে)</div>
+                        </div>
+
+                        <div className='border-2 border-dashed border-[#F9A106] rounded-md h-[220px] items-center place-content-center text-center justify-center' >
+                            <input
+                                type="file"
+                                onChange={handleFileChange}
+                                className="hidden"
+                                id="postbaner"
+                                accept="image/*"
+                            />
+                            <div className='flex items-center justify-center'>
+                                <img src='../images/user/image-plus-1.png' alt='Image Plus' />
+                            </div>
+                            <div className='create__border'>
+                                <p className='pt-[5px] pb-[5px]'>Drag your file(s) to start uploading</p>
+                                <img className='m-auto' src='../images/user/divider.png' alt='Divider' />
+                            </div>
+                            
+                            <label htmlFor='postbaner' className=" cursor-pointer flex items-center justify-center" >
+                                {preview.length > 0 && <img
+                                    src={preview}
+                                    height={100}
+                                    width={100}
+                                    // className="object-cover "
+                                    alt={preview}
+                                />
+                                }
+                                <div className=" mt-[15px]  file-btn w-[200px] h-[43px] text-[16px] " onClick={handleFileChange}>আপলোড</div>
+
+                            </label>
+                        </div>
+
+                    </div>
+                    <div className='bg-[#EEF1F7] mt-[15px] rounded-[10px] p-[12px]'>
+                        <div className='flex justify-between items-center'>
+                            <img className='m-auto pr-[10px]' src='../images/user/audio-file.png' alt='Audio File ' />
+                            <p className='w-full'>
+                                <strong className='block'>Kobitar Gan.mp3</strong>
+                                <span className='flex justify-start items-center'>60 KB of 12O KB . <img className='m-auto pr-[10px]' src='../images/user/audio-icon.png' alt='Audio Icon ' /><strong>Uploading...</strong></span>
+                            </p>
+                        </div>
+                    </div>
+                    <hr class="my-5 border-gray-200" />
+                    <div className='text-black'>
+                        <div className="text-[#F9A106] mt-[40px] font-bold text-[22px] !mb-[2px]">অডিও আপলোড করুন (যদি থাকে)</div>
+                        <AudioFileUpload selectedFile={selectedFile} setSelectedFile={setSelectedFile} />
+                    </div>
+                </div>
                 <hr class="my-4 border-gray-200" />
             </div>
         </>
