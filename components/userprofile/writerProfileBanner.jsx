@@ -167,7 +167,7 @@ export default function WriterProfileBanner({
                     </li>}
 
                 </ul>
-                {isSelfWriter && <ul className='text-[#737373] text-[20px] mt-[14px]  space-y-[14px]'>
+                {isSelfWriter && <ul className={`text-[#737373] text-[20px] mt-[14px]  space-y-[14px] ${isSelfWriter ? '' : 'mb-[44px]'}`}>
 
                     <li>
                         <span className='text-[#F9A106]'><i class="ri-map-pin-line"></i></span> <span className='text-[#737373]'>{profileInfo?.address}</span>
@@ -182,14 +182,14 @@ export default function WriterProfileBanner({
                     </li>
                 </ul>}
 
-                <div className='flex justify-center mt-[44px] mb-[44px]'>
+             { isSelfWriter &&  <div className='flex justify-center mt-[44px] mb-[44px]'>
                     <button
                         className='py-[13px] bg-[#F9A106] hover:bg-[#c67256] px-[75px] p-1 rounded-md text-white text-[16px]'
                         onClick={() => followUserhandler(profileInfo?.user_id, userUuid)}
                     >
                         <span><i class="ri-add-box-fill"></i></span> <span> {isAlreadyFollowing ? 'অনুসরণ করছেন' : 'অনুসরণ করুন'}</span>
                     </button>
-                </div>
+                </div>}
 
                 <hr></hr>
 
