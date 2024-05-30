@@ -7,12 +7,16 @@ import Link from "next/link";
 import UserInformationsAndBio from '../user/userInformationsAndBio';
 import FollowerList from './followerList';
 import FollowingList from './followingList';
+import { useRouter } from 'next/router';
+import ProfilePostLeftContentUnApproved from './ProfilePostLeftContentUnapproved';
+import ProfilePostLeftContentApproved from './ProfilePostLeftContentApproved';
 
 export default function UserProfile({ slug }) {
 
+  const router = useRouter();
+
   const [writer, setWriter] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const [status, setStatus] = useState("");
   const [username, setUsername] = useState("");
   const [userUuid, setUserUuid] = useState("");
   const [userPhone, setUserPhone] = useState("");
@@ -28,22 +32,33 @@ export default function UserProfile({ slug }) {
   const [isProfileUpdated, setIsProfileUpdated] = useState(false)
 
   // profile information fetch
-  const [designation, setDesignation] = useState('');
-  const [profileStatus, setProfileStatus] = useState('');
-  const [gender, setGender] = useState('');
-  const [dob, setDob] = useState('');
-  const [address, setAddress] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [image, setImage] = useState('');
-  const [follower, setFollower] = useState(0);
-  const [approvedPostNum, setApprovedPostNum] = useState(0);
-  const [unapprovedPostNum, setunApprovedPostNum] = useState(0);
-  const [profileUserName, setProfileuserName] = useState('')
+  // const [designation, setDesignation] = useState('');
+  // const [profileStatus, setProfileStatus] = useState('');
+  // const [gender, setGender] = useState('');
+  // const [dob, setDob] = useState('');
+  // const [address, setAddress] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [phone, setPhone] = useState('');
+  // const [image, setImage] = useState('');
+  // const [follower, setFollower] = useState(0);
+  // const [approvedPostNum, setApprovedPostNum] = useState(0);
+  // const [unapprovedPostNum, setunApprovedPostNum] = useState(0);
+  // const [profileUserName, setProfileuserName] = useState('')
   const [bio, setBio] = useState('')
   const [bioId, setBioId] = useState('')
   const [following, setFollowing] = useState(0);
   const [canPostStatus, setCanPostStatus] = useState(false)
+  // 
+
+  const [profileInfo, setProfileInfo] = useState([])
+  const [profileName, setProfileName] = useState('')
+  const [approvedPost, setApprovedPost] = useState(0)
+  const [unapprovedPost, setUnapprovedPost] = useState(0)
+  const [profileStats, setProfileStats] = useState([])
+  const [profileStatus, setProfileStatus] = useState('')
+  const [status, setStatus] = useState("");
+
+
 
   //  follow/ follower and profile controller [profile/ following/ follower]
   const [profileController, setProfileController] = useState("profile")
@@ -67,20 +82,26 @@ export default function UserProfile({ slug }) {
     fetch(`${apiBasePath}/getprofile/${slug}`)
       .then((response) => response.json())
       .then((data) => {
-         console.log('pofile details on user profile--------------->>>>>>>', data);
-        setDesignation(data.object.profile.designation || '')
-        setProfileStatus(data.object.profile.profileStatus || '')
-        setGender(data.object.profile.gender || '')
-        setDob(data.object.profile.dob || '')
-        setUsername(data.object.profile.name || '')
-        setAddress(data.object.profile.address || '')
-        setEmail(data.object.profile.email || '')
-        setPhone(data.object.profile.phone || '')
-        setImage(data.object.profile.image || '')
-        setFollower(data.object.stats.follower)
-        setFollowing(data.object.stats.following)
-        setApprovedPostNum(data.object.approved_post)
-        setunApprovedPostNum(data.object.unapproved_post)
+        console.log('pofile details on user profile--------------->>>>>>>', data);
+        setProfileInfo(data.object.profile)
+        setApprovedPost(data.object.approved_post)
+        setUnapprovedPost(data.object.unapproved_post)
+        setProfileName(data.object.name)
+        setProfileStatus(data.object.status)
+        setProfileStats(data.object.stats)
+        // setDesignation(data.object.profile.designation || '')
+        // setProfileStatus(data.object.profile.profileStatus || '')
+        // setGender(data.object.profile.gender || '')
+        // setDob(data.object.profile.dob || '')
+        // setUsername(data.object.profile.name || '')
+        // setAddress(data.object.profile.address || '')
+        // setEmail(data.object.profile.email || '')
+        // setPhone(data.object.profile.phone || '')
+        // setImage(data.object.profile.image || '')
+        // setFollower(data.object.stats.follower)
+        // setFollowing(data.object.stats.following)
+        // setApprovedPostNum(data.object.approved_post)
+        // setunApprovedPostNum(data.object.unapproved_post)
         // console.log('pofile get PROFILE post )()()() details on user profile--------------->>>>>>>', data.object);
 
         if (!data.object.stats) {
@@ -155,93 +176,43 @@ export default function UserProfile({ slug }) {
   } else {
     return (
       <>
-        {status && (
-          <div className="">
-            <div>
-              <UserProfileBanner
-                image={image}
-                apprevedPost={approvedPostNum}
-                unApprovedPost={unapprovedPostNum}
-                follower={follower}
-                following={following}
-                username={username}
-                phone={phone}
-                email={email}
-                address={address}
-                dob={dob}
-                gender={gender}
-                bio={bio}
-                setUsername={setUsername}
-                designation={designation}
-                profileStatus={profileStatus}
-                setProfileController={setProfileController}
-              />
-            </div>
-
-            <div className='container'>
-              <hr className='my-[40px]'></hr>
-            </div>
-
-            <section className="all__page__main__content">
-              <div className="container">
-                <div className="row">
-                  <div className="col-md-12"></div>
-                  <div className="lg:flex lg:flex-row lg:pt-[80px] md:pt-[60px] sm:pt-[40px] xs:pt-[40px]">
-                    <div className="w-full">
-
-                      <div>
-                        {/* {true &&
-                          <UserInformationsAndBio
-                            username={username}
-                            setUsername={setUsername}
-                            sex={gender}
-                            birthdate={dob}
-                            location={address}
-                            mail={email}
-                            phone={phone}
-                            userID={userUuid}
-                            setIsProfileUpdated={setIsProfileUpdated}
-                          />
-
-                        } */}
-                        {
-                          profileController === 'follower' &&
-                          <FollowerList showModal={'follower'} handleClose={handleClose} />
-                        }
-
-                        {
-                          profileController === 'following' &&
-                          <FollowingList showModal={'following'} handleClose={handleClose} />
-                        }
-
-                        {/* <UserDetails
-                          sex={gender}
-                          birthdate={dob}
-                          location={address}
-                          mail={email}
-                          phone={phone}
-                          userID={userUuid}
-                          setIsProfileUpdated={setIsProfileUpdated}
-                        /> */}
-                      </div>
-
-
-                    </div>
-            
-                  </div>
+        <section className="all__post__sec__wrap">
+          <div className="relative w-full xl:h-[315px] lg:h-[315px] md:h-[315px] sm:h-[280px] xs:h-[220px] -z-10  overflow-hidden" style={{ background: `url('/images/usericons/userbanner.svg')center center / cover no-repeat` }}>
+          </div>
+        </section>
+        <section className='text-black'>
+          <div className='container'>
+            <div className='flex flex-row'>
+              {/* left part */}
+              <div className='w-[30%] border  mb-[110px]'>
+                <UserProfileBanner
+                  bio={bio}
+                  profileInfo={profileInfo}
+                  profileName={profileName}
+                  approvedPost={approvedPost}
+                  unapprovedPost={unapprovedPost}
+                  profileStatus={profileStatus}
+                  profileStats={profileStats}
+                />
+              </div>
+              <div className='w-[60%] p-[40px]'>
+                <div>
+                  <button
+                    onClick={() => router.push('/user/createpost')}
+                    className='px-[50px] py-[8px] bg-[#F9A106] text-white rounded'><i class="ri-add-box-fill"></i> নতুন লেখা যুক্ত করুন
+                  </button>
+                </div>
+                <div>
+                <ProfilePostLeftContentUnApproved />
+                </div>
+                <div>
+                <ProfilePostLeftContentApproved />
                 </div>
               </div>
-            </section>
-          </div>
-        )}
-        {!status && (
-          <div className="text-gray-800">
-            <div>
-              আপনি লগ ইন করেননি,
+
             </div>
-            <Link href='/'> প্রচ্ছদ পৃষ্ঠায় যান</Link>
           </div>
-        )}
+        </section>
       </>
     );
   }

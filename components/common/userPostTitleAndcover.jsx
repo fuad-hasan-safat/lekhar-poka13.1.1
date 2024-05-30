@@ -14,8 +14,9 @@ export default function UserPostTitleAndcover({id, title, writer, writer_id, ima
 
         <div className="">
 
-          <div className="pb-[8px]">
+          <div className="pb-[8px] relative">
             <div className="lg:text-[32] md:text-[28px] sm:text-[28px] xs:text-[28px] pr-[50px] text-yellow-400 font-bold">{title}</div>
+            <span className='inline-block absolute top-0 right-0 text-[20px]'><i class="ri-more-2-line"></i></span>
           </div>
 
           <div className="">

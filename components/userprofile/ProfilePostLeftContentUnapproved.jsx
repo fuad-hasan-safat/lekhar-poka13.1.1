@@ -19,14 +19,14 @@ export default function ProfilePostLeftContentUnApproved() {
   const [username, setUsername] = useState("");
   const [slug, setUserUuid] = useState("");
   const [userToken, setUserToken] = useState("");
-  
-useEffect(() => {
 
-  setUsername(localStorage.getItem("name") || "");
-  setUserToken(localStorage.getItem("token") || "");
-  setUserUuid(localStorage.getItem("uuid") || "");
+  useEffect(() => {
 
-}, []);
+    setUsername(localStorage.getItem("name") || "");
+    setUserToken(localStorage.getItem("token") || "");
+    setUserUuid(localStorage.getItem("uuid") || "");
+
+  }, []);
 
 
   useEffect(() => {
@@ -35,7 +35,7 @@ useEffect(() => {
       try {
 
         const response = await axios.get(`${apiBasePath}/unverifiedpostsbyuser/${localStorage.getItem("uuid")}`); // Use Axios
-        const data = response.data; 
+        const data = response.data;
         console.log('UN-APPROVED POST----->>', response)
 
 
@@ -76,9 +76,9 @@ useEffect(() => {
           {/* <div className='container'> */}
           {postList.length > 0 &&
             <div className='flex'>
-              <div className="lakha__main__content pt-20 text-3xl lg:mr-[100px] md:mr-[50px]">
+              <div className="lakha__main__content pt-[56px] text-3xl lg:mr-[100px] md:mr-[50px]">
 
-                  <h1 className='lg:text-5xl md:text-3xl sm:text-xl xs:text-2xl text-black mb-[35px]'>অনুমোদনহীন  পোস্ট </h1>
+                {/* <h1 className='lg:text-5xl md:text-3xl sm:text-xl xs:text-2xl text-black mb-[35px]'>অনুমোদনহীন  পোস্ট </h1> */}
 
                 {displayedPosts.length && (
                   displayedPosts.map((post, index) => (
@@ -90,24 +90,26 @@ useEffect(() => {
                           writer={post.writer}
                           writer_id={post?.writer_id}
                           image={post?.image}
-                          content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 50).join(" ")}` : `${post.content.split(/\s+/).slice(0, 80).join(" ")}`} // Truncate content
+                          content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 20).join(" ")}` : `${post.content.split(/\s+/).slice(0, 20).join(" ")}`} // Truncate content
                           category={post.category}
 
                         />
+                        <span className='inline-block bg-[#F9A106] text-white rounded text-[13px] px-[10px]'> অনুমোদিত</span>
+
                       </div>
 
                       {index < displayedPosts.length - 1 && <MainContentDivider />}
 
                     </>
                   ))
-                  
+
                 )}
               </div>
 
               <hr></hr>
 
-            </div> 
-            
+            </div>
+
 
           }
           {totalPages > 1 && <div className="py-10 space-x-4"> {/* Add a class for styling */}
@@ -145,7 +147,7 @@ useEffect(() => {
 
           </div>
           }
-        
+
         </>
       )}
     </div>
