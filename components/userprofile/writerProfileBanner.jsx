@@ -146,7 +146,7 @@ export default function WriterProfileBanner({
     return (
         <>
 
-            <div className='container'>
+            <div className='container border'>
                 <div className="flex justify-center">
                     <img
                         className="w-[264px] h-[264px] rounded-full  border-4 border-solid border-white -mt-[110px]  "
@@ -209,8 +209,6 @@ export default function WriterProfileBanner({
                     <h1 className='mt-[44px] text-[#F9A106] text-[20px]'>সংক্ষিপ্ত বায়ো</h1>
                     <p className='text-[20px] text-[#737373] mt-[16px]'>{rendredBio}</p>
                 </div>}
-
-
 
             </div>
         </>
