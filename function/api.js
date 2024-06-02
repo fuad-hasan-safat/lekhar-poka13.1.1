@@ -16,7 +16,7 @@ export async function fetchData(url) {
 
 
 
-  export function countWords(content, limit) {
+  export function countWords(content='  ', limit) {
     // console.log('in side api function --->><><><><><><<<<>>>><<<<>>> ---- content', content)
     let currentWord = 0;
     let inTag = false;
