@@ -96,7 +96,7 @@ export default function ProfilePostLeftContentUnApproved() {
                           isProfile={true}
 
                         />
-                        <span className='inline-block bg-[#F9A106] text-white rounded text-[13px] px-[10px]'> অনুমোদিত</span>
+                        <span className='page__common__yello__btn inline-block bg-[#F9A106] text-white rounded text-[13px] px-[10px]'> অনুমোদিত</span>
 
                       </div>
 

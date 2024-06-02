@@ -44,11 +44,8 @@ const SinglePostConponent = ({
 
         <button
           onClick={() => handleClick(id)}
-          className="bg-[#FCD200] text-[#484848] text-[16px] px-[14px] py-[3px] rounded"
-        >
-
+          className="page__common__btn bg-[#FCD200] text-[#484848] text-[16px] px-[14px] py-[3px] rounded">
           পুরোটা পড়ুন <i class="ri-arrow-right-s-line"></i>
-
         </button>
 
 

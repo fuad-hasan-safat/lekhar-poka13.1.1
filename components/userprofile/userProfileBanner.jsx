@@ -79,7 +79,7 @@ export default function UserProfileBanner({
             </>}
 
             <div className='flex justify-center'>
-                <button onClick={() => setShowModal(true)} className='bg-[#F9A106] text-white hover:bg-[#FCD200] rounded-[5px] px-[75px] py-[10px] mt-[44px] mb-[50px]'>সম্পাদন করুন</button>
+                <button onClick={() => setShowModal(true)} className='page__common__yello__btn bg-[#F9A106] text-white rounded-[5px] px-[75px] py-[10px] mt-[44px] mb-[50px]'>সম্পাদন করুন</button>
 
             </div>
             {<ProfileModal setShowModal={setShowModal} image={profileInfo?.image} showModal={showModal} handleClose={handleClose} />}

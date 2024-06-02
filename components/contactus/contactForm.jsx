@@ -97,7 +97,7 @@ const ContactForm = () => {
 
                 <button
                     type="submit"
-                    className={` bg-[#F9A106] w-full lg:h-[75px] md:h-[70px] sm:h-[60px] xs:h-[50px] rounded-3xl lg:text-[36px] md:text-[34px] sm:text-[30px] xs:text-[24px] text-white`}
+                    className={`page__common__btn contact__form__btn bg-[#F9A106] w-full lg:h-[75px] md:h-[70px] sm:h-[60px] xs:h-[50px] rounded-3xl lg:text-[36px] md:text-[34px] sm:text-[30px] xs:text-[24px] text-white`}
                 >
                     Send
                 </button>
