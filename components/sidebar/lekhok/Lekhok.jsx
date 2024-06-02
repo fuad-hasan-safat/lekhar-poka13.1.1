@@ -120,11 +120,9 @@ const Lekhok = () => {
               </button>
               <button
                 onClick={handleNextPage}
-<<<<<<< Updated upstream
-                className="pl-4 bg-white   rounded-md border border-gray-300 w-[50px] h-[43px] ">
-=======
+
                 className="page__common__btn pl-4 bg-white rounded-md border border-gray-300 hover:border-[#F9A106] w-[50px] h-[43px] ">
->>>>>>> Stashed changes
+
 
                 <svg
                   width="24"
