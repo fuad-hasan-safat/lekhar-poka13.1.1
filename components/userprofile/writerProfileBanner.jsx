@@ -158,11 +158,11 @@ export default function WriterProfileBanner({
                 <ul className='flex flex-row space-x-[25px] text-[#737373] text-[20px] mt-[28px]'>
 
 
-                    <li>
+                    {birthDate?.length>0 && <li>
                         <span className='text-[#F9A106]'><i class="ri-calendar-2-line"></i></span> <span className='text-[#737373]'>{birthDate}</span>
-                    </li>
+                    </li>}
 
-                    {isSelfWriter && <li>
+                    {isSelfWriter && profileInfo?.gender?.length>0 && <li>
                         <span className='text-[#F9A106]'>{profileInfo?.gender === 'male' ? <i class="ri-men-line"></i> : <i class="ri-women-line"></i>}</span> <span className='capitalize text-[#737373]'>{profileInfo?.gender}</span>
                     </li>}
 
