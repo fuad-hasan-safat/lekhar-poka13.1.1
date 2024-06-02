@@ -149,13 +149,13 @@ export default function WriterProfileBanner({
             <div className='container border'>
                 <div className="flex justify-center">
                     <img
-                        className="w-[264px] h-[264px] rounded-full  border-4 border-solid border-white -mt-[110px]  "
+                        className="lg:w-[264px] lg:h-[264px]  md:w-[200px] md:h-[200px] sm:w-[180px] sm:h-[180px] xs:w-[180px] xs:h-[180px] rounded-full  border-4 border-solid border-white -mt-[110px]  "
                         src={image?.length > 0 ? `${apiBasePath}/${image.slice(image.indexOf("/") + 1)}` : '/images/defaultUserPic/profile.jpg'}
                     />
                 </div>
                 <h1><span className='text-[35px] text-[#FCD200]'>{writerInfo?.name}</span> <span className='text-[#595D5B] text-[22px]'>{profileInfo?.designation}</span></h1>
 
-                <ul className='flex flex-row space-x-[25px] text-[#737373] text-[20px] mt-[28px]'>
+                <ul className='flex flex-row space-x-[25px] text-[#737373] text-[20px] lg:mt-[28px]'>
 
 
                     {birthDate?.length>0 && <li>
@@ -167,7 +167,7 @@ export default function WriterProfileBanner({
                     </li>}
 
                 </ul>
-                {isSelfWriter && <ul className={`text-[#737373] text-[20px] mt-[14px]  space-y-[14px] ${isSelfWriter ? '' : 'mb-[44px]'}`}>
+                {isSelfWriter && <ul className={`text-[#737373] text-[20px] lg:mt-[14px]  lg:space-y-[14px] ${isSelfWriter ? '' : 'mb-[44px]'}`}>
 
                     <li>
                         <span className='text-[#F9A106]'><i class="ri-map-pin-line"></i></span> <span className='text-[#737373]'>{profileInfo?.address}</span>

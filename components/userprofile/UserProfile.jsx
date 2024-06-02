@@ -157,7 +157,7 @@ export default function UserProfile({ slug }) {
           <div className='container'>
             <div className='lg:flex lg:flex-row'>
               {/* left part */}
-              <div className='lg:w-[30%]   mb-[110px]'>
+              <div className='lg:w-[30%]   lg:mb-[110px]'>
                 <UserProfileBanner
                   bio={bio}
                   profileInfo={profileInfo}
@@ -170,7 +170,7 @@ export default function UserProfile({ slug }) {
                 />
 
               </div>
-              <div className='lg:w-[60%] p-[40px]'>
+              <div className='lg:w-[60%] lg:p-[40px] mb-[40px]'>
                 <div>
                   <button
                     onClick={() => router.push('/user/createpost')}

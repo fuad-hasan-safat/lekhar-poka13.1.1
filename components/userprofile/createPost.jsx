@@ -267,7 +267,7 @@ export default function CreatePost() {
                             setContent('');
                             setSummary('');
 
-                            router.push('/user/alluserpost')
+                            router.push(`/user/${localStorage.getItem("uuid")}`)
 
                         } else {
                             console.error("Failed to update writing:", response.statusText);

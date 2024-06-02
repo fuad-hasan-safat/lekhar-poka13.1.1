@@ -26,13 +26,13 @@ export default function UserProfileBanner({
         <div className='container border'>
             <div className="flex justify-center">
                 <img
-                    className="w-[264px] h-[264px] rounded-full  border-4 border-solid border-white -mt-[110px]  "
+                    className="lg:w-[264px] lg:h-[264px]  md:w-[200px] md:h-[200px] sm:w-[180px] sm:h-[180px] xs:w-[180px] xs:h-[180px] rounded-full  border-4 border-solid border-white -mt-[110px]  "
                     src={profileInfo?.image?.length > 0 ? `${apiBasePath}/${profileInfo?.image.slice(profileInfo?.image.indexOf("/") + 1)}` : '/images/defaultUserPic/profile.jpg'}
                 />
             </div>
             <h1><span className='text-[35px] text-[#FCD200]'>{profileInfo?.name}</span> <span className='text-[#595D5B] text-[22px]'>{profileInfo?.designation}</span></h1>
 
-            <ul className='flex flex-row space-x-[25px] text-[#737373] text-[20px] mt-[28px]'>
+            <ul className='flex flex-row space-x-[25px] text-[#737373] text-[20px] lg:mt-[28px]'>
 
 
                 <li>
@@ -44,7 +44,7 @@ export default function UserProfileBanner({
                 </li>
 
             </ul>
-            <ul className='text-[#737373] text-[20px] mb-[44px] mt-[14px]  space-y-[14px]'>
+            <ul className='text-[#737373] text-[20px] lg:mb-[44px] md:mb-[40px] sm:mb-[22px] xs:mb-[22px]  space-y-[14px]'>
 
                 <li>
                     {profileInfo?.address?.length > 0 && <> <span className='text-[#F9A106]'><i class="ri-map-pin-line"></i></span> <span className='text-[#737373]'>{profileInfo?.address}</span></>}

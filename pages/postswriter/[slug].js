@@ -100,7 +100,7 @@ export default function PostOfWriterPage() {
                     <div className='container'>
                         <div className='lg:flex lg:flex-row'>
                             {/* left part */}
-                            <div className='lg:w-[30%]   mb-[110px]'>
+                            <div className='lg:w-[30%]   lg:mb-[110px]'>
 
                                 <WriterProfileBanner
                                     setProfileController={setProfileController}
@@ -123,7 +123,7 @@ export default function PostOfWriterPage() {
 
                             </div>
 
-                            <div className='lg:w-[60%] p-[40px]'>
+                            <div className='lg:w-[60%] lg:p-[40px] mb-[40px]'>
                                 <WriterPostList postList={postList}/>
                             </div>
 
