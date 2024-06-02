@@ -50,11 +50,6 @@ const SinglePostConponent = ({
           পুরোটা পড়ুন <i class="ri-arrow-right-s-line"></i>
 
         </button>
-
-
-
-
-
       </div>
 
     </>
