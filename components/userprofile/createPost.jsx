@@ -1,12 +1,5 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import {
-    BtnBold,
-    BtnItalic,
-    Editor,
-    EditorProvider,
-    Toolbar
-} from 'react-simple-wysiwyg';
 import Link from "next/link";
 import Select from "react-select";
 import { apiBasePath } from '../../utils/constant';
@@ -15,13 +8,15 @@ import CreateWriter from './createWriter';
 import Checkbox from '../common/Checkbox'
 import AudioFileUpload from './AudiofileUpload';
 import { useRouter } from 'next/router';
-
+import { FileUploader } from "react-drag-drop-files";
 import dynamic from 'next/dynamic';
 
 const CustomEditor = dynamic(() => {
     return import('../../components/custom-editor');
 }, { ssr: false });
 
+
+const fileTypes = ["JPEG", "PNG", "GIF"];
 
 
 export default function CreatePost() {
@@ -132,15 +127,8 @@ export default function CreatePost() {
     }, [isWriterAdded, isCategoryAdded])
 
 
-    // const handleCheckboxChange = (isChecked) => {
-    //     setCheckboxValue(isChecked);
-    //     // Handle the changed checkbox value in your application logic here
-    // };
-
     const categoryhandleChange = (selected) => {
         setSelectedOption(selected); // Selected option object
-
-
     };
 
     const writerhandleChange = (selected) => {
@@ -254,7 +242,7 @@ export default function CreatePost() {
                     console.log(writer, writerId)
 
                     try {
-                    // console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&   inside first &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+                        // console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&   inside first &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
 
 
                         const response = await fetch(`${apiBasePath}/posts`, {
@@ -264,7 +252,7 @@ export default function CreatePost() {
                             },
                             body: formData,
                         });
-                    // console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&   inside last &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+                        // console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&   inside last &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
 
                         // console.log("LIKHUN data save ----- response", response)
                         if (response.ok) {
@@ -278,7 +266,7 @@ export default function CreatePost() {
                             setWriters('');
                             setContent('');
                             setSummary('');
-                            
+
                             router.push('/user/alluserpost')
 
                         } else {
@@ -287,7 +275,7 @@ export default function CreatePost() {
                         }
                     } catch (error) {
                         console.error("Error creating post:", error);
-                         alert(error);
+                        alert(error);
                     }
                 } else {
                     alert('শিরোনাম, লেখার ধরণ ও সারসংক্ষেপ লিখুন')
@@ -301,27 +289,66 @@ export default function CreatePost() {
 
 
     //  image handle
-    const handleFileChange = async ({ target: { files } }) => {
-        const file = files && files[0];
-        if (file) {
-            setImage(file);
-            console.log({ file })
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setPreview(reader.result); // Set preview image
-            };
-            reader.readAsDataURL(file);
+    const handleFileChange = (acceptedFiles) => {
+        console.log({ acceptedFiles })
+
+        if (acceptedFiles?.length > 0) {
+            console.log('IS ARRAY ', acceptedFiles)
+            // const imageFiles = acceptedFiles.map((file) => {
+            //     return file.type.startsWith('image/');
+            // });
+
+            if (acceptedFiles[0].type.startsWith('image/')) {
+                const file = acceptedFiles[0];
+                if (file) {
+                    setImage(file);
+                    console.log({ file })
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        setPreview(reader.result); // Set preview image
+                    };
+                    reader.readAsDataURL(file);
+                }
+            } else {
+                alert('ছবি আপলোড করুন')
+            }
+
         }
 
     };
+
+    const handleAudioFile = (acceptedFiles) => {
+        console.log('file', acceptedFiles)
+        if (acceptedFiles?.length > 0) {
+            console.log('IS ARRAY ', acceptedFiles)
+            // const imageFiles = acceptedFiles.map((file) => {
+            //     return file.type.startsWith('image/');
+            // });
+
+            if (acceptedFiles[0].type.startsWith('audio/')) {
+                const file = acceptedFiles[0];
+                if (file) {
+                    setSelectedFile(file);
+                    console.log({ file })
+                  
+                }
+            } else {
+                alert('অডিও আপলোড করুন')
+            }
+
+        }
+
+    }
+
+
 
     return (
         <>
             <div className="lg:pr-6 md:pr-0 sm:pr-0 space-y-4 flex">
                 <div className='create__post__lft pr-[100px] w-[75%]'>
-                  <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">লেখার শিরোনাম</div>
+                    <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">লেখার শিরোনাম</div>
 
-                    <input style={{marginTop:'0'}}
+                    <input style={{ marginTop: '0' }}
                         onChange={handleTitle}
                         value={title}
                         className="w-full h-[62px] !mt-0 p-4 bg-[#FCF7E8] border-solid border-slate-800 rounded-[8px] text-[#00000080] leading-tight focus:outline-none focus:shadow-outline"
@@ -371,7 +398,7 @@ export default function CreatePost() {
                     </div>
                 </div>
                 <div className='create__post__rgt w-[25%]'>
-                  <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">আপনার লেখার ধরণ নির্বাচন করুন</div>
+                    <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">আপনার লেখার ধরণ নির্বাচন করুন</div>
 
                     <div>
                         <Select
@@ -417,50 +444,72 @@ export default function CreatePost() {
                             <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">ছবি আপলোড করুন (যদি থাকে)</div>
                         </div>
 
-                        <div className='border-2 border-dashed border-[#F9A106] rounded-md h-[220px] items-center place-content-center text-center justify-center' >
-                            <input
-                                type="file"
-                                onChange={handleFileChange}
-                                className="hidden"
-                                id="postbaner"
-                                accept="image/*"
-                            />
-                            <div className='flex items-center justify-center'>
-                                <img src='../images/user/image-plus-1.png' alt='Image Plus' />
-                            </div>
-                            <div className='create__border'>
-                                <p className='pt-[5px] pb-[5px]'>Drag your file(s) to start uploading</p>
-                                <img className='m-auto' src='../images/user/divider.png' alt='Divider' />
-                            </div>
-                            
-                            <label htmlFor='postbaner' className=" cursor-pointer flex items-center justify-center" >
-                                {preview.length > 0 && <img
-                                    src={preview}
-                                    height={100}
-                                    width={100}
-                                    // className="object-cover "
-                                    alt={preview}
-                                />
-                                }
-                                <div className=" mt-[15px]  file-btn w-[200px] h-[43px] text-[16px] " onClick={handleFileChange}>আপলোড</div>
+                        <FileUploader handleChange={handleFileChange} multiple={true} mimeTypes={['image/*']}
+                        >
+                            <div
 
-                            </label>
-                        </div>
+                                className='border-2 border-dashed border-[#F9A106] rounded-md h-[220px] items-center place-content-center text-center justify-center'>
+                                <div className='flex items-center justify-center'>
+                                    <img src='../images/user/image-plus-1.png' alt='Image Plus' />
+                                </div>
+                                <div className='create__border'>
+                                    <h1 className='pt-[5px] pb-[5px]'>এখানে ছবি ড্রাগ ড্রপ করুন </h1>
+                                    <img className='m-auto' src='../images/user/divider.png' alt='Divider' />
+                                </div>
+
+                                <label className=" cursor-pointer flex items-center justify-center" >
+                                    <div className=" mt-[15px]  file-btn w-[200px] h-[43px] text-[16px] " onClick={handleFileChange}>আপলোড</div>
+
+                                </label>
+                            </div>
+                        </FileUploader>
 
                     </div>
-                    <div className='bg-[#EEF1F7] mt-[15px] rounded-[10px] p-[12px]'>
+                    <div className='bg-[#EEF1F7] mt-[15px] rounded-[10px] p-[12px] w-full'>
                         <div className='flex justify-between items-center'>
-                            <img className='m-auto pr-[10px]' src='../images/user/audio-file.png' alt='Audio File ' />
-                            <p className='w-full'>
-                                <strong className='block'>Kobitar Gan.mp3</strong>
-                                <span className='flex justify-start items-center'>60 KB of 12O KB . <img className='m-auto pr-[10px]' src='../images/user/audio-icon.png' alt='Audio Icon ' /><strong>Uploading...</strong></span>
-                            </p>
+                            <img className='m-auto pr-[10px] w-[40px] h-[35px]' src='/images/likhun/imagelogo.png' alt='image File ' />
+                            <div className='w-full'>
+                                {/* <strong className='block'>Kobitar Gan.mp3</strong> */}
+                                <p className='w-full text-[#292D32]'>{image ? `File name: ${image?.name}` : "কোন ছবি নির্বাচন করা হয় নি"}</p>
+
+                                {/* <span className='flex justify-start items-center'>60 KB of 12O KB . <img className='m-auto pr-[10px]' src='../images/user/audio-icon.png' alt='Audio Icon ' /><strong>Uploading...</strong></span> */}
+                            </div>
                         </div>
                     </div>
                     <hr class="my-5 border-gray-200" />
                     <div className='text-black'>
                         <div className="text-[#F9A106] mt-[40px] font-bold text-[22px] !mb-[2px]">অডিও আপলোড করুন (যদি থাকে)</div>
-                        <AudioFileUpload selectedFile={selectedFile} setSelectedFile={setSelectedFile} />
+                        <FileUploader handleChange={handleAudioFile} multiple={true} mimeTypes={['audio/*']}
+                        >
+                            <div
+
+                                className='border-2 border-dashed border-[#F9A106] rounded-md h-[220px] items-center place-content-center text-center justify-center'>
+                                <div className='flex items-center justify-center'>
+                                    <img src='../images/user/image-audio.png' alt='Image Plus' />
+                                </div>
+                                <div className='create__border'>
+                                    <h1 className='pt-[5px] pb-[5px]'>এখানে অডিও ড্রাগ ড্রপ করুন </h1>
+                                    <img className='m-auto' src='../images/user/divider.png' alt='Divider' />
+                                </div>
+
+                                <label className=" cursor-pointer flex items-center justify-center" >
+                                    <div className=" mt-[15px]  file-btn w-[200px] h-[43px] text-[16px] " onClick={handleAudioFile}>আপলোড</div>
+
+                                </label>
+                            </div>
+                        </FileUploader>
+                        {/* <AudioFileUpload selectedFile={selectedFile} setSelectedFile={setSelectedFile} /> */}
+                    </div>
+                    <div className='bg-[#EEF1F7] mt-[15px] rounded-[10px] p-[12px] w-full'>
+                        <div className='flex justify-between items-center'>
+                            <img className='m-auto pr-[10px] w-[40px] h-[35px]' src='/images/likhun/imagelogo.png' alt='image File ' />
+                            <div className='w-full'>
+                                {/* <strong className='block'>Kobitar Gan.mp3</strong> */}
+                                <p className='w-full text-[#292D32]'>{selectedFile ? `File name: ${selectedFile?.name}` : "কোন অডিও নির্বাচন করা হয়নি"}</p>
+
+                                {/* <span className='flex justify-start items-center'>60 KB of 12O KB . <img className='m-auto pr-[10px]' src='../images/user/audio-icon.png' alt='Audio Icon ' /><strong>Uploading...</strong></span> */}
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <hr class="my-4 border-gray-200" />
