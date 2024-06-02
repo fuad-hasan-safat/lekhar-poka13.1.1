@@ -43,7 +43,7 @@ const ProcchodButtonList = ({
 
       {buttons.length &&
         buttons.map((button, index) => (
-          <ButtonItem
+          <ButtonItem 
             key={button._id}
             id={button._id}
             title={button.title}
