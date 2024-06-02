@@ -66,7 +66,7 @@ export default function UserProfile({ slug }) {
 
   useEffect(() => {
 
-    fetch(`${apiBasePath}/getprofile/${slug}`)
+    fetch(`${apiBasePath}/getprofile/${localStorage.getItem("uuid")}`)
       .then((response) => response.json())
       .then((data) => {
         console.log('pofile details on user profile--------------->>>>>>>', data);

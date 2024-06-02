@@ -94,7 +94,7 @@ useEffect(() => {
                           writer={post.writer}
                           writer_id={post.writer_id}
                           image={post?.image}
-                          content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 50).join(" ")}` : `${post.content.split(/\s+/).slice(0, 80).join(" ")}`} // Truncate content
+                          content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 20).join(" ")}` : `${post.content.split(/\s+/).slice(0, 30).join(" ")}`} // Truncate content
                           category={post.category}
                           postStatus={post.status}
                           isProfile={true}
