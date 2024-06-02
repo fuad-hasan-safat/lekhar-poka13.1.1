@@ -138,8 +138,8 @@ export default function SignInOption({
             {icon1?.length &&
                 <div className="flex place-content-center justify-center space-x-[8px]">
 
-                    <button
-                        className="flex border border-solid rounded-md shadow-md p-1 py-[9px] px-[5px]"
+                    <button 
+                        className="page__common__yello__btn flex border border-solid rounded-md shadow-md p-1 py-[9px] px-[5px]"
                         onClick={login}
                     >
                         <img

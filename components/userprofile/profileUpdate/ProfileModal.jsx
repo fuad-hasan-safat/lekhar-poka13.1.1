@@ -394,7 +394,7 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
                     <div className="flex justify-center text-[22px]">
                         <button
                             type="button"
-                            className="bg-white  text-[#F9A106]  py-[7px] px-[125px] rounded border border-[#F9A106] focus:outline-none focus:shadow-outline mr-2"
+                            className="page__common__yello__btn bg-white  text-[#F9A106]  py-[7px] px-[125px] rounded border border-[#F9A106] focus:outline-none focus:shadow-outline mr-2"
                             onClick={handleClose}
                         >
                             বাতিল
@@ -402,7 +402,7 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
                         <button
                             onClick={handleSubmit}
                             type="submit"
-                            className="ml-[6px] bg-[#FCA000] hover:bg-[#e3a230] text-white py-[7px] px-[125px] rounded focus:outline-none focus:shadow-outline"
+                            className="page__common__yello__btn ml-[6px] bg-[#FCA000] hover:bg-[#e3a230] text-white py-[7px] px-[125px] rounded focus:outline-none focus:shadow-outline"
                         >
                             আপডেট
                         </button>

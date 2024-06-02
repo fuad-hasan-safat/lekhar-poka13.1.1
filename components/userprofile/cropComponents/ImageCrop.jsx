@@ -114,7 +114,7 @@ const ImageCrop = ({setImageFile, image, type = "profilePic", setWriterImage}) =
                 />
                 {/* <div onClick={handleFileChange} className='button -mt-[53px]'><i className='ri-camera-line'></i></div> */}
 
-                <span onClick={handleFileChange} className='inline-block px-[50px] py-[8px] bg-[#F9A106] text-white rounded'><i class="ri-image-add-fill"></i> ছবি পরিবর্তন</span>
+                <span onClick={handleFileChange} className='page__common__yello__btn inline-block px-[50px] py-[8px] bg-[#F9A106] text-white rounded'><i class="ri-image-add-fill"></i> ছবি পরিবর্তন</span>
 
             </label>
 

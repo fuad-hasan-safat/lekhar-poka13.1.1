@@ -406,7 +406,7 @@ export default function CreatePost() {
                                 </div>
 
                                 <label className=" cursor-pointer flex items-center justify-center" >
-                                    <div className=" mt-[15px]  file-btn w-[200px] h-[43px] text-[16px] " onClick={handleFileChange}>আপলোড</div>
+                                    <div className="page__common__yello__btn mt-[15px]  file-btn w-[200px] h-[43px] text-[16px] " onClick={handleFileChange}>আপলোড</div>
 
                                 </label>
                             </div>
@@ -441,7 +441,7 @@ export default function CreatePost() {
                                 </div>
 
                                 <label className=" cursor-pointer flex items-center justify-center" >
-                                    <div className=" mt-[15px]  file-btn w-[200px] h-[43px] text-[16px] " onClick={handleAudioFile}>আপলোড</div>
+                                    <div className="page__common__yello__btn mt-[15px]  file-btn w-[200px] h-[43px] text-[16px] " onClick={handleAudioFile}>আপলোড</div>
 
                                 </label>
                             </div>
@@ -497,7 +497,7 @@ export default function CreatePost() {
                         <div className='w-[50%] pr-[12px]'>
                             <button
                                 onClick={handleSubmit}
-                                className="w-full px-[20px] h-[50px] text-[#FCA000] border border-[#FCA000] border-spacing-1 rounded-md text-[16px] items-center profile__btn__midl"
+                                className="page__common__yello__btn w-full px-[20px] h-[50px] text-[#FCA000] border border-[#FCA000] border-spacing-1 rounded-md text-[16px] items-center profile__btn__midl"
                             >
                                 পোস্ট করুন
                             </button>
@@ -505,7 +505,7 @@ export default function CreatePost() {
                         <div className='w-[50%] pl-[12px]'>
                             <button
                                 onClick={handleSubmit}
-                                className="w-full px-[20px] h-[50px] bg-[#FCA000] rounded-md text-[16px] text-white items-center profile__btn__midl"
+                                className="page__common__yello__btn w-full px-[20px] h-[50px] bg-[#FCA000] rounded-md text-[16px] text-white items-center profile__btn__midl"
                             >
                                 পোস্ট করুন
                             </button>
