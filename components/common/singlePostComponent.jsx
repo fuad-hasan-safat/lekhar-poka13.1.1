@@ -44,15 +44,10 @@ const SinglePostConponent = ({
 
         <button
           onClick={() => handleClick(id)}
-          className="text-yellow-500 text-xs"
+          className="bg-[#FCD200] text-[#484848] text-[16px] px-[14px] py-[3px] rounded"
         >
 
-          <Image
-            src={"/images/svgs/purotadekhun.svg"}
-            height={31}
-            width={130}
-            alt="next"
-          />
+          পুরোটা পড়ুন <i class="ri-arrow-right-s-line"></i>
 
         </button>
 
