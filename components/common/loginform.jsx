@@ -169,7 +169,7 @@ export default function LoginForm({ logreg, btntext }) {
             <button
               type="button"
               onClick={submitLogin}
-              className=" px-[90px] bg-[#F9A106] rounded-full text-[30px] text-white  h-[60px] text-center place-content-center"
+              className="page__common__yello__btn px-[90px] bg-[#F9A106] rounded-full text-[30px] text-white  h-[60px] text-center place-content-center"
             >
               {btntext}
             </button>
