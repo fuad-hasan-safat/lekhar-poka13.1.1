@@ -330,7 +330,7 @@ export default function CreatePost() {
                 if (file) {
                     setSelectedFile(file);
                     console.log({ file })
-                  
+
                 }
             } else {
                 alert('অডিও আপলোড করুন')
@@ -344,60 +344,8 @@ export default function CreatePost() {
 
     return (
         <>
-            <div className="lg:pr-6 md:pr-0 sm:pr-0 space-y-4 flex">
-                <div className='create__post__lft pr-[100px] w-[75%]'>
-                    <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">লেখার শিরোনাম</div>
-
-                    <input style={{ marginTop: '0' }}
-                        onChange={handleTitle}
-                        value={title}
-                        className="w-full h-[62px] !mt-0 p-4 bg-[#FCF7E8] border-solid border-slate-800 rounded-[8px] text-[#00000080] leading-tight focus:outline-none focus:shadow-outline"
-                        id="title"
-                        type="text"
-                        placeholder="শিরোনাম"
-                        required
-                    />
-                    <div className="text-[#F9A106] font-bold text-[22px] !mt-[30px] !mb-[2px]">সারসংক্ষেপ</div>
-                    <textarea
-                        onChange={handleSummary}
-                        value={summary}
-                        className="w-full h-[200px] p-4 !mt-0 bg-[#FCF7E8] border-solid border-slate-800 text-gray-700 rounded-[8px] leading-tight focus:outline-none focus:shadow-outline"
-                        id="summary"
-                        type="textarea"
-                        placeholder="লেখার মূল ভাবার্থ লিখুন"
-                        required
-                    />
-
-                    <div className="text-[#F9A106] font-bold text-[22px] !mt-[30px] !mb-[2px]">মূল লেখা</div>
-
-
-                    <div>
-                        <CustomEditor
-                            initialData=''
-                            setContent={setContent}
-                        />
-                    </div>
-
-                    <div className='submit__btn flex !mt-[40px]'>
-                        <div className='w-[50%] pr-[12px]'>
-                            <button
-                                onClick={handleSubmit}
-                                className="w-full px-[20px] h-[50px] text-[#FCA000] border border-[#FCA000] border-spacing-1 rounded-md text-[16px] items-center profile__btn__midl"
-                            >
-                                পোস্ট করুন
-                            </button>
-                        </div>
-                        <div className='w-[50%] pl-[12px]'>
-                            <button
-                                onClick={handleSubmit}
-                                className="w-full px-[20px] h-[50px] bg-[#FCA000] rounded-md text-[16px] text-white items-center profile__btn__midl"
-                            >
-                                পোস্ট করুন
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div className='create__post__rgt w-[25%]'>
+            <div className="lg:pr-6 md:pr-0 sm:pr-0 space-y-4 lg:flex">
+                <div className='create__post__rgt lg:w-[25%] lg:order-last'>
                     <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">আপনার লেখার ধরণ নির্বাচন করুন</div>
 
                     <div>
@@ -470,7 +418,7 @@ export default function CreatePost() {
                             <img className='m-auto pr-[10px] w-[40px] h-[35px]' src='/images/likhun/imagelogo.png' alt='image File ' />
                             <div className='w-full'>
                                 {/* <strong className='block'>Kobitar Gan.mp3</strong> */}
-                                <p className='w-full text-[#292D32]'>{image ? `File name: ${image?.name}` : "কোন ছবি নির্বাচন করা হয় নি"}</p>
+                                <p className='w-full text-[#292D32]'>{image ? `File name: ${image?.name}` : "কোন ছবি নির্বাচন করা হয়নি"}</p>
 
                                 {/* <span className='flex justify-start items-center'>60 KB of 12O KB . <img className='m-auto pr-[10px]' src='../images/user/audio-icon.png' alt='Audio Icon ' /><strong>Uploading...</strong></span> */}
                             </div>
@@ -512,6 +460,59 @@ export default function CreatePost() {
                         </div>
                     </div>
                 </div>
+                <div className='create__post__lft lg:pr-[100px] lg:w-[75%] lg:order-first'>
+                    <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">লেখার শিরোনাম</div>
+
+                    <input style={{ marginTop: '0' }}
+                        onChange={handleTitle}
+                        value={title}
+                        className="w-full h-[62px] !mt-0 p-4 bg-[#FCF7E8] border-solid border-slate-800 rounded-[8px] text-[#00000080] leading-tight focus:outline-none focus:shadow-outline"
+                        id="title"
+                        type="text"
+                        placeholder="শিরোনাম"
+                        required
+                    />
+                    <div className="text-[#F9A106] font-bold text-[22px] !mt-[30px] !mb-[2px]">সারসংক্ষেপ</div>
+                    <textarea
+                        onChange={handleSummary}
+                        value={summary}
+                        className="w-full h-[200px] p-4 !mt-0 bg-[#FCF7E8] border-solid border-slate-800 text-gray-700 rounded-[8px] leading-tight focus:outline-none focus:shadow-outline"
+                        id="summary"
+                        type="textarea"
+                        placeholder="লেখার মূল ভাবার্থ লিখুন"
+                        required
+                    />
+
+                    <div className="text-[#F9A106] font-bold text-[22px] !mt-[30px] !mb-[2px]">মূল লেখা</div>
+
+
+                    <div>
+                        <CustomEditor
+                            initialData=''
+                            setContent={setContent}
+                        />
+                    </div>
+
+                    <div className='submit__btn flex  !mt-[40px]'>
+                        <div className='w-[50%] pr-[12px]'>
+                            <button
+                                onClick={handleSubmit}
+                                className="w-full px-[20px] h-[50px] text-[#FCA000] border border-[#FCA000] border-spacing-1 rounded-md text-[16px] items-center profile__btn__midl"
+                            >
+                                পোস্ট করুন
+                            </button>
+                        </div>
+                        <div className='w-[50%] pl-[12px]'>
+                            <button
+                                onClick={handleSubmit}
+                                className="w-full px-[20px] h-[50px] bg-[#FCA000] rounded-md text-[16px] text-white items-center profile__btn__midl"
+                            >
+                                পোস্ট করুন
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
                 <hr class="my-4 border-gray-200" />
             </div>
         </>

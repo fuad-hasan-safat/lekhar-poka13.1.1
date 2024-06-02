@@ -71,7 +71,7 @@ export default function UserPostTitleAndcover({ id, title, writer, writer_id, im
           </a>
         </div>
 
-        <div className="w-[400px] relative">
+        <div className="lg:w-[400px] md:w-[270px] sm:w-[270px] xs:w-[270px] relative">
 
           <div className="pb-[8px] ">
             <h1 className="lg:text-[32] md:text-[28px] sm:text-[28px] xs:text-[28px] pr-[50px] text-yellow-400 font-bold">{title}</h1>
