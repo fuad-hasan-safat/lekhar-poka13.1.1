@@ -120,7 +120,7 @@ const Lekhok = () => {
               </button>
               <button
                 onClick={handleNextPage}
-                className="pl-4 bg-white rounded-md border border-gray-300 w-[50px] h-[43px] ">
+                className="pl-4 bg-white   rounded-md border border-gray-300 w-[50px] h-[43px] ">
 
                 <svg
                   width="24"
