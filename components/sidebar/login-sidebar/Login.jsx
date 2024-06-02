@@ -120,7 +120,7 @@ export default function Login() {
             {localStorage.getItem("usertype") === 'admin' &&
               <button
                 onClick={() => router.push('/admin/admin')}
-                className="text-white rounded-[6px] bg-[#F9A106] px-[20px] h-[40px] mt-[25px]"
+                className="page__common__yello__btn text-white rounded-[6px] bg-[#F9A106] px-[20px] h-[40px] mt-[25px]"
               >অ্যাডমিন প্যানেল</button>
             }
 
@@ -133,7 +133,7 @@ export default function Login() {
         <div>
           <div>
 
-            <div className="text-[20px] text-yellow-500 h-[28px]  pt-5 pb-[28px]">
+            <div className="page__common__yello__btn text-[20px] text-yellow-500 h-[28px]  pt-5 pb-[28px]">
               লগইন
             </div>
 
