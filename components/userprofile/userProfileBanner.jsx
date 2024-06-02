@@ -23,7 +23,7 @@ export default function UserProfileBanner({
     const handleClose = () => setShowModal(false);
 
     return (
-        <div className='container'>
+        <div className='container border'>
             <div className="flex justify-center">
                 <img
                     className="w-[264px] h-[264px] rounded-full  border-4 border-solid border-white -mt-[110px]  "
