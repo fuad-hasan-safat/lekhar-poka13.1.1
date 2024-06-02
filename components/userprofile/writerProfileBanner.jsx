@@ -184,7 +184,7 @@ export default function WriterProfileBanner({
 
              { isSelfWriter &&  <div className='flex justify-center mt-[44px] mb-[44px]'>
                     <button
-                        className='py-[13px] bg-[#F9A106] hover:bg-[#c67256] px-[75px] p-1 rounded-md text-white text-[16px]'
+                        className='page__common__yello__btn py-[13px] bg-[#F9A106] px-[75px] p-1 rounded-md text-white text-[16px]'
                         onClick={() => followUserhandler(profileInfo?.user_id, userUuid)}
                     >
                         <span><i class="ri-add-box-fill"></i></span> <span> {isAlreadyFollowing ? 'অনুসরণ করছেন' : 'অনুসরণ করুন'}</span>
