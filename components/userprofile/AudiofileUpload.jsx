@@ -38,7 +38,7 @@ const AudioFileUpload = ({ selectedFile, setSelectedFile }) => {
     };
 
     return (
-        <div className="audio-upload text-black border border-solid border-gray-200 rounded-md h-[215px] items-center place-content-center">
+        <div className="audio-upload text-black border-2 border-dashed border-[#F9A106] rounded-md h-[215px] items-center place-content-center">
             <input
             id="audio"
                 ref={inputRef}
@@ -47,11 +47,17 @@ const AudioFileUpload = ({ selectedFile, setSelectedFile }) => {
                 onChange={handleFileChange}
                 style={{ display: "none" }}
             />
-
+            <div className='flex items-center justify-center'>
+                <img src='../images/user/image-audio.png' alt='Image Plus' />
+            </div>
+            <div className='create__border'>
+                <p className='pt-[5px] pb-[5px]'>Drag your file(s) to start uploading</p>
+                <img className='m-auto' src='../images/user/divider.png' alt='Divider' />
+            </div>
             {/* Button to trigger the file input dialog */}
             {!selectedFile && (
-                <button className="file-btn w-[60px] text-[22px] " onClick={onChooseFile}>
-                    <i class="ri-folder-music-line"></i>
+                <button className="file-btn mt-[10px] w-[200px] h-[43px] text-[16px] " onClick={onChooseFile}>
+                    আপলোড
                 </button>
             )}
 

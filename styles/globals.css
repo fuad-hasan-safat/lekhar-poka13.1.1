@@ -54,13 +54,28 @@ body {
   color: black; /* Set the default text color to black */
 }
 .ck-editor__editable {
-height: 700px;
+height: 492px;
 background-color: #FCF7E8;
 }
 .ck-focused{
   /* display: none; */
 }
-
+.ck-editor__editable{
+  background: #FCF7E8 !important;
+  border-radius:0 0 8px 8px !important;
+}
+.ck.ck-editor__top .ck-sticky-panel .ck-sticky-panel__content {
+  border-width: 1px 1px 1px !important;
+}
+.ck.ck-editor__editable_inline {
+  border: none !important;
+}
+.css-1u9des2-indicatorSeparator{
+  display: none !important;
+}
+.css-13cymwt-control {
+  min-height: 45px !important;
+}
 
 .progress-bar {
   background-color: #fdcb43 !important;
