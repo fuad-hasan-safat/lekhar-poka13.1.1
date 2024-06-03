@@ -74,7 +74,7 @@ export default function PostDetails() {
 
   let selectedcoverImage = writerImage;
 
-  if(data?.image?.length>0){
+  if (data?.image?.length > 0) {
     selectedcoverImage = data?.image;
   }
 
@@ -121,6 +121,8 @@ export default function PostDetails() {
                               writer={data?.writer}
                               writer_id={data?.writer_id}
                               image={selectedcoverImage}
+                              uploadedBy={data?.uploader_name}
+                              updatedAt={data?.updatedAt}
                               catagory={data?.category}
                               url={asPath}
                             />

@@ -93,7 +93,7 @@ export default function ProfilePostLeftContentUnApproved() {
                           content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 20).join(" ")}` : `${post.content.split(/\s+/).slice(0, 30).join(" ")}`} // Truncate content
                           category={post.category}
                           postStatus={post.status}
-                          uploadedBy={post.uploaded_by}
+                          uploadedBy={post?.uploader_name}
                           updatedAt={post?.updatedAt}
                           isProfile={true}
 
