@@ -171,7 +171,7 @@ export default function UserProfile({ slug }) {
 
               </div>
               <div className='lg:w-[60%] lg:p-[60px] mb-[40px]'>
-                <div>
+                <div className='mb-[50px]'>
                   <button
                     onClick={() => router.push('/user/createpost')}
                     className='page__common__yello__btn  px-[50px] py-[18px] bg-[#F9A106] text-white rounded-[16px]'><i class="ri-add-box-fill"></i> নতুন লেখা যুক্ত করুন
