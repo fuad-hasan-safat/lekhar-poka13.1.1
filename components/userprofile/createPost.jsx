@@ -398,7 +398,7 @@ export default function CreatePost() {
 
                                 className='border-2 border-dashed border-[#F9A106] rounded-md h-[220px] items-center place-content-center text-center justify-center'>
                                 <div className='flex items-center justify-center'>
-                                    <img src='../images/user/image-plus-1.png' alt='Image Plus' />
+                                    <img src='/images/user/image-plus-1.png' alt='Image Plus' />
                                 </div>
                                 <div className='create__border'>
                                     <h1 className='pt-[5px] pb-[5px]'>এখানে ছবি ড্রাগ ড্রপ করুন </h1>

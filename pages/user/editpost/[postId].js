@@ -1,5 +1,5 @@
-'use client'
-import React, { useEffect, useState } from 'react'
+
+import React from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router';
 import { apiBasePath } from '../../../utils/constant';
@@ -8,43 +8,9 @@ import EditPost from '../../../components/userprofile/EditPost';
 
 
 export default function Createpost() {
-    const router = useRouter();
-    const slug = router.query.postId;
-    console.log({router})
 
-    const [fetchedPost, setFeathedPost] = useState([]);
-
-    useEffect(() => {
-
-        async function fetchDataAsync() {
-
-            try {
-                const result = await axios.get(
-                    `${apiBasePath}/getpost/${slug}`
-                );
-                console.log('hello slug---', router)
-
-                setFeathedPost(result.data.object)
-                console.log('post page single postss EDIT ====================>>>>>>>>>>>>>>>>>>>>', result.data.object)
-                if (result.data.object.audio?.length > 0) {
-                } else {
-                }
-
-                if (result.data.status === 'success') {
-                } else if (result.data.status === 'failed') {
-                }
-
-            } catch (error) {
-                // setError(error)    
-            } finally {
-            }
-        }
-
-        fetchDataAsync();
-    }, [router.query]);
 
     return (
-        router.isReady &&
         <>
             <div>
                 <Head>
@@ -63,7 +29,7 @@ export default function Createpost() {
                         <div className="w-full">
 
                             {/* <CreatePost /> */}
-                            <EditPost prevPostData={fetchedPost}/>
+                            <EditPost prevPostData/>
 
                         </div>
                     </div>

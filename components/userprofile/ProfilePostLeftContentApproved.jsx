@@ -23,15 +23,15 @@ export default function ProfilePostLeftContentApproved() {
   const [username, setUsername] = useState("");
   const [slug, setUserUuid] = useState("");
   const [userToken, setUserToken] = useState("");
-  
-useEffect(() => {
-  setUsername(localStorage.getItem("name") || "");
-  setUserToken(localStorage.getItem("token") || "");
-  setUserUuid(localStorage.getItem("uuid") || "");
 
-  console.log({username, slug, userToken})
+  useEffect(() => {
+    setUsername(localStorage.getItem("name") || "");
+    setUserToken(localStorage.getItem("token") || "");
+    setUserUuid(localStorage.getItem("uuid") || "");
 
-}, []);
+    console.log({ username, slug, userToken })
+
+  }, []);
 
 
   useEffect(() => {
@@ -76,7 +76,7 @@ useEffect(() => {
         <Loading />
       ) : error ? (
         <div className="mt-[70px]">আপনার লেখা খুঁজে পাওয়া যাচ্ছে না । </div>
-        
+
       ) : (
         <>
           {/* <div className='container'> */}
@@ -97,6 +97,8 @@ useEffect(() => {
                           content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 20).join(" ")}` : `${post.content.split(/\s+/).slice(0, 30).join(" ")}`} // Truncate content
                           category={post.category}
                           postStatus={post.status}
+                          uploadedBy={post.uploaded_by}
+                          updatedAt={post?.updatedAt}
                           isProfile={true}
 
                         />
@@ -140,7 +142,7 @@ useEffect(() => {
             </button>
           </div>
           }
-        
+
         </>
       )}
     </div>
