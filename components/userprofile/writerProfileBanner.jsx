@@ -158,11 +158,11 @@ export default function WriterProfileBanner({
                 <ul className='flex flex-row space-x-[25px] text-[#737373] text-[20px] lg:mt-[28px]'>
 
 
-                    {birthDate?.length>0 && <li>
+                    {birthDate?.length > 0 && <li>
                         <span className='text-[#F9A106]'><i class="ri-calendar-2-line"></i></span> <span className='text-[#737373]'>{birthDate}</span>
                     </li>}
 
-                    {isSelfWriter && profileInfo?.gender?.length>0 && <li>
+                    {isSelfWriter && profileInfo?.gender?.length > 0 && <li>
                         <span className='text-[#F9A106]'>{profileInfo?.gender === 'male' ? <i class="ri-men-line"></i> : <i class="ri-women-line"></i>}</span> <span className='capitalize text-[#737373]'>{profileInfo?.gender}</span>
                     </li>}
 
@@ -182,7 +182,7 @@ export default function WriterProfileBanner({
                     </li>
                 </ul>}
 
-             { isSelfWriter &&  <div className='w-full mt-[44px] mb-[44px]'>
+                {isSelfWriter && <div className='w-full mt-[44px] mb-[44px]'>
                     <button
                         className='page__common__yello__btn w-full py-[13px] bg-[#F9A106] px-[75px] p-1 rounded-md text-white text-[16px]'
                         onClick={() => followUserhandler(profileInfo?.user_id, userUuid)}
@@ -191,7 +191,7 @@ export default function WriterProfileBanner({
                     </button>
                 </div>}
 
-                <hr></hr>
+                {isSelfWriter && <hr></hr>}
 
 
                 {isSelfWriter && <div className='mt-[30px] mb-[40px] flex justify-center'>
@@ -203,7 +203,7 @@ export default function WriterProfileBanner({
                         unApprovedPost={unapprovedPost} />
                 </div>}
 
-                <hr></hr>
+                {isSelfWriter && <hr></hr>}
 
                 {rendredBio?.length > 0 && <div className='mb-[25px]'>
                     <h1 className='mt-[30px] text-[#F9A106] text-[20px]'>সংক্ষিপ্ত বায়ো</h1>

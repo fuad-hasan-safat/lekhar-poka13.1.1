@@ -12,12 +12,12 @@ export default function UserPostTitleAndcover({
   postStatus = false,
   isProfile = false,
   uploadedBy = '',
-  updatedAt = '১৩ জানুয়ারি, ২০২৪',
+  updatedAt = '',
 }) {
   const router = useRouter()
   const [isMoreClick, setIsMoreClick] = useState(false)
 
-  console.log({uploadedBy})
+  console.log({ updatedAt })
 
   function moreOptionHandler() {
     setIsMoreClick((prevState) => !prevState)
@@ -104,25 +104,25 @@ export default function UserPostTitleAndcover({
         <div className="lg:w-[400px] md:w-[270px] sm:w-[270px] xs:w-[270px] relative">
 
           <div className="lg:pb-[2px]  ">
-            <h1 className="lg:text-[32] md:text-[28px] sm:text-[24px] xs:text-[22px] leading-7 lg:pr-[50px] text-yellow-400 font-bold">{title}</h1>
+            <h1 className="lg:text-[32] md:text-[28px] sm:text-[24px] xs:text-[22px] leading-7 lg:pr-[50px] text-yellow-400 font-bold mb-[5px]">{title}</h1>
           </div>
 
           <a className="lg:text-[22px] md:text-[16px] sm:text-[16px] xs:text-[14px]  text-[#595D5B] font-semibold " href={`/postswriter/${writer_id}`} >{writer}</a>
 
           <div className="text-[16px] font-thin leading-1">
             <a className="flex place-content-start items-center lg:text-xl md:text-[16px] sm:text-[16px] xs:text-[16px]  text-[#595D5B]" href={`/postswriter/${writer_id}`} >
-              {((uploadedBy !== null) && uploadedBy.length>0 )&& <> <span className='inline-block mr-[10px]'>
+              {((uploadedBy !== null) && uploadedBy.length > 0) && <> <span className='inline-block mr-[10px]'>
                 <img className="w-[24px] h-[24px] rounded-full block m-auto shadow-lg" src={image === '' ? `/images/user/coverimage.jpg` : `${apiBasePath}/${image?.slice(image.indexOf('/') + 1)}`} alt="" />
               </span>
                 <span className='inline-block text-[16px] color-[#595D5B] mr-[15px]'>
                   {uploadedBy}
                 </span></>}
-              <span className='inline-block '>
+              {updatedAt.length > 0 && <>  <span className='inline-block '>
                 <img src='/images/usericons/calender.svg' />
               </span>
-              <span className='inline-block ml-[10px] text-[16px] color-[#595D5B]'>
-                {formattedDate}
-              </span>
+                <span className='inline-block ml-[10px] text-[16px] color-[#595D5B]'>
+                  {formattedDate}
+                </span></>}
             </a>
           </div>
 
