@@ -95,22 +95,19 @@ export default function UserPostTitleAndcover({
 
         <div className="profile__auth__img">
           <a href={`/post/${id}`} >
-            <img className="w-[120px] h-[120px] rounded-[10px] block m-auto" src={image === '' ? `/images/user/coverimage.jpg` : `${apiBasePath}/${image?.slice(image.indexOf('/') + 1)}`} alt="" />
+            <img className="lg:w-[120px] lg:h-[120px] md:w-[110px] md:h-[110px] sm:w-[100px] sm:h-[100px] xs:w-[80px] xs:h-[80px] rounded-[10px] block m-auto" src={image === '' ? `/images/user/coverimage.jpg` : `${apiBasePath}/${image?.slice(image.indexOf('/') + 1)}`} alt="" />
           </a>
         </div>
 
         <div className="lg:w-[400px] md:w-[270px] sm:w-[270px] xs:w-[270px] relative">
 
           <div className="lg:pb-[2px]  ">
-            <h1 className="lg:text-[32] md:text-[28px] sm:text-[24px] xs:text-[24px] leading-7 lg:pr-[50px] text-yellow-400 font-bold">{title}</h1>
+            <h1 className="lg:text-[32] md:text-[28px] sm:text-[24px] xs:text-[22px] leading-7 lg:pr-[50px] text-yellow-400 font-bold">{title}</h1>
           </div>
 
+          <a className="lg:text-[22px] md:text-[16px] sm:text-[16px] xs:text-[14px]  text-[#595D5B] font-semibold " href={`/postswriter/${writer_id}`} >{writer}</a>
 
-          <div className="pb-[5px]">
-            <a className="lg:text-[22px] md:text-[16px] sm:text-[16px] xs:text-[16px]  text-[#595D5B] font-semibold " href={`/postswriter/${writer_id}`} >{writer}</a>
-          </div>
-
-          <div className="text-[16px] font-thin">
+          <div className="text-[16px] font-thin leading-1">
             <a className="flex place-content-start items-center lg:text-xl md:text-[16px] sm:text-[16px] xs:text-[16px]  text-[#595D5B]" href={`/postswriter/${writer_id}`} >
               <span className='inline-block mr-[10px]'>
                 <img className="w-[24px] h-[24px] rounded-full block m-auto shadow-lg" src={image === '' ? `/images/user/coverimage.jpg` : `${apiBasePath}/${image?.slice(image.indexOf('/') + 1)}`} alt="" />

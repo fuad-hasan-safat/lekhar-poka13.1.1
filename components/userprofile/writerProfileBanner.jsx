@@ -194,7 +194,7 @@ export default function WriterProfileBanner({
                 <hr></hr>
 
 
-                {isSelfWriter && <div className='mt-[44px] mb-[44px] flex justify-center'>
+                {isSelfWriter && <div className='mt-[30px] mb-[40px] flex justify-center'>
                     <UserAchivement
                         setProfileController={setProfileController}
                         follower={profileStats?.follower}

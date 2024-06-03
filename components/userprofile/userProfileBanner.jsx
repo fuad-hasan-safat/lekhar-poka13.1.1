@@ -40,7 +40,7 @@ export default function UserProfileBanner({
                 </li>
 
                 <li>
-                    {profileInfo?.gender?.length > 0 && <> <span className='text-[#F9A106] ml-[30px]'>{profileInfo?.gender === 'male' ? <img src='/images/usericons/sexicon.svg' /> : <i class="ri-women-line"></i>}</span> <span className='capitalize text-[#737373]'>{profileInfo?.gender}</span> </>}
+                    {profileInfo?.gender?.length > 0 && <> <span className='text-[#F9A106] ml-[30px]'>{profileInfo?.gender === 'male' ? <img src='/images/usericons/sexicon.svg' /> : <img src='/images/usericons/sexicon.svg' />}</span> <span className='capitalize text-[#737373]'>{profileInfo?.gender}</span> </>}
                 </li>
 
             </ul>
