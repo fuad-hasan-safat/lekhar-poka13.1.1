@@ -94,6 +94,7 @@ export default function ProfilePostLeftContentUnApproved() {
                           category={post.category}
                           postStatus={post.status}
                           uploadedBy={post.uploaded_by}
+                          updatedAt={post?.updatedAt}
                           isProfile={true}
 
                         />

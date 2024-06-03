@@ -3,11 +3,32 @@ import { apiBasePath } from '../../utils/constant'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 
-export default function UserPostTitleAndcover({ id, title, writer, writer_id, image = '', postStatus = false, isProfile = false, uploadedBy }) {
+export default function UserPostTitleAndcover({
+  id,
+  title,
+  writer,
+  writer_id,
+  image = '',
+  postStatus = false,
+  isProfile = false,
+  uploadedBy,
+  updatedAt = '১৩ জানুয়ারি, ২০২৪',
+}) {
   const router = useRouter()
   const [isMoreClick, setIsMoreClick] = useState(false)
+
   function moreOptionHandler() {
     setIsMoreClick((prevState) => !prevState)
+  }
+
+  const formattedDate = formatDate(updatedAt);
+
+  function formatDate(isoString) {
+    const date = new Date(isoString);
+    const year = date.getUTCFullYear();
+    const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+    const day = String(date.getUTCDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 
 
@@ -89,12 +110,21 @@ export default function UserPostTitleAndcover({ id, title, writer, writer_id, im
             <a className="lg:text-xl md:text-[16px] sm:text-[16px] xs:text-[16px]  text-[#595D5B] font-semibold " href={`/postswriter/${writer_id}`} >{writer}</a>
           </div>
 
-          <div className="">
-            <a className="lg:text-xl md:text-[16px] sm:text-[16px] xs:text-[16px]  text-[#595D5B] font-semibold " href={`/postswriter/${writer_id}`} >
+          <div className="text-[16px] font-thin">
+            <a className="lg:text-xl md:text-[16px] sm:text-[16px] xs:text-[16px]  text-[#595D5B] table" href={`/postswriter/${writer_id}`} >
               <span className='inline-block mr-[10px]'>
                 <img className="w-[24px] h-[24px] rounded-full block m-auto shadow-lg" src={image === '' ? `/images/user/coverimage.jpg` : `${apiBasePath}/${image?.slice(image.indexOf('/') + 1)}`} alt="" />
               </span>
-              <span className='inline-block'> {uploadedBy}</span>  </a>
+              <span className='inline-block'>
+                অ্যাডমিন
+              </span>
+              <span className='inline-block ml-[15px]'>
+                <img src='/images/usericons/calender.svg' />
+              </span>
+              <span className='inline-block ml-[10px]'>
+                {formattedDate}
+              </span>
+            </a>
           </div>
 
           {isProfile &&

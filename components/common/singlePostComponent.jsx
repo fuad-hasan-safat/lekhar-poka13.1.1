@@ -11,6 +11,7 @@ const SinglePostConponent = ({
   image,
   postStatus,
   uploadedBy,
+  updatedAt,
   isProfile,
 }) => {
   const router = useRouter();
@@ -30,6 +31,7 @@ const SinglePostConponent = ({
         image={image}
         postStatus={postStatus}
         uploadedBy={uploadedBy}
+        updatedAt={updatedAt}
         isProfile={isProfile}
       />
 
