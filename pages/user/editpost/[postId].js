@@ -29,7 +29,7 @@ export default function Createpost() {
                         <div className="w-full">
 
                             {/* <CreatePost /> */}
-                            <EditPost prevPostData/>
+                            <EditPost />
 
                         </div>
                     </div>

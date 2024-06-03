@@ -236,8 +236,9 @@ export default function CreatePost() {
                 formData.append("uploaded_by", userUuid);
                 formData.append("new_writer", isWriter);
 
+                console.log('form data ---', userUuid)
 
-                if (title && selectedOption && summary) {
+                if (title && selectedOption && summary ) {
 
                     console.log(writer, writerId)
 

@@ -29,6 +29,7 @@ export default function EditPost() {
   const [content, setContent] = useState('')
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState('');
+  const [audioPreview, setAudioPreview] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
 
 
@@ -64,8 +65,8 @@ export default function EditPost() {
       setFeathedPost(result.data.object)
       setFormData(result.data.object)
       setContent(result.data.object?.content)
-      setImage(result.data.object?.image)
-      setSelectedFile(result.data.object?.audio)
+      setPreview(result.data.object?.image)
+      setAudioPreview(result.data.object?.audio)
       console.log('post page single postss EDIT ====================>>>>>>>>>>>>>>>>>>>>', result.data.object)
       if (result.data.object.audio?.length > 0) {
       } else {
@@ -91,6 +92,8 @@ export default function EditPost() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    console.log({ name, value })
     setFormData({ ...formData, [name]: value });
   };
 
@@ -168,7 +171,62 @@ export default function EditPost() {
   }
 
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
+    // Determine which fields have changed
+    const changedData = {};
+    // for (const key in formData) {
+    //     if (formData[key] !== originalData[key]) {
+    //         changedData[key] = formData[key];
+    //     }
+    // }
+
+    // console.log({changedData})
+
+    const editFormData = new FormData();
+
+    editFormData.append('title', formData?.title);
+    editFormData.append('summary', formData?.summary);
+    editFormData.append('content', content);
+
+    if (selectedOption) {
+      editFormData.append('category', selectedOption?.label);
+    }
+
+    if (image) {
+      editFormData.append("image", image);
+    }
+
+    if (selectedFile) {
+      editFormData.append("file", selectedFile);
+    }
+
+
+
+
+
+
+    try {
+      // const response = await axios.put(`${apiBasePath}/posts/${formData?._id}`, changedData);
+      const response = await fetch(`${apiBasePath}/posts/${formData?._id}`, {
+        method: "PUT",
+        headers: {
+
+        },
+        body: editFormData,
+      });
+      console.log('edit response', response);
+      // Handle successful update
+    } catch (error) {
+      console.error(error);
+      // Handle error
+    }
+
+  };
+
+
+  let postImage = preview;
 
 
   return (
@@ -177,11 +235,11 @@ export default function EditPost() {
       <div className="lg:pr-6 md:pr-0 sm:pr-0 space-y-4 lg:flex">
         <div className='create__post__rgt lg:w-[25%] lg:order-last'>
           <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">আপনার লেখার ধরণ নির্বাচন করুন</div>
-
+{/* <p></p> */}
           <div>
             <Select
-              // value={selectedOption}
-              // onChange={categoryhandleChange}
+              value={selectedOption}
+              onChange={categoryhandleChange}
               styles={customStyles}
               options={Categoryoptions}
             />
@@ -219,7 +277,8 @@ export default function EditPost() {
               <img className='m-auto pr-[10px] w-[40px] h-[35px]' src='/images/likhun/imagelogo.png' alt='image File ' />
               <div className='w-full'>
                 {/* <strong className='block'>Kobitar Gan.mp3</strong> */}
-                <p className='w-full text-[#292D32]'>{image ? `File name: ${image?.name}` : "কোন ছবি নির্বাচন করা হয়নি"}</p>
+                {image ? <p className='w-full text-[#292D32]'>{image ? `File name: ${image?.name}` : "কোন ছবি নির্বাচন করা হয়নি"}</p> :
+                  <p className='w-full text-[#292D32]'>{preview?.length > 0 ? `File name: ${preview?.slice(preview?.indexOf('/'))}` : "কোন ছবি নির্বাচন করা হয়নি"}</p>}
 
                 {/* <span className='flex justify-start items-center'>60 KB of 12O KB . <img className='m-auto pr-[10px]' src='../images/user/audio-icon.png' alt='Audio Icon ' /><strong>Uploading...</strong></span> */}
               </div>
@@ -254,9 +313,10 @@ export default function EditPost() {
               <img className='m-auto pr-[10px] w-[40px] h-[35px]' src='/images/likhun/imagelogo.png' alt='image File ' />
               <div className='w-full'>
                 {/* <strong className='block'>Kobitar Gan.mp3</strong> */}
-                <p className='w-full text-[#292D32]'>{selectedFile ? `File name: ${selectedFile?.name}` : "কোন অডিও নির্বাচন করা হয়নি"}</p>
+                {selectedFile ? <p className='w-full text-[#292D32]'>{selectedFile ? `File name: ${selectedFile?.name}` : "কোন অডিও নির্বাচন করা হয়নি"}</p> :
+                 <p className='w-full text-[#292D32]'>{audioPreview?.length> 0 ? `File name: ${audioPreview?.slice(audioPreview?.indexOf('/'))}` : "কোন অডিও নির্বাচন করা হয়নি"}</p>}
 
-                {/* <span className='flex justify-start items-center'>60 KB of 12O KB . <img className='m-auto pr-[10px]' src='../images/user/audio-icon.png' alt='Audio Icon ' /><strong>Uploading...</strong></span> */}
+                {/* <span className='flex audioPreview justify-start items-center'>60 KB of 12O KB . <img className='m-auto pr-[10px]' src='../images/user/audio-icon.png' alt='Audio Icon ' /><strong>Uploading...</strong></span> */}
               </div>
             </div>
           </div>
@@ -270,6 +330,7 @@ export default function EditPost() {
             className="w-full h-[62px] !mt-0 p-4 bg-[#FCF7E8] border-solid border-slate-800 rounded-[8px] text-[#00000080] leading-tight focus:outline-none focus:shadow-outline"
             id="title"
             type="text"
+            name="title"
             placeholder="শিরোনাম"
             required
           />
@@ -280,6 +341,7 @@ export default function EditPost() {
             className="w-full h-[200px] p-4 !mt-0 bg-[#FCF7E8] border-solid border-slate-800 text-gray-700 rounded-[8px] leading-tight focus:outline-none focus:shadow-outline"
             id="summary"
             type="textarea"
+            name="summary"
             placeholder="লেখার মূল ভাবার্থ লিখুন"
             required
           />
@@ -290,17 +352,17 @@ export default function EditPost() {
           <div>
             <CustomEditor
               initialData={content}
-            setContent={setContent}
+              setContent={setContent}
             />
           </div>
 
           <div className='submit__btn flex  !mt-[40px]'>
             <div className='w-[50%] pr-[12px]'>
               <button
-                // onClick={handleSubmit}
+                onClick={handleSubmit}
                 className="page__common__yello__btn w-full px-[20px] h-[50px] text-[#FCA000] border border-[#FCA000] border-spacing-1 rounded-md text-[16px] items-center profile__btn__midl"
               >
-                পোস্ট করুন
+                পোস্ট আপডেট করুন
               </button>
             </div>
           </div>

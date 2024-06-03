@@ -84,8 +84,8 @@ export default function ProfilePostLeftContentApproved() {
             <div className='flex'>
               <div className="lakha__main__content text-3xl lg:mr-[100px] md:mr-[50px]">
                 
-                {displayedPosts.length && (
-                  displayedPosts.map((post, index) => (
+                {postList.length && (
+                  postList.map((post, index) => (
                     <>
                       <div key={index}>
                         <SinglePostConponent
@@ -109,10 +109,10 @@ export default function ProfilePostLeftContentApproved() {
                 )}
               </div>
             </div> :
-            <div className="pt-10"> এই মুহূর্তে কোনো লেখা নেই </div>
+            <div className="pt-10"> এই মুহূর্তে কোনো অনুমোদিত লেখা নেই </div>
 
           }
-          {totalPages > 1 && <div className="py-10 space-x-4"> {/* Add a class for styling */}
+          {/* {totalPages > 1 && <div className="py-10 space-x-4"> 
             <button
               className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
 
@@ -141,7 +141,7 @@ export default function ProfilePostLeftContentApproved() {
               শেষ পৃষ্ঠা
             </button>
           </div>
-          }
+          } */}
 
         </>
       )}
