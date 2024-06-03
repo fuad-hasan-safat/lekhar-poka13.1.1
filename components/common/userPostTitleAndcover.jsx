@@ -11,11 +11,13 @@ export default function UserPostTitleAndcover({
   image = '',
   postStatus = false,
   isProfile = false,
-  uploadedBy,
+  uploadedBy = '',
   updatedAt = '১৩ জানুয়ারি, ২০২৪',
 }) {
   const router = useRouter()
   const [isMoreClick, setIsMoreClick] = useState(false)
+
+  console.log({uploadedBy})
 
   function moreOptionHandler() {
     setIsMoreClick((prevState) => !prevState)
@@ -112,13 +114,13 @@ export default function UserPostTitleAndcover({
 
           <div className="text-[16px] font-thin">
             <a className="flex place-content-start items-center lg:text-xl md:text-[16px] sm:text-[16px] xs:text-[16px]  text-[#595D5B]" href={`/postswriter/${writer_id}`} >
-              <span className='inline-block mr-[10px]'>
+              {((uploadedBy !== null) && uploadedBy.length>0 )&& <> <span className='inline-block mr-[10px]'>
                 <img className="w-[24px] h-[24px] rounded-full block m-auto shadow-lg" src={image === '' ? `/images/user/coverimage.jpg` : `${apiBasePath}/${image?.slice(image.indexOf('/') + 1)}`} alt="" />
               </span>
-              <span className='inline-block text-[16px] color-[#595D5B]'>
-                অ্যাডমিন
-              </span>
-              <span className='inline-block ml-[15px]'>
+                <span className='inline-block text-[16px] color-[#595D5B] mr-[15px]'>
+                  {uploadedBy}
+                </span></>}
+              <span className='inline-block '>
                 <img src='/images/usericons/calender.svg' />
               </span>
               <span className='inline-block ml-[10px] text-[16px] color-[#595D5B]'>

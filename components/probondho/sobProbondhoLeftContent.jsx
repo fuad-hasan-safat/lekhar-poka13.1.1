@@ -102,7 +102,7 @@ export default function SobProbondhoLeftContent() {
                             title={post.title}
                             writer={post.writer}
                             writer_id={post.writer_id}
-                            uploadedBy={post.uploaded_by}
+                            uploadedBy={post?.uploader_name}
                             updatedAt={post?.updatedAt}
                             content={countWords(post.content, 70)}
                           />
