@@ -44,7 +44,8 @@ export default function UserProfileBanner({
                 </li>
 
             </ul>
-            <ul className='text-[#737373] text-[20px] lg:mb-[44px] md:mb-[40px] sm:mb-[22px] xs:mb-[22px]  space-y-[14px]'>
+
+            <ul className='text-[#737373] text-[20px] lg:mt-[14px] lg:mb-[44px] md:mb-[40px] sm:mb-[22px] xs:mb-[22px]  lg:space-y-[14px]'>
 
                 <li>
                     {profileInfo?.address?.length > 0 && <> <span className='text-[#F9A106]'><i class="ri-map-pin-line"></i></span> <span className='text-[#737373]'>{profileInfo?.address}</span></>}

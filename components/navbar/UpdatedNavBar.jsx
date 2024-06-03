@@ -279,7 +279,7 @@ export default function UpdatedNavBar() {
                                                             <Link className='block' href="/kobita">কবিতা</Link>
                                                             {/* <hr/> */}
                                                         </li>
-                                                        <hr />
+                                                        <hr className='lg:block md:hidden sm:hidden xs:hidden' />
 
                                                         <li
                                                             className="block px-4 py-2  hover:bg-[#F9A106]  hover:text-white"
@@ -288,7 +288,8 @@ export default function UpdatedNavBar() {
                                                         >
                                                             <Link className='block' href="/golpo">গল্প</Link>
                                                         </li>
-                                                        <hr />
+                                                        <hr className='lg:block md:hidden sm:hidden xs:hidden' />
+                                                        
 
                                                         <li
                                                             className="block px-4 py-2 hover:bg-[#F9A106]  hover:text-white"
@@ -297,7 +298,8 @@ export default function UpdatedNavBar() {
                                                         >
                                                             <Link className='block' href="/onugolpo">অনুগল্প</Link>
                                                         </li>
-                                                        <hr />
+                                                        <hr className='lg:block md:hidden sm:hidden xs:hidden' />
+                                                        
 
                                                         <li
                                                             className="block px-4 py-2  hover:bg-[#F9A106]  hover:text-white"
@@ -306,7 +308,8 @@ export default function UpdatedNavBar() {
                                                         >
                                                             <Link className='block' href="/probondho">প্রবন্ধ</Link>
                                                         </li>
-                                                        <hr />
+                                                        <hr className='lg:block md:hidden sm:hidden xs:hidden' />
+                                                        
 
                                                         <li
                                                             className="block px-4 py-2   hover:bg-[#F9A106]  hover:text-white"
@@ -315,7 +318,7 @@ export default function UpdatedNavBar() {
                                                         >
                                                             <Link className='block' href="/jiboni">জীবনী</Link>
                                                         </li>
-                                                        <hr />
+                                                        <hr className='lg:block md:hidden sm:hidden xs:hidden' />
 
                                                         <li
                                                             className="block px-4 py-2   hover:bg-[#F9A106]  hover:text-white"
@@ -395,7 +398,8 @@ export default function UpdatedNavBar() {
                                                             >
                                                                 <Link className='block' href={`/user/${localStorage.getItem("uuid")}`}>প্রোফাইল</Link>
                                                             </li>
-                                                            <hr />
+                                                        <hr className='lg:block md:hidden sm:hidden xs:hidden' />
+                                                            
 
                                                             <li
                                                                 className="block cursor-pointer px-4 py-2   hover:bg-[#F9A106]  hover:text-white"
