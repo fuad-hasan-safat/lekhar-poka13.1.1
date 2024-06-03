@@ -98,10 +98,12 @@ export default function SobProbondhoLeftContent() {
                       <>
                         <div key={index}>
                           <SinglePostConponent
-                            id={post._id} 
+                            id={post._id}
                             title={post.title}
                             writer={post.writer}
                             writer_id={post.writer_id}
+                            uploadedBy={post.uploaded_by}
+                            updatedAt={post?.updatedAt}
                             content={countWords(post.content, 70)}
                           />
                         </div>
@@ -114,13 +116,13 @@ export default function SobProbondhoLeftContent() {
               <div className="pt-10 text-black">  এই মুহূর্তে কোনো লেখা নেই </div>
 
             }
-            
+
             <InfiniteScroll
               dataLength={postList?.length} //This is important field to render the next data
               next={loadnextPage}
               hasMore={isHasMore}
               loader={<h6>ডাটা লোড হচ্ছে ...</h6>}
-              scrollThreshold= {0.5}
+              scrollThreshold={0.5}
             >
             </InfiniteScroll>
 

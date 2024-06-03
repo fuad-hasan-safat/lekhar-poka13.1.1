@@ -102,6 +102,8 @@ export default function SobKobitaLeftContent() {
                             writer_id={post.writer_id}
                             category={post.category}
                             image={post?.image}
+                            uploadedBy={post.uploaded_by}
+                            updatedAt={post?.updatedAt}
                             content={countWords(post.content, 20)}
 
                           />
@@ -121,7 +123,7 @@ export default function SobKobitaLeftContent() {
                   </InfiniteScroll>
 
                 </div>
-                
+
               </div> :
 
               <div className="pt-10">  এই মুহূর্তে কোনো লেখা নেই </div>

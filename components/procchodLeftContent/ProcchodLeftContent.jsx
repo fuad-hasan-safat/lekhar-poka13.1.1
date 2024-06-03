@@ -147,6 +147,8 @@ export default function ProcchodLeftContent() {
                           title={post.title}
                           writer={post.writer}
                           writer_id={post.writer_id}
+                          uploadedBy={post.uploaded_by}
+                          updatedAt={post?.updatedAt}
                           // category={post.category}
                           content={post.category === 'কবিতা' ? countWords(post.content, 20) : countWords(post.content, 50)}
                         />

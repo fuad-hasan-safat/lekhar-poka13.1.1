@@ -102,6 +102,8 @@ export default function SobOnugolpoLeftContent() {
                             title={post.title}
                             writer={post.writer}
                             writer_id={post.writer_id}
+                            uploadedBy={post.uploaded_by}
+                            updatedAt={post?.updatedAt}
                             content={countWords(post.content, 70)}
                             image={post?.image}
                           />
