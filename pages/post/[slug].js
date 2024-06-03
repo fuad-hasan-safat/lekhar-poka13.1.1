@@ -23,6 +23,7 @@ export default function PostDetails() {
   const [error, setError] = useState(null); // State to store any errors
   const [isAudioAvailable, setIsAudioAvailAble] = useState(false);
   const [isdataFetch, setisDataFetch] = useState(false)
+  const [uploaderName, setUploaderName] = useState('')
 
   //  focus mood ----
 
@@ -39,6 +40,7 @@ export default function PostDetails() {
         );
         setData(result.data.object);
         setWriterImage(result.data.writer_image)
+        setUploaderName(result.data.uploader_name)
         console.log('post page single postss ====================>>>>>>>>>>>>>>>>>>>>', result)
         if (result.data.object.audio?.length > 0) {
           setIsAudioAvailAble(true);
@@ -121,7 +123,7 @@ export default function PostDetails() {
                               writer={data?.writer}
                               writer_id={data?.writer_id}
                               image={selectedcoverImage}
-                              uploadedBy={data?.uploader_name}
+                              uploadedBy={uploaderName}
                               updatedAt={data?.updatedAt}
                               catagory={data?.category}
                               url={asPath}
