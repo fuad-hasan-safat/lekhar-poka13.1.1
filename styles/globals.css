@@ -1357,6 +1357,21 @@ transition: all 0.5s !important;
   -webkit-transform: scale3d(20, 20, 1);
   transform: scale3d(20, 20, 1);
 }
+
+.profile__info__wrap li{
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 10px 0;
+}
+.profile__info__wrap li span{
+  display: inline-block;
+  vertical-align: baseline;
+  line-height: 1;
+}
+.profile__info__wrap li span img{
+  padding-right: 10px;
+}
 /* .page__common__btn:hover{
   border-color:#F9A106;
 } */

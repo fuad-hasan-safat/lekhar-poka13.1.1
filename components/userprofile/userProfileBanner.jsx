@@ -30,33 +30,33 @@ export default function UserProfileBanner({
                     src={profileInfo?.image?.length > 0 ? `${apiBasePath}/${profileInfo?.image.slice(profileInfo?.image.indexOf("/") + 1)}` : '/images/defaultUserPic/profile.jpg'}
                 />
             </div>
-            <h1><span className='text-[35px] text-[#FCD200]'>{profileInfo?.name}</span> <span className='text-[#595D5B] text-[22px]'>{profileInfo?.designation}</span></h1>
+            <h1><span className='text-[35px] font-bold text-[#FCD200]'>{profileInfo?.name}</span> <span className='text-[#595D5B] pl-[5px] text-[22px]'>{profileInfo?.designation}</span></h1>
 
-            <ul className='flex flex-row space-x-[25px] text-[#737373] text-[20px] lg:mt-[28px]'>
+            <ul className='profile__info__wrap flex flex-row text-[#737373] text-[20px] lg:mt-[10px]'>
 
 
                 <li>
-                    {profileInfo?.dob?.length > 0 && <>  <span className='text-[#F9A106]'><i class="ri-calendar-2-line"></i></span> <span className='text-[#737373]'>{profileInfo?.dob}</span> </>}
+                    {profileInfo?.dob?.length > 0 && <>  <span className='text-[#F9A106]'><img src='/images/usericons/birthdate.svg' /></span> <span className='text-[#737373]'>{profileInfo?.dob}</span> </>}
                 </li>
 
                 <li>
-                    {profileInfo?.gender?.length > 0 && <> <span className='text-[#F9A106]'>{profileInfo?.gender === 'male' ? <i class="ri-men-line"></i> : <i class="ri-women-line"></i>}</span> <span className='capitalize text-[#737373]'>{profileInfo?.gender}</span> </>}
+                    {profileInfo?.gender?.length > 0 && <> <span className='text-[#F9A106] ml-[30px]'>{profileInfo?.gender === 'male' ? <img src='/images/usericons/sexicon.svg' /> : <i class="ri-women-line"></i>}</span> <span className='capitalize text-[#737373]'>{profileInfo?.gender}</span> </>}
                 </li>
 
             </ul>
 
-            <ul className='text-[#737373] text-[20px] lg:mt-[14px] lg:mb-[44px] md:mb-[40px] sm:mb-[22px] xs:mb-[22px]  lg:space-y-[14px]'>
+            <ul className='profile__info__wrap text-[#737373] text-[20px]'>
 
                 <li>
-                    {profileInfo?.address?.length > 0 && <> <span className='text-[#F9A106]'><i class="ri-map-pin-line"></i></span> <span className='text-[#737373]'>{profileInfo?.address}</span></>}
+                    {profileInfo?.address?.length > 0 && <> <span className='text-[#F9A106]'><img src='/images/usericons/location.svg' /></span> <span className='text-[#737373]'>{profileInfo?.address}</span></>}
                 </li>
 
                 <li>
-                    {profileInfo?.phone?.length > 0 && <> <span className='text-[#F9A106] '><i class="ri-phone-line"></i></span> <span className='text-[#737373] '>+{profileInfo?.phone}</span> </>}
+                    {profileInfo?.phone?.length > 0 && <> <span className='text-[#F9A106] '><img src='/images/usericons/phone.svg' /></span> <span className='text-[#737373] '>+{profileInfo?.phone}</span> </>}
                 </li>
 
                 <li>
-                    {profileInfo?.email?.length > 0 && <>  <span className='text-[#F9A106]'><i class="ri-mail-line"></i></span> <span className='text-[#737373] '>{profileInfo?.email}</span> </>}
+                    {profileInfo?.email?.length > 0 && <>  <span className='text-[#F9A106]'><img src='/images/usericons/email.svg' /></span> <span className='text-[#737373] '>{profileInfo?.email}</span> </>}
                 </li>
             </ul>
 
