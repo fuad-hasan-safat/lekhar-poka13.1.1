@@ -10,6 +10,7 @@ const SinglePostConponent = ({
   content,
   image,
   postStatus,
+  uploadedBy,
   isProfile,
 }) => {
   const router = useRouter();
@@ -28,6 +29,7 @@ const SinglePostConponent = ({
         writer_id={writer_id}
         image={image}
         postStatus={postStatus}
+        uploadedBy={uploadedBy}
         isProfile={isProfile}
       />
 

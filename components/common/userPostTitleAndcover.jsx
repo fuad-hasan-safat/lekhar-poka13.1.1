@@ -3,7 +3,7 @@ import { apiBasePath } from '../../utils/constant'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 
-export default function UserPostTitleAndcover({ id, title, writer, writer_id, image = '', postStatus = false, isProfile = false }) {
+export default function UserPostTitleAndcover({ id, title, writer, writer_id, image = '', postStatus = false, isProfile = false, uploadedBy }) {
   const router = useRouter()
   const [isMoreClick, setIsMoreClick] = useState(false)
   function moreOptionHandler() {
@@ -13,22 +13,22 @@ export default function UserPostTitleAndcover({ id, title, writer, writer_id, im
 
   async function deletePost(id) {
     const confirmPostDelete = window.confirm('আপনি কি পোস্টটি মুছে ফেলতে চান?');
-if(confirmPostDelete){
-  try {
-    const response = await axios.delete(`${apiBasePath}/posts/${id}`);
-    console.log('Delete successful:', response.data);
+    if (confirmPostDelete) {
+      try {
+        const response = await axios.delete(`${apiBasePath}/posts/${id}`);
+        console.log('Delete successful:', response.data);
 
-    alert('পোস্টটি মুছে ফেলা হয়েছে')
-    router.reload()
+        alert('পোস্টটি মুছে ফেলা হয়েছে')
+        router.reload()
 
-    return response.data;
-  } catch (error) {
-    console.error('Error deleting data:', error);
-    throw error;
-  }
+        return response.data;
+      } catch (error) {
+        console.error('Error deleting data:', error);
+        throw error;
+      }
 
-}
-   
+    }
+
 
   }
 
@@ -89,6 +89,14 @@ if(confirmPostDelete){
             <a className="lg:text-xl md:text-[16px] sm:text-[16px] xs:text-[16px]  text-[#595D5B] font-semibold " href={`/postswriter/${writer_id}`} >{writer}</a>
           </div>
 
+          <div className="">
+            <a className="lg:text-xl md:text-[16px] sm:text-[16px] xs:text-[16px]  text-[#595D5B] font-semibold " href={`/postswriter/${writer_id}`} >
+              <span className='inline-block mr-[10px]'>
+                <img className="w-[24px] h-[24px] rounded-full block m-auto shadow-lg" src={image === '' ? `/images/user/coverimage.jpg` : `${apiBasePath}/${image?.slice(image.indexOf('/') + 1)}`} alt="" />
+              </span>
+              <span className='inline-block'> {uploadedBy}</span>  </a>
+          </div>
+
           {isProfile &&
             <>
               <button
@@ -100,7 +108,7 @@ if(confirmPostDelete){
                     className="block cursor-pointer hover:bg-[#F9A106]  hover:text-white"
 
                   >
-                    <button className=' w-full text-center'>সম্পাদন</button>
+                    <button onClick={() => router.push(`/user/editpost/${id}`)} className=' w-full text-center'>সম্পাদন</button>
                   </li>
                   <hr />
 

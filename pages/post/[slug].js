@@ -26,8 +26,6 @@ export default function PostDetails() {
 
   //  focus mood ----
 
-
-
   const [rating, setRating] = useState(0);
 
 
