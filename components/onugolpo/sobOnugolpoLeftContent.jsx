@@ -51,7 +51,7 @@ export default function SobOnugolpoLeftContent() {
 
       const response = await fetch(`${apiBasePath}/categoryposts/অনুগল্প/${currentPage}`);
       const data = await response.json();
-
+      console.log('ONUGOLPO -----', data)
       setPostList(postList.concat(data));
 
     } catch (error) {
