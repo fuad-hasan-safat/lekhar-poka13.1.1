@@ -174,7 +174,7 @@ export default function UserProfile({ slug }) {
                 <div>
                   <button
                     onClick={() => router.push('/user/createpost')}
-                    className='page__common__yello__btn  px-[50px] py-[8px] bg-[#F9A106] text-white rounded'><i class="ri-add-box-fill"></i> নতুন লেখা যুক্ত করুন
+                    className='page__common__yello__btn  px-[50px] py-[18px] bg-[#F9A106] text-white rounded-[16px]'><i class="ri-add-box-fill"></i> নতুন লেখা যুক্ত করুন
                   </button>
                 </div>
                 <div>

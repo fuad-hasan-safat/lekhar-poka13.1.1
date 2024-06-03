@@ -45,7 +45,7 @@ export default function UserProfileBanner({
 
             </ul>
 
-            <ul className='profile__info__wrap text-[#737373] text-[20px]'>
+            <ul className='profile__info__wrap text-[#737373] text-[20px] pb-[30px]'>
 
                 <li>
                     {profileInfo?.address?.length > 0 && <> <span className='text-[#F9A106]'><img src='/images/usericons/location.svg' /></span> <span className='text-[#737373]'>{profileInfo?.address}</span></>}
@@ -75,12 +75,12 @@ export default function UserProfileBanner({
             <hr></hr>
 
             {selectedBio.length > 0 && <>
-                <h1 className='mt-[44px] text-[#F9A106] text-[20px]'>সংক্ষিপ্ত বায়ো</h1>
-                <p className='text-[20px] text-[#737373] mt-[16px]'>{selectedBio}</p>
+                <h1 className='mt-[35px] text-[#F9A106] text-[20px]'>সংক্ষিপ্ত বায়ো</h1>
+                <p className='text-[20px] text-[#737373] mt-[10px]'>{selectedBio}</p>
             </>}
 
-            <div className='flex justify-center'>
-                <button onClick={() => setShowModal(true)} className='page__common__yello__btn bg-[#F9A106] text-white rounded-[5px] px-[75px] py-[10px] mt-[44px] mb-[50px]'>সম্পাদন করুন</button>
+            <div className='w-full'>
+                <button onClick={() => setShowModal(true)} className='page__common__yello__btn w-full bg-[#F9A106] text-white rounded-[5px] px-[75px] py-[17px] mt-[30px] mb-[40px]'>সম্পাদন করুন</button>
 
             </div>
             {<ProfileModal setShowModal={setShowModal} image={profileInfo?.image} showModal={showModal} handleClose={handleClose} />}

@@ -1356,6 +1356,9 @@ transition: all 0.5s !important;
 .contact__form__btn:hover::before{
   -webkit-transform: scale3d(20, 20, 1);
   transform: scale3d(20, 20, 1);
+  transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
 }
 
 .profile__info__wrap li{
@@ -1367,7 +1370,10 @@ transition: all 0.5s !important;
 .profile__info__wrap li span{
   display: inline-block;
   vertical-align: baseline;
+  font-size: 16px;
   line-height: 1;
+  color:#535353;
+  ;
 }
 .profile__info__wrap li span img{
   padding-right: 10px;

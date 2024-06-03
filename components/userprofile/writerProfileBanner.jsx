@@ -182,9 +182,9 @@ export default function WriterProfileBanner({
                     </li>
                 </ul>}
 
-             { isSelfWriter &&  <div className='flex justify-center mt-[44px] mb-[44px]'>
+             { isSelfWriter &&  <div className='w-full mt-[44px] mb-[44px]'>
                     <button
-                        className='page__common__yello__btn py-[13px] bg-[#F9A106] px-[75px] p-1 rounded-md text-white text-[16px]'
+                        className='page__common__yello__btn w-full py-[13px] bg-[#F9A106] px-[75px] p-1 rounded-md text-white text-[16px]'
                         onClick={() => followUserhandler(profileInfo?.user_id, userUuid)}
                     >
                         <span><i class="ri-add-box-fill"></i></span> <span> {isAlreadyFollowing ? 'অনুসরণ করছেন' : 'অনুসরণ করুন'}</span>
@@ -206,8 +206,8 @@ export default function WriterProfileBanner({
                 <hr></hr>
 
                 {rendredBio?.length > 0 && <div className='mb-[25px]'>
-                    <h1 className='mt-[44px] text-[#F9A106] text-[20px]'>সংক্ষিপ্ত বায়ো</h1>
-                    <p className='text-[20px] text-[#737373] mt-[16px]'>{rendredBio}</p>
+                    <h1 className='mt-[30px] text-[#F9A106] text-[20px]'>সংক্ষিপ্ত বায়ো</h1>
+                    <p className='text-[20px] text-[#737373] mt-[10px]'>{rendredBio}</p>
                 </div>}
 
             </div>
