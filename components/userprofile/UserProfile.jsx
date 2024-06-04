@@ -157,7 +157,7 @@ export default function UserProfile({ slug }) {
           <div className='container'>
             <div className='lg:flex lg:flex-row'>
               {/* left part */}
-              <div className='lg:w-[30%]   lg:mb-[110px]'>
+              <div className='lg:w-[30%] lg:mb-[110px] md:mb-[50px] sm:mb-[40px] xs:mb-[40px]'>
                 <UserProfileBanner
                   bio={bio}
                   profileInfo={profileInfo}
@@ -171,10 +171,10 @@ export default function UserProfile({ slug }) {
 
               </div>
               <div className='lg:w-[60%] lg:p-[60px] mb-[40px]'>
-                <div className='mb-[50px]'>
+                <div className='lg:mb-[50px] md:mb-[40px] sm:mb-[30px] xs:mb-[20px]'>
                   <button
                     onClick={() => router.push('/user/createpost')}
-                    className='page__common__yello__btn  px-[50px] py-[18px] bg-[#F9A106] text-white rounded-[16px]'><i class="ri-add-box-fill"></i> নতুন লেখা যুক্ত করুন
+                    className='page__common__yello__btn  px-[50px] md:px-[50px] sm:px-[40px] xs:px-[40px] lg:py-[18px] md:py-[18px] sm:py-[15px] xs:py-[14px] bg-[#F9A106] text-white rounded-[16px]'><i class="ri-add-box-fill"></i> নতুন লেখা যুক্ত করুন
                   </button>
                 </div>
                 <div>

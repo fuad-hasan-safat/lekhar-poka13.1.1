@@ -1376,6 +1376,9 @@ transition: all 0.5s !important;
   margin: 0 auto;
   padding: 0 15px;
 }
+.page__dsc__wrap p{
+  line-height: 1.3 !important;
+}
 
 
 /*
@@ -1833,9 +1836,8 @@ transition: all 0.5s !important;
   }
 
   .lakha__main__content {
-    padding-top: 40px !important;
+    padding-top: 30px !important;
   }
-
   .all__button__list {
     padding-top: 0;
     display: inline-block;
