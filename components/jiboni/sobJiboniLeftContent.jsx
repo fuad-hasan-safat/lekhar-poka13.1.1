@@ -90,7 +90,6 @@ export default function SobJiboniLeftContent() {
         <div>Error fetching posts: {error.message}</div>
       ) : (
         <>
-          <div className='container'>
             <div className='flex'>
               {postList.length > 0 ?
                 <div className="lakha__main__content pt-20  text-3xl lg:mr-[100px] md:mr-[50px]">
@@ -119,8 +118,6 @@ export default function SobJiboniLeftContent() {
                 <div className="pt-10">  এই মুহূর্তে কোনো লেখা নেই </div>
               }
             </div>
-
-          </div>
         </>
       )}
 

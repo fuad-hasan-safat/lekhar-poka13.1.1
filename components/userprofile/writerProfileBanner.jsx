@@ -146,7 +146,7 @@ export default function WriterProfileBanner({
     return (
         <>
 
-            <div className='container border'>
+            <div className='container border pb-[20px]'>
                 <div className="flex justify-center">
                     <img
                         className="lg:w-[264px] lg:h-[264px]  md:w-[200px] md:h-[200px] sm:w-[180px] sm:h-[180px] xs:w-[180px] xs:h-[180px] rounded-full  border-4 border-solid border-white -mt-[110px]  "
