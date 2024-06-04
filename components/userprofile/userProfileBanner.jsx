@@ -6,6 +6,7 @@ import ImageCropProvider from './cropComponents/ImageCropProvider'
 import UserAchivement from './userAchivement'
 import { countWords } from '../../function/api'
 import ProfileModal from './profileUpdate/ProfileModal'
+import { convertToBanglaPhoneNumber, convertToBengaliDate } from '../../utils/convertToBanglaDate'
 
 export default function UserProfileBanner({
     bio,
@@ -22,6 +23,12 @@ export default function UserProfileBanner({
 
     const handleClose = () => setShowModal(false);
 
+    const banglaBirthDate = convertToBengaliDate(profileInfo?.dob)
+
+    const banglaGender = profileInfo?.gender === 'male' ? 'পুরুষ' : 'নারী';
+
+    const banglaPhoneNumber = convertToBanglaPhoneNumber(profileInfo?.phone)
+
     return (
         <div className='container border'>
             <div className="flex justify-center">
@@ -36,11 +43,11 @@ export default function UserProfileBanner({
 
 
                 <li>
-                    {profileInfo?.dob?.length > 0 && <>  <span className='text-[#F9A106]'><img src='/images/usericons/birthdate.svg' /></span> <span className='text-[#737373]'>{profileInfo?.dob}</span> </>}
+                    {profileInfo?.dob?.length > 0 && <>  <span className='text-[#F9A106]'><img src='/images/usericons/birthdate.svg' /></span> <span className='text-[#737373]'>{banglaBirthDate}</span> </>}
                 </li>
 
                 <li>
-                    {profileInfo?.gender?.length > 0 && <> <span className='text-[#F9A106] ml-[30px]'>{profileInfo?.gender === 'male' ? <img src='/images/usericons/sexicon.svg' /> : <img src='/images/usericons/sexicon.svg' />}</span> <span className='capitalize text-[#737373]'>{profileInfo?.gender}</span> </>}
+                    {profileInfo?.gender?.length > 0 && <> <span className='text-[#F9A106] ml-[30px]'>{profileInfo?.gender === 'male' ? <img src='/images/usericons/sexicon.svg' /> : <img src='/images/usericons/sexicon.svg' />}</span> <span className='capitalize text-[#737373]'>{banglaGender}</span> </>}
                 </li>
 
             </ul>
@@ -52,7 +59,7 @@ export default function UserProfileBanner({
                 </li>
 
                 <li>
-                    {profileInfo?.phone?.length > 0 && <> <span className='text-[#F9A106] '><img src='/images/usericons/phone.svg' /></span> <span className='text-[#737373] '>+{profileInfo?.phone}</span> </>}
+                    {profileInfo?.phone?.length > 0 && <> <span className='text-[#F9A106] '><img src='/images/usericons/phone.svg' /></span> <span className='text-[#737373] '>+{banglaPhoneNumber}</span> </>}
                 </li>
 
                 <li>

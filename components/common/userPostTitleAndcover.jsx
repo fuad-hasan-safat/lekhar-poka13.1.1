@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { apiBasePath } from '../../utils/constant'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import { convertToBengaliDate } from '../../utils/convertToBanglaDate'
 
 export default function UserPostTitleAndcover({
   id,
@@ -91,6 +92,8 @@ export default function UserPostTitleAndcover({
   }
 
 
+const banglaDate = convertToBengaliDate(formattedDate)
+
   return (
     <>
       <div className="profile__auth__wrap space-x-[15px]">
@@ -121,7 +124,7 @@ export default function UserPostTitleAndcover({
                 <img src='/images/usericons/calender.svg' />
               </span>
                 <span className='inline-block ml-[10px] text-[16px] color-[#595D5B]'>
-                  {formattedDate}
+                  {banglaDate}
                 </span></>}
             </a>
           </div>
