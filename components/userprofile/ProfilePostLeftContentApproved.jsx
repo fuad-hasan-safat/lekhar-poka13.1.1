@@ -98,6 +98,8 @@ export default function ProfilePostLeftContentApproved() {
                           category={post.category}
                           postStatus={post.status}
                           uploadedBy={post?.uploader_name}
+                          writer_image={post?.writer_image}
+                          profileName={post?.profile_name}
                           updatedAt={post?.updatedAt}
                           isProfile={true}
 
