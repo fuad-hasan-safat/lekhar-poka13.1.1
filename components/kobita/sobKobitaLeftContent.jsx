@@ -51,7 +51,7 @@ export default function SobKobitaLeftContent() {
 
       const response = await fetch(`${apiBasePath}/categoryposts/কবিতা/${currentPage}`);
       const data = await response.json();
-
+      console.log("KOBITA: ", data)
       setPostList(postList.concat(data));
 
     } catch (error) {
