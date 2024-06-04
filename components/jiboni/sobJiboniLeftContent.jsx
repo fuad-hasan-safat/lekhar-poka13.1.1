@@ -27,7 +27,7 @@ export default function SobJiboniLeftContent() {
 
         const response = await fetch(`${apiBasePath}/categorypostpages/জীবনী`);
         const data = await response.json();
-
+       
         setTotalPages(data?.length);
 
         if (data?.length > 1) {
@@ -53,7 +53,7 @@ export default function SobJiboniLeftContent() {
 
       const response = await fetch(`${apiBasePath}/categoryposts/জীবনী/${currentPage}`);
       const data = await response.json();
-
+      console.log("JIBONI:::::::", data)
       setPostList(postList.concat(data));
 
     } catch (error) {

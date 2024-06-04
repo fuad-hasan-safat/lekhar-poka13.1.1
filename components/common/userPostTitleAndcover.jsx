@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { apiBasePath } from '../../utils/constant'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import { convertToBengaliDate } from '../../utils/convertToBanglaDate'
 
 export default function UserPostTitleAndcover({
   id,
@@ -90,6 +91,8 @@ export default function UserPostTitleAndcover({
 
   }
 
+
+const banglaDate = convertToBengaliDate(formattedDate)
 
   return (
     <>

@@ -58,10 +58,10 @@ const PostTable = () => {
 
     const jsonData = JSON.stringify(data);
 
-    console.log('status after -----------------', data)
+    console.log('status after -----------------', jsonData)
 
 
-    fetch(`${apiBasePath}/posts/${id}`, {
+    fetch(`${apiBasePath}/toggleposts/${id}`, {
       method: 'PUT', // Specify PUT method for update
       headers: {
         'Content-Type': 'application/json' // Set content type as JSON
@@ -78,7 +78,7 @@ const PostTable = () => {
       });
 
     // router.push(`/admin/allposttable`);
-    router.refresh()
+    // router.refresh()
 
   }
 

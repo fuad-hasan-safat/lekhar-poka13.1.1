@@ -80,8 +80,8 @@ export default function ProfilePostLeftContentUnApproved() {
 
                 {/* <h1 className='lg:text-5xl md:text-3xl sm:text-xl xs:text-2xl text-black mb-[35px]'>অনুমোদনহীন  পোস্ট </h1> */}
 
-                {displayedPosts.length && (
-                  displayedPosts.map((post, index) => (
+                {postList.length && (
+                  postList.map((post, index) => (
                     <>
                       <div key={index}>
                         <SinglePostConponent
@@ -116,7 +116,7 @@ export default function ProfilePostLeftContentUnApproved() {
 
 
           }
-          {totalPages > 1 && <div className="py-10 space-x-4"> {/* Add a class for styling */}
+          {/* {totalPages > 1 && <div className="py-10 space-x-4">
 
             <button
               className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
@@ -150,7 +150,7 @@ export default function ProfilePostLeftContentUnApproved() {
             </button>
 
           </div>
-          }
+          } */}
 
         </>
       )}
