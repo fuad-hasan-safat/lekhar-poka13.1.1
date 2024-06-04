@@ -38,7 +38,7 @@ const SinglePostConponent = ({
       <div className=" pt-[10px] pb-3">
 
         <div
-          className="text-[16px] text-gray-500 text-justify"
+          className="page__dsc__wrap text-[16px] text-gray-500 text-justify"
           dangerouslySetInnerHTML={{ __html: content }}
         />
 
