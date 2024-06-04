@@ -289,11 +289,13 @@ background-color: #FCF7E8;
   width: 60px;
   height: 60px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .lekhokIteam img {
   width: 60px;
   height: 60px;
+  object-fit: cover;
 }
 
 /* 
@@ -1181,6 +1183,7 @@ transition: all 0.5s !important;
 
 .all__page__main__content {
   padding-bottom: 50px;
+  padding-top: 50px;
 }
 
 /*
@@ -1296,23 +1299,6 @@ transition: all 0.5s !important;
   -webkit-backface-visibility: hidden;
   -moz-osx-font-smoothing: grayscale;
 }
-
-/* .button {
-  float: left;
-  min-width: 150px;
-  max-width: 250px;
-  display: block;
-  margin: 1em;
-  padding: 1em 2em;
-  border: none;
-  background: none;
-  color: inherit;
-  vertical-align: middle;
-  position: relative;
-  z-index: 1;
-  -webkit-backface-visibility: hidden;
-  -moz-osx-font-smoothing: grayscale;
-} */
 .page__common__yello__btn::before,
 .page__common__btn::before {
     content: '';
@@ -1381,6 +1367,17 @@ transition: all 0.5s !important;
 /* .page__common__btn:hover{
   border-color:#F9A106;
 } */
+
+.slider__pagination__cntlr{
+  display: flex;
+  gap: 0.3rem;
+  max-width: 1370px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+
 /*
 ----------------------
  Resposnive Css
@@ -1828,7 +1825,6 @@ transition: all 0.5s !important;
 
   .slider__pagination {
       bottom: 1rem !important;
-      left: 50% !important;
   }
 
   .procchod__button button {
@@ -1837,7 +1833,7 @@ transition: all 0.5s !important;
   }
 
   .lakha__main__content {
-    padding-top: 50px !important;
+    padding-top: 40px !important;
   }
 
   .all__button__list {
@@ -2127,15 +2123,14 @@ transition: all 0.5s !important;
 
 
   .slider__desc button {
-      font-size: 14px;
-      width: 100px;
-      height: 35px;
-      margin-top: 10px;
-  }
+    font-size: 13px;
+    width: 90px;
+    height: 30px;
+    margin-top: 10px;
+}
 
   .slider__pagination {
-    bottom: 2rem !important;
-    left: 10% !important;
+    bottom: 0.5rem !important;
   }
 
   .procchod__button button {
@@ -2156,9 +2151,9 @@ transition: all 0.5s !important;
     right: 36% !important;
   }
 
-  .slider__pagination {
+  /* .slider__pagination {
     display: none !important;
-  }
+  } */
 
   .audio-sound-line {
     max-width: 320px;
