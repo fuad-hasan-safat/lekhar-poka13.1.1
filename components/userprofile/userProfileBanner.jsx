@@ -37,7 +37,7 @@ export default function UserProfileBanner({
                     src={profileInfo?.image?.length > 0 ? `${apiBasePath}/${profileInfo?.image.slice(profileInfo?.image.indexOf("/") + 1)}` : '/images/defaultUserPic/profile.jpg'}
                 />
             </div>
-            <h1><span className='text-[35px] font-bold text-[#FCD200]'>{profileInfo?.name}</span> <span className='text-[#595D5B] pl-[5px] text-[22px]'>{profileInfo?.designation}</span></h1>
+            <h1><span className='text-[35px] font-bold text-[#FCD200]'>{profileInfo?.name}</span> <span className='text-[#595D5B] pl-[20px] text-[22px]'>{profileInfo?.designation}</span></h1>
 
             <ul className='profile__info__wrap flex flex-row text-[#737373] text-[20px] lg:mt-[10px]'>
 
