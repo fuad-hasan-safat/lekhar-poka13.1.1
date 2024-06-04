@@ -2060,6 +2060,10 @@ transition: all 0.5s !important;
   .read__mod__content {
       padding: 30px 20px 20px !important;
   }
+  .read__mod__innr {
+      max-width: 330px;
+      margin: 0 auto;
+  }
 }
 
 @media(max-width:479px) {
@@ -2080,7 +2084,13 @@ transition: all 0.5s !important;
   .search__bar img {
     width: 35px !important;
   }
-
+  .kobita__dsc__lft {
+      padding-left: 10px !important;
+      padding-right: 10px !important;
+  }
+  .read__mod__content {
+      padding: 30px 10px 20px !important;
+  }
   .search_result {
     top: 36px;
     width: 100%;
