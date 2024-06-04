@@ -412,7 +412,7 @@ export default function CreatePost() {
                         >
                             <div
 
-                                className='border-2 border-dashed border-[#F9A106] rounded-md h-[220px] items-center place-content-center text-center justify-center -z-10'>
+                                className='border-2 border-dashed border-[#F9A106] rounded-md h-[220px] items-center place-content-center text-center justify-center '>
                                 <div className='flex items-center justify-center'>
                                     <img src='/images/user/image-plus-1.png' alt='Image Plus' />
                                 </div>
@@ -421,8 +421,8 @@ export default function CreatePost() {
                                     <img className='m-auto' src='../images/user/divider.png' alt='Divider' />
                                 </div>
 
-                                <label className=" cursor-pointer flex items-center justify-center" >
-                                    <div className="page__common__yello__btn mt-[15px]  file-btn w-[200px] h-[43px] text-[16px] " onClick={handleFileChange}>আপলোড</div>
+                                <label className=" cursor-pointer flex items-center justify-center relative -z-[9999999]" >
+                                    <div className="page__common__yello__btn mt-[15px]  file-btn w-[200px] h-[43px] text-[16px] -z-[999999]" onClick={handleFileChange}>আপলোড</div>
 
                                 </label>
                             </div>
