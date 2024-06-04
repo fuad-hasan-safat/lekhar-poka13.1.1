@@ -7,6 +7,8 @@ const SinglePostConponent = ({
   title,
   writer,
   writer_id,
+  writer_image,
+  profileName,
   content,
   image,
   postStatus,
@@ -28,9 +30,11 @@ const SinglePostConponent = ({
         title={title}
         writer={writer}
         writer_id={writer_id}
+        writer_image={writer_image}
         image={image}
         postStatus={postStatus}
         uploadedBy={uploadedBy}
+        profileName={profileName}
         updatedAt={updatedAt}
         isProfile={isProfile}
       />

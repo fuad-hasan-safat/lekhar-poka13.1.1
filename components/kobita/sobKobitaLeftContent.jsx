@@ -103,6 +103,8 @@ export default function SobKobitaLeftContent() {
                             category={post.category}
                             image={post?.image}
                             uploadedBy={post?.uploader_name}
+                            writer_image={post?.writer_image}
+                            profileName={post?.profile_name}
                             updatedAt={post?.updatedAt}
                             content={countWords(post.content, 20)}
 

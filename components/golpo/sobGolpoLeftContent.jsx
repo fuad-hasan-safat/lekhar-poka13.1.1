@@ -116,6 +116,8 @@ export default function SobGolpoLeftContent() {
                               writer_id={post.writer_id}
                               image={post?.image}
                               uploadedBy={post?.uploader_name}
+                              writer_image={post?.writer_image}
+                              profileName={post?.profile_name}
                               updatedAt={post?.updatedAt}
                               content={countWords(post.content, 70)}
                             />

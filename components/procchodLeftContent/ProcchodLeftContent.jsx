@@ -143,10 +143,13 @@ export default function ProcchodLeftContent() {
                         <SinglePostConponent
                           id={post._id}
                           // buttons={buttons}
-                          image={post?.image}
+                         
+                          image={post?.image }
                           title={post.title}
                           writer={post.writer}
                           writer_id={post.writer_id}
+                          writer_image={post?.writer_image}
+                          profileName={post?.profile_name}
                           uploadedBy={post.uploader_name}
                           updatedAt={post?.updatedAt}
                           // category={post.category}
