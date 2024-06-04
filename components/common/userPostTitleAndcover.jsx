@@ -139,7 +139,7 @@ if(profileName){
               {((uploadedBy !== null) && uploadedBy.length > 0) && <> <span className='inline-block mr-[10px]'>
                 <img className="w-[24px] h-[24px] rounded-full block m-auto shadow-lg" src={writerImage === '' ? `/images/user/coverimage.jpg` : `${apiBasePath}/${writerImage?.slice(writerImage.indexOf('/') + 1)}`} alt="" />
               </span>
-                <span className='inline-block text-[16px] color-[#595D5B] mr-[15px]'>
+                <span className='inline-block lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[12px] color-[#595D5B] mr-[15px]'>
                   {postuploadedBy}
 
                 </span></>}
