@@ -139,28 +139,31 @@ export function ImageSlider() {
                 style={{
                     position: "absolute",
                     bottom: "3rem",
-                    left: "6%",
+                    left: "0",
+                    right:'0',
                     // right: "50%",
                     // translatex: "-50%",
                     display: "flex",
                     gap: ".3rem",
                 }}
             >
-                {data.map((_, index) => (
+             <div className="slider__pagination__cntlr" style={{display: "flex",gap: ".3rem"}}>
+                    {data.map((_, index) => (
 
-                    <button
-                        key={index}
-                        className={`img-slider-dot-btn ${index === imageIndex ? 'active-img-slider-dot-btn' : ''}`}
-                        aria-label={`View Image ${index + 1}`}
-                        onClick={() => setImageIndex(index)}
-                    >
-                        {index === imageIndex ? (
-                            <Circle aria-hidden />
-                        ) : (
-                            <Circle aria-hidden />
-                        )}
-                    </button>
-                ))}
+                        <button
+                            key={index}
+                            className={`img-slider-dot-btn ${index === imageIndex ? 'active-img-slider-dot-btn' : ''}`}
+                            aria-label={`View Image ${index + 1}`}
+                            onClick={() => setImageIndex(index)}
+                        >
+                            {index === imageIndex ? (
+                                <Circle aria-hidden />
+                            ) : (
+                                <Circle aria-hidden />
+                            )}
+                        </button>
+                    ))}
+                </div>
             </div>
             <div id="after-image-slider-controls" />
         </section>

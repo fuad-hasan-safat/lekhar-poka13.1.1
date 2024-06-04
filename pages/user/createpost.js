@@ -21,7 +21,7 @@ export default function Createpost() {
             <section className="all__page__main__content">
                 <div className="container">
 
-                    <div className="lg:flex lg:flex-row lg:pt-[110px] md:pt-[90px] sm:pt-[40px] xs:pt-[40px]">
+                    <div className="lg:flex lg:flex-row">
                         <div className="w-full">
 
                             <CreatePost />

@@ -8,7 +8,7 @@ export default function CreateDesignation({setIsCategoryAdded}) {
     const handleShow = () => setShowModal(true);
 
     return (
-        <div>
+        <div className='pb-[15px]'>
             <button
                 className="bg-[#FCA000] hover:bg-[#eeb249] text-white py-2 px-[25px] rounded mt-[20px]"
                 onClick={handleShow}
