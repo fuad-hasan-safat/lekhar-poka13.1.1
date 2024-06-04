@@ -24,7 +24,7 @@ export default function EditPost() {
 
   console.log({ formData })
 
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState('');
   const [category, setCategory] = useState([]);
   const [content, setContent] = useState('')
   const [image, setImage] = useState(null);
@@ -67,6 +67,7 @@ export default function EditPost() {
       setContent(result.data.object?.content)
       setPreview(result.data.object?.image)
       setAudioPreview(result.data.object?.audio)
+      setSelectedOption(result.data.object.category)
       console.log('post page single postss EDIT ====================>>>>>>>>>>>>>>>>>>>>', result.data.object)
       if (result.data.object.audio?.length > 0) {
       } else {
@@ -85,9 +86,9 @@ export default function EditPost() {
 
 
 
-  const categoryhandleChange = (selected) => {
-    setSelectedOption(selected); // Selected option object
-  };
+  // const categoryhandleChange = (selected) => {
+  //   setSelectedOption(selected); // Selected option object
+  // };
 
 
   const handleChange = (e) => {
@@ -189,18 +190,19 @@ export default function EditPost() {
     editFormData.append('title', formData?.title);
     editFormData.append('summary', formData?.summary);
     editFormData.append('content', content);
+    editFormData.append('category', selectedOption);
 
-    if (selectedOption) {
-      editFormData.append('category', selectedOption?.label);
-    }
+    // if (selectedOption) {
+    //   editFormData.append('category', selectedOption?.label);
+    // }
 
-    if (image) {
-      editFormData.append("image", image);
-    }
+    // if (image) {
+    //   editFormData.append("image", image);
+    // }
 
-    if (selectedFile) {
-      editFormData.append("file", selectedFile);
-    }
+    // if (selectedFile) {
+    //   editFormData.append("file", selectedFile);
+    // }
 
 
 
@@ -216,6 +218,11 @@ export default function EditPost() {
         },
         body: editFormData,
       });
+
+      alert("আপনার লেখাটির আপডেট সম্পন্ন হয়েছে");
+
+      router.push(`/user/${localStorage.getItem("uuid")}`)
+
       console.log('edit response', response);
       // Handle successful update
     } catch (error) {
@@ -235,18 +242,32 @@ export default function EditPost() {
       <div className="lg:pr-6 md:pr-0 sm:pr-0 space-y-4 lg:flex">
         <div className='create__post__rgt lg:w-[25%] lg:order-last'>
           <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">আপনার লেখার ধরণ নির্বাচন করুন</div>
-{/* <p></p> */}
+          {/* <p></p> */}
           <div>
-            <Select
+            {/* <Select
               value={selectedOption}
               onChange={categoryhandleChange}
               styles={customStyles}
               options={Categoryoptions}
-            />
+            /> */}
+            <select
+              id="category"
+              name="category"
+              className={`h-[40px] w-full px-[16px] text-black`}
+              required
+              value={selectedOption}
+              onChange={(e) => setSelectedOption(e.target.value)}>
+              <option value="">লেখার ধরণ</option>
+              {category.map((cat) => (
+                <option key={cat._id} value={cat.title}>
+                  {cat.title}
+                </option>
+              ))}
+            </select>
           </div>
 
           <hr class="my-5 border-gray-200" />
-          <div className='text-black'>
+          <div className='text-[#292D32]'>
             <div className='mb-[15px]'>
               <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">ছবি আপলোড করুন (যদি থাকে)</div>
             </div>
@@ -285,7 +306,7 @@ export default function EditPost() {
             </div>
           </div>
           <hr class="my-5 border-gray-200" />
-          <div className='text-black'>
+          <div className='text-[#292D32]'>
             <div className="text-[#F9A106] mt-[40px] font-bold text-[22px] !mb-[2px]">অডিও আপলোড করুন (যদি থাকে)</div>
             <FileUploader handleChange={handleAudioFile} multiple={true} mimeTypes={['audio/*']}
             >
@@ -314,7 +335,7 @@ export default function EditPost() {
               <div className='w-full'>
                 {/* <strong className='block'>Kobitar Gan.mp3</strong> */}
                 {selectedFile ? <p className='w-full text-[#292D32]'>{selectedFile ? `File name: ${selectedFile?.name}` : "কোন অডিও নির্বাচন করা হয়নি"}</p> :
-                 <p className='w-full text-[#292D32]'>{audioPreview?.length> 0 ? `File name: ${audioPreview?.slice(audioPreview?.indexOf('/'))}` : "কোন অডিও নির্বাচন করা হয়নি"}</p>}
+                  <p className='w-full text-[#292D32]'>{audioPreview?.length > 0 ? `File name: ${audioPreview?.slice(audioPreview?.indexOf('/'))}` : "কোন অডিও নির্বাচন করা হয়নি"}</p>}
 
                 {/* <span className='flex audioPreview justify-start items-center'>60 KB of 12O KB . <img className='m-auto pr-[10px]' src='../images/user/audio-icon.png' alt='Audio Icon ' /><strong>Uploading...</strong></span> */}
               </div>

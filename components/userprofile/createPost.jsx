@@ -238,7 +238,7 @@ export default function CreatePost() {
 
                 console.log('form data ---', userUuid)
 
-                if (title && selectedOption && summary ) {
+                if (title && selectedOption && summary) {
 
                     console.log(writer, writerId)
 
@@ -356,7 +356,22 @@ export default function CreatePost() {
                             styles={customStyles}
                             options={Categoryoptions}
                         />
+                        {/* <select
+                            id="category"
+                            name="category"
+                            className={`h-[40px] w-full px-[16px] text-black`}
+                            required
+                            value={selectedOption}
+                            onChange={(e) => setSelectedOption(e.target.value)}>
+                            <option value="">লেখার ধরণ</option>
+                            {category.map((cat) => (
+                                <option key={cat._id} value={cat.title}>
+                                    {cat.title}
+                                </option>
+                            ))}
+                        </select> */}
                     </div>
+
                     {userType === 'admin' &&
                         <div className='profile__btn__midl'>
 
@@ -397,7 +412,7 @@ export default function CreatePost() {
                         >
                             <div
 
-                                className='border-2 border-dashed border-[#F9A106] rounded-md h-[220px] items-center place-content-center text-center justify-center'>
+                                className='border-2 border-dashed border-[#F9A106] rounded-md h-[220px] items-center place-content-center text-center justify-center '>
                                 <div className='flex items-center justify-center'>
                                     <img src='/images/user/image-plus-1.png' alt='Image Plus' />
                                 </div>
@@ -406,8 +421,8 @@ export default function CreatePost() {
                                     <img className='m-auto' src='../images/user/divider.png' alt='Divider' />
                                 </div>
 
-                                <label className=" cursor-pointer flex items-center justify-center" >
-                                    <div className="page__common__yello__btn mt-[15px]  file-btn w-[200px] h-[43px] text-[16px] " onClick={handleFileChange}>আপলোড</div>
+                                <label className=" cursor-pointer flex items-center justify-center relative -z-[9999999]" >
+                                    <div className="page__common__yello__btn mt-[15px]  file-btn w-[200px] h-[43px] text-[16px] -z-[999999]" onClick={handleFileChange}>আপলোড</div>
 
                                 </label>
                             </div>
@@ -495,14 +510,14 @@ export default function CreatePost() {
                     </div>
 
                     <div className='submit__btn flex  !mt-[40px]'>
-                        <div className='w-[50%] pr-[12px]'>
+                        {/* <div className='w-[50%] pr-[12px]'>
                             <button
                                 onClick={handleSubmit}
                                 className="page__common__yello__btn w-full px-[20px] h-[50px] text-[#FCA000] border border-[#FCA000] border-spacing-1 rounded-md text-[16px] items-center profile__btn__midl"
                             >
                                 পোস্ট করুন
                             </button>
-                        </div>
+                        </div> */}
                         <div className='w-[50%] pl-[12px]'>
                             <button
                                 onClick={handleSubmit}

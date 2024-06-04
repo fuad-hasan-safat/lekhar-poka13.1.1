@@ -6,15 +6,15 @@ import { convertToBengaliDate } from '../../utils/convertToBanglaDate'
 
 export default function UserPostTitleAndcover({
   id,
-  title,
-  writer,
+  title='',
+  writer='',
   writer_id,
   writer_image='', 
   image = '',
   postStatus = false,
   isProfile = false,
   uploadedBy = '',
-  profileName,
+  profileName = '',
   updatedAt = '',
 }) {
   const router = useRouter()
@@ -114,6 +114,12 @@ if(profileName){
   postuploadedBy = profileName;
 }
 
+let shortenTitle = title?.length> 23? `${title?.slice(0,22)}...` : title;
+let shortenWriter = writer?.length>26 ? `${writer?.slice(0,25)}...`  : writer;
+let shortenUploadedBy = postuploadedBy?.length> 16 ? `${postuploadedBy?.slice(0,15)}...` : postuploadedBy;
+
+
+
   return (
     <>
       <div className="profile__auth__wrap space-x-[15px]">
@@ -129,10 +135,10 @@ if(profileName){
         <div className="lg:w-[400px] md:w-[270px] sm:w-[270px] xs:w-[270px] relative">
 
           <div className="lg:pb-[2px]  ">
-            <h1 className="lg:text-[32] md:text-[28px] sm:text-[24px] xs:text-[20px] leading-7 lg:pr-[50px] text-yellow-400 font-bold" style={{lineHeight:'1.2'}}>{title}</h1>
+            <h1 className="lg:text-[32] md:text-[28px] sm:text-[24px] xs:text-[20px] leading-7 lg:pr-[50px] text-yellow-400 font-bold" style={{lineHeight:'1.2'}}>{shortenTitle}</h1>
           </div>
 
-          <a className="lg:text-[22px] md:text-[16px] sm:text-[16px] xs:text-[14px]  text-[#595D5B] font-semibold " href={`/postswriter/${writer_id}`} >{writer}</a>
+          <a className="lg:text-[22px] md:text-[16px] sm:text-[16px] xs:text-[14px]  text-[#595D5B] font-semibold " href={`/postswriter/${writer_id}`} >{shortenWriter}</a>
 
           <div className="text-[16px] font-thin leading-1">
             <a className="flex place-content-start items-center leading-1 lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[12px]  text-[#595D5B]" href={`/postswriter/${writer_id}`} style={{lineHeight:'1'}} >
@@ -140,14 +146,14 @@ if(profileName){
                 <img className="w-[24px] h-[24px] rounded-full block m-auto shadow-lg" src={writerImage === '' ? `/images/user/coverimage.jpg` : `${apiBasePath}/${writerImage?.slice(writerImage.indexOf('/') + 1)}`} alt="" />
               </span>
                 <span className='inline-block lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[12px] color-[#595D5B] mr-[15px]'>
-                  {postuploadedBy}
+                  {shortenUploadedBy}
 
                 </span></>}
               {updatedAt.length > 0 && <>  <span className='inline-block '>
                 <img src='/images/usericons/calender.svg' />
               </span>
                 <span className='inline-block leading-1 ml-[10px] lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[12px] color-[#595D5B]'>
-                  {formattedDate}
+                  {banglaDate}
                 </span></>}
             </a>
           </div>
