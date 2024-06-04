@@ -164,7 +164,7 @@ let shortenUploadedBy = postuploadedBy?.length> 16 ? `${postuploadedBy?.slice(0,
                 onClick={moreOptionHandler}
                 className='absolute top-0 right-0 text-[20px] rounded-full bg-[#EFEFEF] w-[38px]'><i class="ri-more-2-line"></i></button>
               {isMoreClick &&
-                <ul className='mt-[15px] absolute top-[35px] right-0 lg:text-[15px] sm:text-[13px] lg:backdrop-blur-md md:backdrop-blur-md  lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none lg:bg-[#FCF7E8] md:bg-[#FCF7E8] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static w-[190px] rounded-md  ring-opacity-5 focus:outline-none'>
+                <ul className='mt-[15px] absolute top-[35px] right-0 lg:text-[15px] sm:text-[13px] xs:text-[13px] backdrop-blur-md shadow-xl bg-[#FCF7E8] xs:bg-transparent z-[1000] origin-top-right w-[190px] rounded-md  ring-opacity-5 focus:outline-none'>
                   <li
                     className="block cursor-pointer hover:bg-[#F9A106]  hover:text-white"
 
