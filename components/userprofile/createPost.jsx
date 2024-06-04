@@ -434,7 +434,7 @@ export default function CreatePost() {
                             <img className='m-auto pr-[10px] w-[40px] h-[35px]' src='/images/likhun/imagelogo.png' alt='image File ' />
                             <div className='w-full'>
                                 {/* <strong className='block'>Kobitar Gan.mp3</strong> */}
-                                <p className='w-full text-[#292D32]'>{image ? `File name: ${image?.name}` : "কোন ছবি নির্বাচন করা হয়নি"}</p>
+                                <p className='w-full text-[#292D32]'>{image ? `File name: ${image?.name?.slice(0,20)}` : "কোন ছবি নির্বাচন করা হয়নি"}</p>
 
                                 {/* <span className='flex justify-start items-center'>60 KB of 12O KB . <img className='m-auto pr-[10px]' src='../images/user/audio-icon.png' alt='Audio Icon ' /><strong>Uploading...</strong></span> */}
                             </div>
@@ -469,7 +469,7 @@ export default function CreatePost() {
                             <img className='m-auto pr-[10px] w-[40px] h-[35px]' src='/images/likhun/imagelogo.png' alt='image File ' />
                             <div className='w-full'>
                                 {/* <strong className='block'>Kobitar Gan.mp3</strong> */}
-                                <p className='w-full text-[#292D32]'>{selectedFile ? `File name: ${selectedFile?.name}` : "কোন অডিও নির্বাচন করা হয়নি"}</p>
+                                <p className='w-full text-[#292D32]'>{selectedFile ? `File name: ${selectedFile?.name?.slice(0,20)}` : "কোন অডিও নির্বাচন করা হয়নি"}</p>
 
                                 {/* <span className='flex justify-start items-center'>60 KB of 12O KB . <img className='m-auto pr-[10px]' src='../images/user/audio-icon.png' alt='Audio Icon ' /><strong>Uploading...</strong></span> */}
                             </div>

@@ -298,7 +298,7 @@ export default function EditPost() {
               <img className='m-auto pr-[10px] w-[40px] h-[35px]' src='/images/likhun/imagelogo.png' alt='image File ' />
               <div className='w-full'>
                 {/* <strong className='block'>Kobitar Gan.mp3</strong> */}
-                {image ? <p className='w-full text-[#292D32]'>{image ? `File name: ${image?.name}` : "কোন ছবি নির্বাচন করা হয়নি"}</p> :
+                {image ? <p className='w-full text-[#292D32]'>{image ? `File name: ${image?.name?.slice(0,20)}` : "কোন ছবি নির্বাচন করা হয়নি"}</p> :
                   <p className='w-full text-[#292D32]'>{preview?.length > 0 ? `File name: ${preview?.slice(preview?.indexOf('/'))}` : "কোন ছবি নির্বাচন করা হয়নি"}</p>}
 
                 {/* <span className='flex justify-start items-center'>60 KB of 12O KB . <img className='m-auto pr-[10px]' src='../images/user/audio-icon.png' alt='Audio Icon ' /><strong>Uploading...</strong></span> */}
@@ -334,7 +334,7 @@ export default function EditPost() {
               <img className='m-auto pr-[10px] w-[40px] h-[35px]' src='/images/likhun/imagelogo.png' alt='image File ' />
               <div className='w-full'>
                 {/* <strong className='block'>Kobitar Gan.mp3</strong> */}
-                {selectedFile ? <p className='w-full text-[#292D32]'>{selectedFile ? `File name: ${selectedFile?.name}` : "কোন অডিও নির্বাচন করা হয়নি"}</p> :
+                {selectedFile ? <p className='w-full text-[#292D32]'>{selectedFile ? `File name: ${selectedFile?.name?.slice(0,20)}` : "কোন অডিও নির্বাচন করা হয়নি"}</p> :
                   <p className='w-full text-[#292D32]'>{audioPreview?.length > 0 ? `File name: ${audioPreview?.slice(audioPreview?.indexOf('/'))}` : "কোন অডিও নির্বাচন করা হয়নি"}</p>}
 
                 {/* <span className='flex audioPreview justify-start items-center'>60 KB of 12O KB . <img className='m-auto pr-[10px]' src='../images/user/audio-icon.png' alt='Audio Icon ' /><strong>Uploading...</strong></span> */}
