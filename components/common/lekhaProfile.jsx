@@ -29,7 +29,7 @@ const LekhaPokaProfile = ({
               <img
                 className="border border-[#A5A5A536] "
                 src={image === null ? '/images/defaultUserPic/profile.jpg' : `${apiBasePath}/${image?.slice(image.indexOf("/") + 1)}`}
-                height={100} width={100} alt={image}
+                height={100} width={100} alt={''}
               />
 
             </a>
