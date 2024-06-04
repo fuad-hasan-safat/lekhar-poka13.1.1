@@ -12,6 +12,9 @@ const LekhaPokaProfile = ({
   star,
 }) => {
 
+  let shortenTitle = title?.length > 26 ? `${title?.slice(0,25)}...` : title;
+  let shortenWriter = writer?.length > 26 ? `${writer?.slice(0,25)}...` : writer;
+
   return (
     <>
 
@@ -39,7 +42,7 @@ const LekhaPokaProfile = ({
               className="text-[20px] text-gray-800 "
               href={`/post/${id}`}
             >
-              {title}
+              {shortenTitle}
             </Link>
 
             <diV>
@@ -47,7 +50,7 @@ const LekhaPokaProfile = ({
               <a
                 className="text-[16px] text-gray-600"
                 href={`/postswriter/${writer_id}`}>
-                {writer}
+                {shortenWriter}
               </a>
 
             </diV>

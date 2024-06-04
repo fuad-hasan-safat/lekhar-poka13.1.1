@@ -116,7 +116,7 @@ if(profileName){
 
 let shortenTitle = title?.length> 23? `${title?.slice(0,22)}...` : title;
 let shortenWriter = writer?.length>26 ? `${writer?.slice(0,25)}...`  : writer;
-let shortenUploadedBy = postuploadedBy?.length> 16 ? `${postuploadedBy?.slice(0,15)}...` : postuploadedBy;
+let shortenUploadedBy = postuploadedBy?.length> 12 ? `${postuploadedBy?.slice(0,12)}...` : postuploadedBy;
 
 
 

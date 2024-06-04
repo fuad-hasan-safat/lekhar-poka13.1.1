@@ -1,6 +1,6 @@
 // Mapping of month numbers to Bengali month names
-const bengaliMonths = ["জানুয়ারী", "ফেব্রুয়ারী", "মার্চ", "এপ্রিল", "মে", "জুন", 
-                       "জুলাই", "অগাস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"];
+const bengaliMonths = ["জানু", "ফেব", "মার্চ", "এপ্রিল", "মে", "জুন", 
+                       "জুলাই", "অগাস্ট", "সেপ্ট", "অক্টো", "নভেম্বর", "ডিসে"];
 
 // Mapping of digits to Bengali numerals
 const bengaliDigits = {
