@@ -345,8 +345,8 @@ export default function CreatePost() {
 
     return (
         <>
-            <div className="lg:pr-6 md:pr-0 sm:pr-0 space-y-4 lg:flex">
-                <div className='create__post__rgt lg:w-[25%] lg:order-last'>
+            <div className="md:pr-0 sm:pr-0 space-y-4 lg:flex">
+                <div className='create__post__rgt lg:w-[25%] lg:order-last pt-[10px]'>
                     <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">আপনার লেখার ধরণ নির্বাচন করুন</div>
 
                     <div>
