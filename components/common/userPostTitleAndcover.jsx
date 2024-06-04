@@ -125,11 +125,11 @@ let shortenUploadedBy = postuploadedBy?.length> 12 ? `${postuploadedBy?.slice(0,
       <div className="profile__auth__wrap space-x-[15px]">
 
         <div className="profile__auth__img">
-          <a href={`/post/${id}`} >
+          {/* <a href={`/post/${id}`} > */}
 
             <img className="lg:w-[120px] lg:h-[120px] md:w-[110px] md:h-[110px] sm:w-[100px] sm:h-[100px] xs:w-[80px] xs:h-[80px] rounded-[10px] block m-auto" src={bannerImage === '' ? `/images/user/coverimage.jpg` : `${apiBasePath}/${bannerImage?.slice(bannerImage?.indexOf('/')+1)}`} alt="" />
 
-          </a>
+          {/* </a> */}
         </div>
 
         <div className="lg:w-[400px] md:w-[270px] sm:w-[270px] xs:w-[240px] relative">
