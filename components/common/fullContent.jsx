@@ -3,7 +3,7 @@ import FullPostPagination from "../fullPost/FullPostpagination";
 import FullPostPaginationOthers from "../fullPost/FullPostpaginationOther";
 import UserPostTitleAndcover from "./userPostTitleAndcover";
 
-const FullPost = ({ id, content, title, writer, writer_id, catagory, url, image, uploadedBy,updatedAt }) => {
+const FullPost = ({ id, content, title, writer, writer_id, catagory, url, image, uploadedBy,updatedAt,profileName,writer_image }) => {
 
 
     if (catagory === 'কবিতা') {
@@ -18,7 +18,9 @@ const FullPost = ({ id, content, title, writer, writer_id, catagory, url, image,
                         writer_id={writer_id}
                         updatedAt={updatedAt}
                         uploadedBy={uploadedBy}
+                        profileName={profileName}
                         image={image}
+                        writer_image={writer_image}
                     />
               
                     <div className="pt-[30px]">
