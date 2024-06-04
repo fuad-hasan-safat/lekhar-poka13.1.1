@@ -259,7 +259,7 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
         <div className={`${showModal ? 'block' : 'hidden'} fixed z-[9999999999] inset-0 overflow-y-auto flex items-center justify-center bg-black/70`} aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <div className=" inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
             <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-            <div className="inline-block align-bottom mt-[650px] mb-[300px] bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all lg:max-w-[700px] sm:align-middle sm:max-w-lg sm:w-full xs:max-w-lg xs:w-full ">
+            <div className="inline-block align-bottom mt-[650px] mb-[300px] bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all lg:max-w-[700px] sm:align-middle sm:max-w-lg sm:w-full xs:max-w-[340px] ">
                 <div className="bg-white pb-[60px] ">
                     <div className=" sm:flex sm:items-start h-[140px] bg-[#FFC973]">
 
@@ -272,7 +272,7 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
 
                     </div>
 
-                    <div className='max-w-[640px] items-center justify-center place-content-center m-auto'>
+                    <div className='lg:max-w-[640px] md:max-w-[570px] sm:max-w-[540px] xs:max-w-[310px] items-center justify-center place-content-center m-auto'>
                         <input
                             type='text'
                             className={`${Class.profile__input} h-[40px] px-[16px]`}
@@ -394,7 +394,7 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
                     <div className="flex justify-center text-[22px]">
                         <button
                             type="button"
-                            className="page__common__yello__btn bg-white  text-[#F9A106]  py-[7px] px-[125px] rounded border border-[#F9A106] focus:outline-none focus:shadow-outline mr-2"
+                            className="page__common__yello__btn bg-white  text-[#F9A106]  py-[7px] lg:px-[125px] md:px-[80px] sm:px-[65px] xs:px-[40px] rounded border border-[#F9A106] focus:outline-none focus:shadow-outline mr-2"
                             onClick={handleClose}
                         >
                             বাতিল
@@ -402,7 +402,7 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
                         <button
                             onClick={handleSubmit}
                             type="submit"
-                            className="page__common__yello__btn ml-[6px] bg-[#FCA000] hover:bg-[#e3a230] text-white py-[7px] px-[125px] rounded focus:outline-none focus:shadow-outline"
+                            className="page__common__yello__btn ml-[6px] bg-[#FCA000] hover:bg-[#e3a230] text-white py-[7px] lg:px-[125px] md:px-[80px] sm:px-[60px] xs:px-[40px] rounded focus:outline-none focus:shadow-outline"
                         >
                             আপডেট
                         </button>
