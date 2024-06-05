@@ -148,7 +148,7 @@ export default function PostDetails() {
                     }
                     {!isdataFetch &&
                       <>
-                        <div className="text-black text-2xl mb-[75px]">
+                        <div className="text-black text-2xl mb-[75px] h-[100vh]">
                           আপনার অনুসন্ধানকৃত লেখাটি পাওয়া যাচ্ছে না !
                         </div>
                       </>

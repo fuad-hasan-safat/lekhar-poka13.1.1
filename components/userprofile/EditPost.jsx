@@ -253,7 +253,7 @@ export default function EditPost() {
             <select
               id="category"
               name="category"
-              className={`h-[40px] w-full px-[16px] text-black`}
+              className={`h-[45px] w-full px-[16px] text-black border-[1px] border-[#ddd] rounded-[7px]`}
               required
               value={selectedOption}
               onChange={(e) => setSelectedOption(e.target.value)}>
