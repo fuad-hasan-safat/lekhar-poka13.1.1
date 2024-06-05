@@ -123,7 +123,7 @@ const FullPostPagination = ({ logText, customclass }) => {
         {logLines
           ?.slice(startIndex, endIndex)
           .map((line, index) => (
-            <div key={startIndex + index} className={'lg:text-[18px] md:text-[17px] sm:text-[16px] xs:text-[14px] mt-[20px]'} dangerouslySetInnerHTML={{ __html: line }} ></div>
+            <div key={startIndex + index} className={'lg:text-[18px] md:text-[17px] sm:text-[16px] xs:text-[14px] '} dangerouslySetInnerHTML={{ __html: line }} ></div>
 
           ))}
       </div>

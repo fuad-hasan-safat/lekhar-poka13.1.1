@@ -20,6 +20,8 @@ export default function PostDetails() {
   const slug = router.query.slug;
   const { asPath } = router;
 
+  console.log({asPath})
+
   const [data, setData] = useState(null); // State to store fetched data
   const [writerImage, setWriterImage] = useState('')
   const [error, setError] = useState(null); // State to store any errors
@@ -29,7 +31,7 @@ export default function PostDetails() {
   const [profileName, setProfileName] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-
+  
   //  focus mood ----
 
   const [rating, setRating] = useState(0);
@@ -83,18 +85,20 @@ export default function PostDetails() {
 
   function readerModeClosehandler() {
     setIsModalOpen(false);
-    router.reload()
-}
+    // router.reload()
+  }
 
 
   // select image
 
-  let selectedcoverImage = writerImage;
+  let selectedCoverImage = writerImage;
 
   if (data?.image?.length > 0) {
-    selectedcoverImage = data?.image;
+    selectedCoverImage = data?.image;
   }
 
+  let pageTitle = data?.title
+  let description = "লেখার পোকা  হলো কবিতা, গান, প্রবন্ধ গল্প এবং জীবনী লেখা প্রকাশের একটি ওয়েব সাইট। যেটা অভিব্যক্তির একটি সুন্দর রূপ যা ব্যক্তিদের তাদের চিন্তাভাবনা, আবেগ এবং অভিজ্ঞতা সৃজনশীল এবং শৈল্পিক উপায়ে প্রকাশ করতে দেয়। "
 
   return (
     router.isReady &&
@@ -107,10 +111,16 @@ export default function PostDetails() {
         <Head>
 
           <title>{data?.title}</title>
-          <meta property="og:url" content={`lekharpoka.com/post/${slug}`} />
-          <meta property="og:title" content={data?.title} />
-          <meta property="og:description" content={'লেখার পোকা'} />
-          <meta property="og:image" content={''} />
+          <meta property="og:title" content={pageTitle} />
+          <meta property="og:description" content={description} />
+          <meta property="og:image" content={`https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/')+1)}`} />
+          <meta property="og:url" content={`https://lekharpoka.com${asPath}`} />
+          <meta property="og:type" content="website" />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={pageTitle} />
+          <meta name="twitter:description" content={description} />
+          <meta name="twitter:image" content={`https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/')+1)}`} />
+
 
 
         </Head>
@@ -137,7 +147,7 @@ export default function PostDetails() {
                               title={data?.title}
                               writer={data?.writer}
                               writer_id={data?.writer_id}
-                              image={selectedcoverImage}
+                              image={selectedCoverImage}
                               uploadedBy={uploaderName}
                               writer_image={writerImage}
                               profileName={profileName}
@@ -156,6 +166,10 @@ export default function PostDetails() {
 
                         </div>
                         <div className="rating__share__wrap">
+                          {/* <button onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=https://lekharpoka.com/post/${slug}`, '_blank')}>
+                            Share on Facebook
+                          </button> */}
+
                           <ShareOnFacebook url={`lekharpoka.com/post/${slug}`} title={'লেখার পোকায় আপনাকে স্বাগতম'} image={''} />
                           <RatingComponent setRating={setRating} rating={rating} post_id={data?._id} />
                         </div>
@@ -197,7 +211,7 @@ export default function PostDetails() {
                   writer_id={data?.writer_id}
                   catagory={data?.category}
                   content={data?.content}
-                   />
+                />
               </div>
             </div>
           </section>
