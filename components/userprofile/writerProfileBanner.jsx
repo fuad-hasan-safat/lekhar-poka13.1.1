@@ -6,6 +6,8 @@ import ImageCropProvider from './cropComponents/ImageCropProvider'
 import UserAchivement from './userAchivement'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import { convertToBanglaPhoneNumber, convertToBengaliDate } from '../../utils/convertToBanglaDate'
+
 
 export default function WriterProfileBanner({
     apprevedPost = 0,
@@ -118,6 +120,11 @@ export default function WriterProfileBanner({
         birthDate = writerInfo?.birth_date;
     }
 
+    const banglaBirthDate = convertToBengaliDate(birthDate)
+    const banglaGender = profileInfo?.gender === 'male' ? 'পুরুষ' : 'নারী';
+
+
+
     async function followUserhandler(user_id, following) {
         if (!isAlreadyFollowing) {
             try {
@@ -153,32 +160,32 @@ export default function WriterProfileBanner({
                         src={image?.length > 0 ? `${apiBasePath}/${image.slice(image.indexOf("/") + 1)}` : '/images/defaultUserPic/profile.jpg'}
                     />
                 </div>
-                <h1><span className='text-[35px] text-[#FCD200]'>{writerInfo?.name}</span> <span className='text-[#595D5B] text-[22px]'>{profileInfo?.designation}</span></h1>
+                <h1><span className='text-[35px] text-[#FCD200]'>{writerInfo?.name}</span> <span className='text-[#595D5B] pl-[20px] text-[22px]'>{profileInfo?.designation}</span></h1>
 
-                <ul className='flex flex-row space-x-[25px] text-[#737373] text-[20px] lg:mt-[28px]'>
+                <ul className='profile__info__wrap flex flex-row text-[#737373] text-[20px] lg:mt-[10px]'>
 
 
                     {birthDate?.length > 0 && <li>
-                        <span className='text-[#F9A106]'><i class="ri-calendar-2-line"></i></span> <span className='text-[#737373]'>{birthDate}</span>
+                        <span className='text-[#F9A106]'><img src='/images/usericons/birthdate.svg' /></span> <span className='text-[#737373]'>{banglaBirthDate}</span>
                     </li>}
 
                     {isSelfWriter && profileInfo?.gender?.length > 0 && <li>
-                        <span className='text-[#F9A106]'>{profileInfo?.gender === 'male' ? <i class="ri-men-line"></i> : <i class="ri-women-line"></i>}</span> <span className='capitalize text-[#737373]'>{profileInfo?.gender}</span>
+                        <span className='text-[#F9A106] ml-[30px]'>{profileInfo?.gender === 'male' ?  <img src='/images/usericons/sexicon.svg' /> :  <img src='/images/usericons/sexicon.svg' /> }</span> <span className='capitalize text-[#737373]'>{banglaGender}</span>
                     </li>}
 
                 </ul>
-                {isSelfWriter && <ul className={`text-[#737373] text-[20px] lg:mt-[14px]  lg:space-y-[14px] ${isSelfWriter ? '' : 'mb-[44px]'}`}>
+                {isSelfWriter && <ul className={` profile__info__wrap text-[#737373] text-[20px] lg:mt-[14px] ${isSelfWriter ? '' : 'mb-[44px]'}`}>
 
                     <li>
-                        <span className='text-[#F9A106]'><i class="ri-map-pin-line"></i></span> <span className='text-[#737373]'>{profileInfo?.address}</span>
+                        <span className='text-[#F9A106]'><img src='/images/usericons/location.svg' /></span> <span className='text-[#737373]'>{profileInfo?.address}</span>
                     </li>
 
                     <li>
-                        <span className='text-[#F9A106] '><i class="ri-phone-line"></i></span> <span className='text-[#737373] '>+{profileInfo?.phone}</span>
+                        <span className='text-[#F9A106] '><img src='/images/usericons/phone.svg' /></span> <span className='text-[#737373] '>+{convertToBanglaPhoneNumber(profileInfo?.phone)}</span>
                     </li>
 
                     <li>
-                        <span className='text-[#F9A106]'><i class="ri-mail-line"></i></span> <span className='text-[#737373] '>{profileInfo?.email}</span>
+                        <span className='text-[#F9A106]'><img src='/images/usericons/email.svg' /></span> <span className='text-[#737373] '>{profileInfo?.email}</span>
                     </li>
                 </ul>}
 

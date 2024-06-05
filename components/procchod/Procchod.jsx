@@ -1,6 +1,4 @@
-//import ProcchodLeftContent from "@/components/procchodLeftContent/ProcchodLeftContent";
 import ProcchodLeftContent from '../procchodLeftContent/ProcchodLeftContent'
-// import Sidebar from "@/components/sidebar/Sidebar";
 import Sidebar from '../sidebar/Sidebar'
 export default function Procchod() {
   return (

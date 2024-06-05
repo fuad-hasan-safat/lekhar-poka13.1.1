@@ -142,8 +142,6 @@ export default function ProcchodLeftContent() {
                       <div key={index}>
                         <SinglePostConponent
                           id={post._id}
-                          // buttons={buttons}
-                         
                           image={post?.image }
                           title={post.title}
                           writer={post.writer}
@@ -152,7 +150,6 @@ export default function ProcchodLeftContent() {
                           profileName={post?.profile_name}
                           uploadedBy={post.uploader_name}
                           updatedAt={post?.updatedAt}
-                          // category={post.category}
                           content={post.category === 'কবিতা' ? countWords(post.content, 20) : countWords(post.content, 50)}
                         />
                       </div>
@@ -168,7 +165,7 @@ export default function ProcchodLeftContent() {
               }
 
               <InfiniteScroll
-                dataLength={postList?.length} //This is important field to render the next data
+                dataLength={postList?.length} 
                 next={loadnextPage}
                 hasMore={isHasMore}
                 scrollThreshold= {0.5}

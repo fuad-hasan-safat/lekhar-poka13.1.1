@@ -8,6 +8,9 @@ import Image from 'next/image';
 import { apiBasePath } from '../../utils/constant';
 import Link from 'next/link';
 
+
+
+
 export default function UpdatedNavBar() {
     const router = useRouter();
     const [selectedNav, setSelectedNav] = useState("");
@@ -23,9 +26,37 @@ export default function UpdatedNavBar() {
     const [userToken, setUserToken] = useState("");
     const [userImage, setUserImage] = useState(null);
 
+    // ------
+    const popupRef1 = useRef(null);
+    const popupRef2 = useRef(null);
+    useOutsideAlerter(popupRef1);
+    useOutsideAlerter(popupRef2);
+
+    
+function useOutsideAlerter(ref) {
+    useEffect(() => {
+        /**
+         * Alert if clicked on outside of element
+         */
+        function handleClickOutside(event) {
+            if (ref.current && !ref.current.contains(event.target)) {
+                // alert("You clicked outside of me!");
+                setVisibleItem(null)
+            }
+        }
+        // Bind the event listener
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            // Unbind the event listener on clean up
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [ref]);
+}
+
+
 
     useEffect(() => {
-        
+
         setUsername(localStorage.getItem("name") || "");
         setUserToken(localStorage.getItem("token") || "");
         setUserUuid(localStorage.getItem("uuid") || "");
@@ -169,7 +200,7 @@ export default function UpdatedNavBar() {
                         <div className="row-span-12">
                             <div className="header-innr">
                                 <div className="logo">
-                                    <Link onClick={()=>setSelectedNav('procchod')} href="/">
+                                    <Link onClick={() => setSelectedNav('procchod')} href="/">
                                         <Logo
                                             icon="/images/svgs/lekhapokaBlack.svg"
                                             width={200}
@@ -265,7 +296,7 @@ export default function UpdatedNavBar() {
                                                     href="#">সব লেখা <span><i class="ri-arrow-down-s-line"></i></span></Link>
                                                 {/* <FontAwesomeIcon icon={faAngleDown} className="ml-2 pt-1 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-4 sm:w-4 xs:h-4 xs:w-4 focus:text-[#F9A106]" /> */}
                                                 {visibleItem === 0 && (
-                                                    <ul
+                                                    <ul ref={popupRef1}
                                                         className='absolute lg:text-[16px] sm:text-[13px]
                                                     lg:backdrop-blur-md md:backdrop-blur-md  
                                                      lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none 
@@ -289,7 +320,7 @@ export default function UpdatedNavBar() {
                                                             <Link className='block' href="/golpo">গল্প</Link>
                                                         </li>
                                                         <hr className='lg:block md:hidden sm:hidden xs:hidden' />
-                                                        
+
 
                                                         <li
                                                             className="block px-4 py-2 hover:bg-[#F9A106]  hover:text-white"
@@ -299,7 +330,7 @@ export default function UpdatedNavBar() {
                                                             <Link className='block' href="/onugolpo">অনুগল্প</Link>
                                                         </li>
                                                         <hr className='lg:block md:hidden sm:hidden xs:hidden' />
-                                                        
+
 
                                                         <li
                                                             className="block px-4 py-2  hover:bg-[#F9A106]  hover:text-white"
@@ -309,7 +340,7 @@ export default function UpdatedNavBar() {
                                                             <Link className='block' href="/probondho">প্রবন্ধ</Link>
                                                         </li>
                                                         <hr className='lg:block md:hidden sm:hidden xs:hidden' />
-                                                        
+
 
                                                         <li
                                                             className="block px-4 py-2   hover:bg-[#F9A106]  hover:text-white"
@@ -383,37 +414,37 @@ export default function UpdatedNavBar() {
                                             } */}
                                             {
                                                 userUuid.length > 0 ?
-                                                <li
-                                                    className='relative cursor-pointer'
-                                                    onClick={() => { toggleVisibility(2); }}>
-                                                    {userImage?.length > 0 ? <img src={`${apiBasePath}/${userImage.slice(userImage.indexOf("/") + 1)}`} alt={userImage} className='h-[35px] w-[35px] rounded-full' /> :
-                                                        <img src='/images/user/deafultProfile.png' alt='profile pic' className='h-[35px] w-[35px] rounded-full' />}
+                                                    <li
+                                                        className='relative cursor-pointer'
+                                                        onClick={() => { toggleVisibility(2); }}>
+                                                        {userImage?.length > 0 ? <img src={`${apiBasePath}/${userImage.slice(userImage.indexOf("/") + 1)}`} alt={userImage} className='h-[35px] w-[35px] rounded-full' /> :
+                                                            <img src='/images/user/deafultProfile.png' alt='profile pic' className='h-[35px] w-[35px] rounded-full' />}
 
-                                                    {visibleItem === 2 && (
-                                                        <ul className='absolute lg:text-[16px] sm:text-[13px] lg:backdrop-blur-md md:backdrop-blur-md  lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none lg:bg-[#FCF7E8] md:bg-[#FCF7E8] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none'>
-                                                            <li
-                                                                className="block cursor-pointer px-4 py-2 hover:bg-[#F9A106]  hover:text-white"
-                                                                onClick={() => closeMenu()}
+                                                        {visibleItem === 2 && (
+                                                            <ul ref={popupRef1} className='absolute lg:text-[16px] sm:text-[13px] lg:backdrop-blur-md md:backdrop-blur-md  lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none lg:bg-[#FCF7E8] md:bg-[#FCF7E8] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none'>
+                                                                <li
+                                                                    className="block cursor-pointer px-4 py-2 hover:bg-[#F9A106]  hover:text-white"
+                                                                    onClick={() => closeMenu()}
 
-                                                            >
-                                                                <Link className='block' href={`/user/${localStorage.getItem("uuid")}`}>প্রোফাইল</Link>
-                                                            </li>
-                                                        <hr className='lg:block md:hidden sm:hidden xs:hidden' />
-                                                            
+                                                                >
+                                                                    <Link className='block' href={`/user/${localStorage.getItem("uuid")}`}>প্রোফাইল</Link>
+                                                                </li>
+                                                                <hr className='lg:block md:hidden sm:hidden xs:hidden' />
 
-                                                            <li
-                                                                className="block cursor-pointer px-4 py-2   hover:bg-[#F9A106]  hover:text-white"
-                                                                onClick={() => closeMenu()}
 
-                                                            >
-                                                                <button className=' w-full text-center' onClick={Logout}>লগ আউট</button>
-                                                            </li>
-                                                        </ul>
-                                                    )}
-                                                </li> :
-                                                <li>
-                                                    <button onClick={()=> router.push('/account/login')}><i class="ri-account-circle-fill"></i></button>
-                                                </li>
+                                                                <li
+                                                                    className="block cursor-pointer px-4 py-2   hover:bg-[#F9A106]  hover:text-white"
+                                                                    onClick={() => closeMenu()}
+
+                                                                >
+                                                                    <button className=' w-full text-center' onClick={Logout}>লগ আউট</button>
+                                                                </li>
+                                                            </ul>
+                                                        )}
+                                                    </li> :
+                                                    <li>
+                                                        <button onClick={() => router.push('/account/login')}><i class="ri-account-circle-fill"></i></button>
+                                                    </li>
                                             }
                                         </ul>
                                     </div>
