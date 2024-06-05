@@ -36,8 +36,8 @@ export default function WriterPostList({ postList }) {
           <div className='flex'>
             <div className="lakha__main__content pt-[15px] text-3xl lg:mr-[100px] md:mr-[50px]">
 
-              {displayedPosts.length && (
-                displayedPosts.map((post, index) => (
+              {postList.length && (
+                postList.map((post, index) => (
                   <>
                     <div key={index}>
                       <SinglePostConponent
@@ -49,10 +49,14 @@ export default function WriterPostList({ postList }) {
                         content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 20).join(" ")}` : `${post.content.split(/\s+/).slice(0, 40).join(" ")}`} // Truncate content
                         category={post.category}
                         postStatus={post.status}
+                        uploadedBy={post?.uploader_name}
+                        writer_image={post?.writer_image}
+                        profileName={post?.profile_name}
+                        updatedAt={post?.updatedAt}
 
                       />
                     </div>
-                    {index < displayedPosts.length - 1 && <MainContentDivider />}
+                    {index < postList.length - 1 && <MainContentDivider />}
                   </>
                 ))
               )}
@@ -61,7 +65,7 @@ export default function WriterPostList({ postList }) {
           <div className="pt-10"> এই মুহূর্তে কোনো লেখা নেই </div>
 
         }
-        {totalPages > 1 && <div className="py-10 space-x-4"> {/* Add a class for styling */}
+        {/* {totalPages > 1 && <div className="py-10 space-x-4">
           <button
             className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
 
@@ -90,7 +94,7 @@ export default function WriterPostList({ postList }) {
             শেষ পৃষ্ঠা
           </button>
         </div>
-        }
+        } */}
 
       </>
 
