@@ -9,6 +9,10 @@ import { fetchData } from "../../function/api";
 
 export function ImageSlider() {
     const [data, setData] = useState([])
+    const [imageIndex, setImageIndex] = useState(0)
+    const router = useRouter();
+
+
 
     useEffect(() => {
 
@@ -21,8 +25,16 @@ export function ImageSlider() {
 
     }, []);
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setImageIndex(index => (index === data.length - 1 ? 0 : index + 1));
+        }, 5000); // Change slide every 5 seconds
+
+        return () => clearInterval(interval); // Clear interval on component unmount
+    }, [data.length]);
+
+
     //  handler
-    const router = useRouter();
 
     async function fetchDataAsync(postId) {
         try {
@@ -46,7 +58,6 @@ export function ImageSlider() {
 
     // slider states
 
-    const [imageIndex, setImageIndex] = useState(0)
 
     function showNextImage() {
         setImageIndex(index => {

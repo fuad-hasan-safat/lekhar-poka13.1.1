@@ -222,7 +222,7 @@ export default function EditPost() {
 
       alert("আপনার লেখাটির আপডেট সম্পন্ন হয়েছে");
 
-      // router.push(`/user/${localStorage.getItem("uuid")}`)
+      router.push(`/user/${localStorage.getItem("uuid")}`)
 
       console.log('edit response', response);
       // Handle successful update
