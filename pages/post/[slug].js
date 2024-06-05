@@ -44,7 +44,7 @@ export default function PostDetails() {
           `${apiBasePath}/getpost/${slug}`
         );
         setData(result.data.object);
-        setWriterImage(result.data.profile_image)
+        setWriterImage(result.data.writer_image)
         setUploaderName(result.data.uploader_name)
         setProfileName(result.data.profile_name)
         console.log('post page single postss ====================>>>>>>>>>>>>>>>>>>>>', result)
@@ -76,6 +76,11 @@ export default function PostDetails() {
   function readMoodHandler(postId) {
     router.push(`/post/readermood/${postId}`)
   }
+
+  function readerModeClosehandler() {
+    setIsModalOpen(false);
+    router.reload()
+}
 
 
   // select image
@@ -178,9 +183,9 @@ export default function PostDetails() {
         <ReaderModeModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
           <section className="read__mod__sec__wrap py-[100px] pb-[470px]" onCopy={(e) => { e.preventDefault(); alert('এই ওয়েবসাইটের যেকোনো লেখা আমাদের অনুমতি ছাড়া কপি করলে আইনগত ব্যবস্থা গ্রহণ করা হবে।') }}>
             <div className="read__mod__wrap">
-              {/* <div className="read__mod__btn">
-                <button className="w-[40px] h-[40px] text-white rounded-full bg-orange-400" onClick={() => readMoodHandler(data?._id)}><i class="ri-close-large-fill"></i></button>
-              </div> */}
+              <div className="read__mod__btn">
+                <button className="w-[40px] h-[40px] text-white rounded-full bg-orange-400" onClick={readerModeClosehandler}><i class="ri-close-large-fill"></i></button>
+              </div>
               <div className="read__mod__innr">
                 <FullPostReaderMode
                   title={data?.title}
@@ -188,9 +193,6 @@ export default function PostDetails() {
                   writer_id={data?.writer_id}
                   catagory={data?.category}
                   content={data?.content}
-                  // fontSize={fontSize}
-
-                  
                    />
               </div>
             </div>
