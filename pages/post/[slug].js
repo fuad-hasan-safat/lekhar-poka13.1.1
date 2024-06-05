@@ -12,6 +12,8 @@ import MusicPlayer from "../../components/musicbar/MusicPlayer";
 import ShareOnFacebook from "../../components/share/share";
 import { FacebookShareButton } from "react-share";
 import axios from "axios";
+import ReaderModeModal from "../../components/readerMode/ReaderModeModal";
+import FullPostReaderMode from "../../components/common/fullContentReadermood";
 
 export default function PostDetails() {
   const router = useRouter();
@@ -25,6 +27,8 @@ export default function PostDetails() {
   const [isdataFetch, setisDataFetch] = useState(false)
   const [uploaderName, setUploaderName] = useState('')
   const [profileName, setProfileName] = useState('')
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   //  focus mood ----
 
@@ -39,7 +43,7 @@ export default function PostDetails() {
         const result = await axios.get(
           `${apiBasePath}/getpost/${slug}`
         );
-        
+
         console.log('post page single postss ====================>>>>>>>>>>>>>>>>>>>>', result)
 
         setData(result.data.object);
@@ -76,6 +80,11 @@ export default function PostDetails() {
   function readMoodHandler(postId) {
     router.push(`/post/readermood/${postId}`)
   }
+
+  function readerModeClosehandler() {
+    setIsModalOpen(false);
+    router.reload()
+}
 
 
   // select image
@@ -139,8 +148,10 @@ export default function PostDetails() {
 
                           </div>
                           <div>
-                            <button onMouse className="absolute  w-[35px] h-[35px] right-2 mt-[5px] text-white rounded-xl bg-orange-400" onClick={() => readMoodHandler(data?._id)}><i class="ri-book-read-fill text-[22px]"></i></button>
+                            <button onMouse className="absolute  w-[35px] h-[35px] right-2 mt-[5px] text-white rounded-xl bg-orange-400" onClick={() => setIsModalOpen(true)}><i class="ri-book-read-fill text-[22px]"></i></button>
                           </div>
+
+
 
 
                         </div>
@@ -171,6 +182,27 @@ export default function PostDetails() {
 
           </section>
         </div>
+
+
+        <ReaderModeModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <section className="read__mod__sec__wrap py-[100px] pb-[470px]" onCopy={(e) => { e.preventDefault(); alert('এই ওয়েবসাইটের যেকোনো লেখা আমাদের অনুমতি ছাড়া কপি করলে আইনগত ব্যবস্থা গ্রহণ করা হবে।') }}>
+            <div className="read__mod__wrap">
+              <div className="read__mod__btn">
+                <button className="w-[40px] h-[40px] text-white rounded-full bg-orange-400" onClick={readerModeClosehandler}><i class="ri-close-large-fill"></i></button>
+              </div>
+              <div className="read__mod__innr">
+                <FullPostReaderMode
+                  title={data?.title}
+                  writer={data?.writer}
+                  writer_id={data?.writer_id}
+                  catagory={data?.category}
+                  content={data?.content}
+                   />
+              </div>
+            </div>
+          </section>
+
+        </ReaderModeModal>
 
 
         {isAudioAvailable && (

@@ -56,6 +56,7 @@ const FullPostPagination = ({ logText, customclass }) => {
           },
         }
       );
+      console.log('get page---', response)
 
       if (response.data.status === 'success') {
         setCurrentPage(response.data.saved_page)
@@ -89,6 +90,8 @@ const FullPostPagination = ({ logText, customclass }) => {
           },
         }
       );
+
+      console.log('save  page---', response)
 
 
       if (response.status === 'success') {

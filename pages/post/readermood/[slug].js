@@ -48,10 +48,8 @@ export default function PostDetailsReaderMood() {
                     setisDataFetch(false)
                 }
 
-                // console.log('is audio available ------->>>', isAudioAvailable)
             } catch (error) {
                 setError(error)
-                // console.log('post page ====================>>>>>>>>>>>>>>>>>>>>', error)
 
             } finally {
             }
