@@ -20,7 +20,7 @@ export default function UserPostTitleAndcover({
   const router = useRouter()
   const [isMoreClick, setIsMoreClick] = useState(false)
 
-  console.log({ updatedAt })
+  console.log("WRITER IMAGE FROM TITLE", { writer_image })
 
   function moreOptionHandler() {
     setIsMoreClick((prevState) => !prevState)
@@ -127,7 +127,7 @@ let shortenUploadedBy = postuploadedBy?.length> 12 ? `${postuploadedBy?.slice(0,
         <div className="profile__auth__img">
           {/* <a href={`/post/${id}`} > */}
 
-            <img className="lg:w-[120px] lg:h-[120px] md:w-[110px] md:h-[110px] sm:w-[100px] sm:h-[100px] xs:w-[80px] xs:h-[80px] rounded-[10px] block m-auto" src={bannerImage === '' ? `/images/user/coverimage.jpg` : `${apiBasePath}/${bannerImage?.slice(bannerImage?.indexOf('/')+1)}`} alt="" />
+            <img className="object-cover lg:w-[120px] lg:h-[120px] md:w-[110px] md:h-[110px] sm:w-[100px] sm:h-[100px] xs:w-[80px] xs:h-[80px] rounded-[10px] block m-auto" src={bannerImage === '' ? `/images/user/coverimage.jpg` : `${apiBasePath}/${bannerImage?.slice(bannerImage?.indexOf('/')+1)}`} alt="" />
 
           {/* </a> */}
         </div>

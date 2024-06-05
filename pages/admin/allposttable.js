@@ -78,7 +78,7 @@ const PostTable = () => {
       });
 
     // router.push(`/admin/allposttable`);
-    // router.refresh()
+    router.refresh()
 
   }
 

@@ -196,13 +196,13 @@ export default function EditPost() {
     //   editFormData.append('category', selectedOption?.label);
     // }
 
-    // if (image) {
-    //   editFormData.append("image", image);
-    // }
+    if (image) {
+      editFormData.append("image", image);
+    }
 
-    // if (selectedFile) {
-    //   editFormData.append("file", selectedFile);
-    // }
+    if (selectedFile) {
+      editFormData.append("file", selectedFile);
+    }
 
 
 
@@ -210,6 +210,7 @@ export default function EditPost() {
 
 
     try {
+      console.log({})
       // const response = await axios.put(`${apiBasePath}/posts/${formData?._id}`, changedData);
       const response = await fetch(`${apiBasePath}/posts/${formData?._id}`, {
         method: "PUT",
@@ -253,7 +254,7 @@ export default function EditPost() {
             <select
               id="category"
               name="category"
-              className={`h-[40px] w-full px-[16px] text-black`}
+              className={`h-[45px] w-full px-[16px] text-black border-[1px] border-[#ddd] rounded-[7px]`}
               required
               value={selectedOption}
               onChange={(e) => setSelectedOption(e.target.value)}>

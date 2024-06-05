@@ -10,6 +10,7 @@ import AudioFileUpload from './AudiofileUpload';
 import { useRouter } from 'next/router';
 import { FileUploader } from "react-drag-drop-files";
 import dynamic from 'next/dynamic';
+import zIndex from '@mui/material/styles/zIndex';
 
 const CustomEditor = dynamic(() => {
     return import('../../components/custom-editor');
@@ -142,7 +143,8 @@ export default function CreatePost() {
             ...provided,
             backgroundColor: "#fff",
             border: "1px solid #ccc",
-            color: "#000"
+            color: "#000",
+            zIndex: '99999'
         }),
     };
 
@@ -356,34 +358,15 @@ export default function CreatePost() {
                             styles={customStyles}
                             options={Categoryoptions}
                         />
-                        {/* <select
-                            id="category"
-                            name="category"
-                            className={`h-[40px] w-full px-[16px] text-black`}
-                            required
-                            value={selectedOption}
-                            onChange={(e) => setSelectedOption(e.target.value)}>
-                            <option value="">লেখার ধরণ</option>
-                            {category.map((cat) => (
-                                <option key={cat._id} value={cat.title}>
-                                    {cat.title}
-                                </option>
-                            ))}
-                        </select> */}
                     </div>
 
-                    {userType === 'admin' &&
-                        <div className='profile__btn__midl'>
 
-                            <CreateCategory setIsCategoryAdded={setIsCategoryAdded} />
-
-                        </div>}
 
 
                     {userType === 'admin' &&
                         <>
-                            <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">লেখক নির্বাচন করুন</div>
-                            <div className=" place-content-center justify-center ">
+                            <div className="text-[#F9A106] font-bold text-[22px] mt-[10px] !mb-[2px]">লেখক নির্বাচন করুন</div>
+                            <div className=" place-content-center justify-center">
 
                                 <div className="">
                                     <Select
@@ -396,9 +379,19 @@ export default function CreatePost() {
                                 </div>
 
 
-                                <div className='profile__btn__midl'>
-                                    <CreateWriter setIsWriterAdded={setIsWriterAdded} />
-                                </div>
+
+                            </div>
+                        </>
+                    }
+
+                    {userType === 'admin' &&
+                        <>
+                            <div className='profile__btn__midl'>
+                                <CreateCategory setIsCategoryAdded={setIsCategoryAdded} />
+                            </div>
+
+                            <div className='profile__btn__midl'>
+                                <CreateWriter setIsWriterAdded={setIsWriterAdded} />
                             </div>
                         </>
                     }
@@ -421,8 +414,8 @@ export default function CreatePost() {
                                     <img className='m-auto' src='../images/user/divider.png' alt='Divider' />
                                 </div>
 
-                                <label className=" cursor-pointer flex items-center justify-center relative -z-[9999999]" >
-                                    <div className="page__common__yello__btn mt-[15px]  file-btn w-[200px] h-[43px] text-[16px] -z-[999999]" onClick={handleFileChange}>আপলোড</div>
+                                <label className=" cursor-pointer flex items-center justify-center relative " >
+                                    <div className="page__common__yello__btn mt-[15px]  file-btn w-[200px] h-[43px] text-[16px] " onClick={handleFileChange}>আপলোড</div>
 
                                 </label>
                             </div>
@@ -434,7 +427,7 @@ export default function CreatePost() {
                             <img className='m-auto pr-[10px] w-[40px] h-[35px]' src='/images/likhun/imagelogo.png' alt='image File ' />
                             <div className='w-full'>
                                 {/* <strong className='block'>Kobitar Gan.mp3</strong> */}
-                                <p className='w-full text-[#292D32]'>{image ? `File name: ${image?.name?.slice(0,20)}` : "কোন ছবি নির্বাচন করা হয়নি"}</p>
+                                <p className='w-full text-[#292D32]'>{image ? `File name: ${image?.name?.slice(0, 20)}` : "কোন ছবি নির্বাচন করা হয়নি"}</p>
 
                                 {/* <span className='flex justify-start items-center'>60 KB of 12O KB . <img className='m-auto pr-[10px]' src='../images/user/audio-icon.png' alt='Audio Icon ' /><strong>Uploading...</strong></span> */}
                             </div>
@@ -469,7 +462,7 @@ export default function CreatePost() {
                             <img className='m-auto pr-[10px] w-[40px] h-[35px]' src='/images/likhun/imagelogo.png' alt='image File ' />
                             <div className='w-full'>
                                 {/* <strong className='block'>Kobitar Gan.mp3</strong> */}
-                                <p className='w-full text-[#292D32]'>{selectedFile ? `File name: ${selectedFile?.name?.slice(0,20)}` : "কোন অডিও নির্বাচন করা হয়নি"}</p>
+                                <p className='w-full text-[#292D32]'>{selectedFile ? `File name: ${selectedFile?.name?.slice(0, 20)}` : "কোন অডিও নির্বাচন করা হয়নি"}</p>
 
                                 {/* <span className='flex justify-start items-center'>60 KB of 12O KB . <img className='m-auto pr-[10px]' src='../images/user/audio-icon.png' alt='Audio Icon ' /><strong>Uploading...</strong></span> */}
                             </div>
