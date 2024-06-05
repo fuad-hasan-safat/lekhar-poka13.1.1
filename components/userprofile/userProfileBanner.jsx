@@ -90,7 +90,7 @@ export default function UserProfileBanner({
                 <button onClick={() => setShowModal(true)} className='page__common__yello__btn w-full bg-[#F9A106] text-white rounded-[5px] px-[75px] py-[17px] mt-[30px] mb-[40px]'>সম্পাদন করুন</button>
 
             </div>
-            {<ProfileModal setShowModal={setShowModal} image={profileInfo?.image} showModal={showModal} handleClose={handleClose} />}
+            {<ProfileModal setShowModal={setShowModal} image={profileInfo?.image || ''} showModal={showModal} handleClose={handleClose} />}
 
         </div>
     )
