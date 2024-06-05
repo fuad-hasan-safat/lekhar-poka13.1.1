@@ -34,7 +34,7 @@ export default function UserProfileBanner({
             <div className="flex justify-center">
                 <img
                     className="lg:w-[240px] lg:h-[240px]  md:w-[200px] md:h-[200px] sm:w-[180px] sm:h-[180px] xs:w-[180px] xs:h-[180px] rounded-full  border-4 border-solid border-white -mt-[110px]  "
-                    src={profileInfo?.image?.length > 0 ? `${apiBasePath}/${profileInfo?.image}` : '/images/defaultUserPic/profile.jpg'}
+                    src={profileInfo?.image?.length > 0 ? `${apiBasePath}/${profileInfo?.image.slice(profileInfo?.image.indexOf("/") + 1)}` : '/images/defaultUserPic/profile.jpg'}
                 />
             </div>
             <h1><span className='text-[35px] font-bold text-[#FCD200]'>{profileInfo?.name}</span> <span className='text-[#595D5B] pl-[20px] text-[22px]'>{profileInfo?.designation}</span></h1>

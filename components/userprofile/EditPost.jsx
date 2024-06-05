@@ -196,13 +196,13 @@ export default function EditPost() {
     //   editFormData.append('category', selectedOption?.label);
     // }
 
-    // if (image) {
-    //   editFormData.append("image", image);
-    // }
+    if (image) {
+      editFormData.append("image", image);
+    }
 
-    // if (selectedFile) {
-    //   editFormData.append("file", selectedFile);
-    // }
+    if (selectedFile) {
+      editFormData.append("file", selectedFile);
+    }
 
 
 
@@ -210,6 +210,7 @@ export default function EditPost() {
 
 
     try {
+      console.log({})
       // const response = await axios.put(`${apiBasePath}/posts/${formData?._id}`, changedData);
       const response = await fetch(`${apiBasePath}/posts/${formData?._id}`, {
         method: "PUT",
@@ -221,7 +222,7 @@ export default function EditPost() {
 
       alert("আপনার লেখাটির আপডেট সম্পন্ন হয়েছে");
 
-      router.push(`/user/${localStorage.getItem("uuid")}`)
+      // router.push(`/user/${localStorage.getItem("uuid")}`)
 
       console.log('edit response', response);
       // Handle successful update

@@ -39,11 +39,15 @@ export default function PostDetails() {
         const result = await axios.get(
           `${apiBasePath}/getpost/${slug}`
         );
-        setData(result.data.object);
-        setWriterImage(result.data.profile_image)
-        setUploaderName(result.data.uploader_name)
-        setProfileName(result.data.profile_name)
+        
         console.log('post page single postss ====================>>>>>>>>>>>>>>>>>>>>', result)
+
+        setData(result.data.object);
+        setWriterImage(result.data?.writer_image)
+        setUploaderName(result.data?.uploader_name)
+        setProfileName(result.data?.profile_name)
+        console.log("STATE WrtiER : ", writerImage, result.data.writer_image);
+
         if (result.data.object.audio?.length > 0) {
           setIsAudioAvailAble(true);
         } else {
