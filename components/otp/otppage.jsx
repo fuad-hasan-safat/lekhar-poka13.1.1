@@ -1,77 +1,147 @@
-import LoginReg from "@/components/common/loginform";
-import LoginSignInOtpLeftPartDesign from "../common/login-signup-otp-left-design";
-import { arial } from "../fonts/arial";
-import SignInOption from "../signInOption/SignInOption";
-import DropDown from "../common/dropDown";
+import React, { useRef, useState, useEffect } from "react";
+import axios from "axios";
+import { apiBasePath } from "../../utils/constant";
 
-const OtpPage = () => {
-    return (
-        <>
-            <div className={`flex ${arial.variable} font-arial`}>
-                <div className="flex flex-row h-[832px]  w-[1280px] bg-[#FCF7E8] shadow-md">
-                    {/* left part */}
-                    <div className=" w-[640px]   ">
-                        <LoginSignInOtpLeftPartDesign />
-                    </div>
-                    {/* right part */}
-                    <div className="relative w-[640px]  bg-white rounded-l-[46px] text-black grid place-items-center ">
-                        <div className="grid place-items-center">
-                            <div className="grid place-items-center pt-28">
-                                <h1 className=" text-black text-5xl mb-[40px]">OTP Verification</h1>
-                                <p className="text-gray-500">We Will send you a one time password on</p>
-                                <p className="text-gray-500"> on this <span className="font-semibold">Mobile Number</span></p>
-                                <p className="text-gray-500 font-semibold pt-4">+91 - 12989200823</p>
-                            </div>
-                            <div className="flex flex-row space-x-6 mt-[70px] mb-[70px] text-3xl font-semibold text-gray-700">
-                                <input
-                                    type="text"
-                                    className="w-[51px] h-[65px] border-solid  bg-gray-100 rounded-xl text-center"
-                                >
-                                </input>
-                                <input
-                                    type="text"
-                                    className="w-[51px] h-[65px] border-solid  bg-gray-100 rounded-xl text-center"
-                                >
-                                </input>
-                                <input
-                                    type="text"
-                                    className="w-[51px] h-[65px] border-solid  bg-gray-100 rounded-xl text-center"
-                                >
-                                </input>
-                                <input
-                                    type="text"
-                                    className="w-[51px] h-[65px] border-solid  bg-gray-100 rounded-xl text-center"
-                                >
-                                </input>
-                            </div>
-                            <div>
-                                <div className="flex flex-col">
-                                    <button
-                                        className=" bg-[#F9A106] rounded-full text-[35px] text-white w-[368px] h-[70px] "
-                                    >
-                                        Verify
-                                    </button>
-                                    <a className="pl-60 pt-2 text-gray-400 font-semibold text-sm" href='#'>Do not get OTP?</a>
-                                </div>
-                            </div>
-                            <div className="pt-32">
-                                <SignInOption
 
-                                    lowermessege1="Already Have Account? "
-                                    lowermessege2="Log In"
-                                    signLogLink="\login"
-                                />
-                            </div>
+const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus, otpStatus }) => {
 
-                        </div>
-                        <div className="absolute top-7 right-0 pr-2">
-                            <DropDown />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </>
-    );
+  const [otp, setOtp] = useState(["", "", "", ""]);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [numberPrefix, setNumberPrefix] = useState('88');
+  const [timer, setTimer] = useState(60); 
+  const inputRefs = useRef([]);
+
+  useEffect(() => {
+
+    const interval = setInterval(() => {
+      if (timer > 0) {
+        setTimer((prevTimer) => prevTimer - 1);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+
+  }, [timer]);
+
+  const sendOtp = async () => {
+
+    const formattedPhoneNumber = `88${phonenumber}`;
+
+    try {
+      const response = await axios.post(`${apiBasePath}/verify-otp`, {
+        otp: Number(otp.join("")),
+        phone: formattedPhoneNumber,
+      });
+      
+      if (response.data.status === "success") {
+        setIsOtpVerified(true);
+        setIsOtpSuccess(true);
+      } else {
+        alert("ওটিপি সফলভাবে সম্পন্ন হয়নি");
+      }
+    } catch (error) {
+      console.error("Otp Send Error:", error);
+    }
+  };
+
+  const handleOtpChange = (index, value) => {
+    const newOtp = [...otp];
+    newOtp[index] = value.slice(-1);
+    setOtp(newOtp);
+
+    if (newOtp.every((value) => value !== "")) {
+      setIsButtonDisabled(false);
+    } else {
+      setIsButtonDisabled(true);
+    }
+
+    // Focus on the next field
+    if (value && inputRefs.current[index + 1]) {
+      inputRefs.current[index + 1].focus();
+    }
+
+    setOtp(newOtp);
+
+    console.log(otp.join(''))
+    console.log(typeof(otp.join()))
+  };
+
+  const handleSendOtpAgain = async () => {
+    console.log('phone number in otp page ----', phonenumber)
+
+    try {
+      const response = await axios.post(`${apiBasePath}/send-otp`, {
+        phone: `${numberPrefix}${phonenumber}`,
+      });
+      // console.log(`full number ------>>> ${numberPrefix}`)
+      console.log('sigh up OTP In otp page  ------>> ', response)
+      setOtpStatus(response.data.otp_status)
+
+      if (response.data.otp_status === "SENT") {
+        setTimer(60)
+        setOtpStatus(true)
+        setOtpStatus('SENT')
+      }
+      if (response.data.otp_status === "LIMIT_CROSSED") {
+        setIsOtpSuccess(false)
+        setOtpStatus(false)
+        alert('আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন');
+      }
+    } catch (error) {
+      console.error('Signup error:', error);
+      // Handle signup error (e.g., display error message)
+      alert('nothing happen');
+    }
+
+  }
+
+  return (
+    <div className="w-full">
+      <div className="grid place-items-center lg:pt-28 md:pt-26 sm:pt-20 xs:pt-15">
+        <h1 className="text-black lg:text-5xl md:text-4xl sm:text-4xl xs:text-3xl lg:mb-[40px] md:mb-[40px] sm:mb-[30px] xs:mb-[20px]">
+        ওটিপি যাচাই করুন
+        </h1>
+        <p className="text-gray-500">আমরা আপনাকে একটি এককালীন পাসওয়ার্ড পাঠাব</p>
+        <p className="text-gray-500">
+           <span className="font-semibold">মোবাইল নাম্বার:</span> +88 {phonenumber}
+        </p>
+      </div>
+      <div className="flex justify-center flex-row space-x-6 lg:mt-[70px] lg:mb-[70px] md:mt-[60px] md:mb-[60px] sm:mt-[50px] sm:mb-[50px] xs:mt-[30px] xs:mb-[20px] text-3xl font-semibold text-gray-700">
+        {[...Array(4)].map((_, index) => (
+          <input
+            key={index}
+            type="number"
+            className="w-[51px] h-[65px] border-solid bg-gray-100 rounded-xl text-center"
+            value={otp[index]}
+            onChange={(e) => handleOtpChange(index, e.target.value)}
+            ref={(ref) => (inputRefs.current[index] = ref)}
+            maxLength="1" // Limit input to one character
+          />
+        ))}
+      </div>
+      <div className="flex justify-center items-center flex-col">
+        {otpStatus === "SENT" && <p className="text-gray-500">{`ওটিপি  ${timer} সেকেন্ড পর আবার পাঠানো হবে`}</p>}
+        <button
+          onClick={sendOtp}
+          disabled={isButtonDisabled}
+          className={`login__btn page__common__yello__btn mt-8 lg:px-5 md:px- sm:px-3  bg-[#F9A106] rounded-full lg:text-[35px] md:text-[30px] sm:text-[25px] xs:text-[20px] text-white lg:h-[75px] md:h-[65px] sm:h-[60px] xs:h-[55px] ${isButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+        >
+          ওটিপি যাচাই করুন
+        </button>
+        {timer <= 0 &&
+
+          <button
+            onClick={handleSendOtpAgain}
+            className="page__common__yello__btn lg:pl-60 md:pl-50 sm:pl-40 xs:pl-10 pt-2 text-gray-400 font-semibold text-sm"
+          >
+           ওটিপি পাননি ?
+          </button>
+        }
+
+      </div>
+    </div>
+  );
 };
 
 export default OtpPage;

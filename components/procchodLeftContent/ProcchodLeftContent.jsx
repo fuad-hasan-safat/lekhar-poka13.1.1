@@ -1,12 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
-import MaincontentBody from "../common/maincontentBody";
+import InfiniteScroll from 'react-infinite-scroll-component';
 import MainContentDivider from "../common/mainContentDivider";
 import ProcchodButtonList from "./ProcchodButtonList";
 import { apiBasePath } from "../../utils/constant";
-
 import { countWords } from "../../function/api";
 import Loading from "../common/loading";
+import SinglePostConponent from "../common/singlePostComponent";
+
 
 export default function ProcchodLeftContent() {
 
@@ -17,7 +18,8 @@ export default function ProcchodLeftContent() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const postsPerPage = 5; // Number of posts to display per page
-
+  const [isHasMore, setisHasMore] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null)
   const [buttons, setButtons] = useState([
     {
       _id: "",
@@ -27,59 +29,98 @@ export default function ProcchodLeftContent() {
   ]);
 
 
-
-
   useEffect(() => {
 
+    const fetchTotalPage = async () => {
 
-    const fetchPosts = async () => {
       try {
-        const response = await fetch(`${apiBasePath}/posts`);
-        const data = await response.json();
-        setPostList(data);
 
-        // Calculate total pages based on posts and postsPerPage
-        setTotalPages(Math.ceil(data.length / postsPerPage));
+        const response = await fetch(`${apiBasePath}/postpages`);
+        const data = await response.json();
+
+        setTotalPages(data?.length);
+
+        if(data?.length> 1){
+          setisHasMore(true)
+        }
+
       } catch (error) {
         setError(error);
       } finally {
-        setIsLoading(false)
+        // setIsLoading(false)
       }
     };
 
-    fetchPosts();
-
-
-
+    fetchTotalPage();
   }, []);
 
 
-  const handlePageChange = (pageNumber) => {
-    if (pageNumber > 0 && pageNumber <= totalPages) {
-      setCurrentPage(pageNumber);
+  const preparePostList = (newData = []) => {
+    
+    if (currentPage === 1) {
+      setPostList(newData);
+    } else {
+      setPostList(postList.concat(newData));
     }
+
+  }
+
+  
+  const fetchPosts = async () => {
+    
+    try {
+
+      const response = await fetch(`${apiBasePath}/posts/${currentPage}`);
+      const data = await response.json();
+      console.log('main page post,', data)
+      preparePostList(data)
+
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false)
+    }
+
   };
 
-  const firstPage = () => {
-    handlePageChange(1);
+  const fetcCategoryhPosts = async () => {
+    try {
+      const response = await fetch(`${apiBasePath}/categoryposts/${selectedCategory}/${currentPage}`);
+      const data = await response.json();
+      console.log('main page category post,', data)
+
+      preparePostList(data)
+
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false)
+    }
+    
   };
 
-  const lastPage = () => {
-    handlePageChange(totalPages);
-  };
 
-  const nextPage = () => {
-    handlePageChange(currentPage + 1);
-  };
+  useEffect(() => {
+     
+    if(!selectedCategory){
+      fetchPosts();
+      }else{
+        fetcCategoryhPosts();
+      }
 
-  const prevPage = () => {
-    handlePageChange(currentPage - 1);
-  };
+  }, [selectedCategory, currentPage]);
 
-  const startIndex = (currentPage - 1) * postsPerPage;
-  const endIndex = Math.min(startIndex + postsPerPage, postList.length); // Ensure endIndex doesn't exceed posts length
 
-  const displayedPosts = postList.slice(startIndex, endIndex); // Slice the posts for the current page
+
+  const loadnextPage = () => {
+
+    setCurrentPage(currentPage + 1)
+
+    if (currentPage >= totalPages) {
+      setisHasMore(false)
+    }
+  }
+
 
   if (isLoading) {
     <Loading />
@@ -87,67 +128,52 @@ export default function ProcchodLeftContent() {
 
     return (
       <div>
-        <ProcchodButtonList buttons={buttons} setButtons={setButtons} selectedId={selectedId} setSelectedId={setSelectedId} setPostList={setPostList} postList={postList} setTotalPages={setTotalPages} postsPerPage={postsPerPage} setCurrentPage={setCurrentPage} />
+        <ProcchodButtonList buttons={buttons} setButtons={setButtons} selectedId={selectedId} setSelectedId={setSelectedId} setPostList={setPostList} postList={postList} setTotalPages={setTotalPages} totalPages={totalPages} postsPerPage={postsPerPage} currentPage={currentPage} setCurrentPage={setCurrentPage} setisHasMore={setisHasMore} setIsLoading={setIsLoading} setSelectedCategory={setSelectedCategory}/>
         <div className="text-3xl">
 
           {error ? (
             <div></div>
           ) : (
             <>
-              {postList.length > 0 ?
+              {postList?.length > 0 ?
                 (<div className="lakha__main__content pt-20 text-3xl">
-                  {displayedPosts.map((post, index) => (
+                  {postList?.map((post, index) => (
                     <>
                       <div key={index}>
-                        <MaincontentBody
+                        <SinglePostConponent
                           id={post._id}
-                          buttons={buttons}
+                          image={post?.image }
                           title={post.title}
                           writer={post.writer}
-                          category={post.category}
-                          content={post.category === 'কবিতা' ? countWords(post.content, 30) : countWords(post.content, 70)}
-
-                        // content={post.category === 'কবিতা' ? post.content.match(/(\S+\s*){1,100}/)?.[0] : post.content.match(/(\S+\s*){1,200}/)?.[0]}
-                        // content={post.summary}
-                        // content={post.category === 'কবিতা' ? `${post.content.split().slice(0, 10)}` : `${post.content.split().slice(0, 30)}`} // Truncate content
+                          writer_id={post.writer_id}
+                          writer_image={post?.writer_image}
+                          profileName={post?.profile_name}
+                          uploadedBy={post.uploader_name}
+                          updatedAt={post?.updatedAt}
+                          content={post.category === 'কবিতা' ? countWords(post.content, 20) : countWords(post.content, 50)}
                         />
                       </div>
-                      {index < displayedPosts.length - 1 && <MainContentDivider />}
+                      {index < postList?.length && <MainContentDivider />}
                     </>
                   ))}
                 </div>) : (
 
-                  <div className="pt-10">  এই মুহূর্তে কোনো লেখা নেই </div>
+                  <div className="pt-10 text-black">  এই মুহূর্তে কোনো লেখা নেই </div>
 
                 )
 
               }
-              {totalPages > 1 && <div className="py-10 space-x-4"> {/* Add a class for styling */}
-                <button
-                  className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
-                  onClick={firstPage} disabled={currentPage === 1}>
-                  প্রথম পৃষ্ঠা
-                </button>
-                <button
-                  className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
-                  onClick={prevPage} disabled={currentPage === 1}>
-                  পূর্ববর্তী পৃষ্ঠা
-                </button>
-                <span
-                  className="text-sm text-gray-800"
-                >পৃষ্ঠা {currentPage} এর {totalPages}</span>
-                <button
-                  className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
-                  onClick={nextPage} disabled={currentPage === totalPages}>
-                  পরবর্তী পৃষ্ঠা
-                </button>
-                <button
-                  className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
-                  onClick={lastPage} disabled={currentPage === totalPages}>
-                  শেষ পৃষ্ঠা
-                </button>
-              </div>
-              }
+
+              <InfiniteScroll
+                dataLength={postList?.length} 
+                next={loadnextPage}
+                hasMore={isHasMore}
+                scrollThreshold= {0.5}
+                loader={<h6>ডাটা লোড হচ্ছে ...</h6>}
+          
+              >
+              </InfiniteScroll>
+
             </>
           )}
 

@@ -14,16 +14,19 @@ const ProcchodButtonList = ({
   setCurrentPage,
   buttons,
   setButtons,
+  setisHasMore,
+  totalPages,
+  currentPage,
+  setIsLoading,
+  setSelectedCategory,
 }) => {
 
 
-   useEffect(() => {
- 
+  useEffect(() => {
 
     async function fetchDataAsync() {
       try {
         const result = await fetchData(`${apiBasePath}/categories`);
-        //console.log("result         ->>>>>>>>>>>>>>>>", result.object);
         setButtons(result);
       } catch (error) {
         alert(error)
@@ -31,14 +34,16 @@ const ProcchodButtonList = ({
     }
 
     fetchDataAsync();
+
   }, []);
 
   return (
+
     <div className="all__button__list pt-16 clearfix">
-    
+
       {buttons.length &&
         buttons.map((button, index) => (
-          <ButtonItem
+          <ButtonItem 
             key={button._id}
             id={button._id}
             title={button.title}
@@ -51,10 +56,15 @@ const ProcchodButtonList = ({
             setTotalPages={setTotalPages}
             postsPerPage={postsPerPage}
             setCurrentPage={setCurrentPage}
+            setisHasMore={setisHasMore}
+            totalPages={totalPages}
+            currentPage={currentPage}
+            setIsLoading={setIsLoading}
+            setSelectedCategory={setSelectedCategory}
             buttons={buttons}
           />
         ))}
-        </div>
+    </div>
   );
 };
 

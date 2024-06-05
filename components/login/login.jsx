@@ -2,19 +2,17 @@
 import React, { useState, useEffect } from "react";
 import LoginReg from '../common/loginform'
 import LoginSignInOtpLeftPartDesign from '../common/login-signup-otp-left-design'
-// import { arial } from "../fonts/arial";
 import SignInOption from "../signInOption/SignInOption";
-import DropDown from "../common/dropDown";
 
 const LoginPage = () => {
 
+  const [userToken, setUserToken] = useState("");
+  const [user, setUser] = useState(null);
   const [status, setStatus] = useState("");
   const [username, setUsername] = useState("");
   const [userUuid, setUserUuid] = useState("");
-  const [userToken, setUserToken] = useState("");
-  
-
-
+  const [profile, setProfile] = useState([]);
+  const [email, setEmail] = useState('')
 
   useEffect(() => {
     setStatus(localStorage.getItem("status") || "");
@@ -26,39 +24,58 @@ const LoginPage = () => {
 
   return (
     <>
-      <section className="all__post__sec__wrap">
+      <section className="login__form__sec__wrp clearfix">
 
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <div className={`flex `}>
-                <div className="flex flex-row  bg-[#FCF7E8] shadow-md">
-                  {/* left part */}
-                  <div className=" w-[640px]   ">
-                    <LoginSignInOtpLeftPartDesign />
-                  </div>
-                  {/* right part */}
-                  <div className="relative w-[640px]  bg-white rounded-l-[46px] text-black grid place-items-center ">
-
-                    <div className="grid place-items-center ">
-                      <LoginReg logreg="Log In" btntext="Log In" />
-                      <SignInOption
-                        title="Or Signup with"
-                        icon1="/images/loginOptionIcon/google.svg"
-                        icon2="/images/loginOptionIcon/facebook_squre.svg"
-                        icon3="/images/loginOptionIcon/ig.svg"
-                        lowermessege1="Don't have any account? "
-                        lowermessege2="Create account."
-                        signLogLink="/account/signup"
-                      />
-
-                    </div>
-                    <div className="absolute top-7 right-0 pr-2">
-                      <DropDown />
-                    </div>
-                  </div>
-
+              <div className="login__form__wrap flex flex-row bg-[#FCF7E8] shadow-md">
+              
+                <div className="login__form__left">
+                  <LoginSignInOtpLeftPartDesign />
                 </div>
+               
+                <div className="login__form__right relative bg-white rounded-l-[46px] text-black grid place-items-center ">
+
+                  <div className="w-full">
+                    {
+                      userUuid?.length > 0 ?
+                      <>
+
+                      <div>
+                        <p className="text-black text-3xl">আপনি ইতিমধ্যেই লগইন করেছেন.<a href="/"> <span className="text-orange-500 cursor-pointer">প্রচ্ছদ পেজে যান </span></a></p>
+                      </div>
+                      
+                      </>
+                      :
+                      <>
+                        <LoginReg logreg="লগইন করুন" btntext="লগইন" />
+
+                        <SignInOption
+                          user={user}
+                          setUser={setUser}
+                          profile={profile}
+                          setProfile={setProfile}
+                          setStatus={setStatus}
+                          setUsername={setUsername}
+                          setUserUuid={setUserUuid}
+                          setEmail={setEmail}
+                          title="অথবা সাইন ইন করুন"
+                          icon1="/images/loginOptionIcon/google.svg"
+                          lowermessege1="একাউন্ট নেই? "
+                          lowermessege2="একাউন্ট তৈরী করুন ।"
+                          signLogLink="/account/signup"
+                        />
+                      </>
+
+                    }
+
+                  </div>
+                  {/* <div className="absolute top-7 right-0 pr-2">
+                      <DropDown />
+                    </div> */}
+                </div>
+
               </div>
             </div>
           </div>

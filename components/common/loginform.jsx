@@ -1,16 +1,14 @@
 "use client"
+
 import { apiBasePath } from "../../utils/constant";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Loading from "./loading";
 
-// type logreg = {
-//   logreg: string;
-//   btntext: string;
-// };
 
 export default function LoginForm({ logreg, btntext }) {
+
   const router = useRouter();
 
   const [number, setnumber] = useState("");
@@ -24,25 +22,44 @@ export default function LoginForm({ logreg, btntext }) {
   const [status, setStatus] = useState("");
   const [username, setUsername] = useState("");
   const [userUuid, setUserUuid] = useState("");
-  const [error, setError] = useState(null); 
+  const [error, setError] = useState(null);
   const [numberPrefix, setNumberPrefix] = useState('88');
+  const [showPassword, setShowPassword] = useState(false);
 
+  useEffect(() => {
+
+    setStatus(localStorage.getItem("status") || "");
+
+  }, [status]);
+
+  useEffect(() => {
+
+    setUsername(localStorage.getItem('name') || '');
+    setUserUuid(localStorage.getItem('uuid') || '')
+
+  }, []);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleNumberhange = (e) => {
-     // Allow only numbers and backspace key
-     const newValue = e.target.value.replace(/[^0-9\b]/g, "");
-     // Enforce maximum length of 11 digits
-     if (newValue.length > 11) {
-       setError("Phone number cannot exceed 11 digits.");
-       return;
-     }
-     // Enforce starting with "01"
-     if (newValue.length > 1 && newValue.slice(0, 2) !== "01") {
-       setError("Phone number must start with 01.");
-       return;
-     }
-     setnumber(newValue);
-     setError(null); // Clear error if valid input
+
+    const newValue = e.target.value.replace(/[^0-9\b]/g, "");
+
+    if (newValue.length > 11) {
+      setError("Phone number cannot exceed 11 digits.");
+      return;
+    }
+
+    if (newValue.length > 1 && newValue.slice(0, 2) !== "01") {
+      setError("Phone number must start with 01.");
+      return;
+    }
+
+    setnumber(newValue);
+    setError(null);
+
   };
 
   const handlePasswordChange = (e) => {
@@ -51,8 +68,6 @@ export default function LoginForm({ logreg, btntext }) {
 
   async function submitLogin() {
 
-    console.log("Calling submitLogin---------------->>>>>>");
-    console.log(`${numberPrefix}${number}`);
     try {
       const response = await axios.post(
         `${apiBasePath}/login`,
@@ -67,15 +82,15 @@ export default function LoginForm({ logreg, btntext }) {
         }
       );
 
-      //console.log({ response });
 
-      if (response.status === 'success' || 200) {
+      if (response.data.status === 'success') {
+
         const data = await response.data;
 
-        console.log(data)
         setStatus(data.status);
         setUserUuid(data.uuid);
         setUser(data);
+
         localStorage.setItem("status", data.status);
         localStorage.setItem("name", data.name);
         localStorage.setItem("uuid", data.uuid);
@@ -83,74 +98,84 @@ export default function LoginForm({ logreg, btntext }) {
         localStorage.setItem("token", data.access_token);
         localStorage.setItem("usertype", data.usertype);
         localStorage.setItem("phone", data.phone);
-        //localStorage.setItem('user', data);
-
-
-        console.log('user type,_____',data.usertype )
 
         setnumber('')
         setPassword('')
+
         router.push(`/`)
+
       } else {
-        //console.log("error res", response);
-        alert('error');
+        alert('সঠিক নাম্বার দিন');
       }
     } catch (error) {
-      //console.log("inside catch", error);
-      alert(error.response.data.message);
+      alert('সঠিক পাসওয়ার্ড দিন');
     }
+
   }
-
-
-   useEffect(() => {
-    setStatus(localStorage.getItem("status") || "");
-
-  }, [status]);
-
-  useEffect(() => {
-    setUsername(localStorage.getItem('name')|| '');
-    setUserUuid(localStorage.getItem('uuid')|| '')
-  }, []);
 
 
   return (
     <>
-      <div>
+      <div className="login__form__dsc">
+
         <div className="text-[48px] mb-5  font-semibold text-yellow-500">
           {logreg}
         </div>
-        <div className="  grid place-items-center">
+
+        <div className="login__form__fleds w-full ">
+
           <div className="mb-4 ">
+
             <input
               onChange={handleNumberhange}
               value={number}
-              className="w-[559px] h-[62px] p-4 bg-[#FCF7E8] rounded-2xl text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="h-[62px] p-4 bg-[#FCF7E8] rounded-2xl text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="phone"
               type="number"
-              placeholder="Enter Phone Number (01-XXXXXXXXX)"
+              placeholder="নাম্বার দিন (01-XXXXXXXXX)"
               required
             />
             {error && <p className="error text-red-500">{error}</p>}
+
           </div>
-          <div className="">
+
+          <div className="relative w-full">
+
             <input
               onChange={handlePasswordChange}
               value={password}
-              className="w-[559px] h-[62px] p-4 bg-[#FCF7E8]  rounded-2xl   text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
+              className="h-[62px] p-4 pr-[40px] bg-[#FCF7E8]  rounded-2xl   text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
               id="password"
-              type="password"
-              placeholder="Password"
+              type={showPassword ? 'text' : 'password'}
+              placeholder="পাসওয়ার্ড দিন"
               required
             />
+
+            <button className="absolute right-[20px]  pt-[18px]" type="button" onClick={togglePasswordVisibility}>
+              {showPassword ? <i class="ri-eye-off-line"></i> : <i class="ri-eye-line"></i>}
+            </button>
+
+            <a
+              className="pt-[12px] float-right mb-[15px] inline-block align-baseline font-bold text-base text-gray-600 hover:text-black-800"
+              href="/account/recoverpassword"
+            >
+              পাসওয়ার্ড ভুলে গেছেন?
+            </a>
+
           </div>
 
-          <button
-            type="button"
-            onClick={submitLogin}
-            className=" mt-8 px-5 bg-[#F9A106] rounded-full text-[35px] text-white w-[368px] h-[75px] "
-          >
-            {btntext}
-          </button>
+          <div className="w-full table m-auto">
+
+            <button
+              type="button"
+              onClick={submitLogin}
+              className="page__common__yello__btn px-[90px] bg-[#F9A106] rounded-full text-[30px] text-white  h-[60px] text-center place-content-center"
+            >
+              {btntext}
+            </button>
+
+          </div>
+
         </div>
       </div>
     </>

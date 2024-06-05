@@ -6,6 +6,8 @@ import { apiBasePath } from "../../utils/constant";
 import SobUserPostBody from "./SobUserPostBody";
 import Loading from "../common/loading";
 import axios from "axios";
+import { countWords } from "../../function/api";
+import SinglePostConponent from "../common/singlePostComponent";
 
 export default function ProfilePostLeftContent({ slug }) {
   //   const [selectedId, setSelectedId] = useState("sob");
@@ -30,7 +32,7 @@ export default function ProfilePostLeftContent({ slug }) {
         const data = response.data; // Assuming the response structure
         setPostList(data.object);
 
-        console.log("user profile post---------------------->>>>>>>>>>>>><<<<<<<<<<<<<<<< data ", data.object)
+        console.log("user profile post writer---------------------->>>>>>>>>>>>><<<<<<<<<<<<<<<< data ", data.object)
 
 
         // Calculate total pages based on posts and postsPerPage
@@ -71,18 +73,21 @@ export default function ProfilePostLeftContent({ slug }) {
         <>
           {/* <div className='container'> */}
           {postList.length > 0 ?
-            <div className='flex justify-center'>
+            <div className='flex'>
               <div className="lakha__main__content pt-20 text-3xl lg:mr-[100px] md:mr-[50px]">
                 {displayedPosts.length && (
                   displayedPosts.map((post, index) => (
                     <>
                       <div key={index}>
-                        <SobUserPostBody
+                        <SinglePostConponent
                           id={post._id} // Assuming '_id' is the unique identifier
                           title={post.title}
                           writer={post.writer}
-                          content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 200).join(" ")}` : `${post.content.split(/\s+/).slice(0, 200).join(" ")}`} // Truncate content
+                          writer_id={post?.writer_id}
+                          image={post?.image}
                           category={post.category}
+                          content={post.category === 'কবিতা' ? countWords(post.content, 20) : countWords(post.content, 50)}
+
 
                         />
                       </div>
@@ -92,7 +97,7 @@ export default function ProfilePostLeftContent({ slug }) {
                 )}
               </div>
             </div> :
-            <div className="pt-10"> লেখা নেই </div>
+            <div className="pt-10"> এই মুহূর্তে কোনো লেখা নেই </div>
 
           }
           {totalPages > 1 && <div className="py-10 space-x-4"> {/* Add a class for styling */}

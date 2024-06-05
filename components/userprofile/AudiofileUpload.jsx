@@ -1,12 +1,10 @@
 import React, { useRef, useState } from "react";
 import ProgressBar from "@ramonak/react-progress-bar";
 
-// import './FileUpload.css'
-
 
 const AudioFileUpload = ({ selectedFile, setSelectedFile }) => {
+
     const inputRef = useRef();
-    //   const [selectedFile, setSelectedFile] = useState(null);
     const [progress, setProgress] = useState(0);
 
     const handleFileChange = (event) => {
@@ -29,10 +27,8 @@ const AudioFileUpload = ({ selectedFile, setSelectedFile }) => {
         for (let i = 0; i <= 100; i += 10) {
             await new Promise((resolve) => setTimeout(resolve, 100)); // Simulate delay
             setProgress(i);
-            console.log('---------', i)
         }
 
-        console.log("Simulated upload complete for:", selectedFile.name);
     };
 
     const clearFileInput = () => {
@@ -42,19 +38,26 @@ const AudioFileUpload = ({ selectedFile, setSelectedFile }) => {
     };
 
     return (
-        <div className="audio-upload text-black">
+        <div className="audio-upload text-black border-2 border-dashed border-[#F9A106] rounded-md h-[215px] items-center place-content-center">
             <input
+            id="audio"
                 ref={inputRef}
                 type="file"
                 accept="audio/*"
                 onChange={handleFileChange}
                 style={{ display: "none" }}
             />
-
+            <div className='flex items-center justify-center'>
+                <img src='../images/user/image-audio.png' alt='Image Plus' />
+            </div>
+            <div className='create__border'>
+                <p className='pt-[5px] pb-[5px]'>Drag your file(s) to start uploading</p>
+                <img className='m-auto' src='../images/user/divider.png' alt='Divider' />
+            </div>
             {/* Button to trigger the file input dialog */}
             {!selectedFile && (
-                <button className="file-btn" onClick={onChooseFile}>
-                    <span className="material-symbols-outlined">অডিও</span> আপলোড করুন
+                <button className="file-btn mt-[10px] w-[200px] h-[43px] text-[16px] " onClick={onChooseFile}>
+                    আপলোড
                 </button>
             )}
 
@@ -85,7 +88,7 @@ const AudioFileUpload = ({ selectedFile, setSelectedFile }) => {
                             </button>
                         </div>
                     </div>
-                    <button className="upload-btn" onClick={simulateUpload}>
+                    <button className="upload-btn w-[150px] " onClick={simulateUpload}>
                         {progress === 100 ? "আপলোড সম্পন্ন" : "আপলোড করুন"}
                     </button>
                 </>

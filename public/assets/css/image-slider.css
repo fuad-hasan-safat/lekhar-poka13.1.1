@@ -110,6 +110,17 @@
     z-index: 100;
 }
 
+@media(max-width:575px){
+    .img-slider-dot-btn {
+        width: 0.8rem;
+        height: 0.8rem;
+    }
+    .active-img-slider-dot-btn>* {
+        width: 0.9rem;
+        height: 0.9rem;
+    }
+}
+
 @media not (prefers-reduced-motion) {
     .img-slider-img {
         transition: translate 300ms ease-in-out;

@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import RecoveryPage from '../../components/recoverypage/RecoveryPage'
+import PassRecoveryPageBeforeOTP from '../../components/recoverypage/UpdateRecoveryPage';
 
 
 
@@ -11,8 +12,8 @@ export default function Home() {
         <title>পাসওয়ার্ড রিকভারি</title>
       </Head>
 
-      <div className="h-screen flex items-center justify-center ">
-        <RecoveryPage />
+      <div className="">
+        <PassRecoveryPageBeforeOTP/>
       </div>
     </div>
   );

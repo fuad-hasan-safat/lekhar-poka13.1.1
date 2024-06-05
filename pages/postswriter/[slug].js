@@ -7,6 +7,12 @@ import MainContentDivider from '../../components/common/mainContentDivider'
 import SobPostsOfWriterBody from '../../components/postOfWriter/sobPostsOfWriterBody'
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import { countWords } from '../../function/api';
+import SinglePostConponent from '../../components/common/singlePostComponent';
+import WriterProfileBanner from '../../components/userprofile/writerProfileBanner';
+import FollowerList from '../../components/userprofile/followerList';
+import FollowingList from '../../components/userprofile/followingList';
+import WriterPostList from '../../components/userprofile/WriterPostList';
 
 
 export default function PostOfWriterPage() {
@@ -14,43 +20,49 @@ export default function PostOfWriterPage() {
     const slug = router.query.slug;
 
     const [postList, setPostList] = useState([])
+    const [bio, setBio] = useState('')
     const [isLoading, setIsLoading] = useState(true);
-
-
+    const [writerInfo, setWriterInfo] = useState([])
+    const [writerBio, setWriterBio] = useState([])
+    const [profileInfo, setProfileInfo] = useState([])
+    const [isSelfWriter, setIsSelfWriter] = useState(false)
     const [error, setError] = useState(null); // State to store any errors
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const postsPerPage = 5; // Number of posts to display per page
+    const [profileController, setProfileController] = useState("profile")
 
-
+    const handleClose = () => setProfileController('profile');
 
     useEffect(() => {
 
-        console.log("QUERY ", router.query.slug);
+        // console.log("QUERY ", router.query.slug);
         const fetchPosts = async () => {
             console.log('------------------slug of writers ---------------', slug)
             try {
                 const response = await fetch(`${apiBasePath}/postswriter/${slug}`);
                 const data = await response.json();
                 setPostList(data.object);
+                setWriterInfo(data.writer_info)
+                setProfileInfo(data?.user_profile)
+                setWriterBio(data?.writer_bio)
+                setBio(data.writer_bio?.content)
+                setIsSelfWriter(data.self_writer)
 
-                console.log('posts of writer ----------------------------------', data.object)
+                console.log('posts of writer ----------------------------------', data)
 
-                // Calculate total pages based on posts and postsPerPage
                 setTotalPages(Math.ceil(data.object.length / postsPerPage));
 
             } catch (error) {
                 setError(error);
+                console.log('writer post ---', error)
             } finally {
                 setIsLoading(false)
             }
         };
         if (router.isReady) {
             fetchPosts();
-
         }
-
-
 
     }, [router.query]);
 
@@ -73,83 +85,52 @@ export default function PostOfWriterPage() {
         return <Loading />;
     } else {
 
+
         return (
 
             <div>
                 <Head>
                     <title>লেখক পোস্ট</title>
                 </Head>
-                <div className='container lg:flex lg:flex-row pt-[94px]'>
-                    <div className="pt-20 text-3xl lg:w-[70%]">
-
-
-                        {isLoading ? (
-                            <Loading />
-                        ) : error ? (
-                            <div>Error fetching posts: {error.message}</div>
-                        ) : (
-                            <>
-                                {postList.length > 0 ?
-                                    <div className="pt-20  text-3xl lg:mr-[100px] md:mr-[70px]">
-                                        {displayedPosts.length && (
-                                            displayedPosts.map((post, index) => (
-                                                <>
-                                                    <div key={index}>
-                                                        <SobPostsOfWriterBody
-                                                            id={post._id}
-                                                            title={post.title}
-                                                            writer={post.writer}
-                                                            category={post.category}
-                                                            content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 200).join(" ")}` : `${post.content.split(/\s+/).slice(0, 200).join(" ")}`} // Truncate content
-
-                                                        />
-                                                    </div>
-                                                    {index < displayedPosts.length - 1 && <MainContentDivider />}
-                                                </>
-                                            ))
-                                        )}
-                                    </div> :
-                                    <div className="pt-10">  এই মুহূর্তে কোনো লেখা নেই </div>
-
-                                }
-                                {totalPages > 1 && <div className="py-10 space-x-4"> {/* Add a class for styling */}
-                                    <button
-                                        className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
-
-                                        onClick={() => handlePageChange(1)} disabled={currentPage === 1}>
-                                        প্রথম পৃষ্ঠা
-                                    </button>
-                                    <button
-                                        className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
-
-                                        onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
-                                        পূর্ববর্তী পৃষ্ঠা
-                                    </button>
-                                    <span
-                                        className="text-sm text-gray-700 "
-                                    >পৃষ্ঠা {currentPage} এর {totalPages}</span>
-                                    <button
-                                        className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
-
-                                        onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
-                                        পরবর্তী পৃষ্ঠা
-                                    </button>
-                                    <button
-                                        className="text-[16px] bg-orange-400 px-2 text-white rounded-2xl h-[40px]"
-
-                                        onClick={() => handlePageChange(totalPages)} disabled={currentPage === totalPages}>
-                                        শেষ পৃষ্ঠা
-                                    </button>
-                                </div>
-                                }
-                            </>
-                        )}
-
+                <section className="all__post__sec__wrap">
+                    <div className="relative w-full xl:h-[380px] lg:h-[360px] md:h-[340px] sm:h-[280px] xs:h-[220px] -z-10  overflow-hidden" style={{ background: `url('/images/usericons/userbanner.svg')center center / cover no-repeat` }}>
                     </div>
-                    <div className='lg:w-[30%]'>
-                        <Sidebar />
+                </section>
+                <section className='text-black'>
+                    <div className='container'>
+                        <div className='lg:flex lg:flex-row'>
+                            {/* left part */}
+                            <div className='lg:w-[30%]   lg:mb-[110px]'>
+
+                                <WriterProfileBanner
+                                    setProfileController={setProfileController}
+                                    writerInfo={writerInfo}
+                                    writerBio={writerBio}
+                                    profileInfo={profileInfo}
+                                    isSelfWriter={isSelfWriter}
+                                />
+
+
+                                {
+                                    profileController === 'follower' &&
+                                    <FollowerList userId={writerInfo?.user_id} showModal={'follower'} handleClose={handleClose} />
+                                }
+
+                                {
+                                    profileController === 'following' &&
+                                    <FollowingList userId={writerInfo?.user_id} showModal={'following'} handleClose={handleClose} />
+                                }
+
+                            </div>
+
+                            <div className='lg:w-[60%] lg:p-[40px] mb-[40px]'>
+                                <WriterPostList postList={postList}/>
+                            </div>
+
+                        </div>
                     </div>
-                </div>
+                </section>
+
             </div>
         );
     }

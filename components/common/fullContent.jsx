@@ -1,44 +1,58 @@
 import React, { useState } from "react";
+import FullPostPagination from "../fullPost/FullPostpagination";
+import FullPostPaginationOthers from "../fullPost/FullPostpaginationOther";
+import UserPostTitleAndcover from "./userPostTitleAndcover";
 
-const FullPost = ({ content, title, writer, catagory }) => {
-    console.log(' detail ----------------->>>>> cat', catagory)
+const FullPost = ({ id, content, title, writer, writer_id, catagory, url, image, uploadedBy,updatedAt,profileName,writer_image }) => {
 
-    const [numLines, setNumLines] = useState(10); 
-    const [prevLines, setPrevLines] = useState(0);
-
-    const handleLoadMore = () => {
-        setPrevLines(numLines);
-        setNumLines(prevNumLines => prevNumLines + 10);
-        console.log(`prevline : ${prevLines} and next line : ${numLines}`)
-    };
-
-    const lines = content ? content.split('\n') : [];
 
     if (catagory === 'কবিতা') {
         return (
-            <div className="kobita__content text-black space-y-3 text-center py-[55px]">
-                <div className="font-semibold text-[35px] text-yellow-400">{title}</div>
-                <div className="text-[22px] text-[#595D5B] ">{writer}</div>
-                {/* {lines.slice(prevLines, numLines).map((line, index) => ( */}
-                    <div className="text-[16px] text-gray-500 " dangerouslySetInnerHTML={{ __html: content }} />
-                {/* ))} */}
-                {/* {numLines < lines.length && ( */}
-                    {/* <button className="text-[14] text-yellow-400" onClick={handleLoadMore}>পরবর্তী </button> */}
-                {/* ) } */}
-            </div>
+            <>
+                <div className="kobita__content text-[#737373]">
+
+                    <UserPostTitleAndcover
+                        id={id}
+                        title={title}
+                        writer={writer}
+                        writer_id={writer_id}
+                        updatedAt={updatedAt}
+                        uploadedBy={uploadedBy}
+                        profileName={profileName}
+                        image={image}
+                        writer_image={writer_image}
+                    />
+              
+                    <div className="pt-[30px]">
+                        <FullPostPagination customclass='text-[16px] text-[#595D5B]' logText={content} />
+                    </div>
+
+                </div>
+
+            </>
         );
     } else {
         return (
-            <div className=" text-black lg:pr-[100px] pt-24 space-y-3">
-                <div className="font-semibold text-[35px] text-[#FCD200]">{title}</div>
-                <div className="text-[22px] text-[#595D5B] ">{writer}</div>
-                {/* {lines.slice(prevLines, numLines).map((line, index) => ( */}
-                    <div className="text-[16px] text-gray-500 text-justify" dangerouslySetInnerHTML={{ __html: content }} />
-                {/* ))} */}
-                {/* {numLines < lines.length && ( */}
-                    {/* <button onClick={handleLoadMore}>পরবর্তী</button> */}
-                {/* ) } */}
-            </div>
+            <>
+                <div className="kobita__content text-[#737373]">
+
+                    <UserPostTitleAndcover
+                        id={id}
+                        title={title}
+                        writer={writer}
+                        writer_id={writer_id}
+                        updatedAt={updatedAt}
+                        uploadedBy={uploadedBy}
+                        image={image}
+                    />
+                 
+                    <div className="pt-[30px]">
+                        <FullPostPaginationOthers customclass='text-[16px] text-gray-500' logText={content} />
+                    </div>
+
+                </div>
+
+            </>
         );
     }
 };

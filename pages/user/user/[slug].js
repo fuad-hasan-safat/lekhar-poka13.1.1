@@ -1,8 +1,13 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import Sidebar from '../../../components/sidebar/Sidebar';
-import UserProfileBanner from '../../../components/userprofile/userProfileBanner';
 import { apiBasePath } from '../../../utils/constant';
+import ProfilePostLeftContent from '../../../components/userprofile/ProfilePostLeftContent';
+import axios from 'axios';
+import Head from 'next/head';
+import WriterProfileBanner from '../../../components/userprofile/writerProfileBanner';
+import FollowerList from '../../../components/userprofile/followerList';
+import FollowingList from '../../../components/userprofile/followingList';
 
 export default function WriterProfile() {
     const router = useRouter()
@@ -28,16 +33,49 @@ export default function WriterProfile() {
     const [post, setPost] = useState(0);
     const [following, setFollowing] = useState(0);
 
+    const [profileController, setProfileController] = useState("")
 
+    //  following status check
+    const [isAlreadyFollowing, setIsAlreadyFollowing] = useState(false)
+
+
+    //  fetch data from local store
+
+    const [loggedInUser, setLoggedInUser] = useState("");
+    const [userUuid, setUserUuid] = useState("");
+    const [userToken, setUserToken] = useState("");
+
+
+    async function getFollowingStatus(user_id, following) {
+        try {
+            const followingResponse = await axios.post(
+                `${apiBasePath}/followstatus`,
+                {
+                    user_id: following,
+                    following: user_id,
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+
+            setIsAlreadyFollowing(followingResponse.data.status)
+            console.log('followingResponse ------------------------- writer in response message---------------->>>>>>', followingResponse.data.status)
+        } catch (error) {
+            // console.log("inside catch ----------------", error);
+        }
+    }
 
     useEffect(() => {
         console.log("-----------------------------  SLUG -----------------------", slug);
         fetch(`${apiBasePath}/getprofile/${slug}`)
             .then((response) => response.json())
             .then((data) => {
-                // console.log('pofile details on user profile--------------->>>>>>>', data);
-                setDesignation(data.object.profile.designation)
-                setProfileStatus(data.object.profile.profileStatus)
+                console.log('pofile details on writer---- profile--------------->>>>>>>', data);
+                setDesignation(data.object.profile?.designation)
+                setProfileStatus(data.object.profile?.profileStatus)
                 setGender(data.object.profile.gender)
                 setDob(data.object.profile.dob)
                 setAddress(data.object.profile.address)
@@ -47,20 +85,15 @@ export default function WriterProfile() {
                 setFollower(data.object.stats.follower)
                 setFollowing(data.object.stats.following)
                 setPost(data.object.stats.post)
-                setUserName(data.object.name)
-
-                // console.log('pofile post )()()() details on user profile--------------->>>>>>>', post);
+                setUserName(data.object.profile.name)
 
 
-                if (!data.object.stats) {
-                    setCanPostStatus(false)
-                } else {
-                    setCanPostStatus(true)
-                }
-
-                // console.log(' profile image----------->>>>', image)
+                console.log(' profile ----------->>>>', data)
             })
             .catch((error) => console.error("Error fetching data:", error));
+
+        //  following status
+
 
 
 
@@ -71,36 +104,70 @@ export default function WriterProfile() {
                 const result = await fetchData(
                     `${apiBasePath}/postsbyuser/${slug}`
                 );
-                // console.log(
-                //   "result        user profile  ->>>>>>>>>>>>>>>>",
-                //   result.object
-                // );
+
                 setUserPost(result.object);
-                // console.log(
-                //   "result        user USER POST  ->>>>>>>>>>>>>>>>",
-                //   userPost
-                // );
+
             } catch (error) {
                 //alert("Error fetching user post");
-                // console.log("Error fetching user post")
+                console.log("Error fetching user post")
             }
         }
 
         fetchDataAsync();
 
+
+        getFollowingStatus(slug, userUuid)
+
     }, [router.query])
+
+
+    useEffect(() => {
+        setLoggedInUser(localStorage.getItem("name") || "");
+        setUserToken(localStorage.getItem("token") || "");
+        setUserUuid(localStorage.getItem("uuid") || "");
+        // setUserPhone(localStorage.getItem("phone") || "");
+
+    }, []);
+
+    async function followUserhandler(user_id, following) {
+        try {
+            const response = await axios.post(
+                `${apiBasePath}/follow`,
+                {
+                    user_id: following,
+                    following: user_id,
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+            console.log('following ------------------------- writer in response message---------------->>>>>>', response)
+
+        } catch (error) {
+            // console.log("inside catch ----------------", error);
+        }
+    }
+
+    const handleClose = () => setProfileController('profile');
 
     return (
         router.isReady &&
         <>
             {/* main section */}
-            <section className='pt-[95px] text-black' >
+            <div>
+                <Head>
+                    <title>{username}</title>
+                </Head>
+            </div>
+            <section className=' text-black mb-[110px]' >
                 {/* profile header */}
                 <section>
 
                     <div>
                         <div>
-                            <UserProfileBanner
+                            <WriterProfileBanner
                                 image={image}
                                 post={post}
                                 follower={follower}
@@ -108,18 +175,32 @@ export default function WriterProfile() {
                                 username={username}
                                 designation={designation}
                                 profileStatus={profileStatus}
+                                setProfileController={setProfileController}
                             />
 
                         </div>
+                        {isAlreadyFollowing === false ?
+                            <div className='container relative '>
+                                <button
+                                    className='absolute mt-[70px] ml-[12.5%] h-[43px] bg-[#F9A106] hover:bg-[#c67256] px-[48px] p-1 rounded-lg text-white text-[16px]'
+                                    onClick={() => followUserhandler(slug, userUuid)}
+                                >
+                                    অনুসরণ করুন
+                                </button>
 
-                        <div className='container  '>
-                            <button
-                                className='mt-[30px] ml-[12.5%] h-[43px] bg-[#F9A106] px-[48px] p-1 rounded-lg text-white text-[16px]'
-                            >
-                                অনুসরণ করুন
-                            </button>
+                            </div> :
 
-                        </div>
+                            <div className='container  '>
+                                <button
+                                    className='mt-[30px] ml-[12.5%] h-[43px] bg-[#F9A106]  px-[48px] p-1 rounded-lg text-white text-[16px]'
+                                    onClick={() => followUserhandler(slug, userUuid)}
+                                >
+                                    অনুসরণ করছেন
+                                </button>
+
+                            </div>
+
+                        }
 
                     </div>
 
@@ -128,18 +209,28 @@ export default function WriterProfile() {
                 {/* profile body */}
 
                 <section>
+                    <div className='all__post__sec__wrap'>
+                        <div className='container'>
+                            <div className='lg:flex lg:flex-row'>
+                                <div className='lg:w-[70%]'>
+                                    {<ProfilePostLeftContent slug={slug} />}
 
-                    <div className='lg:flex lg:flex-row'>
-                        {/* body */}
-                        <div className='lg:w-[70%]'>
+                                    {
+                          profileController === 'follower' &&
+                          <FollowerList showModal={'follower'} handleClose={handleClose} />
+                        }
 
-                        </div>
-                        {/* sidebar */}
-                        <div className='lg:w-[30%]'>
-                            <Sidebar />
+                        {
+                          profileController === 'following' &&
+                          <FollowingList showModal={'following'} handleClose={handleClose} />
+                        }
+                                </div>
+                                {/* <div className='lg:w-[30%]'>
+                                    <Sidebar />
+                                </div> */}
+                            </div>
                         </div>
                     </div>
-
                 </section>
 
             </section>

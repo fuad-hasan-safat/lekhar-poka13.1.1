@@ -1,17 +1,17 @@
 'use client'
 
+import { useRouter } from 'next/router'
 import { apiBasePath } from '../../utils/constant'
 import React, { useEffect, useState } from 'react'
 import { Rating } from 'react-simple-star-rating'
 
 
 export default function RatingComponent({ post_id, setRating, rating }) {
-
+  const router = useRouter()
   const [status, setStatus] = useState("");
   const [username, setUsername] = useState("");
   const [userUuid, setUserUuid] = useState("");
   const [userToken, setUserToken] = useState("");
-
 
   // check if user is logged in
   useEffect(() => {
@@ -23,35 +23,51 @@ export default function RatingComponent({ post_id, setRating, rating }) {
 
   // Catch Rating value
   const handleRating = (rate) => {
+
     setRating(rate)
 
-    // other logic
   }
+
+
   async function submitRating(id) {
 
+    if (userUuid.length > 0) {
 
-    if(userUuid.length>0){
       const data = {
         rating: rating,
       }
+
       const response = await fetch(`${apiBasePath}/rating/${id}`, {
+
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
+
       });
-  
+
+
       if (!response.ok) {
+
         throw new Error(`Error updating data: ${response.statusText}`);
+
       } else {
-        alert('Rating Sucessfully update');
+
+        alert('রেটিং সফলভাবে সম্পন্ন হয়েছে');
+
       }
 
-    }else{
-      alert('Looged In first')
+    } else {
+
+      const confirmLogout = window.confirm('দয়া করে লগইন করুন');
+
+      if (confirmLogout) {
+        router.push('/account/login')
+      }
+
     }
-    
+
   }
   // Optinal callback functions
   const onPointerEnter = () => console.log('Enter')
@@ -61,27 +77,31 @@ export default function RatingComponent({ post_id, setRating, rating }) {
 
 
   return (
-    
-    <div className='start__rating place-content-center justify-center  mt-[50px] pt-[50px] pb-[50px] mx-[40px] mb-[50px] rounded-xl float-left text-center border-2 text-black border-gray-400'>
-     <p>রেটিং দিন ।</p> 
 
-     <div>
+    <div className='start__rating place-content-center justify-center  mt-[50px] pt-[50px] pb-[50px] mx-[40px] mb-[50px] rounded-xl float-left text-center border-2 text-black border-gray-400 '>
 
-     <Rating
-        style={{ float: 'left', textAlign: 'center' }}
-        onClick={handleRating}
-        onPointerEnter={onPointerEnter}
-        onPointerLeave={onPointerLeave}
-        onPointerMove={onPointerMove}
-      /* Available Props */
-      />
+      <p>রেটিং দিন ।</p>
 
-     </div>
+      <div>
+
+        <Rating
+          style={{ float: 'left', textAlign: 'center' }}
+          onClick={handleRating}
+          onPointerEnter={onPointerEnter}
+          onPointerLeave={onPointerLeave}
+          onPointerMove={onPointerMove}
+        /* Available Props */
+        />
+
+      </div>
 
       <button
         onClick={() => submitRating(post_id)}
         className='bg-orange-400 px-2 py-1 text-white h-[34px] w-[195px] rounded-md'
-      >Submit </button>
+      >
+        Submit
+      </button>
+
     </div>
   )
 }

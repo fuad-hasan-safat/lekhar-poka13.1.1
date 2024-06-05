@@ -8,25 +8,36 @@ const Star = ({
   height = 50,
   alt = "",
 }) => {
+
   const starArray = [];
 
   let tempStar = Number(star);
+
   while (tempStar > 0) {
+
     if (tempStar >= 1) {
+
       starArray.push(1);
+
     } else {
+
       starArray.push(0.5);
+
     }
+
     tempStar--;
+
   }
 
   return (
     <>
       <div className="flex">
+
         {starArray.length &&
-          starArray.map((item,index) => (
+          starArray.map((item, index) => (
+
             <Image className="px-[2px]"
-            key={index}
+              key={index}
               src={
                 item == 1
                   ? "/images/svgs/full-star.svg"
@@ -36,7 +47,9 @@ const Star = ({
               height={height}
               alt={alt}
             />
+            
           ))}
+
       </div>
     </>
   );

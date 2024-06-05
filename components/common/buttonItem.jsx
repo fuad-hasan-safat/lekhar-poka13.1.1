@@ -1,6 +1,6 @@
-// "use client";
+"use client";
+
 import { apiBasePath } from "../../utils/constant";
-// import { useEffect, useState } from "react";
 
 const ButtonItem = ({
   id,
@@ -15,43 +15,30 @@ const ButtonItem = ({
   setTotalPages,
   setCurrentPage,
   buttons,
+  setisHasMore,
+  totalPages,
+  currentPage,
+  setIsLoading,
+  setSelectedCategory,
 }) => {
 
-
   function handleButton(title) {
+
     setSelectedId(id)
     setCurrentPage(1)
+    setSelectedCategory(title)
 
-    console.log('buton ->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', title);
-
-    if (title === 'সব') {
-      fetch(`${apiBasePath}/posts`)
+      fetch(`${apiBasePath}/categorypostpages/${title}`)
         .then(response => response.json())
         .then(data => {
-          setPostList(data)
-          setTotalPages(Math.ceil(data.length / 5))
-          console.log('data --->>>>>>>>>>>>>>>>>>>>>>>>>', data);
-
+          setTotalPages(data?.length);
+          if (data.length > 1) {
+            setisHasMore(true)
+          }else{
+            setisHasMore(false)
+          }
         })
         .catch(error => console.error("Error fetching data:", error));
-
-
-    }
-    else {
-
-      fetch(`${apiBasePath}/posts/${title}`)
-        .then(response => response.json())
-        .then(data => {
-          setPostList(data.object)
-          setTotalPages(Math.ceil(data.object.length / 5))
-          console.log('data --->>>>>>>>>>>>>>>>>>>>>>>>>', data);
-
-        })
-        .catch(error => console.error("Error fetching data:", error));
-
-    }
-
-
 
   }
 
@@ -62,11 +49,12 @@ const ButtonItem = ({
       >
         <button
           onClick={() => handleButton(title)}
-          className={`w-full py-1 rounded-md border border-gray-300  text-gray-600 font-semibold ${selectedId === id ? " bg-yellow-400 shadow-md" : "bg-gray-300"
-        }`}
+          className={`page__common__btn w-full py-1 hover:text-white rounded-md  text-gray-600 font-semibold hover:font-normal ${selectedId === id ? " bg-[#F9A106] text-white font-normal shadow-md" : "bg-gray-300"
+            }`}
         >
           {title}
         </button>
+        
       </div>
     </>
   );

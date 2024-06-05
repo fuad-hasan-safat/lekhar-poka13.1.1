@@ -1,12 +1,6 @@
 'use client'
 
-import { FC } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-
-// interface PaginationControlsProps {
-//   hasNextPage: boolean
-//   hasPrevPage: boolean
-// }
 
 const PaginationControls = (
   {
@@ -14,14 +8,16 @@ const PaginationControls = (
     hasPrevPage,
   }
 ) => {
-  const router = useRouter()
-  const searchParams = useSearchParams()
 
+  const router = useRouter()
+
+  const searchParams = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const per_page = searchParams.get('per_page') ?? '5'
 
   return (
     <div className='flex gap-2'>
+      
       <button
         className='bg-blue-500 text-white p-1'
         disabled={!hasPrevPage}

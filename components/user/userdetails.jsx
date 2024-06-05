@@ -3,10 +3,13 @@ import React, { useEffect, useState } from 'react';
 import Classes from './profile.module.css';
 import { apiBasePath } from '../../utils/constant';
 import { useRouter } from 'next/navigation';
+import TakePhoneNumber from './takePhoneNumber';
 
 
 
-export default function UserDetails({ sex = '---', birthdate = '---', location = '---', mail = '---', phone = '---', userID = '' }) {
+export default function UserDetails({ sex = '---', birthdate = '---', location = '---', mail = '---', phone = '---', userID = '', setIsProfileUpdated, isProfileUpdated }) {
+
+    console.log('user page phone number------>>>', phone)
 
     const router = useRouter();
     const [startDate, setStartDate] = useState(new Date());
@@ -40,12 +43,12 @@ export default function UserDetails({ sex = '---', birthdate = '---', location =
 
     function saveImageFromURL(url, filename) {
         fetch(url)
-        .then(response => response.blob())
-        .then(blob => {
-            setImageFile(blob);
-        })
-        .catch(error => console.error('Error:', error));
-      }
+            .then(response => response.blob())
+            .then(blob => {
+                setImageFile(blob);
+            })
+            .catch(error => console.error('Error:', error));
+    }
 
     // get profile data 
 
@@ -80,7 +83,9 @@ export default function UserDetails({ sex = '---', birthdate = '---', location =
             })
             .catch((error) => console.error("Error fetching profile:", error));
 
-    }, [])
+        setIsProfileUpdated(false)
+
+    }, [isProfileUpdated])
 
 
 
@@ -92,7 +97,7 @@ export default function UserDetails({ sex = '---', birthdate = '---', location =
     const handleProfileUpdate = async (e) => {
         e.preventDefault();
 
-        if (!imageFile ) {
+        if (!imageFile) {
             alert('Upload your image')
         } else if (!gender) {
             alert('Select your gender')
@@ -121,6 +126,7 @@ export default function UserDetails({ sex = '---', birthdate = '---', location =
                     },
                     body: formData
                 });
+                setIsProfileUpdated(true)
 
                 if (response.ok) {
                     const data = await response.json();
@@ -155,45 +161,74 @@ export default function UserDetails({ sex = '---', birthdate = '---', location =
 
     return (
         <>
-            <div className='m-auto lg:pt-0 md:pt-[40px] sm:pt-[50px] xs:pt-[70px]'>
+            <div className='edit__btn__wrap m-auto lg:pt-0 md:pt-[40px] sm:pt-[50px] xs:pt-[70px] text-black'>
                 <div className="text-[28px] text-[#F9A106]">বিস্তারিত</div>
-                <div className="text-[20px] text-[#737373] divide-y w-[200px] space-y-3 ">
-                    <div className="flex flex-row space-x-2">
-                        <img
-                            src="/images/usericons/sexicon.svg"
-                        />
-                        <p className='capitalize'>{sex}</p>
+                <div className="text-[20px] text-[#737373] divide-y  space-y-3 ">
+                    <div className='flex flex-row w-full'>
+                        <div className="w-[50%]">
+                            <div className='flex flex-row space-x-2'>
+                                <img
+                                    src="/images/usericons/sexicon.svg"
+                                />
+                                <p className='capitalize'>{sex}</p>
+                            </div>
+
+                        </div>
+
+                        <div className="w-[50%]">
+                            <div className='flex flex-row space-x-2'>
+                                <img
+                                    src="/images/usericons/birthdate.svg"
+                                />
+                                <p>{birthdate}</p>
+                            </div>
+                        </div>
                     </div>
 
-                    <div className="flex flex-row space-x-2 pt-2">
-                        <img
-                            src="/images/usericons/birthdate.svg"
-                        />
-                        <p>{birthdate}</p>
+                    <div className=' flex flex-row w-full'>
+                        <div className='w-[50%]'>
+
+                            <div className="flex flex-row space-x-2 pt-2">
+                                <img
+                                    src="/images/usericons/phone.svg"
+                                />
+                                <p>{phone}</p>
+                            </div>
+
+                        </div>
+                        <div className='w-[50%]'>
+                            <div className="flex flex-row space-x-2 pt-2">
+                                <img
+                                    src="/images/usericons/email.svg"
+                                />
+                                <p>{mail}</p>
+                            </div>
+                        </div>
+
                     </div>
-                    <div className="flex flex-row space-x-2 pt-2">
-                        <img
-                            src="/images/usericons/location.svg"
-                        />
-                        <p>{location}</p>
+
+                    <div className='flex flex-row'>
+
+
+                        <div className="flex flex-row space-x-2 pt-2">
+                            <img
+                                src="/images/usericons/location.svg"
+                            />
+                            <p>{location}</p>
+                        </div>
+
                     </div>
-                    <div className="flex flex-row space-x-2 pt-2">
-                        <img
-                            src="/images/usericons/email.svg"
-                        />
-                        <p>{mail}</p>
-                    </div>
-                    <div className="flex flex-row space-x-2 pt-2">
-                        <img
-                            src="/images/usericons/phone.svg"
-                        />
-                        <p>{phone}</p>
-                    </div>
+
+
+
                     <button
-                        className="bg-[#F9A106]  text-white py-2 px-4 rounded"
+                        className="bg-[#F9A106]  text-white py-2  px-4 rounded"
                         onClick={toggleModal}>
-                        Edit Profile
+                        প্রোফাইল আপডেট
                     </button>
+                    {phone === "" &&
+                        <TakePhoneNumber userUuid={userUuid} />
+                    }
                     {isOpen && (
                         <div className="fixed inset-0 flex items-center justify-center z-[9999]">
                             <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
@@ -286,7 +321,7 @@ export default function UserDetails({ sex = '---', birthdate = '---', location =
                                                         name='gender'
                                                         checked={gender === 'male'}
                                                         className='custom-radio'
-                                                        value='male' 
+                                                        value='male'
                                                         onChange={(e) => setGender(e.target.value)} />
                                                     <label htmlFor='male' className='custom-radio-label'>Male</label>
                                                 </div>
@@ -305,7 +340,7 @@ export default function UserDetails({ sex = '---', birthdate = '---', location =
                                             <div className='form__submit'>
                                                 <button
                                                     className='bg-[#F9A106] hover:bg-orange-600'
-                                                    type='submit'>Update</button>
+                                                    type='submit'>আপডেট</button>
                                             </div>
                                         </form>
                                     </div>

@@ -1,27 +1,29 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import LekhokDetails from "../../common/lekhok";
 import SidebarPostDivider from '../../common/sidebarpostdivider'
 import { apiBasePath } from "../../../utils/constant";
 import { useRouter } from "next/navigation";
 
+
 const Lekhok = () => {
+
   const router = useRouter()
 
   const [lekhokList, setLekhokList] = useState([]);
-  const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1); // Track current page
   const [writersPerPage, setWritersPerPage] = useState(3); // Number of writers per page
 
   useEffect(() => {
+
     fetch(`${apiBasePath}/writers`)
       .then((response) => response.json())
       .then((data) => {
         setLekhokList(data);
-        console.log("-----------", data);
-        console.log("-----------", setLekhokList);
       })
       .catch((error) => console.error("Error fetching data:", error));
+      
   }, []);
 
 
@@ -60,15 +62,16 @@ const Lekhok = () => {
 
             {getVisibleWriters().length > 0 &&
               getVisibleWriters().map((item, index) => (
-                <>
+                <div key={index}>
                   <div className="pb-3">
                     <LekhokDetails
-                      key={index}
                       image={`${apiBasePath}/${item.image.replace('/uploads/', '/')
                         }`}
                       writer={item.name}
+                      writer_id={item._id}
                       id={item._id}
-                      lifeCycle={`${item.birth_date} - ${item.expiry_date === null ? 'বর্তমান' : item.expiry_date}`}
+                      user_id={item.user_id}
+                      lifeCycle={`  ${item.birth_date === null ? `বর্তমান` : `${item.birth_date} `} থেকে  ${item.expiry_date === null? '' : ` ${item.expiry_date}` } `}
                     />
                   </div>
                   <div className="pb-3">
@@ -78,7 +81,7 @@ const Lekhok = () => {
                       ""
                     )}
                   </div>
-                </>
+                </div>
               ))}
           </div> :
           <div className="pt-10"> লেখক নেই </div>
@@ -89,7 +92,7 @@ const Lekhok = () => {
             <div>
               <button
                 onClick={allWriterHandler}
-                className="sidebar__all__see bg-yellow-500 lg:w-[180px] md:w-[160px] sm:w-[150px] h-[43px] text-white rounded-md mr-3">
+                className="sidebar__all__see page__common__btn bg-yellow-500 lg:w-[180px] md:w-[160px] sm:w-[150px] h-[43px] text-white rounded-md mr-3">
                 সব দেখুন
               </button>
             </div>
@@ -97,7 +100,7 @@ const Lekhok = () => {
             <div className="flex space-x-3">
               <button
                 onClick={handlePreviousPage}
-                className="pl-2 bg-white rounded-md border border-gray-300  w-[50px] h-[43px] ">
+                className="page__common__btn pl-2 bg-white rounded-md border border-gray-300 hover:border-[#F9A106]  w-[50px] h-[43px] ">
 
                 <svg
                   width="24"
@@ -117,8 +120,7 @@ const Lekhok = () => {
               </button>
               <button
                 onClick={handleNextPage}
-                className="pl-4 bg-white rounded-md border border-gray-300 w-[50px] h-[43px] ">
-
+                className="page__common__btn pl-4 bg-white rounded-md border border-gray-300 hover:border-[#F9A106] w-[50px] h-[43px] ">
                 <svg
                   width="24"
                   height="25"

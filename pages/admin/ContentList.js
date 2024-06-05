@@ -10,8 +10,9 @@ const ContentList = ({ content, onOpenModal, setIsTitleClick, isSlider= false })
     <ul>
       {content?.map((item) => (
         <li key={item._id}>
-          {!isSlider  && ( <button onClick={() => {onOpenModal(item); setIsTitleClick(true)}}>{item.title}</button>)}
-          {isSlider && <p>{item.title}</p>}
+          {!isSlider  && ( <button onClick={() => {onOpenModal(item); setIsTitleClick(true)}}>{(item.title) || (item.name)}</button>)}
+          {isSlider && <p>{(item.title) || (item.name)} </p>}
+          <hr />
          
         </li>
       ))}

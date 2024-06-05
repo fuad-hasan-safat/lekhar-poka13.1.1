@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import CreateWriterModal from './CreateWriterModal';
 
 
-export default function CreateWriter() {
+export default function CreateWriter({setIsWriterAdded}) {
     const [showModal, setShowModal] = useState(false);
 
     const handleClose = () => setShowModal(false);
@@ -11,13 +11,13 @@ export default function CreateWriter() {
     return (
         <div>
             <button
-                className="bg-[#F9A106] hover:bg-[#f3ad57] text-white py-2 px-4 rounded mt-[20px]"
+                className="bg-[#FCA000] hover:bg-[#f3ad57] text-white py-2 px-4 rounded mt-[20px]"
                 onClick={handleShow}
             >
                 নতুন রাইটার ক্রিয়েট করুন
             </button>
 
-            <CreateWriterModal showModal={showModal} handleClose={handleClose} />
+            <CreateWriterModal showModal={showModal} handleClose={handleClose} setIsWriterAdded={setIsWriterAdded} />
         </div>
     );
 
