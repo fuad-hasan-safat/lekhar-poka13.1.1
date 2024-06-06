@@ -161,7 +161,7 @@ export default function UserPostTitleAndcover({
         <div className="lg:w-[400px] md:w-[270px] sm:w-[270px] xs:w-[240px] relative">
 
           <div className="lg:pb-[5px]  ">
-            <h1 className="lg:text-[32] md:text-[28px] sm:text-[24px] xs:text-[20px] leading-7 lg:pr-[50px] text-[#FCD200] font-bold" style={{ lineHeight: '1.2' }}>{shortenTitle}</h1>
+            <h1 className="lg:text-[32] md:text-[28px] sm:text-[24px] xs:text-[18px] leading-7 lg:pr-[50px] text-[#FCD200] font-bold" style={{ lineHeight: '1.2' }}>{shortenTitle}</h1>
           </div>
 
           <a className="lg:text-[22px] md:text-[16px] sm:text-[16px] xs:text-[14px]  font-semibold text-[#595D5B] " href={`/postswriter/${writer_id}`} >{shortenWriter}</a>
