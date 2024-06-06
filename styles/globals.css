@@ -58,8 +58,9 @@ body {
 height: 492px;
 background-color: #FCF7E8;
 }
-.ck-focused{
-  /* display: none; */
+
+.ck-powered-by{
+display: none;
 }
 .ck-editor__editable{
   background: #FCF7E8 !important;
