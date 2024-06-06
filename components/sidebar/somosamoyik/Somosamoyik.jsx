@@ -39,7 +39,7 @@ useEffect(() => {
     <>
       <div className="">
         <div>
-          <div className="text-[20px] text-yellow-500 font-semibold ">
+          <div className="text-[18px] text-yellow-500 font-semibold ">
            <p>সমসাময়িক</p> 
           </div>
         </div>

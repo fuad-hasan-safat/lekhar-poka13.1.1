@@ -36,10 +36,10 @@ const LekhaPokaProfile = ({
 
           </div>
 
-          <div className="sidebar__post pl-[80px] space-y-2 w-full">
+          <div className="sidebar__post pl-[80px] w-full">
 
             <Link
-              className="text-[20px] text-gray-800 "
+              className="text-[18px] text-gray-800 "
               href={`/post/${id}`}
             >
               {shortenTitle}

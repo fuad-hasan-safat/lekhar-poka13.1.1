@@ -209,7 +209,7 @@ function useOutsideAlerter(ref) {
                                         />
                                     </Link>
                                 </div>
-                                <div className={`flex justify-between items-center text-black lg:text-[18px] sm:text-[15px] pt-1  place-content-center `}>
+                                <div className={`flex justify-between items-center text-black lg:text-[16px] sm:text-[15px] pt-1  place-content-center `}>
 
                                     <div className="search__bar relative flex flex-row place-content-center">
                                         <Image
@@ -293,7 +293,7 @@ function useOutsideAlerter(ref) {
                                                         ? "text-[#F9A106] font-semibold underline"
                                                         : "text-black"
                                                         }`}
-                                                    href="#">সব লেখা <span><i class="ri-arrow-down-s-line"></i></span></Link>
+                                                    href="#">সব লেখা <span style={{position: 'relative',top:'-3px'}}><i class="ri-arrow-down-s-line"></i></span></Link>
                                                 {/* <FontAwesomeIcon icon={faAngleDown} className="ml-2 pt-1 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-4 sm:w-4 xs:h-4 xs:w-4 focus:text-[#F9A106]" /> */}
                                                 {visibleItem === 0 && (
                                                     <ul ref={popupRef1}
@@ -415,7 +415,7 @@ function useOutsideAlerter(ref) {
                                             {
                                                 userUuid.length > 0 ?
                                                     <li
-                                                        className='relative cursor-pointer'
+                                                        className='relative cursor-pointer -mt-[5px]'
                                                         onClick={() => { toggleVisibility(2); }}>
                                                         {userImage?.length > 0 ? <img src={`${apiBasePath}/${userImage.slice(userImage.indexOf("/") + 1)}`} alt={userImage} className='h-[35px] w-[35px] rounded-full' /> :
                                                             <img src='/images/user/deafultProfile.png' alt='profile pic' className='h-[35px] w-[35px] rounded-full' />}

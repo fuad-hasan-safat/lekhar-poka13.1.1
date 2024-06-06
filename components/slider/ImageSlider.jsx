@@ -99,15 +99,15 @@ export function ImageSlider() {
                                 <div className="container">
                                     <div className="slider__desc__innr">
                                         <div className="slider__desc">
-                                            <h1 className="lg:text-[52px] md:text-[48px] sm:text-[44px] xs:text-[38px] text-[#86312F]" >{title}</h1>
+                                            <h1 className="lg:text-[52px] md:text-[48px] sm:text-[44px] xs:text-[38px] text-[#f58807]" >{title}</h1>
                                             <h2 className="lg:text-[28px] md:text-[24px] sm:text-[22px] xs:text-[18px] text-[#595D5B]">{caption}</h2>
                                             <p className="text-[16px] text-[#595D5B] w-[90%]">{content}</p>
 
                                             <button
                                                 onClick={() => featureHandler(_id)}
-                                                className="page__common__btn w-[176px] inline-block lg:mt-[30px] md:mt-[20px] sm:mt-[20px] xs:mt-[20px] bg-orange-400 px-2 lg:h-[56px] md:h-[50px] sm:h-[50px] xs:h-[50px] rounded-md text-[19px]  text-white"
+                                                className="page__common__btn w-[176px] inline-block  lg:mt-[25px] md:mt-[20px] sm:mt-[20px] xs:mt-[20px] bg-orange-400 px-2 lg:h-[56px] md:h-[50px] sm:h-[50px] xs:h-[50px] rounded-md text-[19px]  text-white"
                                             >
-                                               <i class="ri-arrow-right-line"></i> বিস্তারিত
+                                             বিস্তারিত <i class="ri-arrow-right-line"></i>
                                             </button>
                                         </div>
                                     </div>

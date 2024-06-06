@@ -36,7 +36,7 @@ const Samprotik = () => {
     <>
       <div>
         <div>
-          <h1 className="text-[20px] text-yellow-500 font-semibold">সাম্প্রতিক</h1>
+          <h1 className="text-[18px] text-yellow-500 font-semibold">সাম্প্রতিক</h1>
         </div>
         {samprotikPost.length > 0 ?
           <div className="pt-[23px]">

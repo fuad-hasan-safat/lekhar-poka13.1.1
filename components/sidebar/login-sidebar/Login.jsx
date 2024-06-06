@@ -124,7 +124,7 @@ export default function Login() {
               >অ্যাডমিন প্যানেল</button>
             }
 
-            <Divider />
+            {/* <Divider /> */}
 
           </div>
 

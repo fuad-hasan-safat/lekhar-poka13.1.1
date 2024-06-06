@@ -39,7 +39,7 @@ const SinglePostConponent = ({
         isProfile={isProfile}
       />
 
-      <div className=" pt-[10px] pb-3">
+      <div className=" pt-[20px] pb-[15px]">
 
         <div
           className="page__dsc__wrap text-[16px] text-gray-500 text-justify"
@@ -52,7 +52,7 @@ const SinglePostConponent = ({
 
         <button
           onClick={() => handleClick(id)}
-          className="page__common__btn bg-[#FCD200] text-[#484848] text-[16px] px-[14px] py-[2px] rounded">
+          className="page__common__btn bg-[#FCD200] text-[#484848] text-[16px] px-[14px] py-[2px] rounded-[4px]">
           পুরোটা পড়ুন <i class="ri-arrow-right-s-line"></i>
         </button>
       </div>
