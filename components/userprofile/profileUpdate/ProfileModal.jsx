@@ -402,7 +402,7 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
 
 
 
-                    <div className="flex justify-center text-[22px]">
+                    <div className="flex justify-center lg:text-[22px] md:text-[20px] sm:text-[16px] xs:text-[16px]">
                         <button
                             type="button"
                             className="page__common__yello__btn bg-white  text-[#F9A106]  py-[7px] lg:px-[125px] md:px-[80px] sm:px-[65px] xs:px-[40px] rounded border border-[#F9A106] focus:outline-none focus:shadow-outline mr-2"

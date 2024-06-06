@@ -89,8 +89,8 @@ export default function UserProfileBanner({
             <hr></hr>
 
             {selectedBio.length > 0 && <>
-                <h1 className='mt-[35px] text-[#F9A106] text-[20px]'>সংক্ষিপ্ত বায়ো</h1>
-                <p className='text-[20px] text-[#737373] mt-[10px]'>{selectedBio}</p>
+                <h1 className='mt-[35px] text-[#F9A106] font-semibold text-[20px]'>সংক্ষিপ্ত বায়ো</h1>
+                <p className='text-[16px] text-[#737373] mt-[10px]'>{selectedBio}</p>
             </>}
 
             <div className='w-full'>
