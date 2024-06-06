@@ -2088,6 +2088,9 @@ transition: all 0.5s !important;
       max-width: 330px;
       margin: 0 auto;
   }
+  .procchod__button {
+      width: 25%;
+  }
 }
 
 @media(max-width:479px) {
