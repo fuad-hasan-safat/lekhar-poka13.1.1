@@ -452,7 +452,7 @@ input[type="number"] {
   padding: 200px 0 170px;
 }
 .slider__desc {
-  max-width: 700px;
+  max-width: 800px;
   width: 100%;
   height: 330px;
 }
@@ -833,7 +833,7 @@ transition: all 0.5s !important;
 ------------------ 
 */
 .procchod__button {
-  width: 20%;
+  width: 12.5%;
   float: left;
   text-align: center;
   padding: 0 5px 5px;
