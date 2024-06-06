@@ -47,44 +47,7 @@ const ImageCrop = ({setImageFile, image, type = "profilePic", setWriterImage}) =
         } else{
             setImageFile(avatar)
         }
-        // else {
-
-        //     console.log(' call in profile image crop                    CROP     VROP')
-
-        //     const formData = new FormData();
-        //     formData.append('file', avatar);
-        //     formData.append('user_id', localStorage.getItem("uuid"));
-
-        //     try {
-        //         const response = await fetch(`${apiBasePath}/profile-pic`, {
-        //             method: 'PUT',
-        //             headers: {
-        //                 // 'x-access-token': token,
-        //             },
-        //             body: formData
-        //         });
-        //         // setIsProfileUpdated(true)
-
-        //         // console.log('------>>>> PROFILE PICCCCCCCC RESPONSE <<<<<<--------', response)
-
-        //         if (response.ok) {
-        //             const data = await response.json();
-        //             alert('প্রোফাইল সফলভাবে আপডেট হয়েছে')
-
-
-
-
-        //         } else {
-        //             console.error('Failed to update profile:', response.statusText);
-        //         }
-        //         router.reload()
-        //     } catch (error) {
-        //         console.error('Error updating profile:', error);
-        //     }
-
-        // }
-
-
+        
 
     };
 

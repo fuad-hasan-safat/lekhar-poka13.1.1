@@ -170,17 +170,14 @@ export default function SigninFormBeforeOTP({type, logreg, btntext, SetIsOtpSuce
         <>
             <div className="login__form__dsc">
 
-                <div className="text-[48px] mb-5  font-semibold text-yellow-500">
+                <div className="text-[48px] mb-[79px] text-left font-semibold">
                     {logreg}
                 </div>
 
                 <div className="login__form__fleds w-full">
 
-                    <div className="mb-4 ">
 
-                    </div>
-
-                    <div className="mb-4 ">
+                    <div className="mb-4">
 
                         <input
                             id="phonenumber"
@@ -190,7 +187,7 @@ export default function SigninFormBeforeOTP({type, logreg, btntext, SetIsOtpSuce
                             value={state.mobileNumber}
                             onChange={handleChange}
                             onBlur={validate}
-                            className="h-[62px] p-4 bg-[#FCF7E8] rounded-2xl text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className="h-[62px] p-4 bg-[#FCF7E8] rounded-[8px] text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             required
                         />
 
@@ -200,7 +197,7 @@ export default function SigninFormBeforeOTP({type, logreg, btntext, SetIsOtpSuce
 
                     <button
                         onClick={handleSubmitBeforeOTP}
-                        className="page__common__yello__btn mt-8 px-[90px] bg-[#F9A106] rounded-full lg:text-[35px] md:text-[30px] sm:text-[25px]  text-white lg:h-[70px] md:h-[70px] sm:h-[60px] xs:h-[55px] "
+                        className="page__common__yello__btn mt-8 px-[90px] bg-[#F9A106] rounded-[8px] lg:text-[35px] md:text-[30px] sm:text-[25px]  text-white lg:h-[70px] md:h-[70px] sm:h-[60px] xs:h-[55px] "
                     >
                         {btntext}
                     </button>

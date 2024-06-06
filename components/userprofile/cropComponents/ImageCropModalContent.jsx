@@ -15,7 +15,7 @@ const ImageCropModalContent = ({ handleDone, handleClose }) => {
 
   return (
     <div className="text-center relative">
-      <h5 className="text-gray-800 mb-4">Edit profile picture</h5>
+      <h5 className="text-gray-800 mb-4">ছবি সম্পাদনা করুন </h5>
       <div className="border border-dashed border-gray-200 p-6 rounded-lg">
         <div className="flex justify-center">
           <div className="crop-container  mb-4">
@@ -34,14 +34,14 @@ const ImageCropModalContent = ({ handleDone, handleClose }) => {
         />
 
         <Button variant="light" className="shadow w-full mb-4 hover:shadow-lg">
-          <label htmlFor="avatarInput">Upload Another Picture</label>
+          <label htmlFor="avatarInput">অন্য ছবি আপলোড করুন</label>
         </Button>
         <div className="flex gap-2">
           <Button variant="secondary" onClick={handleClose}>
-            Cancel
+            বাতিল
           </Button>
           <Button variant="primary" className="w-full" onClick={handleDone}>
-            Save
+            সংরক্ষণ
           </Button>
         </div>
       </div>
