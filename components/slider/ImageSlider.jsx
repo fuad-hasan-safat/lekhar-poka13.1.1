@@ -106,7 +106,7 @@ export function ImageSlider() {
 
                                             <button
                                                 onClick={() => featureHandler(_id)}
-                                                className="page__common__btn w-[150px] inline-block  lg:mt-[25px] md:mt-[20px] sm:mt-[20px] xs:mt-[20px] bg-orange-400 px-2 lg:h-[45px] md:h-[40px] sm:h-[40px] xs:h-[35px] rounded-md text-[19px]  text-white"
+                                                className="page__common__btn w-[150px] inline-block  lg:mt-[25px] md:mt-[20px] sm:mt-[20px] xs:mt-[20px] bg-orange-400 px-2 lg:h-[45px] md:h-[40px] sm:h-[40px] xs:h-[35px] rounded-md text-[18px]  text-white"
                                             >
                                              বিস্তারিত <i class="ri-arrow-right-line"></i>
                                             </button>
