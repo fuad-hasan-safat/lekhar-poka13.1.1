@@ -58,7 +58,9 @@ body {
 height: 492px;
 background-color: #FCF7E8;
 }
-
+/* .ck-balloon-panel {
+  display: none;
+} */
 .ck-powered-by{
 display: none;
 }
