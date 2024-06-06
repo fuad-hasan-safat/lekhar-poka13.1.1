@@ -12,7 +12,7 @@ export default function ContactUs() {
 
             <section>
                 <div className="relative w-full xl:h-[380px] lg:h-[360px] md:h-[340px] sm:h-[280px] xs:h-[260px]  overflow-hidden" style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat` }}>
-                    <h2 className=" absolute top-[50%] left-[50%] text-[40px] text-[#F9A106] -translate-x-[50%] -translate-y-[50%] max-h-[0px]">যোগাযোগ</h2>
+                    <h2 className=" absolute top-[50%] left-[50%] text-[40px] font-[700] text-[#F9A106] -translate-x-[50%] -translate-y-[50%] max-h-[0px]">যোগাযোগ</h2>
                 </div>
             </section>
 
@@ -25,11 +25,11 @@ export default function ContactUs() {
                         <div className="col-md-12">
 
                             <div className="contect__frm__wrap flex flex-row space-x-5 place-content-center py-[110px]">
-                                
-                                <div className="contect__frm_left space-y-5">
+
+                                <div className="contect__frm_left space-y-[15px]">
 
                                     <div>
-                                        <p className="lg:text-[48px] md:text-[44px] sm:text-[40px] xs:text-[36px] text-[#F9A106]">যোগাযোগ করুন</p>
+                                        <p className="lg:text-[48px] md:text-[44px] sm:text-[40px] xs:text-[36px] font-[600] text-[#F9A106]">যোগাযোগ করুন</p>
                                     </div>
 
                                     <div className="flex flex-row space-x-2">
@@ -40,31 +40,31 @@ export default function ContactUs() {
                                             height={20}
                                             alt="location"
                                         />
-                                        <p className="text-[18px] text-black">১৩/২ ওয়েস্ট পান্থপথ, ধানমন্ডী, ঢাকা</p>
+                                        <p className="text-[18px] font-[600] text-black">১৩/২ ওয়েস্ট পান্থপথ, ধানমন্ডী, ঢাকা</p>
 
                                     </div>
 
                                     <div className="flex flex-row space-x-2">
-                                       
+
                                         <Image
                                             src={phoneIcon}
                                             width={20}
                                             height={20}
                                             alt="phone"
                                         />
-                                        <p className="text-[18px] text-black">+৮৮০ ১৩৬৫৪৭৬৫৪</p>
+                                        <p className="text-[18px] font-[600] text-black">+৮৮০ ১৩৬৫৪৭৬৫৪</p>
 
                                     </div>
 
                                     <div className="flex flex-row space-x-2">
-                                      
+
                                         <Image
                                             src={emailIcon}
                                             width={20}
                                             height={20}
                                             alt="email"
                                         />
-                                        <p className="text-[18px] text-black">info@live-technologies.net</p>
+                                        <p className="text-[18px] font-[600] text-black">info@live-technologies.net</p>
 
                                     </div>
 
@@ -76,7 +76,7 @@ export default function ContactUs() {
                                             height="293"
                                             loading="lazy"
                                             referrerPolicy="no-referrer-when-downgrade"
-                                            className="rounded-3xl"
+                                            className="rounded-[5px] mt-[44px]"
                                         >
 
                                         </iframe>
