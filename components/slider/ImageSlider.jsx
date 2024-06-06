@@ -101,7 +101,7 @@ export function ImageSlider() {
                                         <div className="slider__desc">
                                             <h1 className="lg:text-[52px] md:text-[48px] sm:text-[44px] xs:text-[38px] text-[#f58807]" >{title}</h1>
                                             <h2 className="lg:text-[28px] md:text-[24px] sm:text-[22px] xs:text-[18px] text-[#595D5B]">{caption}</h2>
-                                            <p className="text-[16px] text-[#595D5B] w-[90%]">{content?.slice(0,100)}</p>
+                                            <p className="text-[16px] text-[#595D5B] w-[90%]">{content?.slice(0,300)}</p>
 
                                             <button
                                                 onClick={() => featureHandler(_id)}
