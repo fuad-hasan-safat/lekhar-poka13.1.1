@@ -133,7 +133,7 @@ export default function Login() {
         <div>
           <div>
 
-            <div className="page__common__yello__btn text-[20px] text-yellow-500 h-[28px]  pt-5 pb-[28px]">
+            <div className=" text-[20px] text-yellow-500 h-[28px]  pt-5 pb-[28px]">
               লগইন
             </div>
 
@@ -177,7 +177,7 @@ export default function Login() {
 
             <div className="">
               <button
-                className=" mb-8 w-full h-[43px] text-[16px] bg-[#F9A106] hover:bg-yellow-700 text-white  py-2 rounded focus:outline-none focus:shadow-outline"
+                className="page__common__yello__btn mb-8 w-full h-[43px] text-[16px] bg-[#F9A106] hover:bg-yellow-700 text-white  py-2 rounded focus:outline-none focus:shadow-outline"
                 type="button"
                 onClick={submitLogin}
               >
