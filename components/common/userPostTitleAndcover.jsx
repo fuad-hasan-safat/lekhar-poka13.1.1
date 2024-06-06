@@ -144,6 +144,8 @@ export default function UserPostTitleAndcover({
   let shortenWriter = writer?.length > 26 ? `${writer?.slice(0, 25)}...` : writer;
   let shortenUploadedBy = postuploadedBy?.length > 12 ? `${postuploadedBy?.slice(0, 12)}...` : postuploadedBy;
 
+  let defaultBannerImage = '/images/defaultUserPic/square/null.png'
+
 
 
   return (
@@ -152,7 +154,7 @@ export default function UserPostTitleAndcover({
 
         <div className="profile__auth__img">
 
-          <img className="object-cover lg:w-[120px] lg:h-[120px] md:w-[110px] md:h-[110px] sm:w-[100px] sm:h-[100px] xs:w-[80px] xs:h-[80px] rounded-[16px] block m-auto" src={bannerImage === '' ? `/images/user/coverimage.jpg` : `${apiBasePath}/${bannerImage?.slice(bannerImage?.indexOf('/') + 1)}`} alt="" />
+          <img className="object-cover lg:w-[120px] lg:h-[120px] md:w-[110px] md:h-[110px] sm:w-[100px] sm:h-[100px] xs:w-[80px] xs:h-[80px] rounded-[16px] block m-auto" src={bannerImage === '' ? defaultBannerImage : `${apiBasePath}/${bannerImage?.slice(bannerImage?.indexOf('/') + 1)}`} alt="" />
 
         </div>
 
@@ -167,7 +169,7 @@ export default function UserPostTitleAndcover({
           <div className="text-[16px] font-thin leading-1 pt-[5px]">
             <a className="flex place-content-start items-center leading-1 lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[12px]  text-[#595D5B]" href={`/postswriter/${writer_id}`} style={{ lineHeight: '1' }} >
               {((uploadedBy !== null) && uploadedBy.length > 0) && <> <span className='inline-block mr-[10px]'>
-                <img className="w-[24px] h-[24px] rounded-full block m-auto shadow-lg" src={writerImage === '' ? `/images/user/coverimage.jpg` : `${apiBasePath}/${writerImage?.slice(writerImage.indexOf('/') + 1)}`} alt="" />
+                <img className="w-[24px] h-[24px] rounded-full block m-auto shadow-lg" src={writerImage === '' ? defaultBannerImage : `${apiBasePath}/${writerImage?.slice(writerImage.indexOf('/') + 1)}`} alt="" />
               </span>
                 <span className='inline-block lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[12px] text-[#595D5B] mr-[15px]'>
                   {shortenUploadedBy}
