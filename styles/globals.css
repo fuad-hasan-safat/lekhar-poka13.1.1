@@ -471,6 +471,7 @@ input[type="number"] {
 }
 .slider__desc button{
   font-weight: 500;
+  padding-top: 5px;
 }
 
 /* / carosal / */
@@ -1400,7 +1401,7 @@ transition: all 0.5s !important;
   padding: 0 15px;
 }
 .page__dsc__wrap p{
-  line-height: 1.5 !important;
+  line-height: 2 !important;
 }
 
 
