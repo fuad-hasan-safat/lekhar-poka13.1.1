@@ -1,8 +1,6 @@
 
-// import Procchod from "@/components/procchod/Procchod";
 import Head from 'next/head';
 import Procchod from '../components/procchod/Procchod'
-//import { ImageSlider } from "@/components/slider/MySlider";
 import { ImageSlider } from '../components/slider/ImageSlider'
 
 export default function Home() {
