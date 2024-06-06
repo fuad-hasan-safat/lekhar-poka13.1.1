@@ -115,8 +115,8 @@ export default function PostDetails() {
           <meta property="og:description" content={description} />
           <meta property="og:image" content={`https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/')+1)}`} />
           <meta property="og:url" content={`https://lekharpoka.com${asPath}`} />
-          <meta property="og:type" content="website" />
-          <meta name="twitter:card" content="summary_large_image" />
+          <meta property="og:type" content="post" />
+          <meta name="twitter:card" content={`https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/')+1)}`} />
           <meta name="twitter:title" content={pageTitle} />
           <meta name="twitter:description" content={description} />
           <meta name="twitter:image" content={`https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/')+1)}`} />

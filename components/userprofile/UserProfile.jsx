@@ -184,7 +184,7 @@ export default function UserProfile({ slug }) {
                   <ProfilePostLeftContentApproved />
                 </div>
 
-                {
+                {/* {
                   profileController === 'follower' &&
                   <FollowerList userId={slug} showModal={'follower'} handleClose={handleClose} />
                 }
@@ -192,7 +192,7 @@ export default function UserProfile({ slug }) {
                 {
                   profileController === 'following' &&
                   <FollowingList userId={slug} showModal={'following'} handleClose={handleClose} />
-                }
+                } */}
               </div>
 
             </div>
