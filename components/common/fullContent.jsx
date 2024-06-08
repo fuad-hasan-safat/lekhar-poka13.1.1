@@ -5,7 +5,7 @@ import UserPostTitleAndcover from "./userPostTitleAndcover";
 
 const FullPost = ({ id, content, title, writer, writer_id, catagory, url, image, uploadedBy,updatedAt,profileName,writer_image }) => {
 
-
+console.log("FULL POST : ", writer_image)
     if (catagory === 'কবিতা') {
         return (
             <>
@@ -44,6 +44,8 @@ const FullPost = ({ id, content, title, writer, writer_id, catagory, url, image,
                         updatedAt={updatedAt}
                         uploadedBy={uploadedBy}
                         image={image}
+                        writer_image={writer_image}
+
                     />
                  
                     <div className="pt-[30px]">

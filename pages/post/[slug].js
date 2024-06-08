@@ -12,11 +12,15 @@ import MusicPlayer from "../../components/musicbar/MusicPlayer";
 import ShareOnFacebook from "../../components/share/share";
 import { FacebookShareButton } from "react-share";
 import axios from "axios";
+import ReaderModeModal from "../../components/readerMode/ReaderModeModal";
+import FullPostReaderMode from "../../components/common/fullContentReadermood";
 
 export default function PostDetails() {
   const router = useRouter();
   const slug = router.query.slug;
   const { asPath } = router;
+
+  console.log({asPath})
 
   const [data, setData] = useState(null); // State to store fetched data
   const [writerImage, setWriterImage] = useState('')
@@ -25,7 +29,9 @@ export default function PostDetails() {
   const [isdataFetch, setisDataFetch] = useState(false)
   const [uploaderName, setUploaderName] = useState('')
   const [profileName, setProfileName] = useState('')
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
+  
   //  focus mood ----
 
   const [rating, setRating] = useState(0);
@@ -39,11 +45,15 @@ export default function PostDetails() {
         const result = await axios.get(
           `${apiBasePath}/getpost/${slug}`
         );
-        setData(result.data.object);
-        setWriterImage(result.data.profile_image)
-        setUploaderName(result.data.uploader_name)
-        setProfileName(result.data.profile_name)
+
         console.log('post page single postss ====================>>>>>>>>>>>>>>>>>>>>', result)
+
+        setData(result.data.object);
+        setWriterImage(result.data?.writer_image)
+        setUploaderName(result.data?.uploader_name)
+        setProfileName(result.data?.profile_name)
+        console.log("STATE WrtiER : ", writerImage, result.data.writer_image);
+
         if (result.data.object.audio?.length > 0) {
           setIsAudioAvailAble(true);
         } else {
@@ -73,15 +83,22 @@ export default function PostDetails() {
     router.push(`/post/readermood/${postId}`)
   }
 
+  function readerModeClosehandler() {
+    setIsModalOpen(false);
+    // router.reload()
+  }
+
 
   // select image
 
-  let selectedcoverImage = writerImage;
+  let selectedCoverImage = writerImage;
 
   if (data?.image?.length > 0) {
-    selectedcoverImage = data?.image;
+    selectedCoverImage = data?.image;
   }
 
+  let pageTitle = data?.title
+  let description = "লেখার পোকা  হলো কবিতা, গান, প্রবন্ধ গল্প এবং জীবনী লেখা প্রকাশের একটি ওয়েব সাইট। যেটা অভিব্যক্তির একটি সুন্দর রূপ যা ব্যক্তিদের তাদের চিন্তাভাবনা, আবেগ এবং অভিজ্ঞতা সৃজনশীল এবং শৈল্পিক উপায়ে প্রকাশ করতে দেয়। "
 
   return (
     router.isReady &&
@@ -94,10 +111,16 @@ export default function PostDetails() {
         <Head>
 
           <title>{data?.title}</title>
-          <meta property="og:url" content={`lekharpoka.com/post/${slug}`} />
-          <meta property="og:title" content={data?.title} />
-          <meta property="og:description" content={'লেখার পোকা'} />
-          <meta property="og:image" content={''} />
+          <meta property="og:title" content={pageTitle} />
+          <meta property="og:description" content={description} />
+          <meta property="og:image" content={`https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/')+1)}`} />
+          <meta property="og:url" content={`https://lekharpoka.com${asPath}`} />
+          <meta property="og:type" content="post" />
+          <meta name="twitter:card" content={`https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/')+1)}`} />
+          <meta name="twitter:title" content={pageTitle} />
+          <meta name="twitter:description" content={description} />
+          <meta name="twitter:image" content={`https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/')+1)}`} />
+
 
 
         </Head>
@@ -124,8 +147,8 @@ export default function PostDetails() {
                               title={data?.title}
                               writer={data?.writer}
                               writer_id={data?.writer_id}
-                              image={selectedcoverImage}
-                              uploadedBy={uploaderName}
+                              image={selectedCoverImage}
+                              uploadedBy={profileName}
                               writer_image={writerImage}
                               profileName={profileName}
                               updatedAt={data?.updatedAt}
@@ -135,12 +158,18 @@ export default function PostDetails() {
 
                           </div>
                           <div>
-                            <button onMouse className="absolute  w-[35px] h-[35px] right-2 mt-[5px] text-white rounded-xl bg-orange-400" onClick={() => readMoodHandler(data?._id)}><i class="ri-book-read-fill text-[22px]"></i></button>
+                            <button onMouse className="absolute  w-[35px] h-[35px] right-2 mt-[5px] text-white rounded-xl bg-orange-400" onClick={() => setIsModalOpen(true)}><i class="ri-book-read-fill text-[22px]"></i></button>
                           </div>
+
+
 
 
                         </div>
                         <div className="rating__share__wrap">
+                          {/* <button onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=https://lekharpoka.com/post/${slug}`, '_blank')}>
+                            Share on Facebook
+                          </button> */}
+
                           <ShareOnFacebook url={`lekharpoka.com/post/${slug}`} title={'লেখার পোকায় আপনাকে স্বাগতম'} image={''} />
                           <RatingComponent setRating={setRating} rating={rating} post_id={data?._id} />
                         </div>
@@ -148,7 +177,7 @@ export default function PostDetails() {
                     }
                     {!isdataFetch &&
                       <>
-                        <div className="text-black text-2xl mb-[75px]">
+                        <div className="text-black text-2xl mb-[75px] h-[100vh]">
                           আপনার অনুসন্ধানকৃত লেখাটি পাওয়া যাচ্ছে না !
                         </div>
                       </>
@@ -167,6 +196,27 @@ export default function PostDetails() {
 
           </section>
         </div>
+
+
+        <ReaderModeModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <section className="read__mod__sec__wrap py-[100px] pb-[470px]" onCopy={(e) => { e.preventDefault(); alert('এই ওয়েবসাইটের যেকোনো লেখা আমাদের অনুমতি ছাড়া কপি করলে আইনগত ব্যবস্থা গ্রহণ করা হবে।') }}>
+            <div className="read__mod__wrap">
+              <div className="read__mod__btn">
+                <button className="w-[40px] h-[40px] text-white rounded-full bg-orange-400" onClick={readerModeClosehandler}><i class="ri-close-large-fill"></i></button>
+              </div>
+              <div className="read__mod__innr">
+                <FullPostReaderMode
+                  title={data?.title}
+                  writer={data?.writer}
+                  writer_id={data?.writer_id}
+                  catagory={data?.category}
+                  content={data?.content}
+                />
+              </div>
+            </div>
+          </section>
+
+        </ReaderModeModal>
 
 
         {isAudioAvailable && (

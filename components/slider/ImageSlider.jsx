@@ -9,6 +9,10 @@ import { fetchData } from "../../function/api";
 
 export function ImageSlider() {
     const [data, setData] = useState([])
+    const [imageIndex, setImageIndex] = useState(0)
+    const router = useRouter();
+
+
 
     useEffect(() => {
 
@@ -21,8 +25,16 @@ export function ImageSlider() {
 
     }, []);
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setImageIndex(index => (index === data.length - 1 ? 0 : index + 1));
+        }, 5000); // Change slide every 5 seconds
+
+        return () => clearInterval(interval); // Clear interval on component unmount
+    }, [data.length]);
+
+
     //  handler
-    const router = useRouter();
 
     async function fetchDataAsync(postId) {
         try {
@@ -46,7 +58,6 @@ export function ImageSlider() {
 
     // slider states
 
-    const [imageIndex, setImageIndex] = useState(0)
 
     function showNextImage() {
         setImageIndex(index => {
@@ -78,7 +89,7 @@ export function ImageSlider() {
                             overflow: "hidden",
                         }}
                     >
-                        {data.map(({ _id, title, caption, image, content }, index) => (
+                        {data.map(({ _id, title, caption, image, content='' }, index) => (
 
                             <div className="slider__bg__img img-slider-img"
                                 key={_id}
@@ -88,15 +99,16 @@ export function ImageSlider() {
                                 <div className="container">
                                     <div className="slider__desc__innr">
                                         <div className="slider__desc">
-                                            <h1 className="lg:text-[52px] md:text-[48px] sm:text-[44px] xs:text-[38px] text-[#86312F]" >{title}</h1>
+                                            <h1 className="lg:text-[52px] md:text-[48px] sm:text-[44px] xs:text-[38px] text-[#f58807]" >{title}</h1>
                                             <h2 className="lg:text-[28px] md:text-[24px] sm:text-[22px] xs:text-[18px] text-[#595D5B]">{caption}</h2>
-                                            <p className="text-[16px] text-[#595D5B] w-[90%]">{content}</p>
+
+                                            <p className="lg:text-[18px] md:text-[17px] sm:text-[16px] xs:text-[14px] text-[#595D5B] w-[90%]">{content?.slice(0,230)}</p>
 
                                             <button
                                                 onClick={() => featureHandler(_id)}
-                                                className="page__common__btn w-[176px] inline-block lg:mt-[30px] md:mt-[20px] sm:mt-[20px] xs:mt-[20px] bg-orange-400 px-2 lg:h-[56px] md:h-[50px] sm:h-[50px] xs:h-[50px] rounded-md text-[19px]  text-white"
+                                                className="page__common__btn w-[150px] inline-block  lg:mt-[25px] md:mt-[20px] sm:mt-[20px] xs:mt-[20px] bg-orange-400 px-2 lg:h-[45px] md:h-[40px] sm:h-[40px] xs:h-[35px] rounded-md text-[18px]  text-white"
                                             >
-                                               <i class="ri-arrow-right-line"></i> বিস্তারিত
+                                             বিস্তারিত <i class="ri-arrow-right-line"></i>
                                             </button>
                                         </div>
                                     </div>

@@ -99,7 +99,7 @@ export default function RatingComponent({ post_id, setRating, rating }) {
         onClick={() => submitRating(post_id)}
         className='bg-orange-400 px-2 py-1 text-white h-[34px] w-[195px] rounded-md'
       >
-        Submit
+        সাবমিট
       </button>
 
     </div>

@@ -196,13 +196,13 @@ export default function EditPost() {
     //   editFormData.append('category', selectedOption?.label);
     // }
 
-    // if (image) {
-    //   editFormData.append("image", image);
-    // }
+    if (image) {
+      editFormData.append("image", image);
+    }
 
-    // if (selectedFile) {
-    //   editFormData.append("file", selectedFile);
-    // }
+    if (selectedFile) {
+      editFormData.append("file", selectedFile);
+    }
 
 
 
@@ -210,6 +210,7 @@ export default function EditPost() {
 
 
     try {
+      console.log({})
       // const response = await axios.put(`${apiBasePath}/posts/${formData?._id}`, changedData);
       const response = await fetch(`${apiBasePath}/posts/${formData?._id}`, {
         method: "PUT",
@@ -241,19 +242,14 @@ export default function EditPost() {
     <>
       <div className="lg:pr-6 md:pr-0 sm:pr-0 space-y-4 lg:flex">
         <div className='create__post__rgt lg:w-[25%] lg:order-last'>
-          <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">আপনার লেখার ধরণ নির্বাচন করুন</div>
+          <div className="text-[#F9A106] font-bold text-[20px] !mb-[5px]">আপনার লেখার ধরণ নির্বাচন করুন</div>
           {/* <p></p> */}
           <div>
-            {/* <Select
-              value={selectedOption}
-              onChange={categoryhandleChange}
-              styles={customStyles}
-              options={Categoryoptions}
-            /> */}
+      
             <select
               id="category"
               name="category"
-              className={`h-[40px] w-full px-[16px] text-black`}
+              className={`h-[45px] w-full px-[16px] text-black border-[1px] border-[#ddd] rounded-[7px]`}
               required
               value={selectedOption}
               onChange={(e) => setSelectedOption(e.target.value)}>
@@ -269,7 +265,7 @@ export default function EditPost() {
           <hr class="my-5 border-gray-200" />
           <div className='text-[#292D32]'>
             <div className='mb-[15px]'>
-              <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">ছবি আপলোড করুন (যদি থাকে)</div>
+              <div className="text-[#F9A106] font-bold text-[20px] !mb-[2px]">ছবি আপলোড করুন (যদি থাকে)</div>
             </div>
 
             <FileUploader handleChange={handleFileChange} multiple={true} mimeTypes={['image/*']}
@@ -307,7 +303,7 @@ export default function EditPost() {
           </div>
           <hr class="my-5 border-gray-200" />
           <div className='text-[#292D32]'>
-            <div className="text-[#F9A106] mt-[40px] font-bold text-[22px] !mb-[2px]">অডিও আপলোড করুন (যদি থাকে)</div>
+            <div className="text-[#F9A106] mt-[40px] font-bold text-[20px] !mb-[2px]">অডিও আপলোড করুন (যদি থাকে)</div>
             <FileUploader handleChange={handleAudioFile} multiple={true} mimeTypes={['audio/*']}
             >
               <div
@@ -343,7 +339,7 @@ export default function EditPost() {
           </div>
         </div>
         <div className='create__post__lft lg:pr-[100px] lg:w-[75%] lg:order-first'>
-          <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">লেখার শিরোনাম</div>
+          <div className="text-[#F9A106] font-bold text-[20px] !mb-[2px]">লেখার শিরোনাম</div>
 
           <input style={{ marginTop: '0' }}
             onChange={handleChange}
@@ -355,7 +351,7 @@ export default function EditPost() {
             placeholder="শিরোনাম"
             required
           />
-          <div className="text-[#F9A106] font-bold text-[22px] !mt-[30px] !mb-[2px]">সারসংক্ষেপ</div>
+          <div className="text-[#F9A106] font-bold text-[20px] !mt-[30px] !mb-[2px]">সারসংক্ষেপ</div>
           <textarea
             onChange={handleChange}
             value={formData?.summary}

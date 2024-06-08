@@ -176,17 +176,17 @@ export default function WriterProfileBanner({
                 </ul>
                 {isSelfWriter && <ul className={` profile__info__wrap text-[#737373] text-[20px] lg:mt-[14px] ${isSelfWriter ? '' : 'mb-[44px]'}`}>
 
-                    <li>
+                   {profileInfo?.address?.length > 0 && <li>
                         <span className='text-[#F9A106]'><img src='/images/usericons/location.svg' /></span> <span className='text-[#737373]'>{profileInfo?.address}</span>
-                    </li>
+                    </li>}
 
-                    <li>
+                   {profileInfo?.phone?.length > 0  && <li>
                         <span className='text-[#F9A106] '><img src='/images/usericons/phone.svg' /></span> <span className='text-[#737373] '>+{convertToBanglaPhoneNumber(profileInfo?.phone)}</span>
-                    </li>
+                    </li>}
 
-                    <li>
+                    {profileInfo?.email?.length > 0 && <li>
                         <span className='text-[#F9A106]'><img src='/images/usericons/email.svg' /></span> <span className='text-[#737373] '>{profileInfo?.email}</span>
-                    </li>
+                    </li>}
                 </ul>}
 
                 {isSelfWriter && <div className='w-full mt-[44px] mb-[44px]'>

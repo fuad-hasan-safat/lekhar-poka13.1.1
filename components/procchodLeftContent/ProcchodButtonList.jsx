@@ -39,7 +39,7 @@ const ProcchodButtonList = ({
 
   return (
 
-    <div className="all__button__list pt-16 clearfix">
+    <div className="all__button__list clearfix">
 
       {buttons.length &&
         buttons.map((button, index) => (

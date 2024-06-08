@@ -118,18 +118,18 @@ export default function LoginForm({ logreg, btntext }) {
     <>
       <div className="login__form__dsc">
 
-        <div className="text-[48px] mb-5  font-semibold text-yellow-500">
+        <div className="text-[48px] mb-[79px] text-left font-semibold text-black">
           {logreg}
         </div>
 
         <div className="login__form__fleds w-full ">
 
-          <div className="mb-4 ">
+          <div className="mb-[18px] ">
 
             <input
               onChange={handleNumberhange}
               value={number}
-              className="h-[62px] p-4 bg-[#FCF7E8] rounded-2xl text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="h-[62px] p-4 bg-[#FCF7E8] rounded-[8px] text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="phone"
               type="number"
               placeholder="নাম্বার দিন (01-XXXXXXXXX)"
@@ -144,7 +144,7 @@ export default function LoginForm({ logreg, btntext }) {
             <input
               onChange={handlePasswordChange}
               value={password}
-              className="h-[62px] p-4 pr-[40px] bg-[#FCF7E8]  rounded-2xl   text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
+              className="h-[62px] p-4 pr-[40px] bg-[#FCF7E8] rounded-[8px] text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
               id="password"
               type={showPassword ? 'text' : 'password'}
               placeholder="পাসওয়ার্ড দিন"
@@ -169,7 +169,7 @@ export default function LoginForm({ logreg, btntext }) {
             <button
               type="button"
               onClick={submitLogin}
-              className="page__common__yello__btn px-[90px] bg-[#F9A106] rounded-full text-[30px] text-white  h-[60px] text-center place-content-center"
+              className="page__common__yello__btn mt-[23px] px-[110px] bg-[#F9A106] rounded-[8px] text-[30px] text-white  h-[60px] text-center place-content-center"
             >
               {btntext}
             </button>

@@ -7,7 +7,8 @@ import Class from './profileEdit.module.css'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 
-export default function ProfileModal({ setShowModal, showModal, handleClose, image }) {
+export default function ProfileModal({ setShowModal, showModal, handleClose, image='' }) {
+    console.log('image in profile modal::', image)
     const router = useRouter();
     const [fullName, setFullName] = useState('');
     const [gender, setGender] = useState('');
@@ -68,7 +69,10 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
                 setApprovedPostNum(data.object.approved_post)
                 setunApprovedPostNum(data.object.unapproved_post)
 
-                saveImageFromURL(`${apiBasePath}/${data.object.profile.image?.slice(data.object.profile.image.indexOf("/") + 1)}`, 'profile.jpg')
+                if(data.object.profile?.image){
+                    saveImageFromURL(`${apiBasePath}/${data.object.profile.image?.slice(data.object.profile.image.indexOf("/") + 1)}`, 'profile.jpg')
+
+                }
 
                 if (data.object.profile.phone?.length > 0) {
                     setIsSubMit(true);
@@ -199,12 +203,19 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
         }
 
 
+        console.log('outside check,', image, imageFile)
         //  update profile data
-
-        if (!gender) {
-            alert('Select your gender')
+        if((image?.length  <= 0) && (!imageFile) ){
+            console.log('Inside check,', image, imageFile)
+            alert('দয়া করে প্রোফাইল এর জন্য স্থিরচিত্র নির্বাচন করুন')
+        }
+        else if (designation?.length<=0) {
+            alert('আপনার পদবী প্রদান করুন')
+        }
+        else if (!gender) {
+            alert('আপনার লিঙ্গ নির্ধারণ করুন')
         } else if (!birthOfDate) {
-            alert('Give your birth date')
+            alert('আপনার জন্ম তারিখ প্রদান করুন')
         } else {
 
             //const formattedDate = moment(startDate).format('DD-MM-YYYY');
@@ -391,7 +402,7 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
 
 
 
-                    <div className="flex justify-center text-[22px]">
+                    <div className="flex justify-center lg:text-[22px] md:text-[20px] sm:text-[16px] xs:text-[16px]">
                         <button
                             type="button"
                             className="page__common__yello__btn bg-white  text-[#F9A106]  py-[7px] lg:px-[125px] md:px-[80px] sm:px-[65px] xs:px-[40px] rounded border border-[#F9A106] focus:outline-none focus:shadow-outline mr-2"

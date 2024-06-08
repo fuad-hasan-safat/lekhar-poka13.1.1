@@ -70,7 +70,7 @@ const MyFooter = () => {
                         links={[
                           { url: "", label: "ফোনঃ +৮৮০ ১৩৬৫৪৭৬৫৪" },
                           { url: "", label: "ইমেইলঃ info@live-technologies.net" },
-                          { url: "", label: "ঠিকানাঃ Dhanmondi, Dhaka" },
+                          { url: "", label: "ঠিকানাঃ ধানমন্ডি, ঢাকা"},
                         ]}
                       />
                     </div>
@@ -83,7 +83,7 @@ const MyFooter = () => {
                       <SocialLink
                         title="Social"
                         links={[
-                          { label: "/images/footer/fb.svg", url: 'https://www.facebook.com/profile.php?id=61559820926777' }
+                          { label: "/images/footer/fb.svg", url: 'https://www.facebook.com/lekharpoka' }
                         ]}
                       />
                     </div>
@@ -95,7 +95,7 @@ const MyFooter = () => {
               </div>
 
               <div className="ftr__btm text-white text-center">
-                <p>© 2024 Lekharpoka | All Rights Reserved</p>
+                <p>© ২০২৪ লেখারপোকা | সমস্ত অধিকার সংরক্ষিত</p>
               </div>
 
             </div>

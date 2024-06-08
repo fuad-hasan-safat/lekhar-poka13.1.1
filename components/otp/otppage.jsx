@@ -124,7 +124,7 @@ const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus,
         <button
           onClick={sendOtp}
           disabled={isButtonDisabled}
-          className={`login__btn page__common__yello__btn mt-8 lg:px-5 md:px- sm:px-3  bg-[#F9A106] rounded-full lg:text-[35px] md:text-[30px] sm:text-[25px] xs:text-[20px] text-white lg:h-[75px] md:h-[65px] sm:h-[60px] xs:h-[55px] ${isButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
+          className={`login__btn page__common__yello__btn mt-8 lg:px-5 md:px- sm:px-3  bg-[#F9A106] rounded-[8px] lg:text-[30px] md:text-[30px] sm:text-[25px] xs:text-[20px] text-white lg:h-[75px] md:h-[65px] sm:h-[60px] xs:h-[55px] ${isButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
             }`}
         >
           ওটিপি যাচাই করুন

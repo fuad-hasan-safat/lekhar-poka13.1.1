@@ -10,7 +10,7 @@ const bengaliDigits = {
 
 
 // Function to convert English numerals to Bengali numerals
-function convertToBengaliNumerals(number) {
+export function convertToBengaliNumerals(number) {
     return number.toString().split('').map(digit => bengaliDigits[digit]).join('');
 }
 

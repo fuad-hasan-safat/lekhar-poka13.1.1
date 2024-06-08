@@ -11,6 +11,7 @@ import { useRouter } from 'next/router';
 import { FileUploader } from "react-drag-drop-files";
 import dynamic from 'next/dynamic';
 
+
 const CustomEditor = dynamic(() => {
     return import('../../components/custom-editor');
 }, { ssr: false });
@@ -142,7 +143,8 @@ export default function CreatePost() {
             ...provided,
             backgroundColor: "#fff",
             border: "1px solid #ccc",
-            color: "#000"
+            color: "#000",
+            zIndex: '99999'
         }),
     };
 
@@ -347,7 +349,7 @@ export default function CreatePost() {
         <>
             <div className="md:pr-0 sm:pr-0 space-y-4 lg:flex">
                 <div className='create__post__rgt lg:w-[25%] lg:order-last pt-[10px]'>
-                    <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">আপনার লেখার ধরণ নির্বাচন করুন</div>
+                    <div className="text-[#F9A106] font-bold text-[20px] !mb-[5px]">আপনার লেখার ধরণ নির্বাচন করুন</div>
 
                     <div>
                         <Select
@@ -356,34 +358,15 @@ export default function CreatePost() {
                             styles={customStyles}
                             options={Categoryoptions}
                         />
-                        {/* <select
-                            id="category"
-                            name="category"
-                            className={`h-[40px] w-full px-[16px] text-black`}
-                            required
-                            value={selectedOption}
-                            onChange={(e) => setSelectedOption(e.target.value)}>
-                            <option value="">লেখার ধরণ</option>
-                            {category.map((cat) => (
-                                <option key={cat._id} value={cat.title}>
-                                    {cat.title}
-                                </option>
-                            ))}
-                        </select> */}
                     </div>
 
-                    {userType === 'admin' &&
-                        <div className='profile__btn__midl'>
 
-                            <CreateCategory setIsCategoryAdded={setIsCategoryAdded} />
-
-                        </div>}
 
 
                     {userType === 'admin' &&
                         <>
-                            <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">লেখক নির্বাচন করুন</div>
-                            <div className=" place-content-center justify-center ">
+                            <div className="text-[#F9A106] font-bold text-[20px] mt-[10px] !mb-[2px]">লেখক নির্বাচন করুন</div>
+                            <div className=" place-content-center justify-center">
 
                                 <div className="">
                                     <Select
@@ -396,16 +379,26 @@ export default function CreatePost() {
                                 </div>
 
 
-                                <div className='profile__btn__midl'>
-                                    <CreateWriter setIsWriterAdded={setIsWriterAdded} />
-                                </div>
+
+                            </div>
+                        </>
+                    }
+
+                    {userType === 'admin' &&
+                        <>
+                            <div className='profile__btn__midl'>
+                                <CreateCategory setIsCategoryAdded={setIsCategoryAdded} />
+                            </div>
+
+                            <div className='profile__btn__midl'>
+                                <CreateWriter setIsWriterAdded={setIsWriterAdded} />
                             </div>
                         </>
                     }
                     <hr class="my-5 border-gray-200" />
                     <div className='text-black'>
                         <div className='mb-[15px]'>
-                            <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">ছবি আপলোড করুন (যদি থাকে)</div>
+                            <div className="text-[#F9A106] font-bold text-[20px] !mb-[2px]">ছবি আপলোড করুন (যদি থাকে)</div>
                         </div>
 
                         <FileUploader handleChange={handleFileChange} multiple={true} mimeTypes={['image/*']}
@@ -421,8 +414,8 @@ export default function CreatePost() {
                                     <img className='m-auto' src='../images/user/divider.png' alt='Divider' />
                                 </div>
 
-                                <label className=" cursor-pointer flex items-center justify-center relative -z-[9999999]" >
-                                    <div className="page__common__yello__btn mt-[15px]  file-btn w-[200px] h-[43px] text-[16px] -z-[999999]" onClick={handleFileChange}>আপলোড</div>
+                                <label className=" cursor-pointer flex items-center justify-center relative " >
+                                    <div className="page__common__yello__btn mt-[15px]  file-btn w-[200px] h-[43px] text-[16px] " onClick={handleFileChange}>আপলোড</div>
 
                                 </label>
                             </div>
@@ -434,7 +427,7 @@ export default function CreatePost() {
                             <img className='m-auto pr-[10px] w-[40px] h-[35px]' src='/images/likhun/imagelogo.png' alt='image File ' />
                             <div className='w-full'>
                                 {/* <strong className='block'>Kobitar Gan.mp3</strong> */}
-                                <p className='w-full text-[#292D32]'>{image ? `File name: ${image?.name?.slice(0,20)}` : "কোন ছবি নির্বাচন করা হয়নি"}</p>
+                                <p className='w-full text-[#292D32]'>{image ? `File name: ${image?.name?.slice(0, 20)}` : "কোন ছবি নির্বাচন করা হয়নি"}</p>
 
                                 {/* <span className='flex justify-start items-center'>60 KB of 12O KB . <img className='m-auto pr-[10px]' src='../images/user/audio-icon.png' alt='Audio Icon ' /><strong>Uploading...</strong></span> */}
                             </div>
@@ -442,7 +435,7 @@ export default function CreatePost() {
                     </div>
                     <hr class="my-5 border-gray-200" />
                     <div className='text-black'>
-                        <div className="text-[#F9A106] mt-[40px] font-bold text-[22px] !mb-[2px]">অডিও আপলোড করুন (যদি থাকে)</div>
+                        <div className="text-[#F9A106] mt-[40px] font-bold text-[20px] !mb-[2px]">অডিও আপলোড করুন (যদি থাকে)</div>
                         <FileUploader handleChange={handleAudioFile} multiple={true} mimeTypes={['audio/*']}
                         >
                             <div
@@ -469,7 +462,7 @@ export default function CreatePost() {
                             <img className='m-auto pr-[10px] w-[40px] h-[35px]' src='/images/likhun/imagelogo.png' alt='image File ' />
                             <div className='w-full'>
                                 {/* <strong className='block'>Kobitar Gan.mp3</strong> */}
-                                <p className='w-full text-[#292D32]'>{selectedFile ? `File name: ${selectedFile?.name?.slice(0,20)}` : "কোন অডিও নির্বাচন করা হয়নি"}</p>
+                                <p className='w-full text-[#292D32]'>{selectedFile ? `File name: ${selectedFile?.name?.slice(0, 20)}` : "কোন অডিও নির্বাচন করা হয়নি"}</p>
 
                                 {/* <span className='flex justify-start items-center'>60 KB of 12O KB . <img className='m-auto pr-[10px]' src='../images/user/audio-icon.png' alt='Audio Icon ' /><strong>Uploading...</strong></span> */}
                             </div>
@@ -477,7 +470,7 @@ export default function CreatePost() {
                     </div>
                 </div>
                 <div className='create__post__lft lg:pr-[100px] lg:w-[75%] lg:order-first'>
-                    <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">লেখার শিরোনাম</div>
+                    <div className="text-[#F9A106] font-bold text-[20px] !mb-[2px]">লেখার শিরোনাম</div>
 
                     <input style={{ marginTop: '0' }}
                         onChange={handleTitle}
@@ -488,7 +481,7 @@ export default function CreatePost() {
                         placeholder="শিরোনাম"
                         required
                     />
-                    <div className="text-[#F9A106] font-bold text-[22px] !mt-[30px] !mb-[2px]">সারসংক্ষেপ</div>
+                    <div className="text-[#F9A106] font-bold text-[20px] !mt-[30px] !mb-[2px]">সারসংক্ষেপ</div>
                     <textarea
                         onChange={handleSummary}
                         value={summary}
@@ -499,7 +492,7 @@ export default function CreatePost() {
                         required
                     />
 
-                    <div className="text-[#F9A106] font-bold text-[22px] !mt-[30px] !mb-[2px]">মূল লেখা</div>
+                    <div className="text-[#F9A106] font-bold text-[20px] !mt-[30px] !mb-[2px]">মূল লেখা</div>
 
 
                     <div>

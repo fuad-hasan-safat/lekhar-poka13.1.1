@@ -136,7 +136,7 @@ export default function ProcchodLeftContent() {
           ) : (
             <>
               {postList?.length > 0 ?
-                (<div className="lakha__main__content pt-20 text-3xl">
+                (<div className="lakha__main__content pt-[40px] text-3xl">
                   {postList?.map((post, index) => (
                     <>
                       <div key={index}>
