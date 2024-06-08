@@ -148,7 +148,7 @@ export default function PostDetails() {
                               writer={data?.writer}
                               writer_id={data?.writer_id}
                               image={selectedCoverImage}
-                              uploadedBy={uploaderName}
+                              uploadedBy={profileName}
                               writer_image={writerImage}
                               profileName={profileName}
                               updatedAt={data?.updatedAt}
