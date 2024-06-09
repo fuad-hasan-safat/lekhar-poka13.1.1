@@ -53,17 +53,23 @@ export default function PostDetails({ postData }) {
     // router.reload()
   }
 
+  function removeHtmlTags(str) {
+    return str?.replace(/<\/?[^>]+(>|$)/g, "");
+}
+
 
   // select image
 
-  let selectedCoverImage = writerImage;
+  let selectedCoverImage = postData?.writer_image;
 
-  if (data?.image?.length > 0) {
+  if (postData?.object?.image) {
     selectedCoverImage = data?.image;
   }
 
   let pageTitle = data?.title
-  let description = data?.content?.slice(0, 200);
+  let withoutTagDes = removeHtmlTags(data?.content?.slice(0, 700))
+  console.log({withoutTagDes})
+  let description = withoutTagDes;
   let postLink = `https://lekharpoka.com${asPath}`;
   let imageLink = `https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/') + 1)}`
   console.log({pageTitle, description, postLink, imageLink})
