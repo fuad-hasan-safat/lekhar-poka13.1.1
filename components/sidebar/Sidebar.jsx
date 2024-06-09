@@ -11,7 +11,7 @@ export default function Sidebar() {
     return (
         <div>
             <div className="bg-white">
-                <div className="border-[1px] border-[#F3F3F3] rounded-[12px] lg:px-10 md:px-8 sm:px-6 xs:px-5 mb-[40px]">
+                <div className="border-[1px] border-[#F3F3F3] rounded-[12px] lg:px-10 md:px-8 sm:px-6 xs:px-5 mb-[40px] lg:mt-[0] md:mt-[40px] sm:mt-[40px] xs:mt-[40px]">
                    
                     <div className="">
                         <Login />
