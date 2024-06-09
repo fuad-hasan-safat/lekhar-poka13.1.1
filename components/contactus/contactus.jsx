@@ -40,7 +40,7 @@ export default function ContactUs() {
                                             height={20}
                                             alt="location"
                                         />
-                                        <p className="text-[18px] font-[600] text-black">১৩/২ ওয়েস্ট পান্থপথ, ধানমন্ডী, ঢাকা</p>
+                                        <p className="text-[18px] font-[600] text-[#011334]">১৩/২ ওয়েস্ট পান্থপথ, ধানমন্ডী, ঢাকা</p>
 
                                     </div>
 
@@ -52,7 +52,7 @@ export default function ContactUs() {
                                             height={20}
                                             alt="phone"
                                         />
-                                        <p className="text-[18px] font-[600] text-black">+৮৮০ ১৩৬৫৪৭৬৫৪</p>
+                                        <p className="text-[18px] font-[600] text-[#011334]">+৮৮০ ১৩৬৫৪৭৬৫৪</p>
 
                                     </div>
 
@@ -64,7 +64,7 @@ export default function ContactUs() {
                                             height={20}
                                             alt="email"
                                         />
-                                        <p className="text-[18px] font-[600] text-black">info@live-technologies.net</p>
+                                        <p className="text-[18px] font-[600] text-[#011334]">info@live-technologies.net</p>
 
                                     </div>
 
