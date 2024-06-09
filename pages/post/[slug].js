@@ -1,6 +1,5 @@
-"use client";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Head from 'next/head';
 
 
@@ -10,73 +9,39 @@ import { fetchData } from "../../function/api";
 import { apiBasePath } from "../../utils/constant";
 import MusicPlayer from "../../components/musicbar/MusicPlayer";
 import ShareOnFacebook from "../../components/share/share";
-import { FacebookShareButton } from "react-share";
-import axios from "axios";
 import ReaderModeModal from "../../components/readerMode/ReaderModeModal";
 import FullPostReaderMode from "../../components/common/fullContentReadermood";
 
-export default function PostDetails() {
+export async function getServerSideProps(context) {
+
+  const { slug } = context.params;
+
+  const res = await fetch(`${apiBasePath}/getpost/${slug}`)
+  const postData = await res.json()
+
+  return { props: { postData } }
+}
+
+export default function PostDetails({ postData }) {
   const router = useRouter();
   const slug = router.query.slug;
   const { asPath } = router;
 
-  console.log({asPath})
+  console.log({ postData })
 
-  const [data, setData] = useState(null); // State to store fetched data
-  const [writerImage, setWriterImage] = useState('')
-  const [error, setError] = useState(null); // State to store any errors
-  const [isAudioAvailable, setIsAudioAvailAble] = useState(false);
-  const [isdataFetch, setisDataFetch] = useState(false)
-  const [uploaderName, setUploaderName] = useState('')
-  const [profileName, setProfileName] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  
+  const data = postData.object;
+  const writerImage = postData?.writer_image;
+  const uploaderName = postData?.uploader_name;
+  const profileName = postData?.profile_name;
+  let isAudioAvailable = postData.object?.audio ? true : false;
+  let isdataFetch = postData?.status === "success" ? true : false;
+
+
   //  focus mood ----
 
   const [rating, setRating] = useState(0);
-
-
-  useEffect(() => {
-
-    async function fetchDataAsync() {
-
-      try {
-        const result = await axios.get(
-          `${apiBasePath}/getpost/${slug}`
-        );
-
-        console.log('post page single postss ====================>>>>>>>>>>>>>>>>>>>>', result)
-
-        setData(result.data.object);
-        setWriterImage(result.data?.writer_image)
-        setUploaderName(result.data?.uploader_name)
-        setProfileName(result.data?.profile_name)
-        console.log("STATE WrtiER : ", writerImage, result.data.writer_image);
-
-        if (result.data.object.audio?.length > 0) {
-          setIsAudioAvailAble(true);
-        } else {
-          setIsAudioAvailAble(false)
-        }
-
-        if (result.data.status === 'success') {
-          setisDataFetch(true)
-        } else if (result.data.status === 'failed') {
-          setisDataFetch(false)
-        }
-
-        // console.log('is audio available ------->>>', isAudioAvailable)
-      } catch (error) {
-        setError(error)
-        // console.log('post page ====================>>>>>>>>>>>>>>>>>>>>', error)
-
-      } finally {
-      }
-    }
-
-    fetchDataAsync();
-  }, [router.query]);
 
 
   function readMoodHandler(postId) {
@@ -98,34 +63,32 @@ export default function PostDetails() {
   }
 
   let pageTitle = data?.title
-  let description = "লেখার পোকা  হলো কবিতা, গান, প্রবন্ধ গল্প এবং জীবনী লেখা প্রকাশের একটি ওয়েব সাইট। যেটা অভিব্যক্তির একটি সুন্দর রূপ যা ব্যক্তিদের তাদের চিন্তাভাবনা, আবেগ এবং অভিজ্ঞতা সৃজনশীল এবং শৈল্পিক উপায়ে প্রকাশ করতে দেয়। "
+  let description = data?.content?.slice(0, 200);
+  let postLink = `https://lekharpoka.com${asPath}`;
+  let imageLink = `https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/') + 1)}`
+  console.log({pageTitle, description, postLink, imageLink})
 
   return (
-    router.isReady &&
 
     <>
-
-      {/* <CustomHead title={data?.title} description={data?.writer} image={''} /> */}
 
       <div>
         <Head>
 
           <title>{data?.title}</title>
           <meta property="og:title" content={pageTitle} />
-          <meta property="og:description" content={description} />
-          <meta property="og:image" content={`https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/')+1)}`} />
-          <meta property="og:url" content={`https://lekharpoka.com${asPath}`} />
-          <meta property="og:type" content="post" />
-          <meta name="twitter:card" content={`https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/')+1)}`} />
+          <meta property="og:description" content={`${description} #lekharpoka`} />
+          <meta property="og:image" content={imageLink} />
+          <meta property="og:url" content={postLink} />
+          <meta property="og:type" content="website" />
+          <meta name="twitter:card" content={imageLink} />
           <meta name="twitter:title" content={pageTitle} />
           <meta name="twitter:description" content={description} />
-          <meta name="twitter:image" content={`https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/')+1)}`} />
-
-
+          <meta name="twitter:image" content={imageLink} />
 
         </Head>
       </div>
-      <body className=" body__control" >
+      <div className=" body__control" >
         <div className="all__post__content__overlay">
           <section className="banner-sec-wrap place-content-center">
             <div className="relative w-full xl:h-[190px] lg:h-[180px] md:h-[180px] sm:h-[180px] xs:h-[170px]  overflow-hidden" style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat` }}>
@@ -166,11 +129,13 @@ export default function PostDetails() {
 
                         </div>
                         <div className="rating__share__wrap">
-                          {/* <button onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=https://lekharpoka.com/post/${slug}`, '_blank')}>
-                            Share on Facebook
-                          </button> */}
+                          <button
+                          className="facebook__share bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 rounded flex items-center"
+                           onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=https://lekharpoka.com/post/${slug}`, '_blank')}>
+                           <i class="ri-facebook-circle-fill mr-[4px]"></i> শেয়ার করুন 
+                          </button>
 
-                          <ShareOnFacebook url={`lekharpoka.com/post/${slug}`} title={'লেখার পোকায় আপনাকে স্বাগতম'} image={''} />
+                          {/* <ShareOnFacebook url={`lekharpoka.com/post/${slug}`} title={'লেখার পোকায় আপনাকে স্বাগতম'} image={''} /> */}
                           <RatingComponent setRating={setRating} rating={rating} post_id={data?._id} />
                         </div>
                       </>
@@ -231,7 +196,7 @@ export default function PostDetails() {
           }]} />
 
         )}
-      </body>
+      </div>
     </>
   );
 }
