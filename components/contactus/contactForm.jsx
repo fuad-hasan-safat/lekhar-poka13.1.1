@@ -90,14 +90,14 @@ const ContactForm = () => {
                         value={formData.message}
                         onChange={handleInputChange}
                         required
-                        className='bg-[#FCF7E8] w-full lg:h-[257px] md:h-[240px] sm:h-[220px] xs:h-[200px] rounded-[5px] p-5'
+                        className='bg-[#FCF7E8] w-full lg:h-[270px] md:h-[240px] sm:h-[220px] xs:h-[200px] rounded-[5px] p-5'
                     />
                     
                 </div>
 
                 <button
                     type="submit"
-                    className={`page__common__btn contact__form__btn font-[600] bg-[#F9A106] w-full lg:h-[75px] md:h-[70px] sm:h-[60px] xs:h-[50px] rounded-[5px] lg:text-[36px] md:text-[34px] sm:text-[30px] xs:text-[24px] text-white`}
+                    className={`page__common__btn contact__form__btn font-[600] bg-[#F9A106] w-full lg:h-[75px] md:h-[70px] sm:h-[60px] xs:h-[50px] rounded-[5px] lg:text-[30px] md:text-[29px] sm:text-[28px] xs:text-[24px] text-white`}
                 >
                     সাবমিট
                 </button>

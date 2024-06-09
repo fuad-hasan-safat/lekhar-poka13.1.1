@@ -443,7 +443,7 @@ function useOutsideAlerter(ref) {
                                                         )}
                                                     </li> :
                                                     <li>
-                                                        <button onClick={() => router.push('/account/login')}><i class="ri-account-circle-fill"></i></button>
+                                                        <button className="text-[25px]" onClick={() => router.push('/account/login')}><i class="ri-account-circle-fill"></i></button>
                                                     </li>
                                             }
                                         </ul>
