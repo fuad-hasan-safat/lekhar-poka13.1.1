@@ -1293,7 +1293,7 @@ transition: all 0.5s !important;
   margin-right: 15px; */
 }
 .read__mod__wrap{
-  /* padding: 100px 0; */
+  padding: 100px 0;
   position: relative;
 }
 .read__mod__content {
