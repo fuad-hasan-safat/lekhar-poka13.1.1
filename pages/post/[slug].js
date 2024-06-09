@@ -76,12 +76,12 @@ export default function PostDetails({ postData }) {
         <Head>
 
           <title>{data?.title}</title>
-          <meta property="og:title" content={pageTitle} />
+          <meta property="og:title" content={pageTitle} key="og:title"/>
           <meta property="og:description" content={`${description} #lekharpoka`} />
-          <meta property="og:image" content={imageLink} />
+          <meta property="og:image" content={imageLink}  key="og:image"/>
           <meta property="og:url" content={postLink} />
-          <meta property="og:type" content="website" />
-          <meta name="twitter:card" content={imageLink} />
+          <meta property="og:type" content="website" key="og:type" />
+          <meta name="twitter:card" content={imageLink}  />
           <meta name="twitter:title" content={pageTitle} />
           <meta name="twitter:description" content={description} />
           <meta name="twitter:image" content={imageLink} />
