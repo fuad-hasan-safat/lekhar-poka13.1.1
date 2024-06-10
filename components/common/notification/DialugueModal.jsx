@@ -28,8 +28,8 @@ const DialugueModal = forwardRef(function DialugueModal({ alert, address, type }
             <h2>{alert}</h2>
 
 
-            <button onClick={() => ref.current.close()} className="bg-red-300">বাতিল</button>
-            <button onClick={handleClick} className="ml-[25px]">ঠিক আছে</button>
+            <button onClick={() => ref.current.close()} className="bg-red-300">না</button>
+            <button onClick={handleClick} className="ml-[25px]">হ্যাঁ</button>
 
         </dialog>
     )
