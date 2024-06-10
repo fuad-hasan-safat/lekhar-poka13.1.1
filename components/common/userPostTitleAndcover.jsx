@@ -4,6 +4,9 @@ import { apiBasePath } from '../../utils/constant'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import { convertToBengaliDate } from '../../utils/convertToBanglaDate'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import DialugueModal from './notification/DialugueModal'
 
 export default function UserPostTitleAndcover({
   id,
@@ -20,11 +23,14 @@ export default function UserPostTitleAndcover({
 }) {
   const router = useRouter()
 
+  const dialogueRef = useRef()
   const editPostRef = useRef()
   useOutsideAlerter(editPostRef);
+
+  let notification = '';
+
   const [isMoreClick, setIsMoreClick] = useState(false)
 
-  console.log("WRITER IMAGE FROM TITLE", { writer_image })
 
   function moreOptionHandler() {
     setIsMoreClick((prevState) => !prevState)
@@ -62,62 +68,33 @@ export default function UserPostTitleAndcover({
     return `${year}-${month}-${day}`;
   }
 
+  function reloadPage() {
+    setTimeout(() => {
+      router.reload()
+    }, 2500)
+  }
 
-  async function deletePost(id) {
-    const confirmPostDelete = window.confirm('আপনি কি পোস্টটি মুছে ফেলতে চান?');
-    if (confirmPostDelete) {
+  async function deletePost() {
+    console.log('Delete id----',id)
       try {
         const response = await axios.delete(`${apiBasePath}/posts/${id}`);
         console.log('Delete successful:', response.data);
 
-        alert('পোস্টটি মুছে ফেলা হয়েছে')
-        router.reload()
+        notification = 'পোস্টটি মুছে ফেলা হয়েছে'
+        notify();
 
+        dialogueRef.current.close();
+
+        reloadPage();
         return response.data;
       } catch (error) {
         console.error('Error deleting data:', error);
         throw error;
       }
 
-    }
-
 
   }
 
-
-  function revokeStatus(id, status) {
-    console.log('status before -----------------', status)
-
-    const data = {
-      status: !status
-    };
-
-
-    const jsonData = JSON.stringify(data);
-
-    console.log('status after -----------------', data)
-
-
-    fetch(`${apiBasePath}/posts/${id}`, {
-      method: 'PUT', // Specify PUT method for update
-      headers: {
-        'Content-Type': 'application/json' // Set content type as JSON
-      },
-      body: jsonData
-    })
-      .then(response => response.json()) // Parse the response as JSON
-      .then(updatedData => {
-        console.log('Data updated successfully:', updatedData);
-
-      })
-      .catch(error => {
-        console.error('Error updating data:', error);
-      });
-
-    // router.push(`/admin/allposttable`);
-    router.reload()
-
-  }
 
 
   const banglaDate = convertToBengaliDate(formattedDate)
@@ -148,8 +125,20 @@ export default function UserPostTitleAndcover({
 
 
 
+  const notify = () => toast.warn(notification, {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+
+  });
+
   return (
     <>
+      <DialugueModal ref={dialogueRef} alert='আপনি কি পোস্ট মুছে ফেলতে চান' address={deletePost} type='delete' />
+
       <div className="profile__auth__wrap space-x-[15px]">
 
         <div className="profile__auth__img">
@@ -189,7 +178,7 @@ export default function UserPostTitleAndcover({
               <button
                 onClick={moreOptionHandler}
                 className='absolute top-0 right-0 text-[20px] rounded-full bg-[#EFEFEF] w-[38px]'><i class="ri-more-2-line"></i>
-                </button>
+              </button>
               {isMoreClick &&
                 <ul ref={editPostRef} className=' mt-[15px] absolute top-[35px] right-0 lg:text-[15px] sm:text-[13px] xs:text-[13px] backdrop-blur-md shadow-xl bg-[#FCF7E8] z-[1000] origin-top-right w-[110px] rounded-md  ring-opacity-5 focus:outline-none'>
                   <li
@@ -200,20 +189,12 @@ export default function UserPostTitleAndcover({
                   </li>
                   <hr />
 
-                  {/* <li
-                    className="block cursor-pointer   hover:bg-[#F9A106]  hover:text-white"
 
-                  >
-                    <button
-                      onClick={() => revokeStatus(id, postStatus)}
-                      className=' w-full text-center'>{postStatus ? 'অপ্রকাশিত' : 'প্রকাশিত'}</button>
-                  </li>
-                  <hr /> */}
                   <li
                     className="block cursor-pointer  hover:bg-[#F9A106]  hover:text-white"
 
                   >
-                    <button onClick={() => deletePost(id)} className=' w-full text-center'>মুছে ফেলুন</button>
+                    <button onClick={() => dialogueRef.current.showModal()} className=' w-full text-center'>মুছে ফেলুন</button>
                   </li>
 
 
@@ -224,6 +205,12 @@ export default function UserPostTitleAndcover({
         </div>
 
       </div>
+
+      <div className='text-[16px]'>
+        <ToastContainer />
+      </div>
+
+
     </>
   )
 }

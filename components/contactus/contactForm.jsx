@@ -4,7 +4,13 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { apiBasePath } from '../../utils/constant';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const ContactForm = () => {
+
+    let notification = ''
+
 
     const [formData, setFormData] = useState({
         fullName: '',
@@ -34,7 +40,8 @@ const ContactForm = () => {
                 message: formData.message
             });
 
-            alert('ধন্যবাদ আপনার মন্তব্যের জন্য')
+            // alert('ধন্যবাদ আপনার মন্তব্যের জন্য')
+            notification = 'ধন্যবাদ আপনার মন্তব্যের জন্য'
 
         } catch (error) {
             console.error('Signup error:', error);
@@ -48,7 +55,19 @@ const ContactForm = () => {
             phoneNumber: '',
             message: ''
         });
+
+        notify();
     };
+
+    const notify = () => toast.warn(notification, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+
+    });
 
     return (
         <form onSubmit={handleSubmit} >
@@ -92,7 +111,7 @@ const ContactForm = () => {
                         required
                         className='bg-[#FCF7E8] w-full lg:h-[270px] md:h-[240px] sm:h-[220px] xs:h-[200px] rounded-[5px] p-5'
                     />
-                    
+
                 </div>
 
                 <button
@@ -101,6 +120,8 @@ const ContactForm = () => {
                 >
                     সাবমিট
                 </button>
+                <ToastContainer />
+
 
             </div>
 

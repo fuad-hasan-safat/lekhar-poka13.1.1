@@ -5,11 +5,14 @@ import SignInOption from '../../signInOption/SignInOption'
 import { apiBasePath } from "../../../utils/constant";
 import { useRouter } from "next/navigation";
 import Divider from '../../common/sidebardivider';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
 
   const router = useRouter();
+
+  let notification = ''
 
   const [number, setnumber] = useState("");
   const [password, setPassword] = useState("");
@@ -61,6 +64,12 @@ export default function Login() {
     setPassword(e.target.value);
   };
 
+function reloadPage(){
+  setTimeout(()=>{
+    router.refresh()
+
+  }, 1000)
+}
 
   async function submitLogin() {
 
@@ -82,6 +91,9 @@ export default function Login() {
       if (response.data.status === 'success') {
         const data = await response.data;
 
+        notification = 'সফলভাবে লগইন করেছেন';
+        notify1();
+
         setStatus(data.status);
         setUserUuid(data.uuid);
         setUser(data);
@@ -97,19 +109,45 @@ export default function Login() {
         setnumber("");
         setPassword("");
 
-        router.refresh()
+        reloadPage()
       }
       else if (response.data.status === "failed") {
-        alert(' সঠিক নাম্বার দিন ')
+        // alert(' সঠিক নাম্বার দিন ')
+        notification = 'সঠিক নাম্বার দিন';
+        notify();
+
       }
 
 
     } catch (error) {
-      alert('সঠিক পাসওয়ার্ড দিন');
+      // alert('সঠিক পাসওয়ার্ড দিন');
+      notification = 'সঠিক পাসওয়ার্ড দিন';
+      notify();
     }
+
+  
+
   }
 
+  const notify = () => toast.warn(notification, {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
 
+  });
+
+  const notify1 = () => toast.success(notification, {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+
+  });
 
   return (
     <>
@@ -183,6 +221,8 @@ export default function Login() {
               >
                 লগইন করুন
               </button>
+            <ToastContainer />
+
             </div>
 
             <SignInOption

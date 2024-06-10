@@ -4,6 +4,8 @@ import { apiBasePath } from "../../utils/constant";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function SigninFormAterOTP({ logreg, btntext, phonenumber }) {
@@ -18,6 +20,7 @@ export default function SigninFormAterOTP({ logreg, btntext, phonenumber }) {
         isDisabled: true, // Button initially disabled
     });
 
+    let notification = '';
     const [numberPrefix, setNumberPrefix] = useState('88');
     const [showPassword, setShowPassword] = useState(false);
     const [reshowPassword, setReShowPassword] = useState(false);
@@ -82,6 +85,14 @@ export default function SigninFormAterOTP({ logreg, btntext, phonenumber }) {
         setState((prevState) => ({ ...prevState, isDisabled: !isValid }));
     };
 
+
+    function reloadPage(){
+        setTimeout(()=>{
+            router.push(`/account/login`)
+      
+        }, 1000)
+      }
+
     const handleSubmit = async () => {
 
         validate();
@@ -98,16 +109,41 @@ export default function SigninFormAterOTP({ logreg, btntext, phonenumber }) {
 
                 });
 
-                alert('আপনার রেজিস্ট্রেশন সম্পূর্ণ হয়েছে। অনুগ্রহ করে লগইন করুন।')
+                // alert('আপনার রেজিস্ট্রেশন সম্পূর্ণ হয়েছে। অনুগ্রহ করে লগইন করুন।')
+                notification = 'আপনার রেজিস্ট্রেশন সম্পূর্ণ হয়েছে। অনুগ্রহ করে লগইন করুন।';
+                notify1();
 
-                router.push(`/account/login`)
-
+                reloadPage()
+                
             } catch (error) {
 
-                alert('আপনি আগে থেকেই সাইন আপ করেছেন');
+                // alert('আপনি আগে থেকেই সাইন আপ করেছেন');
+                notification = 'আপনি আগে থেকেই সাইন আপ করেছেন';
+                notify()
             }
         }
     };
+
+
+    const notify = () => toast.warn(notification, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+    
+      });
+    
+      const notify1 = () => toast.success(notification, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+    
+      });
 
     return (
         <>
@@ -185,6 +221,8 @@ export default function SigninFormAterOTP({ logreg, btntext, phonenumber }) {
                 </div>
 
             </div>
+            <ToastContainer />
+
         </>
     );
 }

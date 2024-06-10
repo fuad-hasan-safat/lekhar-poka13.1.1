@@ -7,7 +7,8 @@ import UserAchivement from './userAchivement'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import { convertToBanglaPhoneNumber, convertToBengaliDate } from '../../utils/convertToBanglaDate'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function WriterProfileBanner({
     apprevedPost = 0,
@@ -23,6 +24,8 @@ export default function WriterProfileBanner({
 }) {
     const router = useRouter()
     const slug = router.query.slug;
+
+    let notification = ''
 
     const [loggedInUser, setLoggedInUser] = useState("");
     const [userUuid, setUserUuid] = useState("");
@@ -141,13 +144,38 @@ export default function WriterProfileBanner({
                     }
                 );
                 console.log('following ------------------------- writer in response message---------------->>>>>>', response)
+                notification = 'অনুসরণ করছেন'
+                notify1();
             } catch (error) {
                 // console.log("inside catch ----------------", error);
             }
         } else {
-            alert(`আপনি ইতিমধ্যেই ${writerInfo.name} কে অনুসরণ করছেন `)
+            // alert(`আপনি ইতিমধ্যেই ${writerInfo.name} কে অনুসরণ করছেন `)
+            notification = `আপনি ইতিমধ্যেই ${writerInfo.name} কে অনুসরণ করছেন `;
+            notify();
         }
     }
+
+
+    const notify = () => toast.warn(notification, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+
+    });
+
+    const notify1 = () => toast.success(notification, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
 
     console.log('image --------- length >>>>>', profileInfo?.image)
     return (
@@ -170,17 +198,17 @@ export default function WriterProfileBanner({
                     </li>}
 
                     {isSelfWriter && profileInfo?.gender?.length > 0 && <li>
-                        <span className='text-[#F9A106] ml-[30px]'>{profileInfo?.gender === 'male' ?  <img src='/images/usericons/sexicon.svg' /> :  <img src='/images/usericons/sexicon.svg' /> }</span> <span className='capitalize text-[#737373]'>{banglaGender}</span>
+                        <span className='text-[#F9A106] ml-[30px]'>{profileInfo?.gender === 'male' ? <img src='/images/usericons/sexicon.svg' /> : <img src='/images/usericons/sexicon.svg' />}</span> <span className='capitalize text-[#737373]'>{banglaGender}</span>
                     </li>}
 
                 </ul>
                 {isSelfWriter && <ul className={` profile__info__wrap text-[#737373] text-[20px] lg:mt-[14px] ${isSelfWriter ? '' : 'mb-[44px]'}`}>
 
-                   {profileInfo?.address?.length > 0 && <li>
+                    {profileInfo?.address?.length > 0 && <li>
                         <span className='text-[#F9A106]'><img src='/images/usericons/location.svg' /></span> <span className='text-[#737373]'>{profileInfo?.address}</span>
                     </li>}
 
-                   {profileInfo?.phone?.length > 0  && <li>
+                    {profileInfo?.phone?.length > 0 && <li>
                         <span className='text-[#F9A106] '><img src='/images/usericons/phone.svg' /></span> <span className='text-[#737373] '>+{convertToBanglaPhoneNumber(profileInfo?.phone)}</span>
                     </li>}
 
@@ -196,6 +224,7 @@ export default function WriterProfileBanner({
                     >
                         <span><i class="ri-add-box-fill"></i></span> <span> {isAlreadyFollowing ? 'অনুসরণ করছেন' : 'অনুসরণ করুন'}</span>
                     </button>
+                    <ToastContainer />
                 </div>}
 
                 {isSelfWriter && <hr></hr>}

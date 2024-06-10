@@ -4,11 +4,14 @@ import { apiBasePath } from "../../utils/constant";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function PassRecovertFormAterOTP({ phonenumber }) {
 
     const router = useRouter()
 
+    let notification = ''
     const [numberPrefix, setNumberPrefix] = useState("88");
 
     const [state, setState] = useState({
@@ -54,9 +57,15 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
     };
 
 
+
+    function reloadPage() {
+        setTimeout(() => {
+            router.push('/account/login')
+        }, 1000)
+    }
     const handleUpdatePassword = async () => {
 
-        validate(); 
+        validate();
 
         const data = {
             phone: numberPrefix + phonenumber,
@@ -64,11 +73,11 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
         };
 
         const options = {
-            method: "PUT", 
+            method: "PUT",
             headers: {
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             },
-            body: JSON.stringify(data), 
+            body: JSON.stringify(data),
         };
 
         try {
@@ -81,15 +90,27 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
             const responseBody = await response.json();
             console.log("API response:", responseBody);
 
-            alert('পাসওয়ার্ড রিকভারি সফলভাবে সম্পন্ন হয়েছে, অনুগ্রহ করে লগইন করুন')
+            // alert('পাসওয়ার্ড রিকভারি সফলভাবে সম্পন্ন হয়েছে, অনুগ্রহ করে লগইন করুন')
+            notification = 'পাসওয়ার্ড রিকভারি সফলভাবে সম্পন্ন হয়েছে, অনুগ্রহ করে লগইন করুন';
+            notify1()
 
-            router.push('/account/login')
+            reloadPage()
 
         } catch (error) {
             console.error("Error:", error);
         }
 
     }
+
+    const notify1 = () => toast.success(notification, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+
+    });
 
     return (
         <>
@@ -137,8 +158,9 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
                 >
                     আপডেট পাসওয়ার্ড
                 </button>
-                
+
             </div>
+            <ToastContainer />
         </>
     );
 }

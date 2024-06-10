@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import UserProfileBanner from '../userprofile/userProfileBanner'
 import { apiBasePath } from "../../utils/constant";
 import Link from "next/link";
-import UserInformationsAndBio from '../user/userInformationsAndBio';
 import FollowerList from './followerList';
 import FollowingList from './followingList';
 import { useRouter } from 'next/router';
