@@ -217,6 +217,7 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
         //  update profile data
         if ((image?.length <= 0) && (!imageFile)) {
             notification = 'দয়া করে প্রোফাইল এর জন্য স্থিরচিত্র নির্বাচন করুন';
+            notify();
         }
         else if (designation?.length <= 0) {
             notification = 'আপনার পদবী প্রদান করুন';
@@ -290,11 +291,15 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
     return (
         <>
 
-            <div className={`${showModal ? 'block' : 'hidden'} fixed z-[9999999999] inset-0 overflow-y-auto flex items-center justify-center bg-black/70`} aria-labelledby="modal-title" role="dialog" aria-modal="true">
+
+            <div className={`${showModal ? 'block' : 'hidden'} fixed z-[9999] inset-0 overflow-y-auto flex items-center justify-center bg-black/70`} aria-labelledby="modal-title" role="dialog" aria-modal="true">
+
                 <div className=" inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
                 <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
                 <div className="inline-block align-bottom mt-[650px] mb-[300px] bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all lg:max-w-[700px] sm:align-middle sm:max-w-lg sm:w-full xs:max-w-[340px] ">
+
                     <div className="bg-white pb-[60px] ">
+
                         <div className=" sm:flex sm:items-start h-[140px] bg-[#FFC973]">
 
                         </div>
@@ -440,6 +445,9 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
                             >
                                 আপডেট
                             </button>
+                            <ToastContainer />
+
+
                         </div>
 
 
@@ -450,9 +458,7 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
 
             </div>
 
-            <div className='!text-[16px]'>
-                <ToastContainer />
-            </div>
+
 
         </>
 
