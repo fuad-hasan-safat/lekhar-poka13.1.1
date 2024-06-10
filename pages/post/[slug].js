@@ -11,6 +11,8 @@ import MusicPlayer from "../../components/musicbar/MusicPlayer";
 import ShareOnFacebook from "../../components/share/share";
 import ReaderModeModal from "../../components/readerMode/ReaderModeModal";
 import FullPostReaderMode from "../../components/common/fullContentReadermood";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export async function getServerSideProps(context) {
 
@@ -166,6 +168,8 @@ export default function PostDetails({ postData }) {
 
 
           </section>
+      <ToastContainer />
+
         </div>
 
 
