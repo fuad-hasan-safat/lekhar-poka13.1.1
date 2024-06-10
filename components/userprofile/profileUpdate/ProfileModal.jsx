@@ -260,7 +260,7 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
                     const data = await response.json();
                     // alert('প্রোফাইল সফলভাবে আপডেট হয়েছে')
                     notification = 'প্রোফাইল সফলভাবে আপডেট হয়েছে';
-                    notify();
+                    notify1();
                     console.log('Profile updated successfully:', data);
                     setIsSubMit(true)
                     setShowModal(false)
@@ -278,6 +278,16 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
     };
 
     const notify = () => toast.warn(notification, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: true,
+
+    });
+
+    const notify1 = () => toast.success(notification, {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
