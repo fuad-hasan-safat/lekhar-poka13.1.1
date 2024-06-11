@@ -2401,19 +2401,24 @@ transition: all 0.5s !important;
 }
 
 .audio__cat_iteam{
-  /* display: flex; */
-  justify-content: space-between;
-  align-items: center;
+
+
 }
-.audio__cat__single__iteam {
+.audio__cat_Single_wrap{
   width: 25%;
   height: 84px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  float: left;
+
+}
+.audio__cat__single__iteam {
+  width: 100%;
   border-radius: 8px;
   padding: 10px;
   position: relative;
   overflow: hidden;
   display: flex;
-  margin: 15px;
   cursor: pointer;
 }
 
