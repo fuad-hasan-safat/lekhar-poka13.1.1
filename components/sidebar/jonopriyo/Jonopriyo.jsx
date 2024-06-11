@@ -36,7 +36,7 @@ const Jonopriyo = () => {
     <>
       <div>
         <div>
-          <h1 className="text-[20px] text-yellow-500 font-semibold">জনপ্রিয়</h1>
+          <h1 className="text-[18px] text-yellow-500 font-semibold">জনপ্রিয়</h1>
         </div>
         {jonopriyoData.length > 0 ?
           <div className="pt-[23px]">

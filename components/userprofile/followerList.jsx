@@ -38,11 +38,11 @@ export default function FollowerList({ showModal, handleClose, userId }) {
 
                                         <LekhokDetails
                                             key={index}
-                                            image={`${apiBasePath}/${item.writer.image?.slice(item.writer.image.indexOf("/") + 1)}`}
-                                            writer={item.writer.name}
-                                            writer_id={item.writer._id}
-                                            id={item.writer._id}
-                                            lifeCycle={`  ${item.writer.birth_date === null ? `` : `${item.writer.birth_date} `} থেকে  ${item.writer.expiry_date === null ? 'বর্তমান' : ` ${item.writer.expiry_date}`} `}
+                                            image={`${apiBasePath}/${item?.writer?.image?.slice(item?.writer?.image.indexOf("/") + 1)}`}
+                                            writer={item?.writer?.name}
+                                            writer_id={item?.writer?._id}
+                                            id={item?.writer?._id}
+                                            lifeCycle={`  ${item?.writer?.birth_date === null ? `` : `${item?.writer?.birth_date} `} থেকে  ${item?.writer?.expiry_date === null ? 'বর্তমান' : ` ${item?.writer?.expiry_date}`} `}
 
                                         />
                                     </div>

@@ -91,6 +91,8 @@ export default function PostOfWriterPage() {
             <div>
                 <Head>
                     <title>লেখক পোস্ট</title>
+                 
+
                 </Head>
                 <section className="all__post__sec__wrap">
                     <div className="relative w-full xl:h-[380px] lg:h-[360px] md:h-[340px] sm:h-[280px] xs:h-[220px] -z-10  overflow-hidden" style={{ background: `url('/images/usericons/userbanner.svg')center center / cover no-repeat` }}>
@@ -111,7 +113,7 @@ export default function PostOfWriterPage() {
                                 />
 
 
-                                {
+                                {/* {
                                     profileController === 'follower' &&
                                     <FollowerList userId={writerInfo?.user_id} showModal={'follower'} handleClose={handleClose} />
                                 }
@@ -119,12 +121,12 @@ export default function PostOfWriterPage() {
                                 {
                                     profileController === 'following' &&
                                     <FollowingList userId={writerInfo?.user_id} showModal={'following'} handleClose={handleClose} />
-                                }
+                                } */}
 
                             </div>
 
                             <div className='lg:w-[60%] lg:p-[40px] mb-[40px]'>
-                                <WriterPostList postList={postList}/>
+                                <WriterPostList postList={postList} />
                             </div>
 
                         </div>

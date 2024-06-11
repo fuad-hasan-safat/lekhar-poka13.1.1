@@ -9,6 +9,7 @@ import SigninFormAterOTP from "../common/signinfornAfterOtp";
 
 const SignUpPageBeforeOTP = () => {
 
+
   const [user, setUser] = useState(null);
   const [status, setStatus] = useState("");
   const [username, setUsername] = useState("");

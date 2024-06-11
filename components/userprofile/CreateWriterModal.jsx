@@ -59,12 +59,12 @@ const CreateWriterModal = ({ showModal, handleClose, setIsWriterAdded }) => {
           <div className="sm:flex sm:items-start">
 
             <div className="mt-3 w-full ml-0 text-center sm:mt-0 sm:ml-4 sm:text-left">
-              <h3 className="text-[22px] leading-6 font-medium text-gray-900" id="modal-title">
+              <h3 className="text-[20px] leading-6 font-medium text-gray-900" id="modal-title">
                 নতুন রাইটার ক্রিয়েট করুন
               </h3>
-              <div className="my-[25px] w-full">
+              <div className="my-[20px] w-full">
                 <form onSubmit={handleSubmit}>
-                  <div className="mb-4 profile__date text-[18px]">
+                  <div className="mb-[10px] profile__date text-[14px]">
                     <label className="block text-gray-700  font-bold mb-2" htmlFor="name">
                       নাম
                     </label>
@@ -78,7 +78,7 @@ const CreateWriterModal = ({ showModal, handleClose, setIsWriterAdded }) => {
                       required
                     />
                   </div>
-                  <div className="mb-4 profile__date text-[18px]">
+                  <div className="mb-[10px] profile__date">
                     <label className="block text-gray-700 font-bold mb-2" htmlFor="birthDate">
                       জন্ম তারিখ
                     </label>
@@ -93,7 +93,7 @@ const CreateWriterModal = ({ showModal, handleClose, setIsWriterAdded }) => {
                     />
                     {/* <span className='absolute text-gray-700 right-[195px] pt-[8px] '>mm/dd /yyyy</span> */}
                   </div>
-                  <div className="mb-4 profile__date w-full text-[18px]">
+                  <div className="mb-[10px] profile__date w-full">
                     <label className="block text-gray-700 font-bold mb-2" htmlFor="deathDate">
                       মৃত্যু তারিখ
                     </label>
@@ -108,8 +108,8 @@ const CreateWriterModal = ({ showModal, handleClose, setIsWriterAdded }) => {
                     //  style={{ '::placeholder': { color: 'red' } }} 
                     />
                   </div>
-                  <div className="mb-4 profile__date">
-                    <label className="pt-[15px] block text-gray-700 text-[18px] font-bold mb-2" htmlFor="image">
+                  <div className="mb-[10px] profile__date">
+                    <label className="pt-[15px] block text-gray-700 font-bold" htmlFor="image">
                       ছবি আপলোড করুন
                     </label>
                     {/* <input
@@ -120,7 +120,7 @@ const CreateWriterModal = ({ showModal, handleClose, setIsWriterAdded }) => {
                         onChange={handleImageChange}
                         required
                       /> */}
-                    <div className='table m-auto mt-[140px] ' id='image'>
+                    <div className='table m-auto mt-[30px] ' id='image'>
                       <ImageCropProvider>
                         <ImageCrop image={'/images/defaultUserPic/profile.jpg'} type="createWriter" setWriterImage={setImage} />
                       </ImageCropProvider>

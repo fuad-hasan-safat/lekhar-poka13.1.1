@@ -7,6 +7,8 @@ import { FileUploader } from "react-drag-drop-files";
 import dynamic from 'next/dynamic';
 import { apiBasePath } from '../../utils/constant';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CustomEditor = dynamic(() => {
   return import('../../components/custom-editor');
@@ -17,6 +19,8 @@ export default function EditPost() {
   const router = useRouter();
   const slug = router.query.postId;
   console.log({ router })
+
+  let notification = ''
 
   const [fetchedPost, setFeathedPost] = useState([]);
 
@@ -141,10 +145,13 @@ export default function EditPost() {
           reader.readAsDataURL(file);
         }
       } else {
-        alert('ছবি আপলোড করুন')
+        // alert('ছবি আপলোড করুন')
+        notification = 'ছবি আপলোড করুন';
+        notify1();
       }
 
     }
+
 
   };
 
@@ -164,12 +171,22 @@ export default function EditPost() {
 
         }
       } else {
-        alert('অডিও আপলোড করুন')
+        // alert('অডিও আপলোড করুন')
+        notification = 'অডিও আপলোড করুন';
+        notify1();
       }
 
     }
 
+
   }
+
+
+  function reloadPage(){
+    setTimeout(()=>{
+        router.push(`/user/${localStorage.getItem("uuid")}`)
+    }, 3000)
+}
 
 
   const handleSubmit = async (e) => {
@@ -177,13 +194,6 @@ export default function EditPost() {
 
     // Determine which fields have changed
     const changedData = {};
-    // for (const key in formData) {
-    //     if (formData[key] !== originalData[key]) {
-    //         changedData[key] = formData[key];
-    //     }
-    // }
-
-    // console.log({changedData})
 
     const editFormData = new FormData();
 
@@ -192,9 +202,6 @@ export default function EditPost() {
     editFormData.append('content', content);
     editFormData.append('category', selectedOption);
 
-    // if (selectedOption) {
-    //   editFormData.append('category', selectedOption?.label);
-    // }
 
     if (image) {
       editFormData.append("image", image);
@@ -203,11 +210,6 @@ export default function EditPost() {
     if (selectedFile) {
       editFormData.append("file", selectedFile);
     }
-
-
-
-
-
 
     try {
       console.log({})
@@ -220,16 +222,17 @@ export default function EditPost() {
         body: editFormData,
       });
 
-      alert("আপনার লেখাটির আপডেট সম্পন্ন হয়েছে");
+      // alert("আপনার লেখাটির আপডেট সম্পন্ন হয়েছে");
+      notification = 'আপনার লেখাটির আপডেট সম্পন্ন হয়েছে';
 
-      router.push(`/user/${localStorage.getItem("uuid")}`)
-
+      reloadPage();
       console.log('edit response', response);
       // Handle successful update
     } catch (error) {
       console.error(error);
       // Handle error
     }
+    notify();
 
   };
 
@@ -237,20 +240,36 @@ export default function EditPost() {
   let postImage = preview;
 
 
+  const notify = () => toast.success(notification, {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+
+  const notify1 = () => toast.warn(notification, {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+
+  });
+
+
   return (
     router.isReady &&
     <>
       <div className="lg:pr-6 md:pr-0 sm:pr-0 space-y-4 lg:flex">
         <div className='create__post__rgt lg:w-[25%] lg:order-last'>
-          <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">আপনার লেখার ধরণ নির্বাচন করুন</div>
+          <div className="text-[#F9A106] font-bold text-[20px] !mb-[5px]">আপনার লেখার ধরণ নির্বাচন করুন</div>
           {/* <p></p> */}
           <div>
-            {/* <Select
-              value={selectedOption}
-              onChange={categoryhandleChange}
-              styles={customStyles}
-              options={Categoryoptions}
-            /> */}
+
             <select
               id="category"
               name="category"
@@ -270,7 +289,7 @@ export default function EditPost() {
           <hr class="my-5 border-gray-200" />
           <div className='text-[#292D32]'>
             <div className='mb-[15px]'>
-              <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">ছবি আপলোড করুন (যদি থাকে)</div>
+              <div className="text-[#F9A106] font-bold text-[20px] !mb-[2px]">ছবি আপলোড করুন (যদি থাকে)</div>
             </div>
 
             <FileUploader handleChange={handleFileChange} multiple={true} mimeTypes={['image/*']}
@@ -299,7 +318,7 @@ export default function EditPost() {
               <img className='m-auto pr-[10px] w-[40px] h-[35px]' src='/images/likhun/imagelogo.png' alt='image File ' />
               <div className='w-full'>
                 {/* <strong className='block'>Kobitar Gan.mp3</strong> */}
-                {image ? <p className='w-full text-[#292D32]'>{image ? `File name: ${image?.name?.slice(0,20)}` : "কোন ছবি নির্বাচন করা হয়নি"}</p> :
+                {image ? <p className='w-full text-[#292D32]'>{image ? `File name: ${image?.name?.slice(0, 20)}` : "কোন ছবি নির্বাচন করা হয়নি"}</p> :
                   <p className='w-full text-[#292D32]'>{preview?.length > 0 ? `File name: ${preview?.slice(preview?.indexOf('/'))}` : "কোন ছবি নির্বাচন করা হয়নি"}</p>}
 
                 {/* <span className='flex justify-start items-center'>60 KB of 12O KB . <img className='m-auto pr-[10px]' src='../images/user/audio-icon.png' alt='Audio Icon ' /><strong>Uploading...</strong></span> */}
@@ -308,7 +327,7 @@ export default function EditPost() {
           </div>
           <hr class="my-5 border-gray-200" />
           <div className='text-[#292D32]'>
-            <div className="text-[#F9A106] mt-[40px] font-bold text-[22px] !mb-[2px]">অডিও আপলোড করুন (যদি থাকে)</div>
+            <div className="text-[#F9A106] mt-[40px] font-bold text-[20px] !mb-[2px]">অডিও আপলোড করুন (যদি থাকে)</div>
             <FileUploader handleChange={handleAudioFile} multiple={true} mimeTypes={['audio/*']}
             >
               <div
@@ -335,7 +354,7 @@ export default function EditPost() {
               <img className='m-auto pr-[10px] w-[40px] h-[35px]' src='/images/likhun/imagelogo.png' alt='image File ' />
               <div className='w-full'>
                 {/* <strong className='block'>Kobitar Gan.mp3</strong> */}
-                {selectedFile ? <p className='w-full text-[#292D32]'>{selectedFile ? `File name: ${selectedFile?.name?.slice(0,20)}` : "কোন অডিও নির্বাচন করা হয়নি"}</p> :
+                {selectedFile ? <p className='w-full text-[#292D32]'>{selectedFile ? `File name: ${selectedFile?.name?.slice(0, 20)}` : "কোন অডিও নির্বাচন করা হয়নি"}</p> :
                   <p className='w-full text-[#292D32]'>{audioPreview?.length > 0 ? `File name: ${audioPreview?.slice(audioPreview?.indexOf('/'))}` : "কোন অডিও নির্বাচন করা হয়নি"}</p>}
 
                 {/* <span className='flex audioPreview justify-start items-center'>60 KB of 12O KB . <img className='m-auto pr-[10px]' src='../images/user/audio-icon.png' alt='Audio Icon ' /><strong>Uploading...</strong></span> */}
@@ -344,7 +363,7 @@ export default function EditPost() {
           </div>
         </div>
         <div className='create__post__lft lg:pr-[100px] lg:w-[75%] lg:order-first'>
-          <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">লেখার শিরোনাম</div>
+          <div className="text-[#F9A106] font-bold text-[20px] !mb-[2px]">লেখার শিরোনাম</div>
 
           <input style={{ marginTop: '0' }}
             onChange={handleChange}
@@ -356,7 +375,7 @@ export default function EditPost() {
             placeholder="শিরোনাম"
             required
           />
-          <div className="text-[#F9A106] font-bold text-[22px] !mt-[30px] !mb-[2px]">সারসংক্ষেপ</div>
+          <div className="text-[#F9A106] font-bold text-[20px] !mt-[30px] !mb-[2px]">সারসংক্ষেপ</div>
           <textarea
             onChange={handleChange}
             value={formData?.summary}
@@ -386,6 +405,7 @@ export default function EditPost() {
               >
                 পোস্ট আপডেট করুন
               </button>
+              <ToastContainer />
             </div>
           </div>
         </div>

@@ -11,6 +11,10 @@ import { useRouter } from 'next/router';
 import { FileUploader } from "react-drag-drop-files";
 import dynamic from 'next/dynamic';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 const CustomEditor = dynamic(() => {
     return import('../../components/custom-editor');
@@ -191,11 +195,17 @@ export default function CreatePost() {
         return modifiedString;
     }
 
+    function reloadPage(){
+        setTimeout(()=>{
+            router.push(`/user/${localStorage.getItem("uuid")}`)
+        }, 3000)
+    }
+
+    let notification = ''
 
     const handleSubmit = async () => {
         console.log("INSIDE HANDLE")
         if (!canPostStatus) {
-            // alert('দয়া করে প্রোফাইল তৈরি করুন')
             const confirmLogout = window.confirm('দয়া করে প্রোফাইল তৈরি করুন');
             if (confirmLogout) {
                 router.push(`/user/${localStorage.getItem("uuid")}`)
@@ -205,17 +215,19 @@ export default function CreatePost() {
         else {
 
             if (!title) {
-                alert('দয়া করে আপনার লেখার শিরোনাম দিন')
+                notification = 'দয়া করে আপনার লেখার শিরোনাম দিন';
+                notify();
             }
             else if (!selectedOption) {
-                alert('দয়া করে আপনার লেখার ধরণ নির্বাচন করুন')
+                notification = 'দয়া করে আপনার লেখার ধরণ নির্বাচন করুন';
+                notify();
             }
             else if (!summary) {
-                alert('দয়া করে আপনার লেখার সারমর্ম লিখুন')
+                notification = 'দয়া করে আপনার লেখার সারমর্ম লিখুন';
+                notify();
             }
             else {
 
-                // const formated_text = extractText(content)
                 console.log({ userUuid, isWriter, writer, writerId })
                 var isWriter = true;
 
@@ -245,8 +257,6 @@ export default function CreatePost() {
                     console.log(writer, writerId)
 
                     try {
-                        // console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&   inside first &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
-
 
                         const response = await fetch(`${apiBasePath}/posts`, {
                             method: "POST",
@@ -255,13 +265,11 @@ export default function CreatePost() {
                             },
                             body: formData,
                         });
-                        // console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&   inside last &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
 
-                        // console.log("LIKHUN data save ----- response", response)
                         if (response.ok) {
                             const data = await response.json();
-                            // console.log("sucessfully sent:", data);
-                            alert("আপনার লেখাটি অনুমোদনের জন্য এডমিনের কাছে পাঠানো হয়েছে। লেখাটি শীঘ্রই প্রকাশিত হবে। ধন্যবাদ");
+                            notification = 'আপনার লেখাটি অনুমোদনের জন্য এডমিনের কাছে পাঠানো হয়েছে। লেখাটি শীঘ্রই প্রকাশিত হবে। ধন্যবাদ';
+                            notify();
 
                             setSelectedFile(null);
                             setTitle('');
@@ -270,18 +278,18 @@ export default function CreatePost() {
                             setContent('');
                             setSummary('');
 
-                            router.push(`/user/${localStorage.getItem("uuid")}`)
+                            reloadPage();
 
                         } else {
                             console.error("Failed to update writing:", response.statusText);
-                            alert(response.statusText);
                         }
                     } catch (error) {
                         console.error("Error creating post:", error);
-                        alert(error);
+                        notification = error
                     }
                 } else {
-                    alert('শিরোনাম, লেখার ধরণ ও সারসংক্ষেপ লিখুন')
+                    notification = 'শিরোনাম, লেখার ধরণ ও সারসংক্ষেপ লিখুন';
+                    notify();
                 }
             }
 
@@ -290,6 +298,17 @@ export default function CreatePost() {
 
     };
 
+    const notify = () => toast.warn(notification, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: true,
+
+    });
+
+
 
     //  image handle
     const handleFileChange = (acceptedFiles) => {
@@ -297,9 +316,6 @@ export default function CreatePost() {
 
         if (acceptedFiles?.length > 0) {
             console.log('IS ARRAY ', acceptedFiles)
-            // const imageFiles = acceptedFiles.map((file) => {
-            //     return file.type.startsWith('image/');
-            // });
 
             if (acceptedFiles[0].type.startsWith('image/')) {
                 const file = acceptedFiles[0];
@@ -313,7 +329,8 @@ export default function CreatePost() {
                     reader.readAsDataURL(file);
                 }
             } else {
-                alert('ছবি আপলোড করুন')
+                notification = 'ছবি আপলোড করুন';
+                notify()
             }
 
         }
@@ -324,9 +341,6 @@ export default function CreatePost() {
         console.log('file', acceptedFiles)
         if (acceptedFiles?.length > 0) {
             console.log('IS ARRAY ', acceptedFiles)
-            // const imageFiles = acceptedFiles.map((file) => {
-            //     return file.type.startsWith('image/');
-            // });
 
             if (acceptedFiles[0].type.startsWith('audio/')) {
                 const file = acceptedFiles[0];
@@ -336,7 +350,8 @@ export default function CreatePost() {
 
                 }
             } else {
-                alert('অডিও আপলোড করুন')
+                notification = 'অডিও আপলোড করুন';
+                notify()
             }
 
         }
@@ -349,7 +364,7 @@ export default function CreatePost() {
         <>
             <div className="md:pr-0 sm:pr-0 space-y-4 lg:flex">
                 <div className='create__post__rgt lg:w-[25%] lg:order-last pt-[10px]'>
-                    <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">আপনার লেখার ধরণ নির্বাচন করুন</div>
+                    <div className="text-[#F9A106] font-bold text-[20px] !mb-[5px]">আপনার লেখার ধরণ নির্বাচন করুন</div>
 
                     <div>
                         <Select
@@ -365,7 +380,7 @@ export default function CreatePost() {
 
                     {userType === 'admin' &&
                         <>
-                            <div className="text-[#F9A106] font-bold text-[22px] mt-[10px] !mb-[2px]">লেখক নির্বাচন করুন</div>
+                            <div className="text-[#F9A106] font-bold text-[20px] mt-[10px] !mb-[2px]">লেখক নির্বাচন করুন</div>
                             <div className=" place-content-center justify-center">
 
                                 <div className="">
@@ -398,7 +413,7 @@ export default function CreatePost() {
                     <hr class="my-5 border-gray-200" />
                     <div className='text-black'>
                         <div className='mb-[15px]'>
-                            <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">ছবি আপলোড করুন (যদি থাকে)</div>
+                            <div className="text-[#F9A106] font-bold text-[20px] !mb-[2px]">ছবি আপলোড করুন (যদি থাকে)</div>
                         </div>
 
                         <FileUploader handleChange={handleFileChange} multiple={true} mimeTypes={['image/*']}
@@ -435,7 +450,7 @@ export default function CreatePost() {
                     </div>
                     <hr class="my-5 border-gray-200" />
                     <div className='text-black'>
-                        <div className="text-[#F9A106] mt-[40px] font-bold text-[22px] !mb-[2px]">অডিও আপলোড করুন (যদি থাকে)</div>
+                        <div className="text-[#F9A106] mt-[40px] font-bold text-[20px] !mb-[2px]">অডিও আপলোড করুন (যদি থাকে)</div>
                         <FileUploader handleChange={handleAudioFile} multiple={true} mimeTypes={['audio/*']}
                         >
                             <div
@@ -470,7 +485,7 @@ export default function CreatePost() {
                     </div>
                 </div>
                 <div className='create__post__lft lg:pr-[100px] lg:w-[75%] lg:order-first'>
-                    <div className="text-[#F9A106] font-bold text-[22px] !mb-[2px]">লেখার শিরোনাম</div>
+                    <div className="text-[#F9A106] font-bold text-[20px] !mb-[2px]">লেখার শিরোনাম</div>
 
                     <input style={{ marginTop: '0' }}
                         onChange={handleTitle}
@@ -481,7 +496,7 @@ export default function CreatePost() {
                         placeholder="শিরোনাম"
                         required
                     />
-                    <div className="text-[#F9A106] font-bold text-[22px] !mt-[30px] !mb-[2px]">সারসংক্ষেপ</div>
+                    <div className="text-[#F9A106] font-bold text-[20px] !mt-[30px] !mb-[2px]">সারসংক্ষেপ</div>
                     <textarea
                         onChange={handleSummary}
                         value={summary}
@@ -492,7 +507,7 @@ export default function CreatePost() {
                         required
                     />
 
-                    <div className="text-[#F9A106] font-bold text-[22px] !mt-[30px] !mb-[2px]">মূল লেখা</div>
+                    <div className="text-[#F9A106] font-bold text-[20px] !mt-[30px] !mb-[2px]">মূল লেখা</div>
 
 
                     <div>
@@ -503,14 +518,6 @@ export default function CreatePost() {
                     </div>
 
                     <div className='submit__btn flex  !mt-[40px]'>
-                        {/* <div className='w-[50%] pr-[12px]'>
-                            <button
-                                onClick={handleSubmit}
-                                className="page__common__yello__btn w-full px-[20px] h-[50px] text-[#FCA000] border border-[#FCA000] border-spacing-1 rounded-md text-[16px] items-center profile__btn__midl"
-                            >
-                                পোস্ট করুন
-                            </button>
-                        </div> */}
                         <div className='w-[50%] pl-[12px]'>
                             <button
                                 onClick={handleSubmit}
@@ -518,12 +525,14 @@ export default function CreatePost() {
                             >
                                 পোস্ট করুন
                             </button>
+
                         </div>
                     </div>
                 </div>
 
                 <hr class="my-4 border-gray-200" />
             </div>
+            <ToastContainer />
         </>
     )
 }

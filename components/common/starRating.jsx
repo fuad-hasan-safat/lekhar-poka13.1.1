@@ -5,6 +5,9 @@ import { apiBasePath } from '../../utils/constant'
 import React, { useEffect, useState } from 'react'
 import { Rating } from 'react-simple-star-rating'
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function RatingComponent({ post_id, setRating, rating }) {
   const router = useRouter()
@@ -12,6 +15,7 @@ export default function RatingComponent({ post_id, setRating, rating }) {
   const [username, setUsername] = useState("");
   const [userUuid, setUserUuid] = useState("");
   const [userToken, setUserToken] = useState("");
+  let notification = ''
 
   // check if user is logged in
   useEffect(() => {
@@ -54,17 +58,22 @@ export default function RatingComponent({ post_id, setRating, rating }) {
 
       } else {
 
-        alert('রেটিং সফলভাবে সম্পন্ন হয়েছে');
+        // alert('রেটিং সফলভাবে সম্পন্ন হয়েছে');
+        notification = 'রেটিং সফলভাবে সম্পন্ন হয়েছে';
+        notify1();
 
       }
 
     } else {
 
-      const confirmLogout = window.confirm('দয়া করে লগইন করুন');
+      notification = 'দয়া করে লগইন করুন';
+      notify();
 
-      if (confirmLogout) {
-        router.push('/account/login')
-      }
+    //   const confirmLogout = window.confirm('দয়া করে লগইন করুন');
+
+    //   if (confirmLogout) {
+    //     router.push('/account/login')
+    //   }
 
     }
 
@@ -75,6 +84,26 @@ export default function RatingComponent({ post_id, setRating, rating }) {
   const onPointerMove = (value, index) => console.log(value, index, rating)
 
 
+
+  const notify = () => toast.warn(notification, {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+
+  });
+
+  const notify1 = () => toast.success(notification, {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+
+  });
 
   return (
 
@@ -99,8 +128,10 @@ export default function RatingComponent({ post_id, setRating, rating }) {
         onClick={() => submitRating(post_id)}
         className='bg-orange-400 px-2 py-1 text-white h-[34px] w-[195px] rounded-md'
       >
-        Submit
+        সাবমিট
       </button>
+      <ToastContainer style={{ fontSize: "14px", zIndex: 9999999999999999999999999999999999999 }} />
+
 
     </div>
   )

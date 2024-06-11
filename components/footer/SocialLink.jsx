@@ -17,7 +17,7 @@ const SocialLink = ({ title, links }) => {
 
                             <li key={index}>
 
-                                <a href={link.url} key={index}>
+                                <a href={link.url} key={index} target="blank">
 
                                     <img
                                         src={link.label}
