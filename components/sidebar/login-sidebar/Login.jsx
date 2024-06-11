@@ -5,11 +5,14 @@ import SignInOption from '../../signInOption/SignInOption'
 import { apiBasePath } from "../../../utils/constant";
 import { useRouter } from "next/navigation";
 import Divider from '../../common/sidebardivider';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
 
   const router = useRouter();
+
+  let notification = ''
 
   const [number, setnumber] = useState("");
   const [password, setPassword] = useState("");
@@ -61,6 +64,12 @@ export default function Login() {
     setPassword(e.target.value);
   };
 
+function reloadPage(){
+  setTimeout(()=>{
+    router.refresh()
+
+  }, 1000)
+}
 
   async function submitLogin() {
 
@@ -82,6 +91,9 @@ export default function Login() {
       if (response.data.status === 'success') {
         const data = await response.data;
 
+        notification = 'সফলভাবে লগইন করেছেন';
+        notify1();
+
         setStatus(data.status);
         setUserUuid(data.uuid);
         setUser(data);
@@ -97,19 +109,45 @@ export default function Login() {
         setnumber("");
         setPassword("");
 
-        router.refresh()
+        reloadPage()
       }
       else if (response.data.status === "failed") {
-        alert(' সঠিক নাম্বার দিন ')
+        // alert(' সঠিক নাম্বার দিন ')
+        notification = 'সঠিক নাম্বার দিন';
+        notify();
+
       }
 
 
     } catch (error) {
-      alert('সঠিক পাসওয়ার্ড দিন');
+      // alert('সঠিক পাসওয়ার্ড দিন');
+      notification = 'সঠিক পাসওয়ার্ড দিন';
+      notify();
     }
+
+  
+
   }
 
+  const notify = () => toast.warn(notification, {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
 
+  });
+
+  const notify1 = () => toast.success(notification, {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+
+  });
 
   return (
     <>
@@ -124,7 +162,7 @@ export default function Login() {
               >অ্যাডমিন প্যানেল</button>
             }
 
-            <Divider />
+            {/* <Divider /> */}
 
           </div>
 
@@ -133,7 +171,7 @@ export default function Login() {
         <div>
           <div>
 
-            <div className="page__common__yello__btn text-[20px] text-yellow-500 h-[28px]  pt-5 pb-[28px]">
+            <div className=" text-[20px] text-yellow-500 h-[28px]  pt-5 pb-[28px]">
               লগইন
             </div>
 
@@ -169,7 +207,7 @@ export default function Login() {
             </div>
 
             <a
-              className="pt-[12px] float-right mb-[15px] inline-block align-baseline font-bold text-base text-gray-600 hover:text-black-800"
+              className="pt-[12px] float-right mb-[15px] inline-block align-baseline font-bold text-[14px] text-gray-600 hover:text-black-800"
               href="/account/recoverpassword"
             >
               পাসওয়ার্ড ভুলে গেছেন?
@@ -177,12 +215,14 @@ export default function Login() {
 
             <div className="">
               <button
-                className=" mb-8 w-full h-[43px] text-[16px] bg-[#F9A106] hover:bg-yellow-700 text-white  py-2 rounded focus:outline-none focus:shadow-outline"
+                className="page__common__yello__btn mb-8 w-full h-[43px] text-[16px] bg-[#F9A106] hover:bg-yellow-700 text-white  py-2 rounded focus:outline-none focus:shadow-outline"
                 type="button"
                 onClick={submitLogin}
               >
                 লগইন করুন
               </button>
+            <ToastContainer />
+
             </div>
 
             <SignInOption

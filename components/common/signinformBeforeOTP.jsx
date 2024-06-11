@@ -4,12 +4,15 @@ import { apiBasePath } from "../../utils/constant";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
-export default function SigninFormBeforeOTP({type, logreg, btntext, SetIsOtpSucess, setState, state , otpStatus, setOtpStatus, otpProp}) {
-    
+export default function SigninFormBeforeOTP({ type, logreg, btntext, SetIsOtpSucess, setState, state, otpStatus, setOtpStatus, otpProp }) {
+
     const router = useRouter()
 
+    let notification = ''
     const [numberPrefix, setNumberPrefix] = useState('88');
     const [showPassword, setShowPassword] = useState(false);
     const [reshowPassword, setReShowPassword] = useState(false);
@@ -87,7 +90,7 @@ export default function SigninFormBeforeOTP({type, logreg, btntext, SetIsOtpSuce
             isValid = false;
         }
 
-        setState((prevState) => ({ ...prevState, isDisabled: !isValid })); 
+        setState((prevState) => ({ ...prevState, isDisabled: !isValid }));
     };
 
     const handleSubmitBeforeOTP = async () => {
@@ -98,66 +101,76 @@ export default function SigninFormBeforeOTP({type, logreg, btntext, SetIsOtpSuce
 
         if (!state.isDisabled) {
 
-            if(type === 'recoveryPass'){
+            if (type === 'recoveryPass') {
                 console.log(' in re pass ------------')
 
                 try {
                     const response = await axios.post(`${apiBasePath}/${otpProp}`, {
                         phone: `${numberPrefix}${state.mobileNumber}`,
                     });
-                   
+
                     setOtpStatus(response.data.otp_status)
 
-                    if(response.data.status === 'failed'){
+                    if (response.data.status === 'failed') {
 
-                        alert('এই নাম্বার এ লগইন করা নেই ')
-                       
+                        // alert('এই নাম্বার এ লগইন করা নেই ')
+                        notification = 'এই নাম্বার এ লগইন করা নেই ';
+                        notify();
                     }
-                 
-                    if(response.data.otp_status === "SENT"){
+
+                    if (response.data.otp_status === "SENT") {
+                        notification = 'ওটিপি প্রেরণ করা হয়েছে';
+                        notify1();
 
                         SetIsOtpSucess(true)
 
                     }
-                    if(response.data.otp_status === "LIMIT_CROSSED"){
-                   
-                    alert('আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন');
+                    if (response.data.otp_status === "LIMIT_CROSSED") {
 
-                    SetIsOtpSucess(false)
+                        // alert('আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন');
+                        notification = 'আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন';
+                        notify();
+                        SetIsOtpSucess(false)
 
                     }
                 } catch (error) {
 
-                    alert('এই ফোন নম্বর দিয়ে কোনো ব্যবহারকারী নিবন্ধিত নয়');
+                    // alert('এই ফোন নম্বর দিয়ে কোনো ব্যবহারকারী নিবন্ধিত নয়');
+                    notification = 'এই ফোন নম্বর দিয়ে কোনো ব্যবহারকারী নিবন্ধিত নয়';
+                    notify();
 
                 }
 
-            }else {
+            } else {
 
                 try {
 
                     const response = await axios.post(`${apiBasePath}/${otpProp}`, {
                         phone: `${numberPrefix}${state.mobileNumber}`,
                     });
-                    
+
                     console.log('sigh up OTP Before ------>> ', response.data)
                     setOtpStatus(response.data.otp_status)
-                    if(response.data.status === 'success'){
+                    if (response.data.status === 'success') {
                         // SetIsOtpSucess(true)
                     }
-                 
-                    if(response.data.otp_status === "SENT"){
+
+                    if (response.data.otp_status === "SENT") {
                         SetIsOtpSucess(true)
                     }
-                    if(response.data.otp_status === "LIMIT_CROSSED"){
-                  
-                    alert('আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন');
-                    SetIsOtpSucess(false)
+                    if (response.data.otp_status === "LIMIT_CROSSED") {
+
+                        // alert('আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন');
+                        notification = 'আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন';
+                        notify();
+                        SetIsOtpSucess(false)
 
                     }
                 } catch (error) {
 
-                     alert('আপনি আগে থেকেই সাইন আপ করেছেন');
+                    //  alert('আপনি আগে থেকেই সাইন আপ করেছেন');
+                    notification = 'আপনি আগে থেকেই সাইন আপ করেছেন';
+                    notify();
                 }
 
             }
@@ -166,21 +179,38 @@ export default function SigninFormBeforeOTP({type, logreg, btntext, SetIsOtpSuce
     };
 
 
+    const notify = () => toast.warn(notification, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+
+    });
+
+    const notify1 = () => toast.success(notification, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+
+    });
+
     return (
         <>
             <div className="login__form__dsc">
 
-                <div className="text-[48px] mb-5  font-semibold text-yellow-500">
+                <div className="text-[48px] mb-[79px] text-left font-semibold">
                     {logreg}
                 </div>
 
                 <div className="login__form__fleds w-full">
 
-                    <div className="mb-4 ">
 
-                    </div>
-
-                    <div className="mb-4 ">
+                    <div className="mb-4">
 
                         <input
                             id="phonenumber"
@@ -190,7 +220,7 @@ export default function SigninFormBeforeOTP({type, logreg, btntext, SetIsOtpSuce
                             value={state.mobileNumber}
                             onChange={handleChange}
                             onBlur={validate}
-                            className="h-[62px] p-4 bg-[#FCF7E8] rounded-2xl text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className="h-[62px] p-4 bg-[#FCF7E8] rounded-[8px] text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             required
                         />
 
@@ -200,7 +230,7 @@ export default function SigninFormBeforeOTP({type, logreg, btntext, SetIsOtpSuce
 
                     <button
                         onClick={handleSubmitBeforeOTP}
-                        className="page__common__yello__btn mt-8 px-[90px] bg-[#F9A106] rounded-full lg:text-[35px] md:text-[30px] sm:text-[25px]  text-white lg:h-[70px] md:h-[70px] sm:h-[60px] xs:h-[55px] "
+                        className="page__common__yello__btn mt-8 px-[90px] bg-[#F9A106] rounded-[8px] lg:text-[35px] md:text-[30px] sm:text-[25px]  text-white lg:h-[70px] md:h-[70px] sm:h-[60px] xs:h-[55px] "
                     >
                         {btntext}
                     </button>
@@ -208,6 +238,8 @@ export default function SigninFormBeforeOTP({type, logreg, btntext, SetIsOtpSuce
                 </div>
 
             </div>
+
+            <ToastContainer />
         </>
     );
 }

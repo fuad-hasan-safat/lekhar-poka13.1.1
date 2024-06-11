@@ -156,7 +156,7 @@ export default function SignInOption({
                 </div>
             }
             <div className="flex space-x-3 pt-5  items-center justify-center">
-                <p className=" text-gray-500">{lowermessege1}</p> <a className=" text-black font-semibold text-lg" href={signLogLink}>{lowermessege2}</a>
+                <p className=" text-gray-500">{lowermessege1}</p> <a className=" text-black font-semibold text-[16px]" href={signLogLink}>{lowermessege2}</a>
             </div>
         </>
 

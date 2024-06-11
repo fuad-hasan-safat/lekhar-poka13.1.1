@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import UserProfileBanner from '../userprofile/userProfileBanner'
 import { apiBasePath } from "../../utils/constant";
 import Link from "next/link";
-import UserInformationsAndBio from '../user/userInformationsAndBio';
 import FollowerList from './followerList';
 import FollowingList from './followingList';
 import { useRouter } from 'next/router';
@@ -174,7 +173,7 @@ export default function UserProfile({ slug }) {
                 <div className='lg:mb-[50px] md:mb-[40px] sm:mb-[30px] xs:mb-[20px]'>
                   <button
                     onClick={() => router.push('/user/createpost')}
-                    className='page__common__yello__btn  px-[50px] md:px-[50px] sm:px-[40px] xs:px-[40px] lg:py-[18px] md:py-[18px] sm:py-[15px] xs:py-[14px] bg-[#F9A106] text-white rounded-[16px]'><i class="ri-add-box-fill"></i> নতুন লেখা যুক্ত করুন
+                    className='page__common__yello__btn  px-[50px] md:px-[50px] sm:px-[40px] xs:px-[40px] lg:py-[18px] md:py-[18px] sm:py-[15px] xs:py-[14px] bg-[#F9A106] text-white text-[20px] font-semibold rounded-[16px]'><i class="ri-add-box-fill"></i> নতুন লেখা যুক্ত করুন
                   </button>
                 </div>
                 <div>
@@ -184,7 +183,7 @@ export default function UserProfile({ slug }) {
                   <ProfilePostLeftContentApproved />
                 </div>
 
-                {
+                {/* {
                   profileController === 'follower' &&
                   <FollowerList userId={slug} showModal={'follower'} handleClose={handleClose} />
                 }
@@ -192,7 +191,7 @@ export default function UserProfile({ slug }) {
                 {
                   profileController === 'following' &&
                   <FollowingList userId={slug} showModal={'following'} handleClose={handleClose} />
-                }
+                } */}
               </div>
 
             </div>

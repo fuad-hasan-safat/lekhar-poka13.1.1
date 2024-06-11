@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { apiBasePath } from '../../utils/constant';
 import Link from 'next/link';
+import DialugueModal from '../common/notification/DialugueModal';
 
 
 
@@ -27,31 +28,32 @@ export default function UpdatedNavBar() {
     const [userImage, setUserImage] = useState(null);
 
     // ------
+    const dialogueRef = useRef()
     const popupRef1 = useRef(null);
     const popupRef2 = useRef(null);
     useOutsideAlerter(popupRef1);
     useOutsideAlerter(popupRef2);
 
-    
-function useOutsideAlerter(ref) {
-    useEffect(() => {
-        /**
-         * Alert if clicked on outside of element
-         */
-        function handleClickOutside(event) {
-            if (ref.current && !ref.current.contains(event.target)) {
-                // alert("You clicked outside of me!");
-                setVisibleItem(null)
+
+    function useOutsideAlerter(ref) {
+        useEffect(() => {
+            /**
+             * Alert if clicked on outside of element
+             */
+            function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    // alert("You clicked outside of me!");
+                    setVisibleItem(null)
+                }
             }
-        }
-        // Bind the event listener
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            // Unbind the event listener on clean up
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [ref]);
-}
+            // Bind the event listener
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                // Unbind the event listener on clean up
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [ref]);
+    }
 
 
 
@@ -173,28 +175,16 @@ function useOutsideAlerter(ref) {
     //   logout
 
     function Logout() {
-        const confirmLogout = window.confirm('আপনি কি লগ আউট করতে চান?');
-        if (confirmLogout) {
-            // alert('Logging out...'); 
-            localStorage.removeItem("status");
-            localStorage.removeItem("name");
-            localStorage.removeItem("uuid");
-            localStorage.removeItem("phone");
-            localStorage.removeItem("token");
-            localStorage.removeItem("usertype");
-            localStorage.removeItem("email");
-
-            // setisLogOut(true)
-
-            router.push('/account/login');
-        }
+        dialogueRef.current.showModal();
     }
+
 
     return (
         <>
             <div className="fixed w-full bg-white z-[9900]">
                 <header className="header shadow-md">
                     {/* Logo */}
+                    <DialugueModal ref={dialogueRef} alert='আপনি কি লগআউট করতে চান' address={`/account/login`} type='logout'/>
 
                     <div className="container">
                         <div className="row-span-12">
@@ -209,7 +199,7 @@ function useOutsideAlerter(ref) {
                                         />
                                     </Link>
                                 </div>
-                                <div className={`flex justify-between items-center text-black lg:text-[18px] sm:text-[15px] pt-1  place-content-center `}>
+                                <div className={`flex justify-between items-center text-black lg:text-[16px] sm:text-[15px] pt-1  place-content-center `}>
 
                                     <div className="search__bar relative flex flex-row place-content-center">
                                         <Image
@@ -293,7 +283,7 @@ function useOutsideAlerter(ref) {
                                                         ? "text-[#F9A106] font-semibold underline"
                                                         : "text-black"
                                                         }`}
-                                                    href="#">সব লেখা <span><i class="ri-arrow-down-s-line"></i></span></Link>
+                                                    href="#">সব লেখা <span style={{ position: 'relative', top: '-3px' }}><i class="ri-arrow-down-s-line"></i></span></Link>
                                                 {/* <FontAwesomeIcon icon={faAngleDown} className="ml-2 pt-1 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-4 sm:w-4 xs:h-4 xs:w-4 focus:text-[#F9A106]" /> */}
                                                 {visibleItem === 0 && (
                                                     <ul ref={popupRef1}
@@ -378,50 +368,27 @@ function useOutsideAlerter(ref) {
                                             >
                                                 <Link href="/aboutus">আমাদের সম্পর্কে</Link>
                                             </li>
-                                            {/* {
-                                                userUuid.length > 0 &&
-                                                <li
-
-                                                    className='relative cursor-pointer '
-                                                    onClick={() => { toggleVisibility(1); setSelectedNav("post"); }}>
-
-                                                    <Link
-                                                        className={`hover:text-[#F9A106] ${selectedNav === "post"
-                                                            ? "text-[#F9A106] font-semibold underline"
-                                                            : "text-black"
-                                                            }`}
-                                                        href="#">পোস্ট <span><i class="ri-arrow-down-s-line"></i></span></Link>
-
-                                                    {visibleItem === 1 && (
-                                                        <ul className='absolute lg:text-[16px] sm:text-[13px] lg:backdrop-blur-md md:backdrop-blur-md  lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none lg:bg-[#FCF7E8] md:bg-[#FCF7E8] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none'>
-                                                            <li
-                                                                className="block cursor-pointer px-4 py-2  hover:bg-[#F9A106]  hover:text-white"
-                                                                onClick={() => closeMenu()}
-
-                                                            >
-                                                                <Link className='block' href="/user/alluserpost">সকল</Link>
-                                                            </li>
-                                                            <hr />
-
-                                                            <li
-                                                                className="block cursor-pointer px-4 py-2 hover:bg-[#F9A106]  hover:text-white"
-                                                                onClick={() => closeMenu()}
-
-                                                            ><Link className='block' href="/user/createpost">লিখুন</Link></li>
-                                                        </ul>
-                                                    )}
-                                                </li>
-                                            } */}
+                                            
                                             {
                                                 userUuid.length > 0 ?
                                                     <li
-                                                        className='relative cursor-pointer'
+                                                        className='relative cursor-pointer -mt-[5px]'
                                                         onClick={() => { toggleVisibility(2); }}>
                                                         {userImage?.length > 0 ? <img src={`${apiBasePath}/${userImage.slice(userImage.indexOf("/") + 1)}`} alt={userImage} className='h-[35px] w-[35px] rounded-full' /> :
                                                             <img src='/images/user/deafultProfile.png' alt='profile pic' className='h-[35px] w-[35px] rounded-full' />}
 
                                                         {visibleItem === 2 && (
                                                             <ul ref={popupRef1} className='absolute lg:text-[16px] sm:text-[13px] lg:backdrop-blur-md md:backdrop-blur-md  lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none lg:bg-[#FCF7E8] md:bg-[#FCF7E8] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none'>
+                                                                <li
+                                                                    className="block cursor-pointer px-4 py-2 hover:bg-[#F9A106]  hover:text-white"
+                                                                    onClick={() => closeMenu()}
+
+                                                                >
+                                                                    <Link className='block' href="/user/createpost">লিখুন</Link>
+                                                                </li>
+
+                                                                <hr className='lg:block md:hidden sm:hidden xs:hidden' />
+
                                                                 <li
                                                                     className="block cursor-pointer px-4 py-2 hover:bg-[#F9A106]  hover:text-white"
                                                                     onClick={() => closeMenu()}
@@ -443,7 +410,7 @@ function useOutsideAlerter(ref) {
                                                         )}
                                                     </li> :
                                                     <li>
-                                                        <button onClick={() => router.push('/account/login')}><i class="ri-account-circle-fill"></i></button>
+                                                        <button className="text-[25px]" onClick={() => router.push('/account/login')}><i class="ri-account-circle-fill"></i></button>
                                                     </li>
                                             }
                                         </ul>

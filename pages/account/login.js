@@ -10,7 +10,7 @@ export default function Home() {
       <Head>
         <title>লগ ইন</title>
       </Head>
-      <div className="items-center justify-center ">
+      <div className="">
         <LoginPage />
       </div>
     </div>

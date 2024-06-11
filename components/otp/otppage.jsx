@@ -1,10 +1,12 @@
 import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import { apiBasePath } from "../../utils/constant";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus, otpStatus }) => {
 
+  let notification = ''
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [numberPrefix, setNumberPrefix] = useState('88');
@@ -37,7 +39,9 @@ const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus,
         setIsOtpVerified(true);
         setIsOtpSuccess(true);
       } else {
-        alert("ওটিপি সফলভাবে সম্পন্ন হয়নি");
+        // alert("ওটিপি সফলভাবে সম্পন্ন হয়নি");
+        notification = 'ওটিপি সফলভাবে সম্পন্ন হয়নি'
+        notify();
       }
     } catch (error) {
       console.error("Otp Send Error:", error);
@@ -81,19 +85,41 @@ const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus,
         setTimer(60)
         setOtpStatus(true)
         setOtpStatus('SENT')
+        notification = 'ওটিপি পাঠানো হয়েছে';
+        notify1();
       }
       if (response.data.otp_status === "LIMIT_CROSSED") {
         setIsOtpSuccess(false)
         setOtpStatus(false)
-        alert('আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন');
+        // alert('আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন');
+        notification = 'আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন';
       }
     } catch (error) {
       console.error('Signup error:', error);
-      // Handle signup error (e.g., display error message)
-      alert('nothing happen');
+     
     }
 
   }
+
+  
+  const notify = () => toast.warn(notification, {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+
+  });
+  const notify1 = () => toast.success(notification, {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+
+  });
 
   return (
     <div className="w-full">
@@ -124,7 +150,7 @@ const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus,
         <button
           onClick={sendOtp}
           disabled={isButtonDisabled}
-          className={`login__btn page__common__yello__btn mt-8 lg:px-5 md:px- sm:px-3  bg-[#F9A106] rounded-full lg:text-[35px] md:text-[30px] sm:text-[25px] xs:text-[20px] text-white lg:h-[75px] md:h-[65px] sm:h-[60px] xs:h-[55px] ${isButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
+          className={`login__btn page__common__yello__btn mt-8 lg:px-5 md:px- sm:px-3  bg-[#F9A106] rounded-[8px] lg:text-[30px] md:text-[30px] sm:text-[25px] xs:text-[20px] text-white lg:h-[75px] md:h-[65px] sm:h-[60px] xs:h-[55px] ${isButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
             }`}
         >
           ওটিপি যাচাই করুন
@@ -140,6 +166,7 @@ const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus,
         }
 
       </div>
+      <ToastContainer />
     </div>
   );
 };

@@ -136,17 +136,22 @@ export default function ProcchodLeftContent() {
           ) : (
             <>
               {postList?.length > 0 ?
-                (<div className="lakha__main__content pt-20 text-3xl">
-                  {postList?.map((post, index) => (
+                (<div className="lakha__main__content pt-[40px] text-3xl">
+                  {postList?.map((post, index) =>{
+                      let selectedCoverImage = post?.profile_image
+                      if(post?.image){
+                        selectedCoverImage = post?.image;
+                      }
+                     return (
                     <>
                       <div key={index}>
                         <SinglePostConponent
                           id={post._id}
-                          image={post?.image }
+                          image={selectedCoverImage}
                           title={post.title}
                           writer={post.writer}
                           writer_id={post.writer_id}
-                          writer_image={post?.writer_image}
+                          writer_image={post?.profile_image}
                           profileName={post?.profile_name}
                           uploadedBy={post.uploader_name}
                           updatedAt={post?.updatedAt}
@@ -155,7 +160,7 @@ export default function ProcchodLeftContent() {
                       </div>
                       {index < postList?.length && <MainContentDivider />}
                     </>
-                  ))}
+                  )})}
                 </div>) : (
 
                   <div className="pt-10 text-black">  এই মুহূর্তে কোনো লেখা নেই </div>
