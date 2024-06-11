@@ -1,7 +1,10 @@
-import '../styles/globals.css'
-import '../public/assets/fonts/customfont.css'
-import '../public/assets/css/image-slider.css'
-import '../components/userprofile/FileUpload.css'
+import '../styles/globals.css';
+import '../styles/audiobook.css';
+import '../public/assets/fonts/customfont.css';
+import '../public/assets/css/image-slider.css';
+import '../components/userprofile/FileUpload.css';
+import 'slick-carousel/slick/slick.css';
+import "slick-carousel/slick/slick-theme.css";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 
