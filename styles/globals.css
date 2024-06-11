@@ -2400,19 +2400,20 @@ transition: all 0.5s !important;
   font-size: 20px;
 }
 
-.audio__cat_iteam{
+.audio__cat_iteam {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .audio__cat__single__iteam {
-  width: 237px;
+  width: 20%;
   height: 84px;
   border-radius: 8px;
-
-  display: flex;
-  align-items: center;
   padding: 10px;
+  float: left;
+  position: relative;
+  overflow: hidden;
 
 }
 
@@ -2430,8 +2431,9 @@ transition: all 0.5s !important;
 }
 
 .audio__cat__image img {
-  width: 45px;
+  width: 50px;
   height: 78px;
   transform: rotate(335deg);
   max-width: 100px;
+  object-fit: cover;
 }
