@@ -23,3 +23,57 @@ hm__audio__book__wrap
     margin-top: 20px;
     margin-bottom: 30px;
 }
+.hm__audio__see__more{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.hm__audio__see__more h3{
+   font-size: 36px;
+   line-height: 1;
+   color: #5D5A88; 
+   font-weight: 600;
+   margin-bottom: 0;
+}
+.hm__audio__common__btn{
+    font-size: 16px;
+    line-height: 1;
+    color: #515151;
+    background: #FCD200;
+    border-radius: 4px;
+    padding: 10px 20px;
+    position: relative;
+    overflow: hidden;
+    vertical-align: middle;
+    z-index: 1;
+    -webkit-backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+}
+.hm__audio__common__btn::before {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin: -15px 0 0 1px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #F9A106;
+    -webkit-transform-origin: 100% 50%;
+    transform-origin: 100% 50%;
+    -webkit-transform: scale3d(1, 2, 1);
+    transform: scale3d(1, 2, 1);
+    -webkit-transition: -webkit-transform 0.4s, opacity 0.4s;
+    transition: transform 0.4s, opacity 0.4s;
+    -webkit-transition-timing-function: cubic-bezier(0.7,0,0.9,1);
+    transition-timing-function: cubic-bezier(0.7,0,0.9,1);
+}
+.hm__audio__common__btn:hover::before {
+  -webkit-transform: scale3d(8, 8, 1);
+  transform: scale3d(8, 8, 1);
+  transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+}
+
