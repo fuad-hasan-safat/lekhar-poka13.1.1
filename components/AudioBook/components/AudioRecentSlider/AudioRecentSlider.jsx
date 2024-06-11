@@ -14,35 +14,35 @@ export const AudioRecentSliderData=[
         time:'১:৪১ মিনিট',
     },
     {
-        image: '/audioBook/audio-slider/audio-slider-img-1.png',
+        image: '/audioBook/audio-slider/audio-slider-img-2.png',
         title:'তিন গোয়েন্দা',
         kText:'লেখক : রকিব হাসান',
         vText:'কন্ঠ: রকিব হাসান তুষার',
         time:'১:৪১ মিনিট',
     },
     {
-        image: '/audioBook/audio-slider/audio-slider-img-1.png',
+        image: '/audioBook/audio-slider/audio-slider-img-3.png',
         title:'তিন গোয়েন্দা',
         kText:'লেখক : রকিব হাসান',
         vText:'কন্ঠ: রকিব হাসান তুষার',
         time:'১:৪১ মিনিট',
     },
     {
-        image: '/audioBook/audio-slider/audio-slider-img-1.png',
+        image: '/audioBook/audio-slider/audio-slider-img-4.png',
         title:'তিন গোয়েন্দা',
         kText:'লেখক : রকিব হাসান',
         vText:'কন্ঠ: রকিব হাসান তুষার',
         time:'১:৪১ মিনিট',
     },
     {
-        image: '/audioBook/audio-slider/audio-slider-img-1.png',
+        image: '/audioBook/audio-slider/audio-slider-img-5.png',
         title:'তিন গোয়েন্দা',
         kText:'লেখক : রকিব হাসান',
         vText:'কন্ঠ: রকিব হাসান তুষার',
         time:'১:৪১ মিনিট',
     },
     {
-        image: '/audioBook/audio-slider/audio-slider-img-1.png',
+        image: '/audioBook/audio-slider/audio-slider-img-6.png',
         title:'তিন গোয়েন্দা',
         kText:'লেখক : রকিব হাসান',
         vText:'কন্ঠ: রকিব হাসান তুষার',
@@ -81,7 +81,7 @@ const AudioRecentSlider = () => {
                        <p>{item.kText}</p>
                        <ul className='clearfix reset-list'>
                           <li>{item.vText}</li>
-                          <li>{item.time}</li>
+                          <li><i class="ri-time-line"></i> {item.time}</li>
                        </ul>
                     </div>
                 </div>
