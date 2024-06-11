@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Link from 'next/link';
+import AudioRecentSlider from './components/AudioRecentSlider/AudioRecentSlider';
 
 
 
@@ -53,8 +54,9 @@ const AudioBookHome = () => {
                 <div className='hm__audio__recent__wrap'>
                     <div className='hm__audio__see__more'>
                         <h3>সাম্প্রতিক</h3>
-                     <Link className='hm__audio__common__btn' href='#'>সব দেখুন</Link>
+                        <Link className='hm__audio__common__btn' href='#'>সব দেখুন</Link>
                     </div>
+                    <AudioRecentSlider />
                 </div>
             </div>
         </section>

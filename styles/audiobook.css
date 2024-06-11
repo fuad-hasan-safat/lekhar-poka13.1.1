@@ -27,6 +27,7 @@ hm__audio__book__wrap
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 20px;
 }
 .hm__audio__see__more h3{
    font-size: 36px;
