@@ -1,0 +1,25 @@
+/*
+-----------------------
+hm__audio__book__wrap
+----------------------- 
+*/
+.hm__audio__book__sec{
+    padding:70px 0 0;
+}
+.hm__audio__book__wrap{
+    text-align: center;
+}
+.audiu__logo a {
+    display: inline-block;
+    vertical-align: baseline;
+    text-decoration: none;
+    max-width: 280px;
+    width: 100%;
+}
+.hm__audio__slide__item p {
+    font-size: 20px;
+    line-height: 1.2;
+    color: #061A23;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
