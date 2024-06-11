@@ -69,7 +69,7 @@ const AudioRecentSlider = () => {
       };
 
     return (
-        <Slider {...settings}>
+        <Slider {...settings} className='hmRecentSlider'>
         {AudioRecentSliderData.map((item,index)=>
             <div className='hm__audio__recent__slide__item'>
                 <div className='hm__audio__recent__slide__item__innr'>
