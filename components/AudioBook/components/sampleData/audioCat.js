@@ -1,62 +1,62 @@
 export const audioCategory = [
     {
         title: 'রোমান্টিক',
-        color: 'red',
+        color: '#FF5733',
         image: '/audioBook/demoCatImage/bookCover.jpg'
     },
     {
         title: 'কবিতা',
-        color: 'green',
+        color: '#28B463',
         image: '/audioBook/demoCatImage/bookCover.jpg'
     },
     {
         title: 'গল্প',
-        color: 'white',
+        color: '#DC7633',
         image: '/audioBook/demoCatImage/bookCover.jpg'
     },
     {
         title: 'রোমান্টিক',
-        color: 'yellow',
+        color: '#FF5733',
         image: '/audioBook/demoCatImage/bookCover.jpg'
     },
     {
         title: 'রোমান্টিক',
-        color: 'green',
+        color: '#A569BD',
         image: '/audioBook/demoCatImage/bookCover.jpg'
     },
     {
         title: 'রোমান্টিক',
-        color: 'white',
+        color: '#DC7633',
         image: '/audioBook/demoCatImage/bookCover.jpg'
     },
     {
         title: 'জীবনী',
-        color: 'green',
+        color: '#28B463',
         image: '/audioBook/demoCatImage/bookCover.jpg'
     },
     {
         title: 'ইতিহাস',
-        color: 'red',
+        color: '#FF5733',
         image: '/audioBook/demoCatImage/bookCover.jpg'
     },
     {
         title: 'ইসলামিক',
-        color: 'white',
+        color: '#DC7633',
         image: '/audioBook/demoCatImage/bookCover.jpg'
     },
     {
         title: 'রোমান্টিক',
-        color: 'yellow',
+        color: '#A569BD',
         image: '/audioBook/demoCatImage/bookCover.jpg'
     },
     {
         title: 'রোমান্টিক',
-        color: 'black',
+        color: '#FF5733',
         image: '/audioBook/demoCatImage/bookCover.jpg'
     },
     {
         title: 'রোমান্টিক',
-        color: 'red',
+        color: '#28B463',
         image: '/audioBook/demoCatImage/bookCover.jpg'
     },
 ]
