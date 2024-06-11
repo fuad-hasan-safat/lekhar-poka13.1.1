@@ -20,22 +20,20 @@ export default function BackGroundSlider({ sliderData }) {
         <>
             <p>Back ground slider called</p>
             <Slider {...settings} className='hmRecentSlider'>
-                {sliderData.map((item, index) =>
-                    <div key={index} className='hm__audio__recent__slide__item'>
-                        <div className='hm__audio__recent__slide__item__innr'>
-                            <div className='hm__audio__recent__slide__item__img'>
-                                <img src={item.image} alt='Slider Img' />
+                {sliderData.map((iteam, index) =>
+                    <div className='backgroundSlider__single__wrap'>
+                        <div key={index} className='backgroundSlider__single__iteam' style={{ backgroundClip: `${iteam?.color}` }}>
+                            <div className='audio__bgslider__image'>
+                                <img src={iteam.image} alt='' />
                             </div>
-                            <div className='hm__audio__recent__slide__dsc'>
-                                <h5>{item.title}</h5>
-                                <p>{item.writer}</p>
-                                <ul className='clearfix reset-list'>
-                                    <li>{item.voice}</li>
-                                    <li>{item.duration}</li>
-                                </ul>
+                            <div className='audio__bgslider__text'>
+                                <h5> {iteam.title} </h5>
+                                <p>লেখকঃ {}</p>
                             </div>
+
                         </div>
                     </div>
+
                 )}
             </Slider>
         </>
