@@ -1,25 +1,20 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { audioSlider } from '../sampleData/audioSliderdata'
+import WithoutBgSlider from './withoutBackGroundSlider/WithoutBgSlider'
+import BackGroundSlider from './BackgroundSlider/BackGroundSlider'
+
 
 export default function AudioSlider() {
   return (
     <>
     {audioSlider.map((sliderData, index)=>{
         console.log(sliderData.background)
-        if(sliderData.background){
-            return(
-                <>
-                
-                </>
-            )
-        }else{
-            return(
-                <>
-                <p>without Color Sclider</p>
-
-                </>
-            )
-        }
+       return(
+        <Fragment key={index}>
+        {sliderData.background === 'no_background' && <WithoutBgSlider sliderData={sliderData.sliderData} />}
+        {sliderData.background === 'background' && <BackGroundSlider sliderData={sliderData.sliderData} />}
+        </Fragment>
+       )
     })}
     </>
   )
