@@ -130,7 +130,6 @@ export default function RatingComponent({ post_id, setRating, rating }) {
       >
         সাবমিট
       </button>
-      <ToastContainer style={{ fontSize: "14px", zIndex: 9999999999999999999999999999999999999 }} />
 
 
     </div>
