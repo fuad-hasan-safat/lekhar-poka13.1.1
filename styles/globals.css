@@ -2384,6 +2384,9 @@ transition: all 0.5s !important;
 
 
 /*  AUDIO BOOK */
+.hm__audio__section{
+  margin-top: 100px;
+}
 
 .hm__audio__left {
   float: left;
@@ -2401,19 +2404,19 @@ transition: all 0.5s !important;
 }
 
 .audio__cat_iteam{
-
+margin: 0 -10px;
 
 }
 .audio__cat_Single_wrap{
   width: 25%;
-  height: 84px;
   padding-left: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
   float: left;
-
+  padding-right: 10px;
 }
 .audio__cat__single__iteam {
   width: 100%;
+  height: 84px;
   border-radius: 8px;
   padding: 10px;
   position: relative;
@@ -2423,7 +2426,7 @@ transition: all 0.5s !important;
 }
 
 .audio__cat__title {
-  font-size: 20px;
+  font-size: 18px;
   flex: 1;
   color: #FFFFFF ;
   font-weight: 600;

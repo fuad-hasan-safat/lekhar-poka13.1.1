@@ -15,7 +15,6 @@ export default function AudioCategory() {
               image={category.image}
               color={category.color} />
 
-
           )
         })}
 

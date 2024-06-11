@@ -7,17 +7,17 @@ export const audioCategory = [
     {
         title: 'কবিতা',
         color: '#28B463',
-        image: '/audioBook/demoCatImage/bookCover.jpg'
+        image: '/audioBook/demoCatImage/cover 1.jpg'
     },
     {
         title: 'গল্প',
         color: '#DC7633',
-        image: '/audioBook/demoCatImage/bookCover.jpg'
+        image: '/audioBook/demoCatImage/cover 3.webp'
     },
     {
         title: 'রোমান্টিক',
         color: '#FF5733',
-        image: '/audioBook/demoCatImage/bookCover.jpg'
+        image: '/audioBook/demoCatImage/cover.webp'
     },
     {
         title: 'রোমান্টিক',
@@ -57,6 +57,6 @@ export const audioCategory = [
     {
         title: 'রোমান্টিক',
         color: '#28B463',
-        image: '/audioBook/demoCatImage/bookCover.jpg'
+        image: '/audioBook/demoCatImage/cover.webp'
     },
 ]

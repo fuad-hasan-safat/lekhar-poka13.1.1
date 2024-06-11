@@ -1,6 +1,9 @@
 import React from 'react'
 import Sidebar from '../../../sidebar/Sidebar'
 import AudioCategory from './audioCategory/AudioCategory'
+import AudioSlider from '../audioSlider/AudioSlider'
+
+
 
 export default function AudioHomePage() {
   return (
@@ -10,6 +13,7 @@ export default function AudioHomePage() {
             <div className='hm__audio__wrap clearfix'>
                 <div className='hm__audio__left'>
                 <AudioCategory/>
+                <AudioSlider/>
 
                 </div>
                 <div className='hm__audio__right'>
