@@ -22,13 +22,14 @@ export default function BackGroundSlider({ sliderData }) {
             <Slider {...settings} className='hmRecentSlider'>
                 {sliderData.map((iteam, index) =>
                     <div className='backgroundSlider__single__wrap'>
-                        <div key={index} className='backgroundSlider__single__iteam' style={{ backgroundClip: `${iteam?.color}` }}>
+                        <div key={index} className='backgroundSlider__single__iteam' style={{ backgroundClip: `${iteam.color}` }}>
                             <div className='audio__bgslider__image'>
                                 <img src={iteam.image} alt='' />
                             </div>
                             <div className='audio__bgslider__text'>
                                 <h5> {iteam.title} </h5>
-                                <p>লেখকঃ {}</p>
+                                <p>লেখকঃ {iteam.writer}</p>
+                                <p>কণ্ঠ {iteam.voice}</p>
                             </div>
 
                         </div>
