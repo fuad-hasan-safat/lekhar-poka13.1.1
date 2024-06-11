@@ -124,6 +124,7 @@ export const audioSlider = [
                 writer: 'রকিব হাসান',
                 voice: 'রকিব হাসান তুষার',
                 duration: '১:৪১ মিনিট',
+                color: '#1E8449',
             },
             {
                 image: '/audioBook/audio-slider/audio-slider-img-1.png',
@@ -131,6 +132,7 @@ export const audioSlider = [
                 writer: 'রকিব হাসান',
                 voice: 'রকিব হাসান তুষার',
                 duration: '১:৪১ মিনিট',
+                color: '#1E8449',
             },
             {
                 image: '/audioBook/audio-slider/audio-slider-img-1.png',
@@ -138,6 +140,7 @@ export const audioSlider = [
                 writer: 'রকিব হাসান',
                 voice: 'রকিব হাসান তুষার',
                 duration: '১:৪১ মিনিট',
+                color: '#1E8449',
             },
             {
                 image: '/audioBook/audio-slider/audio-slider-img-1.png',
@@ -145,6 +148,7 @@ export const audioSlider = [
                 writer: 'রকিব হাসান',
                 voice: 'রকিব হাসান তুষার',
                 duration: '১:৪১ মিনিট',
+                color: '#1E8449',
             },
             {
                 image: '/audioBook/audio-slider/audio-slider-img-1.png',
@@ -152,6 +156,7 @@ export const audioSlider = [
                 writer: 'রকিব হাসান',
                 voice: 'রকিব হাসান তুষার',
                 duration: '১:৪১ মিনিট',
+                color: '#1E8449',
             },
             {
                 image: '/audioBook/audio-slider/audio-slider-img-1.png',
@@ -159,6 +164,7 @@ export const audioSlider = [
                 writer: 'রকিব হাসান',
                 voice: 'রকিব হাসান তুষার',
                 duration: '১:৪১ মিনিট',
+                color: '#1E8449',
             },
             {
                 image: '/audioBook/audio-slider/audio-slider-img-1.png',
@@ -166,6 +172,7 @@ export const audioSlider = [
                 writer: 'রকিব হাসান',
                 voice: 'রকিব হাসান তুষার',
                 duration: '১:৪১ মিনিট',
+                color: '#1E8449',
             },
         ]
     }

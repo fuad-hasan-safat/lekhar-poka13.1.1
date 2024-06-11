@@ -12,7 +12,7 @@ export default function BackGroundSlider({ sliderData }) {
         infinite: true,
         autoplay: true,
         speed: 500,
-        slidesToShow: 4,
+        slidesToShow: 3,
         slidesToScroll: 1,
     };
 
@@ -20,20 +20,29 @@ export default function BackGroundSlider({ sliderData }) {
         <>
             <p>Back ground slider called</p>
             <Slider {...settings} className='hmRecentSlider'>
-                {sliderData.map((iteam, index) =>
-                    <div className='backgroundSlider__single__wrap'>
-                        <div key={index} className='backgroundSlider__single__iteam' style={{ backgroundClip: `${iteam.color}` }}>
-                            <div className='audio__bgslider__image'>
-                                <img src={iteam.image} alt='' />
-                            </div>
-                            <div className='audio__bgslider__text'>
-                                <h5> {iteam.title} </h5>
-                                <p>লেখকঃ {iteam.writer}</p>
-                                <p>কণ্ঠ {iteam.voice}</p>
-                            </div>
+            {sliderData.map((iteam, index) =>{
 
+                const color = iteam?.color;
+                console.log({color, iteam})
+                return(
+                    <div className='backgroundSlider__single__wrap'>
+                    <div key={index} className='backgroundSlider__single__iteam' style={{ backgroundColor: `${color}` }}>
+                        <div className='audio__bgslider__image'>
+                            <img src={iteam.image} alt='' />
                         </div>
+                        <div className='audio__bgslider__text'>
+                            <h5> {iteam.title} </h5>
+                            <p>লেখকঃ {iteam.writer}</p>
+                            <p>কণ্ঠ {iteam.voice}</p>
+                            <p>slider color {iteam?.color}</p>
+                        </div>
+
                     </div>
+                </div>
+                )
+
+            }
+                
 
                 )}
             </Slider>
