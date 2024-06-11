@@ -6,3 +6,16 @@ hm__audio__book__wrap
 .hm__audio__book__wrap{
     text-align: center;
 }
+
+.hm__audio__wrap{
+    /* display: flex;
+    flex-direction: row; */
+}
+.hm__audio__left{
+    float: left;
+    width: 80%;
+}
+.hm__audio__right{
+    float: right;
+    width: 20%;
+}
