@@ -1,7 +1,118 @@
 
 export const audioSlider = [
     {
+        background: 'no_background',
+        category: 'সফলতার গল্প',
+        sliderData: [
+            {
+                image: '/audioBook/demoCatImage/cover 1.jpg',
+                title: 'তিন গোয়েন্দা',
+                writer: 'FUAD HASAN',
+                voice: 'FUAD HASAN',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'FUAD HASAN',
+                voice: 'FUAD HASAN',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'FUAD HASAN',
+                voice: 'FUAD HASAN',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'FUAD HASAN',
+                voice: 'FUAD HASAN',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'FUAD HASAN',
+                voice: 'FUAD HASAN',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/demoCatImage/cover 1.jpg',
+                title: 'তিন গোয়েন্দা',
+                writer: 'FUAD HASAN',
+                voice: 'FUAD HASAN',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'FUAD HASAN',
+                voice: 'FUAD HASAN',
+                duration: '১:৪১ মিনিট',
+            },
+        ]
+    },
+    {
+        background: 'no_background',
+        category: 'সফলতার গল্প',
+        sliderData: [
+            {
+                image: '/audioBook/demoCatImage/cover 1.jpg',
+                title: 'তিন গোয়েন্দা',
+                writer: 'FUAD HASAN',
+                voice: 'FUAD HASAN',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'FUAD HASAN',
+                voice: 'FUAD HASAN',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'FUAD HASAN',
+                voice: 'FUAD HASAN',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'FUAD HASAN',
+                voice: 'FUAD HASAN',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'FUAD HASAN',
+                voice: 'FUAD HASAN',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/demoCatImage/cover 1.jpg',
+                title: 'তিন গোয়েন্দা',
+                writer: 'FUAD HASAN',
+                voice: 'FUAD HASAN',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'FUAD HASAN',
+                voice: 'FUAD HASAN',
+                duration: '১:৪১ মিনিট',
+            },
+        ]
+    },
+    {
         background: 'background',
+        category: 'সফলতার গল্প',
         sliderData: [
             {
                 image: '/audioBook/demoCatImage/cover 1.jpg',
@@ -63,6 +174,7 @@ export const audioSlider = [
     },
     {
         background: 'no_background',
+        category: 'সফলতার গল্প',
         sliderData: [
             {
                 image: '/audioBook/demoCatImage/cover 1.jpg',
@@ -117,6 +229,7 @@ export const audioSlider = [
     },
     {
         background: 'background',
+        category: 'সফলতার গল্প',
         sliderData: [
             {
                 image: '/audioBook/audio-slider/audio-slider-img-1.png',
@@ -175,5 +288,122 @@ export const audioSlider = [
                 color: '#1E8449',
             },
         ]
-    }
+    },
+    {
+        background: 'no_background',
+        category: 'সফলতার গল্প',
+        sliderData: [
+            {
+                image: '/audioBook/demoCatImage/cover 1.jpg',
+                title: 'তিন গোয়েন্দা',
+                writer: 'FUAD HASAN',
+                voice: 'FUAD HASAN',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'FUAD HASAN',
+                voice: 'FUAD HASAN',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'FUAD HASAN',
+                voice: 'FUAD HASAN',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'FUAD HASAN',
+                voice: 'FUAD HASAN',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'FUAD HASAN',
+                voice: 'FUAD HASAN',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/demoCatImage/cover 1.jpg',
+                title: 'তিন গোয়েন্দা',
+                writer: 'FUAD HASAN',
+                voice: 'FUAD HASAN',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'FUAD HASAN',
+                voice: 'FUAD HASAN',
+                duration: '১:৪১ মিনিট',
+            },
+        ]
+    },
+    {
+        background: 'background',
+        category: 'সফলতার গল্প',
+        sliderData: [
+            {
+                image: '/audioBook/demoCatImage/cover 1.jpg',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+                color: '#1E8449',
+            },
+            {
+                image: '/audioBook/demoCatImage/cover 3.webp',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+                color: '#CB4335',
+            },
+            {
+                image: '/audioBook/demoCatImage/cover 1.jpg',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+                color: '#A569BD',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+                color: '#3498DB',
+            },
+            {
+                image: '/audioBook/demoCatImage/cover 3.webp',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+                color: '#F1C40F',
+            },
+            {
+                image: '/audioBook/demoCatImage/cover 1.jpg',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+                color: '#58D68D',
+            },
+            {
+                image: '/audioBook/demoCatImage/cover.webp',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+                color: '#D35400',
+            },
+        ]
+    },
 ]
