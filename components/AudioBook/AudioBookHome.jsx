@@ -39,7 +39,7 @@ const AudioBookHome = () => {
             <div className='container'>
                 <div className='hm__audio__book__wrap'>
                     <div className='audiu__logo'>
-                        <a href='#'><img src='/images/audio-logo.png' alt='Audio Logo'/></a>
+                        <a href='/audioHome'><img src='/images/audio-logo.png' alt='Audio Logo'/></a>
                     </div>
                     <Slider {...settings}>
                         {HmAudioSlideData.map((item,index)=>
