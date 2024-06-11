@@ -77,6 +77,9 @@ hm__audio__book__wrap
   -ms-transition: all 0.3s;
   -webkit-transition: all 0.3s;
 }
+.hm__audio__common__btn:hover{
+    color: #fff;
+}
 
 /*
 -------------------------------
@@ -105,6 +108,29 @@ hm audio recent slide item innr
     object-fit: cover;
 }
 .hm__audio__recent__slide__dsc{
-    
+    padding: 10px 10px;
 }
-
+.hm__audio__recent__slide__dsc h5{
+    font-size: 16px;
+    line-height: 1;
+    color: #F9A106;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+.hm__audio__recent__slide__dsc p{
+    font-size: 10px;
+    line-height: 1;
+    color: #5D5A88;
+    margin-bottom: 8px;
+}
+.hm__audio__recent__slide__dsc ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.hm__audio__recent__slide__dsc ul li{
+    font-size: 10px;
+    line-height: 1;
+    color:#5D5A88;
+    padding-right: 5px;
+}
