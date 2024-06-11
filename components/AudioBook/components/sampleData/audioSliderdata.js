@@ -1,0 +1,165 @@
+
+export const audioSlider = [
+    {
+        background: true,
+        sliderData: [
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+            },
+        ]
+    },
+    {
+        background: false,
+        sliderData: [
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+            },
+        ]
+    },
+    {
+        background: true,
+        sliderData: [
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+            },
+            {
+                image: '/audioBook/audio-slider/audio-slider-img-1.png',
+                title: 'তিন গোয়েন্দা',
+                writer: 'রকিব হাসান',
+                voice: 'রকিব হাসান তুষার',
+                duration: '১:৪১ মিনিট',
+            },
+        ]
+    }
+]
