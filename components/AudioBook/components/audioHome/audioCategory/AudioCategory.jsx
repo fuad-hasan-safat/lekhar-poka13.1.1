@@ -5,7 +5,7 @@ import AudioSingleCategory from './AudioSingleCategory'
 export default function AudioCategory() {
   return (
     <>
-      <div className='audio__cat_iteam'>
+      <div className='audio__cat_iteam '>
         {audioCategory.map((category, index) => {
           return (
 
