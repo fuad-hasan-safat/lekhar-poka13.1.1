@@ -2391,21 +2391,22 @@ transition: all 0.5s !important;
 .hm__audio__left {
   float: left;
   width: 70%;
-  padding-right: 10px;
+  padding-right: 30px;
 }
 
 .hm__audio__right {
   float: right;
   width: 30%;
+  padding-left: 30px;
 }
 
 .audio_cat_text {
   font-size: 20px;
 }
 
-.audio__cat_iteam{
-margin: 0 -10px;
-
+.audio__cat_iteam {
+  margin: 0 -10px;
+  padding-bottom: 60px;
 }
 .audio__cat_Single_wrap{
   width: 25%;
@@ -2451,7 +2452,7 @@ margin: 0 -10px;
 
 
 .backgroundSlider__single__wrap{
-  width: 25%;
+  /* width: 25%; */
   padding-left: 10px;
   padding-bottom: 20px;
   float: left;
@@ -2461,12 +2462,14 @@ margin: 0 -10px;
 
 .backgroundSlider__single__iteam{
   width: 100%;
-  height: 84px;
-  border-radius: 8px;
-  padding: 10px;
+  height: 140px;
+  border-radius: 16px;
+  padding: 15px;
   position: relative;
   overflow: hidden;
   display: flex;
+  justify-content: left;
+  align-items: center;
   cursor: pointer;
   
 }

@@ -18,7 +18,7 @@ export default function BackGroundSlider({ sliderData, category }) {
 
     return (
         <>
-            <Slider {...settings} className='hmRecentSlider'>
+            <Slider {...settings} className='backgroundSlider'>
                 {sliderData.map((iteam, index) => {
 
                     const color = iteam?.color;
@@ -34,7 +34,7 @@ export default function BackGroundSlider({ sliderData, category }) {
                                     <h5> {iteam.title} </h5>
                                     <p>লেখকঃ {iteam.writer}</p>
                                     <p>কণ্ঠ {iteam.voice}</p>
-                                    <p>slider color {iteam?.color}</p>
+                                    <p style={{marginBottom:'0'}}><i class="ri-time-line"></i> {iteam.duration}</p>
                                 </div>
 
                             </div>

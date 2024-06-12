@@ -12,7 +12,7 @@ export default function AudioSingleCategory({ color, title, image }) {
                         <h5> {title} </h5>
                     </div>
                     <div className='audio__cat__image'>
-                        <img src={image} alt='' />
+                        <img src={image} alt='Audio Cat Image' />
                     </div>
 
                 </div>
