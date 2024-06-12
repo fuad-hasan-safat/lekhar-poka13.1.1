@@ -2475,5 +2475,32 @@ margin: 0 -10px;
   width: 69px;
   height: 105px;
   object-fit: cover;
-
 }
+
+
+.audio__playlist__wrap{
+  display: flex;
+  justify-content: space-between;
+  max-width: 330px;
+}
+
+.audio__playlist__left{
+  display: flex;
+  justify-content: space-between;
+}
+
+.audio__playlist__info{
+  padding-left: 11px;
+}
+.audio__playlist__info h6{
+  font-size: 16px;
+  font-weight: 600;
+  color:#F9A106;
+}
+
+.audio__playlist__info p{
+  font-size: 10px;
+  font-weight: 400;
+  color:#5D5A88;
+}
+
