@@ -367,6 +367,8 @@ body {
 .lekhokIteam img {
   width: 60px;
   height: 60px;
+  border: solid 0.5px #A5A5A536 ;
+  border-radius: 50%;
   object-fit: cover;
 }
 
