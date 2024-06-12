@@ -1,62 +1,63 @@
 export const audioCategory = [
     {
         title: 'রোমান্টিক',
-        color: '#FF5733',
+        color: '#FF5555',
         image: '/audioBook/demoCatImage/bookCover.jpg'
     },
     {
-        title: 'কবিতা',
-        color: '#28B463',
+        title: 'সাইন্স ফিকশন',
+        color: '#59C1B9',
         image: '/audioBook/demoCatImage/cover 1.jpg'
     },
     {
-        title: 'গল্প',
-        color: '#DC7633',
+        title: 'উপন্যাস',
+        color: '#585EDF',
         image: '/audioBook/demoCatImage/cover 3.webp'
     },
     {
-        title: 'রোমান্টিক',
-        color: '#FF5733',
+        title: 'কবিতা',
+        color: '#00D67C',
         image: '/audioBook/demoCatImage/cover.webp'
     },
     {
-        title: 'রোমান্টিক',
-        color: '#A569BD',
+        title: 'কিশোর উপন্যাস',
+        color: '#F247C2',
         image: '/audioBook/demoCatImage/bookCover.jpg'
     },
     {
-        title: 'রোমান্টিক',
-        color: '#DC7633',
+        title: 'ভ্রমণ',
+        color: '#B741FF',
         image: '/audioBook/demoCatImage/bookCover.jpg'
     },
     {
         title: 'জীবনী',
-        color: '#28B463',
+        color: '#FC3939',
+        image: '/audioBook/demoCatImage/bookCover.jpg'
+    },
+    {
+        title: 'গল্প',
+        color: '#FFC700',
         image: '/audioBook/demoCatImage/bookCover.jpg'
     },
     {
         title: 'ইতিহাস',
-        color: '#FF5733',
+        color: '#FFC700',
         image: '/audioBook/demoCatImage/bookCover.jpg'
     },
     {
         title: 'ইসলামিক',
-        color: '#DC7633',
+        color: '#585EDF',
+        image: '/audioBook/demoCatImage/bookCover.jpg'
+    },
+ 
+    {
+        title: 'রোমান্টিক',
+        color: '#59C1B9',
         image: '/audioBook/demoCatImage/bookCover.jpg'
     },
     {
-        title: 'রোমান্টিক',
-        color: '#A569BD',
-        image: '/audioBook/demoCatImage/bookCover.jpg'
-    },
-    {
-        title: 'রোমান্টিক',
-        color: '#FF5733',
-        image: '/audioBook/demoCatImage/bookCover.jpg'
-    },
-    {
-        title: 'রোমান্টিক',
-        color: '#28B463',
+        title: 'ক্লাসিকস',
+        color: '#B741FF',
         image: '/audioBook/demoCatImage/cover.webp'
     },
 ]

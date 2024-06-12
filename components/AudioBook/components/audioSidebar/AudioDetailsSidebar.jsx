@@ -2,7 +2,8 @@ import React from 'react'
 import Login from '../../../sidebar/login-sidebar/Login'
 import PlayList from '../audioPlaylist/PlayList'
 import Link from 'next/link'
-import Lekhok from '../../../sidebar/lekhok/Lekhok'
+import { audioPlaylist } from '../sampleData/audioPlaylist'
+
 import AudioSidebarLekhok from './AudioSidebarLekhok'
 
 export default function AudioDetailsSideBar() {
@@ -18,7 +19,7 @@ export default function AudioDetailsSideBar() {
                     <div className='py-[10px]'>
                         <hr></hr>
                     </div>
-                    <PlayList />
+                    <PlayList audioPlaylist={audioPlaylist} />
                     <div className='hm__audio__see__more'>
                         <Link className='sidebar__audio__common__btn' href='#'>সব দেখুন</Link>
                     </div>
@@ -30,7 +31,7 @@ export default function AudioDetailsSideBar() {
                     </div>
                     <AudioSidebarLekhok />
                     <div className='hm__audio__see__more'>
-                        <Link className='sidebar__audio__common__btn' href='#'>সব দেখুন</Link>
+                        <Link className='sidebar__audio__common__btn' href='/allwriter'>সব দেখুন</Link>
                     </div>
                 </div>
 
@@ -39,7 +40,7 @@ export default function AudioDetailsSideBar() {
                     <div className='py-[10px]'>
                         <hr></hr>
                     </div>
-                    <PlayList />
+                    <PlayList audioPlaylist={audioPlaylist}/>
                     <div className='hm__audio__see__more'>
                         <Link className='sidebar__audio__common__btn' href='#'>সব দেখুন</Link>
                     </div>

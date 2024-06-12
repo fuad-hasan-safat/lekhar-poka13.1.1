@@ -171,7 +171,7 @@ function reloadPage(){
         <div>
           <div>
 
-            <div className=" text-[20px] text-yellow-500 h-[28px]  pt-5 pb-[28px]">
+            <div className=" text-[20px] text-[#F9A106] font-semibold h-[28px]  pt-5 pb-[28px]">
               লগইন
             </div>
 

@@ -1,9 +1,8 @@
 import React from 'react'
 
-import { audioPlaylist } from '../sampleData/audioPlaylist'
 import PlaylistItem from './PlaylistItem'
 
-export default function PlayList() {
+export default function PlayList({audioPlaylist}) {
   return (
     <>
     {audioPlaylist.map((songInfo, index)=>{

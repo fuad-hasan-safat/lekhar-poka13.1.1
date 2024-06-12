@@ -2483,9 +2483,9 @@ transition: all 0.5s !important;
 }
 
 
-.audio__playlist__wrap{
+/* .audio__playlist__wrap{
   max-width: 300px;
- }
+ } */
 
  .audio__playlist__devider{
   margin-top: 15px;
@@ -2536,7 +2536,7 @@ transition: all 0.5s !important;
   font-weight: 600;
   background: #F9A106  ; 
   border-radius: 8px;
-  padding: 11px 123px;
+  padding: 11px 151px;
   margin-top: 16px;
   position: relative;
   overflow: hidden;

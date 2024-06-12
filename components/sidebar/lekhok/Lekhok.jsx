@@ -56,7 +56,7 @@ const Lekhok = () => {
     <>
       <div>
         <div>
-          <h1 className="text-[20px] text-yellow-500 font-semibold">লেখক</h1>
+          <h1 className="text-[20px] text-[#F9A106] font-semibold">লেখক</h1>
         </div>
         {lekhokList.length > 0 ?
           <div className="pt-[23px] ">
