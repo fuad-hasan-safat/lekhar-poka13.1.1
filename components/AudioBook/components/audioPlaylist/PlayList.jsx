@@ -7,8 +7,16 @@ export default function PlayList() {
   return (
     <>
     {audioPlaylist.map((songInfo, index)=>{
+        const length = audioPlaylist?.length;
+        console.log({length})
         return(
-            <PlaylistItem songInfo={songInfo} />
+            <div key={index} className='audio__playlist__wrap'>
+                <PlaylistItem songInfo={songInfo} />
+                {index + 1 < length && <div className='audio__playlist__devider'>
+                    <hr></hr>
+                    </div>}
+            </div>
+
         )
     })}
     </>

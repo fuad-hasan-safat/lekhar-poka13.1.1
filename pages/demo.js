@@ -3,21 +3,30 @@ import Procchod from '../components/procchod/Procchod';
 import { ImageSlider } from '../components/slider/ImageSlider';
 import AduioBookHome from '../components/AudioBook/AudioBookHome';
 import PlayList from '../components/AudioBook/components/audioPlaylist/PlayList';
+import AudioDetailsSideBar from '../components/AudioBook/components/audioSidebar/AudioDetailsSidebar';
 
 export default function Home() {
 
-  return (
-    <>
-      <div>
-        <Head>
-          <title>DELETE KOrte hobe </title>
-        </Head>
+    return (
+        <>
+            <div>
+                <Head>
+                    <title>DELETE KOrte hobe </title>
+                </Head>
 
-        <div className="hm__slider__wrp lg:pt-[95px] md:pt-[90px] sm:pt-[92px] text-black " oncontextmenu="return false;">
-          <ImageSlider />
-          <PlayList/>
-        </div>
-      </div>
-    </>
-  );
+                <div className='container flex flex-row lg:pt-[95px] md:pt-[90px] sm:pt-[92px]'>
+                    <div className="w-[70%] hm__slider__wrp  text-black " oncontextmenu="return false;">
+
+                    </div>
+
+                    <div className='w-[30%]'>
+                        <AudioDetailsSideBar />
+                    </div>
+
+                </div>
+
+
+            </div>
+        </>
+    );
 }

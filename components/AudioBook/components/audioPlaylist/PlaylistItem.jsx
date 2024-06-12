@@ -24,12 +24,16 @@ export default function PlaylistItem({ songInfo }) {
             audioElement.addEventListener('error', handleError);
         }
 
+        handleLoadedMetadata();
+
         return () => {
             if (audioElement) {
                 audioElement.removeEventListener('loadedmetadata', handleLoadedMetadata);
                 audioElement.removeEventListener('error', handleError);
             }
         };
+
+      
     }, [songInfo?.audio]);
 
     const togglePlayPause = () => {
@@ -43,7 +47,7 @@ export default function PlaylistItem({ songInfo }) {
     };
 
     return (
-        <div className='audio__playlist__wrap'>
+        <div className='audio__playlist__item'>
             <div className='audio__playlist__left'>
                 <div>
                     <img src={songInfo.image} className='w-[41px] h-[41px] rounded-full' />
@@ -56,13 +60,13 @@ export default function PlaylistItem({ songInfo }) {
                         <source src={songInfo?.audio} type="audio/mpeg" />
                         Your browser does not support the audio element.
                     </audio>
-                    {duration && <p> <i class="ri-time-line"></i> {(duration / 60).toFixed(2)} মিনিট</p>}
+                    {audioRef.current?.duration && <p> <i class="ri-time-line"></i> {(duration / 60).toFixed(2)} মিনিট</p>}
 
                 </div>
 
             </div>
 
-            <div className='text-[#FCD200]'>
+            <div className='audio__playlist__playbutton'>
                 <button onClick={togglePlayPause}>{isPlaying ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</button>
             </div>
 
