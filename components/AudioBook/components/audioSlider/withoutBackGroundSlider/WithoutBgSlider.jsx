@@ -4,7 +4,7 @@ import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-export default function WithoutBgSlider({ sliderData }) {
+export default function WithoutBgSlider({ sliderData, category }) {
     console.log('WITHOUT BACKGROUND SLIDER', sliderData)
 
     var settings = {
@@ -17,11 +17,11 @@ export default function WithoutBgSlider({ sliderData }) {
     };
 
     return (
-        <>
-        <p>Without back ground Slider called</p>
+        <>         
             <Slider {...settings} className='hmRecentSlider'>
                 {sliderData.map((item, index) =>
                     <div key={index} className='hm__audio__recent__slide__item'>
+
                         <div className='hm__audio__recent__slide__item__innr'>
                             <div className='hm__audio__recent__slide__item__img'>
                                 <img src={item.image} alt='Slider Img' />

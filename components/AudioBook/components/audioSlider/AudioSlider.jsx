@@ -11,8 +11,9 @@ export default function AudioSlider() {
         console.log(sliderData.background)
        return(
         <Fragment key={index}>
+             <h2>{sliderData.category}</h2>
         {sliderData.background === 'no_background' && <WithoutBgSlider sliderData={sliderData.sliderData} />}
-        {sliderData.background === 'background' && <BackGroundSlider sliderData={sliderData.sliderData} />}
+        {sliderData.background === 'background' && <BackGroundSlider sliderData={sliderData.sliderData}  />}
         </Fragment>
        )
     })}

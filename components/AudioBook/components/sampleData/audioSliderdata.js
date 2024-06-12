@@ -57,7 +57,7 @@ export const audioSlider = [
     },
     {
         background: 'no_background',
-        category: 'সফলতার গল্প',
+        category: 'গল্প',
         sliderData: [
             {
                 image: '/audioBook/demoCatImage/cover 1.jpg',
@@ -112,7 +112,7 @@ export const audioSlider = [
     },
     {
         background: 'background',
-        category: 'সফলতার গল্প',
+        category: 'ইতিহাস',
         sliderData: [
             {
                 image: '/audioBook/demoCatImage/cover 1.jpg',
@@ -174,7 +174,7 @@ export const audioSlider = [
     },
     {
         background: 'no_background',
-        category: 'সফলতার গল্প',
+        category: 'রোমান্টিক',
         sliderData: [
             {
                 image: '/audioBook/demoCatImage/cover 1.jpg',
@@ -229,7 +229,7 @@ export const audioSlider = [
     },
     {
         background: 'background',
-        category: 'সফলতার গল্প',
+        category: 'উপন্যাস',
         sliderData: [
             {
                 image: '/audioBook/audio-slider/audio-slider-img-1.png',
@@ -346,7 +346,7 @@ export const audioSlider = [
     },
     {
         background: 'background',
-        category: 'সফলতার গল্প',
+        category: 'কবিতা',
         sliderData: [
             {
                 image: '/audioBook/demoCatImage/cover 1.jpg',
