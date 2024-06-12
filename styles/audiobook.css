@@ -30,7 +30,7 @@ hm__audio__book__wrap
     margin-bottom: 20px;
 }
 .hm__audio__see__more h3{
-   font-size: 36px;
+   font-size: 28px;
    line-height: 1;
    color: #5D5A88; 
    font-weight: 600;
@@ -86,8 +86,15 @@ hm__audio__book__wrap
 hm audio recent slide item innr
 -------------------------------
 */
+.hmCategorySlider,
 .hmRecentSlider{
     margin: 0 -15px;
+}
+.backgroundSlider{
+    margin: 0 -10px 60px;
+}
+.hmCategorySlider{
+    margin-bottom: 80px;
 }
 .hm__audio__recent__slide__item{
     padding: 0 15px;
@@ -134,3 +141,74 @@ hm audio recent slide item innr
     color:#5D5A88;
     padding-right: 5px;
 }
+
+/*
+------------------
+ Next Prev Css
+------------------ 
+*/
+.backgroundSlider .slick-prev,
+.backgroundSlider .slick-next,
+.hmCategorySlider .slick-prev,
+.hmCategorySlider .slick-next{
+    width: 30px !important;
+    height: 30px !important;
+}
+.hmCategorySlider .slick-prev {
+    left: -25px;
+}
+.hmCategorySlider .slick-next {
+    right: -25px;
+}
+.backgroundSlider .slick-prev{
+    left: -30px;
+}
+.backgroundSlider .slick-next{
+    right: -30px;
+}
+.backgroundSlider .slick-prev::before,
+.backgroundSlider .slick-next::before,
+.hmCategorySlider .slick-prev:before,
+.hmCategorySlider .slick-next:before {
+    color: inherit !important; 
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 30px !important;
+}
+.backgroundSlider .slick-prev::before,
+.hmCategorySlider .slick-prev:before{
+    background-image: url(../public/audioBook/audio-slider/prev-icon.svg);
+    background-repeat: no-repeat;
+    background-size: 30px 30px !important;
+}
+.backgroundSlider .slick-next::before,
+.hmCategorySlider .slick-next:before{
+    background-image: url(../public/audioBook/audio-slider/next-icon.svg);
+    background-repeat: no-repeat;
+    background-size: 30px 30px !important;
+}
+
+/*
+-------------------
+Bg Slider Css
+------------------- 
+*/
+.audio__bgslider__text{
+    padding-left: 20px;
+}
+.audio__bgslider__text h5{
+    font-size: 16px;
+    line-height: 1.1;
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+.audio__bgslider__text p{
+    font-size: 12px;
+    line-height: 1;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+
+

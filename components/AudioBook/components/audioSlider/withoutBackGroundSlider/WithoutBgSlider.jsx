@@ -18,7 +18,7 @@ export default function WithoutBgSlider({ sliderData, category }) {
 
     return (
         <>         
-            <Slider {...settings} className='hmRecentSlider'>
+            <Slider {...settings} className='hmCategorySlider'>
                 {sliderData.map((item, index) =>
                     <div key={index} className='hm__audio__recent__slide__item'>
 
@@ -31,7 +31,7 @@ export default function WithoutBgSlider({ sliderData, category }) {
                                 <p>{item.writer}</p>
                                 <ul className='clearfix reset-list'>
                                     <li>{item.voice}</li>
-                                    <li>{item.duration}</li>
+                                    <li><i class="ri-time-line"></i> {item.duration}</li>
                                 </ul>
                             </div>
                         </div>
