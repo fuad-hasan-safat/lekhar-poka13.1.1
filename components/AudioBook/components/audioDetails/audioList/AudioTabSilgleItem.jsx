@@ -47,12 +47,12 @@ export default function AudioTabSingleItem({ songInfo }) {
     };
 
     return (
-        <div className='audio__playlist__item'>
-            <div className='audio__playlist__left'>
+        <div className='audio__tab__item'>
+            <div className='audio__tab__left'>
                 <div>
                     <img src={songInfo.image} className='w-[41px] h-[41px] rounded-full' />
                 </div>
-                <div className='audio__playlist__info'>
+                <div className='audio__tab__info'>
                     <h6>
                         {songInfo.title}
                     </h6>
