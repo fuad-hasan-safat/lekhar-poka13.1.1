@@ -1,6 +1,7 @@
 import Head from 'next/head';
 
 import AudioDetailsSideBar from '../../components/AudioBook/components/audioSidebar/AudioDetailsSidebar';
+import { singleAudioData } from '../../components/AudioBook/components/sampleData/singleAudioDetailsPage';
 
 export default function Home() {
 
