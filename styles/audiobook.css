@@ -253,7 +253,6 @@ Bg Slider Css
   
   .content {
       display: none;
-      padding: 10px;
   }
   .active-content {
       display: flex;
