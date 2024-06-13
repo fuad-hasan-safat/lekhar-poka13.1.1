@@ -2483,9 +2483,15 @@ transition: all 0.5s !important;
 }
 
 
-/* .audio__playlist__wrap{
-  max-width: 300px;
- } */
+.audio__tab__wrap{
+  background-color: #F3F3F3  ;
+  border-radius: 8px;
+  margin-top: 16px;
+  height: 110px;
+  place-content: center;
+  padding-left: 37px;
+  padding-right: 67px;
+ }
 
  
 .audio__tab__item{
@@ -2504,7 +2510,7 @@ transition: all 0.5s !important;
   padding-left: 11px;
 }
 .audio__tab__info h6{
-  font-size: 16px;
+  font-size: 28px;
   font-weight: 600;
   color:#F9A106;
 }
@@ -2513,6 +2519,10 @@ transition: all 0.5s !important;
   font-size: 10px;
   font-weight: 400;
   color:#5D5A88;
+}
+.audio__tab__playbutton{
+  color:#FCD200 ;
+  font-size: 44px;
 }
 
  .audio__playlist__devider{

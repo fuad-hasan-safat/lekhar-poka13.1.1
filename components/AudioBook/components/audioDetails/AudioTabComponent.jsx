@@ -8,11 +8,8 @@ export default function AudioTabComponent({audioData}) {
          const length = audioData?.length;
       
          return(
-             <div key={index} className='audio__playlist__wrap'>
+             <div key={index} className='audio__tab__wrap'>
                  <AudioTabSingleItem songInfo={songInfo} />
-                 {index + 1 < length && <div className='audio__playlist__devider'>
-                     <hr></hr>
-                     </div>}
              </div>
  
          )
