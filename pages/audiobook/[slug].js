@@ -1,8 +1,7 @@
 import Head from 'next/head';
-
 import AudioDetailsSideBar from '../../components/AudioBook/components/audioSidebar/AudioDetailsSidebar';
 import { singleAudioData } from '../../components/AudioBook/components/sampleData/singleAudioDetailsPage';
-import AudioTabs from '../../components/AudioBook/components/AudioTabs';
+import AudioTabs from '../../components/AudioBook/components/audioDetails/AudioTabs';
 
 export default function Home() {
 
@@ -22,7 +21,7 @@ export default function Home() {
                 <div className='container flex flex-row lg:pt-[95px] md:pt-[90px] sm:pt-[92px]'>
 
                     <div className='w-[70%]'>
-                        <AudioTabs />
+                        <AudioTabs audioData={singleAudioData} />
                     </div>
 
 

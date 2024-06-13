@@ -7,7 +7,7 @@ export default function PlayList({audioPlaylist}) {
     <>
     {audioPlaylist.map((songInfo, index)=>{
         const length = audioPlaylist?.length;
-        console.log({length})
+      
         return(
             <div key={index} className='audio__playlist__wrap'>
                 <PlaylistItem songInfo={songInfo} />

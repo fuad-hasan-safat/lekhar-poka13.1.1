@@ -2587,4 +2587,38 @@ transition: all 0.3s;
   margin-bottom: 32px;
 }
 
+.audio__tab__caption{
+  color:#F9A106;
+}
 
+.audio__tab__details{
+  color: #484848;
+}
+.audio__tab__content{
+  padding-right: 60px;
+}
+.audio__tab__content_wrap{
+  width: 100%;
+}
+
+.audio__tab__caption h5{
+  margin-top: 23px;
+color: #F9A106;
+font-weight: 600;
+font-size: 28px;
+}
+.audio__tab__caption hr{
+  width: 100%;
+  border-top: 2px solid #F9A106;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.audio__tab__details p{
+  font-size: 20px;
+  font-weight: 400;
+  color: #484848  ;
+  line-height: 1.8;
+  text-align: justify;
+  text-justify: inter-word;
+}
