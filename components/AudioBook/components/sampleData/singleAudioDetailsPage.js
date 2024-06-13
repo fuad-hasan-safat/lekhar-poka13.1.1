@@ -1,7 +1,7 @@
 export const singleAudioData = {
     title: 'আমি গাধা বলছি',
     category: '১৮+ গল্প',
-    category_icon: '/audioBook/audioCatIcon/18plus.png',
+    category_icon: '/audioBook/audioCatIcon/18+.svg',
     writer: 'মোস্তফা হারুন',
     banner_img: '/audioBook/audioCatBanner/Ami-gadha-bolchi-200x300.jpg',
     lisening_time: '100000',
