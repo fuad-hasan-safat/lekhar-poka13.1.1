@@ -2495,6 +2495,7 @@ transition: all 0.5s !important;
 .audio__playlist__item{
   display: flex;
   justify-content: space-between;
+  align-items: center;
   
 }
 
