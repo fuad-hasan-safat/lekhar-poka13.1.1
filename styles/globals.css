@@ -2513,12 +2513,14 @@ transition: all 0.5s !important;
   font-size: 28px;
   font-weight: 600;
   color:#F9A106;
+  padding-top: 10px;
 }
 
 .audio__tab__info p{
   font-size: 10px;
   font-weight: 400;
   color:#5D5A88;
+ 
 }
 .audio__tab__playbutton{
   color:#FCD200 ;

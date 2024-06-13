@@ -68,6 +68,7 @@ export default function AudioTabSingleItem({ songInfo }) {
 
             <div className='audio__tab__playbutton'>
                 <button onClick={togglePlayPause}>{isPlaying ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</button>
+                <button className='text-[#484848] text-opacity-[50%] ml-[18px]'><i class="ri-add-circle-fill"></i></button>
             </div>
 
         </div>
