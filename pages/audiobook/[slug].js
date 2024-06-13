@@ -1,9 +1,6 @@
 import Head from 'next/head';
-import Procchod from '../components/procchod/Procchod';
-import { ImageSlider } from '../components/slider/ImageSlider';
-import AduioBookHome from '../components/AudioBook/AudioBookHome';
-import PlayList from '../components/AudioBook/components/audioPlaylist/PlayList';
-import AudioDetailsSideBar from '../components/AudioBook/components/audioSidebar/AudioDetailsSidebar';
+
+import AudioDetailsSideBar from '../../components/AudioBook/components/audioSidebar/AudioDetailsSidebar';
 
 export default function Home() {
 
@@ -11,7 +8,7 @@ export default function Home() {
         <>
             <div>
                 <Head>
-                    <title>DELETE KOrte hobe </title>
+                    <title>Single AUdio</title>
                 </Head>
 
                 <div className='container flex flex-row lg:pt-[95px] md:pt-[90px] sm:pt-[92px]'>
