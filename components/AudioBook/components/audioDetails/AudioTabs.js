@@ -4,6 +4,7 @@ import Summary from './Summary';
 import CommentsOfWriter from './CommentsOfWriter';
 import Rating from './Rating';
 import AudioTabComponent from './AudioTabComponent';
+import AudioPlayer from '../../AudioPlayer/AudioPlayer';
 
 
 const AudioTabs = ({ audioData }) => {
@@ -16,6 +17,7 @@ const AudioTabs = ({ audioData }) => {
 
   const getActiveClass = (index, className) =>
     ToggleState === index ? className : "";
+
 
   return (
     <div className="audio__tabs__wrap">
@@ -58,6 +60,7 @@ const AudioTabs = ({ audioData }) => {
           {ToggleState === 5 && <Rating userComments={audioData?.rating} />}
         </div>
       </div>
+      <AudioPlayer songs={audioData?.audio}/>
     </div>
   );
 };

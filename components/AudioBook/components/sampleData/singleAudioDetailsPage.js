@@ -10,28 +10,33 @@ export const singleAudioData = {
     audio: [
 
         {
-            title: 'আমি গাধা বলছি পর্ব ১',
+            id: 1,
+            title: 'ফেরো নাজারিয়া',
+            audio:  '/audioBook/audioFileDemo/Phero Na Najariya.mp3',
+            image: '/audioBook/demoCatImage/cover 1.jpg',
+        },
+        {
+            id: 2,
+            title: 'বুলবুলি',
+            audio: '/audioBook/audioFileDemo/Bulbuli  Coke Studio Bangla  Season One  Ritu Raj X Nandita.mp3',
+            image: '/audioBook/demoCatImage/cover 1.jpg',
+        },
+        {
+            id: 3,
+            title: 'ও সঙ্গী',
             audio: '/audioBook/audioFileDemo/O Sangi  Sukheri Chowate  Lyrical Song  Mita Chatterjee  Bengali Hit Songs  Atlantis Music.mp3',
             image: '/audioBook/demoCatImage/cover 1.jpg',
         },
         {
-            title: 'আমি গাধা বলছি পর্ব ১',
-            audio: '/audioBook/audioFileDemo/O Sangi  Sukheri Chowate  Lyrical Song  Mita Chatterjee  Bengali Hit Songs  Atlantis Music.mp3',
+            id: 4,
+            title: 'বুলবুলি',
+            audio: '/audioBook/audioFileDemo/Bulbuli  Coke Studio Bangla  Season One  Ritu Raj X Nandita.mp3',
             image: '/audioBook/demoCatImage/cover 1.jpg',
         },
         {
-            title: 'আমি গাধা বলছি পর্ব ১',
-            audio: '/audioBook/audioFileDemo/O Sangi  Sukheri Chowate  Lyrical Song  Mita Chatterjee  Bengali Hit Songs  Atlantis Music.mp3',
-            image: '/audioBook/demoCatImage/cover 1.jpg',
-        },
-        {
-            title: 'আমি গাধা বলছি পর্ব ১',
-            audio: '/audioBook/audioFileDemo/O Sangi  Sukheri Chowate  Lyrical Song  Mita Chatterjee  Bengali Hit Songs  Atlantis Music.mp3',
-            image: '/audioBook/demoCatImage/cover 1.jpg',
-        },
-        {
-            title: 'আমি গাধা বলছি পর্ব ১',
-            audio: '/audioBook/audioFileDemo/O Sangi  Sukheri Chowate  Lyrical Song  Mita Chatterjee  Bengali Hit Songs  Atlantis Music.mp3',
+            id: 5,
+            title: 'ফেরো নাজারিয়া',
+            audio:  '/audioBook/audioFileDemo/Phero Na Najariya.mp3',
             image: '/audioBook/demoCatImage/cover 1.jpg',
         }
     ],
