@@ -2,12 +2,13 @@ import React from 'react'
 import Sidebar from '../../../sidebar/Sidebar'
 import AudioCategory from './audioCategory/AudioCategory'
 import AudioSlider from '../audioSlider/AudioSlider'
+import AudioPlaylistContextProvider from '../../../store/audioPlayer-context'
 
 
 
 export default function AudioHomePage() {
   return (
-    <>
+    <AudioPlaylistContextProvider>
     <section className='hm__audio__section'>
         <div className='container'>
             <div className='hm__audio__wrap clearfix'>
@@ -23,6 +24,6 @@ export default function AudioHomePage() {
             </div>
         </div>
     </section>
-    </>
+    </AudioPlaylistContextProvider>
   )
 }

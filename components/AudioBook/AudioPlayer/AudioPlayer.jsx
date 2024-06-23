@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 import {
   MdPlayArrow,
   MdPause,
@@ -29,12 +30,21 @@ export default function AudioPlayer({ songs }) {
   var currentSong = songs[currentSongIndex];
   console.log(songs)
 
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+
+
   useEffect(() => {
     currentSong = songs[currentSongIndex];
   })
 
   useEffect(() => {
-    setDuration(audioPlayer.current.duration);
+    setDuration(audioPlayer?.current?.duration);
 
   }, [currentSong]);
 
@@ -157,14 +167,17 @@ export default function AudioPlayer({ songs }) {
 
   };
 
-  return (
+
+  if (!mounted) return null;
+
+  return createPortal((
     <>
       <div className="audio-player-wrap fixed text-black  backdrop-blur-lg  place-content-center text-center justify-center bottom-[0] bg-yellow-500/30  w-full h-[140px] z-[999999]">
         <div className="container lg:flex lg:flex-row justify-center content-center lg:space-x-16">
           <div className="items-center content-center justify-center z-[200] w-[300px]">
             {/* song info */}
             <div className="lg:flex lg:flex-row lg:w-[380px] space-x-2  md:hidden sm:hidden xs:hidden">
-              
+
               <div className="">
                 <img
                   src={currentSong?.image}
@@ -176,7 +189,7 @@ export default function AudioPlayer({ songs }) {
               </div>
 
               <div className="lg:flex lg:flex-col text-gray-600 lg:space-y-2">
-               
+
                 <div className="">
                   <div className="text-xl  font-bold">{currentSong?.title}</div>
                 </div>
@@ -281,7 +294,7 @@ export default function AudioPlayer({ songs }) {
 
               </div>
               {/*   notes */}
-              
+
               <button>
                 <img src="/images/icons/ic_songlist.svg"></img>
               </button>
@@ -291,7 +304,7 @@ export default function AudioPlayer({ songs }) {
         </div>
       </div>
     </>
-  );
+  ), document.getElementById('audio-root'));
 }
 
 function formatTime(seconds) {
