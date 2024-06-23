@@ -43,7 +43,7 @@ export default function AudioPlayer() {
 
 
   useEffect(() => {
-    currentSong = songs[currentSongIndex];
+    currentSong = songs[currentPlayingIndex];
   })
 
   useEffect(() => {
@@ -183,7 +183,7 @@ export default function AudioPlayer() {
                   <MdSkipPrevious />
                 </button>
 
-                <button className="text-4xl" onClick={toggleAudioPlay}>
+                <button className="text-4xl" onClick={()=>toggleAudioPlay(currentPlayingIndex)}>
                   {isAudioPlaying ?
                     //  <MdPause /> 
                     <>
