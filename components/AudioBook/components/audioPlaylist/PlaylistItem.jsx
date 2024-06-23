@@ -38,11 +38,11 @@ export default function PlaylistItem({ songInfo }) {
 
     const togglePlayPause = () => {
         const audioElement = audioRef.current;
-        if (isPlaying) {
-            audioElement.pause();
-        } else {
-            audioElement.play();
-        }
+        // if (isPlaying) {
+        //     audioElement.pause();
+        // } else {
+        //     audioElement.play();
+        // }
         setIsPlaying(!isPlaying);
     };
 

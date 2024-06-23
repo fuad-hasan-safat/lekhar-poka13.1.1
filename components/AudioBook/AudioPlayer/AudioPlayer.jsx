@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { createPortal } from "react-dom";
 import {
   MdPlayArrow,
@@ -12,13 +12,17 @@ import {
 } from "react-icons/md";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { useRouter } from "next/navigation";
+import { AudioPlayListContext } from "../../store/audioPlayer-context";
+
+export default function AudioPlayer() {
+
+  const { playList, currentPlayingIndex, nextSongPlay, prevSongPlay, toggleAudioPlay, isAudioPlaying } = useContext(AudioPlayListContext)
 
 
-export default function AudioPlayer({ songs }) {
-  const router = useRouter();
+
+  const songs = playList;
   const audioPlayer = useRef(null);
-  const [currentSongIndex, setCurrentSongIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentSongIndex, setCurrentSongIndex] = useState(currentPlayingIndex);
   const [isShuffle, setIsShuffle] = useState(false);
   const [isRepeat, setIsRepeat] = useState(false);
   const [volume, setVolume] = useState(0.5);
@@ -27,10 +31,9 @@ export default function AudioPlayer({ songs }) {
   const [isMute, setIsMute] = useState(false);
 
 
-  var currentSong = songs[currentSongIndex];
-  console.log(songs)
 
 
+  var currentSong = songs[currentPlayingIndex];
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -50,7 +53,7 @@ export default function AudioPlayer({ songs }) {
 
   useEffect(() => {
 
-    if (isPlaying) {
+    if (isAudioPlaying) {
 
       audioPlayer.current?.play();
 
@@ -60,37 +63,8 @@ export default function AudioPlayer({ songs }) {
 
     }
 
-  }, [isPlaying, currentSong]);
+  }, [isAudioPlaying, currentSong]);
 
-  const togglePlay = () => {
-
-    setIsPlaying(!isPlaying);
-
-  };
-
-  const playNextSong = () => {
-
-    setCurrentSongIndex((prevIndex) =>
-      isShuffle
-        ? Math.floor(Math.random() * songs.length)
-        : prevIndex === songs.length - 1
-          ? 0
-          : prevIndex + 1
-    );
-
-  };
-
-  const playPreviousSong = () => {
-
-    setCurrentSongIndex((prevIndex) =>
-      isShuffle
-        ? Math.floor(Math.random() * songs.length)
-        : prevIndex === 0
-          ? songs.length - 1
-          : prevIndex - 1
-    );
-
-  };
 
   const toggleShuffle = () => {
     setIsShuffle(!isShuffle);
@@ -112,29 +86,10 @@ export default function AudioPlayer({ songs }) {
     if (isRepeat) {
       audioPlayer.current?.play();
     } else {
-      playNextSong();
+      nextSongPlay();
     }
   };
 
-  const handleNextSong = () => {
-    if (isPlaying) {
-      playNextSong();
-    } else {
-      setCurrentSongIndex((prevIndex) =>
-        prevIndex === songs.length - 1 ? 0 : prevIndex + 1
-      );
-    }
-  };
-
-  const handlePreviousSong = () => {
-    if (isPlaying) {
-      playPreviousSong();
-    } else {
-      setCurrentSongIndex((prevIndex) =>
-        prevIndex === 0 ? songs.length - 1 : prevIndex - 1
-      );
-    }
-  };
 
   const handleProgressClick = (e) => {
 
@@ -169,6 +124,8 @@ export default function AudioPlayer({ songs }) {
 
 
   if (!mounted) return null;
+
+  if (songs.length <= 0) return null;
 
   return createPortal((
     <>
@@ -222,12 +179,12 @@ export default function AudioPlayer({ songs }) {
                   <MdShuffle />
                 </button>
 
-                <button onClick={handlePreviousSong}>
+                <button onClick={prevSongPlay}>
                   <MdSkipPrevious />
                 </button>
 
-                <button className="text-4xl" onClick={togglePlay}>
-                  {isPlaying ?
+                <button className="text-4xl" onClick={toggleAudioPlay}>
+                  {isAudioPlaying ?
                     //  <MdPause /> 
                     <>
                       <img
@@ -240,7 +197,7 @@ export default function AudioPlayer({ songs }) {
                     />}
                 </button>
 
-                <button onClick={handleNextSong}>
+                <button onClick={nextSongPlay}>
                   <MdSkipNext />
                 </button>
 
