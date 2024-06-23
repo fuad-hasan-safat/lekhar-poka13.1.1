@@ -99,6 +99,16 @@ hm audio recent slide item innr
 .hm__audio__recent__slide__item{
     padding: 0 15px;
 }
+.see__more__list__wrap{
+    margin: 0 -10px;
+    padding: 0 20px;
+}
+.see__more__list__wrap .hm__audio__recent__slide__item{
+    width: 33.3333%;
+    padding: 0 10px 20px;
+    float: left;
+    padding-bottom: 20px;
+}
 .hm__audio__recent__slide__item__innr{
     border: 1px solid #D4D2E3;
     border-radius: 16px;

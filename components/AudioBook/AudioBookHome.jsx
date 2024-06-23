@@ -54,7 +54,7 @@ const AudioBookHome = () => {
                 <div className='hm__audio__recent__wrap'>
                     <div className='hm__audio__see__more'>
                         <h3>সাম্প্রতিক</h3>
-                        <Link className='hm__audio__common__btn' href='#'>সব দেখুন</Link>
+                        <Link className='hm__audio__common__btn' href='/seemorelist'>সব দেখুন</Link>
                     </div>
                     <AudioRecentSlider />
                 </div>
