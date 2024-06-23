@@ -80,7 +80,9 @@ export default function AudioPlaylistContextProvider({ children }) {
         }
       };
 
-      const togglePlay = () => {
+      const togglePlay = (index) => {
+
+        setCurrentAudioIndex(index)
 
         setIsPlaying(!isPlaying);
     
