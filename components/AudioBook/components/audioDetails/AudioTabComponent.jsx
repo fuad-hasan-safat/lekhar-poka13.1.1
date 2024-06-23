@@ -9,7 +9,7 @@ export default function AudioTabComponent({audioData}) {
       
          return(
              <div key={index} className='audio__tab__wrap'>
-                 <AudioTabSingleItem songInfo={songInfo} />
+                 <AudioTabSingleItem songInfo={songInfo} audioIndex = {index} />
              </div>
  
          )

@@ -18,7 +18,6 @@ export function convertToBengaliNumerals(number) {
 export function convertToBengaliDate(dateStr) {
     // Parse the date string
     const date = new Date(dateStr);
-    console.log('date::::::::::',dateStr)
     // // Extract year, month, and day
     const year = date.getFullYear();
     const month = ('0' + (date.getMonth() + 1)).slice(-2); // getMonth() returns month index (0-11), so we add 1
@@ -48,8 +47,5 @@ export function convertToBanglaPhoneNumber(engNumber){
 
     }
    
-    // console.log('Number',engNumber)
-    // const bengaliNumberStr = convertToBengaliNumerals(parseInt(engNumber));
-    // console.log('Number',bengaliNumberStr)
-    // return bengaliNumberStr;
+
 }

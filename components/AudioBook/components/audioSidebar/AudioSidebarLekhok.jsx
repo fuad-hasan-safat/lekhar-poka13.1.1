@@ -18,7 +18,6 @@ export default function AudioSidebarLekhok() {
             .then((response) => response.json())
             .then((data) => {
                 setLekhokList(data);
-                console.log('side  bar lekhok AUDIO', data)
                 getVisibleWriters(data?.slice(0,4))
             })
             .catch((error) => console.error("Error fetching data:", error));

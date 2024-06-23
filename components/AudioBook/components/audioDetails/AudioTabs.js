@@ -1,23 +1,37 @@
-import React, { useState } from 'react';
+'use client'
+
+import React, { useContext, useEffect, useState } from 'react';
 import TechnicalDetails from './technicalDetails';
 import Summary from './Summary';
 import CommentsOfWriter from './CommentsOfWriter';
 import Rating from './Rating';
 import AudioTabComponent from './AudioTabComponent';
 import AudioPlayer from '../../AudioPlayer/AudioPlayer';
+import { AudioPlayListContext } from '../../../store/audioPlayer-context'
+import { singleAudioData } from '../sampleData/singleAudioDetailsPage';
 
+const AudioTabs = () => {
 
-const AudioTabs = ({ audioData }) => {
-
+  const {setPlaylist} = useContext(AudioPlayListContext);
   const [ToggleState, setToggleState] = useState(1);
+
+  useEffect(() => {
+    setPlaylist(singleAudioData.audio)
+  }, [])
+  
 
   const toggleTab = (index) => {
     setToggleState(index);
+
   };
 
   const getActiveClass = (index, className) =>
     ToggleState === index ? className : "";
 
+
+
+
+ 
 
   return (
     <>
@@ -26,7 +40,7 @@ const AudioTabs = ({ audioData }) => {
         <ul className="tab-list">
           <li
             className={`tabs ${getActiveClass(1, "active-tabs")}`}
-            onClick={() => toggleTab(1)}
+            onClick={() => {toggleTab(1);}}
           >
             অডিও
           </li>
@@ -55,15 +69,15 @@ const AudioTabs = ({ audioData }) => {
         <div className="audio__tab__content">
 
           <div className={`content ${getActiveClass(ToggleState, "active-content")}`}>
-            {ToggleState === 1 && <AudioTabComponent audioData={audioData?.audio} />}
-            {ToggleState === 2 && <Summary summary={audioData?.summary} />}
-            {ToggleState === 3 && <TechnicalDetails technicalDetails={audioData?.technical_team} />}
-            {ToggleState === 4 && <CommentsOfWriter commentsOfWriter={audioData?.comment_of_writer} />}
-            {ToggleState === 5 && <Rating userComments={audioData?.rating} />}
+            {ToggleState === 1 && <AudioTabComponent audioData={singleAudioData?.audio} />}
+            {ToggleState === 2 && <Summary summary={singleAudioData?.summary} />}
+            {ToggleState === 3 && <TechnicalDetails technicalDetails={singleAudioData?.technical_team} />}
+            {ToggleState === 4 && <CommentsOfWriter commentsOfWriter={singleAudioData?.comment_of_writer} />}
+            {ToggleState === 5 && <Rating userComments={singleAudioData?.rating} />}
           </div>
         </div>
       </div>
-      <AudioPlayer songs={audioData?.audio} />
+      <AudioPlayer />
     </>
   );
 };
