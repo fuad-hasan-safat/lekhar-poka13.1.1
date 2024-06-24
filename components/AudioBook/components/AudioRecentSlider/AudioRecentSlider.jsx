@@ -66,6 +66,32 @@ const AudioRecentSlider = () => {
         speed: 500,
         slidesToShow: 6,
         slidesToScroll: 1,
+        responsive: [
+            {
+              breakpoint: 1299,
+              settings: {
+                slidesToShow: 5,
+                slidesToScroll: 1,
+                infinite: true,
+                dots: false
+              }
+            },
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2,
+                initialSlide: 2
+              }
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+              }
+            }
+          ]
       };
 
     return (
