@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { audioList } from '../sampleData/samprotikData';
 
-const SeeMoreListGrid = () => {
+export default function SeeMoreListGrid(audioData) {
+    console.log(audioData.audioData)
     const [displayCount, setDisplayCount] = useState(6);
     const [loading, setLoading] = useState(false);
     const [inViewRef, inView] = useInView({
@@ -14,7 +14,7 @@ const SeeMoreListGrid = () => {
         if (inView && !loading) {
             setLoading(true);
             setTimeout(() => {
-                setDisplayCount((prevCount) => Math.min(prevCount + 3, audioList.length));
+                setDisplayCount((prevCount) => Math.min(prevCount + 3, audioData.audioData.length));
                 setLoading(false);
             }, 1500);
         }
@@ -22,7 +22,7 @@ const SeeMoreListGrid = () => {
 
     return (
         <div>
-            {audioList.slice(0, displayCount).map((item, index) => (
+            {audioData.audioData.slice(0, displayCount).map((item, index) => (
                 <div key={index} className='hm__audio__recent__slide__item'>
                     <div className='hm__audio__recent__slide__item__innr'>
                         <div className='hm__audio__recent__slide__item__img'>
@@ -45,4 +45,3 @@ const SeeMoreListGrid = () => {
     );
 };
 
-export default SeeMoreListGrid;
