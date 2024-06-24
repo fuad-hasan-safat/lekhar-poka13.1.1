@@ -101,7 +101,7 @@ hm audio recent slide item innr
 }
 .see__more__list__wrap{
     margin: 0 -10px;
-    padding: 0 20px;
+    padding-right: 30px;
 }
 .see__more__list__wrap .hm__audio__recent__slide__item{
     width: 33.3333%;
