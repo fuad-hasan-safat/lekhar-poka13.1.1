@@ -7,19 +7,11 @@ import CommentsOfWriter from './CommentsOfWriter';
 import Rating from './Rating';
 import AudioTabComponent from './AudioTabComponent';
 import AudioPlayer from '../../AudioPlayer/AudioPlayer';
-import { AudioPlayListContext } from '../../../store/audioPlayer-context'
-import { singleAudioData } from '../sampleData/singleAudioDetailsPage';
 
 const AudioTabs = () => {
 
-  const {setPlaylist} = useContext(AudioPlayListContext);
   const [ToggleState, setToggleState] = useState(1);
-
-  useEffect(() => {
-    setPlaylist(singleAudioData.audio)
-  }, [])
   
-
   const toggleTab = (index) => {
     setToggleState(index);
 
@@ -69,7 +61,7 @@ const AudioTabs = () => {
         <div className="audio__tab__content">
 
           <div className={`content ${getActiveClass(ToggleState, "active-content")}`}>
-            {ToggleState === 1 && <AudioTabComponent audioData={singleAudioData?.audio} />}
+            {ToggleState === 1 && <AudioTabComponent/>}
             {ToggleState === 2 && <Summary summary={singleAudioData?.summary} />}
             {ToggleState === 3 && <TechnicalDetails technicalDetails={singleAudioData?.technical_team} />}
             {ToggleState === 4 && <CommentsOfWriter commentsOfWriter={singleAudioData?.comment_of_writer} />}
