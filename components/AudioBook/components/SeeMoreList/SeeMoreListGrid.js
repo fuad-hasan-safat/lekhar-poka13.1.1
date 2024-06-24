@@ -1,106 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-
-const initialData = [
-    {
-        image: '/audioBook/audio-slider/audio-slider-img-1.png',
-        title: 'তিন গোয়েন্দা',
-        kText: 'লেখক : রকিব হাসান',
-        vText: 'কন্ঠ: রকিব হাসান তুষার',
-        time: '১:৪১ মিনিট',
-    },
-    {
-        image: '/audioBook/audio-slider/audio-slider-img-2.png',
-        title: 'তিন গোয়েন্দা',
-        kText: 'লেখক : রকিব হাসান',
-        vText: 'কন্ঠ: রকিব হাসান তুষার',
-        time: '১:৪১ মিনিট',
-    },
-    {
-        image: '/audioBook/audio-slider/audio-slider-img-3.png',
-        title: 'তিন গোয়েন্দা',
-        kText: 'লেখক : রকিব হাসান',
-        vText: 'কন্ঠ: রকিব হাসান তুষার',
-        time: '১:৪১ মিনিট',
-    },
-    {
-        image: '/audioBook/audio-slider/audio-slider-img-4.png',
-        title: 'তিন গোয়েন্দা',
-        kText: 'লেখক : রকিব হাসান',
-        vText: 'কন্ঠ: রকিব হাসান তুষার',
-        time: '১:৪১ মিনিট',
-    },
-    {
-        image: '/audioBook/audio-slider/audio-slider-img-5.png',
-        title: 'তিন গোয়েন্দা',
-        kText: 'লেখক : রকিব হাসান',
-        vText: 'কন্ঠ: রকিব হাসান তুষার',
-        time: '১:৪১ মিনিট',
-    },
-    {
-        image: '/audioBook/audio-slider/audio-slider-img-6.png',
-        title: 'তিন গোয়েন্দা',
-        kText: 'লেখক : রকিব হাসান',
-        vText: 'কন্ঠ: রকিব হাসান তুষার',
-        time: '১:৪১ মিনিট',
-    },
-    {
-        image: '/audioBook/audio-slider/audio-slider-img-1.png',
-        title: 'তিন গোয়েন্দা',
-        kText: 'লেখক : রকিব হাসান',
-        vText: 'কন্ঠ: রকিব হাসান তুষার',
-        time: '১:৪১ মিনিট',
-    },
-    {
-        image: '/audioBook/audio-slider/audio-slider-img-1.png',
-        title: 'তিন গোয়েন্দা',
-        kText: 'লেখক : রকিব হাসান',
-        vText: 'কন্ঠ: রকিব হাসান তুষার',
-        time: '১:৪১ মিনিট',
-    },
-    {
-        image: '/audioBook/audio-slider/audio-slider-img-2.png',
-        title: 'তিন গোয়েন্দা',
-        kText: 'লেখক : রকিব হাসান',
-        vText: 'কন্ঠ: রকিব হাসান তুষার',
-        time: '১:৪১ মিনিট',
-    },
-    {
-        image: '/audioBook/audio-slider/audio-slider-img-3.png',
-        title: 'তিন গোয়েন্দা',
-        kText: 'লেখক : রকিব হাসান',
-        vText: 'কন্ঠ: রকিব হাসান তুষার',
-        time: '১:৪১ মিনিট',
-    },
-    {
-        image: '/audioBook/audio-slider/audio-slider-img-4.png',
-        title: 'তিন গোয়েন্দা',
-        kText: 'লেখক : রকিব হাসান',
-        vText: 'কন্ঠ: রকিব হাসান তুষার',
-        time: '১:৪১ মিনিট',
-    },
-    {
-        image: '/audioBook/audio-slider/audio-slider-img-5.png',
-        title: 'তিন গোয়েন্দা',
-        kText: 'লেখক : রকিব হাসান',
-        vText: 'কন্ঠ: রকিব হাসান তুষার',
-        time: '১:৪১ মিনিট',
-    },
-    {
-        image: '/audioBook/audio-slider/audio-slider-img-6.png',
-        title: 'তিন গোয়েন্দা',
-        kText: 'লেখক : রকিব হাসান',
-        vText: 'কন্ঠ: রকিব হাসান তুষার',
-        time: '১:৪১ মিনিট',
-    },
-    {
-        image: '/audioBook/audio-slider/audio-slider-img-1.png',
-        title: 'তিন গোয়েন্দা',
-        kText: 'লেখক : রকিব হাসান',
-        vText: 'কন্ঠ: রকিব হাসান তুষার',
-        time: '১:৪১ মিনিট',
-    },
-];
+import { audioList } from '../sampleData/samprotikData';
 
 const SeeMoreListGrid = () => {
     const [displayCount, setDisplayCount] = useState(6);
@@ -114,7 +14,7 @@ const SeeMoreListGrid = () => {
         if (inView && !loading) {
             setLoading(true);
             setTimeout(() => {
-                setDisplayCount((prevCount) => Math.min(prevCount + 3, initialData.length));
+                setDisplayCount((prevCount) => Math.min(prevCount + 3, audioList.length));
                 setLoading(false);
             }, 1500);
         }
@@ -122,7 +22,7 @@ const SeeMoreListGrid = () => {
 
     return (
         <div>
-            {initialData.slice(0, displayCount).map((item, index) => (
+            {audioList.slice(0, displayCount).map((item, index) => (
                 <div key={index} className='hm__audio__recent__slide__item'>
                     <div className='hm__audio__recent__slide__item__innr'>
                         <div className='hm__audio__recent__slide__item__img'>
@@ -130,10 +30,10 @@ const SeeMoreListGrid = () => {
                         </div>
                         <div className='hm__audio__recent__slide__dsc'>
                             <h5>{item.title}</h5>
-                            <p>{item.kText}</p>
+                            <p>{item.writer}</p>
                             <ul className='clearfix reset-list'>
-                                <li>{item.vText}</li>
-                                <li><i className="ri-time-line"></i> {item.time}</li>
+                                <li>{item.voice}</li>
+                                <li><i className="ri-time-line"></i> {item.duration}</li>
                             </ul>
                         </div>
                     </div>
