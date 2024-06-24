@@ -2,7 +2,7 @@ import React from 'react'
 
 import PlaylistItem from './PlaylistItem'
 
-export default function PlayList({ audioPlaylist }) {
+export default function PlayList({ audioPlaylist, audioScope }) {
   return (
     <>
       {audioPlaylist.map((songInfo, index) => {
@@ -10,7 +10,7 @@ export default function PlayList({ audioPlaylist }) {
 
         return (
           <div key={index} className='audio__playlist__wrap'>
-            <PlaylistItem songInfo={songInfo} songIndex={index} />
+            <PlaylistItem songInfo={songInfo} songIndex={index} songList={audioPlaylist} audioScope = {audioScope} />
             {index + 1 < length && <div className='audio__playlist__devider'>
               <hr></hr>
             </div>}

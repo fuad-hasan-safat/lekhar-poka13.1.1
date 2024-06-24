@@ -16,7 +16,7 @@ import { AudioPlayListContext } from "../../store/audioPlayer-context";
 
 export default function AudioPlayer() {
 
-  const { playList, currentPlayingIndex, nextSongPlay, prevSongPlay, toggleAudioPlay, isAudioPlaying } = useContext(AudioPlayListContext)
+  const { playList, currentPlayingIndex, audioPlace, nextSongPlay, prevSongPlay, toggleAudioPlay, isAudioPlaying } = useContext(AudioPlayListContext)
 
 
 
@@ -183,7 +183,7 @@ export default function AudioPlayer() {
                   <MdSkipPrevious />
                 </button>
 
-                <button className="text-4xl" onClick={()=>toggleAudioPlay(currentPlayingIndex)}>
+                <button className="text-4xl" onClick={()=>toggleAudioPlay(currentPlayingIndex, playList, audioPlace)}>
                   {isAudioPlaying ?
                     //  <MdPause /> 
                     <>

@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 
 export const AudioPlayListContext = createContext({
   playList: [],
+  audioPlace: '',
   isAudioPlaying: false,
   isAudiobarVisible: false,
   currentPlayingIndex: 0,
@@ -15,6 +16,7 @@ export const AudioPlayListContext = createContext({
 export default function AudioPlaylistContextProvider({ children }) {
   const [audioBar, setAudioBar] = useState({
     playList: [],
+    audioPlace:'',
     isAudiobarVisible: false,
   });
   const [currentPlayingIndex, setCurrentPlayingIndex] = useState(0)
@@ -80,13 +82,14 @@ export default function AudioPlaylistContextProvider({ children }) {
     }
   };
 
-  function togglePlay (songIndex){
-    console.log({songIndex})
+  function togglePlay(songIndex, songList, audioScope) {
+    console.log({ songIndex, songList })
 
-    if (songIndex !== -1) {
-      setCurrentAudioIndex(songIndex)
-    }
 
+    setCurrentAudioIndex(songIndex)
+
+//  audioScope: 'details'(details page), 'latestPlayList', 'myPlayList'
+    setAudioBar((prevAudioBar) => ({ ...prevAudioBar, playList: songList, audioPlace: audioScope }))
     setIsPlaying(!isPlaying);
 
   };
@@ -94,6 +97,7 @@ export default function AudioPlaylistContextProvider({ children }) {
 
   const cntxValue = {
     playList: audioBar.playList,
+    audioPlace: audioBar.audioPlace,
     isAudioPlaying: isPlaying,
     currentPlayingIndex: currentPlayingIndex,
     isAudiobarVisible: audioBar.isAudiobarVisible,

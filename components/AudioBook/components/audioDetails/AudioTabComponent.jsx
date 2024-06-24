@@ -1,7 +1,11 @@
 import React, { Fragment } from 'react'
 import AudioTabSingleItem from './audioList/AudioTabSilgleItem';
 
-export default function AudioTabComponent({audioData}) {
+import { singleAudioData } from '../sampleData/singleAudioDetailsPage';
+
+
+export default function AudioTabComponent() {
+  const audioData = singleAudioData.audio;
   return (
     <div className='w-full'>
       {audioData?.map((songInfo, index)=>{
@@ -9,7 +13,7 @@ export default function AudioTabComponent({audioData}) {
       
          return(
              <div key={index} className='audio__tab__wrap'>
-                 <AudioTabSingleItem songInfo={songInfo} audioIndex = {index} />
+                 <AudioTabSingleItem songInfo={songInfo} audioIndex = {index} audioList={audioData} />
              </div>
  
          )

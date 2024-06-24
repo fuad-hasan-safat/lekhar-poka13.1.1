@@ -19,7 +19,7 @@ export default function AudioDetailsSideBar() {
                     <div className='py-[10px]'>
                         <hr></hr>
                     </div>
-                    <PlayList audioPlaylist={audioPlaylist} />
+                    <PlayList audioPlaylist={audioPlaylist} audioScope={'latestPlayList'}/>
                     <div className='hm__audio__see__more'>
                         <Link className='sidebar__audio__common__btn' href='#'>সব দেখুন</Link>
                     </div>
@@ -40,7 +40,7 @@ export default function AudioDetailsSideBar() {
                     <div className='py-[10px]'>
                         <hr></hr>
                     </div>
-                    <PlayList audioPlaylist={audioPlaylist}/>
+                    <PlayList audioPlaylist={audioPlaylist} audioScope={'myPlayList'}/>
                     <div className='hm__audio__see__more'>
                         <Link className='sidebar__audio__common__btn' href='#'>সব দেখুন</Link>
                     </div>
