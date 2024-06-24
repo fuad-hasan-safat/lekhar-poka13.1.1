@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 const initialData = [
-    // Your data here
     {
         image: '/audioBook/audio-slider/audio-slider-img-1.png',
         title: 'তিন গোয়েন্দা',
@@ -105,37 +105,20 @@ const initialData = [
 const SeeMoreListGrid = () => {
     const [displayCount, setDisplayCount] = useState(6);
     const [loading, setLoading] = useState(false);
-    const observerRef = useRef();
+    const [inViewRef, inView] = useInView({
+        triggerOnce: true,
+        rootMargin: '0px 0px 200px 0px',
+    });
 
     useEffect(() => {
-        observerRef.current = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-                loadMoreData();
-            }
-        });
-        
-        const target = document.querySelector('#load-more-trigger');
-        if (target) {
-            observerRef.current.observe(target);
+        if (inView && !loading) {
+            setLoading(true);
+            setTimeout(() => {
+                setDisplayCount((prevCount) => Math.min(prevCount + 3, initialData.length));
+                setLoading(false);
+            }, 1500);
         }
-
-        return () => {
-            if (observerRef.current) {
-                observerRef.current.disconnect();
-            }
-        };
-    }, []);
-
-    const loadMoreData = () => {
-        if (loading) return;
-
-        setLoading(true);
-
-        setTimeout(() => {
-            setDisplayCount((prevCount) => Math.min(prevCount + 3, initialData.length));
-            setLoading(false);
-        }, 1500);
-    };
+    }, [inView, loading]);
 
     return (
         <div>
@@ -156,8 +139,8 @@ const SeeMoreListGrid = () => {
                     </div>
                 </div>
             ))}
-            <div id="load-more-trigger" style={{ height: '1px' }}></div>
-            {loading && <p>Loading more content...</p>}
+            {loading && <p></p>}
+            <div ref={inViewRef} />
         </div>
     );
 };
