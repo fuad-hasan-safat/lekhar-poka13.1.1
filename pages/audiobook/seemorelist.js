@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
 import Sidebar from '../../components/sidebar/Sidebar';
-import SeeMoreListGrid from '../../components/AudioBook/components/SeeMoreListGrid/SeeMoreListGrid';
+import SeeMoreListGrid from '../../components/AudioBook/components/SeeMoreList/SeeMoreListGrid';
 
 
 
