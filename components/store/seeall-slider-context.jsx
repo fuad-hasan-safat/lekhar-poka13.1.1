@@ -15,6 +15,8 @@ export default function SeeAllSliderContextProvider({children}){
     });
 
     function setSliderInformation(updatetype, updateCategory){
+        localStorage.setItem("slideType", updatetype);
+        localStorage.setItem("slideCategory", updateCategory);
         setSliderInfo((prevSlideInfo)=>({...prevSlideInfo, sliderType:updatetype, category: updateCategory}))
     }
 
