@@ -277,7 +277,8 @@ Bg Slider Css
 @media(max-width:1399px){
     .hmCategorySlider,
     .hmRecentSlider {
-        margin: 0 -10px;
+        margin-left: -10px;
+        margin-right: -10px;
     }
     .hm__audio__recent__slide__item {
         padding: 0 10px;
@@ -288,19 +289,59 @@ Bg Slider Css
     
 }
 @media(max-width:1199px){
-    
+    .hmCategorySlider .slick-next {
+        right:0;
+        z-index: 999;
+    }
+    .hmCategorySlider .slick-prev {
+        left:0;
+        z-index: 999;
+    }
 }
 @media(max-width:991px){
-    
+    .see__more__list__wrap {
+        padding-right: 0;
+    }
+    .hmCategorySlider .slick-next {
+        right:0;
+        z-index: 999;
+    }
+    .hmCategorySlider .slick-prev {
+        left:0;
+        z-index: 999;
+    }
 }
 @media(max-width:767px){
-    
+    .see__more__list__wrap .hm__audio__recent__slide__item {
+        width: 50%;
+    }
 }
 @media(max-width:575px){
     
 }
 @media(max-width:479px){
-    
+    .hm__audio__book__sec {
+        padding: 50px 0 0;
+    }
+    .audiu__logo a {
+        max-width: 220px;
+        width: 100%;
+    }
+    .hm__audio__slide__item p {
+        font-size: 17px;
+        margin-top: 20px;
+        margin-bottom: 25px;
+    }
+    .hm__audio__see__more h3 {
+        font-size: 22px;
+    }
+    .hm__audio__common__btn {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+    .see__more__list__wrap .hm__audio__recent__slide__item {
+        width: 100%;
+    }
 }
 
 

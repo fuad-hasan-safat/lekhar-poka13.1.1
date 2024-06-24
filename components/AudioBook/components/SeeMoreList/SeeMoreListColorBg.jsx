@@ -27,8 +27,7 @@ export default function SeeMoreListBackground(audioData) {
                 const color = iteam?.color;
                 console.log({ color, iteam })
                 return (
-                    <div className='backgroundSlider__single__wrap'>
-
+                    <div className='backgroundSlider__single__wrap backgroundSlider__single'>
                         <div key={index} className='backgroundSlider__single__iteam' style={{ backgroundColor: `${color}` }}>
                             <div className='audio__bgslider__image'>
                                 <img src={iteam.image} alt='' />
@@ -39,7 +38,6 @@ export default function SeeMoreListBackground(audioData) {
                                 <p>কণ্ঠ {iteam.voice}</p>
                                 <p style={{ marginBottom: '0' }}><i class="ri-time-line"></i> {iteam.duration}</p>
                             </div>
-
                         </div>
                     </div>
                 )

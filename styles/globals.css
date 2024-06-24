@@ -2459,9 +2459,11 @@ transition: all 0.5s !important;
   /* padding-bottom: 20px; */
   float: left;
   padding-right: 10px;
-
 }
-
+.backgroundSlider__single{
+  width:33.3333%;
+  padding-bottom: 20px;
+}
 .backgroundSlider__single__iteam{
   width: 100%;
   height: 140px;
@@ -2661,4 +2663,31 @@ font-size: 28px;
   line-height: 1.8;
   text-align: justify;
   text-justify: inter-word;
+}
+/*
+-------------------
+ Responsive Css
+-------------------
+*/
+@media(max-width:1199px){
+
+}
+@media(max-width:991px){
+  .hm__audio__left {
+      padding-right: 0;
+      width: 100%;
+  }
+  .hm__audio__right {
+      width: 100%;
+      padding-left: 0;
+  }
+}
+@media(max-width:767px){
+  
+}
+@media(max-width:575px){
+  
+}
+@media(max-width:479px){
+  
 }
