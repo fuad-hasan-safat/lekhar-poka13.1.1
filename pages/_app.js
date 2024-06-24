@@ -17,6 +17,7 @@ import Layout from '../components/layout'
 import LayoutNoSidebar from '../components/layoutnosidebar'
 import { useRouter } from 'next/router'
 import AudioPlaylistContextProvider from '../components/store/audioPlayer-context';
+import SeeAllSliderContextProvider from '../components/store/seeall-slider-context';
 
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -74,12 +75,13 @@ export default function MyApp({ Component, pageProps }) {
         crossOrigin="anonymous"
       />
       <AudioPlaylistContextProvider>
-
-        <GoogleOAuthProvider clientId="854926132475-sm4btto49sresu4g5o9qpuk9lgtqor9f.apps.googleusercontent.com">
-          <>
-            {result}
-          </>
-        </GoogleOAuthProvider>
+        <SeeAllSliderContextProvider>
+          <GoogleOAuthProvider clientId="854926132475-sm4btto49sresu4g5o9qpuk9lgtqor9f.apps.googleusercontent.com">
+            <>
+              {result}
+            </>
+          </GoogleOAuthProvider>
+        </SeeAllSliderContextProvider>
       </AudioPlaylistContextProvider>
     </>
 
