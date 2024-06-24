@@ -7,6 +7,7 @@ import CommentsOfWriter from './CommentsOfWriter';
 import Rating from './Rating';
 import AudioTabComponent from './AudioTabComponent';
 import AudioPlayer from '../../AudioPlayer/AudioPlayer';
+import { singleAudioData } from '../sampleData/singleAudioDetailsPage';
 
 const AudioTabs = () => {
 
