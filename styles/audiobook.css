@@ -268,5 +268,40 @@ Bg Slider Css
       display: flex;
   }
 
+/*
+---------------------
+ Responsive Css
+--------------------- 
+*/
+
+@media(max-width:1399px){
+    .hmCategorySlider,
+    .hmRecentSlider {
+        margin: 0 -10px;
+    }
+    .hm__audio__recent__slide__item {
+        padding: 0 10px;
+    }
+}
+
+@media(max-width:1299px){
+    
+}
+@media(max-width:1199px){
+    
+}
+@media(max-width:991px){
+    
+}
+@media(max-width:767px){
+    
+}
+@media(max-width:575px){
+    
+}
+@media(max-width:479px){
+    
+}
+
 
 
