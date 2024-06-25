@@ -7,6 +7,7 @@ import { convertToBengaliDate } from '../../utils/convertToBanglaDate'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DialugueModal from './notification/DialugueModal'
+import Link from 'next/link'
 
 export default function UserPostTitleAndcover({
   id,
@@ -153,10 +154,10 @@ export default function UserPostTitleAndcover({
             <h1 className="lg:text-[32] md:text-[28px] sm:text-[24px] xs:text-[18px] leading-7 lg:pr-[50px] text-[#FCD200] font-bold" style={{ lineHeight: '1.2' }}>{shortenTitle}</h1>
           </div>
 
-          <a className="lg:text-[22px] md:text-[16px] sm:text-[16px] xs:text-[14px]  font-semibold text-[#595D5B] " href={`/postswriter/${writer_id}`} >{shortenWriter}</a>
+          <Link className="lg:text-[22px] md:text-[16px] sm:text-[16px] xs:text-[14px]  font-semibold text-[#595D5B] " href={`/postswriter/${writer_id}`} >{shortenWriter}</Link>
 
           <div className="text-[16px] font-thin leading-1 pt-[5px]">
-            <a className="flex place-content-start items-center leading-1 lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[12px]  text-[#595D5B]" href={`/postswriter/${writer_id}`} style={{ lineHeight: '1' }} >
+            <Link className="flex place-content-start items-center leading-1 lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[12px]  text-[#595D5B]" href={`/postswriter/${writer_id}`} style={{ lineHeight: '1' }} >
               {((uploadedBy !== null) && uploadedBy.length > 0) && <> <span className='inline-block mr-[10px]'>
                 <img className="w-[24px] h-[24px] rounded-full block m-auto shadow-lg" src={writerImage === '' ? defaultBannerImage : `${apiBasePath}/${writerImage?.slice(writerImage.indexOf('/') + 1)}`} alt="" />
               </span>
@@ -170,7 +171,7 @@ export default function UserPostTitleAndcover({
                 <span className='inline-block leading-1 ml-[10px] lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[12px] text-[#595D5B]'>
                   {banglaDate}
                 </span></>}
-            </a>
+            </Link>
           </div>
 
           {isProfile &&
