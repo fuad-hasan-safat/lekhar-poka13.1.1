@@ -74,7 +74,7 @@ const PlaylistSeeAll = () => {
                     </div>
                 </div>
             </section>
-            <AudioPlayer />
+            {/* <AudioPlayer /> */}
         </>
     );
 };

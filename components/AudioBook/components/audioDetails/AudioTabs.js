@@ -70,7 +70,6 @@ const AudioTabs = () => {
           </div>
         </div>
       </div>
-      <AudioPlayer />
     </>
   );
 };
