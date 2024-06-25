@@ -2512,7 +2512,7 @@ transition: all 0.5s !important;
   padding-left: 11px;
 }
 .audio__tab__info h6{
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 600;
   color:#F9A106;
   padding-top: 10px;
@@ -2587,6 +2587,11 @@ transition: all 0.5s !important;
   z-index: 1;
   -webkit-backface-visibility: hidden;
   -moz-osx-font-smoothing: grayscale;
+}
+.hm__audio__see__more .sidebar__audio__common__btn{
+  padding: 14px 20px;
+  width: 100%;
+  text-align: center;
 }
 .sidebar__audio__common__btn::before {
   content: '';
@@ -2697,6 +2702,13 @@ font-size: 28px;
   .audio__cat_Single_wrap {
       width: 33.3333%;
   }
+  .audio__tab__wrap {
+      padding-left: 20px;
+      padding-right: 30px;
+  }
+  .audio__tab__info h6 {
+      font-size: 22px;
+  }
 }
 @media(max-width:767px){
   .audio__cat__title {
@@ -2713,6 +2725,9 @@ font-size: 28px;
   }
   .backgroundSlider__single {
       width: 50%;
+  }
+  .audio__tabs__wrap{
+    padding-bottom: 30px;
   }
 }
 @media(max-width:575px){

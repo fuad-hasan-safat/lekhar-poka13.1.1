@@ -250,6 +250,8 @@ Bg Slider Css
     position: relative;
     cursor: pointer;
     padding: 14px 20px 10px;
+    font-size: 16px;
+    line-height: 1;
 }
   
   .tabs:not(:last-child) {
@@ -315,6 +317,13 @@ Bg Slider Css
         left:0;
         z-index: 999;
     }
+    .tabs {
+        padding: 14px 15px 10px;
+        font-size: 14px;
+    }
+    .audio__tab__content {
+        padding-right: 20px;
+    }
 }
 @media(max-width:767px){
     .see__more__list__wrap .hm__audio__recent__slide__item {
@@ -325,6 +334,9 @@ Bg Slider Css
     }
     .backgroundSlider {
         margin: 0 -10px 50px;
+    }
+    .audio__tab__content {
+        padding-right: 0;
     }
 }
 @media(max-width:575px){
