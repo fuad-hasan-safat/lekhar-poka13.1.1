@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { createContext, useState } from "react";
 
 export const AudioPlayListContext = createContext({
@@ -20,7 +19,6 @@ export const AudioPlayListContext = createContext({
 });
 
 export default function AudioPlaylistContextProvider({ children }) {
-  const router = useRouter();
   const [audioBar, setAudioBar] = useState({
     playList: [],
     audioPlace: '',
@@ -48,12 +46,6 @@ export default function AudioPlaylistContextProvider({ children }) {
       ...prevAudioBar,
       audioPlace: scope
     }))
-
-    const currentPath = router.pathname;
-    console.log({ currentPath })
-    if (currentPath === '/audiobook/playlist') {
-      router.reload();
-    }
   }
 
   function setCurrentAudioIndex(index) {

@@ -14,7 +14,7 @@ import Loading from '../../components/common/loading';
 
 
 const PlaylistSeeAll = () => {
-
+const {audioPlace} = useContext(AudioPlayListContext)
 
     const [seeAllRenderInfo, setSeeAllRenderInfo] = useState({
         playListScope: '',
@@ -40,7 +40,7 @@ const PlaylistSeeAll = () => {
             isLoadedDone: true
         }))
 
-    }, [])
+    }, [audioPlace])
 
 
     if (!seeAllRenderInfo.isLoadedDone) return <Loading />;
