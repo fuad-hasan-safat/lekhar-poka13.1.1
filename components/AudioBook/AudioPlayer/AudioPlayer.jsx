@@ -152,7 +152,7 @@ export default function AudioPlayer() {
                 </div>
 
                 <div>
-                  <div>{currentSong?.writer}</div>
+                  <div className="text-left">{currentSong?.writer}</div>
                 </div>
 
               </div>

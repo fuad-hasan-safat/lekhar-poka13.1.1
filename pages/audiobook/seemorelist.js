@@ -4,7 +4,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import Sidebar from '../../components/sidebar/Sidebar';
 import SeeMoreListGrid from '../../components/AudioBook/components/SeeMoreList/SeeMoreListGrid';
 import { audioList, bgAudioList } from '../../components/AudioBook/components/sampleData/samprotikData';
-import { SeeAllSliderContext } from '../../components/store/seeall-slider-context';
 import SeeMoreListBackground from '../../components/AudioBook/components/SeeMoreList/SeeMoreListColorBg';
 
 
