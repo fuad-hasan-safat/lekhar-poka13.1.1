@@ -2,60 +2,55 @@
 import Head from 'next/head';
 import React, { useContext, useEffect, useState } from 'react';
 import Sidebar from '../../components/sidebar/Sidebar';
-import SeeMoreListGrid from '../../components/AudioBook/components/SeeMoreList/SeeMoreListGrid';
-import { audioList, bgAudioList } from '../../components/AudioBook/components/sampleData/samprotikData';
-import SeeMoreListBackground from '../../components/AudioBook/components/SeeMoreList/SeeMoreListColorBg';
+import { AudioPlayListContext } from '../../components/store/audioPlayer-context';
+import AudioDetailsSideBar from '../../components/AudioBook/components/audioSidebar/AudioDetailsSidebar';
+import AudioPlayer from '../../components/AudioBook/AudioPlayer/AudioPlayer';
 
 
 
-const SeeMoreList = () => {
+const PlaylistSeeAll = () => {
 
 
     const [seeAllRenderInfo, setSeeAllRenderInfo] = useState({
-        sliderType: '',
-        slideCategory: '',
+        playListScope: '',
         isLoadedDone: false,
     })
 
     useEffect(() => {
 
-        const type = localStorage.getItem("slideType");
-        const category = localStorage.getItem("slideCategory");
+        const type = localStorage.getItem("playlistScope");
+        let scope = '';
 
-        console.log(type, category)
+        if(type === 'latestPlayList'){
+            scope = 'সর্বশেষ প্লেলিস্ট';
+        }else if(type === 'myPlayList'){
+            scope = 'আমার প্লেলিস্ট';
+        }else if(type === 'details'){
+            scope = 'অডিও'
+        }
 
         setSeeAllRenderInfo((prevSeeAllRenderInfo) => ({
             ...prevSeeAllRenderInfo,
-            sliderType: type,
-            slideCategory: category,
-            isLoadedDone: true,
+            playListScope: scope,
+            isLoadedDone: true
         }))
+
     }, [])
-
-
-
-
-    let audioData = audioList.data;
-
-    if(seeAllRenderInfo.isLoadedDone){
-        if(seeAllRenderInfo.sliderType === 'background'){
-            audioData = bgAudioList.data;
-        }
-    }
 
 
     if (!seeAllRenderInfo.isLoadedDone) return null;
 
+
     return (
         <>
             <Head>
-                <title>সব দেখুন</title>
+                <title>প্লেলিস্ট</title>
             </Head>
             <section className="banner-sec-wrap">
                 <div className="relative w-full xl:h-[380px] lg:h-[360px] md:h-[340px] sm:h-[280px] xs:h-[260px]  overflow-hidden"
                     style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat` }}>
                     <h2 className=" absolute top-[50%] left-[50%] text-[40px] text-[#F9A106] -translate-x-[50%] -translate-y-[50%] max-h-[0px]">
-                        {seeAllRenderInfo.slideCategory}
+                        {seeAllRenderInfo.playListScope}
                     </h2>
                 </div>
             </section>
@@ -64,24 +59,18 @@ const SeeMoreList = () => {
                     <div className="all__post__content flex flex-row">
                         <div className="lg:w-[70%]">
                             <div className='see__more__list__wrap clearfix'>
-                                {
-                                    seeAllRenderInfo.sliderType === 'no_background' &&
-                                    <SeeMoreListGrid audioData={audioData} />
-                                }
-                                {
-                                    seeAllRenderInfo.sliderType === 'background' &&
-                                    <SeeMoreListBackground audioData={audioData} />
-                                }
+                              rendered data
                             </div>
                         </div>
                         <div className="lg:w-[30%]">
-                            <Sidebar />
+                            <AudioDetailsSideBar />
                         </div>
                     </div>
                 </div>
             </section>
+            <AudioPlayer />
         </>
     );
 };
 
-export default SeeMoreList;
+export default PlaylistSeeAll;

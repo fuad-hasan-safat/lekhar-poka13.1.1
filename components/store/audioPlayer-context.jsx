@@ -7,6 +7,7 @@ export const AudioPlayListContext = createContext({
   isAudiobarVisible: false,
   currentPlayingIndex: 0,
   setCurrentAudioIndex: () => { },
+  setPlayListScope: () => { },
   setPlaylist: () => { },
   nextSongPlay: () => { },
   prevSongPlay: () => { },
@@ -16,7 +17,7 @@ export const AudioPlayListContext = createContext({
 export default function AudioPlaylistContextProvider({ children }) {
   const [audioBar, setAudioBar] = useState({
     playList: [],
-    audioPlace:'',
+    audioPlace: '',
     isAudiobarVisible: false,
   });
   const [currentPlayingIndex, setCurrentPlayingIndex] = useState(0)
@@ -31,6 +32,16 @@ export default function AudioPlaylistContextProvider({ children }) {
     }));
 
     setCurrentAudioIndex(currentIndex)
+  }
+
+  function setcurrentPlaylistScope(scope) {
+    localStorage.setItem("playlistScope", scope);
+
+    setAudioBar((prevAudioBar) => ({
+      ...prevAudioBar,
+      audioPlace: scope
+    }))
+
   }
 
   function setCurrentAudioIndex(index) {
@@ -85,10 +96,10 @@ export default function AudioPlaylistContextProvider({ children }) {
   function togglePlay(songIndex, songList, audioScope) {
     console.log({ songIndex, songList })
 
-
+    localStorage.setItem("playlistScope", audioScope);
     setCurrentAudioIndex(songIndex)
 
-//  audioScope: 'details'(details page), 'latestPlayList', 'myPlayList'
+    //  audioScope: 'details'(details page), 'latestPlayList', 'myPlayList'
     setAudioBar((prevAudioBar) => ({ ...prevAudioBar, playList: songList, audioPlace: audioScope }))
     setIsPlaying(!isPlaying);
 
@@ -102,6 +113,7 @@ export default function AudioPlaylistContextProvider({ children }) {
     currentPlayingIndex: currentPlayingIndex,
     isAudiobarVisible: audioBar.isAudiobarVisible,
     setPlaylist: setCurrentPlaylist,
+    setPlayListScope: setcurrentPlaylistScope,
     setCurrentAudioIndex: setCurrentAudioIndex,
     nextSongPlay: handleNextSong,
     prevSongPlay: handlePreviousSong,
