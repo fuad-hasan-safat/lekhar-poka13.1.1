@@ -61,6 +61,8 @@ export default function AudioPlaylistContextProvider({ children }) {
   }
 
   const playNextSong = () => {
+    console.log('shuffle ', audioBar.isShuffle)
+    
 
     setCurrentPlayingIndex((prevIndex) =>
       audioBar.isShuffle
@@ -73,6 +75,7 @@ export default function AudioPlaylistContextProvider({ children }) {
   };
 
   const playPreviousSong = () => {
+    console.log('shuffle ', audioBar.isShuffle)
 
     setCurrentPlayingIndex((prevIndex) =>
       audioBar.isShuffle
@@ -135,18 +138,29 @@ export default function AudioPlaylistContextProvider({ children }) {
   };
 
   function toggleShuffleState() {
-    setAudioBar((prevAudioBar) => ({
-      ...prevAudioBar,
-      isShuffle: !prevAudioBar.isShuffle
-    }))
+    setAudioBar((prevAudioBar) => {
+      console.log('Previous audio shuffle -', prevAudioBar.isShuffle)
+
+      const upDateShuffle = !prevAudioBar.isShuffle;
+      console.log('upDateShuffle audio shuffle -', upDateShuffle)
+
+
+      return ({
+        ...prevAudioBar,
+        isShuffle: !prevAudioBar.isShuffle
+      })
+    })
 
   }
 
   function toggleReapetState() {
-    setAudioBar((prevAudioBar) => ({
-      ...prevAudioBar,
-      isRepeat: !prevAudioBar.isRepeat
-    }))
+    setAudioBar((prevAudioBar) => {
+      console.log('Previous audio reaper -', prevAudioBar.isRepeat)
+      return ({
+        ...prevAudioBar,
+        isRepeat: !prevAudioBar.isRepeat
+      })
+    })
 
   }
 

@@ -16,7 +16,7 @@ import { AudioPlayListContext } from "../../store/audioPlayer-context";
 
 export default function AudioPlayer() {
 
-  const { playList,isShuffle, isRepeat ,currentPlayingIndex, audioPlace, nextSongPlay, prevSongPlay, toggleAudioPlay, isAudioPlaying } = useContext(AudioPlayListContext)
+  const { playList, isShuffle, isRepeat, toggleReapet, toggleShuffle ,currentPlayingIndex, audioPlace, nextSongPlay, prevSongPlay, toggleAudioPlay, isAudioPlaying } = useContext(AudioPlayListContext)
 
 
 
@@ -63,14 +63,6 @@ export default function AudioPlayer() {
 
   }, [isAudioPlaying, currentSong]);
 
-
-  const toggleShuffle = () => {
-    setIsShuffle(!isShuffle);
-  };
-
-  const toggleRepeat = () => {
-    setIsRepeat(!isRepeat);
-  };
 
   const handleTimeUpdate = () => {
     setCurrentTime(audioPlayer.current?.currentTime);
@@ -199,7 +191,7 @@ export default function AudioPlayer() {
                   <MdSkipNext />
                 </button>
 
-                <button onClick={toggleRepeat} className={isRepeat ? "active" : "text-gray-400"}>
+                <button onClick={toggleReapet} className={isRepeat ? "active" : "text-gray-400"}>
                   <MdRepeat />
                 </button>
 
