@@ -45,7 +45,7 @@ export default function WithoutBgSlider({ sliderData, category }) {
                   slidesToScroll: 1
                 }
               },
-          ]
+        ]
     };
 
     return (
