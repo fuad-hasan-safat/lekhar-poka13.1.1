@@ -16,15 +16,13 @@ import { AudioPlayListContext } from "../../store/audioPlayer-context";
 
 export default function AudioPlayer() {
 
-  const { playList, currentPlayingIndex, audioPlace, nextSongPlay, prevSongPlay, toggleAudioPlay, isAudioPlaying } = useContext(AudioPlayListContext)
+  const { playList,isShuffle, isRepeat ,currentPlayingIndex, audioPlace, nextSongPlay, prevSongPlay, toggleAudioPlay, isAudioPlaying } = useContext(AudioPlayListContext)
 
 
 
   const songs = playList;
   const audioPlayer = useRef(null);
   const [currentSongIndex, setCurrentSongIndex] = useState(currentPlayingIndex);
-  const [isShuffle, setIsShuffle] = useState(false);
-  const [isRepeat, setIsRepeat] = useState(false);
   const [volume, setVolume] = useState(0.5);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);

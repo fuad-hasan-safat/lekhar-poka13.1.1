@@ -7,7 +7,7 @@ export const AudioPlayListContext = createContext({
   isAudioPlaying: false,
   isAudiobarVisible: false,
   isShuffle: false,
-  isreapet: false,
+  isRepeat: false,
   currentPlayingIndex: 0,
   setCurrentAudioIndex: () => { },
   setPlayListScope: () => { },
@@ -25,7 +25,7 @@ export default function AudioPlaylistContextProvider({ children }) {
     playList: [],
     audioPlace: '',
     isShuffle: false,
-    isreapet: false,
+    isRepeat: false,
     isAudiobarVisible: false,
   });
   const [currentPlayingIndex, setCurrentPlayingIndex] = useState(0)
@@ -134,11 +134,19 @@ export default function AudioPlaylistContextProvider({ children }) {
 
   };
 
-  function toggleShuffleState(){
+  function toggleShuffleState() {
+    setAudioBar((prevAudioBar) => ({
+      ...prevAudioBar,
+      isShuffle: !prevAudioBar.isShuffle
+    }))
 
   }
 
-  function toggleReapetState(){
+  function toggleReapetState() {
+    setAudioBar((prevAudioBar) => ({
+      ...prevAudioBar,
+      isRepeat: !prevAudioBar.isRepeat
+    }))
 
   }
 
@@ -147,7 +155,7 @@ export default function AudioPlaylistContextProvider({ children }) {
     audioPlace: audioBar.audioPlace,
     isAudioPlaying: isPlaying,
     isShuffle: audioBar.isShuffle,
-    isreapet: audioBar.isreapet,
+    isRepeat: audioBar.isRepeat,
     currentPlayingIndex: currentPlayingIndex,
     isAudiobarVisible: audioBar.isAudiobarVisible,
     setPlaylist: setCurrentPlaylist,
