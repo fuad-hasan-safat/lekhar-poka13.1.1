@@ -6,6 +6,11 @@ import { AudioPlayListContext } from '../../components/store/audioPlayer-context
 import AudioDetailsSideBar from '../../components/AudioBook/components/audioSidebar/AudioDetailsSidebar';
 import AudioPlayer from '../../components/AudioBook/AudioPlayer/AudioPlayer';
 
+import { audioPlaylist } from '../../components/AudioBook/components/sampleData/audioPlaylist';
+import SeeMoreListPlayList from '../../components/AudioBook/components/SeeMoreList/SeeMorePlayList';
+import Loading from '../../components/common/loading';
+
+
 
 
 const PlaylistSeeAll = () => {
@@ -21,11 +26,11 @@ const PlaylistSeeAll = () => {
         const type = localStorage.getItem("playlistScope");
         let scope = '';
 
-        if(type === 'latestPlayList'){
+        if (type === 'latestPlayList') {
             scope = 'সর্বশেষ প্লেলিস্ট';
-        }else if(type === 'myPlayList'){
+        } else if (type === 'myPlayList') {
             scope = 'আমার প্লেলিস্ট';
-        }else if(type === 'details'){
+        } else if (type === 'details') {
             scope = 'অডিও'
         }
 
@@ -38,7 +43,7 @@ const PlaylistSeeAll = () => {
     }, [])
 
 
-    if (!seeAllRenderInfo.isLoadedDone) return null;
+    if (!seeAllRenderInfo.isLoadedDone) return <Loading />;
 
 
     return (
@@ -59,7 +64,8 @@ const PlaylistSeeAll = () => {
                     <div className="all__post__content flex flex-row">
                         <div className="lg:w-[70%]">
                             <div className='see__more__list__wrap clearfix'>
-                              rendered data
+                                <SeeMoreListPlayList audioPlaylist={audioPlaylist} />
+
                             </div>
                         </div>
                         <div className="lg:w-[30%]">

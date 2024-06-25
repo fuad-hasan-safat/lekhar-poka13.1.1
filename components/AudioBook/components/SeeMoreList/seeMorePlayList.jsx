@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
+import AudioTabSingleItem from '../audioDetails/audioList/AudioTabSilgleItem';
 
-export default function SeeMoreListBackground(audioData) {
-    console.log(audioData.audioData)
+export default function SeeMoreListPlayList(audioPlaylist) {
     const [displayCount, setDisplayCount] = useState(6);
     const [loading, setLoading] = useState(false);
     const [inViewRef, inView] = useInView({
@@ -14,7 +14,7 @@ export default function SeeMoreListBackground(audioData) {
         if (inView && !loading) {
             setLoading(true);
             setTimeout(() => {
-                setDisplayCount((prevCount) => Math.min(prevCount + 3, audioData.audioData.length));
+                setDisplayCount((prevCount) => Math.min(prevCount + 3, audioPlaylist.audioPlaylist.length));
                 setLoading(false);
             }, 1500);
         }
@@ -22,30 +22,14 @@ export default function SeeMoreListBackground(audioData) {
 
     return (
         <div>
-            {audioData.audioData.slice(0, displayCount).map((iteam, index) => {
-
-                const color = iteam?.color;
-                console.log({ color, iteam })
+            {audioPlaylist.audioPlaylist.slice(0, displayCount).map((songInfo, index) => {
+                console.log({ songInfo })
                 return (
-                    <div className='backgroundSlider__single__wrap backgroundSlider__single'>
-                        <div key={index} className='backgroundSlider__single__iteam' style={{ backgroundColor: `${color}` }}>
-                            <div className='audio__bgslider__image'>
-                                <img src={iteam.image} alt='' />
-                            </div>
-                            <div className='audio__bgslider__text'>
-                                <h5> {iteam.title} </h5>
-                                <p>লেখকঃ {iteam.writer}</p>
-                                <p>কণ্ঠ {iteam.voice}</p>
-                                <p style={{ marginBottom: '0' }}><i class="ri-time-line"></i> {iteam.duration}</p>
-                            </div>
-                        </div>
+                    <div key={index} className='audio__tab__wrap'>
+                        <AudioTabSingleItem songInfo={songInfo} audioIndex={index} audioList={audioPlaylist.audioPlaylist} />
                     </div>
                 )
-
             }
-
-
-
             )}
             {loading && <p></p>}
             <div ref={inViewRef} />
