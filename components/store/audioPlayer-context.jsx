@@ -45,8 +45,8 @@ export default function AudioPlaylistContextProvider({ children }) {
     }))
 
     const currentPath = router.pathname;
-    console.log({currentPath})
-    if(currentPath === '/audiobook/playlist'){
+    console.log({ currentPath })
+    if (currentPath === '/audiobook/playlist') {
       router.reload();
     }
   }
@@ -102,6 +102,22 @@ export default function AudioPlaylistContextProvider({ children }) {
 
   function togglePlay(songIndex, songList, audioScope) {
     console.log({ songIndex, songList })
+    const prevScope = audioBar.audioPlace;
+    const prevIndex = currentPlayingIndex;
+
+    if (isPlaying) {
+
+      if (prevIndex !== songIndex || prevScope !== audioScope) {
+        localStorage.setItem("playlistScope", audioScope);
+        setCurrentAudioIndex(songIndex)
+
+        //  audioScope: 'details'(details page), 'latestPlayList', 'myPlayList'
+        setAudioBar((prevAudioBar) => ({ ...prevAudioBar, playList: songList, audioPlace: audioScope }))
+
+        return;
+      }
+
+    }
 
     localStorage.setItem("playlistScope", audioScope);
     setCurrentAudioIndex(songIndex)
@@ -109,6 +125,7 @@ export default function AudioPlaylistContextProvider({ children }) {
     //  audioScope: 'details'(details page), 'latestPlayList', 'myPlayList'
     setAudioBar((prevAudioBar) => ({ ...prevAudioBar, playList: songList, audioPlace: audioScope }))
     setIsPlaying(!isPlaying);
+
 
   };
 
