@@ -1,8 +1,10 @@
+import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 export default function SeeMoreListGrid(audioData) {
     console.log(audioData.audioData)
+    const router = useRouter()
     const [displayCount, setDisplayCount] = useState(6);
     const [loading, setLoading] = useState(false);
     const [inViewRef, inView] = useInView({
@@ -20,11 +22,15 @@ export default function SeeMoreListGrid(audioData) {
         }
     }, [inView, loading]);
 
+    function sliderClickHandler(audioId) {
+        router.push(`/audiobook/${audioId}`)
+    }
+
     return (
         <div>
             {audioData.audioData.slice(0, displayCount).map((item, index) => (
                 <div key={index} className='hm__audio__recent__slide__item'>
-                    <div className='hm__audio__recent__slide__item__innr'>
+                    <div className='hm__audio__recent__slide__item__innr' onClick={() => sliderClickHandler(item.id)}>
                         <div className='hm__audio__recent__slide__item__img'>
                             <img src={item.image} alt='Slider Img' />
                         </div>

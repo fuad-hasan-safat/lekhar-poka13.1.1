@@ -112,7 +112,7 @@ export const audioSlider = [
     },
     {
         background: 'background',
-        category: 'ইতিহাস',
+        category: 'Science Fiction',
         sliderData: [
             {
                 image: '/audioBook/audio-slider/bgSliderImg.png',
