@@ -6,13 +6,17 @@ export const AudioPlayListContext = createContext({
   audioPlace: '',
   isAudioPlaying: false,
   isAudiobarVisible: false,
+  isShuffle: false,
+  isRepeat: false,
   currentPlayingIndex: 0,
   setCurrentAudioIndex: () => { },
   setPlayListScope: () => { },
   setPlaylist: () => { },
   nextSongPlay: () => { },
   prevSongPlay: () => { },
-  toggleAudioPlay: () => { }
+  toggleAudioPlay: () => { },
+  toggleShuffle: () => { },
+  toggleReapet: () => { },
 });
 
 export default function AudioPlaylistContextProvider({ children }) {
@@ -20,11 +24,12 @@ export default function AudioPlaylistContextProvider({ children }) {
   const [audioBar, setAudioBar] = useState({
     playList: [],
     audioPlace: '',
+    isShuffle: false,
+    isRepeat: false,
     isAudiobarVisible: false,
   });
   const [currentPlayingIndex, setCurrentPlayingIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isShuffle, setIsShuffle] = useState(false);
 
   function setCurrentPlaylist(playlist, currentIndex = 0) {
     console.log('Playlist in context function', playlist, currentIndex);
@@ -45,8 +50,8 @@ export default function AudioPlaylistContextProvider({ children }) {
     }))
 
     const currentPath = router.pathname;
-    console.log({currentPath})
-    if(currentPath === '/audiobook/playlist'){
+    console.log({ currentPath })
+    if (currentPath === '/audiobook/playlist') {
       router.reload();
     }
   }
@@ -56,9 +61,11 @@ export default function AudioPlaylistContextProvider({ children }) {
   }
 
   const playNextSong = () => {
+    console.log('shuffle ', audioBar.isShuffle)
+    
 
     setCurrentPlayingIndex((prevIndex) =>
-      isShuffle
+      audioBar.isShuffle
         ? Math.floor(Math.random() * audioBar.playList.length)
         : prevIndex === audioBar.playList.length - 1
           ? 0
@@ -68,9 +75,10 @@ export default function AudioPlaylistContextProvider({ children }) {
   };
 
   const playPreviousSong = () => {
+    console.log('shuffle ', audioBar.isShuffle)
 
     setCurrentPlayingIndex((prevIndex) =>
-      isShuffle
+      audioBar.isShuffle
         ? Math.floor(Math.random() * audioBar.playList.length)
         : prevIndex === 0
           ? audioBar.playList.length - 1
@@ -102,6 +110,22 @@ export default function AudioPlaylistContextProvider({ children }) {
 
   function togglePlay(songIndex, songList, audioScope) {
     console.log({ songIndex, songList })
+    const prevScope = audioBar.audioPlace;
+    const prevIndex = currentPlayingIndex;
+
+    if (isPlaying) {
+
+      if (prevIndex !== songIndex || prevScope !== audioScope) {
+        localStorage.setItem("playlistScope", audioScope);
+        setCurrentAudioIndex(songIndex)
+
+        //  audioScope: 'details'(details page), 'latestPlayList', 'myPlayList'
+        setAudioBar((prevAudioBar) => ({ ...prevAudioBar, playList: songList, audioPlace: audioScope }))
+
+        return;
+      }
+
+    }
 
     localStorage.setItem("playlistScope", audioScope);
     setCurrentAudioIndex(songIndex)
@@ -110,13 +134,42 @@ export default function AudioPlaylistContextProvider({ children }) {
     setAudioBar((prevAudioBar) => ({ ...prevAudioBar, playList: songList, audioPlace: audioScope }))
     setIsPlaying(!isPlaying);
 
+
   };
 
+  function toggleShuffleState() {
+    setAudioBar((prevAudioBar) => {
+      console.log('Previous audio shuffle -', prevAudioBar.isShuffle)
+
+      const upDateShuffle = !prevAudioBar.isShuffle;
+      console.log('upDateShuffle audio shuffle -', upDateShuffle)
+
+
+      return ({
+        ...prevAudioBar,
+        isShuffle: !prevAudioBar.isShuffle
+      })
+    })
+
+  }
+
+  function toggleReapetState() {
+    setAudioBar((prevAudioBar) => {
+      console.log('Previous audio reaper -', prevAudioBar.isRepeat)
+      return ({
+        ...prevAudioBar,
+        isRepeat: !prevAudioBar.isRepeat
+      })
+    })
+
+  }
 
   const cntxValue = {
     playList: audioBar.playList,
     audioPlace: audioBar.audioPlace,
     isAudioPlaying: isPlaying,
+    isShuffle: audioBar.isShuffle,
+    isRepeat: audioBar.isRepeat,
     currentPlayingIndex: currentPlayingIndex,
     isAudiobarVisible: audioBar.isAudiobarVisible,
     setPlaylist: setCurrentPlaylist,
@@ -125,6 +178,8 @@ export default function AudioPlaylistContextProvider({ children }) {
     nextSongPlay: handleNextSong,
     prevSongPlay: handlePreviousSong,
     toggleAudioPlay: togglePlay,
+    toggleShuffle: toggleShuffleState,
+    toggleReapet: toggleReapetState,
   };
 
   return (

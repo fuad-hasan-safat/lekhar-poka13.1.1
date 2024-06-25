@@ -3,9 +3,12 @@ import Image from 'next/image';
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { useRouter } from 'next/router';
 
 export default function WithoutBgSlider({ sliderData, category }) {
     console.log('WITHOUT BACKGROUND SLIDER', sliderData)
+
+    const router = useRouter();
 
     var settings = {
         dots: false,
@@ -48,13 +51,17 @@ export default function WithoutBgSlider({ sliderData, category }) {
         ]
     };
 
+    function sliderClickHandler(audioId){
+      router.push(`/audiobook/${audioId}`)
+    }
+
     return (
         <>         
             <Slider {...settings} className='hmCategorySlider'>
                 {sliderData.map((item, index) =>
                     <div key={index} className='hm__audio__recent__slide__item'>
 
-                        <div className='hm__audio__recent__slide__item__innr'>
+                        <div className='hm__audio__recent__slide__item__innr' onClick={()=>sliderClickHandler(item.id)}>
                             <div className='hm__audio__recent__slide__item__img'>
                                 <img src={item.image} alt='Slider Img' />
                             </div>

@@ -16,15 +16,13 @@ import { AudioPlayListContext } from "../../store/audioPlayer-context";
 
 export default function AudioPlayer() {
 
-  const { playList, currentPlayingIndex, audioPlace, nextSongPlay, prevSongPlay, toggleAudioPlay, isAudioPlaying } = useContext(AudioPlayListContext)
+  const { playList, isShuffle, isRepeat, toggleReapet, toggleShuffle ,currentPlayingIndex, audioPlace, nextSongPlay, prevSongPlay, toggleAudioPlay, isAudioPlaying } = useContext(AudioPlayListContext)
 
 
 
   const songs = playList;
   const audioPlayer = useRef(null);
   const [currentSongIndex, setCurrentSongIndex] = useState(currentPlayingIndex);
-  const [isShuffle, setIsShuffle] = useState(false);
-  const [isRepeat, setIsRepeat] = useState(false);
   const [volume, setVolume] = useState(0.5);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -65,14 +63,6 @@ export default function AudioPlayer() {
 
   }, [isAudioPlaying, currentSong]);
 
-
-  const toggleShuffle = () => {
-    setIsShuffle(!isShuffle);
-  };
-
-  const toggleRepeat = () => {
-    setIsRepeat(!isRepeat);
-  };
 
   const handleTimeUpdate = () => {
     setCurrentTime(audioPlayer.current?.currentTime);
@@ -175,7 +165,7 @@ export default function AudioPlayer() {
 
               <div className="flex flex-row  space-x-6">
 
-                <button onClick={toggleShuffle} className={isShuffle ? "active" : ""}>
+                <button onClick={toggleShuffle} className={isShuffle ? "active" : "text-gray-400"}>
                   <MdShuffle />
                 </button>
 
@@ -201,7 +191,7 @@ export default function AudioPlayer() {
                   <MdSkipNext />
                 </button>
 
-                <button onClick={toggleRepeat} className={isRepeat ? "active" : ""}>
+                <button onClick={toggleReapet} className={isRepeat ? "active" : "text-gray-400"}>
                   <MdRepeat />
                 </button>
 
@@ -236,8 +226,8 @@ export default function AudioPlayer() {
 
               {/* volume icon */}
 
-              {!isMute && <img onClick={() => { setIsMute(true); audioPlayer.current.volume = 0; }} width={30} height={30} src="/images/icons/ic_volumeon.svg"></img>}
-              {isMute && <img onClick={() => { setIsMute(false); audioPlayer.current.volume = volume }} width={30} height={30} src="/images/icons/ic_volumeoff.svg"></img>}
+              {!isMute && <img className="cursor-pointer" onClick={() => { setIsMute(true); audioPlayer.current.volume = 0; }} width={30} height={30} src="/images/icons/ic_volumeon.svg"></img>}
+              {isMute && <img className="cursor-pointer" onClick={() => { setIsMute(false); audioPlayer.current.volume = volume }} width={30} height={30} src="/images/icons/ic_volumeoff.svg"></img>}
 
               {/* volume bar */}
               <div className="text-center items-center content-center justify-center ">

@@ -1,8 +1,11 @@
+import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 export default function SeeMoreListBackground(audioData) {
     console.log(audioData.audioData)
+
+    const router = useRouter();
     const [displayCount, setDisplayCount] = useState(6);
     const [loading, setLoading] = useState(false);
     const [inViewRef, inView] = useInView({
@@ -20,6 +23,10 @@ export default function SeeMoreListBackground(audioData) {
         }
     }, [inView, loading]);
 
+    function sliderClickHandler(audioId) {
+        router.push(`/audiobook/${audioId}`)
+    }
+
     return (
         <div>
             {audioData.audioData.slice(0, displayCount).map((iteam, index) => {
@@ -28,7 +35,12 @@ export default function SeeMoreListBackground(audioData) {
                 console.log({ color, iteam })
                 return (
                     <div className='backgroundSlider__single__wrap backgroundSlider__single'>
-                        <div key={index} className='backgroundSlider__single__iteam' style={{ backgroundColor: `${color}` }}>
+                        <div 
+                        key={index} 
+                        className='backgroundSlider__single__iteam' 
+                        style={{ backgroundColor: `${color}` }}
+                        onClick={()=>sliderClickHandler(iteam.id)}
+                        >
                             <div className='audio__bgslider__image'>
                                 <img src={iteam.image} alt='' />
                             </div>

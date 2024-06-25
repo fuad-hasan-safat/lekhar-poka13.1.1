@@ -3,131 +3,145 @@ import Image from 'next/image';
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { useRouter } from 'next/router';
 
 
-export const AudioRecentSliderData=[
-    {
-        image: '/audioBook/audio-slider/audio-slider-img-1.png',
-        title:'তিন গোয়েন্দা',
-        kText:'লেখক : রকিব হাসান',
-        vText:'কন্ঠ: রকিব হাসান তুষার',
-        time:'১:৪১ মিনিট',
-    },
-    {
-        image: '/audioBook/audio-slider/audio-slider-img-2.png',
-        title:'তিন গোয়েন্দা',
-        kText:'লেখক : রকিব হাসান',
-        vText:'কন্ঠ: রকিব হাসান তুষার',
-        time:'১:৪১ মিনিট',
-    },
-    {
-        image: '/audioBook/audio-slider/audio-slider-img-3.png',
-        title:'তিন গোয়েন্দা',
-        kText:'লেখক : রকিব হাসান',
-        vText:'কন্ঠ: রকিব হাসান তুষার',
-        time:'১:৪১ মিনিট',
-    },
-    {
-        image: '/audioBook/audio-slider/audio-slider-img-4.png',
-        title:'তিন গোয়েন্দা',
-        kText:'লেখক : রকিব হাসান',
-        vText:'কন্ঠ: রকিব হাসান তুষার',
-        time:'১:৪১ মিনিট',
-    },
-    {
-        image: '/audioBook/audio-slider/audio-slider-img-5.png',
-        title:'তিন গোয়েন্দা',
-        kText:'লেখক : রকিব হাসান',
-        vText:'কন্ঠ: রকিব হাসান তুষার',
-        time:'১:৪১ মিনিট',
-    },
-    {
-        image: '/audioBook/audio-slider/audio-slider-img-6.png',
-        title:'তিন গোয়েন্দা',
-        kText:'লেখক : রকিব হাসান',
-        vText:'কন্ঠ: রকিব হাসান তুষার',
-        time:'১:৪১ মিনিট',
-    },
-    {
-        image: '/audioBook/audio-slider/audio-slider-img-1.png',
-        title:'তিন গোয়েন্দা',
-        kText:'লেখক : রকিব হাসান',
-        vText:'কন্ঠ: রকিব হাসান তুষার',
-        time:'১:৪১ মিনিট',
-    },
+export const AudioRecentSliderData = [
+  {
+    id: 1,
+    image: '/audioBook/audio-slider/audio-slider-img-1.png',
+    title: 'তিন গোয়েন্দা',
+    kText: 'লেখক : রকিব হাসান',
+    vText: 'কন্ঠ: রকিব হাসান তুষার',
+    time: '১:৪১ মিনিট',
+  },
+  {
+    id: 2,
+    image: '/audioBook/audio-slider/audio-slider-img-2.png',
+    title: 'তিন গোয়েন্দা',
+    kText: 'লেখক : রকিব হাসান',
+    vText: 'কন্ঠ: রকিব হাসান তুষার',
+    time: '১:৪১ মিনিট',
+  },
+  {
+    id: 3,
+    image: '/audioBook/audio-slider/audio-slider-img-3.png',
+    title: 'তিন গোয়েন্দা',
+    kText: 'লেখক : রকিব হাসান',
+    vText: 'কন্ঠ: রকিব হাসান তুষার',
+    time: '১:৪১ মিনিট',
+  },
+  {
+    id: 4,
+    image: '/audioBook/audio-slider/audio-slider-img-4.png',
+    title: 'তিন গোয়েন্দা',
+    kText: 'লেখক : রকিব হাসান',
+    vText: 'কন্ঠ: রকিব হাসান তুষার',
+    time: '১:৪১ মিনিট',
+  },
+  {
+    id: 5,
+    image: '/audioBook/audio-slider/audio-slider-img-5.png',
+    title: 'তিন গোয়েন্দা',
+    kText: 'লেখক : রকিব হাসান',
+    vText: 'কন্ঠ: রকিব হাসান তুষার',
+    time: '১:৪১ মিনিট',
+  },
+  {
+    id: 6,
+    image: '/audioBook/audio-slider/audio-slider-img-6.png',
+    title: 'তিন গোয়েন্দা',
+    kText: 'লেখক : রকিব হাসান',
+    vText: 'কন্ঠ: রকিব হাসান তুষার',
+    time: '১:৪১ মিনিট',
+  },
+  {
+    id: 7,
+    image: '/audioBook/audio-slider/audio-slider-img-1.png',
+    title: 'তিন গোয়েন্দা',
+    kText: 'লেখক : রকিব হাসান',
+    vText: 'কন্ঠ: রকিব হাসান তুষার',
+    time: '১:৪১ মিনিট',
+  },
 ]
 
 const AudioRecentSlider = () => {
 
-    var settings = {
-        dots: false,
-        infinite: true,
-        autoplay: true,
-        speed: 500,
-        slidesToShow: 6,
-        slidesToScroll: 1,
-        responsive: [
-            {
-              breakpoint: 1299,
-              settings: {
-                slidesToShow: 5,
-                slidesToScroll: 1,
-                infinite: true,
-                dots: false
-              }
-            },
-            {
-              breakpoint: 1199,
-              settings: {
-                slidesToShow: 4,
-                slidesToScroll: 1,
-              }
-            },
-            {
-              breakpoint: 991,
-              settings: {
-                slidesToShow: 3,
-                slidesToScroll: 1
-              }
-            },
-            {
-                breakpoint:767,
-                settings: {
-                  slidesToShow: 2,
-                  slidesToScroll: 1
-                }
-              },
-              {
-                breakpoint:479,
-                settings: {
-                  slidesToShow: 1,
-                  slidesToScroll: 1
-                }
-              },
-          ]
-      };
+  const router = useRouter();
 
-    return (
-        <Slider {...settings} className='hmRecentSlider'>
-        {AudioRecentSliderData.map((item,index)=>
-            <div key={index} className='hm__audio__recent__slide__item'>
-                <div className='hm__audio__recent__slide__item__innr'>
-                    <div className='hm__audio__recent__slide__item__img'>
-                        <img src={item.image} alt='Slider Img' />
-                    </div>
-                    <div className='hm__audio__recent__slide__dsc'>
-                       <h5>{item.title}</h5> 
-                       <p>{item.kText}</p>
-                       <ul className='clearfix reset-list'>
-                          <li>{item.vText}</li>
-                          <li><i class="ri-time-line"></i> {item.time}</li>
-                       </ul>
-                    </div>
-                </div>
+  var settings = {
+    dots: false,
+    infinite: true,
+    autoplay: true,
+    speed: 500,
+    slidesToShow: 6,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1299,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: false
+        }
+      },
+      {
+        breakpoint: 1199,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 991,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 479,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      },
+    ]
+  };
+
+  function sliderClickHandler(audioId){
+    router.push(`/audiobook/${audioId}`)
+  }
+
+  return (
+    <Slider {...settings} className='hmRecentSlider'>
+      {AudioRecentSliderData.map((item, index) =>
+        <div key={index} className='hm__audio__recent__slide__item'>
+          <div className='hm__audio__recent__slide__item__innr' onClick={()=>sliderClickHandler(item.id)}>
+            <div className='hm__audio__recent__slide__item__img'>
+              <img src={item.image} alt='Slider Img' />
             </div>
-         )}
+            <div className='hm__audio__recent__slide__dsc'>
+              <h5>{item.title}</h5>
+              <p>{item.kText}</p>
+              <ul className='clearfix reset-list'>
+                <li>{item.vText}</li>
+                <li><i class="ri-time-line"></i> {item.time}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
     </Slider>
-    );
+  );
 };
 
 export default AudioRecentSlider;

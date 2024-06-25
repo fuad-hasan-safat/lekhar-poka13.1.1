@@ -112,6 +112,7 @@ hm audio recent slide item innr
 .hm__audio__recent__slide__item__innr{
     border: 1px solid #D4D2E3;
     border-radius: 16px;
+    cursor: pointer;
 }
 .hm__audio__recent__slide__item__img{
     width: 100%;
