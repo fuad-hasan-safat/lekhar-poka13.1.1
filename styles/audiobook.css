@@ -283,19 +283,24 @@ Bg Slider Css
     .hm__audio__recent__slide__item {
         padding: 0 10px;
     }
-}
-
-@media(max-width:1299px){
-    
-}
-@media(max-width:1199px){
+    .backgroundSlider .slick-next,
     .hmCategorySlider .slick-next {
         right:0;
         z-index: 999;
     }
+    .backgroundSlider .slick-prev,
     .hmCategorySlider .slick-prev {
         left:0;
         z-index: 999;
+    }
+}
+
+@media(max-width:1299px){
+
+}
+@media(max-width:1199px){
+    .audio__bgslider__text {
+        padding-left: 10px;
     }
 }
 @media(max-width:991px){
@@ -314,6 +319,12 @@ Bg Slider Css
 @media(max-width:767px){
     .see__more__list__wrap .hm__audio__recent__slide__item {
         width: 50%;
+    }
+    .hmCategorySlider {
+        margin-bottom: 50px;
+    }
+    .backgroundSlider {
+        margin: 0 -10px 50px;
     }
 }
 @media(max-width:575px){

@@ -14,6 +14,22 @@ export default function BackGroundSlider({ sliderData, category }) {
         speed: 500,
         slidesToShow: 3,
         slidesToScroll: 1,
+        responsive: [
+            {
+                breakpoint:767,
+                settings: {
+                  slidesToShow: 2,
+                  slidesToScroll: 1
+                }
+              },
+              {
+                breakpoint:479,
+                settings: {
+                  slidesToShow: 1,
+                  slidesToScroll: 1
+                }
+              },
+        ]
     };
 
     return (
