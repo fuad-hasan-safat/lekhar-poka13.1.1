@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { AudioPlayListContext } from '../../../../store/audioPlayer-context';
 
-export default function AudioTabSingleItem({ songInfo, audioIndex , audioList}) {
+export default function AudioTabSingleItem({ songInfo, audioIndex , audioList, playListScope}) {
     const { playList, setPlaylist, audioPlace ,currentPlayingIndex ,setCurrentAudioIndex, toggleAudioPlay ,isAudioPlaying } = useContext(AudioPlayListContext)
     const [duration, setDuration] = useState(null);
     const [error, setError] = useState(false);
@@ -62,7 +62,7 @@ export default function AudioTabSingleItem({ songInfo, audioIndex , audioList}) 
             </div>
 
             <div className='audio__tab__playbutton'>
-                <button onClick={() => {toggleAudioPlay(audioIndex, audioList, 'details')}}>{isAudioPlaying && audioIndex === currentPlayingIndex && audioPlace === 'details' ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</button>
+                <button onClick={() => {toggleAudioPlay(audioIndex, audioList, 'details')}}>{isAudioPlaying && audioIndex === currentPlayingIndex && audioPlace === playListScope ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</button>
                 <button className='text-[#484848] text-opacity-[50%] ml-[18px]'><i class="ri-add-circle-fill"></i></button>
             </div>
 

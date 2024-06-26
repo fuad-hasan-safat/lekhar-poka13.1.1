@@ -25,7 +25,7 @@ export default function SeeMoreListPlayList({audioPlaylist, playListScope}) {
             {audioPlaylist.slice(0, displayCount).map((songInfo, index) => {
                 return (
                     <div key={index} className='audio__tab__wrap'>
-                        <AudioTabSingleItem songInfo={songInfo} audioIndex={index} audioList={audioPlaylist} />
+                        <AudioTabSingleItem songInfo={songInfo} audioIndex={index} audioList={audioPlaylist} playListScope={playListScope}/>
                     </div>
                 )
             }
