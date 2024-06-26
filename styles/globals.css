@@ -2729,14 +2729,35 @@ font-size: 28px;
   .audio__tabs__wrap{
     padding-bottom: 30px;
   }
+  .audio__tab__info h6 {
+      font-size: 20px;
+  }
 }
 @media(max-width:575px){
   .audio__cat_Single_wrap {
       width: 50%;
   }
+  .audio__tab__wrap {
+      padding-left: 20px;
+      padding-right: 20px;
+  }
+  .audio__tab__info h6 {
+    font-size: 19px;
+}
 }
 @media(max-width:479px){
   .backgroundSlider__single {
       width: 100%;
+  }
+  .audio__tab__playbutton {
+      font-size: 30px;
+  }
+  .audio__tab__wrap {
+      padding-left: 10px;
+      padding-right: 10px;
+  }
+  .audio__tab__info h6 {
+      font-size: 18px;
+      padding-top: 5px;
   }
 }
