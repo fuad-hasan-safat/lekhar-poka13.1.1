@@ -23,7 +23,6 @@ export default function SeeMoreListPlayList(audioPlaylist) {
     return (
         <div>
             {audioPlaylist.audioPlaylist.slice(0, displayCount).map((songInfo, index) => {
-                console.log({ songInfo })
                 return (
                     <div key={index} className='audio__tab__wrap'>
                         <AudioTabSingleItem songInfo={songInfo} audioIndex={index} audioList={audioPlaylist.audioPlaylist} />

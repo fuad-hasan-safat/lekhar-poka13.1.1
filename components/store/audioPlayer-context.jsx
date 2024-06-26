@@ -21,7 +21,7 @@ export const AudioPlayListContext = createContext({
 export default function AudioPlaylistContextProvider({ children }) {
   const [audioBar, setAudioBar] = useState({
     playList: [],
-    audioPlace: '',
+    audioPlace: 'none',
     isShuffle: false,
     isRepeat: false,
     isAudiobarVisible: false,
@@ -39,7 +39,7 @@ export default function AudioPlaylistContextProvider({ children }) {
     setCurrentAudioIndex(currentIndex)
   }
 
-  function setcurrentPlaylistScope(scope) {
+  function setcurrentPlaylistScope(scope='none') {
     localStorage.setItem("playlistScope", scope);
 
     setAudioBar((prevAudioBar) => ({
@@ -100,7 +100,7 @@ export default function AudioPlaylistContextProvider({ children }) {
     }
   };
 
-  function togglePlay(songIndex, songList, audioScope) {
+  function togglePlay(songIndex, songList, audioScope='none') {
     console.log({ songIndex, songList })
     const prevScope = audioBar.audioPlace;
     const prevIndex = currentPlayingIndex;
