@@ -14,7 +14,7 @@ import Loading from '../../components/common/loading';
 
 
 const PlaylistSeeAll = () => {
-const {audioPlace} = useContext(AudioPlayListContext)
+const {playListRenderScope} = useContext(AudioPlayListContext)
 
     const [seeAllRenderInfo, setSeeAllRenderInfo] = useState({
         playListScope: '',
@@ -23,7 +23,7 @@ const {audioPlace} = useContext(AudioPlayListContext)
 
     useEffect(() => {
 
-        const type = localStorage.getItem("playlistScope");
+        const type = localStorage.getItem("playListRenderScope");
         let scope = '';
 
         if (type === 'latestPlayList') {
@@ -31,7 +31,7 @@ const {audioPlace} = useContext(AudioPlayListContext)
         } else if (type === 'myPlayList') {
             scope = 'আমার প্লেলিস্ট';
         } else if (type === 'details') {
-            scope = 'অডিও'
+            scope = 'প্লেলিস্ট'
         }
 
         setSeeAllRenderInfo((prevSeeAllRenderInfo) => ({
@@ -40,7 +40,7 @@ const {audioPlace} = useContext(AudioPlayListContext)
             isLoadedDone: true
         }))
 
-    }, [audioPlace])
+    }, [playListRenderScope])
 
 
     if (!seeAllRenderInfo.isLoadedDone) return <Loading />;
@@ -64,7 +64,7 @@ const {audioPlace} = useContext(AudioPlayListContext)
                     <div className="all__post__content flex flex-row">
                         <div className="lg:w-[70%]">
                             <div className='see__more__list__wrap clearfix'>
-                                <SeeMoreListPlayList audioPlaylist={audioPlaylist} />
+                                <SeeMoreListPlayList audioPlaylist={audioPlaylist} playListScope={seeAllRenderInfo.playListScope} />
 
                             </div>
                         </div>

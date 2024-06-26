@@ -3,6 +3,7 @@ import { createContext, useState } from "react";
 export const AudioPlayListContext = createContext({
   playList: [],
   audioPlace: '',
+  playListRenderScope: '',
   isAudioPlaying: false,
   isAudiobarVisible: false,
   isShuffle: false,
@@ -10,6 +11,7 @@ export const AudioPlayListContext = createContext({
   currentPlayingIndex: 0,
   setCurrentAudioIndex: () => { },
   setPlayListScope: () => { },
+  setPlayListRenderScope: () => { },
   setPlaylist: () => { },
   nextSongPlay: () => { },
   prevSongPlay: () => { },
@@ -22,6 +24,7 @@ export default function AudioPlaylistContextProvider({ children }) {
   const [audioBar, setAudioBar] = useState({
     playList: [],
     audioPlace: 'none',
+    playListRenderScope: 'none',
     isShuffle: false,
     isRepeat: false,
     isAudiobarVisible: false,
@@ -39,7 +42,7 @@ export default function AudioPlaylistContextProvider({ children }) {
     setCurrentAudioIndex(currentIndex)
   }
 
-  function setcurrentPlaylistScope(scope='none') {
+  function setcurrentPlaylistScope(scope = 'none') {
     localStorage.setItem("playlistScope", scope);
 
     setAudioBar((prevAudioBar) => ({
@@ -48,13 +51,24 @@ export default function AudioPlaylistContextProvider({ children }) {
     }))
   }
 
+  function setCurrentPlaylistRenderScope(scope){
+    localStorage.setItem("playListRenderScope", scope);
+
+
+    setAudioBar((prevAudioBar)=>({
+      ...prevAudioBar,
+      playListRenderScope:scope,
+    }))
+
+  }
+
   function setCurrentAudioIndex(index) {
     setCurrentPlayingIndex(index)
   }
 
   const playNextSong = () => {
     console.log('shuffle ', audioBar.isShuffle)
-    
+
 
     setCurrentPlayingIndex((prevIndex) =>
       audioBar.isShuffle
@@ -100,7 +114,7 @@ export default function AudioPlaylistContextProvider({ children }) {
     }
   };
 
-  function togglePlay(songIndex, songList, audioScope='none') {
+  function togglePlay(songIndex, songList, audioScope = 'none') {
     console.log({ songIndex, songList })
     const prevScope = audioBar.audioPlace;
     const prevIndex = currentPlayingIndex;
@@ -159,6 +173,7 @@ export default function AudioPlaylistContextProvider({ children }) {
   const cntxValue = {
     playList: audioBar.playList,
     audioPlace: audioBar.audioPlace,
+    playListRenderScope: audioBar.playListRenderScope,
     isAudioPlaying: isPlaying,
     isShuffle: audioBar.isShuffle,
     isRepeat: audioBar.isRepeat,
@@ -166,6 +181,7 @@ export default function AudioPlaylistContextProvider({ children }) {
     isAudiobarVisible: audioBar.isAudiobarVisible,
     setPlaylist: setCurrentPlaylist,
     setPlayListScope: setcurrentPlaylistScope,
+    setPlayListRenderScope: setCurrentPlaylistRenderScope,
     setCurrentAudioIndex: setCurrentAudioIndex,
     nextSongPlay: handleNextSong,
     prevSongPlay: handlePreviousSong,
