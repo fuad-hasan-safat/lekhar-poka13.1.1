@@ -319,8 +319,8 @@ Bg Slider Css
         z-index: 999;
     }
     .tabs {
-        padding: 14px 15px 10px;
-        font-size: 14px;
+        padding: 10px 8px 8px;
+        font-size: 11px;
     }
     .audio__tab__content {
         padding-right: 20px;

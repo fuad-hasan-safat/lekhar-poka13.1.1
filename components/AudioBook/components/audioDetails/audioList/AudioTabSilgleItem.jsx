@@ -45,7 +45,7 @@ export default function AudioTabSingleItem({ songInfo, audioIndex , audioList}) 
         <div className='audio__tab__item'>
             <div className='audio__tab__left'>
                 <div>
-                    <img src={songInfo.image} className='w-[78px] h-[78px] rounded-full' />
+                    <img src={songInfo.image} className='lg:w-[78px] md:w-[70px] sm:w-[65px] xs:w-[50px] lg:h-[78px] md:h-[70px] sm:h-[65px] xs:h-[50px] rounded-full' />
                 </div>
                 <div className='audio__tab__info'>
                     <h6>
@@ -63,7 +63,7 @@ export default function AudioTabSingleItem({ songInfo, audioIndex , audioList}) 
 
             <div className='audio__tab__playbutton'>
                 <button onClick={() => {toggleAudioPlay(audioIndex, audioList, 'details')}}>{isAudioPlaying && audioIndex === currentPlayingIndex && audioPlace === 'details' ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</button>
-                <button className='text-[#484848] text-opacity-[50%] ml-[18px]'><i class="ri-add-circle-fill"></i></button>
+                <button className='text-[#484848] text-opacity-[50%] lg:ml-[18px] md:ml-[15px] sm:ml-[12px] xs:ml-[10px]'><i class="ri-add-circle-fill"></i></button>
             </div>
 
         </div>
