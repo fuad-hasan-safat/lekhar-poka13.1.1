@@ -37,6 +37,7 @@ const FullPostPagination = ({ logText, customclass }) => {
 
 
   useEffect(() => {
+
     if (currentPage !== 0) {
       saveCurrentPage();
     }
@@ -45,7 +46,7 @@ const FullPostPagination = ({ logText, customclass }) => {
 
 
   const getSavedpage = async () => {
-    // console.log("get saved page")
+    
     const userUUID = localStorage.getItem("uuid") || ''
     console.log({ userUUID, slug, userUuid })
 
@@ -133,6 +134,9 @@ const FullPostPagination = ({ logText, customclass }) => {
 
   };
 
+  if(currentPage > totalPages -1 ){
+    setCurrentPage(totalPages-1)
+  }
 
   return (
     router.isReady &&
