@@ -64,7 +64,7 @@ const {playListRenderScope} = useContext(AudioPlayListContext)
                     <div className="all__post__content flex flex-row">
                         <div className="lg:w-[70%]">
                             <div className='see__more__list__wrap clearfix'>
-                                <SeeMoreListPlayList audioPlaylist={audioPlaylist} />
+                                <SeeMoreListPlayList audioPlaylist={audioPlaylist} playListScope={seeAllRenderInfo.playListScope} />
 
                             </div>
                         </div>

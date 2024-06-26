@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import AudioTabSingleItem from '../audioDetails/audioList/AudioTabSilgleItem';
 
-export default function SeeMoreListPlayList(audioPlaylist) {
+export default function SeeMoreListPlayList({audioPlaylist, playListScope}) {
     const [displayCount, setDisplayCount] = useState(6);
     const [loading, setLoading] = useState(false);
     const [inViewRef, inView] = useInView({
@@ -14,7 +14,7 @@ export default function SeeMoreListPlayList(audioPlaylist) {
         if (inView && !loading) {
             setLoading(true);
             setTimeout(() => {
-                setDisplayCount((prevCount) => Math.min(prevCount + 3, audioPlaylist.audioPlaylist.length));
+                setDisplayCount((prevCount) => Math.min(prevCount + 3, audioPlaylist.length));
                 setLoading(false);
             }, 1500);
         }
@@ -22,10 +22,10 @@ export default function SeeMoreListPlayList(audioPlaylist) {
 
     return (
         <div>
-            {audioPlaylist.audioPlaylist.slice(0, displayCount).map((songInfo, index) => {
+            {audioPlaylist.slice(0, displayCount).map((songInfo, index) => {
                 return (
                     <div key={index} className='audio__tab__wrap'>
-                        <AudioTabSingleItem songInfo={songInfo} audioIndex={index} audioList={audioPlaylist.audioPlaylist} />
+                        <AudioTabSingleItem songInfo={songInfo} audioIndex={index} audioList={audioPlaylist} />
                     </div>
                 )
             }
