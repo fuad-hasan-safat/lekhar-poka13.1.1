@@ -71,6 +71,7 @@ const AudioRecentSlider = () => {
 
   var settings = {
     dots: false,
+    arrows:false,
     infinite: true,
     autoplay: true,
     speed: 500,

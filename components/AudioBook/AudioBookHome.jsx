@@ -33,6 +33,7 @@ const AudioBookHome = () => {
 
     var settings = {
         dots: false,
+        arrows:false,
         infinite: true,
         autoplay: true,
         speed: 500,
@@ -43,24 +44,26 @@ const AudioBookHome = () => {
     return (
         <section className='hm__audio__book__sec'>
             <div className='container'>
-                <div className='hm__audio__book__wrap'>
-                    <div className='audiu__logo'>
-                        <a href='/audiobook'><img src='/images/audio-logo.png' alt='Audio Logo'/></a>
+                <div className='clearfix'>
+                    <div className='hm__audio__book__wrap'>
+                        <div className='audiu__logo'>
+                            <a href='/audiobook'><img src='/images/audio-logo.png' alt='Audio Logo'/></a>
+                        </div>
+                        <Slider {...settings}>
+                            {HmAudioSlideData.map((item,index)=>
+                                <div className='hm__audio__slide__item'>
+                                    <p>{item.title}</p>
+                                </div>
+                            )}
+                        </Slider>
                     </div>
-                    <Slider {...settings}>
-                        {HmAudioSlideData.map((item,index)=>
-                            <div className='hm__audio__slide__item'>
-                                <p>{item.title}</p>
-                            </div>
-                         )}
-                    </Slider>
-                </div>
-                <div className='hm__audio__recent__wrap'>
-                    <div className='hm__audio__see__more'>
-                        <h3>সাম্প্রতিক</h3>
-                        <Link className='hm__audio__common__btn' href='audiobook/seemorelist/' onClick={()=>setSliderInfo('no_background', 'সাম্প্রতিক')}>সব দেখুন</Link>
+                    <div className='hm__audio__recent__wrap'>
+                        <div className='hm__audio__see__more'>
+                            <h3>সাম্প্রতিক</h3>
+                            <Link className='hm__audio__common__btn' href='audiobook/seemorelist/' onClick={()=>setSliderInfo('no_background', 'সাম্প্রতিক')}>সব দেখুন</Link>
+                        </div>
+                        <AudioRecentSlider />
                     </div>
-                    <AudioRecentSlider />
                 </div>
             </div>
         </section>
