@@ -1477,6 +1477,12 @@ transition: all 0.5s !important;
   justify-content: space-between;
   align-items: center;
 }
+.hm__post__profile__grid h1{
+  margin-bottom: -6px;
+}
+.hm__post__profile__info{
+  margin-top: -6px;
+}
 
 
 /*
