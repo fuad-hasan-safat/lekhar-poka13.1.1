@@ -36,7 +36,7 @@ const FullPostPaginationOthers = ({ logText, customclass }) => {
 
   useEffect(() => {
 
-    if (currentPage !== 0) {
+    if (currentPage !== -1) {
       saveCurrentPage();
     }
 

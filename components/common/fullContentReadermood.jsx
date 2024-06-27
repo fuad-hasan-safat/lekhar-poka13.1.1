@@ -37,10 +37,11 @@ const FullPostReaderMode = ({ content, title, writer, writer_id, catagory }) => 
                     <div className="font-semibold lg:text-[35px] md:text-[33px] sm:text-[30px] xs:text-[28px] text-yellow-400 mb-[10px]">{title}</div>
 
                     <a
-                        className="lg:text-[22px] md:text-[22px] sm:text-[20px] xs:text-[18px] text-[#595D5B] mb-[10px]"
+                        className="lg:text-[22px] md:text-[22px] sm:text-[20px] xs:text-[18px] text-[#595D5B] mb-[20px]"
                         href={`/postswriter/${writer_id}`}
                     >
                         {writer}
+
                     </a>
 
                     <FullPostPaginationOthers logText={content} />

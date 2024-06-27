@@ -3,17 +3,11 @@ import '../public/assets/fonts/customfont.css'
 import '../public/assets/css/image-slider.css'
 import '../components/userprofile/FileUpload.css'
 import { GoogleOAuthProvider } from '@react-oauth/google';
-
-
-// export default function App({ Component, pageProps }) {
-//   return <Component {...pageProps} />
-// }
-
-
 import Layout from '../components/layout'
 import LayoutNoSidebar from '../components/layoutnosidebar'
 import { useRouter } from 'next/router'
 import SearchContextProvider from '../components/lekharpokaStore/search-context';
+import SearchResult from '../components/common/SearchResult'
 
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -58,7 +52,7 @@ export default function MyApp({ Component, pageProps }) {
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
   }
   else {
-    result = <Layout><Component {...pageProps} /></Layout>
+    result = <Layout><Component {...pageProps} /> <SearchResult /></Layout>
   }
   return (
     // <Layout>
