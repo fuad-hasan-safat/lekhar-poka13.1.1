@@ -45,10 +45,11 @@ const AudioBookHome = () => {
         <section className='hm__audio__book__sec'>
             <div className='container'>
                 <div className='clearfix'>
-                    <div className='hm__audio__book__wrap'>
-                        <div className='audiu__logo'>
-                            <a href='/audiobook'><img src='/images/audio-logo.png' alt='Audio Logo'/></a>
-                        </div>
+                <div className='hm__audio__book__wrap'>
+                    <div className='audiu__logo'>
+                        <Link href='/audiobook'><img src='/images/audio-logo.png' alt='Audio Logo'/></Link>
+
+                    </div>
                         <Slider {...settings}>
                             {HmAudioSlideData.map((item,index)=>
                                 <div className='hm__audio__slide__item'>
@@ -56,7 +57,7 @@ const AudioBookHome = () => {
                                 </div>
                             )}
                         </Slider>
-                    </div>
+
                     <div className='hm__audio__recent__wrap'>
                         <div className='hm__audio__see__more'>
                             <h3>সাম্প্রতিক</h3>
@@ -64,6 +65,7 @@ const AudioBookHome = () => {
                         </div>
                         <AudioRecentSlider />
                     </div>
+                </div>
                 </div>
             </div>
         </section>

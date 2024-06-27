@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import AudioTabSingleItem from '../audioDetails/audioList/AudioTabSilgleItem';
+import AudioPlayListSingleItem from '../audioDetails/audioList/AudioPlayListSilgleItem';
 
-export default function SeeMoreListPlayList({audioPlaylist, playListScope}) {
+export default function SeeMoreListPlayList({ audioPlaylist, playListScope }) {
+
     const [displayCount, setDisplayCount] = useState(6);
     const [loading, setLoading] = useState(false);
     const [inViewRef, inView] = useInView({
@@ -25,7 +26,7 @@ export default function SeeMoreListPlayList({audioPlaylist, playListScope}) {
             {audioPlaylist.slice(0, displayCount).map((songInfo, index) => {
                 return (
                     <div key={index} className='audio__tab__wrap'>
-                        <AudioTabSingleItem songInfo={songInfo} audioIndex={index} audioList={audioPlaylist} />
+                        <AudioPlayListSingleItem songInfo={songInfo} audioIndex={index} audioList={audioPlaylist} playListScope={playListScope} />
                     </div>
                 )
             }
