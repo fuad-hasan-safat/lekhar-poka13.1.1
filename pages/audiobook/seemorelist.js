@@ -54,7 +54,7 @@ const SeeMoreList = () => {
             <section className="banner-sec-wrap">
                 <div className="relative w-full xl:h-[380px] lg:h-[360px] md:h-[340px] sm:h-[280px] xs:h-[260px]  overflow-hidden"
                     style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat` }}>
-                    <h2 className=" absolute top-[50%] left-[50%] lg:text-[40px] md:text-[38px] sm:text-[35px] xs:text-[30px] text-[#F9A106] -translate-x-[50%] -translate-y-[50%] max-h-[0px]">
+                    <h2 className=" absolute top-[50%] left-[50%] lg:text-[40px] md:text-[38px] sm:text-[35px] xs:text-[24px] text-[#F9A106] -translate-x-[50%] -translate-y-[50%] max-h-[0px]">
                         {seeAllRenderInfo.slideCategory}
                     </h2>
                 </div>

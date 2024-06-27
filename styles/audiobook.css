@@ -127,6 +127,7 @@ hm audio recent slide item innr
 }
 .hm__audio__recent__slide__dsc{
     padding: 10px 10px;
+    text-align: left;
 }
 .hm__audio__recent__slide__dsc h5{
     font-size: 16px;

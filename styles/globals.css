@@ -2673,6 +2673,12 @@ font-size: 28px;
 .hmRecentSlider .slick-prev {
   display: none;
 }
+.banner-sec-wrap{
+  padding-top: 65px;
+}
+.audio-player-wrap{
+  padding:15px 0;
+}
 
 /*
 -------------------
@@ -2714,6 +2720,9 @@ font-size: 28px;
   .audio__tab__info h6 {
       font-size: 22px;
   }
+  /* .banner-sec-wrap {
+      padding-top: 75px;
+  } */
 }
 @media(max-width:767px){
   .audio__cat__title {
@@ -2756,6 +2765,9 @@ font-size: 28px;
   }
   .audio__tab__info h6 {
     font-size: 19px;
+}
+.banner-sec-wrap {
+  padding-top: 50px;
 }
 }
 @media(max-width:479px){
