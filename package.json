@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3008",
+    "dev": "next dev -p 3009",
     "build": "next build",
     "start": "NODE_ENV=production pm2 start lekha-poka-ui.js --watch",
     "lint": "next lint"
