@@ -13,6 +13,7 @@ import AudioPlaylistContextProvider from '../components/store/audioPlayer-contex
 import SeeAllSliderContextProvider from '../components/store/seeall-slider-context';
 import AudioPlayer from '../components/AudioBook/AudioPlayer/AudioPlayer';
 import SearchContextProvider from '../components/lekharpokaStore/search-context';
+import SearchResult from '../components/common/SearchResult'
 
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -57,7 +58,7 @@ export default function MyApp({ Component, pageProps }) {
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
   }
   else {
-    result = <Layout><Component {...pageProps} />  <AudioPlayer /></Layout>
+    result = <Layout><Component {...pageProps} /> <AudioPlayer /> <SearchResult /></Layout>
   }
   return (
     // <Layout>

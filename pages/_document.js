@@ -19,6 +19,7 @@ export default function Document() {
       </Head>
       <body>
         <div id="audio-root"></div>
+        <div id='search-result' className='fixed top-[95px] z-[999999999999999999999] w-full bg-white'></div>
         <Main />
         <NextScript />
       </body>

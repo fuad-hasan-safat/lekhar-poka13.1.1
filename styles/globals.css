@@ -1499,6 +1499,20 @@ transition: all 0.5s !important;
   line-height: 2 !important;
 }
 
+/*
+-------------------
+ Audio Player Css
+------------------- 
+*/
+.audio-player-wrap{
+  padding: 20px 0;
+}
+.audio__player__innr{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 
 
 
@@ -1888,15 +1902,12 @@ transition: all 0.5s !important;
   .all__post__sec__wrap {
     padding-top: 60px;
   }
-
   .slider__pt__wrap {
     padding-top: 85px;
   }
-
   .hambar__icon {
     display: block;
   }
-
   .sidebar {
     position: absolute;
     left: 0;
@@ -1913,40 +1924,32 @@ transition: all 0.5s !important;
     -ms-transition: all 0.5s;
     -webkit-transition: all 0.5s;
   }
-
   .menu__active.sidebar {
     opacity: 1;
     visibility: visible;
   }
-
   .sidebar>ul {
     display: block;
     padding: 30px 30px !important;
   }
-
   .sidebar>ul li ul {
     display: table;
     margin: 0 auto;
   }
-
   .sidebar ul li {
     width: auto !important;
   }
-
   .hdr__dropdown__menu {
     margin-left: 30px;
   }
-
   .logo a img {
     width: 180px !important;
   }
-
   .sidebar ul li {
     width: auto !important;
     height: auto;
     padding: 5px 0;
   }
-
   .logo:after {
     border-top: 85px solid gold;
     border-right: 130px solid transparent;
@@ -2133,6 +2136,12 @@ transition: all 0.5s !important;
     height: 40px;
     font-size: 16px;
     margin-top: 15px;
+  }
+  .audio__player__innr {
+      display: block;
+  }
+  .audio-player-wrap {
+      padding: 10px 0;
   }
 }
 
