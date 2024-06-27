@@ -4,28 +4,49 @@ import { createPortal } from 'react-dom';
 import Sidebar from '../sidebar/Sidebar'
 import { SearchContext } from '../lekharpokaStore/search-context'
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 
 
 export default function SearchResult() {
+    const router = useRouter();
     const [isMounted, setIsMounted] = useState(false)
-    const { searchResult, isSearchbarActive ,setIsSearchbarActive, setSearchResult, setSearchKey } = useContext(SearchContext);
+    const { searchResult, isSearchbarActive, setIsSearchbarActive, setSearchResult, setSearchKey } = useContext(SearchContext);
+
+    useEffect(() => {
+        const handleRouteChange = (url) => {
+            console.log('App is changing to: ', url);
+            // Your custom function here
+            const data = [];
+            setIsSearchbarActive(false);
+            setSearchResult(data);
+            setSearchKey('')
+        };
+
+        // Subscribe to route changes
+        router.events.on('routeChangeComplete', handleRouteChange);
+
+        // Cleanup the subscription on unmount
+        return () => {
+            router.events.off('routeChangeComplete', handleRouteChange);
+        };
+    }, [router.events]);
 
     useEffect(() => {
         setIsMounted(false)
     }, [])
-    
-    function handleSearchClick(){
+
+    function handleSearchClick() {
         const data = [];
-        setIsSearchbarActive();
+        setIsSearchbarActive(false);
         setSearchResult(data);
         setSearchKey('')
     }
 
-    if(!isSearchbarActive || isMounted) return null;
+    if (!isSearchbarActive || isMounted) return null;
 
-    return createPortal( (
-        <div className='z-[99999999999999999999999]'>
+    return createPortal((
+        <>
             <section className="banner-sec-wrap place-content-center">
                 <div className="relative w-full xl:h-[190px] lg:h-[180px] md:h-[180px] sm:h-[180px] xs:h-[170px]  overflow-hidden" style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat` }}>
                     {<h2 className=" absolute top-[50%] left-[50%] text-[40px] text-[#F9A106] -translate-x-[50%] -translate-y-[50%] max-h-[0px]">অনুসন্ধান</h2>}
@@ -47,7 +68,7 @@ export default function SearchResult() {
                                     console.log("data --", data)
                                     return (<>
                                         <div className='mb-[10px]'>
-                                            <Link  onClick={handleSearchClick} href={`/post/${data._id}`}><h5>{data.title}</h5></Link>
+                                            <Link onClick={handleSearchClick} href={`/post/${data._id}`}><h5>{data.title}</h5></Link>
 
                                         </div>
                                     </>)
@@ -64,6 +85,6 @@ export default function SearchResult() {
                 </div>
 
             </section>
-        </div>
-    ), document.getElementById('search-result') );
+        </>
+    ), document.getElementById('search-result'));
 }
