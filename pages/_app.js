@@ -83,8 +83,6 @@ export default function MyApp({ Component, pageProps }) {
           <GoogleOAuthProvider clientId="854926132475-sm4btto49sresu4g5o9qpuk9lgtqor9f.apps.googleusercontent.com">
             <>
               {result}
-             
-
             </>
           </GoogleOAuthProvider>
           </SearchContextProvider>
