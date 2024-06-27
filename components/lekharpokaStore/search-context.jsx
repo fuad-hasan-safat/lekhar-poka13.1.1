@@ -30,7 +30,10 @@ export default function SearchContextProvider({ children }) {
     }
 
     function updateSearchKey(key) {
-
+        setSearchBar((prevSearchBar)=>({
+            ...prevSearchBar,
+            searchKey: key
+        }))
     }
 
     function updateSearchText(text) {
@@ -49,15 +52,24 @@ export default function SearchContextProvider({ children }) {
 
     }
 
+    function updateResult(result){
+            setSearchBar((prevSearchBar)=>({
+               ...prevSearchBar,
+               searchResult:result
+            }))
+    }
+
     const cntxtValue = {
         searchKey: searchBar.searchKey,
         searchText: searchBar.searchText,
         searchScope: searchBar.searchScope,
+        searchResult: searchBar.searchResult,
         isSearchbarActive: searchBar.isSearchbarActive,
         setSearchInfo: updateSearchInfo,
         setSearchKey: updateSearchKey,
         setSearchText: updateSearchText,
         setSearchScope: updateSearchScope,
+        setSearchResult:updateResult,
         setIsSearchbarActive: updateSearchBarActiveStatus
     }
 
