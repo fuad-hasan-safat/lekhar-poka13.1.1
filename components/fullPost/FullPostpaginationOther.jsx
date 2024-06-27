@@ -8,17 +8,13 @@ import axios from 'axios';
 
 const FullPostPaginationOthers = ({ logText, customclass }) => {
   const router = useRouter()
-  console.log(router.query)
   const slug = router.query.slug
+
   const [currentPage, setCurrentPage] = useState(0);
   const linesPerPage = 80;
-
-
   const logLines = logText?.split('</p>');
-
   const totalLines = logLines?.length;
   const totalPages = Math.ceil(totalLines / linesPerPage);
-
   const startIndex = currentPage * linesPerPage;
   const endIndex = startIndex + linesPerPage;
   const [userUuid, setUserUuid] = useState("");
@@ -27,7 +23,14 @@ const FullPostPaginationOthers = ({ logText, customclass }) => {
   useEffect(() => {
 
     setUserUuid(localStorage.getItem("uuid") || "");
+
     getSavedpage();
+
+    const uuid = localStorage.getItem("uuid") || "";
+
+    if (uuid?.length <= 0) {
+      setCurrentPage(0);
+    }
 
   }, [router.query])
 
@@ -40,32 +43,41 @@ const FullPostPaginationOthers = ({ logText, customclass }) => {
   }, [currentPage, router.query])
 
   const getSavedpage = async () => {
+    
+    const userUUID = localStorage.getItem("uuid") || ''
+    console.log({ userUUID, slug, userUuid })
 
-    const userUUID = localStorage.getItem("uuid")
+    if(userUUID?.length > 0){
 
-    try {
-      const response = await axios.post(
-        `${apiBasePath}/getpostpage`,
-        {
-          userId: userUUID,
-          postId: slug,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
+      try {
+        const response = await axios.post(
+          `${apiBasePath}/getpostpage`,
+          {
+            userId: userUUID,
+            postId: slug,
           },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log('get page---', response)
+  
+        if (response.data.status === 'success') {
+          setCurrentPage(response.data.saved_page)
+        } else {
+          setCurrentPage(0)
         }
-      );
-
-      if (response.data.status === 'success') {
-        setCurrentPage(response.data.saved_page)
-      } else {
+  
+      } catch (error) {
         setCurrentPage(0)
+  
       }
-    } catch (error) {
-      setCurrentPage(0)
-
+    }else{
+      setCurrentPage(0);
     }
+
 
   }
 
@@ -74,33 +86,42 @@ const FullPostPaginationOthers = ({ logText, customclass }) => {
 
     const userUUID = localStorage.getItem("uuid")
 
-    try {
-      const response = await axios.post(
-        `${apiBasePath}/recordpostpage`,
-        {
-          userId: userUUID,
-          postId: slug,
-          currentPage: currentPage,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
+    console.log({ userUUID })
+
+    if (userUUID?.length > 0) {
+      try {
+        const response = await axios.post(
+          `${apiBasePath}/recordpostpage`,
+          {
+            userId: userUUID,
+            postId: slug,
+            currentPage: currentPage,
           },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        console.log('save  page---', response)
+
+
+        if (response.status === 'success') {
+          console.log("page save ----", response.msg)
         }
-      );
 
+        if (response.status === 'failed') {
+          console.log("page save ----", response.msg)
+        }
 
-      if (response.status === 'success') {
-        // console.log("page save ----", response.msg)
+      } catch (error) {
+
       }
-
-      if (response.status === 'failed') {
-        // console.log("page save ----", response.msg)
-      }
-
-    } catch (error) {
 
     }
+
+
   }
 
   const handlePageChange = ({ selected }) => {
