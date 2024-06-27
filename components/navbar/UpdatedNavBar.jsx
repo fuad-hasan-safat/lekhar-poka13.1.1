@@ -11,7 +11,7 @@ import { SearchContext } from '../lekharpokaStore/search-context';
 export default function UpdatedNavBar() {
     const router = useRouter();
 
-    const {setIsSearchbarActive, isSearchbarActive} = useContext(SearchContext)
+    const {setIsSearchbarActive, isSearchbarActive, setSearchResult, searchKey, setSearchKey} = useContext(SearchContext)
     
     const [selectedNav, setSelectedNav] = useState("");
     const [postList, setPostList] = useState(null);
@@ -114,7 +114,8 @@ export default function UpdatedNavBar() {
 
     //  search ---
     const handleChange = (e) => {
-        setSearch(e.target.value);
+        // setSearch(e.target.value);
+        setSearchKey(e.target.value);
     };
     const handleKeyDown = (e) => {
         // console.log(e.key)
@@ -128,7 +129,8 @@ export default function UpdatedNavBar() {
                 setSelectedIteam((prev) => prev + 1);
             } else if (e.key === "Enter") {
                 // window.open(searchData[selectedIteam]?.link);
-                setSearch('')
+                // setSearch('')
+                setSearchKey('')
                 router.push(`/post/${searchData[selectedIteam]?._id}`)
 
             }
@@ -138,33 +140,42 @@ export default function UpdatedNavBar() {
     };
     const handleClose = () => {
         setSearch("");
+        setSearchKey('')
         setSearchData([]);
+        const data = [];
+        setSearchResult(data)
         setSelectedIteam(-1);
     };
 
 
 
     useEffect(() => {
-        if (search !== "") {
+        if (searchKey !== "") {
 
             try {
                 const newFiltreddata = postList.filter((post) => {
                     return post.title
                         .toLocaleLowerCase()
-                        .includes(search.toLocaleLowerCase());
+                        .includes(searchKey.toLocaleLowerCase());
                 });
                 setSearchData(newFiltreddata);
+                setSearchResult(newFiltreddata)
             } catch (error) { }
         } else {
             setSearchData([]);
+            const data = [];
+            setSearchResult(data)
         }
-    }, [search]);
+    }, [searchKey]);
 
 
     function goToSearchPost(id) {
-        setSearch("");
+        // setSearch("");
+        setSearchKey('')
         setSearchData([]);
         setSelectedIteam(-1);
+        const data = [];
+        setSearchResult(data)
         router.push(`/post/${id}`)
         // router.refresh()
     }
@@ -216,7 +227,7 @@ export default function UpdatedNavBar() {
                                                 placeholder=" অনুসন্ধান..."
                                                 autoComplete="off"
                                                 onChange={handleChange}
-                                                value={search}
+                                                value={searchKey}
                                                 onKeyDown={handleKeyDown}
                                             />
                                         )}

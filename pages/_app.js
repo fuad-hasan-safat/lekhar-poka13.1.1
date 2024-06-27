@@ -6,13 +6,6 @@ import '../components/userprofile/FileUpload.css';
 import 'slick-carousel/slick/slick.css';
 import "slick-carousel/slick/slick-theme.css";
 import { GoogleOAuthProvider } from '@react-oauth/google';
-
-
-// export default function App({ Component, pageProps }) {
-//   return <Component {...pageProps} />
-// }
-
-
 import Layout from '../components/layout'
 import LayoutNoSidebar from '../components/layoutnosidebar'
 import { useRouter } from 'next/router'
