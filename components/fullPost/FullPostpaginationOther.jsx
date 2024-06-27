@@ -11,7 +11,7 @@ const FullPostPaginationOthers = ({ logText, customclass }) => {
   const slug = router.query.slug
 
   const [currentPage, setCurrentPage] = useState(0);
-  const linesPerPage = 80;
+  const linesPerPage = 60;
   const logLines = logText?.split('</p>');
   const totalLines = logLines?.length;
   const totalPages = Math.ceil(totalLines / linesPerPage);
@@ -34,13 +34,13 @@ const FullPostPaginationOthers = ({ logText, customclass }) => {
 
   }, [router.query])
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    if (currentPage !== -1) {
-      saveCurrentPage();
-    }
+  //   if (currentPage !== -1) {
+  //     saveCurrentPage();
+  //   }
 
-  }, [currentPage, router.query])
+  // }, [currentPage, router.query])
 
   const getSavedpage = async () => {
     
@@ -67,10 +67,13 @@ const FullPostPaginationOthers = ({ logText, customclass }) => {
         if (response.data.status === 'success') {
           setCurrentPage(response.data.saved_page)
         } else {
+          console.log('response  eeeerrrrroooorrrr')
           setCurrentPage(0)
         }
   
       } catch (error) {
+        console.log('api  eeeerrrrroooorrrr')
+
         setCurrentPage(0)
   
       }
@@ -89,14 +92,14 @@ const FullPostPaginationOthers = ({ logText, customclass }) => {
     console.log({ userUUID })
 
     if (userUUID?.length > 0) {
-      console.log('current page-->>>', currentPage)
+      console.log('current selected page-->>>', selected)
       try {
         const response = await axios.post(
           `${apiBasePath}/recordpostpage`,
           {
             userId: userUUID,
             postId: slug,
-            currentPage: currentPage,
+            currentPage: selected,
           },
           {
             headers: {
@@ -127,8 +130,8 @@ const FullPostPaginationOthers = ({ logText, customclass }) => {
 
   const handlePageChange = ({ selected }) => {
 
-    saveCurrentPage(selected);
     setCurrentPage(selected);
+    saveCurrentPage(selected);
 
   };
 
