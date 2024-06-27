@@ -25,9 +25,9 @@ export default function SearchResult() {
     if(!isSearchbarActive || isMounted) return null;
 
     return createPortal( (
-        <div className='z-[99999999999999999999999]'>
-            <section className="banner-sec-wrap place-content-center">
-                <div className="relative w-full xl:h-[190px] lg:h-[180px] md:h-[180px] sm:h-[180px] xs:h-[170px]  overflow-hidden" style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat` }}>
+        <div className=''>
+            <section className="banner-sec-wrap place-content-center ">
+                <div className="relative -mt-[65px] w-full xl:h-[190px] lg:h-[180px] md:h-[180px] sm:h-[180px] xs:h-[170px]  overflow-hidden" style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat` }}>
                     {<h2 className=" absolute top-[50%] left-[50%] text-[40px] text-[#F9A106] -translate-x-[50%] -translate-y-[50%] max-h-[0px]">অনুসন্ধান</h2>}
                 </div>
             </section>
