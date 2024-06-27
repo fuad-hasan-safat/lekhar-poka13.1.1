@@ -13,6 +13,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import Layout from '../components/layout'
 import LayoutNoSidebar from '../components/layoutnosidebar'
 import { useRouter } from 'next/router'
+import SearchContextProvider from '../components/lekharpokaStore/search-context';
 
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -70,9 +71,11 @@ export default function MyApp({ Component, pageProps }) {
         crossOrigin="anonymous"
       />
       <GoogleOAuthProvider clientId="854926132475-sm4btto49sresu4g5o9qpuk9lgtqor9f.apps.googleusercontent.com">
+        <SearchContextProvider>
         <>
           {result}
         </>
+        </SearchContextProvider>
       </GoogleOAuthProvider>
     </>
 
