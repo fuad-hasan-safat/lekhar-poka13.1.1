@@ -36,7 +36,7 @@ const FullPostPaginationOthers = ({ logText, customclass }) => {
 
   useEffect(() => {
 
-    if (currentPage !== 0) {
+    if (currentPage !== -1) {
       saveCurrentPage();
     }
 
@@ -89,6 +89,7 @@ const FullPostPaginationOthers = ({ logText, customclass }) => {
     console.log({ userUUID })
 
     if (userUUID?.length > 0) {
+      console.log('current page-->>>', currentPage)
       try {
         const response = await axios.post(
           `${apiBasePath}/recordpostpage`,

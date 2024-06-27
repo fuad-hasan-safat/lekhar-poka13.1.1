@@ -1,21 +1,19 @@
 'use client'
-import React, { useEffect, useRef, useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Logo from '../common/Logo';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { apiBasePath } from '../../utils/constant';
 import Link from 'next/link';
 import DialugueModal from '../common/notification/DialugueModal';
-
-
-
+import { SearchContext } from '../lekharpokaStore/search-context';
 
 export default function UpdatedNavBar() {
     const router = useRouter();
+
+    const {setIsSearchbarActive, isSearchbarActive} = useContext(SearchContext)
+    
     const [selectedNav, setSelectedNav] = useState("");
-    const [isSearchActive, setIsSearchActive] = useState(false);
     const [postList, setPostList] = useState(null);
     const [search, setSearch] = useState("");
     const [searchData, setSearchData] = useState([]);
@@ -208,10 +206,10 @@ export default function UpdatedNavBar() {
                                             width={50}
                                             alt=""
                                             className={` cursor-pointer`}
-                                            onClick={() => setIsSearchActive(true)}
+                                            onClick={setIsSearchbarActive}
                                         />
 
-                                        {isSearchActive && (
+                                        {isSearchbarActive && (
                                             <input
                                                 type="text"
                                                 className={` lg:w-[200px] md:w-[200px] sm:w-[150px] sx:w-[150px] text-[16px] bg-transparent text-black py-2 pr-10 rounded-md focus:outline-none`}
@@ -222,8 +220,8 @@ export default function UpdatedNavBar() {
                                                 onKeyDown={handleKeyDown}
                                             />
                                         )}
-                                        <div
-                                            className={`search_result ${isSearchActive ? "visible" : "hidden"
+                                        {/* <div
+                                            className={`search_result ${setIsSearchbarActive ? "visible" : "hidden"
                                                 }`}
                                         >
                                             {searchData.map((data, index) => {
@@ -244,14 +242,14 @@ export default function UpdatedNavBar() {
                                             {searchData.length === 0 && search !== "" && (
                                                 <h1>No Result Found</h1>
                                             )}
-                                        </div>
+                                        </div> */}
 
 
-                                        {isSearchActive && (
+                                        {isSearchbarActive && (
 
                                             <button
                                                 className='lg:px-[15px] md:px-[15px] sm:px-[10px] xs:px-[10px]'
-                                                onClick={() => setIsSearchActive(false)}
+                                                onClick={setIsSearchbarActive}
                                             >
                                                 <i class="ri-list-check"></i>
                                             </button>

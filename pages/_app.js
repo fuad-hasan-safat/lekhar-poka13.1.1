@@ -19,6 +19,7 @@ import { useRouter } from 'next/router'
 import AudioPlaylistContextProvider from '../components/store/audioPlayer-context';
 import SeeAllSliderContextProvider from '../components/store/seeall-slider-context';
 import AudioPlayer from '../components/AudioBook/AudioPlayer/AudioPlayer';
+import SearchContextProvider from '../components/lekharpokaStore/search-context';
 
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -75,8 +76,10 @@ export default function MyApp({ Component, pageProps }) {
         src="https://connect.facebook.net/en_US/sdk.js/xfbml.js?appId=1103079424285739&version=v16.0"
         crossOrigin="anonymous"
       />
+
       <AudioPlaylistContextProvider>
         <SeeAllSliderContextProvider>
+        <SearchContextProvider>
           <GoogleOAuthProvider clientId="854926132475-sm4btto49sresu4g5o9qpuk9lgtqor9f.apps.googleusercontent.com">
             <>
               {result}
@@ -84,6 +87,7 @@ export default function MyApp({ Component, pageProps }) {
 
             </>
           </GoogleOAuthProvider>
+          </SearchContextProvider>
         </SeeAllSliderContextProvider>
       </AudioPlaylistContextProvider>
     </>
