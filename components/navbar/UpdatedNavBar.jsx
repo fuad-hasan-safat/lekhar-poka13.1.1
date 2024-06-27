@@ -32,8 +32,8 @@ export default function UpdatedNavBar() {
     const searchBarRef = useRef(null);
     useOutsideAlerter(popupRef1);
     useOutsideAlerter(popupRef2);
+   
     useOutsideAlerterSearch(searchBarRef);
-
 
     function useOutsideAlerter(ref) {
         useEffect(() => {
