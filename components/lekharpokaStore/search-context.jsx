@@ -44,10 +44,10 @@ export default function SearchContextProvider({ children }) {
 
     }
 
-    function updateSearchBarActiveStatus() {
+    function updateSearchBarActiveStatus(status) {
         setSearchBar((prevSearchBar) => ({
             ...prevSearchBar,
-            isSearchbarActive: !prevSearchBar.isSearchbarActive
+            isSearchbarActive: status
         }))
 
     }

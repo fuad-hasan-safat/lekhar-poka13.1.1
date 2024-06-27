@@ -29,8 +29,10 @@ export default function UpdatedNavBar() {
     const dialogueRef = useRef()
     const popupRef1 = useRef(null);
     const popupRef2 = useRef(null);
+    const searchBarRef = useRef(null);
     useOutsideAlerter(popupRef1);
     useOutsideAlerter(popupRef2);
+    useOutsideAlerterSearch(searchBarRef);
 
 
     function useOutsideAlerter(ref) {
@@ -42,6 +44,27 @@ export default function UpdatedNavBar() {
                 if (ref.current && !ref.current.contains(event.target)) {
                     // alert("You clicked outside of me!");
                     setVisibleItem(null)
+                    // setIsSearchbarActive(false)
+                }
+            }
+            // Bind the event listener
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                // Unbind the event listener on clean up
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [ref]);
+    }
+
+    function useOutsideAlerterSearch(ref) {
+        useEffect(() => {
+            /**
+             * Alert if clicked on outside of element
+             */
+            function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    // alert("You clicked outside of me!");
+                    // setIsSearchbarActive(false)
                 }
             }
             // Bind the event listener
@@ -210,14 +233,14 @@ export default function UpdatedNavBar() {
                                 </div>
                                 <div className={`flex justify-between items-center text-black lg:text-[16px] sm:text-[15px] pt-1  place-content-center `}>
 
-                                    <div className="search__bar relative flex flex-row place-content-center">
+                                    <div ref={searchBarRef} className="search__bar relative flex flex-row place-content-center">
                                         <Image
                                             src="/images/svgs/search.svg"
                                             height={50}
                                             width={50}
                                             alt=""
                                             className={` cursor-pointer`}
-                                            onClick={setIsSearchbarActive}
+                                            onClick={()=>setIsSearchbarActive(true)}
                                         />
 
                                         {isSearchbarActive && (
@@ -260,7 +283,7 @@ export default function UpdatedNavBar() {
 
                                             <button
                                                 className='lg:px-[15px] md:px-[15px] sm:px-[10px] xs:px-[10px]'
-                                                onClick={setIsSearchbarActive}
+                                                onClick={()=>setIsSearchbarActive(false)}
                                             >
                                                 <i class="ri-list-check"></i>
                                             </button>
