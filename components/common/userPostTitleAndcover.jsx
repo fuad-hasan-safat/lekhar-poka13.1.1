@@ -154,7 +154,6 @@ export default function UserPostTitleAndcover({
           </div>
 
           <Link className="lg:text-[22px] md:text-[16px] sm:text-[16px] xs:text-[14px]  font-semibold text-[#595D5B] " href={`/postswriter/${writer_id}`} >{shortenWriter}</Link>
-          <div className="text-[16px] font-thin leading-1 pt-[5px]">
             <div className="hm__post__profile__info text-[16px] font-thin leading-1 pt-[5px]">
               <Link className="flex place-content-start items-center leading-1 lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[12px]  text-[#595D5B]" href={`/postswriter/${writer_id}`} style={{ lineHeight: '1' }} >
 
