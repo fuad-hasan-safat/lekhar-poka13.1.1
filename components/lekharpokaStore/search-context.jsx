@@ -1,7 +1,8 @@
-import { createContext, useState } from "react";
+import { createContext, useRef, useState } from "react";
 import { setDefaultLocale } from "react-datepicker";
 
 export const SearchContext = createContext({
+    searchAreaRef: null,
     searchKey: ' ',
     searchText: ' ',
     searchScope: ' ',
@@ -24,6 +25,8 @@ export default function SearchContextProvider({ children }) {
         searchResult:[],
         isSearchbarActive: false,
     })
+
+    const searchRef = useRef(null);
 
     function updateSearchInfo() {
 
@@ -59,7 +62,9 @@ export default function SearchContextProvider({ children }) {
             }))
     }
 
+
     const cntxtValue = {
+        searchAreaRef: searchRef,
         searchKey: searchBar.searchKey,
         searchText: searchBar.searchText,
         searchScope: searchBar.searchScope,
