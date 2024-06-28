@@ -18,7 +18,7 @@ export default function Document() {
 
       </Head>
       <body>
-        <div id='search-result' className='fixed top-[95px] z-[99] w-full bg-white'></div>
+        <div id='search-result'></div>
         <Main />
         <NextScript />
       </body>
