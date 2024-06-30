@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AudioPlayListContext } from '../../components/store/audioPlayer-context';
 import AudioDetailsSideBar from '../../components/AudioBook/components/audioSidebar/AudioDetailsSidebar';
 import { audioPlaylist } from '../../components/AudioBook/components/sampleData/audioPlaylist';
-// import SeeMoreListPlayList from '../../components/AudioBook/components/SeeMoreList/seeMorePlayList';
+import SeeMoreListPlayList from '../../components/AudioBook/components/SeeMoreList/seeMorePlayList';
 import Loading from '../../components/common/loading';
 
 
@@ -61,7 +61,7 @@ const {playListRenderScope} = useContext(AudioPlayListContext)
                     <div className="all__post__content flex flex-row">
                         <div className="lg:w-[70%]">
                             <div className='see__more__list__wrap clearfix'>
-                                {/* <SeeMoreListPlayList audioPlaylist={audioPlaylist} playListScope={seeAllRenderInfo.playListScope} /> */}
+                                <SeeMoreListPlayList audioPlaylist={audioPlaylist} playListScope={seeAllRenderInfo.playListScope} />
 
                             </div>
                         </div>
