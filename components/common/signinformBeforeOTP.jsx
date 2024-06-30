@@ -93,6 +93,12 @@ export default function SigninFormBeforeOTP({ type, logreg, btntext, SetIsOtpSuc
         setState((prevState) => ({ ...prevState, isDisabled: !isValid }));
     };
 
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleSubmitBeforeOTP();
+        }
+      };
+
     const handleSubmitBeforeOTP = async () => {
 
         validate();
@@ -219,6 +225,7 @@ export default function SigninFormBeforeOTP({ type, logreg, btntext, SetIsOtpSuc
                             placeholder="ফোন নম্বর লিখুন (01-XXXXXXXXX)"
                             value={state.mobileNumber}
                             onChange={handleChange}
+                            onKeyDown={handleKeyDown}
                             onBlur={validate}
                             className="h-[62px] p-4 bg-[#FCF7E8] rounded-[8px] text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             required

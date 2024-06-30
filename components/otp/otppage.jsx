@@ -10,7 +10,7 @@ const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus,
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [numberPrefix, setNumberPrefix] = useState('88');
-  const [timer, setTimer] = useState(60); 
+  const [timer, setTimer] = useState(60);
   const inputRefs = useRef([]);
 
   useEffect(() => {
@@ -25,6 +25,13 @@ const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus,
 
   }, [timer]);
 
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      sendOtp();
+    }
+  };
+
   const sendOtp = async () => {
 
     const formattedPhoneNumber = `88${phonenumber}`;
@@ -34,7 +41,7 @@ const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus,
         otp: Number(otp.join("")),
         phone: formattedPhoneNumber,
       });
-      
+
       if (response.data.status === "success") {
         setIsOtpVerified(true);
         setIsOtpSuccess(true);
@@ -67,7 +74,7 @@ const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus,
     setOtp(newOtp);
 
     console.log(otp.join(''))
-    console.log(typeof(otp.join()))
+    console.log(typeof (otp.join()))
   };
 
   const handleSendOtpAgain = async () => {
@@ -96,12 +103,12 @@ const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus,
       }
     } catch (error) {
       console.error('Signup error:', error);
-     
+
     }
 
   }
 
-  
+
   const notify = () => toast.warn(notification, {
     position: "top-center",
     autoClose: 5000,
@@ -125,11 +132,11 @@ const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus,
     <div className="w-full">
       <div className="grid place-items-center lg:pt-28 md:pt-26 sm:pt-20 xs:pt-15">
         <h1 className="text-black lg:text-5xl md:text-4xl sm:text-4xl xs:text-3xl lg:mb-[40px] md:mb-[40px] sm:mb-[30px] xs:mb-[20px]">
-        ওটিপি যাচাই করুন
+          ওটিপি যাচাই করুন
         </h1>
         <p className="text-gray-500">আমরা আপনাকে একটি এককালীন পাসওয়ার্ড পাঠাব</p>
         <p className="text-gray-500">
-           <span className="font-semibold">মোবাইল নাম্বার:</span> +88 {phonenumber}
+          <span className="font-semibold">মোবাইল নাম্বার:</span> +88 {phonenumber}
         </p>
       </div>
       <div className="flex justify-center flex-row space-x-6 lg:mt-[70px] lg:mb-[70px] md:mt-[60px] md:mb-[60px] sm:mt-[50px] sm:mb-[50px] xs:mt-[30px] xs:mb-[20px] text-3xl font-semibold text-gray-700">
@@ -149,6 +156,7 @@ const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus,
         {otpStatus === "SENT" && <p className="text-gray-500">{`ওটিপি  ${timer} সেকেন্ড পর আবার পাঠানো হবে`}</p>}
         <button
           onClick={sendOtp}
+          onKeyDown={handleKeyDown}
           disabled={isButtonDisabled}
           className={`login__btn page__common__yello__btn mt-8 lg:px-5 md:px- sm:px-3  bg-[#F9A106] rounded-[8px] lg:text-[30px] md:text-[30px] sm:text-[25px] xs:text-[20px] text-white lg:h-[75px] md:h-[65px] sm:h-[60px] xs:h-[55px] ${isButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
             }`}
@@ -161,7 +169,7 @@ const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus,
             onClick={handleSendOtpAgain}
             className=" lg:pl-60 md:pl-50 sm:pl-40 xs:pl-10 pt-2 text-gray-400 hover:text-gray-600 font-semibold text-sm"
           >
-           ওটিপি পাননি ?
+            ওটিপি পাননি ?
           </button>
         }
 

@@ -167,7 +167,7 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
     //  handle submit
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e?.preventDefault();
 
         //  update bio
         try {
@@ -282,6 +282,12 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
         }
     };
 
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleSubmit();
+        }
+      };
+
     const notify = () => toast.warn(notification, {
         position: "top-center",
         autoClose: 5000,
@@ -307,7 +313,7 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
         <>
 
 
-            <div className={`${showModal ? 'block' : 'hidden'} fixed z-[9999] inset-0 overflow-y-auto flex items-center justify-center bg-black/70`} aria-labelledby="modal-title" role="dialog" aria-modal="true">
+            <div onKeyDown={handleKeyDown} className={`${showModal ? 'block' : 'hidden'} fixed z-[9999] inset-0 overflow-y-auto flex items-center justify-center bg-black/70`} aria-labelledby="modal-title" role="dialog" aria-modal="true">
 
                 <div className=" inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
                 <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
