@@ -56,8 +56,7 @@ const [uuid, setUuid] = useState("");
                     {/* {!isOtpSucess && !isOtpVarified  && <SigninFormBeforeOTP type='recoveryPass' logreg="পাসওয়ার্ড রিসেট করুন" btntext="সাবমিট" SetIsOtpSucess={SetIsOtpSucess}  setState={setState} state={state} otpStatus={otpStatus} setOtpStatus={setOtpStatus} otpProp='send-otp-reset-password'/> }
                     {isOtpSucess && !isOtpVarified && <OtpPage phonenumber={state.mobileNumber} setIsOtpSuccess={SetIsOtpSucess} setIsOtpVerified={setIsOtpVarified} otpStatus={otpStatus} setOtpStatus={setOtpStatus}/> }
                     {isOtpVarified && <PassRecovertFormAterOTP phonenumber={state.mobileNumber}/> } */}
-
-                    <PassRecovertFormAterOTP phonenumber={state.mobileNumber}/>
+ <OtpPage phonenumber={state.mobileNumber} setIsOtpSuccess={SetIsOtpSucess} setIsOtpVerified={setIsOtpVarified} otpStatus={otpStatus} setOtpStatus={setOtpStatus}/>
                    
                     <SignInOption
                       user={user}

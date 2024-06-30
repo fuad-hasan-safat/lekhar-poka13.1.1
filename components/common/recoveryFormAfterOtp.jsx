@@ -116,7 +116,7 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
         <>
             <div className="login__form__dsc">
 
-                <div className="lg:text-[48px] md:text-[45px] sm:text-[42px] xs:text-[38px] mb-5  font-semibold text-yellow-500">
+                <div className="lg:text-[48px] md:text-[45px] sm:text-[40px] xs:text-[30px] mb-5  font-semibold text-yellow-500">
                     পাসওয়ার্ড রিসেট করুন
                 </div>
 
@@ -130,7 +130,7 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
                         value={state.password}
                         onChange={handleChange}
                         onBlur={validate}
-                        className="w-[559px] h-[62px] p-4 bg-[#FCF7E8]  rounded-2xl   text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
+                        className="w-full h-[62px] p-4 bg-[#FCF7E8]  rounded-2xl   text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
                         required
                     />
 
@@ -145,7 +145,7 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
                         value={state.retypePassword}
                         onChange={handleChange}
                         onBlur={validate}
-                        className="w-[559px] h-[62px] p-4 bg-[#FCF7E8]  rounded-2xl   text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
+                        className="w-full h-[62px] p-4 bg-[#FCF7E8]  rounded-2xl   text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
                         required
                     />
                     {state.error && <p className="error">{state.error}</p>}
@@ -154,7 +154,7 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
 
                 <button
                     onClick={handleUpdatePassword}
-                    className="login__btn mt-8 px-5 bg-[#F9A106] rounded-full lg:text-[35px] md:text-[34px] sm:text-[33px] xs:text-[30px] text-white lg:h-[75px] md:h-[70px] sm:h-[65px] xs:h-[60px]"
+                    className="login__btn mt-8 px-5 bg-[#F9A106] rounded-full lg:text-[35px] md:text-[34px] sm:text-[33px] xs:text-[25px] text-white lg:h-[75px] md:h-[70px] sm:h-[65px] xs:h-[60px]"
                 >
                     আপডেট পাসওয়ার্ড
                 </button>

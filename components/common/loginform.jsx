@@ -160,7 +160,7 @@ export default function LoginForm({ logreg, btntext }) {
     <>
       <div className="login__form__dsc">
 
-        <div className="text-[48px] mb-[65px] text-left font-semibold text-black">
+        <div className="lg:text-[48px] md:text-[45px] sm:text-[40px] xs:text-[30px] mb-[65px] text-left font-semibold text-black">
           {logreg}
         </div>
 
