@@ -57,7 +57,7 @@ export default function SearchResult() {
         setSearchKey('')
     }
 
-    if (!isSearchbarActive || isMounted) return null;
+    if (!isSearchbarActive || isMounted ) return null;
 
     return createPortal((
         <>
