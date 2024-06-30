@@ -64,12 +64,18 @@ export default function Login() {
     setPassword(e.target.value);
   };
 
-function reloadPage(){
-  setTimeout(()=>{
-    router.refresh()
+  function reloadPage() {
+    setTimeout(() => {
+      router.refresh()
 
-  }, 1000)
-}
+    }, 1000)
+  }
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      submitLogin();
+    }
+  };
 
   async function submitLogin() {
 
@@ -125,7 +131,7 @@ function reloadPage(){
       notify();
     }
 
-  
+
 
   }
 
@@ -197,6 +203,7 @@ function reloadPage(){
                 placeholder="পাসওয়ার্ড দিন"
                 required
                 onChange={handlePasswordChange}
+                onKeyDown={handleKeyDown}
                 value={password}
               />
 
@@ -221,7 +228,7 @@ function reloadPage(){
               >
                 লগইন করুন
               </button>
-            <ToastContainer />
+              <ToastContainer />
 
             </div>
 
