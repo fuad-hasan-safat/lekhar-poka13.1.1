@@ -159,7 +159,7 @@ const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus,
 
           <button
             onClick={handleSendOtpAgain}
-            className="page__common__yello__btn lg:pl-60 md:pl-50 sm:pl-40 xs:pl-10 pt-2 text-gray-400 font-semibold text-sm"
+            className=" lg:pl-60 md:pl-50 sm:pl-40 xs:pl-10 pt-2 text-gray-400 hover:text-gray-600 font-semibold text-sm"
           >
            ওটিপি পাননি ?
           </button>
