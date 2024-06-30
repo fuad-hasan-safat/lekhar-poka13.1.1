@@ -2881,6 +2881,7 @@ transition: all 0.5s !important;
   .audio__tab__wrap {
     padding-left: 10px;
     padding-right: 10px;
+    height: 80px;
   }
 
   .audio__tab__info h6 {
@@ -2898,6 +2899,6 @@ transition: all 0.5s !important;
   }
 
   .banner__bg__wrap h2 {
-    top: 40%;
+    top: 42%;
   }
 }

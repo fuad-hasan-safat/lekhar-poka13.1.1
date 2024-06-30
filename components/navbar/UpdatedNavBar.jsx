@@ -315,7 +315,7 @@ export default function UpdatedNavBar() {
                                                         ? "text-[#F9A106] font-semibold underline"
                                                         : "text-black"
                                                         }`}
-                                                    href="#">সব লেখা <span style={{ position: 'relative', top: '-3px' }}><i class="ri-arrow-down-s-line"></i></span></Link>
+                                                    href="#">সব লেখা <span style={{ position: 'relative', top: '-1px' }}><i class="ri-arrow-down-s-line"></i></span></Link>
                                                 {/* <FontAwesomeIcon icon={faAngleDown} className="ml-2 pt-1 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-4 sm:w-4 xs:h-4 xs:w-4 focus:text-[#F9A106]" /> */}
                                                 {visibleItem === 0 && (
                                                     <ul ref={popupRef1}
