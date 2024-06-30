@@ -11,7 +11,7 @@ import { SearchContext } from '../lekharpokaStore/search-context';
 export default function UpdatedNavBar() {
     const router = useRouter();
 
-    const {setIsSearchbarActive, isSearchbarActive, setSearchResult, searchKey, setSearchKey} = useContext(SearchContext)
+    const {searchAreaRef,setIsSearchbarActive, isSearchbarActive, setSearchResult, searchKey, setSearchKey} = useContext(SearchContext)
     
     const [selectedNav, setSelectedNav] = useState("");
     const [postList, setPostList] = useState(null);
@@ -33,7 +33,7 @@ export default function UpdatedNavBar() {
     useOutsideAlerter(popupRef1);
     useOutsideAlerter(popupRef2);
    
-    useOutsideAlerterSearch(searchBarRef);
+    useOutsideAlerterSearch(searchAreaRef);
 
     function useOutsideAlerter(ref) {
         useEffect(() => {
@@ -64,7 +64,7 @@ export default function UpdatedNavBar() {
             function handleClickOutside(event) {
                 if (ref.current && !ref.current.contains(event.target)) {
                     // alert("You clicked outside of me!");
-                    // setIsSearchbarActive(false)
+                    //  setIsSearchbarActive(false)
                 }
             }
             // Bind the event listener
@@ -233,7 +233,7 @@ export default function UpdatedNavBar() {
                                 </div>
                                 <div className={`flex justify-between items-center text-black lg:text-[16px] md:text-[13px] sm:text-[13px] xs:text-[13px] pt-1  place-content-center `}>
 
-                                    <div ref={searchBarRef} className="search__bar relative flex flex-row place-content-center">
+                                    <div ref={searchAreaRef} className="search__bar relative flex flex-row place-content-center">
                                         <Image
                                             src="/images/svgs/search.svg"
                                             height={50}

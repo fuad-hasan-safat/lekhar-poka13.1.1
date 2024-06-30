@@ -36,13 +36,13 @@ const FullPostPagination = ({ logText, customclass }) => {
   }, [router.query])
 
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    if (currentPage !== -1) {
-      saveCurrentPage();
-    }
+  //   if (currentPage !== -1) {
+  //     saveCurrentPage();
+  //   }
 
-  }, [currentPage, router.query])
+  // }, [currentPage, router.query])
 
 
   const getSavedpage = async () => {
@@ -92,14 +92,14 @@ const FullPostPagination = ({ logText, customclass }) => {
     console.log({ userUUID })
 
     if (userUUID?.length > 0) {
-      console.log('current gage --', currentPage)
+      console.log('current gage --', selected)
       try {
         const response = await axios.post(
           `${apiBasePath}/recordpostpage`,
           {
             userId: userUUID,
             postId: slug,
-            currentPage: currentPage,
+            currentPage: selected,
           },
           {
             headers: {
@@ -130,8 +130,8 @@ const FullPostPagination = ({ logText, customclass }) => {
 
   const handlePageChange = ({ selected }) => {
 
-    saveCurrentPage(selected);
     setCurrentPage(selected);
+    saveCurrentPage(selected);
 
   };
 
