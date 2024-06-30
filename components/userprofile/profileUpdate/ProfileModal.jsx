@@ -327,7 +327,7 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
 
                         </div>
 
-                        <div className='lg:max-w-[640px] md:max-w-[570px] sm:max-w-[540px] xs:max-w-[310px] items-center justify-center place-content-center m-auto'>
+                        <div className='px-[10px] lg:max-w-[640px] md:max-w-[570px] sm:max-w-[540px] xs:max-w-[310px] items-center justify-center place-content-center m-auto'>
                             <input
                                 type='text'
                                 className={`${Class.profile__input} h-[40px] px-[16px]`}
