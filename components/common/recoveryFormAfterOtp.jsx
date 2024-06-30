@@ -116,7 +116,7 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
         <>
             <div className="login__form__dsc">
 
-                <div className="text-[48px] mb-5  font-semibold text-yellow-500">
+                <div className="lg:text-[48px] md:text-[45px] sm:text-[42px] xs:text-[38px] mb-5  font-semibold text-yellow-500">
                     পাসওয়ার্ড রিসেট করুন
                 </div>
 
