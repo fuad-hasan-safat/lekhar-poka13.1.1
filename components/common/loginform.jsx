@@ -78,6 +78,14 @@ export default function LoginForm({ logreg, btntext }) {
     }, 1000)
   }
 
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      submitLogin();
+    }
+  };
+
+
   async function submitLogin() {
 
     try {
@@ -170,6 +178,7 @@ export default function LoginForm({ logreg, btntext }) {
 
             <input
               onChange={handleNumberhange}
+              onKeyDown={handleKeyDown}
               value={number}
               className="h-[62px] p-4 bg-[#FCF7E8] rounded-[8px] text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="phone"
@@ -185,6 +194,7 @@ export default function LoginForm({ logreg, btntext }) {
 
             <input
               onChange={handlePasswordChange}
+              onKeyDown={handleKeyDown}
               value={password}
               className="h-[62px] p-4 pr-[40px] bg-[#FCF7E8] rounded-[8px] text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
               id="password"
