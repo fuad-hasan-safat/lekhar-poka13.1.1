@@ -1486,14 +1486,17 @@ transition: all 0.5s !important;
 .banner-sec-wrap{
   padding-top: 95px;
 }
+.banner__bg__sm__wrap h2,
 .banner__bg__wrap h2{
   left: 50%;
-  top: 50%;
+  top: 43%;
   transform: translate(-50%,-50%);
   -ms-transform: translate(-50%,-50%);
   -webkit-transform: translate(-50%,-50%);
 }
-
+.banner__bg__sm__wrap h2{
+  top: 52%;
+}
 
 
 /*
@@ -1859,7 +1862,7 @@ transition: all 0.5s !important;
     margin-right: 15px;
   }
   .banner-sec-wrap {
-    padding-top: 85px;
+    padding-top: 80px;
 }
 }
 
@@ -2337,5 +2340,8 @@ transition: all 0.5s !important;
   }
   .banner-sec-wrap {
       padding-top: 65px;
+  }
+  .banner__bg__wrap h2 {
+      top: 40%;
   }
 }

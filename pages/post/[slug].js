@@ -99,7 +99,7 @@ export default function PostDetails({ postData }) {
       <div className=" body__control" >
         <div className="all__post__content__overlay">
           <section className="banner-sec-wrap place-content-center">
-            <div className="banner__bg__wrap relative w-full xl:h-[190px] lg:h-[180px] md:h-[180px] sm:h-[180px] xs:h-[170px]  overflow-hidden" style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat` }}>
+            <div className="banner__bg__sm__wrap relative w-full xl:h-[190px] lg:h-[180px] md:h-[180px] sm:h-[180px] xs:h-[170px]  overflow-hidden" style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat` }}>
               {<h2 className=" absolute lg:text-[40px] md:text-[38px] sm:text-[35px] xs:text-[25px] text-[#F9A106]">{data?.category}</h2>}
             </div>
           </section>
