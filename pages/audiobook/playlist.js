@@ -1,11 +1,8 @@
 'use client'
 import Head from 'next/head';
 import React, { useContext, useEffect, useState } from 'react';
-import Sidebar from '../../components/sidebar/Sidebar';
 import { AudioPlayListContext } from '../../components/store/audioPlayer-context';
 import AudioDetailsSideBar from '../../components/AudioBook/components/audioSidebar/AudioDetailsSidebar';
-import AudioPlayer from '../../components/AudioBook/AudioPlayer/AudioPlayer';
-
 import { audioPlaylist } from '../../components/AudioBook/components/sampleData/audioPlaylist';
 import SeeMoreListPlayList from '../../components/AudioBook/components/SeeMoreList/SeeMorePlayList';
 import Loading from '../../components/common/loading';
