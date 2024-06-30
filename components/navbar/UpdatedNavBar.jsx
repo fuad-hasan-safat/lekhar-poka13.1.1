@@ -231,7 +231,7 @@ export default function UpdatedNavBar() {
                                         />
                                     </Link>
                                 </div>
-                                <div className={`flex justify-between items-center text-black lg:text-[16px] sm:text-[15px] pt-1  place-content-center `}>
+                                <div className={`flex justify-between items-center text-black lg:text-[16px] md:text-[13px] sm:text-[13px] xs:text-[13px] pt-1  place-content-center `}>
 
                                     <div ref={searchAreaRef} className="search__bar relative flex flex-row place-content-center">
                                         <Image
