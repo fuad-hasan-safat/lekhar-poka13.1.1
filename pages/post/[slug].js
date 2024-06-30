@@ -1,23 +1,21 @@
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Head from 'next/head';
 
 
 import FullPost from '../../components/common/fullContent'
 import RatingComponent from '../../components/common/starRating'
-import { fetchData } from "../../function/api";
 import { apiBasePath } from "../../utils/constant";
-import MusicPlayer from "../../components/musicbar/MusicPlayer";
-import ShareOnFacebook from "../../components/share/share";
 import ReaderModeModal from "../../components/readerMode/ReaderModeModal";
 import FullPostReaderMode from "../../components/common/fullContentReadermood";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AudioPlayListContext } from "../../components/store/audioPlayer-context";
+
 
 export async function getServerSideProps(context) {
 
   const { slug } = context.params;
-
   const res = await fetch(`${apiBasePath}/getpost/${slug}`)
   const postData = await res.json()
 
@@ -30,6 +28,8 @@ export default function PostDetails({ postData }) {
   const { asPath } = router;
 
   console.log({ postData })
+
+  const { toggleAudioPlay, audioPlace, currentPlayingIndex, isAudioPlaying } = useContext(AudioPlayListContext);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -57,7 +57,7 @@ export default function PostDetails({ postData }) {
 
   function removeHtmlTags(str) {
     return str?.replace(/<\/?[^>]+(>|$)/g, "");
-}
+  }
 
 
   // select image
@@ -70,11 +70,26 @@ export default function PostDetails({ postData }) {
 
   let pageTitle = data?.title
   let withoutTagDes = removeHtmlTags(data?.content?.slice(0, 700))
-  console.log({withoutTagDes})
+  console.log({ withoutTagDes })
   let description = withoutTagDes;
   let postLink = `https://lekharpoka.com${asPath}`;
   let imageLink = `https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/') + 1)}`
-  console.log({pageTitle, description, postLink, imageLink})
+  console.log({ pageTitle, description, postLink, imageLink })
+
+  let audioList = [];
+
+  if (isAudioAvailable) {
+    audioList = [
+      {
+        id: data?._id,
+        title: data?.title,
+        audio: `${apiBasePath}/${data?.audio?.slice(data.audio.indexOf("/") + 1)}`,
+        writer: data?.writer,
+        image: `${apiBasePath}/${writerImage?.slice(writerImage.indexOf("/") + 1)}`,
+      }
+    ]
+
+  }
 
   return (
 
@@ -84,12 +99,12 @@ export default function PostDetails({ postData }) {
         <Head>
 
           <title>{data?.title}</title>
-          <meta property="og:title" content={pageTitle} key="og:title"/>
+          <meta property="og:title" content={pageTitle} key="og:title" />
           <meta property="og:description" content={`${description} #lekharpoka`} />
-          <meta property="og:image" content={imageLink}  key="og:image"/>
+          <meta property="og:image" content={imageLink} key="og:image" />
           <meta property="og:url" content={postLink} />
           <meta property="og:type" content="website" key="og:type" />
-          <meta name="twitter:card" content={imageLink}  />
+          <meta name="twitter:card" content={imageLink} />
           <meta name="twitter:title" content={pageTitle} />
           <meta name="twitter:description" content={description} />
           <meta name="twitter:image" content={imageLink} />
@@ -127,6 +142,15 @@ export default function PostDetails({ postData }) {
                               url={asPath}
                             />
 
+                            {isAudioAvailable && (
+                              <div className="audio__tab__playbutton absolute  top-[160px]">
+                                <button  className="text-center justify-center items-center" onClick={() => toggleAudioPlay(0, audioList, slug)}>
+                                 <span className="inline-block"> {isAudioPlaying && 0 === currentPlayingIndex && audioPlace === slug ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</span> <span className="inline-block font-semibold text-[16px]"> প্লে করুন</span> 
+                                </button>
+                              </div>
+
+                            )}
+
                           </div>
                           <div>
                             <button onMouse className="absolute  w-[35px] h-[35px] right-2 mt-[5px] text-white rounded-xl bg-orange-400" onClick={() => setIsModalOpen(true)}><i class="ri-book-read-fill text-[22px]"></i></button>
@@ -138,9 +162,9 @@ export default function PostDetails({ postData }) {
                         </div>
                         <div className="rating__share__wrap">
                           <button
-                          className="facebook__share bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 rounded flex items-center"
-                           onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=https://lekharpoka.com/post/${slug}`, '_blank')}>
-                           <i class="ri-facebook-circle-fill mr-[4px]"></i> শেয়ার করুন 
+                            className="facebook__share bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 rounded flex items-center"
+                            onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=https://lekharpoka.com/post/${slug}`, '_blank')}>
+                            <i class="ri-facebook-circle-fill mr-[4px]"></i> শেয়ার করুন
                           </button>
 
                           {/* <ShareOnFacebook url={`lekharpoka.com/post/${slug}`} title={'লেখার পোকায় আপনাকে স্বাগতম'} image={''} /> */}
@@ -168,7 +192,7 @@ export default function PostDetails({ postData }) {
 
 
           </section>
-      <ToastContainer />
+          <ToastContainer />
 
         </div>
 
@@ -194,18 +218,7 @@ export default function PostDetails({ postData }) {
         </ReaderModeModal>
 
 
-        {isAudioAvailable && (
 
-          <MusicPlayer songs={[{
-            id: data?._id,
-            title: data?.title,
-            src: `${apiBasePath}/${data?.audio?.slice(data.audio.indexOf("/") + 1)}`,
-            writer: data?.writer,
-            image: `${apiBasePath}/${writerImage?.slice(writerImage.indexOf("/") + 1)}`,
-
-          }]} />
-
-        )}
       </div>
     </>
   );
