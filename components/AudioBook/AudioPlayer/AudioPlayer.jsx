@@ -153,7 +153,7 @@ export default function AudioPlayer() {
                   onEnded={handleEnded}
                 />
                 <div className="flex flex-row  space-x-6">
-                  <button onClick={toggleShuffle} className={isShuffle ? "active" : ""}>
+                  <button onClick={toggleShuffle} className={isShuffle ? "active" : "text-gray-400"}>
                     <MdShuffle />
                   </button>
                   <button onClick={prevSongPlay}>
