@@ -63,6 +63,13 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
             router.push('/account/login')
         }, 1000)
     }
+
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleUpdatePassword();
+        }
+      };
     const handleUpdatePassword = async () => {
 
         validate();
@@ -144,6 +151,7 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
                         placeholder="আবার পাসওয়ার্ড দিন"
                         value={state.retypePassword}
                         onChange={handleChange}
+                        onKeyDown={handleKeyDown}
                         onBlur={validate}
                         className="w-full h-[62px] p-4 bg-[#FCF7E8]  rounded-2xl   text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
                         required
