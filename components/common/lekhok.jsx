@@ -23,7 +23,7 @@ const LekhokDetails = ({
 
                         <img
                             src={image}
-                            alt={`img ${id}`}
+                            alt={`img`}
                         />
 
                     </a>
