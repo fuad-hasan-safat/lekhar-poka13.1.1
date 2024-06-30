@@ -367,7 +367,7 @@ body {
 .lekhokIteam img {
   width: 60px;
   height: 60px;
-  border: solid 0.5px #A5A5A536 ;
+  border: solid 0.5px #A5A5A536;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -1504,10 +1504,11 @@ transition: all 0.5s !important;
  Audio Player Css
 ------------------- 
 */
-.audio-player-wrap{
+.audio-player-wrap {
   padding: 20px 0;
 }
-.audio__player__innr{
+
+.audio__player__innr {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1518,17 +1519,22 @@ transition: all 0.5s !important;
  Banner Css
 ----------------- 
 */
-.banner-sec-wrap{
+.banner-sec-wrap {
   padding-top: 95px;
 }
-.banner__bg__wrap h2{
+
+.banner__bg__sm__wrap h2,
+.banner__bg__wrap h2 {
   left: 50%;
-  top: 50%;
-  transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  -webkit-transform: translate(-50%,-50%);
+  top: 43%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
 }
 
+.banner__bg__sm__wrap h2 {
+  top: 52%;
+}
 
 /*
 ----------------------
@@ -1910,21 +1916,26 @@ transition: all 0.5s !important;
     margin-left: 15px;
     margin-right: 15px;
   }
+
   .banner-sec-wrap {
     padding-top: 75px !important;
-}
+    /* padding-top: 80px; */
+  }
 }
 
 @media(max-width:767px) {
   .all__post__sec__wrap {
     padding-top: 60px;
   }
+
   .slider__pt__wrap {
     padding-top: 85px;
   }
+
   .hambar__icon {
     display: block;
   }
+
   .sidebar {
     position: absolute;
     left: 0;
@@ -1941,32 +1952,40 @@ transition: all 0.5s !important;
     -ms-transition: all 0.5s;
     -webkit-transition: all 0.5s;
   }
+
   .menu__active.sidebar {
     opacity: 1;
     visibility: visible;
   }
+
   .sidebar>ul {
     display: block;
     padding: 30px 30px !important;
   }
+
   .sidebar>ul li ul {
     display: table;
     margin: 0 auto;
   }
+
   .sidebar ul li {
     width: auto !important;
   }
+
   .hdr__dropdown__menu {
     margin-left: 30px;
   }
+
   .logo a img {
     width: 180px !important;
   }
+
   .sidebar ul li {
     width: auto !important;
     height: auto;
     padding: 5px 0;
   }
+
   .logo:after {
     border-top: 85px solid gold;
     border-right: 130px solid transparent;
@@ -2154,16 +2173,20 @@ transition: all 0.5s !important;
     font-size: 16px;
     margin-top: 15px;
   }
+
   .audio__player__innr {
-      display: block;
+    display: block;
   }
+
   .audio-player-wrap {
-      padding: 10px 0;
+    padding: 10px 0;
   }
-  .hm__post__profile__grid h1{
+
+  .hm__post__profile__grid h1 {
     margin-bottom: -6px;
   }
-  .hm__post__profile__info{
+
+  .hm__post__profile__info {
     margin-top: -6px;
   }
 }
@@ -2298,7 +2321,7 @@ transition: all 0.5s !important;
 
   .search__bar input {
     width: 90px !important;
-    font-size: 13px !important;
+    font-size: 11px !important;
   }
 
   .slider__bg__img img {
@@ -2411,8 +2434,9 @@ transition: all 0.5s !important;
   .facebook__share {
     margin-left: 0;
   }
+
   .banner-sec-wrap {
-      padding-top: 65px !important;
+    padding-top: 65px !important;
   }
 }
 
@@ -2421,7 +2445,7 @@ transition: all 0.5s !important;
 
 
 /*  AUDIO BOOK */
-.hm__audio__section{
+.hm__audio__section {
   margin-top: 100px;
 }
 
@@ -2445,13 +2469,15 @@ transition: all 0.5s !important;
   margin: 0 -10px;
   padding-bottom: 60px;
 }
-.audio__cat_Single_wrap{
+
+.audio__cat_Single_wrap {
   width: 25%;
   padding-left: 10px;
   padding-bottom: 20px;
   float: left;
   padding-right: 10px;
 }
+
 .audio__cat__single__iteam {
   width: 100%;
   height: 84px;
@@ -2466,7 +2492,7 @@ transition: all 0.5s !important;
 .audio__cat__title {
   font-size: 18px;
   flex: 1;
-  color: #FFFFFF ;
+  color: #FFFFFF;
   font-weight: 600;
 
 }
@@ -2488,18 +2514,20 @@ transition: all 0.5s !important;
 }
 
 
-.backgroundSlider__single__wrap{
+.backgroundSlider__single__wrap {
   /* width: 25%; */
   padding-left: 10px;
   /* padding-bottom: 20px; */
   float: left;
   padding-right: 10px;
 }
-.backgroundSlider__single{
-  width:33.3333%;
+
+.backgroundSlider__single {
+  width: 33.3333%;
   padding-bottom: 20px;
 }
-.backgroundSlider__single__iteam{
+
+.backgroundSlider__single__iteam {
   width: 100%;
   height: 140px;
   border-radius: 16px;
@@ -2510,109 +2538,112 @@ transition: all 0.5s !important;
   justify-content: left;
   align-items: center;
   cursor: pointer;
-  
+
 }
 
-.audio__bgslider__image img{
+.audio__bgslider__image img {
   width: 69px;
   height: 105px;
   object-fit: cover;
 }
 
 
-.audio__tab__wrap{
-  background-color: #F3F3F3  ;
+.audio__tab__wrap {
+  background-color: #F3F3F3;
   border-radius: 8px;
   margin-top: 16px;
   height: 110px;
   place-content: center;
   padding-left: 37px;
   padding-right: 67px;
- }
+}
 
- 
-.audio__tab__item{
+
+.audio__tab__item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
+
 }
 
-.audio__tab__left{
+.audio__tab__left {
   display: flex;
   justify-content: space-between;
 }
 
-.audio__tab__info{
+.audio__tab__info {
   padding-left: 11px;
 }
-.audio__tab__info h6{
+
+.audio__tab__info h6 {
   font-size: 24px;
   font-weight: 600;
-  color:#F9A106;
+  color: #F9A106;
   padding-top: 10px;
 }
 
-.audio__tab__info p{
+.audio__tab__info p {
   font-size: 10px;
   font-weight: 400;
-  color:#5D5A88;
- 
+  color: #5D5A88;
+
 }
-.audio__tab__playbutton{
-  color:#FCD200 ;
+
+.audio__tab__playbutton {
+  color: #FCD200;
   font-size: 44px;
 }
 
- .audio__playlist__devider{
+.audio__playlist__devider {
   margin-top: 15px;
   margin-bottom: 15px;
- }
+}
 
-.audio__playlist__item{
+.audio__playlist__item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
+
 }
 
-.audio__playlist__left{
+.audio__playlist__left {
   display: flex;
   justify-content: space-between;
 }
 
-.audio__playlist__info{
+.audio__playlist__info {
   padding-left: 11px;
 }
-.audio__playlist__info h6{
+
+.audio__playlist__info h6 {
   font-size: 16px;
   font-weight: 600;
-  color:#F9A106;
+  color: #F9A106;
 }
 
-.audio__playlist__info p{
+.audio__playlist__info p {
   font-size: 10px;
   font-weight: 400;
-  color:#5D5A88;
+  color: #5D5A88;
 }
 
-.audio__playlist__playbutton{
-  color:#FCD200 ;
+.audio__playlist__playbutton {
+  color: #FCD200;
   font-size: 32px;
 }
 
-.audio__sidebar__heading{
+.audio__sidebar__heading {
   color: #F9A106;
   font-size: 20px;
   font-weight: 600;
 }
 
-.sidebar__audio__common__btn{
+.sidebar__audio__common__btn {
   font-size: 16px;
   line-height: 1;
   color: #fff;
   font-weight: 600;
-  background: #F9A106  ; 
+  background: #F9A106;
   border-radius: 8px;
   padding: 11px 151px;
   margin-top: 16px;
@@ -2623,11 +2654,13 @@ transition: all 0.5s !important;
   -webkit-backface-visibility: hidden;
   -moz-osx-font-smoothing: grayscale;
 }
-.hm__audio__see__more .sidebar__audio__common__btn{
+
+.hm__audio__see__more .sidebar__audio__common__btn {
   padding: 14px 20px;
   width: 100%;
   text-align: center;
 }
+
 .sidebar__audio__common__btn::before {
   content: '';
   z-index: -1;
@@ -2645,74 +2678,82 @@ transition: all 0.5s !important;
   transform: scale3d(1, 2, 1);
   -webkit-transition: -webkit-transform 0.4s, opacity 0.4s;
   transition: transform 0.4s, opacity 0.4s;
-  -webkit-transition-timing-function: cubic-bezier(0.7,0,0.9,1);
-  transition-timing-function: cubic-bezier(0.7,0,0.9,1);
+  -webkit-transition-timing-function: cubic-bezier(0.7, 0, 0.9, 1);
+  transition-timing-function: cubic-bezier(0.7, 0, 0.9, 1);
 }
+
 .sidebar__audio__common__btn:hover::before {
--webkit-transform: scale3d(8, 8, 1);
-transform: scale3d(8, 8, 1);
-transition: all 0.3s;
--ms-transition: all 0.3s;
--webkit-transition: all 0.3s;
+  -webkit-transform: scale3d(8, 8, 1);
+  transform: scale3d(8, 8, 1);
+  transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
 }
-.sidebar__audio__common__btn:hover{
+
+.sidebar__audio__common__btn:hover {
   color: #515151;
 }
 
 
-.sidebar__iteam__wrap{
-  border:  solid 1px ;
+.sidebar__iteam__wrap {
+  border: solid 1px;
   border-radius: 11px;
-  border-color: #F3F3F3  ;
+  border-color: #F3F3F3;
   padding: 5px 14px 5px 14px;
   gap: 8px;
   margin-bottom: 32px;
 }
 
-.audio__tab__caption{
-  color:#F9A106;
+.audio__tab__caption {
+  color: #F9A106;
 }
 
-.audio__tab__details{
+.audio__tab__details {
   color: #484848;
 }
-.audio__tab__content{
+
+.audio__tab__content {
   padding-right: 60px;
 }
-.audio__tab__content_wrap{
+
+.audio__tab__content_wrap {
   width: 100%;
 }
 
-.audio__tab__caption h5{
+.audio__tab__caption h5 {
   margin-top: 23px;
-color: #F9A106;
-font-weight: 600;
-font-size: 28px;
+  color: #F9A106;
+  font-weight: 600;
+  font-size: 28px;
 }
-.audio__tab__caption hr{ 
+
+.audio__tab__caption hr {
   width: 100%;
   border-top: 2px solid #F9A106;
   margin-top: 10px;
   margin-bottom: 20px;
 }
 
-.audio__tab__details p{
+.audio__tab__details p {
   font-size: 18px;
   font-weight: 400;
-  color: #484848  ;
+  color: #484848;
   line-height: 1.8;
   text-align: justify;
   text-justify: inter-word;
 }
+
 .hmRecentSlider .slick-next,
 .hmRecentSlider .slick-prev {
   display: none;
 }
-.banner-sec-wrap{
+
+.banner-sec-wrap {
   padding-top: 95px;
 }
-.audio-player-wrap{
-  padding:15px 0;
+
+.audio-player-wrap {
+  padding: 15px 0;
 }
 
 /*
@@ -2720,111 +2761,143 @@ font-size: 28px;
  Responsive Css
 -------------------
 */
-@media(max-width:1199px){
+@media(max-width:1199px) {
   .audio__cat__title {
-      font-size: 16px;
+    font-size: 16px;
   }
+
   .hm__audio__left {
-      padding-right: 0;
+    padding-right: 0;
   }
+
   .audio__cat__image img {
-      width: 50px;
-      height: 110px;
+    width: 50px;
+    height: 110px;
   }
+
   .audio__bgslider__image img {
-      width: 45px;
-      height: 75px;
+    width: 45px;
+    height: 75px;
   }
 }
-@media(max-width:991px){
+
+@media(max-width:991px) {
   .hm__audio__left {
-      padding-right: 0;
-      width: 100%;
+    padding-right: 0;
+    width: 100%;
   }
+
   .hm__audio__right {
-      width: 100%;
-      padding-left: 0;
+    width: 100%;
+    padding-left: 0;
   }
+
   .audio__cat_Single_wrap {
-      width: 33.3333%;
+    width: 33.3333%;
   }
+
   .audio__tab__wrap {
-      padding-left: 20px;
-      padding-right: 30px;
+    padding-left: 20px;
+    padding-right: 30px;
   }
+
   .audio__tab__info h6 {
-      font-size: 22px;
+    font-size: 22px;
   }
+
   /* .banner-sec-wrap {
       padding-top: 75px;
   } */
 }
-@media(max-width:767px){
+
+@media(max-width:767px) {
   .audio__cat__title {
-      font-size: 16px;
+    font-size: 16px;
   }
+
   .hm__audio__section {
-      margin-top: 50px;
+    margin-top: 50px;
   }
+
   .audio__cat_iteam {
-      padding-bottom: 30px;
-  }
-  .hmCategorySlider {
-      margin-bottom: 50px;
-  }
-  .backgroundSlider__single {
-      width: 50%;
-  }
-  .audio__tabs__wrap{
     padding-bottom: 30px;
   }
+
+  .hmCategorySlider {
+    margin-bottom: 50px;
+  }
+
+  .backgroundSlider__single {
+    width: 50%;
+  }
+
+  .audio__tabs__wrap {
+    padding-bottom: 30px;
+  }
+
   .audio__tab__info h6 {
-      font-size: 20px;
+    font-size: 20px;
   }
+
   .audio__cat_iteam {
-      margin: 0 -5px;
+    margin: 0 -5px;
   }
+
   .audio__cat_Single_wrap {
-      padding-left: 5px;
-      padding-bottom: 10px;
-      padding-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 10px;
+    padding-right: 5px;
   }
 }
-@media(max-width:575px){
+
+@media(max-width:575px) {
   .audio__cat_Single_wrap {
-      width: 50%;
+    width: 50%;
   }
+
   .audio__tab__wrap {
-      padding-left: 20px;
-      padding-right: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
+
   .audio__tab__info h6 {
     font-size: 19px;
+  }
+
+  .banner-sec-wrap {
+    padding-top: 50px;
+  }
 }
-.banner-sec-wrap {
-  padding-top: 50px;
-}
-}
-@media(max-width:479px){
+
+@media(max-width:479px) {
   .backgroundSlider__single {
-      width: 100%;
+    width: 100%;
   }
+
   .audio__tab__playbutton {
-      font-size: 30px;
+    font-size: 30px;
   }
+
   .audio__tab__wrap {
-      padding-left: 10px;
-      padding-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
+
   .audio__tab__info h6 {
-      font-size: 18px;
-      padding-top: 5px;
+    font-size: 18px;
+    padding-top: 5px;
   }
+
   .audio__tab__caption h5 {
-      margin-top: 20px;
-      font-size: 24px;
+    margin-top: 20px;
+    font-size: 24px;
   }
+
   .audio__tab__details p {
-      font-size: 16px;
+    font-size: 16px;
+  }
+
+  .banner__bg__wrap h2 {
+    top: 40%;
   }
 }

@@ -215,7 +215,12 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
 
         console.log('outside check,', image, imageFile)
         //  update profile data
-        if ((image?.length <= 0) && (!imageFile)) {
+
+        if(username.trim().length<= 0){
+            notification = 'দয়া করে প্রোফাইল এর নাম নির্বাচন করুন';
+            notify();
+        }
+        else if ((image?.length <= 0) && (!imageFile)) {
             notification = 'দয়া করে প্রোফাইল এর জন্য স্থিরচিত্র নির্বাচন করুন';
             notify();
         }
@@ -306,8 +311,9 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
 
                 <div className=" inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
                 <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                <div className="inline-block align-bottom mt-[650px] mb-[300px] bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all lg:max-w-[700px] sm:align-middle sm:max-w-lg sm:w-full xs:max-w-[340px] ">
+                <div className="inline-block align-bottom mt-[650px] mb-[300px] bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all lg:max-w-[700px] sm:align-middle sm:max-w-lg sm:w-full xs:max-w-[340px] w-full">
 
+                <ToastContainer />
                     <div className="bg-white pb-[60px] ">
 
                         <div className=" sm:flex sm:items-start h-[140px] bg-[#FFC973]">
@@ -321,7 +327,7 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
 
                         </div>
 
-                        <div className='lg:max-w-[640px] md:max-w-[570px] sm:max-w-[540px] xs:max-w-[310px] items-center justify-center place-content-center m-auto'>
+                        <div className='px-[10px] lg:max-w-[640px] md:max-w-[570px] sm:max-w-[540px] xs:max-w-[310px] items-center justify-center place-content-center m-auto'>
                             <input
                                 type='text'
                                 className={`${Class.profile__input} h-[40px] px-[16px]`}
@@ -455,7 +461,6 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
                             >
                                 আপডেট
                             </button>
-                            <ToastContainer />
 
 
                         </div>
@@ -469,6 +474,7 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
             </div>
 
 
+          
 
         </>
 

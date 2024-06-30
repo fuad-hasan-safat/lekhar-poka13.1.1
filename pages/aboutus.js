@@ -18,7 +18,7 @@ export default function Home() {
         </Head>
 
         <section className="banner-sec-wrap">
-          <div className="relative w-full xl:h-[380px] lg:h-[380px] md:h-[360px] sm:h-[280px] xs:h-[270px]  overflow-hidden" style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat` }}>
+          <div className="banner__bg__wrap relative w-full xl:h-[380px] lg:h-[380px] md:h-[360px] sm:h-[280px] xs:h-[250px]  overflow-hidden" style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat` }}>
             <h2 className=" absolute top-[50%] left-[50%] lg:text-[40px] md:text-[35px] sm:text-[33px] xs:text-[30px] text-[#F9A106] -translate-x-[50%] -translate-y-[50%] max-h-[0px]">আমাদের কথা</h2>
           </div>
         </section>
