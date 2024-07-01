@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { SeeAllSliderContext } from '../../../../store/seeall-slider-context';
 import { useRouter } from 'next/router';
 
-export default function AudioSingleCategory({ color, title, image }) {
+export default function AudioSingleCategory({ color, title, image, background }) {
     const router = useRouter();
     let clr = 'green';
     let bg_color = `bg-[` + color + `]`;
@@ -10,13 +10,13 @@ export default function AudioSingleCategory({ color, title, image }) {
     const {setSliderInfo} = useContext(SeeAllSliderContext);
 
 
-    function categoryClickHandle(){
-        setSliderInfo('no_background', title)
+    function categoryClickHandle(background){
+        setSliderInfo(background , title)
         router.push('/audiobook/seemorelist')
     }
 
     return (
-            <div className='audio__cat_Single_wrap' onClick={categoryClickHandle}>
+            <div className='audio__cat_Single_wrap' onClick={()=>categoryClickHandle(background)}>
 
                 <div className='audio__cat__single__iteam' style={{ backgroundColor: `${color}` }}>
                     <div className='audio__cat__title'>

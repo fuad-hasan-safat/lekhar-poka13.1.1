@@ -1,74 +1,94 @@
-import React, { useContext } from 'react';
+'use client'
+import React, { useContext, useEffect, useState } from 'react';
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Link from 'next/link';
 import AudioRecentSlider from './components/AudioRecentSlider/AudioRecentSlider';
-
 import { SeeAllSliderContext } from '../store/seeall-slider-context';
+import { apiBasePath } from '../../utils/constant';
+import axios from 'axios';
 
 
+export default function AudioBookHome() {
 
-export const HmAudioSlideData=[
-    {
-        title:'বই হচ্ছে শ্রেষ্ঠ আত্মীয়, যার সঙ্গে কোনদিন ঝগড়া হয় না,কোনদিন মনোমালিন্য হয় না। - প্রতিভা বসু',
-    },
-    {
-        title:'বই হচ্ছে শ্রেষ্ঠ আত্মীয়, যার সঙ্গে কোনদিন ঝগড়া হয় না,কোনদিন মনোমালিন্য হয় না। - প্রতিভা বসু',
-    },
-    {
-        title:'বই হচ্ছে শ্রেষ্ঠ আত্মীয়, যার সঙ্গে কোনদিন ঝগড়া হয় না,কোনদিন মনোমালিন্য হয় না। - প্রতিভা বসু',
-    },
-    {
-        title:'বই হচ্ছে শ্রেষ্ঠ আত্মীয়, যার সঙ্গে কোনদিন ঝগড়া হয় না,কোনদিন মনোমালিন্য হয় না। - প্রতিভা বসু',
-    },
-    {
-        title:'বই হচ্ছে শ্রেষ্ঠ আত্মীয়, যার সঙ্গে কোনদিন ঝগড়া হয় না,কোনদিন মনোমালিন্য হয় না। - প্রতিভা বসু',
-    },
-]
+    // const [isLoaded, setIsloaded] = useState(false);
+    const { setSliderInfo } = useContext(SeeAllSliderContext);
 
-const AudioBookHome = () => {
+    const [data, setData] = useState({
+        textSlider: [],
+        recentSlider: [],
+        isLoaded: false
+    })
 
-    const {setSliderInfo} = useContext(SeeAllSliderContext);
+    useEffect(() => {
+
+        loadData()
+    
+
+    }, [])
+
+    async function loadData(){
+        const url = `${apiBasePath}/quotes`;
+        const url2 = `${apiBasePath}/books`;
+
+        const response = await axios.get(url);
+        console.log({ response })
+        const textSliderData = response.data;
+
+        const response2 = await axios.get(url2);
+        const recentSliderData = response2.data;
+
+        setData((prevData) => ({
+            ...prevData,
+            textSlider: textSliderData,
+            recentSlider: recentSliderData,
+            isLoaded: true
+
+        }))
+
+    }
+
+    if(!data.isLoaded) return null;
 
     var settings = {
         dots: false,
-        arrows:false,
+        arrows: false,
         infinite: true,
         autoplay: true,
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
-      };
+    };
+
+
 
     return (
         <section className='hm__audio__book__sec'>
             <div className='container'>
                 <div className='clearfix'>
-                <div className='hm__audio__book__wrap'>
-                    <div className='audiu__logo'>
-                        <Link href='/audiobook'><img src='/images/audio-logo.png' alt='Audio Logo'/></Link>
-                    </div>
-                        <Slider {...settings}>
-                            {HmAudioSlideData.map((item,index)=>
-                                <div className='hm__audio__slide__item'>
-                                    <p>{item.title}</p>
+                    <div className='hm__audio__book__wrap'>
+                        <div className='audiu__logo'>
+                            <Link href='/audiobook'><img src='/images/audio-logo.png' alt='Audio Logo' /></Link>
+                        </div>
+                        {data.textSlider.length >= 0 && <Slider {...settings}>
+                            {data.textSlider?.map((item, index) =>
+                                <div key={index} className='hm__audio__slide__item'>
+                                    <p>{item?.title}</p>
                                 </div>
                             )}
-                        </Slider>
+                        </Slider>}
 
-                    <div className='hm__audio__recent__wrap'>
-                        <div className='hm__audio__see__more'>
-                            <h3>সাম্প্রতিক</h3>
-                            <Link className='hm__audio__common__btn' href='audiobook/seemorelist/' onClick={()=>setSliderInfo('no_background', 'সাম্প্রতিক')}>সব দেখুন</Link>
-                        </div>
-                        <AudioRecentSlider />
+                        {data.recentSlider.length >= 0 && <div className='hm__audio__recent__wrap'>
+                            <div className='hm__audio__see__more'>
+                                <h3>সাম্প্রতিক</h3>
+                                <Link className='hm__audio__common__btn' href='audiobook/seemorelist/' onClick={() => setSliderInfo('no_background', 'সাম্প্রতিক')}>সব দেখুন</Link>
+                            </div>
+                            <AudioRecentSlider recentSliderData={data.recentSlider} />
+                        </div>}
                     </div>
-                </div>
                 </div>
             </div>
         </section>
     );
 };
-
-export default AudioBookHome;

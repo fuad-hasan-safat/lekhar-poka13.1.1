@@ -5,6 +5,8 @@ import Sidebar from '../../components/sidebar/Sidebar';
 import SeeMoreListGrid from '../../components/AudioBook/components/SeeMoreList/SeeMoreListGrid';
 import { audioList, bgAudioList } from '../../components/AudioBook/components/sampleData/samprotikData';
 import SeeMoreListBackground from '../../components/AudioBook/components/SeeMoreList/SeeMoreListColorBg';
+import axios from 'axios';
+import { apiBasePath } from '../../utils/constant';
 
 
 
@@ -14,6 +16,7 @@ const SeeMoreList = () => {
     const [seeAllRenderInfo, setSeeAllRenderInfo] = useState({
         sliderType: '',
         slideCategory: '',
+        allbooks:[],
         isLoadedDone: false,
     })
 
@@ -28,9 +31,24 @@ const SeeMoreList = () => {
             ...prevSeeAllRenderInfo,
             sliderType: type,
             slideCategory: category,
-            isLoadedDone: true,
         }))
+
+        getData(category);
+
     }, [])
+
+
+    async function getData(category){
+        const url = `${apiBasePath}/books/${category}`;
+        const response = await axios.get(url);
+        const bookList = response.data.ebooks;
+
+        setSeeAllRenderInfo((prevSeeAllRenderInfo) => ({
+            ...prevSeeAllRenderInfo,
+            isLoadedDone: true,
+            allbooks: bookList
+        }))
+    }
 
 
 
@@ -66,11 +84,11 @@ const SeeMoreList = () => {
                             <div className='see__more__list__wrap clearfix'>
                                 {
                                     seeAllRenderInfo.sliderType === 'no_background' &&
-                                    <SeeMoreListGrid audioData={audioData} />
+                                    <SeeMoreListGrid audioData={seeAllRenderInfo.allbooks} />
                                 }
                                 {
                                     seeAllRenderInfo.sliderType === 'background' &&
-                                    <SeeMoreListBackground audioData={audioData} />
+                                    <SeeMoreListBackground audioData={seeAllRenderInfo.allbooks} />
                                 }
                             </div>
                         </div>

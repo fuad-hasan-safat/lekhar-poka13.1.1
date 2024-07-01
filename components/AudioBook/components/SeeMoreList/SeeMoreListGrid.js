@@ -2,8 +2,8 @@ import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-export default function SeeMoreListGrid(audioData) {
-    console.log(audioData.audioData)
+export default function SeeMoreListGrid({audioData}) {
+    console.log(audioData)
     const router = useRouter()
     const [displayCount, setDisplayCount] = useState(6);
     const [loading, setLoading] = useState(false);
@@ -16,7 +16,7 @@ export default function SeeMoreListGrid(audioData) {
         if (inView && !loading) {
             setLoading(true);
             setTimeout(() => {
-                setDisplayCount((prevCount) => Math.min(prevCount + 3, audioData.audioData.length));
+                setDisplayCount((prevCount) => Math.min(prevCount + 3, audioData?.length));
                 setLoading(false);
             }, 1500);
         }
@@ -26,9 +26,10 @@ export default function SeeMoreListGrid(audioData) {
         router.push(`/audiobook/${audioId}`)
     }
 
+
     return (
         <div>
-            {audioData.audioData.slice(0, displayCount).map((item, index) => (
+            {audioData?.slice(0, displayCount).map((item, index) => (
                 <div key={index} className='hm__audio__recent__slide__item'>
                     <div className='hm__audio__recent__slide__item__innr' onClick={() => sliderClickHandler(item.id)}>
                         <div className='hm__audio__recent__slide__item__img'>
