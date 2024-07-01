@@ -203,6 +203,13 @@ export default function CreatePost() {
 
     let notification = ''
 
+    
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleSubmit();
+        }
+      };
+
     const handleSubmit = async () => {
         console.log("INSIDE HANDLE")
         if (!canPostStatus) {
