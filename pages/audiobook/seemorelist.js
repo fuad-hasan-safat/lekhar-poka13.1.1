@@ -17,7 +17,7 @@ const SeeMoreList = () => {
     const [seeAllRenderInfo, setSeeAllRenderInfo] = useState({
         sliderType: '',
         slideCategory: '',
-        allbooks:[],
+        allbooks: [],
         isLoadedDone: false,
     })
 
@@ -39,16 +39,23 @@ const SeeMoreList = () => {
     }, [])
 
 
-    async function getData(category){
-        const url = `${apiBasePath}/books/${category}`;
-        const response = await axios.get(url);
-        const bookList = response.data.ebooks;
+    async function getData(category) {
+        try {
+            const url = `${apiBasePath}/books/${category}`;
+            const response = await axios.get(url);
+            const bookList = response.data.ebooks;
 
-        setSeeAllRenderInfo((prevSeeAllRenderInfo) => ({
-            ...prevSeeAllRenderInfo,
-            isLoadedDone: true,
-            allbooks: bookList
-        }))
+            setSeeAllRenderInfo((prevSeeAllRenderInfo) => ({
+                ...prevSeeAllRenderInfo,
+                isLoadedDone: true,
+                allbooks: bookList
+            }))
+
+        } catch (error) {
+            console.log({error})
+
+        }
+
     }
 
 
@@ -56,14 +63,14 @@ const SeeMoreList = () => {
 
     let audioData = audioList.data;
 
-    if(seeAllRenderInfo.isLoadedDone){
-        if(seeAllRenderInfo.sliderType === 'background'){
+    if (seeAllRenderInfo.isLoadedDone) {
+        if (seeAllRenderInfo.sliderType === 'background') {
             audioData = bgAudioList.data;
         }
     }
 
 
-    if (!seeAllRenderInfo.isLoadedDone) return <Loading/>;
+    if (!seeAllRenderInfo.isLoadedDone) return <Loading />;
 
     return (
         <>
