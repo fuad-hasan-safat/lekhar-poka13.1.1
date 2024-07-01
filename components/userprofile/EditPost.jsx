@@ -189,6 +189,12 @@ export default function EditPost() {
 }
 
 
+const handleKeyDown = (e) => {
+  if (e.key === 'Enter') {
+      handleSubmit();
+  }
+};
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -401,7 +407,7 @@ export default function EditPost() {
             <div className='w-[50%] pr-[12px]'>
               <button
                 onClick={handleSubmit}
-                className="page__common__yello__btn w-full px-[20px] h-[50px] text-[#FCA000] border border-[#FCA000] border-spacing-1 rounded-md text-[16px] items-center profile__btn__midl"
+                className="page__common__yello__btn hover:text-gray-700 w-full px-[20px] h-[50px] text-[#FCA000] border border-[#FCA000] border-spacing-1 rounded-md text-[16px] items-center profile__btn__midl"
               >
                 পোস্ট আপডেট করুন
               </button>
