@@ -39,7 +39,7 @@ export default function SeeMoreListBackground(audioData) {
                         key={index} 
                         className='backgroundSlider__single__iteam' 
                         style={{ backgroundColor: `${color}` }}
-                        onClick={()=>sliderClickHandler(iteam.id)}
+                        onClick={()=>sliderClickHandler(iteam?._id)}
                         >
                             <div className='audio__bgslider__image'>
                                 <img src={iteam.image} alt='' />

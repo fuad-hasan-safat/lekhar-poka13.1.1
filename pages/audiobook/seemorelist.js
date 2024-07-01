@@ -7,6 +7,7 @@ import { audioList, bgAudioList } from '../../components/AudioBook/components/sa
 import SeeMoreListBackground from '../../components/AudioBook/components/SeeMoreList/SeeMoreListColorBg';
 import axios from 'axios';
 import { apiBasePath } from '../../utils/constant';
+import Loading from '../../components/common/loading';
 
 
 
@@ -62,7 +63,7 @@ const SeeMoreList = () => {
     }
 
 
-    if (!seeAllRenderInfo.isLoadedDone) return null;
+    if (!seeAllRenderInfo.isLoadedDone) return <Loading/>;
 
     return (
         <>
