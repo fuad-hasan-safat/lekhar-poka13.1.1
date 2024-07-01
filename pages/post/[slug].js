@@ -143,9 +143,9 @@ export default function PostDetails({ postData }) {
                             />
 
                             {isAudioAvailable && (
-                              <div className="audio__tab__playbutton absolute  top-[160px]">
-                                <button  className="text-center justify-center items-center" onClick={() => toggleAudioPlay(0, audioList, slug)}>
-                                 <span className="inline-block"> {isAudioPlaying && 0 === currentPlayingIndex && audioPlace === slug ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</span> <span className="inline-block font-semibold text-[16px]"> প্লে করুন</span> 
+                              <div className="audio__tab__playbutton absolute  top-[150px] ">
+                                <button  className="text-center text-[#F9A106]  flex justify-center items-center" onClick={() => toggleAudioPlay(0, audioList, slug)}>
+                                 <span className="inline-block text-[24px]"> {isAudioPlaying && 0 === currentPlayingIndex && audioPlace === slug ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</span> <span className="inline-block font-[600] text-[14px]"> প্লে করুন</span> 
                                 </button>
                               </div>
 

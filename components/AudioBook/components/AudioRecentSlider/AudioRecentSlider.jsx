@@ -65,7 +65,7 @@ export const AudioRecentSliderData = [
   },
 ]
 
-const AudioRecentSlider = () => {
+const AudioRecentSlider = ({recentSliderData}) => {
 
   const router = useRouter();
 
@@ -124,18 +124,18 @@ const AudioRecentSlider = () => {
 
   return (
     <Slider {...settings} className='hmRecentSlider'>
-      {AudioRecentSliderData.map((item, index) =>
+      {recentSliderData?.map((item, index) =>
         <div key={index} className='hm__audio__recent__slide__item'>
           <div className='hm__audio__recent__slide__item__innr' onClick={()=>sliderClickHandler(item.id)}>
             <div className='hm__audio__recent__slide__item__img'>
-              <img src={item.image} alt='Slider Img' />
+              <img src={item?.image} alt='Slider Img' />
             </div>
             <div className='hm__audio__recent__slide__dsc'>
-              <h5>{item.title}</h5>
-              <p>{item.kText}</p>
+              <h5>{item?.title}</h5>
+              <p>{item?.writer}</p>
               <ul className='clearfix reset-list'>
-                <li>{item.vText}</li>
-                <li><i class="ri-time-line"></i> {item.time}</li>
+                <li>{item?.voice}</li>
+                <li><i class="ri-time-line"></i> {item?.duration}</li>
               </ul>
             </div>
           </div>

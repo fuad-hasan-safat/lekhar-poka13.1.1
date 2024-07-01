@@ -68,7 +68,9 @@ export default function AudioPlaylistContextProvider({ children }) {
 
   const playNextSong = () => {
     console.log('shuffle ', audioBar.isShuffle)
-
+    if(isPlaying && audioBar.playList.length <= 1){
+      setIsPlaying(false)
+    }
 
     setCurrentPlayingIndex((prevIndex) =>
       audioBar.isShuffle
@@ -77,6 +79,8 @@ export default function AudioPlaylistContextProvider({ children }) {
           ? 0
           : prevIndex + 1
     );
+
+   
 
   };
 
