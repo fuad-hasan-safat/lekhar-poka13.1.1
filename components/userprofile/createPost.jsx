@@ -31,7 +31,7 @@ export default function CreatePost() {
 
 
     //--------------- catagory -----------------
-    const [selectedOption, setSelectedOption] = useState(null);
+    const [selectedOption, setSelectedOption] = useState('');
     const [selectedWriter, setSelectedWriter] = useState(null);
 
     // determine writer and writer id
@@ -44,7 +44,7 @@ export default function CreatePost() {
 
     const [title, setTitle] = useState("");
 
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     const [status, setStatus] = useState("");
     const [username, setUsername] = useState("");
@@ -79,6 +79,8 @@ export default function CreatePost() {
         setUserUuid(localStorage.getItem("uuid") || "");
         setUserPhone(localStorage.getItem("phone") || "");
         setUserType(localStorage.getItem("usertype") || "");
+
+        setIsLoading(true)
 
     }, []);
 
@@ -120,10 +122,11 @@ export default function CreatePost() {
         fetch(`${apiBasePath}/categories`)
             .then((response) => response.json())
             .then((data) => {
+                console.log('Create post category -',data)
                 setCategory(data);
             })
             .catch((error) => console.error("Error fetching data:", error))
-            .finally(setIsLoading(false));
+            .finally(setIsLoading(true));
 
 
         setIsCategoryAdded(false)
@@ -154,15 +157,16 @@ export default function CreatePost() {
 
 
 
-    // Drop down category
-    let Categoryoptions = [];
-    let writersOptions = [];
-    for (let i = 0; i < category.length; i++) {
-        let data = { value: category[i]._id, label: category[i].title };
-        // console.log('---data -----------'. data)
-        Categoryoptions.push(data);
-    }
+    // // Drop down category
+    // let Categoryoptions = [];
+    // let writersOptions = [];
+    // for (let i = 0; i < category.length; i++) {
+    //     let data = { value: category[i]._id, label: category[i].title };
+    //     // console.log('---data -----------'. data)
+    //     Categoryoptions.push(data);
+    // }
 
+    let writersOptions = [];
     for (let i = 0; i < writers.length; i++) {
         let data = { value: writers[i]._id, label: writers[i].name };
         // console.log('---data -----------'. data)
@@ -195,20 +199,20 @@ export default function CreatePost() {
         return modifiedString;
     }
 
-    function reloadPage(){
-        setTimeout(()=>{
+    function reloadPage() {
+        setTimeout(() => {
             router.push(`/user/${localStorage.getItem("uuid")}`)
         }, 3000)
     }
 
     let notification = ''
 
-    
+
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
             handleSubmit();
         }
-      };
+    };
 
     const handleSubmit = async () => {
         console.log("INSIDE HANDLE")
@@ -245,8 +249,8 @@ export default function CreatePost() {
                 const formData = new FormData();
                 formData.append("file", selectedFile);
                 formData.append("image", image);
-                formData.append("category", selectedOption?.label);
-                formData.append("cat_id", selectedOption?.value);
+                formData.append("category", selectedOption);
+                // formData.append("cat_id", selectedOption?.value);
                 formData.append("writer", writer);
                 formData.append("writer_id", writerId);
                 formData.append("title", title);
@@ -365,7 +369,11 @@ export default function CreatePost() {
 
     }
 
+   
 
+    console.log({category})
+
+    if(!isLoading) return null;
 
     return (
         <>
@@ -374,12 +382,27 @@ export default function CreatePost() {
                     <div className="text-[#F9A106] font-bold text-[20px] !mb-[5px]">আপনার লেখার ধরণ নির্বাচন করুন</div>
 
                     <div>
-                        <Select
+                        {/* <Select
                             value={selectedOption}
                             onChange={categoryhandleChange}
                             styles={customStyles}
                             options={Categoryoptions}
-                        />
+                        /> */}
+
+                        <select
+                            id="category"
+                            name="category"
+                            className={`h-[45px] w-full px-[16px] text-black border-[1px] border-[#ddd] rounded-[7px]`}
+                            required
+                            value={selectedOption}
+                            onChange={(e) => setSelectedOption(e.target.value)}>
+                            <option value="">লেখার ধরণ</option>
+                            {category?.map((cat) => (
+                                <option key={cat._id} value={cat.title}>
+                                    {cat.title}
+                                </option>
+                            ))}
+                        </select>
                     </div>
 
 
