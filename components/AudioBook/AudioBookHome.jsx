@@ -29,23 +29,30 @@ export default function AudioBookHome() {
     }, [])
 
     async function loadData(){
-        const url = `${apiBasePath}/quotes`;
-        const url2 = `${apiBasePath}/books`;
 
-        const response = await axios.get(url);
-        console.log({ response })
-        const textSliderData = response.data;
+        try{
+            const url = `${apiBasePath}/quotes`;
+            const url2 = `${apiBasePath}/books`;
+    
+            const response = await axios.get(url);
+            console.log({ response })
+            const textSliderData = response.data;
+    
+            const response2 = await axios.get(url2);
+            const recentSliderData = response2.data;
+    
+            setData((prevData) => ({
+                ...prevData,
+                textSlider: textSliderData,
+                recentSlider: recentSliderData,
+                isLoaded: true
+    
+            }))
 
-        const response2 = await axios.get(url2);
-        const recentSliderData = response2.data;
-
-        setData((prevData) => ({
-            ...prevData,
-            textSlider: textSliderData,
-            recentSlider: recentSliderData,
-            isLoaded: true
-
-        }))
+        }catch(error){
+            console.log({error})
+        }
+      
 
     }
 

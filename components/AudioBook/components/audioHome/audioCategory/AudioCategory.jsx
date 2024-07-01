@@ -17,16 +17,23 @@ export default function AudioCategory() {
 
 
   async function getData() {
-    const url = `${apiBasePath}/audiocategories`;
-    const response = await axios.get(url);
-    const categortData = response.data;
+    try {
 
-    setCategoryData((prevCatData) => ({
-      ...prevCatData,
-      audioCategory: categortData,
-      isLoaded: true
-    }))
+      const url = `${apiBasePath}/audiocategories`;
+      const response = await axios.get(url);
+      const categortData = response.data;
+
+      setCategoryData((prevCatData) => ({
+        ...prevCatData,
+        audioCategory: categortData,
+        isLoaded: true
+      }))
+    } catch (error) {
+      console.log({error})
+    }
+
   }
+
 
 
   if (!categoryData.isLoaded || categoryData.audioCategory.length <= 0) return null;
@@ -41,9 +48,9 @@ export default function AudioCategory() {
               key={index}
               title={category.title}
               image={category.image}
-              color={category.color} 
+              color={category.color}
               background={category.background}
-              />
+            />
           )
         })}
 

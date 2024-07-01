@@ -22,15 +22,21 @@ export default function AudioSlider() {
   }, [])
 
   async function getSliders() {
-    const url = `${apiBasePath}/bookslider`;
-    const response = await axios.get(url);
-    const homeSliders = response.data;
+    try {
+      const url = `${apiBasePath}/bookslider`;
+      const response = await axios.get(url);
+      const homeSliders = response.data;
 
-    setHomeSlider((prevSlider) => ({
-      ...prevSlider,
-      audioSlider: homeSliders,
-      isLoaded: true
-    }))
+      setHomeSlider((prevSlider) => ({
+        ...prevSlider,
+        audioSlider: homeSliders,
+        isLoaded: true
+      }))
+
+    } catch (error) {
+      console.log({error})
+    }
+
   }
 
   if (!homeSlider.isLoaded || homeSlider.audioSlider.length <= 0) return null;
