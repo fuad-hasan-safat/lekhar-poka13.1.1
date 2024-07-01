@@ -1,0 +1,45 @@
+.dashboard__header{
+    /* background: #FF9F43; */
+    background: #fff;
+    border-bottom: 1px solid transparent;
+    height: 80px;
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    -webkit-box-shadow: 0 0px 15px 0 rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0 0px 15px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0px 15px 0 rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+.d-logo a{
+    display: inline-block;
+    vertical-align: baseline;
+    text-decoration: none;
+    max-width: 150px;
+    width: 100%;
+}
+.header-rgt{
+    position: relative;
+}
+.d__account__wrap span{
+    display: inline-block;
+    vertical-align: baseline;
+    width: 50px;
+    height: 50px;
+    border-radius: 30px;
+}
+.d__account__wrap span img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.d__account__wrap ul{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}

@@ -1,5 +1,6 @@
 import '../styles/globals.css';
 import '../styles/audiobook.css';
+import '../styles/dashboard.css';
 import '../public/assets/fonts/customfont.css';
 import '../public/assets/css/image-slider.css';
 import '../components/userprofile/FileUpload.css';
@@ -43,6 +44,9 @@ export default function MyApp({ Component, pageProps }) {
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
   }
   else if (pathname == "/admin/admin") {
+    result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
+  }
+  else if(pathname == '/dashboard/dashboard'){
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
   }
   else if (pathname == "/account/otp") {
