@@ -8,11 +8,18 @@ const LekhokDetails = ({
     writer_id,
     lifeCycle,
 }) => {
+    console.log({ writer, writer_id, user_id })
     let redirectAddress = `/postswriter/${writer_id}`;
-    if (user_id === localStorage.getItem('uuid')) {
-        redirectAddress = `/user/${user_id}`;
+    console.log({ redirectAddress })
+
+    if (user_id) {
+        if (user_id === localStorage.getItem('uuid')) {
+            redirectAddress = `/user/${user_id}`;
+        }
     }
 
+
+    console.log('redirected --- url', redirectAddress)
     return (
         <>
             <div className="flex">
