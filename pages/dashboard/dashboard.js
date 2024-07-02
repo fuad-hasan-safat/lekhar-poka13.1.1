@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Sidebar from '../../components/Dashboard/Sidebar';
+import Breadcrumb from '../../components/Dashboard/components/Breadcrumb';
 
 
 const notificationData =[
@@ -80,6 +81,7 @@ const Dashboard = ({children}) => {
             <Sidebar />
             <div className='page-wrapper'>
                 <div className='page__content'>
+                    <Breadcrumb title='Dashboard' subtitles1='Home' subtitles2='Dashboard' />
                     {children}
                 </div>
             </div>
