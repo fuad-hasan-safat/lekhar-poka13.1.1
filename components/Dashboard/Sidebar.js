@@ -1,8 +1,11 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useContext } from 'react';
+import { AdminContext } from '../store/adminpanel-context';
 
 const Sidebar = () => {
     const router = useRouter();
+
+    const {setCurrentComponentIndex} = useContext(AdminContext)
 
     const menuItems = [
         { text: 'Dashboard', icon: 'ri-dashboard-fill', href: '/admin/allposttable' },
@@ -20,16 +23,20 @@ const Sidebar = () => {
         return router.pathname === href;
     };
 
+    function handleIndexClick(index){
+        setCurrentComponentIndex(index)
+    }
+
     return (
         <div className='d__sidebar'>
             <div className='d__sidebar__menu'>
                 <ul>
                     {menuItems.map((item, index) => (
-                        <li key={index} className={isActive(item.href) ? 'active' : ''}>
-                            <a href={item.href}>
-                                <i className={`ri ${item.icon}`}></i>
+                        <li key={index} >
+                            <button onClick={()=>handleIndexClick(index)}>
+                                <i className={`ri ${item.icon} text-black`}></i>
                                 {item.text}
-                            </a>
+                            </button>
                         </li>
                     ))}
                 </ul>

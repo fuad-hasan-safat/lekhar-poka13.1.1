@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import axios from "axios";
-import AdminLayOut from "./admin";
 import { apiBasePath } from "../../../utils/constant";
 import Dashboard from "../../../pages/dashboard/dashboard";
 import ContentList from "../../../pages/admin/ContentList";
@@ -72,8 +71,7 @@ const AllPost = () => {
     if (userType === 'admin') {
 
         return (
-            <Dashboard>
-            <div className="pt-[115px]  text-black mx-10">
+            <div className="pt-[115px]  text-black mx-10 z-[99999999]">
                 <div className="flex flex-row">
                     <div className="w-1/2">
                         <div className="text-7xl pb-4">Category List</div>
@@ -104,7 +102,6 @@ const AllPost = () => {
                     </div>
                 </div>
             </div >
-            </Dashboard>
         )
     } else {
         return <NotFound />
