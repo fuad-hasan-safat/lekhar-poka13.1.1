@@ -2,14 +2,15 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import ContentList from './ContentList';
-import { apiBasePath } from "../../utils/constant";
-import NotFound from "../../components/common/nofFound"
+
 import axios from "axios";
 import AdminLayOut from "./admin";
-import Dashboard from "../dashboard/dashboard";
+import { apiBasePath } from "../../../utils/constant";
+import Dashboard from "../../../pages/dashboard/dashboard";
+import ContentList from "../../../pages/admin/ContentList";
+import NotFound from "../../common/nofFound";
 
-const SliderTable = () => {
+const AllPost = () => {
     const router = useRouter();
     const [userType, setUserType] = useState("");
 
@@ -66,11 +67,6 @@ const SliderTable = () => {
           }
 
 
-
-
-
-        router.push(`/admin/allcategory`);
-
     }
 
     if (userType === 'admin') {
@@ -119,4 +115,4 @@ const SliderTable = () => {
     }
 }
 
-export default SliderTable
+export default AllPost
