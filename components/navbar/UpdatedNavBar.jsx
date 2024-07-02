@@ -11,13 +11,12 @@ import { SearchContext } from '../lekharpokaStore/search-context';
 export default function UpdatedNavBar() {
     const router = useRouter();
 
-    const {searchAreaRef,setIsSearchbarActive, isSearchbarActive, setSearchResult, searchKey, setSearchKey} = useContext(SearchContext)
+    const {selectedIteam, handleKeyDown, setSelectedIteam ,searchAreaRef,setIsSearchbarActive, isSearchbarActive, setSearchResult, searchKey, setSearchKey} = useContext(SearchContext)
     
     const [selectedNav, setSelectedNav] = useState("");
     const [postList, setPostList] = useState(null);
     const [search, setSearch] = useState("");
     const [searchData, setSearchData] = useState([]);
-    const [selectedIteam, setSelectedIteam] = useState(-1);
 
 
     const [username, setUsername] = useState("");
@@ -140,7 +139,7 @@ export default function UpdatedNavBar() {
         // setSearch(e.target.value);
         setSearchKey(e.target.value);
     };
-    const handleKeyDown = (e) => {
+    const handleKeyDown1 = (e) => {
         // console.log(e.key)
         if (selectedIteam < searchData.length) {
             if (e.key === "ArrowUp" && selectedIteam > 0) {
@@ -251,7 +250,7 @@ export default function UpdatedNavBar() {
                                                 autoComplete="off"
                                                 onChange={handleChange}
                                                 value={searchKey}
-                                                onKeyDown={handleKeyDown}
+                                                onKeyDown={(e)=>handleKeyDown(e)}
                                             />
                                         )}
                                         {/* <div
