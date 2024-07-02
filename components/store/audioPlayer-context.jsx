@@ -18,6 +18,7 @@ export const AudioPlayListContext = createContext({
   toggleAudioPlay: () => { },
   toggleShuffle: () => { },
   toggleReapet: () => { },
+  resetAudioPlayer: () => { }
 });
 
 export default function AudioPlaylistContextProvider({ children }) {
@@ -51,13 +52,13 @@ export default function AudioPlaylistContextProvider({ children }) {
     }))
   }
 
-  function setCurrentPlaylistRenderScope(scope){
+  function setCurrentPlaylistRenderScope(scope) {
     localStorage.setItem("playListRenderScope", scope);
 
 
-    setAudioBar((prevAudioBar)=>({
+    setAudioBar((prevAudioBar) => ({
       ...prevAudioBar,
-      playListRenderScope:scope,
+      playListRenderScope: scope,
     }))
 
   }
@@ -68,7 +69,7 @@ export default function AudioPlaylistContextProvider({ children }) {
 
   const playNextSong = () => {
     console.log('shuffle ', audioBar.isShuffle)
-    if(isPlaying && audioBar.playList.length <= 1){
+    if (isPlaying && audioBar.playList.length <= 1) {
       setIsPlaying(false)
     }
 
@@ -80,7 +81,7 @@ export default function AudioPlaylistContextProvider({ children }) {
           : prevIndex + 1
     );
 
-   
+
 
   };
 
@@ -174,6 +175,17 @@ export default function AudioPlaylistContextProvider({ children }) {
 
   }
 
+  function resetPlayer(){
+    setAudioBar({
+      playList: [],
+      audioPlace: 'none',
+      playListRenderScope: 'none',
+      isShuffle: false,
+      isRepeat: false,
+      isAudiobarVisible: false,
+    })
+  }
+
   const cntxValue = {
     playList: audioBar.playList,
     audioPlace: audioBar.audioPlace,
@@ -192,6 +204,7 @@ export default function AudioPlaylistContextProvider({ children }) {
     toggleAudioPlay: togglePlay,
     toggleShuffle: toggleShuffleState,
     toggleReapet: toggleReapetState,
+    resetAudioPlayer: resetPlayer
   };
 
   return (

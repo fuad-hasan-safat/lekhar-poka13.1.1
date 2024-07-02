@@ -150,10 +150,10 @@ export default function UserPostTitleAndcover({
 
         <div className="hm__post__profile__grid lg:w-[400px] md:w-[270px] sm:w-[270px] xs:w-[240px] relative">
           <div className="">
-            <h1 className="lg:text-[32] md:text-[28px] sm:text-[24px] xs:text-[17px] leading-7 lg:pr-[50px] text-[#FCD200] font-bold" style={{ lineHeight: '1.2' }}>{shortenTitle}</h1>
+            <h1 className="lg:text-[32] md:text-[28px] sm:text-[24px] xs:text-[14px] leading-7 lg:pr-[50px] text-[#FCD200] font-bold" style={{ lineHeight: '1.2' }}>{shortenTitle}</h1>
           </div>
 
-          <Link className="lg:text-[22px] md:text-[16px] sm:text-[16px] xs:text-[14px]  font-semibold text-[#595D5B] " href={`/postswriter/${writer_id}`} >{shortenWriter}</Link>
+          <Link className="lg:text-[22px] md:text-[16px] sm:text-[16px] xs:text-[12px]  font-semibold text-[#595D5B] " href={`/postswriter/${writer_id}`} >{shortenWriter}</Link>
             <div className="hm__post__profile__info text-[16px] font-thin leading-1 pt-[5px]">
               <Link className="flex place-content-start items-center leading-1 lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[12px]  text-[#595D5B]" href={`/postswriter/${writer_id}`} style={{ lineHeight: '1' }} >
 
