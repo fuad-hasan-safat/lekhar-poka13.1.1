@@ -1,7 +1,5 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import Link from "next/link";
-import Select from "react-select";
 import { useRouter } from 'next/router';
 import { FileUploader } from "react-drag-drop-files";
 import dynamic from 'next/dynamic';
@@ -88,11 +86,6 @@ export default function EditPost() {
   }
 
 
-
-
-  // const categoryhandleChange = (selected) => {
-  //   setSelectedOption(selected); // Selected option object
-  // };
 
 
   const handleChange = (e) => {
@@ -188,12 +181,6 @@ export default function EditPost() {
     }, 3000)
 }
 
-
-const handleKeyDown = (e) => {
-  if (e.key === 'Enter') {
-      handleSubmit();
-  }
-};
 
   const handleSubmit = async (e) => {
     e.preventDefault();

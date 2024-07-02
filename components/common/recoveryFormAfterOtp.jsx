@@ -34,6 +34,12 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
         let isValid = true;
         setState((prevState) => ({ ...prevState, error: null }));
 
+        if (state.password.trim().length <= 0) {
+            isValid = false;
+            notification = 'দয়া করে পাসওয়ার্ড দিন';
+            notify()
+        }
+
         if (!state.password) {
 
             setState((prevState) => ({ ...prevState, error: 'Password is required.' }));
@@ -54,6 +60,8 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
         }
 
         setState((prevState) => ({ ...prevState, isDisabled: !isValid })); // Enable button if all validations pass
+
+        return isValid;
     };
 
 
@@ -69,47 +77,62 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
         if (e.key === 'Enter') {
             handleUpdatePassword();
         }
-      };
+    };
+
     const handleUpdatePassword = async () => {
 
-        validate();
+        const isValid = validate();
 
-        const data = {
-            phone: numberPrefix + phonenumber,
-            password: state.password
-        };
+        if (isValid) {
+            const data = {
+                phone: numberPrefix + phonenumber,
+                password: state.password
+            };
 
-        const options = {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        };
+            const options = {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            };
 
-        try {
-            const response = await fetch(`${apiBasePath}/changepassword`, options);
+            try {
+                const response = await fetch(`${apiBasePath}/changepassword`, options);
 
-            if (!response.ok) {
-                throw new Error(`API request failed with status ${response.status}`);
+                if (!response.ok) {
+                    throw new Error(`API request failed with status ${response.status}`);
+                }
+
+                const responseBody = await response.json();
+                console.log("API response:", responseBody);
+
+                // alert('পাসওয়ার্ড রিকভারি সফলভাবে সম্পন্ন হয়েছে, অনুগ্রহ করে লগইন করুন')
+                notification = 'পাসওয়ার্ড রিকভারি সফলভাবে সম্পন্ন হয়েছে, অনুগ্রহ করে লগইন করুন';
+                notify1()
+
+                reloadPage()
+
+            } catch (error) {
+                console.error("Error:", error);
             }
 
-            const responseBody = await response.json();
-            console.log("API response:", responseBody);
 
-            // alert('পাসওয়ার্ড রিকভারি সফলভাবে সম্পন্ন হয়েছে, অনুগ্রহ করে লগইন করুন')
-            notification = 'পাসওয়ার্ড রিকভারি সফলভাবে সম্পন্ন হয়েছে, অনুগ্রহ করে লগইন করুন';
-            notify1()
-
-            reloadPage()
-
-        } catch (error) {
-            console.error("Error:", error);
         }
+
 
     }
 
     const notify1 = () => toast.success(notification, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+
+    });
+    const notify = () => toast.warn(notification, {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -161,6 +184,7 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
                 </div>
 
                 <button
+                    type="form"
                     onClick={handleUpdatePassword}
                     className="login__btn mt-8 px-5 bg-[#F9A106] rounded-full lg:text-[35px] md:text-[34px] sm:text-[33px] xs:text-[25px] text-white lg:h-[75px] md:h-[70px] sm:h-[65px] xs:h-[60px]"
                 >
