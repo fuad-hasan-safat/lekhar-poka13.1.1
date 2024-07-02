@@ -209,7 +209,7 @@ export default function SigninFormBeforeOTP({ type, logreg, btntext, SetIsOtpSuc
         <>
             <div className="login__form__dsc">
 
-                <div className="text-[48px] mb-[79px] text-left font-semibold">
+                <div className="lg:text-[48px] md:text-[45px] sm:text-[35px] xs:text-[32px] lg:mb-[79px] md:mb-[73px] sm:mb-[40px] xs:mb-[35px] text-left font-semibold">
                     {logreg}
                 </div>
 
@@ -237,7 +237,7 @@ export default function SigninFormBeforeOTP({ type, logreg, btntext, SetIsOtpSuc
 
                     <button
                         onClick={handleSubmitBeforeOTP}
-                        className="page__common__yello__btn mt-8 px-[90px] bg-[#F9A106] rounded-[8px] lg:text-[35px] md:text-[30px] sm:text-[25px]  text-white lg:h-[70px] md:h-[70px] sm:h-[60px] xs:h-[55px] "
+                        className="page__common__yello__btn mt-8 px-[90px] bg-[#F9A106] rounded-[8px] lg:text-[35px] md:text-[30px] sm:text-[25px] xs:text-[25px]  text-white lg:h-[70px] md:h-[70px] sm:h-[60px] xs:h-[55px] "
                     >
                         {btntext}
                     </button>

@@ -11,13 +11,12 @@ import { SearchContext } from '../lekharpokaStore/search-context';
 export default function UpdatedNavBar() {
     const router = useRouter();
 
-    const {searchAreaRef,setIsSearchbarActive, isSearchbarActive, setSearchResult, searchKey, setSearchKey} = useContext(SearchContext)
-    
+    const { selectedIteam, handleKeyDown, setSelectedIteam, searchAreaRef, setIsSearchbarActive, isSearchbarActive, setSearchResult, searchKey, setSearchKey } = useContext(SearchContext)
+
     const [selectedNav, setSelectedNav] = useState("");
     const [postList, setPostList] = useState(null);
     const [search, setSearch] = useState("");
     const [searchData, setSearchData] = useState([]);
-    const [selectedIteam, setSelectedIteam] = useState(-1);
 
 
     const [username, setUsername] = useState("");
@@ -32,7 +31,7 @@ export default function UpdatedNavBar() {
     const searchBarRef = useRef(null);
     useOutsideAlerter(popupRef1);
     useOutsideAlerter(popupRef2);
-   
+
     useOutsideAlerterSearch(searchAreaRef);
 
     function useOutsideAlerter(ref) {
@@ -140,7 +139,7 @@ export default function UpdatedNavBar() {
         // setSearch(e.target.value);
         setSearchKey(e.target.value);
     };
-    const handleKeyDown = (e) => {
+    const handleKeyDown1 = (e) => {
         // console.log(e.key)
         if (selectedIteam < searchData.length) {
             if (e.key === "ArrowUp" && selectedIteam > 0) {
@@ -216,7 +215,7 @@ export default function UpdatedNavBar() {
             <div className="fixed w-full bg-white z-[9900]">
                 <header className="header shadow-md">
                     {/* Logo */}
-                    <DialugueModal ref={dialogueRef} alert='আপনি কি লগআউট করতে চান' address={`/account/login`} type='logout'/>
+                    <DialugueModal ref={dialogueRef} alert='আপনি কি লগআউট করতে চান' address={`/account/login`} type='logout' />
 
                     <div className="container">
                         <div className="row-span-12">
@@ -231,7 +230,7 @@ export default function UpdatedNavBar() {
                                         />
                                     </Link>
                                 </div>
-                                <div className={`flex justify-between items-center text-black lg:text-[16px] md:text-[13px] sm:text-[13px] xs:text-[13px] pt-1  place-content-center `}>
+                                <div className={`flex justify-between items-center text-black lg:text-[16px] md:text-[11px] sm:text-[11px] xs:text-[11px] pt-1  place-content-center `}>
 
                                     <div ref={searchAreaRef} className="search__bar relative flex flex-row place-content-center">
                                         <Image
@@ -240,7 +239,7 @@ export default function UpdatedNavBar() {
                                             width={50}
                                             alt=""
                                             className={` cursor-pointer`}
-                                            onClick={()=>setIsSearchbarActive(true)}
+                                            onClick={() => setIsSearchbarActive(true)}
                                         />
 
                                         {isSearchbarActive && (
@@ -251,7 +250,7 @@ export default function UpdatedNavBar() {
                                                 autoComplete="off"
                                                 onChange={handleChange}
                                                 value={searchKey}
-                                                onKeyDown={handleKeyDown}
+                                                onKeyDown={(e) => handleKeyDown(e)}
                                             />
                                         )}
                                         {/* <div
@@ -283,7 +282,7 @@ export default function UpdatedNavBar() {
 
                                             <button
                                                 className='lg:px-[15px] md:px-[15px] sm:px-[10px] xs:px-[10px]'
-                                                onClick={()=>setIsSearchbarActive(false)}
+                                                onClick={() => setIsSearchbarActive(false)}
                                             >
                                                 <i class="ri-list-check"></i>
                                             </button>
@@ -303,7 +302,7 @@ export default function UpdatedNavBar() {
                                             <li
                                                 onClick={() => { setSelectedNav("procchod"); closeMenu(); }}
                                                 className={`hover:text-[#F9A106] ${selectedNav === "procchod"
-                                                    ? "text-[#F9A106] font-semibold underline"
+                                                    ? "text-[#F9A106] font-semibold  underline"
                                                     : ""
                                                     }`}
                                             >
@@ -312,7 +311,7 @@ export default function UpdatedNavBar() {
                                             <li className={`relative cursor-pointer`} onClick={() => { toggleVisibility(0); setSelectedNav("soblekha"); }}>
                                                 <Link
                                                     className={`hover:text-[#F9A106] ${selectedNav === "soblekha"
-                                                        ? "text-[#F9A106] font-semibold underline"
+                                                        ? "text-[#F9A106] font-semibold border-b-[2px] border-[#F9A106]"
                                                         : "text-black"
                                                         }`}
                                                     href="#">সব লেখা <span style={{ position: 'relative', top: '-1px' }}><i class="ri-arrow-down-s-line"></i></span></Link>
@@ -385,7 +384,7 @@ export default function UpdatedNavBar() {
                                             </li>
                                             <li onClick={() => { setSelectedNav("zogazog"); closeMenu(); }}
                                                 className={`hover:text-[#F9A106] ${selectedNav === "zogazog"
-                                                    ? "text-[#F9A106] font-semibold underline"
+                                                    ? "text-[#F9A106] font-semibold  underline"
                                                     : ""
                                                     }`}
                                             >
@@ -394,13 +393,13 @@ export default function UpdatedNavBar() {
                                             <li
                                                 onClick={() => { setSelectedNav("amader_somporke"); closeMenu(); }}
                                                 className={` lg:w-[130px] sm:w-[100px] hover:text-[#F9A106] ${selectedNav === "amader_somporke"
-                                                    ? "text-[#F9A106] font-semibold underline"
+                                                    ? "text-[#F9A106] font-semibold  underline"
                                                     : ""
                                                     }`}
                                             >
                                                 <Link href="/aboutus">আমাদের সম্পর্কে</Link>
                                             </li>
-                                            
+
                                             {
                                                 userUuid.length > 0 ?
                                                     <li
