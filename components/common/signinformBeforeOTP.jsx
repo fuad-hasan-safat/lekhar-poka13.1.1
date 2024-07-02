@@ -209,7 +209,7 @@ export default function SigninFormBeforeOTP({ type, logreg, btntext, SetIsOtpSuc
         <>
             <div className="login__form__dsc">
 
-                <div className="text-[48px] mb-[79px] text-left font-semibold">
+                <div className="lg:text-[48px] md:text-[45px] sm:text-[35px] xs:text-[32px] lg:mb-[79px] md:mb-[73px] sm:mb-[40px] xs:mb-[35px] text-left font-semibold">
                     {logreg}
                 </div>
 

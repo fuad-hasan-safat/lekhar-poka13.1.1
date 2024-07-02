@@ -11,8 +11,8 @@ import { SearchContext } from '../lekharpokaStore/search-context';
 export default function UpdatedNavBar() {
     const router = useRouter();
 
-    const {selectedIteam, handleKeyDown, setSelectedIteam ,searchAreaRef,setIsSearchbarActive, isSearchbarActive, setSearchResult, searchKey, setSearchKey} = useContext(SearchContext)
-    
+    const { selectedIteam, handleKeyDown, setSelectedIteam, searchAreaRef, setIsSearchbarActive, isSearchbarActive, setSearchResult, searchKey, setSearchKey } = useContext(SearchContext)
+
     const [selectedNav, setSelectedNav] = useState("");
     const [postList, setPostList] = useState(null);
     const [search, setSearch] = useState("");
@@ -31,7 +31,7 @@ export default function UpdatedNavBar() {
     const searchBarRef = useRef(null);
     useOutsideAlerter(popupRef1);
     useOutsideAlerter(popupRef2);
-   
+
     useOutsideAlerterSearch(searchAreaRef);
 
     function useOutsideAlerter(ref) {
@@ -215,7 +215,7 @@ export default function UpdatedNavBar() {
             <div className="fixed w-full bg-white z-[9900]">
                 <header className="header shadow-md">
                     {/* Logo */}
-                    <DialugueModal ref={dialogueRef} alert='আপনি কি লগআউট করতে চান' address={`/account/login`} type='logout'/>
+                    <DialugueModal ref={dialogueRef} alert='আপনি কি লগআউট করতে চান' address={`/account/login`} type='logout' />
 
                     <div className="container">
                         <div className="row-span-12">
@@ -239,7 +239,7 @@ export default function UpdatedNavBar() {
                                             width={50}
                                             alt=""
                                             className={` cursor-pointer`}
-                                            onClick={()=>setIsSearchbarActive(true)}
+                                            onClick={() => setIsSearchbarActive(true)}
                                         />
 
                                         {isSearchbarActive && (
@@ -250,7 +250,7 @@ export default function UpdatedNavBar() {
                                                 autoComplete="off"
                                                 onChange={handleChange}
                                                 value={searchKey}
-                                                onKeyDown={(e)=>handleKeyDown(e)}
+                                                onKeyDown={(e) => handleKeyDown(e)}
                                             />
                                         )}
                                         {/* <div
@@ -282,7 +282,7 @@ export default function UpdatedNavBar() {
 
                                             <button
                                                 className='lg:px-[15px] md:px-[15px] sm:px-[10px] xs:px-[10px]'
-                                                onClick={()=>setIsSearchbarActive(false)}
+                                                onClick={() => setIsSearchbarActive(false)}
                                             >
                                                 <i class="ri-list-check"></i>
                                             </button>
@@ -311,7 +311,7 @@ export default function UpdatedNavBar() {
                                             <li className={`relative cursor-pointer`} onClick={() => { toggleVisibility(0); setSelectedNav("soblekha"); }}>
                                                 <Link
                                                     className={`hover:text-[#F9A106] ${selectedNav === "soblekha"
-                                                        ? "text-[#F9A106] font-semibold  border-b-[2px] border-[#F9A106]"
+                                                        ? "text-[#F9A106] font-semibold border-b-[2px] border-[#F9A106]"
                                                         : "text-black"
                                                         }`}
                                                     href="#">সব লেখা <span style={{ position: 'relative', top: '-1px' }}><i class="ri-arrow-down-s-line"></i></span></Link>
@@ -399,7 +399,7 @@ export default function UpdatedNavBar() {
                                             >
                                                 <Link href="/aboutus">আমাদের সম্পর্কে</Link>
                                             </li>
-                                            
+
                                             {
                                                 userUuid.length > 0 ?
                                                     <li
