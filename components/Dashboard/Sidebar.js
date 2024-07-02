@@ -32,7 +32,7 @@ const Sidebar = () => {
             <div className='d__sidebar__menu'>
                 <ul>
                     {menuItems.map((item, index) => (
-                        <li key={index} >
+                        <li key={index} className='text-black'>
                             <button onClick={()=>handleIndexClick(index)}>
                                 <i className={`ri ${item.icon} text-black`}></i>
                                 {item.text}
