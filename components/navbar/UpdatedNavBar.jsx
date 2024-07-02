@@ -311,7 +311,7 @@ export default function UpdatedNavBar() {
                                             <li className={`relative cursor-pointer`} onClick={() => { toggleVisibility(0); setSelectedNav("soblekha"); }}>
                                                 <Link
                                                     className={`hover:text-[#F9A106] ${selectedNav === "soblekha"
-                                                        ? "text-[#F9A106] font-semibold underline"
+                                                        ? "text-[#F9A106] font-semibold border-b-[2px] border-[#F9A106]"
                                                         : "text-black"
                                                         }`}
                                                     href="#">সব লেখা <span style={{ position: 'relative', top: '-3px' }}><i class="ri-arrow-down-s-line"></i></span></Link>
