@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Link from 'next/link';
 import Sidebar from '../../components/Dashboard/Sidebar';
+import { AdminContext } from '../../components/store/adminpanel-context';
+import AllPost from '../../components/Dashboard/components/AllPost';
 
 
 const notificationData =[
@@ -27,6 +29,8 @@ const notificationData =[
 ]
 
 const Dashboard = ({children}) => {
+
+    const {currentindex} = useContext(AdminContext)
 
     const [isOpen,setIsOpen] = useState(false);
     const [isNotifation,setIsNotifation] = useState(false);
@@ -80,7 +84,7 @@ const Dashboard = ({children}) => {
             <Sidebar />
             <div className='page-wrapper'>
                 <div className='page__content'>
-                    {children}
+                    {currentindex === 0 && <AllPost/>}
                 </div>
             </div>
         </div>

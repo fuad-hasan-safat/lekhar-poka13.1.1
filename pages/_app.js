@@ -15,6 +15,7 @@ import SeeAllSliderContextProvider from '../components/store/seeall-slider-conte
 import AudioPlayer from '../components/AudioBook/AudioPlayer/AudioPlayer';
 import SearchContextProvider from '../components/lekharpokaStore/search-context';
 import SearchResult from '../components/common/SearchResult'
+import AdminContextProvider from '../components/store/adminpanel-context';
 
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -46,7 +47,7 @@ export default function MyApp({ Component, pageProps }) {
   else if (pathname == "/admin/admin") {
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
   }
-  else if(pathname == '/dashboard/dashboard'){
+  else if (pathname == '/dashboard/dashboard') {
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
   }
   else if (pathname == "/account/otp") {
@@ -62,7 +63,7 @@ export default function MyApp({ Component, pageProps }) {
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
   }
   else {
-    result = <Layout><Component {...pageProps} /> <AudioPlayer /> <SearchResult/> </Layout>
+    result = <Layout><Component {...pageProps} /> <AudioPlayer /> <SearchResult /> </Layout>
   }
   return (
     // <Layout>
@@ -75,17 +76,19 @@ export default function MyApp({ Component, pageProps }) {
         crossOrigin="anonymous"
       />
 
-      <AudioPlaylistContextProvider>
-        <SeeAllSliderContextProvider>
-        <SearchContextProvider>
-          <GoogleOAuthProvider clientId="854926132475-sm4btto49sresu4g5o9qpuk9lgtqor9f.apps.googleusercontent.com">
-            <>
-              {result}
-            </>
-          </GoogleOAuthProvider>
-          </SearchContextProvider>
-        </SeeAllSliderContextProvider>
-      </AudioPlaylistContextProvider>
+      <AdminContextProvider>
+        <AudioPlaylistContextProvider>
+          <SeeAllSliderContextProvider>
+            <SearchContextProvider>
+              <GoogleOAuthProvider clientId="854926132475-sm4btto49sresu4g5o9qpuk9lgtqor9f.apps.googleusercontent.com">
+                <>
+                  {result}
+                </>
+              </GoogleOAuthProvider>
+            </SearchContextProvider>
+          </SeeAllSliderContextProvider>
+        </AudioPlaylistContextProvider>
+      </AdminContextProvider>
     </>
 
 
