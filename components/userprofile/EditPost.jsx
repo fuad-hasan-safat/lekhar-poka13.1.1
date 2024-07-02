@@ -1,7 +1,5 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import Link from "next/link";
-import Select from "react-select";
 import { useRouter } from 'next/router';
 import { FileUploader } from "react-drag-drop-files";
 import dynamic from 'next/dynamic';
@@ -88,11 +86,6 @@ export default function EditPost() {
   }
 
 
-
-
-  // const categoryhandleChange = (selected) => {
-  //   setSelectedOption(selected); // Selected option object
-  // };
 
 
   const handleChange = (e) => {
@@ -401,7 +394,7 @@ export default function EditPost() {
             <div className='w-[50%] pr-[12px]'>
               <button
                 onClick={handleSubmit}
-                className="page__common__yello__btn w-full px-[20px] h-[50px] text-[#FCA000] border border-[#FCA000] border-spacing-1 rounded-md text-[16px] items-center profile__btn__midl"
+                className="page__common__yello__btn hover:text-gray-700 w-full px-[20px] h-[50px] text-[#FCA000] border border-[#FCA000] border-spacing-1 rounded-md text-[16px] items-center profile__btn__midl"
               >
                 পোস্ট আপডেট করুন
               </button>

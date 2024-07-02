@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 export default function SearchResult() {
     const router = useRouter();
     const [isMounted, setIsMounted] = useState(false)
-    const { searchResult, isSearchbarActive, setIsSearchbarActive, setSearchResult, setSearchKey } = useContext(SearchContext);
+    const { searchResult, isSearchbarActive, setIsSearchbarActive, setSearchResult, setSearchKey, searchKey} = useContext(SearchContext);
 
     useEffect(() => {
         const handleRouteChange = (url) => {
@@ -76,9 +76,9 @@ export default function SearchResult() {
                                 <div className="all__post__content flex flex-row ">
 
                                     <div className="lg:w-[70%] text-gray-600">
-                                        {searchResult.length <= 0 && <>
-                                            <h5>কিছু নেই</h5>
-                                        </>}
+
+                                        {searchKey.trim().length > 0 && searchResult.length <= 0 && <h5>কোন তথ্য খুঁজে পাওয়া যায় নি!</h5>}
+                                      
                                         {searchResult.length > 0 && <>
                                             {searchResult.map((data, index) => {
                                                 console.log("data --", data)
