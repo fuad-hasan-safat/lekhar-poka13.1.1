@@ -38,8 +38,35 @@
     height: 100%;
     object-fit: cover;
 }
-.d__account__wrap ul{
+.d__account__wrap ul {
     position: absolute;
-    bottom: 0;
+    top: 100%;
     right: 0;
+    width: 180px;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+    margin-top: 15px;
 }
+.d__account__wrap ul li{
+    padding: 10px 0;
+    border-bottom: 1px solid#ddd;
+}
+.d__account__wrap ul li a{
+    display: inline-block;
+    vertical-align: baseline;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 1;
+    color: #000;
+    padding: 0 10px 0 30px;
+    position: relative;
+}
+.d__account__wrap ul li a i {
+    position: absolute;
+    left: 10px;
+    top: 1px;
+    color:#F9A106;
+}
+
