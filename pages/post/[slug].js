@@ -1,14 +1,10 @@
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Head from 'next/head';
-
-
 import FullPost from '../../components/common/fullContent'
 import RatingComponent from '../../components/common/starRating'
-import { fetchData } from "../../function/api";
 import { apiBasePath } from "../../utils/constant";
 import MusicPlayer from "../../components/musicbar/MusicPlayer";
-import ShareOnFacebook from "../../components/share/share";
 import ReaderModeModal from "../../components/readerMode/ReaderModeModal";
 import FullPostReaderMode from "../../components/common/fullContentReadermood";
 import { ToastContainer, toast } from 'react-toastify';
