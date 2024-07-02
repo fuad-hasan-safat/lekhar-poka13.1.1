@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 export default function SearchResult() {
     const router = useRouter();
     const [isMounted, setIsMounted] = useState(false)
-    const { searchResult, isSearchbarActive, setIsSearchbarActive, setSearchResult, setSearchKey, searchKey } = useContext(SearchContext);
+    const { selectedIteam ,searchResult, isSearchbarActive, setIsSearchbarActive, setSearchResult, setSearchKey, searchKey} = useContext(SearchContext);
 
     useEffect(() => {
         const handleRouteChange = (url) => {
@@ -74,15 +74,19 @@ export default function SearchResult() {
 
                             <div className="all__post__content flex flex-row ">
                                 <div className="lg:w-[70%] text-gray-600">
-
                                     {searchKey.trim().length > 0 && searchResult.length <= 0 && <h5>কোন তথ্য খুঁজে পাওয়া যায় নি!</h5>}
 
                                     {searchResult.length > 0 && <>
                                         {searchResult.map((data, index) => {
                                             console.log("data --", data)
+                                            let classes = '';
+                                            if (index === selectedIteam) {
+                                                classes = 'bg-gray-200 '
+                                            }
                                             return (<>
-                                                <div className='mb-[10px]'>
+                                                <div className={`mb-[10px] p-2 ${classes} hover:bg-gray-200`}>
                                                     <Link onClick={handleSearchClick} href={`/post/${data._id}`}><h5>{data.title}</h5></Link>
+
                                                 </div>
                                             </>)
                                         })}
@@ -96,8 +100,8 @@ export default function SearchResult() {
                         </div>
 
                     </section>
-                </div>
-            </div>
+                </div >
+            </div >
         </>
     ), document.getElementById('search-result'));
 }
