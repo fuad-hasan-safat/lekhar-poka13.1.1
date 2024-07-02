@@ -131,7 +131,7 @@ const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus,
   return (
     <div className="w-full">
       <div className="grid place-items-center lg:pt-28 md:pt-26 sm:pt-20 xs:pt-15">
-        <h1 className="text-black lg:text-5xl md:text-4xl sm:text-4xl xs:text-3xl lg:mb-[40px] md:mb-[40px] sm:mb-[30px] xs:mb-[20px]">
+        <h1 className="text-black lg:text-[48px] md:text-[45px] sm:text-[35px] xs:text-[32px] lg:mb-[40px] md:mb-[40px] sm:mb-[30px] xs:mb-[20px]">
           ওটিপি যাচাই করুন
         </h1>
         <p className="text-gray-500">আমরা আপনাকে একটি এককালীন পাসওয়ার্ড পাঠাব</p>

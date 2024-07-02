@@ -61,10 +61,10 @@ const SignUpPageBeforeOTP = () => {
                       </>
                       : <>
 
-                        {!isOtpSucess && !isOtpVarified && <SigninFormBeforeOTP logreg="একাউন্ট তৈরি করুন" btntext="সাইন আপ" SetIsOtpSucess={SetIsOtpSucess} setState={setState} state={state} otpStatus={otpStatus} setOtpStatus={setOtpStatus} otpProp='send-otp' />}
-                        {isOtpSucess && !isOtpVarified && <OtpPage phonenumber={state.mobileNumber} setIsOtpSuccess={SetIsOtpSucess} setIsOtpVerified={setIsOtpVarified} otpStatus={otpStatus} setOtpStatus={setOtpStatus} />}
-                        {isOtpVarified && <SigninFormAterOTP logreg="একাউন্ট তৈরি করুন" btntext="সাইন আপ" phonenumber={state.mobileNumber} />}
-
+                        {/* {!isOtpSucess && !isOtpVarified && <SigninFormBeforeOTP logreg="একাউন্ট তৈরি করুন" btntext="সাইন আপ" SetIsOtpSucess={SetIsOtpSucess} setState={setState} state={state} otpStatus={otpStatus} setOtpStatus={setOtpStatus} otpProp='send-otp' />} */}
+                        {/* {isOtpSucess && !isOtpVarified && <OtpPage phonenumber={state.mobileNumber} setIsOtpSuccess={SetIsOtpSucess} setIsOtpVerified={setIsOtpVarified} otpStatus={otpStatus} setOtpStatus={setOtpStatus} />} */}
+                        {/* {isOtpVarified && <SigninFormAterOTP logreg="একাউন্ট তৈরি করুন" btntext="সাইন আপ" phonenumber={state.mobileNumber} />}  */}
+                        <SigninFormBeforeOTP logreg="একাউন্ট তৈরি করুন" btntext="সাইন আপ" SetIsOtpSucess={SetIsOtpSucess} setState={setState} state={state} otpStatus={otpStatus} setOtpStatus={setOtpStatus} otpProp='send-otp' />
                         <SignInOption
                           user={user}
                           setUser={setUser}
