@@ -16,7 +16,7 @@ import { AudioPlayListContext } from "../../store/audioPlayer-context";
 
 export default function AudioPlayer() {
 
-  const { playList, isShuffle, isRepeat, toggleReapet, toggleShuffle, currentPlayingIndex, audioPlace, nextSongPlay, prevSongPlay, toggleAudioPlay, isAudioPlaying } = useContext(AudioPlayListContext)
+  const { playList, isShuffle, isRepeat, toggleReapet, toggleShuffle, currentPlayingIndex, audioPlace, nextSongPlay, prevSongPlay, toggleAudioPlay, isAudioPlaying, resetAudioPlayer } = useContext(AudioPlayListContext)
 
 
 
@@ -217,6 +217,7 @@ export default function AudioPlayer() {
             </div>
           </div>
         </div>
+        <button onClick={resetAudioPlayer} className="absolute top-0 right-3 text-[28px] hover:text-[#F9A106]"><i class="ri-close-fill"></i></button>
       </div>
     </>
   ), document.getElementById('audio-root'));
