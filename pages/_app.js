@@ -62,7 +62,7 @@ export default function MyApp({ Component, pageProps }) {
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
   }
   else {
-    result = <Layout><Component {...pageProps} /> <AudioPlayer /> <SearchResult /></Layout>
+    result = <Layout><Component {...pageProps} /> <AudioPlayer /> </Layout>
   }
   return (
     // <Layout>

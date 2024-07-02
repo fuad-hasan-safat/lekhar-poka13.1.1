@@ -1,8 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useContext, useState } from "react";
 import Head from 'next/head';
-
-
 import FullPost from '../../components/common/fullContent'
 import RatingComponent from '../../components/common/starRating'
 import { apiBasePath } from "../../utils/constant";
