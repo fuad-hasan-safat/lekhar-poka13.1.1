@@ -5,7 +5,7 @@ import { AdminContext } from '../store/adminpanel-context';
 const Sidebar = () => {
     const router = useRouter();
 
-    const {setCurrentComponentIndex} = useContext(AdminContext)
+    const {setCurrentComponentIndex, currentindex} = useContext(AdminContext)
 
     const menuItems = [
         { text: 'Dashboard', icon: 'ri-dashboard-fill', href: '/admin/allposttable' },
@@ -32,7 +32,7 @@ const Sidebar = () => {
             <div className='d__sidebar__menu'>
                 <ul>
                     {menuItems.map((item, index) => (
-                        <li key={index} className='text-black'>
+                        <li key={index} className={`text-black ${currentindex === index ? 'active': ''}`}>
                             <button onClick={()=>handleIndexClick(index)}>
                                 <i className={`ri ${item.icon} text-black`}></i>
                                 {item.text}

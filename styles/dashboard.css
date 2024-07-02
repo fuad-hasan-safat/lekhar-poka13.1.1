@@ -44,6 +44,7 @@
     height: 50px;
     border-radius: 30px;
     object-fit: cover;
+    border: 2px solid#F9A106;
 }
 .d__account__wrap ul{
     position: absolute;
@@ -197,19 +198,26 @@
     padding-top:150px;
 }
 .d__sidebar__menu ul li button{
-    display:block;
+    display: block;
     text-decoration: none;
     font-size: 16px;
     line-height: 1;
     color: #000;
     padding: 10px;
+    width: 100%;
+    text-align: left;
 }
 .d__sidebar__menu ul li button i{
     padding-right: 10px;
 }
+.d__sidebar__menu ul li.active button i,
+.d__sidebar__menu ul li.active button,
 .d__sidebar__menu ul li button:hover{
     color: #fff;
     background: #F9A106;
+}
+.d__sidebar__menu ul li button:hover i{
+    color: #fff;
 }
 
 /*

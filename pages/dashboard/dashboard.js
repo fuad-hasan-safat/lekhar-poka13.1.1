@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Sidebar from '../../components/Dashboard/Sidebar';
 import Breadcrumb from '../../components/Dashboard/components/Breadcrumb';
 import { AdminContext } from '../../components/store/adminpanel-context';
-import AllPost from '../../components/Dashboard/components/AllPost';
+import Allcategory from '../../components/Dashboard/components/Allcategory';
 
 
 const notificationData =[
@@ -87,7 +87,7 @@ const Dashboard = ({children}) => {
                 <div className='page__content'>
                     <Breadcrumb title='Dashboard' subtitles1='Home' subtitles2='Dashboard' />
 
-                    {currentindex === 0 && <AllPost/>}
+                    {currentindex === 2 && <Allcategory/>}
                 </div>
             </div>
         </div>

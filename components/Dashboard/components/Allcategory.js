@@ -9,7 +9,7 @@ import Dashboard from "../../../pages/dashboard/dashboard";
 import ContentList from "../../../pages/admin/ContentList";
 import NotFound from "../../common/nofFound";
 
-const AllPost = () => {
+const Allcategory = () => {
     const router = useRouter();
     const [userType, setUserType] = useState("");
 
@@ -112,4 +112,4 @@ const AllPost = () => {
     }
 }
 
-export default AllPost
+export default Allcategory
