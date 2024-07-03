@@ -1,5 +1,5 @@
 "use client";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
 import SignInOption from '../../signInOption/SignInOption'
 import { apiBasePath } from "../../../utils/constant";
@@ -7,10 +7,13 @@ import { useRouter } from "next/navigation";
 import Divider from '../../common/sidebardivider';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AdminContext } from "../../store/adminpanel-context";
 
 export default function Login() {
 
   const router = useRouter();
+
+  const {setCurrentComponentIndex} = useContext(AdminContext)
 
   let notification = ''
 
@@ -163,7 +166,9 @@ export default function Login() {
 
             {localStorage.getItem("usertype") === 'admin' &&
               <button
-                onClick={() => router.push('/admin/admin')}
+                onClick={() => { 
+                  setCurrentComponentIndex(0, 'Dashboard')
+                  router.push('/dashboard/dashboard')} }
                 className="page__common__yello__btn text-white rounded-[6px] bg-[#F9A106] px-[20px] h-[40px] mt-[25px]"
               >অ্যাডমিন প্যানেল</button>
             }
