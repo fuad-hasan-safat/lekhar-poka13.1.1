@@ -66,9 +66,6 @@ const AllDesignation = () => {
 
 
     async function deleteCategory(id) {
-
-
-
         try {
             await deleteData(id);
             // If successful, update state or do something else
