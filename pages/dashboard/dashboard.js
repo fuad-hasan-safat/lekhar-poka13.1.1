@@ -4,6 +4,7 @@ import Sidebar from '../../components/Dashboard/Sidebar';
 import Breadcrumb from '../../components/Dashboard/components/Breadcrumb';
 import { AdminContext } from '../../components/store/adminpanel-context';
 import Allcategory from '../../components/Dashboard/components/Allcategory';
+import DashboardContent from '../../components/Dashboard/components/DashboardContent';
 
 
 const notificationData =[
@@ -87,6 +88,7 @@ const Dashboard = ({children}) => {
                 <div className='page__content'>
                     <Breadcrumb title='Dashboard' subtitles1='Home' subtitles2='Dashboard' />
 
+                    {currentindex === 0 && <DashboardContent/>}
                     {currentindex === 2 && <Allcategory/>}
                 </div>
             </div>

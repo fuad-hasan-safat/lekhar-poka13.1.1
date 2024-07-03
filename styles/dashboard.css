@@ -83,7 +83,7 @@
     border-radius: 30px;
 }
 .d__notifation__wrap span i{
-    color: #000;
+    color: #fff;
     font-size: 16px;
     line-height: 20px;
     text-align: center;
@@ -261,6 +261,9 @@
     justify-content: center;
     align-items: center;
 }
+.breadcrumb__wrap ul li{
+    position: relative;
+}
 .breadcrumb__wrap ul li a{
     font-size: 16px;
     line-height: 1;
@@ -268,11 +271,25 @@
     padding: 0 10px;
     position: relative;
 }
-.breadcrumb__wrap ul li a i {
+.breadcrumb__wrap ul li i {
     position: absolute;
     right: -8px;
     top: 2px;
 }
 .breadcrumb__wrap ul li a:hover{
     color: #F9A106;
+}
+
+/*
+-------------------
+ Dashboard Content
+------------------- 
+*/
+.dashboard__category ul{
+    margin: 0 -10px;
+}
+.dashboard__category ul li{
+    width: 25%;
+    float: left;
+    padding:10px 10px;
 }
