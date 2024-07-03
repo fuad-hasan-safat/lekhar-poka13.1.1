@@ -12,13 +12,13 @@ const Allcategory = () => {
     const router = useRouter();
     const [userType, setUserType] = useState("");
 
-    const [sliderList, setSliderList] = useState([])
+    const [categoryList, setCategoryList] = useState([])
 
 
     const [isOpen, setIsOpen] = useState(false);
     const [selectedContent, setSelectedContent] = useState(null);
 
-  
+
 
     useEffect(() => {
         setUserType(localStorage.getItem("usertype") || "");
@@ -29,28 +29,34 @@ const Allcategory = () => {
         fetch(`${apiBasePath}/categories`)
             .then(response => response.json())
             .then(data => {
-                setSliderList(data);
+                setCategoryList(data);
                 console.log('-----------', data)
-                console.log('-----------', sliderList)
+                console.log('-----------', categoryList)
             })
             .catch(error => console.error("Error fetching data:", error));
 
     }, []);
 
 
+    function deletSelectedPost(id) {
+        setCategoryList(prevCategoryList => prevCategoryList.filter(category => category._id !== id));
+
+    }
+
     async function deleteData(id) {
         try {
-          const response = await axios.delete(`${apiBasePath}/categories/${id}`);
-          console.log('Delete successful:', response.data);
-          return response.data;
+            const response = await axios.delete(`${apiBasePath}/categories/${id}`);
+            console.log('Delete successful:', response.data);
+            deletSelectedPost(id);
+            return response.data;
         } catch (error) {
-          console.error('Error deleting data:', error);
-          throw error;
+            console.error('Error deleting data:', error);
+            throw error;
         }
-      }
+    }
 
 
-      async  function deleteCategory(id) {
+    async function deleteCategory(id) {
 
 
 
@@ -58,11 +64,11 @@ const Allcategory = () => {
             await deleteData(id);
             // If successful, update state or do something else
             alert('Delete Sucessfully')
-          } catch (error) {
+        } catch (error) {
             // Handle error
             alert('Failed to Delete')
 
-          }
+        }
 
 
     }
@@ -74,14 +80,14 @@ const Allcategory = () => {
                 <div className="flex flex-row">
                     <div className="w-1/2">
                         <div className="text-7xl pb-4">Category List</div>
-                        <ContentList content={sliderList} isSlider={true} />
+                        <ContentList content={categoryList} isSlider={true} />
 
                     </div>
                     <div className="w-1/2">
                         <div className="text-7xl pb-4 ">Delete Category</div>
                         <ul>
-                            {sliderList.length &&
-                                sliderList.map((post, index) => (
+                            {categoryList.length &&
+                                categoryList.map((post, index) => (
 
                                     <li key={index}>
                                         {/* {setToggleStatus(post.status)} */}
@@ -91,7 +97,7 @@ const Allcategory = () => {
 
                                             onClick={() => { deleteCategory(post._id) }}
                                         >
-                                            Delete Slider
+                                            Delete Category
                                         </button>
                                         <hr />
 
