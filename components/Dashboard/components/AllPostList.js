@@ -7,6 +7,7 @@ import { apiBasePath } from "../../../utils/constant";
 import NotFound from "../../common/nofFound";
 import ContentList from "./ContentList";
 import StyledModal from './styleModal';
+import { Input } from "postcss";
 
 const AllPostList = () => {
 
@@ -138,15 +139,20 @@ function deletSelectedPost(id){
 
   if (userType === 'admin') {
     return (
-      <div className="all__page__content__block">
+      <div className="all__page__content__block clearfix">
+         <div className="all__post__search">
+            <input type="search" placeholder="Enter Search.." />
+            <button><i class="ri-search-eye-line"></i></button>
+         </div>
          <div className="all__post__list__wrap">
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">Check</th>
+                  <th>No</th>
                   <th scope="col">Post Name</th>
                   <th scope="col">Category</th>
                   <th scope="col">Created By</th>
+                  <th scope="col">Status</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -154,11 +160,27 @@ function deletSelectedPost(id){
               {postList.length &&
                 postList.map((post, index) => (
                   <tr>
-                    <td>Check</td>
+                    <td>{index+1}</td>
                     <td>{post.title}</td>
                     <td>{post.category}</td>
                     <td>{post.writer}</td>
-                    <td><i class="ri-delete-bin-6-line"></i></td>
+                    <td>
+                      <button
+                        id={index}
+                        className={`${post.status ? 'text-green-500' : 'text-red-500'}`}
+
+                        onClick={() => {
+                          revokeStatus(post._id, post.status);
+                        }}
+                      >
+                        {post.status ? 'Revoke Status' : 'Give Status'}
+                      </button>
+                    </td>
+                    <td>
+                      <i class="ri-eye-fill"></i>
+                      <i class="ri-edit-line"></i>
+                      <i class="ri-delete-bin-6-line"></i>
+                    </td>
                   </tr>
                 ))}
               </tbody>
