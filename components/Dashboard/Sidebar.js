@@ -23,8 +23,8 @@ const Sidebar = () => {
         return router.pathname === href;
     };
 
-    function handleIndexClick(index){
-        setCurrentComponentIndex(index)
+    function handleIndexClick(index, page){
+        setCurrentComponentIndex(index, page)
     }
 
     return (
@@ -33,7 +33,7 @@ const Sidebar = () => {
                 <ul>
                     {menuItems.map((item, index) => (
                         <li key={index} className={`text-black ${currentindex === index ? 'active': ''}`}>
-                            <button onClick={()=>handleIndexClick(index)}>
+                            <button onClick={()=>handleIndexClick(index, item.text)}>
                                 <i className={`ri ${item.icon} text-black`}></i>
                                 {item.text}
                             </button>

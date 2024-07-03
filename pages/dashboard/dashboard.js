@@ -92,7 +92,7 @@ const Dashboard = ({children}) => {
             <Sidebar />
             <div className='page-wrapper'>
                 <div className='page__content'>
-                    <Breadcrumb title='Dashboard' subtitles1='Home' subtitles2='Dashboard' />
+                    <Breadcrumb />
                     {currentindex === 0 && <DashboardContent/>}
                     {currentindex === 1 && <AllPostList/>}
                     {currentindex === 2 && <Allcategory/>}

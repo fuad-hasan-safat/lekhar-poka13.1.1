@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AdminContext } from '../../store/adminpanel-context';
 
-const Breadcrumb = ({title,subtitles1,subtitles2}) => {
+const Breadcrumb = () => {
+    const {currentPage} = useContext(AdminContext)
     return (
         <div className='breadcrumb__wrap'>
-            <h5>{title}</h5>
-            <ul>
-                <li><a href='#'>{subtitles1}</a><i class="ri-arrow-right-double-line"></i></li>
-                <li><a href='#'>{subtitles2}</a></li>
+            <h5>Dashboard</h5>
+            <ul className='text-black'>
+                <li><a href='#'>Home</a><i class="ri-arrow-right-double-line"></i></li>
+                <li><a href='#'>{currentPage}</a></li>
             </ul>
         </div>
     );
