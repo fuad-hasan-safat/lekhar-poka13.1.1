@@ -158,7 +158,7 @@ function deletSelectedPost(id){
                     <td>{post.title}</td>
                     <td>{post.category}</td>
                     <td>{post.writer}</td>
-                    <td></td>
+                    <td><i class="ri-delete-bin-6-line"></i></td>
                   </tr>
                 ))}
               </tbody>
