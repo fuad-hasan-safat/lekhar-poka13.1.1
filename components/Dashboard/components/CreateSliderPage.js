@@ -2,12 +2,12 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import Classes from './slider.module.css';
-import { apiBasePath } from '../../utils/constant';
-import NotFound from "../../components/common/nofFound"
-import AdminLayOut from './admin';
+import { apiBasePath } from '../../../utils/constant';
+import NotFound from '../../common/nofFound';
 
 
-const Page = () => {
+
+const CreateSliderPage = () => {
 
     const [highlight, setHighlight] = useState(false);
     const [imageFile, setImageFile] = useState(null);
@@ -102,7 +102,6 @@ const Page = () => {
     };
     if (userType === 'admin') {
         return (
-            <AdminLayOut>
                 <section className='admin__add__slider__sec' style={{ padding: '100px 0' }}>
                     <div className='container'>
                         <div className='row'>
@@ -163,11 +162,10 @@ const Page = () => {
                         </div>
                     </div>
                 </section>
-            </AdminLayOut>
         );
     } else {
         <NotFound />
     }
 };
 
-export default Page;
+export default CreateSliderPage;

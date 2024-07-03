@@ -2,11 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import ContentList from './ContentList';
-import { apiBasePath } from "../../utils/constant";
-import NotFound from "../../components/common/nofFound"
 import axios from "axios";
-import AdminLayOut from "./admin";
+import { apiBasePath } from "../../../utils/constant";
+import NotFound from "../../common/nofFound";
 
 const WriterList = () => {
     const router = useRouter();
@@ -54,25 +52,16 @@ const WriterList = () => {
 
         try {
             await deleteData(id);
-            // If successful, update state or do something else
             alert('Delete Sucessfully')
         } catch (error) {
-            // Handle error
             alert('Failed to Delete')
 
         }
-
-
-
-
-
-        router.push(`/admin/writerlist`);
 
     }
 
     if (userType === 'admin') {
         return (
-            <AdminLayOut>
                 <div className="pt-[115px]  text-black mx-10">
                     <div className="flex flex-row">
                         <div className="w-1/2">
@@ -114,7 +103,6 @@ const WriterList = () => {
                         </div>
                     </div>
                 </div >
-            </AdminLayOut>
         )
     } else {
         return <NotFound />
