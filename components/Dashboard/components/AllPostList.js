@@ -2,14 +2,13 @@
 
 import React, { useState, useEffect, Fragment } from "react";
 import { useRouter } from "next/navigation";
-import ContentList from './ContentList';
-import { apiBasePath } from "../../utils/constant";
-import NotFound from "../../components/common/nofFound"
 import axios from "axios";
-import StyledModal from "./styleModal";
-import AdminLayOut from "./admin";
+import { apiBasePath } from "../../../utils/constant";
+import NotFound from "../../common/nofFound";
+import ContentList from "./ContentList";
+import StyledModal from './styleModal';
 
-const PostTable = () => {
+const AllPostList = () => {
 
   const router = useRouter();
 
@@ -111,7 +110,6 @@ const PostTable = () => {
 
   if (userType === 'admin') {
     return (
-      <AdminLayOut>
         <div className="pt-[115px]  text-black mx-10">
           <div className="flex flex-row">
             <div className="w-1/3">
@@ -174,11 +172,10 @@ const PostTable = () => {
             </div>
           </div>
         </div >
-      </AdminLayOut>
     )
   } else {
     return <NotFound />
   }
 }
 
-export default PostTable
+export default AllPostList;

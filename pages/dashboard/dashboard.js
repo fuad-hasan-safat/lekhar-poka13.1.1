@@ -4,6 +4,12 @@ import Sidebar from '../../components/Dashboard/Sidebar';
 import Breadcrumb from '../../components/Dashboard/components/Breadcrumb';
 import { AdminContext } from '../../components/store/adminpanel-context';
 import Allcategory from '../../components/Dashboard/components/Allcategory';
+import AllDesignation from '../../components/Dashboard/components/AllDesignationList';
+import AllPostList from '../../components/Dashboard/components/AllPostList';
+import AllSliderList from '../../components/Dashboard/components/AllSliderList';
+import AllWriterBio from '../../components/Dashboard/components/AllWriterBio';
+import CreateSliderPage from '../../components/Dashboard/components/CreateSliderPage';
+import WriterList from '../../components/Dashboard/components/AllWriterList';
 
 
 const notificationData =[
@@ -87,7 +93,13 @@ const Dashboard = ({children}) => {
                 <div className='page__content'>
                     <Breadcrumb title='Dashboard' subtitles1='Home' subtitles2='Dashboard' />
 
+                    {currentindex === 1 && <AllPostList/>}
                     {currentindex === 2 && <Allcategory/>}
+                    {currentindex === 3 && <CreateSliderPage/>}
+                    {currentindex === 4 && <WriterList/>}
+                    {currentindex === 5 && <AllSliderList/>}
+                    {currentindex === 6 && <AllDesignation/>}
+                    {currentindex === 7 && <AllWriterBio/>}
                 </div>
             </div>
         </div>

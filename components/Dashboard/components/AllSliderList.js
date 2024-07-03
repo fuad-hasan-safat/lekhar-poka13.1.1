@@ -2,14 +2,12 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import ContentList from './ContentList';
-import { apiBasePath } from "../../utils/constant";
-import NotFound from "../../components/common/nofFound"
 import axios from "axios";
-import AdminLayOut from "./admin";
-import Dashboard from "../dashboard/dashboard";
+import { apiBasePath } from "../../../utils/constant";
+import NotFound from "../../common/nofFound";
+import ContentList from "./ContentList";
 
-const SliderTable = () => {
+const AllSliderList = () => {
     const router = useRouter();
     const [userType, setUserType] = useState("");
 
@@ -19,7 +17,7 @@ const SliderTable = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedContent, setSelectedContent] = useState(null);
 
-  
+
 
     useEffect(() => {
         setUserType(localStorage.getItem("usertype") || "");
@@ -27,7 +25,7 @@ const SliderTable = () => {
 
 
     useEffect(() => {
-        fetch(`${apiBasePath}/categories`)
+        fetch(`${apiBasePath}/sliders`)
             .then(response => response.json())
             .then(data => {
                 setSliderList(data);
@@ -41,17 +39,17 @@ const SliderTable = () => {
 
     async function deleteData(id) {
         try {
-          const response = await axios.delete(`${apiBasePath}/categories/${id}`);
-          console.log('Delete successful:', response.data);
-          return response.data;
+            const response = await axios.delete(`${apiBasePath}/sliders/${id}`);
+            console.log('Delete successful:', response.data);
+            return response.data;
         } catch (error) {
-          console.error('Error deleting data:', error);
-          throw error;
+            console.error('Error deleting data:', error);
+            throw error;
         }
-      }
+    }
 
 
-      async  function deleteCategory(id) {
+    async function deleteSlider(id) {
 
 
 
@@ -59,33 +57,31 @@ const SliderTable = () => {
             await deleteData(id);
             // If successful, update state or do something else
             alert('Delete Sucessfully')
-          } catch (error) {
+        } catch (error) {
             // Handle error
             alert('Failed to Delete')
 
-          }
+        }
 
 
 
 
 
-        router.push(`/admin/allcategory`);
+        router.push(`/admin/allslidertable`);
 
     }
 
     if (userType === 'admin') {
-
         return (
-            <Dashboard>
             <div className="pt-[115px]  text-black mx-10">
                 <div className="flex flex-row">
                     <div className="w-1/2">
-                        <div className="text-7xl pb-4">Category List</div>
+                        <div className="text-7xl pb-4">Slider List</div>
                         <ContentList content={sliderList} isSlider={true} />
 
                     </div>
                     <div className="w-1/2">
-                        <div className="text-7xl pb-4 ">Delete Category</div>
+                        <div className="text-7xl pb-4 ">Delete Slider</div>
                         <ul>
                             {sliderList.length &&
                                 sliderList.map((post, index) => (
@@ -96,11 +92,12 @@ const SliderTable = () => {
                                             id={index}
                                             className={`text-green-500`}
 
-                                            onClick={() => { deleteCategory(post._id) }}
+                                            onClick={() => { deleteSlider(post._id) }}
                                         >
                                             Delete Slider
                                         </button>
                                         <hr />
+
 
                                     </li>
                                 ))}
@@ -108,7 +105,6 @@ const SliderTable = () => {
                     </div>
                 </div>
             </div >
-            </Dashboard>
         )
     } else {
         return <NotFound />
@@ -119,4 +115,4 @@ const SliderTable = () => {
     }
 }
 
-export default SliderTable
+export default AllSliderList
