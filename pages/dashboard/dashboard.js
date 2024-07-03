@@ -11,6 +11,7 @@ import AllSliderList from '../../components/Dashboard/components/AllSliderList';
 import AllWriterBio from '../../components/Dashboard/components/AllWriterBio';
 import CreateSliderPage from '../../components/Dashboard/components/CreateSliderPage';
 import WriterList from '../../components/Dashboard/components/AllWriterList';
+import Head from 'next/head';
 
 
 const notificationData =[
@@ -52,6 +53,9 @@ const Dashboard = ({children}) => {
 
     return (
         <div className='main-wrapper'>
+            <Head>
+                <title>Dashboard</title>
+            </Head>
             <div className='dashboard__header'>
                 <div className='header-left'>
                     <div className="d-logo">
