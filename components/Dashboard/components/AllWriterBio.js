@@ -13,7 +13,7 @@ const AllWriterBio = () => {
 
     const router = useRouter();
     const [userType, setUserType] = useState("");
-    const [sliderList, setSliderList] = useState([])
+    const [bioList, setBioList] = useState([])
     const [isOpen, setIsOpen] = useState(false);
     const [istitleClick, setIsTitleClick] = useState(false)
     const [selectedContent, setSelectedContent] = useState(null);
@@ -33,9 +33,8 @@ const AllWriterBio = () => {
         fetch(`${apiBasePath}/listwriterbio`)
             .then(response => response.json())
             .then(data => {
-                setSliderList(data.list);
+                setBioList(data);
                 console.log('-----------', data)
-                console.log('-----------', sliderList)
             })
             .catch(error => console.error("Error fetching data:", error));
 
@@ -69,9 +68,6 @@ const AllWriterBio = () => {
 
 
     async function deleteCategory(id) {
-
-
-
         try {
             await deleteData(id);
             // If successful, update state or do something else
@@ -81,13 +77,6 @@ const AllWriterBio = () => {
             alert('Failed to Delete')
 
         }
-
-
-
-
-
-        router.reload()
-
     }
 
     if (userType === 'admin') {
@@ -106,15 +95,15 @@ const AllWriterBio = () => {
                     <div className="flex flex-row">
                         <div className="w-1/2">
                             <div className="text-5xl pb-4">Bio List</div>
-                            {/* <ContentList content={sliderList} isSlider={true} /> */}
-                            <ContentList content={sliderList} onOpenModal={handleOpenModal} setIsTitleClick={setIsTitleClick} />
+                            {/* <ContentList content={bioList} isSlider={true} /> */}
+                            <ContentList content={bioList} onOpenModal={handleOpenModal} setIsTitleClick={setIsTitleClick} />
                             {istitleClick && <StyledModal isOpen={isOpen} selectedContent={selectedContent} onClose={handleCloseModal} />}
                         </div>
                         <div className="w-1/2">
                             <div className="text-5xl pb-4 ">Bio</div>
                             <ul>
-                                {sliderList.length &&
-                                    sliderList.map((post, index) => (
+                                {bioList.length &&
+                                    bioList.map((post, index) => (
 
                                         <li key={index}>
                                             {/* {setToggleStatus(post.status)} */}

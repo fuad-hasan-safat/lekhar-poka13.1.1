@@ -12,7 +12,7 @@ const AllDesignation = () => {
     const router = useRouter();
     const [userType, setUserType] = useState("");
 
-    const [sliderList, setSliderList] = useState([])
+    const [designation, setDesignation] = useState([])
 
 
     const [isOpen, setIsOpen] = useState(false);
@@ -34,22 +34,29 @@ const AllDesignation = () => {
         fetch(`${apiBasePath}/designation`)
             .then(response => response.json())
             .then(data => {
-                setSliderList(data);
+                setDesignation(data);
                 console.log('-----------', data)
-                console.log('-----------', sliderList)
+                console.log('-----------', designation)
             })
             .catch(error => console.error("Error fetching data:", error));
 
-    }, []);
+    }, [designation]);
 
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
 
 
+    
+function deletSelectedDesignation(id){
+    setDesignation(prevDesignation => prevDesignation.filter(deg => deg._id !== id));
+  
+  }
+
     async function deleteData(id) {
         try {
             const response = await axios.delete(`${apiBasePath}/designation/${id}`);
             console.log('Delete successful:', response.data);
+            deletSelectedDesignation(id);
             return response.data;
         } catch (error) {
             console.error('Error deleting data:', error);
@@ -84,21 +91,21 @@ const AllDesignation = () => {
                         className="bg-[#FCA000] hover:bg-[#eeb249] text-white py-2 px-[25px] rounded mt-[20px]"
                         onClick={handleShow}
                     >
-                        নতুন লেখার ধরণ করুন
+                        নতুন পদবী
                     </button>
-                    <CreateDesignationModal showModal={showModal} handleClose={handleClose} setIsCategoryAdded={setIsCategoryAdded} />
+                    <CreateDesignationModal setDesignation={setDesignation} showModal={showModal} handleClose={handleClose} setIsCategoryAdded={setIsCategoryAdded} />
                 </div>
                 <div className="flex flex-row">
                     <div className="w-1/2">
                         <div className="text-5xl pb-4">Designation List</div>
-                        <ContentList content={sliderList} isSlider={true} />
+                        <ContentList content={designation} isSlider={true} />
 
                     </div>
                     <div className="w-1/2">
                         <div className="text-5xl pb-4 ">Designation</div>
                         <ul>
-                            {sliderList.length &&
-                                sliderList.map((post, index) => (
+                            {designation.length &&
+                                designation.map((post, index) => (
 
                                     <li key={index}>
                                         {/* {setToggleStatus(post.status)} */}

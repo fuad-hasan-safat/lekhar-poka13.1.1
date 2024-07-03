@@ -33,11 +33,16 @@ const WriterList = () => {
 
     }, []);
 
+    function deletSelectedWriter(id) {
+        setWriterList(prevWriterList => prevWriterList.filter(writer => writer._id !== id));
+
+    }
 
     async function deleteData(id) {
         try {
             const response = await axios.delete(`${apiBasePath}/writers/${id}`);
             console.log('Delete successful:', response.data);
+            deletSelectedWriter(id);
             return response.data;
         } catch (error) {
             console.error('Error deleting data:', error);
