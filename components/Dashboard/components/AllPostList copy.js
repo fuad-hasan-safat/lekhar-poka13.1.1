@@ -14,7 +14,13 @@ const AllPostList = () => {
 
   const [userType, setUserType] = useState("");
   const [isLoaded, setIsloaded] = useState(false);
-  const [postList, setPostList] = useState([])
+  const [postList, setPostList] = useState([{
+    title: ' ',
+    writer: ' ',
+    content: ' ',
+    _id: ' ',
+    status: ' '
+  }])
   const [isOpen, setIsOpen] = useState(false);
   const [istitleClick, setIsTitleClick] = useState(false)
   const [selectedContent, setSelectedContent] = useState(null);
@@ -46,8 +52,7 @@ const AllPostList = () => {
           writer: data.writer,
           content: data.content,
           _id: data._id,
-          status: data.status,
-          category: data.category,
+          status: data.status
         }));
 
         setPostList(filteredPost)
@@ -139,31 +144,66 @@ function deletSelectedPost(id){
   if (userType === 'admin') {
     return (
       <div className="all__page__content__block">
-         <div className="all__post__list__wrap">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Check</th>
-                  <th scope="col">Post Name</th>
-                  <th scope="col">Category</th>
-                  <th scope="col">Created By</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-              <tbody>
+        <div className="flex flex-row">
+          <div className="w-1/3">
+
+            <div className="text-3xl pb-4">Post List</div>
+
+            <ContentList content={postList} onOpenModal={handleOpenModal} setIsTitleClick={setIsTitleClick} />
+            {istitleClick && <StyledModal isOpen={isOpen} selectedContent={selectedContent} onClose={handleCloseModal} />}
+
+
+          </div>
+          <div className="w-1/3">
+            <div className="text-3xl pb-4 ">Toggle Ststud</div>
+
+            <ul>
               {postList.length &&
                 postList.map((post, index) => (
-                  <tr>
-                    <td>Check</td>
-                    <td>{post.title}</td>
-                    <td>{post.category}</td>
-                    <td>{post.writer}</td>
-                    <td></td>
-                  </tr>
+
+                  <li key={index}>
+                    {/* {setToggleStatus(post.status)} */}
+                    <button
+                      id={index}
+                      className={`${post.status ? 'text-green-500' : 'text-red-500'}`}
+
+                      onClick={() => {
+                        revokeStatus(post._id, post.status);
+                      }}
+                    >
+                      {post.status ? 'Revoke Status' : 'Give Status'}
+                    </button>
+                    <hr />
+
+
+                  </li>
                 ))}
-              </tbody>
-            </table>
-         </div>
+            </ul>
+
+          </div>
+          <div className="w-1/3">
+            <div className="text-3xl pb-4 ">Delete Post</div>
+            <ul>
+              {postList.length &&
+                postList.map((post, index) => (
+                  <li key={index}>
+
+                    <button
+                      id={index}
+                      className="text-red-600"
+                      onClick={() => { deletePost(post._id) }}
+                    >
+                      Delete
+                    </button>
+
+                    <hr />
+
+                  </li>
+                ))}
+            </ul>
+
+          </div>
+        </div>
       </div >
     )
   } else {

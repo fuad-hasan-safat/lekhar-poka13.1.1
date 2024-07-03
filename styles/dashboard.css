@@ -338,3 +338,25 @@
     border: 2px dotted#000;
 }
 
+/*
+--------------------------
+all__page__content__block
+-------------------------- 
+*/
+.all__page__content__block{
+    background: #fff;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+.all__post__list__wrap table thead tr,
+.all__post__list__wrap table thead,
+.all__post__list__wrap table{
+    display: block;
+    width: 100%;
+}
+.all__post__list__wrap table thead tr th{
+    width: 20%;
+    float: left;
+}
+
