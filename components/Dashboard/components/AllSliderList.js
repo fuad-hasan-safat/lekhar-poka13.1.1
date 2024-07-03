@@ -37,10 +37,16 @@ const AllSliderList = () => {
     }, []);
 
 
+    function deletSelectedSlider(id) {
+        setSliderList(prevSliderList => prevSliderList.filter(slider => slider._id !== id));
+
+    }
+
     async function deleteData(id) {
         try {
             const response = await axios.delete(`${apiBasePath}/sliders/${id}`);
             console.log('Delete successful:', response.data);
+            deletSelectedSlider(id);
             return response.data;
         } catch (error) {
             console.error('Error deleting data:', error);
