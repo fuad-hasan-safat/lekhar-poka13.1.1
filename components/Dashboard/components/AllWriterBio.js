@@ -38,7 +38,7 @@ const AllWriterBio = () => {
             })
             .catch(error => console.error("Error fetching data:", error));
 
-    }, []);
+    }, [bioList]);
 
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
@@ -54,10 +54,15 @@ const AllWriterBio = () => {
         setSelectedContent(null);
     };
 
+    function deletSelectedBio(id) {
+        setBioList(prevBio => prevBio.filter(bio => bio._id !== id));
+
+    }
 
     async function deleteData(id) {
         try {
             const response = await axios.delete(`${apiBasePath}/deletewriterbio/${id}`);
+            deletSelectedBio(id);
             console.log('Delete successful:', response.data);
             return response.data;
         } catch (error) {
@@ -67,7 +72,7 @@ const AllWriterBio = () => {
     }
 
 
-    async function deleteCategory(id) {
+    async function deleteBio(id) {
         try {
             await deleteData(id);
             // If successful, update state or do something else
@@ -82,47 +87,47 @@ const AllWriterBio = () => {
     if (userType === 'admin') {
 
         return (
-                <div className="pt-[115px]  text-black mx-10">
-                    <div>
-                        <button
-                            className="bg-[#FCA000] hover:bg-[#eeb249] text-white py-2 px-[25px] rounded mt-[20px]"
-                            onClick={handleShow}
-                        >
-                            Bio Add
-                        </button>
-                        <CreateWriterBioModal showModal={showModal} handleClose={handleClose} setIsCategoryAdded={setIsCategoryAdded} />
+            <div className="pt-[115px]  text-black mx-10">
+                <div>
+                    <button
+                        className="bg-[#FCA000] hover:bg-[#eeb249] text-white py-2 px-[25px] rounded mt-[20px]"
+                        onClick={handleShow}
+                    >
+                        Bio Add
+                    </button>
+                    <CreateWriterBioModal setBioList={setBioList} showModal={showModal} handleClose={handleClose} setIsCategoryAdded={setIsCategoryAdded} />
+                </div>
+                <div className="flex flex-row">
+                    <div className="w-1/2">
+                        <div className="text-5xl pb-4">Bio List</div>
+                        {/* <ContentList content={bioList} isSlider={true} /> */}
+                        <ContentList content={bioList} onOpenModal={handleOpenModal} setIsTitleClick={setIsTitleClick} />
+                        {istitleClick && <StyledModal isOpen={isOpen} selectedContent={selectedContent} onClose={handleCloseModal} />}
                     </div>
-                    <div className="flex flex-row">
-                        <div className="w-1/2">
-                            <div className="text-5xl pb-4">Bio List</div>
-                            {/* <ContentList content={bioList} isSlider={true} /> */}
-                            <ContentList content={bioList} onOpenModal={handleOpenModal} setIsTitleClick={setIsTitleClick} />
-                            {istitleClick && <StyledModal isOpen={isOpen} selectedContent={selectedContent} onClose={handleCloseModal} />}
-                        </div>
-                        <div className="w-1/2">
-                            <div className="text-5xl pb-4 ">Bio</div>
-                            <ul>
-                                {bioList.length &&
-                                    bioList.map((post, index) => (
+                    <div className="w-1/2">
+                        <div className="text-5xl pb-4 ">Bio</div>
+                        <ul>
+                            {bioList.length &&
+                                bioList.map((post, index) => (
 
-                                        <li key={index}>
-                                            {/* {setToggleStatus(post.status)} */}
-                                            <button
-                                                id={index}
-                                                className={`text-green-500`}
+                                    <li key={index}>
+                                        {/* {setToggleStatus(post.status)} */}
+                                        <button
+                                            id={index}
+                                            className={`text-green-500`}
 
-                                                onClick={() => { console.log(post); deleteCategory(post._id) }}
-                                            >
-                                                Delete
-                                            </button>
-                                            <hr />
+                                            onClick={() => { console.log(post); deleteBio(post._id) }}
+                                        >
+                                            Delete
+                                        </button>
+                                        <hr />
 
-                                        </li>
-                                    ))}
-                            </ul>
-                        </div>
+                                    </li>
+                                ))}
+                        </ul>
                     </div>
-                </div >
+                </div>
+            </div >
         )
     } else {
         return <NotFound />

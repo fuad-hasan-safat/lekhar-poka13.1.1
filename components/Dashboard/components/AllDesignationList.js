@@ -46,11 +46,11 @@ const AllDesignation = () => {
     const handleShow = () => setShowModal(true);
 
 
-    
-function deletSelectedDesignation(id){
-    setDesignation(prevDesignation => prevDesignation.filter(deg => deg._id !== id));
-  
-  }
+
+    function deletSelectedDesignation(id) {
+        setDesignation(prevDesignation => prevDesignation.filter(deg => deg._id !== id));
+
+    }
 
     async function deleteData(id) {
         try {
@@ -93,7 +93,7 @@ function deletSelectedDesignation(id){
                     >
                         নতুন পদবী
                     </button>
-                    <CreateDesignationModal setDesignation={setDesignation} showModal={showModal} handleClose={handleClose} setIsCategoryAdded={setIsCategoryAdded} />
+                    {showModal && <CreateDesignationModal setDesignation={setDesignation} showModal={showModal} handleClose={handleClose} setIsCategoryAdded={setIsCategoryAdded} />}
                 </div>
                 <div className="flex flex-row">
                     <div className="w-1/2">
