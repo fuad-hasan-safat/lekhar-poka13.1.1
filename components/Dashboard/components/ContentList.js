@@ -3,9 +3,6 @@ import React from 'react';
 
 
 const ContentList = ({ content, onOpenModal, setIsTitleClick, isSlider = false }) => {
-
- console.log('post list ----', content)
-
   return (
     <ul>
       {content.length && content?.map((item) => (

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { apiBasePath } from '../../utils/constant';
 
-const CreateWriterBioModal = ({ showModal, handleClose, setIsCategoryAdded }) => {
+const CreateWriterBioModal = ({ setBioList, showModal, handleClose, setIsCategoryAdded }) => {
 
   const [title, setTitle] = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -59,6 +59,9 @@ const CreateWriterBioModal = ({ showModal, handleClose, setIsCategoryAdded }) =>
 
       if(response.data.status === "failed"){
         alert(response.data.msg)
+      }
+      if(response.data.status === "success"){
+        setBioList(prevbioList => [...prevbioList, {title: title}])
       }
 
       handleClose();

@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const AdminContext = createContext({
     currentindex: 0,
@@ -13,7 +13,23 @@ export default function AdminContextProvider({ children }) {
         currentPage: 'Dashboard',
     })
 
-    function updateCurrentComponentIndex(index, page='Dashboard') {
+    useEffect(() => {
+        const currentDashboardIndex = localStorage.getItem("dashBordPageIndex");
+        const currentDashboardPageScope = localStorage.getItem("dashBordPageScope");
+
+        console.log({ currentDashboardIndex, currentDashboardPageScope })
+
+        setDashboard({
+            currentindex: parseInt(currentDashboardIndex),
+            currentPage: currentDashboardPageScope
+        })
+
+    }, [])
+
+    function updateCurrentComponentIndex(index, page) {
+        localStorage.setItem("dashBordPageIndex", index);
+        localStorage.setItem("dashBordPageScope", page);
+
         setDashboard((prevDashboard) => ({
             ...prevDashboard,
             currentindex: index,
