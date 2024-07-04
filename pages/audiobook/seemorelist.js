@@ -89,6 +89,7 @@ const SeeMoreList = () => {
                 <div className="container">
                     <div className="all__post__content flex flex-row">
                         <div className="lg:w-[70%]">
+                            {seeAllRenderInfo.allbooks.length ?
                             <div className='see__more__list__wrap clearfix'>
                                 {
                                     seeAllRenderInfo.sliderType === 'no_background' &&
@@ -98,7 +99,11 @@ const SeeMoreList = () => {
                                     seeAllRenderInfo.sliderType === 'background' &&
                                     <SeeMoreListBackground audioData={seeAllRenderInfo.allbooks} />
                                 }
+                            </div> :
+                            <div className='text-gray-700 text-[24px]'>
+                                কোন অডিওবুক খুঁজে পাওয়া যায় নি ।  
                             </div>
+                            }
                         </div>
                         <div className="lg:w-[30%]">
                             <Sidebar />
