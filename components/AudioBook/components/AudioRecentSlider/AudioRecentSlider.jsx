@@ -67,6 +67,8 @@ export const AudioRecentSliderData = [
 
 const AudioRecentSlider = ({recentSliderData}) => {
 
+  console.log('audio slider data --',recentSliderData)
+
   const router = useRouter();
 
   var settings = {
@@ -126,7 +128,7 @@ const AudioRecentSlider = ({recentSliderData}) => {
     <Slider {...settings} className='hmRecentSlider'>
       {recentSliderData?.map((item, index) =>
         <div key={index} className='hm__audio__recent__slide__item'>
-          <div className='hm__audio__recent__slide__item__innr' onClick={()=>sliderClickHandler(item.id)}>
+          <div className='hm__audio__recent__slide__item__innr' onClick={()=>sliderClickHandler(item._id)}>
             <div className='hm__audio__recent__slide__item__img'>
               <img src={item?.image} alt='Slider Img' />
             </div>

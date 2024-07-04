@@ -4,7 +4,7 @@ import LoginReg from '../common/loginform'
 import LoginSignInOtpLeftPartDesign from '../common/login-signup-otp-left-design'
 import SignInOption from "../signInOption/SignInOption";
 
-const LoginPage = () => {
+const LoginPage = ({url = '/'}) => {
 
   const [userToken, setUserToken] = useState("");
   const [user, setUser] = useState(null);
@@ -49,7 +49,7 @@ const LoginPage = () => {
                       </>
                       :
                       <>
-                        <LoginReg logreg="লগইন করুন" btntext="লগইন" />
+                        <LoginReg logreg="লগইন করুন" btntext="লগইন" url={url} />
 
                         <SignInOption
                           user={user}

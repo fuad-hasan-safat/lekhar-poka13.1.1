@@ -110,10 +110,6 @@ const Allcategory = () => {
         )
     } else {
         return <NotFound />
-        // <div className="text-9xl text-black">
-        //   <p>not available</p>
-
-        // </div>
     }
 }
 

@@ -2563,6 +2563,7 @@ transition: all 0.5s !important;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 
 }
 
@@ -2592,6 +2593,8 @@ transition: all 0.5s !important;
 .audio__tab__playbutton {
   color: #FCD200;
   font-size: 44px;
+  position: absolute;
+  right: -25px;
 }
 
 .audio__playlist__devider {

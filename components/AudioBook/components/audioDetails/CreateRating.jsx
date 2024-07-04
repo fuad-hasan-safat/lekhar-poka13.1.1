@@ -1,12 +1,31 @@
 import React, { useState } from 'react'
+import { apiBasePath } from '../../../../utils/constant';
 
-export default function CreateRating() {
+export default function CreateRating({singleAudioData}) {
 
     const [userRating, setUserRating] = useState('');
 
-    function submitRating(){
+    async function submitRating() {
+        const postData = {
+            rating: userRating,
+        };
 
+        try {
+            const response = await fetch(`${apiBasePath}/commentaudiobook`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(postData),
+            });
+
+            const result = await response.json();
+            console.log('Response:', result); // Handle the response as needed
+        } catch (error) {
+            console.error('Error submitting rating:', error);
+        }
     }
+
     return (
         <div className={``}>
 

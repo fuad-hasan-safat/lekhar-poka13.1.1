@@ -6,12 +6,18 @@ import AudioDetailsSideBar from '../../components/AudioBook/components/audioSide
 import { audioPlaylist } from '../../components/AudioBook/components/sampleData/audioPlaylist';
 import SeeMoreListPlayList from '../../components/AudioBook/components/SeeMoreList/seeMorePlayList';
 import Loading from '../../components/common/loading';
+import LoginPage from '../../components/login/login';
+import { useRouter } from 'next/router';
 
 
 
 
 const PlaylistSeeAll = () => {
-const {playListRenderScope} = useContext(AudioPlayListContext)
+
+    const router = useRouter();
+    const currentUrl = router.asPath;
+
+    const { playListRenderScope } = useContext(AudioPlayListContext)
 
     const [seeAllRenderInfo, setSeeAllRenderInfo] = useState({
         playListScope: '',
@@ -30,6 +36,9 @@ const {playListRenderScope} = useContext(AudioPlayListContext)
         } else if (type === 'details') {
             scope = 'প্লেলিস্ট'
         }
+        if (!type) {
+            scope = 'সর্বশেষ প্লেলিস্ট';
+        }
 
         setSeeAllRenderInfo((prevSeeAllRenderInfo) => ({
             ...prevSeeAllRenderInfo,
@@ -44,34 +53,39 @@ const {playListRenderScope} = useContext(AudioPlayListContext)
 
 
     return (
-        <>
-            <Head>
-                <title>প্লেলিস্ট</title>
-            </Head>
-            <section className="banner-sec-wrap">
-                <div className="relative w-full xl:h-[380px] lg:h-[360px] md:h-[340px] sm:h-[280px] xs:h-[260px]  overflow-hidden"
-                    style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat` }}>
-                    <h2 className=" absolute top-[50%] left-[50%] text-[40px] text-[#F9A106] -translate-x-[50%] -translate-y-[50%] max-h-[0px]">
-                        {seeAllRenderInfo.playListScope}
-                    </h2>
-                </div>
-            </section>
-            <section className="all__page__main__content">
-                <div className="container">
-                    <div className="all__post__content flex flex-row">
-                        <div className="lg:w-[70%]">
-                            <div className='see__more__list__wrap clearfix'>
-                                <SeeMoreListPlayList audioPlaylist={audioPlaylist} playListScope={seeAllRenderInfo.playListScope} />
+        <>{localStorage.getItem('uuid')?.trim().length ?
+            <>
+                <Head>
+                    <title>প্লেলিস্ট</title>
+                </Head>
+                <section className="banner-sec-wrap">
+                    <div className="relative w-full xl:h-[380px] lg:h-[360px] md:h-[340px] sm:h-[280px] xs:h-[260px]  overflow-hidden"
+                        style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat` }}>
+                        <h2 className=" absolute top-[50%] left-[50%] text-[40px] text-[#F9A106] -translate-x-[50%] -translate-y-[50%] max-h-[0px]">
+                            {seeAllRenderInfo.playListScope}
+                        </h2>
+                    </div>
+                </section>
+                <section className="all__page__main__content">
+                    <div className="container">
+                        <div className="all__post__content flex flex-row">
+                            <div className="lg:w-[70%]">
+                                <div className='see__more__list__wrap clearfix'>
+                                    <SeeMoreListPlayList audioPlaylist={audioPlaylist} playListScope={seeAllRenderInfo.playListScope} />
 
+                                </div>
+                            </div>
+                            <div className="lg:w-[30%]">
+                                <AudioDetailsSideBar />
                             </div>
                         </div>
-                        <div className="lg:w-[30%]">
-                            <AudioDetailsSideBar />
-                        </div>
                     </div>
-                </div>
-            </section>
-            {/* <AudioPlayer /> */}
+                </section>
+            </> :
+            <div>
+                <LoginPage url={currentUrl} />
+            </div>
+        }
         </>
     );
 };

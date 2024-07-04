@@ -4,8 +4,9 @@ import AudioTabSingleItem from './audioList/AudioTabSilgleItem';
 import { singleAudioData } from '../sampleData/singleAudioDetailsPage';
 
 
-export default function AudioTabComponent() {
-  const audioData = singleAudioData.audio;
+export default function AudioTabComponent({audioData}) {
+  // const audioData = singleAudioData.audio;
+  console.log({audioData})
   return (
     <div className='w-full'>
       {audioData?.map((songInfo, index)=>{

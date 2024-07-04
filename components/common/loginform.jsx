@@ -10,7 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-export default function LoginForm({ logreg, btntext }) {
+export default function LoginForm({ logreg, btntext, url = '/' }) {
 
   const router = useRouter();
 
@@ -72,9 +72,13 @@ export default function LoginForm({ logreg, btntext }) {
   };
 
 
-  function reloadPage(){
+  function reloadPage(url){
     setTimeout(()=>{
-      router.push(`/`)
+      if(url === '/'){
+        router.push(url)
+      } else{
+        router.refresh(url)
+      }
     }, 1000)
   }
 
@@ -126,7 +130,7 @@ export default function LoginForm({ logreg, btntext }) {
         setPassword('')
 
         // router.push(`/`)
-        reloadPage();
+        reloadPage(url);
 
       } else {
         // alert('সঠিক নাম্বার দিন');
