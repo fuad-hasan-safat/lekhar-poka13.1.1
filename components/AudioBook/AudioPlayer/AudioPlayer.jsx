@@ -128,7 +128,7 @@ export default function AudioPlayer() {
               <div className="lg:flex lg:flex-row lg:w-[380px] justify-left items-center md:hidden sm:hidden xs:hidden">
                 <div className="">
                   <img
-                    src={`${apiBasePath}/${currentSong?.image?.slice(currentSong?.image?.indexOf('/')+ 1 )}`}
+                    src={`${apiBasePath}/${currentSong?.image?.slice(currentSong?.image?.indexOf('/') + 1)}`}
                     alt={currentSong?.title}
                     width={70}
                     height={70}
