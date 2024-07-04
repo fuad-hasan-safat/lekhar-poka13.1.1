@@ -18,11 +18,13 @@ export default function AdminContextProvider({ children }) {
         const currentDashboardPageScope = localStorage.getItem("dashBordPageScope");
 
         console.log({ currentDashboardIndex, currentDashboardPageScope })
+        if (currentDashboardIndex) {
+            setDashboard({
+                currentindex: parseInt(currentDashboardIndex),
+                currentPage: currentDashboardPageScope
+            })
+        }
 
-        setDashboard({
-            currentindex: parseInt(currentDashboardIndex),
-            currentPage: currentDashboardPageScope
-        })
 
     }, [])
 

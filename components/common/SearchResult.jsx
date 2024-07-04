@@ -36,19 +36,19 @@ export default function SearchResult() {
         setIsMounted(false)
     }, [])
 
-    useEffect(() => {
-        // Prevent scrolling of background page when modal is open
-        if (isSearchbarActive) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'unset';
-        }
+    // useEffect(() => {
+    //     // Prevent scrolling of background page when modal is open
+    //     if (isSearchbarActive) {
+    //         document.body.style.overflow = 'hidden';
+    //     } else {
+    //         document.body.style.overflow = 'unset';
+    //     }
 
-        return () => {
-            // Revert overflow setting when component unmounts
-            document.body.style.overflow = 'unset';
-        };
-    }, [isSearchbarActive]);
+    //     return () => {
+    //         // Revert overflow setting when component unmounts
+    //         document.body.style.overflow = 'unset';
+    //     };
+    // }, [isSearchbarActive]);
 
     function handleSearchClick() {
         const data = [];
@@ -68,11 +68,11 @@ export default function SearchResult() {
                             {<h2 className=" absolute top-[40%] left-[50%] lg:text-[40px] md:text-[38px] sm:text-[35px] xs:text-[30px] text-[#F9A106] -translate-x-[50%] -translate-y-[50%] max-h-[0px]">অনুসন্ধান</h2>}
                         </div>
                     </section>
-                    <section className="all__page__main__content">
+                    <section className="">
 
                         <div className="container">
 
-                            <div className="all__post__content flex flex-row ">
+                            <div className=" flex flex-row ">
                                 <div className="lg:w-[70%] text-gray-600">
                                     {searchKey.trim().length > 0 && searchResult.length <= 0 && <h5>কোন তথ্য খুঁজে পাওয়া যায় নি!</h5>}
 

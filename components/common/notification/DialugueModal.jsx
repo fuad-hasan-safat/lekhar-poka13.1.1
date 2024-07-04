@@ -12,7 +12,7 @@ const DialugueModal = forwardRef(function DialugueModal({ alert, address, type }
         localStorage.removeItem("email");
 
         ref.current.close();
-        router.push(address);
+        router.push(address)
     }
 
     function handleClick(){
