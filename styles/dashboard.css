@@ -219,6 +219,12 @@
 .d__sidebar__menu ul li button:hover i{
     color: #fff;
 }
+.dashboard__component{
+    background: #fff;
+    padding: 20px 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
 
 /*
 -------------------
@@ -343,9 +349,10 @@
 all__page__content__block
 -------------------------- 
 */
+.admin__add__slider__wrap,
 .all__page__content__block{
     background: #fff;
-    padding: 20px;
+    padding: 30px 20px;
     margin-top: 20px;
     border-radius: 5px;
 }
@@ -440,4 +447,42 @@ all__page__content__block
 }
 .all__post__search input[type=search]:focus{
     border-color: #F9A106;
+}
+
+/*
+--------------------
+ all__post__category
+-------------------- 
+*/
+.all__post__category table tbody tr td,
+.all__post__category table thead tr th{
+    width: 33.3333% !important;
+}
+.admin__form__wrap{
+    margin: 0 -10px;
+}
+.admin__input{
+    width: 48%;
+    float: left;
+    margin: 0 10px 15px;
+}
+.dashboard__pagination{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding-top: 20px;
+}
+.dashboard__pagination button {
+    font-size: 16px;
+    line-height: 1;
+    background: #f9a106;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    color: #fff;
+    border-right: 1px solid#fff;
+}
+.dashboard__pagination button.active,
+.dashboard__pagination button:hover{
+    background:#ffd700;
 }

@@ -102,66 +102,59 @@ const CreateSliderPage = () => {
     };
     if (userType === 'admin') {
         return (
-                <section className='admin__add__slider__sec' style={{ padding: '100px 0' }}>
-                    <div className='container'>
-                        <div className='row'>
-                            <div className='col-md-12'>
-                                <div className='admin__add__slider__wrap'>
-                                    <div className='admin__upload__wrap'>
-                                        <div className='profile__image__upload'>
-                                            <div
-                                                onDragEnter={(e) => setHighlight(true)}
-                                                onDragLeave={(e) => setHighlight(false)}
-                                                onDragOver={(e) => {
-                                                    e.preventDefault();
-                                                    e.stopPropagation();
-                                                }}
-                                                onDrop={(e) => handleUpload(e)} className={`${Classes.upload__slider__img}${highlight ? ' is-highlight' : ''}`} style={{ backgroundImage: `url(${preview || '/default-image.jpg'})` }}>
-                                                <form className='my__form'>
-                                                    <div className='upload__button'>
-                                                        <input
-                                                            type='file'
-                                                            className='upload__file'
-                                                            accept='image/*'
-                                                            onChange={(e) => handleUpload(e)}
-                                                        />
-                                                        <button className='button'><i className='ri-camera-line'></i></button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <div className='admin__form__wrap'>
-                                            <form onSubmit={handleProfileUpdate}>
-                                                <div className='admin__input'>
-                                                    <label>Title</label>
-                                                    <input type='text' value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Title' />
-                                                </div>
-                                                <div className='admin__input'>
-                                                    <label>Content</label>
-                                                    <textarea type='text' value={content} onChange={(e) => setContent(e.target.value)} placeholder='Content' />
-                                                </div>
-                                                <div className='admin__input'>
-                                                    <label>Caption</label>
-                                                    <textarea type='text' value={caption} onChange={(e) => setCaption(e.target.value)} placeholder='Caption' />
-                                                </div>
-                                                <div className='admin__input text-black'>
-                                                    <select
-                                                        name="optons" id="options"
-                                                        onChange={(e) => setRelated(e.target.value)} >
-                                                        {options}
-                                                    </select>
-                                                </div>
-                                                <div className='admin__submit'>
-                                                    <button type='button' onClick={saveData}>Submit</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
+            <div className='admin__add__slider__wrap'>
+                <div className='admin__upload__wrap'>
+                    <div className='profile__image__upload'>
+                        <div
+                            onDragEnter={(e) => setHighlight(true)}
+                            onDragLeave={(e) => setHighlight(false)}
+                            onDragOver={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                            }}
+                            onDrop={(e) => handleUpload(e)} className={`${Classes.upload__slider__img}${highlight ? ' is-highlight' : ''}`} style={{ backgroundImage: `url(${preview || '/default-image.jpg'})`,borderRadius:'5px',border:'1px solid#ddd' }}>
+                            <form className='my__form'>
+                                <div className='upload__button'>
+                                    <input
+                                        type='file'
+                                        className='upload__file'
+                                        accept='image/*'
+                                        onChange={(e) => handleUpload(e)}
+                                    />
+                                    <button className='button'><i className='ri-camera-line'></i></button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
-                </section>
+                    <div className='admin__form__wrap clearfix'>
+                        <form onSubmit={handleProfileUpdate}>
+                            <div className='admin__input'>
+                                <label>Title</label>
+                                <input type='text' value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Title' />
+                            </div>
+                            <div className='admin__input text-black'>
+                                <label>Post Title</label>
+                                <select
+                                    name="optons" id="options"
+                                    onChange={(e) => setRelated(e.target.value)} >
+                                    {options}
+                                </select>
+                            </div>
+                            <div className='admin__input'>
+                                <label>Content</label>
+                                <textarea type='text' value={content} onChange={(e) => setContent(e.target.value)} placeholder='Content' />
+                            </div>
+                            <div className='admin__input'>
+                                <label>Caption</label>
+                                <textarea type='text' value={caption} onChange={(e) => setCaption(e.target.value)} placeholder='Caption' />
+                            </div>
+                            <div className='admin__submit'>
+                                <button type='button' onClick={saveData}>Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         );
     } else {
         <NotFound />

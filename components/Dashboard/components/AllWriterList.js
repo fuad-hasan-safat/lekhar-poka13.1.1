@@ -1,5 +1,3 @@
-'use client'
-
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
@@ -7,115 +5,162 @@ import { apiBasePath } from "../../../utils/constant";
 import NotFound from "../../common/nofFound";
 
 const WriterList = () => {
-    const router = useRouter();
-    const [userType, setUserType] = useState("");
+  const router = useRouter();
+  const [userType, setUserType] = useState("");
+  const [writerList, setWriterList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [writersPerPage] = useState(5); // Number of writers per page
+  const [searchTerm, setSearchTerm] = useState(""); // State for search term
 
-    const [writerList, setWriterList] = useState([])
+  useEffect(() => {
+    setUserType(localStorage.getItem("usertype") || "");
+  }, []);
 
+  useEffect(() => {
+    fetchWriterList();
+  }, []);
 
+  const fetchWriterList = () => {
+    fetch(`${apiBasePath}/writers`)
+      .then((response) => response.json())
+      .then((data) => {
+        setWriterList(data);
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  };
 
+  const deletSelectedWriter = (id) => {
+    setWriterList((prevWriterList) =>
+      prevWriterList.filter((writer) => writer._id !== id)
+    );
+  };
 
-
-    useEffect(() => {
-        setUserType(localStorage.getItem("usertype") || "");
-    }, []);
-
-
-    useEffect(() => {
-        fetch(`${apiBasePath}/writers`)
-            .then(response => response.json())
-            .then(data => {
-                setWriterList(data);
-                console.log('-----------', data)
-                console.log('-----------', sliderList)
-            })
-            .catch(error => console.error("Error fetching data:", error));
-
-    }, []);
-
-    function deletSelectedWriter(id) {
-        setWriterList(prevWriterList => prevWriterList.filter(writer => writer._id !== id));
-
+  const deleteData = async (id) => {
+    try {
+      const response = await axios.delete(`${apiBasePath}/writers/${id}`);
+      console.log("Delete successful:", response.data);
+      deletSelectedWriter(id);
+      return response.data;
+    } catch (error) {
+      console.error("Error deleting data:", error);
+      throw error;
     }
+  };
 
-    async function deleteData(id) {
-        try {
-            const response = await axios.delete(`${apiBasePath}/writers/${id}`);
-            console.log('Delete successful:', response.data);
-            deletSelectedWriter(id);
-            return response.data;
-        } catch (error) {
-            console.error('Error deleting data:', error);
-            throw error;
-        }
+  const deleteWriter = async (id) => {
+    try {
+      await deleteData(id);
+      alert("Delete Successfully");
+    } catch (error) {
+      alert("Failed to Delete");
     }
+  };
 
+  // Pagination logic
+  const indexOfLastWriter = currentPage * writersPerPage;
+  const indexOfFirstWriter = indexOfLastWriter - writersPerPage;
+  const currentWriters = writerList.slice(indexOfFirstWriter, indexOfLastWriter);
 
-    async function deleteWriter(id) {
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-
-
-        try {
-            await deleteData(id);
-            alert('Delete Sucessfully')
-        } catch (error) {
-            alert('Failed to Delete')
-
-        }
-
+  const nextPage = () => {
+    if (currentPage < Math.ceil(filteredWriterList.length / writersPerPage)) {
+      setCurrentPage(currentPage + 1);
     }
+  };
 
-    if (userType === 'admin') {
-        return (
-                <div className="pt-[115px]  text-black mx-10">
-                    <div className="flex flex-row">
-                        <div className="w-1/2">
-                            <div className="text-7xl pb-4">Writer List</div>
-                            <ul>
-                                {writerList.length &&
-                                    writerList.map((writer, index) => (
-
-                                        <li key={index}>
-                                            <p className="mb-4">{writer.name}</p>
-                                            <hr />
-
-                                        </li>
-                                    ))}
-                            </ul>
-
-                        </div>
-                        <div className="w-1/2">
-                            <div className="text-7xl pb-4 ">Delete Writer</div>
-                            <ul>
-                                {writerList.length &&
-                                    writerList.map((writer, index) => (
-
-                                        <li key={index}>
-                                            {/* {setToggleStatus(post.status)} */}
-                                            <button
-                                                id={index}
-                                                className={`text-red-500 hover:text-red-950 mb-4`}
-
-                                                onClick={() => { deleteWriter(writer._id) }}
-                                            >
-                                                Delete Writer
-                                            </button>
-                                            <hr />
-
-                                        </li>
-                                    ))}
-                            </ul>
-                        </div>
-                    </div>
-                </div >
-        )
-    } else {
-        return <NotFound />
-        // <div className="text-9xl text-black">
-        //   <p>not available</p>
-
-        // </div>
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
     }
-}
+  };
 
-export default WriterList
+  // Handle search input change
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+    setCurrentPage(1); // Reset pagination when search term changes
+  };
+
+  // Filter writers based on search term
+  const filteredWriterList = writerList.filter((writer) =>
+    writer.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  if (userType === "admin") {
+    return (
+      <div className="all__page__content__block clearfix">
+        <div className="all__post__search">
+          <input
+            type="search"
+            placeholder="Enter Search.."
+            value={searchTerm}
+            onChange={handleChange}
+          />
+          <button>
+            <i className="ri-search-eye-line"></i>
+          </button>
+        </div>
+        <div className="all__post__list__wrap all__post__category">
+          <table className="table">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th scope="col">Writer Name</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredWriterList.length > 0 ? (
+                filteredWriterList.map((writer, index) => (
+                  <tr key={writer._id}>
+                    <td>{indexOfFirstWriter + index + 1}</td>
+                    <td>{writer.name}</td>
+                    <td>
+                      <i className="ri-eye-fill"></i>
+                      <i className="ri-edit-line"></i>
+                      <i
+                        className="ri-delete-bin-6-line"
+                        onClick={() => deleteWriter(writer._id)}
+                      ></i>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="3">No writers found</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+        <div className="dashboard__pagination">
+          <button onClick={prevPage} disabled={currentPage === 1}>
+            <i class="ri-arrow-left-double-line"></i>
+          </button>
+          {Array.from(
+            { length: Math.ceil(filteredWriterList.length / writersPerPage) },
+            (_, index) => (
+              <button
+                key={index}
+                onClick={() => paginate(index + 1)}
+                className={currentPage === index + 1 ? "active" : ""}
+              >
+                {index + 1}
+              </button>
+            )
+          )}
+          <button
+            onClick={nextPage}
+            disabled={currentPage === Math.ceil(filteredWriterList.length / writersPerPage)}
+          >
+            <i class="ri-arrow-right-double-fill"></i>
+          </button>
+        </div>
+      </div>
+    );
+  } else {
+    return <NotFound />;
+  }
+};
+
+export default WriterList;

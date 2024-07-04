@@ -87,46 +87,47 @@ const AllWriterBio = () => {
     if (userType === 'admin') {
 
         return (
-            <div className="all__page__content__block clearfix">
-            <div className="all__post__search">
-                <input type="search" placeholder="Enter Search.." />
-                <button><i class="ri-search-eye-line"></i></button>
-            </div>
-            <div>
-                <button
-                    className="bg-[#FCA000] hover:bg-[#eeb249] text-white py-2 px-[25px] rounded mt-[20px]"
-                    onClick={handleShow}
-                >
-                    BioAdd
-                </button>
-                {showModal && <CreateDesignationModal setDesignation={setDesignation} showModal={showModal} handleClose={handleClose} setIsCategoryAdded={setIsCategoryAdded} />}
-            </div>
-            <div className="all__post__list__wrap all__post__category">
-                <table class="table">
-                <thead>
-                    <tr>
-                    <th>No</th>
-                    <th scope="col">Bio</th>
-                    <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {bioList.length &&
-                    bioList.map((bioList, index) => (
-                    <tr>
-                        <td>{index+1}</td>
-                        <td>{bioList.title}</td>
-                        <td>
-                            <i class="ri-eye-fill"></i>
-                            <i class="ri-edit-line"></i>
-                            <i class="ri-delete-bin-6-line"></i>
-                        </td>
-                    </tr>
-                    ))}
-                </tbody>
-                </table>
-            </div>
-        </div>
+            <div className="pt-[115px]  text-black mx-10">
+                <div>
+                    <button
+                        className="bg-[#FCA000] hover:bg-[#eeb249] text-white py-2 px-[25px] rounded mt-[20px]"
+                        onClick={handleShow}
+                    >
+                        Bio Add
+                    </button>
+                    <CreateWriterBioModal setBioList={setBioList} showModal={showModal} handleClose={handleClose} setIsCategoryAdded={setIsCategoryAdded} />
+                </div>
+                <div className="flex flex-row">
+                    <div className="w-1/2">
+                        <div className="text-5xl pb-4">Bio List</div>
+                        {/* <ContentList content={bioList} isSlider={true} /> */}
+                        <ContentList content={bioList} onOpenModal={handleOpenModal} setIsTitleClick={setIsTitleClick} />
+                        {istitleClick && <StyledModal isOpen={isOpen} selectedContent={selectedContent} onClose={handleCloseModal} />}
+                    </div>
+                    <div className="w-1/2">
+                        <div className="text-5xl pb-4 ">Bio</div>
+                        <ul>
+                            {bioList.length &&
+                                bioList.map((post, index) => (
+
+                                    <li key={index}>
+                                        {/* {setToggleStatus(post.status)} */}
+                                        <button
+                                            id={index}
+                                            className={`text-green-500`}
+
+                                            onClick={() => { console.log(post); deleteBio(post._id) }}
+                                        >
+                                            Delete
+                                        </button>
+                                        <hr />
+
+                                    </li>
+                                ))}
+                        </ul>
+                    </div>
+                </div>
+            </div >
         )
     } else {
         return <NotFound />

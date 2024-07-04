@@ -1,120 +1,160 @@
-'use client'
-
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-
 import axios from "axios";
 import { apiBasePath } from "../../../utils/constant";
 import NotFound from "../../common/nofFound";
 import ContentList from "./ContentList";
 
 const Allcategory = () => {
-    const router = useRouter();
-    const [userType, setUserType] = useState("");
+  const router = useRouter();
+  const [userType, setUserType] = useState("");
+  const [categoryList, setCategoryList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [categoriesPerPage] = useState(5);
+  const [searchTerm, setSearchTerm] = useState(""); // State for search term
 
-    const [categoryList, setCategoryList] = useState([])
+  useEffect(() => {
+    setUserType(localStorage.getItem("usertype") || "");
+  }, []);
 
+  useEffect(() => {
+    fetchCategoryList();
+  }, []);
 
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedContent, setSelectedContent] = useState(null);
+  const fetchCategoryList = () => {
+    fetch(`${apiBasePath}/categories`)
+      .then((response) => response.json())
+      .then((data) => {
+        setCategoryList(data);
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  };
 
+  const deleteCategory = (id) => {
+    axios
+      .delete(`${apiBasePath}/categories/${id}`)
+      .then((response) => {
+        console.log("Delete successful:", response.data);
+        setCategoryList((prevCategoryList) =>
+          prevCategoryList.filter((category) => category._id !== id)
+        );
+        alert("Delete Successfully");
+      })
+      .catch((error) => {
+        console.error("Error deleting data:", error);
+        alert("Failed to Delete");
+      });
+  };
 
+  // Pagination logic
+  const indexOfLastCategory = currentPage * categoriesPerPage;
+  const indexOfFirstCategory = indexOfLastCategory - categoriesPerPage;
 
-    useEffect(() => {
-        setUserType(localStorage.getItem("usertype") || "");
-    }, []);
+  // Filter categories based on search term
+  const filteredCategories = categoryList.filter((category) =>
+    category.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
+  const currentCategories = filteredCategories.slice(
+    indexOfFirstCategory,
+    indexOfLastCategory
+  );
 
-    useEffect(() => {
-        fetch(`${apiBasePath}/categories`)
-            .then(response => response.json())
-            .then(data => {
-                setCategoryList(data);
-                console.log('-----------', data)
-                console.log('-----------', categoryList)
-            })
-            .catch(error => console.error("Error fetching data:", error));
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-    }, []);
-
-
-    function deletSelectedPost(id) {
-        setCategoryList(prevCategoryList => prevCategoryList.filter(category => category._id !== id));
-
+  const nextPage = () => {
+    if (currentPage < Math.ceil(filteredCategories.length / categoriesPerPage)) {
+      setCurrentPage(currentPage + 1);
     }
+  };
 
-    async function deleteData(id) {
-        try {
-            const response = await axios.delete(`${apiBasePath}/categories/${id}`);
-            console.log('Delete successful:', response.data);
-            deletSelectedPost(id);
-            return response.data;
-        } catch (error) {
-            console.error('Error deleting data:', error);
-            throw error;
-        }
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
     }
+  };
 
+  // Handle search input change
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+    setCurrentPage(1); // Reset pagination when search term changes
+  };
 
-    async function deleteCategory(id) {
+  if (userType === "admin") {
+    return (
+      <div className="all__page__content__block clearfix">
+        <div className="all__post__search">
+          <input
+            type="search"
+            placeholder="Enter Search.."
+            value={searchTerm}
+            onChange={handleChange}
+          />
+          <button>
+            <i className="ri-search-eye-line"></i>
+          </button>
+        </div>
+        <div className="all__post__list__wrap all__post__category">
+          <table className="table">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th scope="col">Category Name</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentCategories.length > 0 ? (
+                currentCategories.map((category, index) => (
+                  <tr key={category._id}>
+                    <td>{indexOfFirstCategory + index + 1}</td>
+                    <td>{category.title}</td>
+                    <td>
+                      <i className="ri-eye-fill"></i>
+                      <i className="ri-edit-line"></i>
+                      <i
+                        className="ri-delete-bin-6-line"
+                        onClick={() => deleteCategory(category._id)}
+                      ></i>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="3">No categories found</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+        <div className="dashboard__pagination">
+          <button onClick={prevPage} disabled={currentPage === 1}>
+            <i className="ri-arrow-left-double-line"></i>
+          </button>
+          {Array.from(
+            { length: Math.ceil(filteredCategories.length / categoriesPerPage) },
+            (_, index) => (
+              <button
+                key={index}
+                onClick={() => paginate(index + 1)}
+                className={currentPage === index + 1 ? "active" : ""}
+              >
+                {index + 1}
+              </button>
+            )
+          )}
+          <button
+            onClick={nextPage}
+            disabled={currentPage === Math.ceil(filteredCategories.length / categoriesPerPage)}
+          >
+            <i className="ri-arrow-right-double-fill"></i>
+          </button>
+        </div>
+      </div>
+    );
+  } else {
+    return <NotFound />;
+  }
+};
 
-
-
-        try {
-            await deleteData(id);
-            // If successful, update state or do something else
-            alert('Delete Sucessfully')
-        } catch (error) {
-            // Handle error
-            alert('Failed to Delete')
-
-        }
-
-
-    }
-
-    if (userType === 'admin') {
-
-        return (
-            <div className="pt-[115px]  text-black mx-10 z-[99999999]">
-                <div className="flex flex-row">
-                    <div className="w-1/2">
-                        <div className="text-7xl pb-4">Category List</div>
-                        <ContentList content={categoryList} isSlider={true} />
-
-                    </div>
-                    <div className="w-1/2">
-                        <div className="text-7xl pb-4 ">Delete Category</div>
-                        <ul>
-                            {categoryList.length &&
-                                categoryList.map((post, index) => (
-
-                                    <li key={index}>
-                                        {/* {setToggleStatus(post.status)} */}
-                                        <button
-                                            id={index}
-                                            className={`text-green-500`}
-
-                                            onClick={() => { deleteCategory(post._id) }}
-                                        >
-                                            Delete Category
-                                        </button>
-                                        <hr />
-
-                                    </li>
-                                ))}
-                        </ul>
-                    </div>
-                </div>
-            </div >
-        )
-    } else {
-        return <NotFound />
-        // <div className="text-9xl text-black">
-        //   <p>not available</p>
-
-        // </div>
-    }
-}
-
-export default Allcategory
+export default Allcategory;

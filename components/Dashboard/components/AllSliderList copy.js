@@ -79,37 +79,39 @@ const AllSliderList = () => {
 
     if (userType === 'admin') {
         return (
-         <div className="all__page__content__block clearfix">
-            <div className="all__post__search">
-                <input type="search" placeholder="Enter Search.." />
-                <button><i class="ri-search-eye-line"></i></button>
-            </div>
-            <div className="all__post__list__wrap all__post__category">
-                <table class="table">
-                <thead>
-                    <tr>
-                    <th>No</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {sliderList.length &&
-                    sliderList.map((slider, index) => (
-                    <tr>
-                        <td>{index+1}</td>
-                        <td>{slider.title}</td>
-                        <td>
-                        <i class="ri-eye-fill"></i>
-                        <i class="ri-edit-line"></i>
-                        <i class="ri-delete-bin-6-line"></i>
-                        </td>
-                    </tr>
-                    ))}
-                </tbody>
-                </table>
-            </div>
-        </div>
+            <div className="pt-[115px]  text-black mx-10">
+                <div className="flex flex-row">
+                    <div className="w-1/2">
+                        <div className="text-7xl pb-4">Slider List</div>
+                        <ContentList content={sliderList} isSlider={true} />
+
+                    </div>
+                    <div className="w-1/2">
+                        <div className="text-7xl pb-4 ">Delete Slider</div>
+                        <ul>
+                            {sliderList.length &&
+                                sliderList.map((post, index) => (
+
+                                    <li key={index}>
+                                        {/* {setToggleStatus(post.status)} */}
+                                        <button
+                                            id={index}
+                                            className={`text-green-500`}
+
+                                            onClick={() => { deleteSlider(post._id) }}
+                                        >
+                                            Delete Slider
+                                        </button>
+                                        <hr />
+
+
+                                    </li>
+                                ))}
+                        </ul>
+                    </div>
+                </div>
+            </div >
+
         )
     } else {
         return <NotFound />
