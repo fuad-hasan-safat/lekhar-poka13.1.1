@@ -9,25 +9,36 @@ import { useRouter } from 'next/router';
 
 export async function getServerSideProps(context) {
     const { slug } = context.params;
-    const res = await fetch(`${apiBasePath}/getaudiobook/${slug}`);
-    const singleAudioData = await res.json()
+    try {
+
+        const res = await fetch(`${apiBasePath}/getaudiobook/${slug}`);
+        const singleAudioData = await res.json()
 
 
-    const postRes = await fetch(`${apiBasePath}/updateview/${slug}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
+        const postRes = await fetch(`${apiBasePath}/updateview/${slug}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
 
-    const postResult = await postRes.json();
+        const postResult = await postRes.json();
 
-    console.log({ postResult })
+        console.log({ postResult })
+
+        return { props: { singleAudioData } }
+
+    }catch(error){
+        console.log(error)
+    }
+    
+
+    const singleAudioData = []
 
     return { props: { singleAudioData } }
 
-
 }
+
 export default function Home({ singleAudioData }) {
 
     const router = useRouter();
@@ -42,6 +53,8 @@ export default function Home({ singleAudioData }) {
     }, [])
 
     if (!isLoading) return null;
+
+    
 
     return (
         <>{localStorage.getItem('uuid')?.trim().length > 0 ?
@@ -87,7 +100,7 @@ export default function Home({ singleAudioData }) {
 
             </div> : <div className='pb-[-80px]'>
                 {/* <RequiredLogin/> */}
-                <LoginPage url={currentUrl}/>
+                <LoginPage url={currentUrl} />
             </div>
         }
         </>
