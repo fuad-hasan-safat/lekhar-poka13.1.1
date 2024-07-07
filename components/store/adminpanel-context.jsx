@@ -5,8 +5,13 @@ export const AdminContext = createContext({
     currentPage: '',
     viewPostid: '',
     isViewPost: false,
+    editPostid: '',
+    isEditpost: false,
+    deletePostId: '',
     setCurrentComponentIndex: () => { },
-    setViewPost: () => { }
+    setViewPost: () => { },
+    setEditPost: () => { },
+    setDeletepostId: () => { }
 });
 
 export default function AdminContextProvider({ children }) {
@@ -15,6 +20,9 @@ export default function AdminContextProvider({ children }) {
         currentindex: 0,
         currentPage: 'Dashboard',
         viewPostid: '',
+        editPostid: '',
+        deletePostId:'',
+        isEditpost: false,
         isViewPost: false,
     })
 
@@ -42,6 +50,7 @@ export default function AdminContextProvider({ children }) {
             currentindex: index,
             currentPage: page,
             isViewPost: false,
+            isEditpost: false,
         }))
 
     }
@@ -54,13 +63,33 @@ export default function AdminContextProvider({ children }) {
         }))
     }
 
+    function setPostToEdit(id, status = true) {
+        setDashboard((prevdashboard) => ({
+            ...prevdashboard,
+            editPostid: id,
+            isEditpost: status
+        }))
+    }
+
+    function setPostIdToDelete(id){
+        setDashboard((prevdashboard) => ({
+            ...prevdashboard,
+            deletePostId:id
+        }))
+    }
+
     const cntxtValue = {
         currentindex: dashboard.currentindex,
         currentPage: dashboard.currentPage,
         viewPostid: dashboard.viewPostid,
         isViewPost: dashboard.isViewPost,
+        editPostid: dashboard.editPostid,
+        isEditpost: dashboard.isEditpost,
+        deletePostId: dashboard.deletePostId,
         setCurrentComponentIndex: updateCurrentComponentIndex,
-        setViewPost: setPostToView
+        setViewPost: setPostToView,
+        setEditPost: setPostToEdit,
+        setDeletepostId: setPostIdToDelete
     }
 
     return (
