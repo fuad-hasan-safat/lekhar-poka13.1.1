@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { apiBasePath } from "../../../utils/constant";
 import NotFound from "../../common/nofFound";
+import DialugueModal from "../../common/notification/DialugueModal";
 
 const WriterList = () => {
-  const router = useRouter();
+
+  const dialogueRef = useRef();
   const [userType, setUserType] = useState("");
   const [writerList, setWriterList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [writersPerPage] = useState(5); // Number of writers per page
   const [searchTerm, setSearchTerm] = useState(""); // State for search term
+  const [selectedWriterId, settSelectedWriterId] = useState(null);
 
   useEffect(() => {
     setUserType(localStorage.getItem("usertype") || "");
@@ -47,10 +50,10 @@ const WriterList = () => {
     }
   };
 
-  const deleteWriter = async (id) => {
+  const deleteWriter = async () => {
     try {
-      await deleteData(id);
-      alert("Delete Successfully");
+      await deleteData(selectedWriterId);
+      dialogueRef.current.close();
     } catch (error) {
       alert("Failed to Delete");
     }
@@ -86,9 +89,15 @@ const WriterList = () => {
     writer.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  function handleWriterDlete(id){
+    settSelectedWriterId(id);
+    dialogueRef.current.showModal();
+  }
+
   if (userType === "admin") {
     return (
       <div className="all__page__content__block clearfix">
+      <DialugueModal ref={dialogueRef} alert='আপনি কি লেখক মুছে ফেলতে চান' address={deleteWriter} type='delete' />
         <div className="all__post__search">
           <input
             type="search"
@@ -116,11 +125,11 @@ const WriterList = () => {
                     <td>{indexOfFirstWriter + index + 1}</td>
                     <td>{writer.name}</td>
                     <td>
-                      <i className="ri-eye-fill"></i>
-                      <i className="ri-edit-line"></i>
+                      {/* <i className="ri-eye-fill"></i> */}
+                      {/* <i className="ri-edit-line"></i> */}
                       <i
                         className="ri-delete-bin-6-line"
-                        onClick={() => deleteWriter(writer._id)}
+                        onClick={() => handleWriterDlete(writer._id)}
                       ></i>
                     </td>
                   </tr>
