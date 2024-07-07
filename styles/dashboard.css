@@ -197,6 +197,13 @@
     padding: 20px;
     padding-top:150px;
 }
+.d__sidebar__menu h3{
+    font-size: 20px;
+    line-height: 1;
+    font-weight: 700;
+    margin-bottom: 0;
+    padding: 20px 0;
+}
 .d__sidebar__menu ul li button{
     display: block;
     text-decoration: none;
@@ -485,4 +492,40 @@ all__page__content__block
 .dashboard__pagination button.active,
 .dashboard__pagination button:hover{
     background:#ffd700;
+}
+
+/*
+-------------------
+ Audio Book Css
+------------------- 
+*/
+.audio__book__input__fields{
+    margin: 0 -10px 20px;
+}
+.audio__book__input__field{
+    width: 50%;
+    float: left;
+    padding: 0 10px;
+}
+.audio__book__input__field label{
+    display: inline-block;
+    vertical-align: baseline;
+    font-size: 16px;
+    line-height: 1;
+    color: #000;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.audio__book__input__field input{
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+    line-height: 1;
+    color: #000;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid#ddd;
+}
+.audio__book__input__field input:focus{
+    border-color: #F9A106;
 }

@@ -19,7 +19,6 @@ const Sidebar = () => {
         { text: 'Website', icon: 'ri-progress-8-fill', href: '/' },
     ];
     const menuItemsAudio = [
-        { textA: 'Dashboard', iconA: 'ri-dashboard-fill', href: '/admin/allposttable' },
         { textA: 'Creat Ebook', iconA: 'ri-progress-8-fill', href: '/admin/createbook' },
         { textA: 'All Category', iconA: 'ri-progress-8-fill', href: '/admin/allcategory' },
         { textA: 'Create Slider', iconA: 'ri-progress-8-fill', href: '/admin/slider' },
@@ -55,7 +54,7 @@ const Sidebar = () => {
                 <ul>
                     {menuItemsAudio.map((items,index)=>(
                         <li key={index}>
-                            <button onClick={()=>handleIndexClick(index + 8, items.textA)}>
+                            <button onClick={()=>handleIndexClick(index + 9, items.textA)}>
                                 <i className={`ri ${items.iconA} text-black`}></i>
                                 {items.textA}
                             </button>

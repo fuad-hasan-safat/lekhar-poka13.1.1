@@ -106,7 +106,7 @@ const Dashboard = ({children}) => {
                     {currentindex === 5 && <AllSliderList/>}
                     {currentindex === 6 && <AllDesignation/>}
                     {currentindex === 7 && <AllWriterBio/>}
-                    {currentindex === 8 && <CreatEbook />}
+                    {currentindex === 9 && <CreatEbook />}
                 </div>
             </div>
         </div>
