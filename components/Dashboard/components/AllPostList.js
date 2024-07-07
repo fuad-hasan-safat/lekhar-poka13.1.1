@@ -1,9 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import axios from "axios";
 import NotFound from "../../common/nofFound";
 import { apiBasePath } from "../../../utils/constant";
+import { AdminContext } from "../../store/adminpanel-context";
+import PostDetails from "./SeePost";
+import EditPost from "./EditPost";
+import DialugueModal from "../../common/notification/DialugueModal";
 
 const AllPostList = () => {
+
+  const dialogueRef = useRef();
+  const {setViewPost, isViewPost, setEditPost, isEditpost, setDeletepostId, deletePostId} = useContext(AdminContext);
   const [userType, setUserType] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
   const [postList, setPostList] = useState([]);
@@ -67,13 +74,13 @@ const AllPostList = () => {
     }
   }
 
-  async function deletePost(id) {
+  async function deletePost() {
     try {
-      await axios.delete(`${apiBasePath}/posts/${id}`);
+      await axios.delete(`${apiBasePath}/posts/${deletePostId}`);
       setPostList((prevPostList) =>
-        prevPostList.filter((post) => post._id !== id)
+        prevPostList.filter((post) => post._id !== deletePostId)
       );
-      alert("Delete Successfully");
+      dialogueRef.current.close();
     } catch (error) {
       console.error("Error deleting data:", error);
       alert("Failed to Delete");
@@ -111,11 +118,27 @@ const AllPostList = () => {
     setCurrentPage(1); // Reset pagination when search term changes
   };
 
+  function handleDeletePost(id){
+    setDeletepostId(id);
+    dialogueRef.current.showModal();
+  }
+
   if (!isLoaded) return null;
+
+  if(isViewPost) {
+    return(
+      <PostDetails/>
+    )
+  }
+
+  if(isEditpost){
+    return <EditPost/>
+  }
 
   if (userType === "admin") {
     return (
       <div className="all__page__content__block clearfix">
+      <DialugueModal ref={dialogueRef} alert='আপনি কি পোস্ট মুছে ফেলতে চান' address={deletePost} type='delete' />
         <div className="all__post__search">
           <input
             type="search"
@@ -160,11 +183,11 @@ const AllPostList = () => {
                       </button>
                     </td>
                     <td>
-                      <i className="ri-eye-fill"></i>
-                      <i className="ri-edit-line"></i>
+                      <i onClick={()=>setViewPost(post._id, true)} className="ri-eye-fill"></i>
+                      <i onClick={()=>setEditPost(post._id, true) } className="ri-edit-line"></i>
                       <i
                         className="ri-delete-bin-6-line"
-                        onClick={() => deletePost(post._id)}
+                        onClick={() => handleDeletePost(post._id)}
                       ></i>
                     </td>
                   </tr>

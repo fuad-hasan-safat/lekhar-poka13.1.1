@@ -3,7 +3,15 @@ import { createContext, useEffect, useState } from "react";
 export const AdminContext = createContext({
     currentindex: 0,
     currentPage: '',
+    viewPostid: '',
+    isViewPost: false,
+    editPostid: '',
+    isEditpost: false,
+    deletePostId: '',
     setCurrentComponentIndex: () => { },
+    setViewPost: () => { },
+    setEditPost: () => { },
+    setDeletepostId: () => { }
 });
 
 export default function AdminContextProvider({ children }) {
@@ -11,6 +19,11 @@ export default function AdminContextProvider({ children }) {
     const [dashboard, setDashboard] = useState({
         currentindex: 0,
         currentPage: 'Dashboard',
+        viewPostid: '',
+        editPostid: '',
+        deletePostId:'',
+        isEditpost: false,
+        isViewPost: false,
     })
 
     useEffect(() => {
@@ -35,15 +48,48 @@ export default function AdminContextProvider({ children }) {
         setDashboard((prevDashboard) => ({
             ...prevDashboard,
             currentindex: index,
-            currentPage: page
+            currentPage: page,
+            isViewPost: false,
+            isEditpost: false,
         }))
 
+    }
+
+    function setPostToView(id, status = true) {
+        setDashboard((prevDashboard) => ({
+            ...prevDashboard,
+            viewPostid: id,
+            isViewPost: status,
+        }))
+    }
+
+    function setPostToEdit(id, status = true) {
+        setDashboard((prevdashboard) => ({
+            ...prevdashboard,
+            editPostid: id,
+            isEditpost: status
+        }))
+    }
+
+    function setPostIdToDelete(id){
+        setDashboard((prevdashboard) => ({
+            ...prevdashboard,
+            deletePostId:id
+        }))
     }
 
     const cntxtValue = {
         currentindex: dashboard.currentindex,
         currentPage: dashboard.currentPage,
-        setCurrentComponentIndex: updateCurrentComponentIndex
+        viewPostid: dashboard.viewPostid,
+        isViewPost: dashboard.isViewPost,
+        editPostid: dashboard.editPostid,
+        isEditpost: dashboard.isEditpost,
+        deletePostId: dashboard.deletePostId,
+        setCurrentComponentIndex: updateCurrentComponentIndex,
+        setViewPost: setPostToView,
+        setEditPost: setPostToEdit,
+        setDeletepostId: setPostIdToDelete
     }
 
     return (
