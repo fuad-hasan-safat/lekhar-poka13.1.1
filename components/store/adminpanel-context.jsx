@@ -3,7 +3,10 @@ import { createContext, useEffect, useState } from "react";
 export const AdminContext = createContext({
     currentindex: 0,
     currentPage: '',
+    viewPostid: '',
+    isViewPost: false,
     setCurrentComponentIndex: () => { },
+    setViewPost: () => { }
 });
 
 export default function AdminContextProvider({ children }) {
@@ -11,6 +14,8 @@ export default function AdminContextProvider({ children }) {
     const [dashboard, setDashboard] = useState({
         currentindex: 0,
         currentPage: 'Dashboard',
+        viewPostid: '',
+        isViewPost: false,
     })
 
     useEffect(() => {
@@ -35,15 +40,27 @@ export default function AdminContextProvider({ children }) {
         setDashboard((prevDashboard) => ({
             ...prevDashboard,
             currentindex: index,
-            currentPage: page
+            currentPage: page,
+            isViewPost: false,
         }))
 
+    }
+
+    function setPostToView(id, status = true) {
+        setDashboard((prevDashboard) => ({
+            ...prevDashboard,
+            viewPostid: id,
+            isViewPost: status,
+        }))
     }
 
     const cntxtValue = {
         currentindex: dashboard.currentindex,
         currentPage: dashboard.currentPage,
-        setCurrentComponentIndex: updateCurrentComponentIndex
+        viewPostid: dashboard.viewPostid,
+        isViewPost: dashboard.isViewPost,
+        setCurrentComponentIndex: updateCurrentComponentIndex,
+        setViewPost: setPostToView
     }
 
     return (

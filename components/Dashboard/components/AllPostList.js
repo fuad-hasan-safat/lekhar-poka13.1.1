@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import NotFound from "../../common/nofFound";
 import { apiBasePath } from "../../../utils/constant";
+import { AdminContext } from "../../store/adminpanel-context";
+import PostDetails from "./SeePost";
 
 const AllPostList = () => {
+  const {setViewPost, isViewPost} = useContext(AdminContext);
   const [userType, setUserType] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
   const [postList, setPostList] = useState([]);
@@ -113,6 +116,12 @@ const AllPostList = () => {
 
   if (!isLoaded) return null;
 
+  if(isViewPost) {
+    return(
+      <PostDetails/>
+    )
+  }
+
   if (userType === "admin") {
     return (
       <div className="all__page__content__block clearfix">
@@ -160,7 +169,7 @@ const AllPostList = () => {
                       </button>
                     </td>
                     <td>
-                      <i className="ri-eye-fill"></i>
+                      <i onClick={()=>setViewPost(post._id, true)} className="ri-eye-fill"></i>
                       <i className="ri-edit-line"></i>
                       <i
                         className="ri-delete-bin-6-line"
