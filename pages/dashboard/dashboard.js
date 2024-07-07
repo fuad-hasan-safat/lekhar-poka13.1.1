@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import Link from 'next/link';
+import Head from 'next/head';
 import Sidebar from '../../components/Dashboard/Sidebar';
 import Breadcrumb from '../../components/Dashboard/components/Breadcrumb';
 import { AdminContext } from '../../components/store/adminpanel-context';
@@ -11,7 +12,7 @@ import AllSliderList from '../../components/Dashboard/components/AllSliderList';
 import AllWriterBio from '../../components/Dashboard/components/AllWriterBio';
 import CreateSliderPage from '../../components/Dashboard/components/CreateSliderPage';
 import WriterList from '../../components/Dashboard/components/AllWriterList';
-import Head from 'next/head';
+import CreatEbook from '../../components/Dashboard/components/CreatEbook';
 
 
 const notificationData =[
@@ -105,6 +106,7 @@ const Dashboard = ({children}) => {
                     {currentindex === 5 && <AllSliderList/>}
                     {currentindex === 6 && <AllDesignation/>}
                     {currentindex === 7 && <AllWriterBio/>}
+                    {currentindex === 8 && <CreatEbook />}
                 </div>
             </div>
         </div>
