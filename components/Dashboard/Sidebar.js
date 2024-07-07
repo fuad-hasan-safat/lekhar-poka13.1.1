@@ -18,6 +18,17 @@ const Sidebar = () => {
         { text: 'Bio List', icon: 'ri-progress-8-fill', href: '/admin/allWriterBio' },
         { text: 'Website', icon: 'ri-progress-8-fill', href: '/' },
     ];
+    const menuItemsAudio = [
+        { textA: 'Dashboard', iconA: 'ri-dashboard-fill', href: '/admin/allposttable' },
+        { textA: 'Creat Ebook', iconA: 'ri-progress-8-fill', href: '/admin/createbook' },
+        { textA: 'All Category', iconA: 'ri-progress-8-fill', href: '/admin/allcategory' },
+        { textA: 'Create Slider', iconA: 'ri-progress-8-fill', href: '/admin/slider' },
+        { textA: 'All Writer', iconA: 'ri-progress-8-fill', href: '/admin/writerlist' },
+        { textA: 'Slider List', iconA: 'ri-progress-8-fill', href: '/admin/allslidertable' },
+        { textA: 'Designation List', iconA: 'ri-progress-8-fill', href: '/admin/alldesignation' },
+        { textA: 'Bio List', iconA: 'ri-progress-8-fill', href: '/admin/allWriterBio' },
+        { textA: 'Website', iconA: 'ri-progress-8-fill', href: '/' },
+    ];
 
     const isActive = (href) => {
         return router.pathname === href;
@@ -36,6 +47,17 @@ const Sidebar = () => {
                             <button onClick={()=>handleIndexClick(index, item.text)}>
                                 <i className={`ri ${item.icon} text-black`}></i>
                                 {item.text}
+                            </button>
+                        </li>
+                    ))}
+                </ul>
+                <h3>Audio Book</h3>
+                <ul>
+                    {menuItemsAudio.map((items,index)=>(
+                        <li key={index}>
+                            <button onClick={()=>handleIndexClick(index + 8, items.textA)}>
+                                <i className={`ri ${items.iconA} text-black`}></i>
+                                {items.textA}
                             </button>
                         </li>
                     ))}

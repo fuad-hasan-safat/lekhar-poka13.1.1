@@ -128,7 +128,7 @@ export default function AudioPlayer() {
               <div className="lg:flex lg:flex-row lg:w-[380px] justify-left items-center md:hidden sm:hidden xs:hidden">
                 <div className="">
                   <img
-                    src={`${apiBasePath}/${currentSong?.image?.slice(currentSong?.image?.indexOf('/') + 1)}`}
+                    src={`${apiBasePath}/${currentSong?.image}`}
                     alt={currentSong?.title}
                     width={70}
                     height={70}
@@ -148,7 +148,7 @@ export default function AudioPlayer() {
             <div className="flex flex-col text-center items-center content-center justify-center space-y-3  lg:w-full">
               <div>
                 <audio
-                  src={`${apiBasePath}/${currentSong?.audio?.slice(currentSong?.audio?.indexOf('/') + 1)}`}
+                  src={`${apiBasePath}/${currentSong?.audio}`}
                   ref={audioPlayer}
                   onTimeUpdate={handleTimeUpdate}
                   onLoadedMetadata={handleLoadedMetadata}

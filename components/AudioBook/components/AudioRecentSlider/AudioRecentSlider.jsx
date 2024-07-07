@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useRouter } from 'next/router';
+import { apiBasePath } from '../../../../utils/constant';
 
 
 export const AudioRecentSliderData = [
@@ -130,7 +131,7 @@ const AudioRecentSlider = ({recentSliderData}) => {
         <div key={index} className='hm__audio__recent__slide__item'>
           <div className='hm__audio__recent__slide__item__innr' onClick={()=>sliderClickHandler(item._id)}>
             <div className='hm__audio__recent__slide__item__img'>
-              <img src={item?.image} alt='Slider Img' />
+              <img src={`${apiBasePath}/${item?.image}`} alt='Slider Img' />
             </div>
             <div className='hm__audio__recent__slide__dsc'>
               <h5>{item?.title}</h5>
