@@ -1,17 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { apiBasePath } from "../../../utils/constant";
 import NotFound from "../../common/nofFound";
 import ContentList from "./ContentList";
+import DialugueModal from "../../common/notification/DialugueModal";
 
 const Allcategory = () => {
   const router = useRouter();
+  const dialogueRef = useRef();
   const [userType, setUserType] = useState("");
   const [categoryList, setCategoryList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [categoriesPerPage] = useState(5);
   const [searchTerm, setSearchTerm] = useState(""); // State for search term
+  const [selectedCatId, setSelectedId] = useState(null);
 
   useEffect(() => {
     setUserType(localStorage.getItem("usertype") || "");
@@ -30,15 +33,15 @@ const Allcategory = () => {
       .catch((error) => console.error("Error fetching data:", error));
   };
 
-  const deleteCategory = (id) => {
+  const deleteCategory = () => {
     axios
-      .delete(`${apiBasePath}/categories/${id}`)
+      .delete(`${apiBasePath}/categories/${selectedCatId}`)
       .then((response) => {
         console.log("Delete successful:", response.data);
         setCategoryList((prevCategoryList) =>
-          prevCategoryList.filter((category) => category._id !== id)
+          prevCategoryList.filter((category) => category._id !== selectedCatId)
         );
-        alert("Delete Successfully");
+        dialogueRef.current.close();
       })
       .catch((error) => {
         console.error("Error deleting data:", error);
@@ -80,9 +83,17 @@ const Allcategory = () => {
     setCurrentPage(1); // Reset pagination when search term changes
   };
 
+
+  function handleCategoryDelete(id){
+    setSelectedId(id);
+    dialogueRef.current.showModal();
+  }
+
   if (userType === "admin") {
     return (
       <div className="all__page__content__block clearfix">
+      <DialugueModal ref={dialogueRef} alert='আপনি কি লেখার ধরণ মুছে ফেলতে চান' address={deleteCategory} type='delete' />
+
         <div className="all__post__search">
           <input
             type="search"
@@ -110,11 +121,11 @@ const Allcategory = () => {
                     <td>{indexOfFirstCategory + index + 1}</td>
                     <td>{category.title}</td>
                     <td>
-                      <i className="ri-eye-fill"></i>
-                      <i className="ri-edit-line"></i>
+                      {/* <i className="ri-eye-fill"></i> */}
+                      {/* <i className="ri-edit-line"></i> */}
                       <i
                         className="ri-delete-bin-6-line"
-                        onClick={() => deleteCategory(category._id)}
+                        onClick={() => handleCategoryDelete(category._id)}
                       ></i>
                     </td>
                   </tr>

@@ -1,23 +1,22 @@
 'use client'
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { apiBasePath } from "../../../utils/constant";
 import NotFound from "../../common/nofFound";
 import ContentList from "./ContentList";
+import DialugueModal from "../../common/notification/DialugueModal";
 
 const AllSliderList = () => {
     const router = useRouter();
+    const dialogueRef = useRef();
     const [userType, setUserType] = useState("");
-
-    const [sliderList, setSliderList] = useState([])
-
-
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedContent, setSelectedContent] = useState(null);
-
-
+    const [sliderList, setSliderList] = useState([]);
+    const [selectedSlider, setSelectedSlider] = useState({
+        id: null,
+        title:''
+    })
 
     useEffect(() => {
         setUserType(localStorage.getItem("usertype") || "");
@@ -55,61 +54,60 @@ const AllSliderList = () => {
     }
 
 
-    async function deleteSlider(id) {
-
-
-
+    async function deleteSlider() {
         try {
-            await deleteData(id);
+            await deleteData(selectedSlider.id);
             // If successful, update state or do something else
-            alert('Delete Sucessfully')
+            dialogueRef.current.close();
         } catch (error) {
             // Handle error
-            alert('Failed to Delete')
+            console.log(error)
 
         }
+    }
 
-
-
-
-
-        router.push(`/admin/allslidertable`);
-
+    function handleDeleteSlider(id, title){
+        setSelectedSlider({
+            id: id,
+            title: title
+        });
+        dialogueRef.current.showModal();
     }
 
     if (userType === 'admin') {
         return (
-         <div className="all__page__content__block clearfix">
-            <div className="all__post__search">
-                <input type="search" placeholder="Enter Search.." />
-                <button><i class="ri-search-eye-line"></i></button>
+            <div className="all__page__content__block clearfix">
+                <DialugueModal ref={dialogueRef} alert={`আপনি কি ${selectedSlider.title} স্লাইডার মুছে ফেলতে চান`} address={deleteSlider} type='delete' />
+                <div className="all__post__search">
+                    <input type="search" placeholder="Enter Search.." />
+                    <button><i class="ri-search-eye-line"></i></button>
+                </div>
+                <div className="all__post__list__wrap all__post__category">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {sliderList.length &&
+                                sliderList.map((slider, index) => (
+                                    <tr>
+                                        <td>{index + 1}</td>
+                                        <td>{slider.title}</td>
+                                        <td>
+                                            {/* <i class="ri-eye-fill"></i> */}
+                                            {/* <i class="ri-edit-line"></i> */}
+                                            <i onClick={()=>handleDeleteSlider(slider._id, slider.title)} class="ri-delete-bin-6-line"></i>
+                                        </td>
+                                    </tr>
+                                ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div className="all__post__list__wrap all__post__category">
-                <table class="table">
-                <thead>
-                    <tr>
-                    <th>No</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {sliderList.length &&
-                    sliderList.map((slider, index) => (
-                    <tr>
-                        <td>{index+1}</td>
-                        <td>{slider.title}</td>
-                        <td>
-                        <i class="ri-eye-fill"></i>
-                        <i class="ri-edit-line"></i>
-                        <i class="ri-delete-bin-6-line"></i>
-                        </td>
-                    </tr>
-                    ))}
-                </tbody>
-                </table>
-            </div>
-        </div>
         )
     } else {
         return <NotFound />

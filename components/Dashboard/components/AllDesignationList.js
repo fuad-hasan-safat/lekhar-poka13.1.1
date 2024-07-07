@@ -1,29 +1,22 @@
 'use client'
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { apiBasePath } from "../../../utils/constant";
 import CreateDesignationModal from "../../admin/createDesignationModal";
 import NotFound from "../../common/nofFound";
 import ContentList from "./ContentList";
+import DialugueModal from "../../common/notification/DialugueModal";
 
 const AllDesignation = () => {
     const router = useRouter();
+    const dialogueRef = useRef();
     const [userType, setUserType] = useState("");
-
-    const [designation, setDesignation] = useState([])
-
-
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedContent, setSelectedContent] = useState(null);
-    const [isCategoryAdded, setIsCategoryAdded] = useState(false)
-
+    const [designation, setDesignation] = useState([]);
+    const [isCategoryAdded, setIsCategoryAdded] = useState(false);
+    const [selectedDesignation, setSelectedDesignation] = useState(null);
     const [showModal, setShowModal] = useState(false);
-
-
-
-
 
     useEffect(() => {
         setUserType(localStorage.getItem("usertype") || "");
@@ -65,63 +58,64 @@ const AllDesignation = () => {
     }
 
 
-    async function deleteCategory(id) {
+    async function deteteDesignation() {
         try {
-            await deleteData(id);
-            // If successful, update state or do something else
-            alert('Delete Sucessfully')
+            await deleteData(selectedDesignation);
+            dialogueRef.current.close();
         } catch (error) {
-            // Handle error
-            alert('Failed to Delete')
-
+            console.log(error)
         }
-        // router.reload()
+    }
 
+    function handleDeleteDesignation(id){
+        setSelectedDesignation(id);
+        dialogueRef.current.showModal();
     }
 
     if (userType === 'admin') {
 
         return (
-         <div className="all__page__content__block clearfix">
-            <div className="all__post__search">
-                <input type="search" placeholder="Enter Search.." />
-                <button><i class="ri-search-eye-line"></i></button>
+            <div className="all__page__content__block clearfix">
+                <DialugueModal ref={dialogueRef} alert='আপনি কি পদবী মুছে ফেলতে চান' address={deteteDesignation} type='delete'/>
+                <div className="all__post__search">
+                    <input type="search" placeholder="Enter Search.." />
+                    <button><i class="ri-search-eye-line"></i></button>
+                </div>
+                <div>
+                    <button
+                        className="bg-[#FCA000] hover:bg-[#eeb249] text-white py-2 px-[25px] rounded mt-[20px]"
+                        onClick={handleShow}
+                    >
+                        নতুন পদবী
+                    </button>
+                    {showModal && <CreateDesignationModal setDesignation={setDesignation} showModal={showModal} handleClose={handleClose} setIsCategoryAdded={setIsCategoryAdded} />}
+                </div>
+                <div className="all__post__list__wrap all__post__category">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th scope="col">Designation</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {designation.length &&
+                                designation.map((slider, index) => (
+                                    <tr>
+                                        <td>{index + 1}</td>
+                                        <td>{slider.title}</td>
+                                        <td>
+                                            {/* <i class="ri-eye-fill"></i> */}
+                                            {/* <i class="ri-edit-line"></i> */}
+                                            <i onClick={()=>handleDeleteDesignation(slider._id)} class="ri-delete-bin-6-line"></i>
+                                        </td>
+                                    </tr>
+                                ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div>
-                <button
-                    className="bg-[#FCA000] hover:bg-[#eeb249] text-white py-2 px-[25px] rounded mt-[20px]"
-                    onClick={handleShow}
-                >
-                    নতুন পদবী
-                </button>
-                {showModal && <CreateDesignationModal setDesignation={setDesignation} showModal={showModal} handleClose={handleClose} setIsCategoryAdded={setIsCategoryAdded} />}
-            </div>
-            <div className="all__post__list__wrap all__post__category">
-                <table class="table">
-                <thead>
-                    <tr>
-                    <th>No</th>
-                    <th scope="col">Designation</th>
-                    <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {designation.length &&
-                    designation.map((slider, index) => (
-                    <tr>
-                        <td>{index+1}</td>
-                        <td>{slider.title}</td>
-                        <td>
-                        <i class="ri-eye-fill"></i>
-                        <i class="ri-edit-line"></i>
-                        <i class="ri-delete-bin-6-line"></i>
-                        </td>
-                    </tr>
-                    ))}
-                </tbody>
-                </table>
-            </div>
-        </div>
         )
     } else {
         return <NotFound />
