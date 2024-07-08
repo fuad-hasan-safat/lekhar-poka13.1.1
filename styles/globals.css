@@ -115,6 +115,10 @@ body {
   /* Set the default text color to black */
 }
 
+.dashboardCk .ck-editor__editable{
+  height: 250px;
+}
+
 .ck-editor__editable {
   height: 492px;
   background-color: #FCF7E8;

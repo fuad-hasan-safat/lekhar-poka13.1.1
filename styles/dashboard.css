@@ -516,6 +516,15 @@ all__page__content__block
     font-weight: 600;
     margin-bottom: 10px;
 }
+.audio__book__input__fields label{
+    display: inline-block;
+    vertical-align: baseline;
+    font-size: 16px;
+    line-height: 1;
+    color: #000;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
 .audio__book__input__field input{
     width: 100%;
     height: 40px;
@@ -529,3 +538,6 @@ all__page__content__block
 .audio__book__input__field input:focus{
     border-color: #F9A106;
 }
+
+
+
