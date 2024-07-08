@@ -2,6 +2,10 @@ import { createContext, useState } from "react";
 
 export const AudioPlayListContext = createContext({
   playList: [],
+  myPlayList: [],
+  latestPlayList: [],
+  setMyPlayList: () => { },
+  setLatestPlaylist: () => { },
   audioPlace: '',
   playListRenderScope: '',
   isAudioPlaying: false,
@@ -24,6 +28,8 @@ export const AudioPlayListContext = createContext({
 export default function AudioPlaylistContextProvider({ children }) {
   const [audioBar, setAudioBar] = useState({
     playList: [],
+    myplayList: [],
+    latestPlayList:[],
     audioPlace: 'none',
     playListRenderScope: 'none',
     isShuffle: false,
@@ -175,7 +181,7 @@ export default function AudioPlaylistContextProvider({ children }) {
 
   }
 
-  function resetPlayer(){
+  function resetPlayer() {
     setAudioBar({
       playList: [],
       audioPlace: 'none',
@@ -186,8 +192,26 @@ export default function AudioPlaylistContextProvider({ children }) {
     })
   }
 
+  function updateMyplayList(playlist){
+    setAudioBar((prevAudioBar) =>({
+      ...prevAudioBar,
+      myplayList:playlist
+    }))
+  }
+
+  function updateLatestPlayList(playlist){
+    setAudioBar((prevAudioBar) =>({
+      ...prevAudioBar,
+      latestPlayList:playlist
+    }))
+  }
+
   const cntxValue = {
     playList: audioBar.playList,
+    myPlayList: audioBar.myplayList,
+    latestPlayList: audioBar.latestPlayList,
+    setMyPlayList: updateMyplayList,
+    setLatestPlaylist: updateLatestPlayList,
     audioPlace: audioBar.audioPlace,
     playListRenderScope: audioBar.playListRenderScope,
     isAudioPlaying: isPlaying,

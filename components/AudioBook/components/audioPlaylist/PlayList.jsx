@@ -3,6 +3,7 @@ import React from 'react'
 import PlaylistItem from './PlaylistItem'
 
 export default function PlayList({ audioPlaylist, audioScope }) {
+  console.log('My play list',audioPlaylist)
   return (
     <>
       {audioPlaylist.map((songInfo, index) => {

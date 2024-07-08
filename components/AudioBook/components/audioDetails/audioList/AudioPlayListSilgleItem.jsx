@@ -63,7 +63,7 @@ console.log({audioPlace, playListRenderScope, currentPlayingIndex})
 
             <div className='audio__tab__playbutton'>
                 <button onClick={() => {toggleAudioPlay(audioIndex, audioList, playListRenderScope)}}>{isAudioPlaying && audioIndex === currentPlayingIndex && audioPlace === playListRenderScope ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</button>
-                <button className='text-[#484848] text-opacity-[50%] lg:ml-[18px] md:ml-[15px] sm:ml-[12px] xs:ml-[10px]'><i class="ri-add-circle-fill"></i></button>
+                {/* <button className='text-[#484848] text-opacity-[50%] lg:ml-[18px] md:ml-[15px] sm:ml-[12px] xs:ml-[10px]'><i class="ri-add-circle-fill"></i></button> */}
             </div>
 
         </div>

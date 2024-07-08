@@ -2,9 +2,10 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { AudioPlayListContext } from '../../../../store/audioPlayer-context';
 import { apiBasePath } from '../../../../../utils/constant';
+import axios from 'axios';
 
 export default function AudioTabSingleItem({ songInfo, audioIndex , audioList}) {
-    const { playList, setPlaylist, audioPlace, playListRenderScope ,currentPlayingIndex ,setCurrentAudioIndex, toggleAudioPlay ,isAudioPlaying } = useContext(AudioPlayListContext)
+    const { playList, setPlaylist, audioPlace, playListRenderScope ,currentPlayingIndex ,setCurrentAudioIndex, toggleAudioPlay ,isAudioPlaying, setMyPlayList, myPlayList } = useContext(AudioPlayListContext)
     const [duration, setDuration] = useState(null);
     const [error, setError] = useState(false);
     const audioRef = useRef(null);
@@ -40,7 +41,22 @@ console.log({audioPlace, playListRenderScope, currentPlayingIndex})
 
     }, [songInfo?.audio]);
 
+   async function handleAddMyPlaylist(){
+        console.log({songInfo})
+        const data = {
+            ebook_id: songInfo.ebook_id,
+            audio_id: songInfo._id,
+            userId: localStorage.getItem('uuid')
+        }
 
+        try {
+            const response = await axios.post(`${apiBasePath}/addtoplaylist`, data);
+             console.log('add playlist response', response);
+             setMyPlayList([...myPlayList, songInfo])
+          } catch (error) {
+            console.error('Error posting data:', error);
+          }
+    }
 
     return (
         <div className='audio__tab__item'>
@@ -64,7 +80,7 @@ console.log({audioPlace, playListRenderScope, currentPlayingIndex})
 
             <div className='audio__tab__playbutton'>
                 <button onClick={() => {toggleAudioPlay(audioIndex, audioList, 'details')}}>{isAudioPlaying && audioIndex === currentPlayingIndex && audioPlace === 'details' ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</button>
-                <button className='text-[#484848] text-opacity-[50%] lg:ml-[18px] md:ml-[15px] sm:ml-[12px] xs:ml-[10px]'><i class="ri-add-circle-fill"></i></button>
+                <button onClick={handleAddMyPlaylist} className='text-[#484848] text-opacity-[50%] lg:ml-[18px] md:ml-[15px] sm:ml-[12px] xs:ml-[10px]'><i class="ri-add-circle-fill"></i></button>
             </div>
 
         </div>

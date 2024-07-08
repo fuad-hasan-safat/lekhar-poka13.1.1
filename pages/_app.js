@@ -63,7 +63,7 @@ export default function MyApp({ Component, pageProps }) {
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
   }
   else {
-    result = <Layout><Component {...pageProps} /> <AudioPlayer /> <SearchResult /> </Layout>
+    result = <Layout><Component {...pageProps} />  <SearchResult /> </Layout>
   }
   return (
     // <Layout>
@@ -83,6 +83,7 @@ export default function MyApp({ Component, pageProps }) {
               <GoogleOAuthProvider clientId="854926132475-sm4btto49sresu4g5o9qpuk9lgtqor9f.apps.googleusercontent.com">
                 <>
                   {result}
+                  <AudioPlayer />
                 </>
               </GoogleOAuthProvider>
             </SearchContextProvider>
