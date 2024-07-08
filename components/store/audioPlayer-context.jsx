@@ -4,8 +4,10 @@ export const AudioPlayListContext = createContext({
   playList: [],
   myPlayList: [],
   latestPlayList: [],
+  isPlayListAddedChanged: 0,
   setMyPlayList: () => { },
   setLatestPlaylist: () => { },
+  setPlayListAddedChanged: () => { },
   audioPlace: '',
   playListRenderScope: '',
   isAudioPlaying: false,
@@ -29,7 +31,8 @@ export default function AudioPlaylistContextProvider({ children }) {
   const [audioBar, setAudioBar] = useState({
     playList: [],
     myplayList: [],
-    latestPlayList:[],
+    latestPlayList: [],
+    isPlayListAddedChanged: 0,
     audioPlace: 'none',
     playListRenderScope: 'none',
     isShuffle: false,
@@ -192,17 +195,24 @@ export default function AudioPlaylistContextProvider({ children }) {
     })
   }
 
-  function updateMyplayList(playlist){
-    setAudioBar((prevAudioBar) =>({
+  function updateMyplayList(playlist) {
+    setAudioBar((prevAudioBar) => ({
       ...prevAudioBar,
-      myplayList:playlist
+      myplayList: playlist
     }))
   }
 
-  function updateLatestPlayList(playlist){
-    setAudioBar((prevAudioBar) =>({
+  function updateLatestPlayList(playlist) {
+    setAudioBar((prevAudioBar) => ({
       ...prevAudioBar,
-      latestPlayList:playlist
+      latestPlayList: playlist
+    }))
+  }
+
+  function updatePlayListChanged(){
+    setAudioBar((prevAudioBar)=>({
+      ...prevAudioBar,
+      isPlayListAddedChanged: prevAudioBar.isPlayListAddedChanged + 1,
     }))
   }
 
@@ -210,6 +220,8 @@ export default function AudioPlaylistContextProvider({ children }) {
     playList: audioBar.playList,
     myPlayList: audioBar.myplayList,
     latestPlayList: audioBar.latestPlayList,
+    isPlayListAddedChanged: audioBar.isPlayListAddedChanged,
+    setPlayListAddedChanged: updatePlayListChanged,
     setMyPlayList: updateMyplayList,
     setLatestPlaylist: updateLatestPlayList,
     audioPlace: audioBar.audioPlace,

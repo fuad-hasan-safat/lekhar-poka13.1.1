@@ -8,6 +8,8 @@ import SeeMoreListPlayList from '../../components/AudioBook/components/SeeMoreLi
 import Loading from '../../components/common/loading';
 import LoginPage from '../../components/login/login';
 import { useRouter } from 'next/router';
+import { apiBasePath } from '../../utils/constant';
+import { fetchDataWithAxios } from '../../utils/apiService';
 
 
 
@@ -21,6 +23,7 @@ const PlaylistSeeAll = () => {
 
     const [seeAllRenderInfo, setSeeAllRenderInfo] = useState({
         playListScope: '',
+        playList:[],
         isLoadedDone: false,
     })
 
@@ -46,7 +49,30 @@ const PlaylistSeeAll = () => {
             isLoadedDone: true
         }))
 
+
+        // api call
+    let playListUrl = `${apiBasePath}/showlatestplaylist/${localStorage.getItem('uuid')}`;
+    if(scope === 'আমার প্লেলিস্ট'){
+        playListUrl = `${apiBasePath}/showplaylist/${localStorage.getItem('uuid')}`;
+    }
+
+    getdata(playListUrl);
+
     }, [playListRenderScope])
+
+
+    const getdata = async (url) =>{
+        try{
+            const playList = await fetchDataWithAxios(url);
+            setSeeAllRenderInfo((prevSeeAllRenderInfo)=>({
+                ...prevSeeAllRenderInfo,
+                playList: playList.object,
+            }))
+        }catch(error){
+            console.log('Playlist fetch error ', error)
+        }
+    
+    }
 
 
     if (!seeAllRenderInfo.isLoadedDone) return <Loading />;
@@ -71,7 +97,7 @@ const PlaylistSeeAll = () => {
                         <div className="all__post__content flex flex-row">
                             <div className="lg:w-[70%]">
                                 <div className='see__more__list__wrap clearfix'>
-                                    <SeeMoreListPlayList audioPlaylist={audioPlaylist} playListScope={seeAllRenderInfo.playListScope} />
+                                    <SeeMoreListPlayList audioPlaylist={seeAllRenderInfo.playList} playListScope={seeAllRenderInfo.playListScope} />
 
                                 </div>
                             </div>

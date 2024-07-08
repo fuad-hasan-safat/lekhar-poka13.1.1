@@ -9,24 +9,30 @@ import { fetchDataWithAxios } from '../../../../utils/apiService';
 import { apiBasePath } from '../../../../utils/constant';
 
 export default function AudioDetailsSideBar() {
-    const { setPlayListRenderScope,setMyPlayList, setLatestPlaylist, myPlayList, latestPlayList } = useContext(AudioPlayListContext);
+    const { setPlayListRenderScope,setLatestPlaylist, setMyPlayList ,isPlayListAddedChanged, myPlayList, latestPlayList} = useContext(AudioPlayListContext);
 
     const [playList, setPlaylist] = useState({
+        myPlaylist: [],
+        latestPlayList: [],
         isPlayListrender: false
     })
 
     useEffect(() => {
         getData();
-    },[])
+    },[isPlayListAddedChanged])
 
 
     const getData = async () => {
         const myPlayListUrl = `${apiBasePath}/showplaylist/${localStorage.getItem('uuid')}`;
-        const latestPlayListUrl = ``;
+        const latestPlayListUrl = `${apiBasePath}/showlatestplaylist/${localStorage.getItem('uuid')}`;
         try {
             const myplayList = await fetchDataWithAxios(myPlayListUrl);
-            console.log('my play list----', myplayList)
+            console.log('my play list', myplayList)
             setMyPlayList(myplayList.object)
+
+            const latestPlayList = await fetchDataWithAxios(latestPlayListUrl);
+            console.log('latest playlist get response', latestPlayList);
+            setLatestPlaylist(latestPlayList.object)
         } catch (error) {
             console.log('playlist api call error', error)
         } finally {
@@ -38,8 +44,6 @@ export default function AudioDetailsSideBar() {
     };
 
     if(!playList.isPlayListrender) return null;
-
-    console.log(myPlayList)
 
     return (
         <>
