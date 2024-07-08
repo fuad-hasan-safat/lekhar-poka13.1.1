@@ -1,34 +1,11 @@
-// import React from 'react';
-// import Classes from './slider.module.css';
-
-// const CreatEbook = () => {
-//     console.log('Inside ebook')
-//     return (
-//         <div className="all__page__content__block clearfix">
-//             <div className="all__post__list__wrap">
-//                 <div className='audio__book__input__fields clearfix'>
-//                     <div className='audio__book__input__field'>
-//                         <label>Title</label>
-//                         <input type='text' placeholder='Enter Text' />
-//                     </div>
-//                     <div className='audio__book__input__field'>
-
-//                     </div>
-//                 </div>
-//             </div>
-//       </div>
-//     );
-// };
-
-// export default CreatEbook; 
-
-
 import React, { useState } from 'react';
+import ColorPicker from 'react-pick-color';
 
 function MyAudioUploadForm() {
   const [file, setFile] = useState(null);
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [color, setColor] = useState('#fff');
 
   const handleChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -88,18 +65,71 @@ function MyAudioUploadForm() {
                     <input type='text' placeholder='Enter Text' />
                 </div>
                 <div className='audio__book__input__field'>
+                    <label>writer</label>
+                    <input type='text' placeholder='Enter writer' />
+                </div>
+            </div>
+            <div className='audio__book__input__fields clearfix'>
+                <div className='audio__book__input__field'>
+                    <label>duration</label>
+                    <input type='text' placeholder='Enter duration' />
+                </div>
+                <div className='audio__book__input__field'>
                     <label>voice</label>
                     <input type='text' placeholder='Enter voice' />
                 </div>
             </div>
             <div className='audio__book__input__fields clearfix'>
+                <div className='admin__input text-black'>
+                    <label>Category</label>
+                    <select
+                        name="optons" id="options">
+                        <option>select</option>
+                    </select>
+                </div>
+                <div className='admin__input text-black'>
+                    <label>Background</label>
+                    <select
+                        name="optons" id="options">
+                        <option>background</option>
+                        <option>No Background</option>
+                    </select>
+                </div>
+            </div> 
+            <div className='audio__book__input__fields clearfix'>
+                <div className='admin__input text-black'>
+                    <label>Category</label>
+                    <select
+                        name="optons" id="options">
+                        <option>select</option>
+                    </select>
+                </div>
+                <div className='admin__input text-black'>
+                    <label>Background</label>
+                    <select
+                        name="optons" id="options">
+                        <option>background</option>
+                        <option>No Background</option>
+                    </select>
+                </div>
+            </div>
+            <div className='audio__book__input__fields clearfix'>
                 <div className='admin__input'>
-                    <label>Content</label>
-                    <textarea type='text' value='' placeholder='Content' />
+                  <ColorPicker color={color} onChange={color => setColor(color.hex)} />
                 </div>
                 <div className='admin__input'>
-                    <label>Caption</label>
-                    <textarea type='text' value='' placeholder='Caption' />
+                    <label>summary</label>
+                    <textarea type='text' placeholder='summary' />
+                </div>
+            </div>
+            <div className='audio__book__input__fields clearfix'>
+                <div className='admin__input'>
+                    <label>info</label>
+                    <textarea type='text' placeholder='info' />
+                </div>
+                <div className='admin__input'>
+                    <label>message</label>
+                    <textarea type='text' placeholder='message' />
                 </div>
             </div>
         </form>
