@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { AudioPlayListContext } from '../../../store/audioPlayer-context';
 
 export default function PlaylistItem({ songInfo,songIndex, songList, audioScope }) {
+    console.log('song info-----', songInfo)
     const {currentPlayingIndex, playList, audioPlace ,toggleAudioPlay, isAudioPlaying} = useContext(AudioPlayListContext)
   
     const [duration, setDuration] = useState(null);
