@@ -48,6 +48,7 @@
     "react-infinite-scroller": "^1.2.6",
     "react-intersection-observer": "^9.10.3",
     "react-paginate": "^8.2.0",
+    "react-pick-color": "^2.0.0",
     "react-select": "^5.8.0",
     "react-share": "^5.1.0",
     "react-simple-star-rating": "^5.1.7",
