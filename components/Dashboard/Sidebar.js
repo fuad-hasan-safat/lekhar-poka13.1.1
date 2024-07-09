@@ -27,13 +27,13 @@ const Sidebar = () => {
     ];
 
     const menuItemsAudio = [
-        { text: 'Create Ebook', icon: 'ri-progress-8-fill', href: '/admin/createbook' },
-        { text: 'Create Category', icon: 'ri-progress-8-fill', href: '/admin/allcategory' },
-        { text: 'Create Slider', icon: 'ri-progress-8-fill', href: '/admin/slider' },
-        { text: 'All Writer', icon: 'ri-progress-8-fill', href: '/admin/writerlist' },
-        { text: 'Slider List', icon: 'ri-progress-8-fill', href: '/admin/allslidertable' },
-        { text: 'Designation List', icon: 'ri-progress-8-fill', href: '/admin/alldesignation' },
-        { text: 'Bio List', icon: 'ri-progress-8-fill', href: '/admin/allWriterBio' },
+        { textA: 'Creat Ebook', iconA: 'ri-progress-8-fill', href: '/admin/createbook' },
+        { textA: 'Create Category', iconA: 'ri-progress-8-fill', href: '/admin/allcategory' },
+        { textA: 'Create Quote', iconA: 'ri-progress-8-fill', href: '/admin/slider' },
+        { textA: 'All Writer', iconA: 'ri-progress-8-fill', href: '/admin/writerlist' },
+        { textA: 'Slider List', iconA: 'ri-progress-8-fill', href: '/admin/allslidertable' },
+        { textA: 'Designation List', iconA: 'ri-progress-8-fill', href: '/admin/alldesignation' },
+        { textA: 'Bio List', iconA: 'ri-progress-8-fill', href: '/admin/allWriterBio' },
     ];
 
     const handleIndexClick = (index, page) => {

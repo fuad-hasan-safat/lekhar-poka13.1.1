@@ -35,7 +35,7 @@ export default function AudioBookHome() {
             const url2 = `${apiBasePath}/books`;
     
             const response = await axios.get(url);
-            console.log('audio book response', response )
+            console.log('audio book quote response', response )
             const textSliderData = response.data;
     
             const response2 = await axios.get(url2);

@@ -56,7 +56,15 @@ export default function CreateAudioCategory() {
 
         const formData = new FormData();
         for (const key in audioCategory) {
-            formData.append(key, audioCategory[key]);
+            const data = audioCategory[key];
+            console.log(typeof(data))
+            let solidData = data
+            if(typeof(data) === 'string'){
+             solidData = data.trim();
+            }
+            
+            console.log({data, solidData})
+            formData.append(key, solidData);
         }
 
         try {
