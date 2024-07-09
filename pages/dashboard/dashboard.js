@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import Sidebar from '../../components/Dashboard/Sidebar';
@@ -63,6 +63,13 @@ const Dashboard = ({children}) => {
     const toggleNoti=()=>{
         setIsNotifation(!isNotifation);
     }
+
+    const [userType, setUerType] = useState('user');
+    useEffect(()=>{
+        setUerType(localStorage.getItem('usertype'))
+    },[])
+
+    if(userType != 'admin') return null;
 
     return (
         <div className='main-wrapper'>
