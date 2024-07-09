@@ -195,14 +195,25 @@
     border-right: 1px solid #E8EBED;
     width: 260px;
     padding: 20px;
-    padding-top:150px;
+    padding-top:100px;
 }
-.d__sidebar__menu h3{
-    font-size: 20px;
+.d__sidebar__menu ul > li > a{
+    display:block;
+    font-size: 16px;
     line-height: 1;
-    font-weight: 700;
+    font-weight: 600;
     margin-bottom: 0;
     padding: 20px 0;
+    text-transform: uppercase;
+    position: relative;
+    cursor: pointer;
+}
+.d__sidebar__menu ul > li > a i {
+    position: absolute;
+    right: 0;
+    top: 18px;
+    font-size: 22px;
+    line-height: 1;
 }
 .d__sidebar__menu ul li button{
     display: block;
@@ -535,8 +546,12 @@ all__page__content__block
     border-radius: 5px;
     border: 1px solid#ddd;
 }
+.admin__input textarea:focus,
+.audio__book__input__field textarea:focus,
+.audio__book__input__field select:focus,
 .audio__book__input__field input:focus{
     border-color: #F9A106;
+    outline: none;
 }
 .audio__book__input__fields label input{
     margin-right: 5px;
