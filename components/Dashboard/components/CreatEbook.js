@@ -1,7 +1,9 @@
 // import { color } from 'jodit/types/plugins/color/color';
-import React, { useState } from 'react';
-import ColorPicker from 'react-pick-color';
+import React, { useEffect, useState } from 'react';
+import ColorPicker, { themes } from 'react-pick-color';
 import dynamic from 'next/dynamic';
+import { apiBasePath } from '../../../utils/constant';
+import axios from 'axios';
 
 const CustomEditor = dynamic(() => {
     return import('../../custom-editor');
@@ -9,6 +11,7 @@ const CustomEditor = dynamic(() => {
 
 function MyAudioUploadForm() {
     const [message, setMessage] = useState('');
+    const [category, setCategory] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
     const [ebook, setEbook] = useState({
@@ -18,7 +21,7 @@ function MyAudioUploadForm() {
         voice: '',
         duration: '',
         color: '#fff',
-        background: '',
+        background: 'no_background',
         category: '',
         mature_content: false,
         premium: false,
@@ -28,61 +31,193 @@ function MyAudioUploadForm() {
         message: ''
     })
 
-    function setInfodata(data) {
-        console.log('info data --', data)
+    function resetEbook() {
+        setEbook({
+            file: null,
+            title: '',
+            writer: '',
+            voice: '',
+            duration: '',
+            color: '#fff',
+            background: 'no_background',
+            category: '',
+            mature_content: false,
+            premium: false,
+            type: '',
+            summary: '',
+            info: '',
+            message: ''
+        })
     }
+
+    async function getAudioCategory() {
+        try {
+            console.log('Inside try')
+            const result = await axios.get(
+                `${apiBasePath}/audiocategories`
+            );
+            console.log(result)
+            setCategory(result.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    useEffect(() => {
+        getAudioCategory();
+
+    }, [])
+
     const handleChange = (event) => {
-        const selectedFile = event.target.files[0];
-        // Basic audio format validation (optional)
-        if (!selectedFile.type.match('audio/*')) {
-            setMessage('Please select an audio file.');
-            return;
+        const { name, value, type, files } = event.target;
+        if (type === 'file') {
+            const selectedFile = files[0];
+            if (!selectedFile.type.match('image/*')) {
+                alert('Please select an image file.');
+                return;
+            } else {
+                setEbook(prevState => ({ ...prevState, file: selectedFile }));
+            }
+        } else if (type === 'radio') {
+            if (value === 'true' || value === 'false') {
+                if (value === 'true') {
+                    setEbook(prevState => ({ ...prevState, [name]: true }));
+                } else {
+                    setEbook(prevState => ({ ...prevState, [name]: false }));
+                }
+            } else {
+                setEbook(prevState => ({ ...prevState, [name]: value }));
+            }
+        } else {
+            setEbook(prevState => ({ ...prevState, [name]: value }));
         }
     };
 
+    const validateFields = () => {
+        for (const key in ebook) {
+            if (ebook[key] === '' || ebook[key] === null) {
+                setMessage(`Please fill in the ${key} field.`);
+                return false;
+            }
+        }
+        return true;
+    };
 
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        if (!validateFields()) {
+            alert("সব ফিল্ড পূরণ করুন")
+            return
+        };
+
+        setIsLoading(true);
+
+        const formData = new FormData();
+        for (const key in ebook) {
+            formData.append(key, ebook[key]);
+        }
+
+        try {
+            const response = await fetch(`${apiBasePath}/createbook`, {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const result = await response.json();
+            console.log('Success:', result);
+            resetEbook();
+            setMessage('Ebook created successfully!');
+        } catch (error) {
+            console.error('Error:', error);
+            setMessage('Error creating ebook');
+        }
+
+        setIsLoading(false);
+    };
+
+    console.log('ebook data', ebook);
 
     return (
         <div className='admin__add__slider__wrap'>
-            <form >
+            <form onSubmit={handleSubmit}>
 
                 <div className='audio__book__input__fields clearfix'>
                     <div className='audio__book__input__field'>
                         <label>বইয়ের নাম</label>
-                        <input type='text' placeholder='বইয়ের নাম লিখুন' />
+                        <input
+                            name='title'
+                            type='text'
+                            placeholder='বইয়ের নাম লিখুন'
+                            value={ebook.title}
+                            onChange={handleChange}
+                        />
                     </div>
                     <div className='audio__book__input__field'>
                         <label>লেখক</label>
-                        <input type='text' placeholder='লেখকের নাম লিখুন' />
+                        <input
+                            name='writer'
+                            type='text'
+                            placeholder='লেখকের নাম লিখুন'
+                            value={ebook.writer}
+                            onChange={handleChange}
+                        />
                     </div>
                 </div>
                 <div className='audio__book__input__fields clearfix'>
                     <div className='audio__book__input__field'>
                         <label>সময়</label>
-                        <input type='text' placeholder='অডিও কত মিনিটের সেটা লিখুন' />
+                        <input
+                            name='duration'
+                            type='text'
+                            placeholder='অডিও কত মিনিটের সেটা লিখুন'
+                            value={ebook.duration}
+                            onChange={handleChange}
+                        />
                     </div>
                     <div className='audio__book__input__field'>
                         <label>কণ্ঠ</label>
-                        <input type='text' placeholder='যিনি কণ্ঠ দিয়েছেন তার নাম লিখুন' />
+                        <input
+                            name='voice'
+                            type='text'
+                            placeholder='যিনি কণ্ঠ দিয়েছেন তার নাম লিখুন'
+                            value={ebook.voice}
+                            onChange={handleChange}
+                        />
                     </div>
                 </div>
                 <div className='audio__book__input__fields clearfix'>
                     <div className='admin__input  text-black'>
                         <label>বইয়ের ধরণ</label>
                         <select
-                            name="optons" id="options">
+                            name="category"
+                            id="category"
+                            value={ebook.category}
+                            onChange={handleChange}
+                        >
                             <option>বইয়ের ধরণ নির্বাচন করুন</option>
+                            {category.map((cat) => (
+                                <option key={cat._id} value={cat.title}>
+                                    {cat.title}
+                                </option>
+                            ))}
                         </select>
                     </div>
 
                     <div className='admin__input text-black'>
                         <label>বইয়ের কভার ইমেজ</label>
                         <div className='audio__file__upload'>
-                            <input type="file" id="audioFileInput" onChange={handleChange} />
-                            <button type="submit" disabled={isLoading}>
-                                {/* {isLoading ? 'Uploading...' : 'Upload Audio'} */}
-                            </button>
-                            {/* {message && <p>{message}</p>} */}
+                            <input
+                                name='file'
+                                type="file"
+                                accept="image/*"
+                                id="audioFileInput"
+                                onChange={handleChange}
+                            />
                         </div>
                     </div>
                 </div>
@@ -96,6 +231,7 @@ function MyAudioUploadForm() {
                                     name="mature_content"
                                     value={true}
                                     checked={ebook.mature_content === true}
+                                    onChange={handleChange}
                                 />
                                 হ্যাঁ
                             </label>
@@ -103,8 +239,9 @@ function MyAudioUploadForm() {
                                 <input
                                     type="radio"
                                     name="mature_content"
-                                    value={false}
+                                    value={'false'}
                                     checked={ebook.mature_content === false}
+                                    onChange={handleChange}
                                 />
                                 না
                             </label>
@@ -117,8 +254,9 @@ function MyAudioUploadForm() {
                                 <input
                                     type="radio"
                                     name="premium"
-                                    value={true}
+                                    value={'true'}
                                     checked={ebook.premium === true}
+                                    onChange={handleChange}
                                 />
                                 হ্যাঁ
                             </label>
@@ -128,6 +266,7 @@ function MyAudioUploadForm() {
                                     name="premium"
                                     value={false}
                                     checked={ebook.premium === false}
+                                    onChange={handleChange}
                                 />
                                 না
                             </label>
@@ -142,6 +281,7 @@ function MyAudioUploadForm() {
                                     name="background"
                                     value="background"
                                     checked={ebook.background === 'background'}
+                                    onChange={handleChange}
                                 />
                                 ব্যাকগ্রাউন্ড সহ
                             </label>
@@ -151,6 +291,7 @@ function MyAudioUploadForm() {
                                     name="background"
                                     value="no_background"
                                     checked={ebook.background === 'no_background'}
+                                    onChange={handleChange}
                                 />
                                 ব্যাকগ্রাউন্ড ছাড়া
                             </label>
@@ -159,13 +300,29 @@ function MyAudioUploadForm() {
                 </div>
                 <div className='audio__book__input__fields clearfix'>
                     <div className='admin__input'>
-                        <ColorPicker color={ebook.color} />
+                        <label>ব্যাকগ্রাউন্ড কালার</label>
+                        <ColorPicker
+                            color={ebook.color}
+                            theme={themes.dark}
+                            onChange={(color) => setEbook(prevState => ({ ...prevState, color: color.hex }))}
+                        />
                     </div>
-                    <div className='admin__input dashboardCk'>
-                        <label>সারসংক্ষেপ</label>
+                    <div className='audio__book__input__field'>
+                        <label>টাইপ</label>
+                        <input
+                            name='type'
+                            type='text'
+                            placeholder='বইয়ের টাইপ লিখুন'
+                            value={ebook.type}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className='admin__input dashboardCk '>
+                        <label className='mt-[15px]'>সারসংক্ষেপ</label>
                         <CustomEditor
-                            initialData=''
-                            setContent={setInfodata}
+                            initialData={ebook.summary}
+                            setContent={(data) => setEbook(prevState => ({ ...prevState, summary: data }))}
+
                         />
                         {/* <textarea type='text' placeholder='বইয়ের সারসংক্ষেপ' /> */}
                     </div>
@@ -174,16 +331,17 @@ function MyAudioUploadForm() {
                     <div className='admin__input dashboardCk'>
                         <label>কলাকুশলী</label>
                         <CustomEditor
-                            initialData=''
-                            setContent={setInfodata}
+                            initialData={ebook.info}
+                            setContent={(data) => setEbook(prevState => ({ ...prevState, info: data }))}
                         />
                         {/* <textarea type='text' placeholder='info' /> */}
                     </div>
                     <div className='admin__input dashboardCk'>
                         <label>লেখকের মন্তব্য</label>
                         <CustomEditor
-                            initialData=''
-                            setContent={setInfodata}
+                            initialData={ebook.message}
+                            setContent={(data) => setEbook(prevState => ({ ...prevState, message: data }))}
+
                         />
                         {/* <textarea type='text' placeholder='message' /> */}
                     </div>
@@ -193,10 +351,12 @@ function MyAudioUploadForm() {
                 <div className='w-[50%] pl-[12px]'>
                     <button
                         className="page__common__yello__btn w-[80%] h-[50px] bg-[#FCA000] rounded-md text-[16px] text-white items-center profile__btn__midl"
+                        type="submit"
+                        onClick={handleSubmit}
+                        disabled={isLoading}
                     >
-                        ক্রিয়েট করুন 
+                        {isLoading ? 'Uploading...' : 'ক্রিয়েট করুন'}
                     </button>
-
                 </div>
             </div>
         </div>

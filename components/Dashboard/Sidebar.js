@@ -20,7 +20,7 @@ const Sidebar = () => {
     ];
     const menuItemsAudio = [
         { textA: 'Creat Ebook', iconA: 'ri-progress-8-fill', href: '/admin/createbook' },
-        { textA: 'All Category', iconA: 'ri-progress-8-fill', href: '/admin/allcategory' },
+        { textA: 'Create Category', iconA: 'ri-progress-8-fill', href: '/admin/allcategory' },
         { textA: 'Create Slider', iconA: 'ri-progress-8-fill', href: '/admin/slider' },
         { textA: 'All Writer', iconA: 'ri-progress-8-fill', href: '/admin/writerlist' },
         { textA: 'Slider List', iconA: 'ri-progress-8-fill', href: '/admin/allslidertable' },

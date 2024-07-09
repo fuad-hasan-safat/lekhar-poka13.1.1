@@ -8,8 +8,7 @@ export default function CommentsOfWriter({commentsOfWriter}) {
                 <hr></hr>
             </div>
 
-            <div className='audio__tab__details'>
-                <p className='text-justify'>{commentsOfWriter}</p>
+            <div className='audio__tab__details' dangerouslySetInnerHTML={{__html:commentsOfWriter}}>
 
             </div>
         </div>

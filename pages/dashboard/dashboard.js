@@ -13,6 +13,7 @@ import AllWriterBio from '../../components/Dashboard/components/AllWriterBio';
 import CreateSliderPage from '../../components/Dashboard/components/CreateSliderPage';
 import WriterList from '../../components/Dashboard/components/AllWriterList';
 import CreatEbook from '../../components/Dashboard/components/CreatEbook';
+import CreateAudioCategory from '../../components/Dashboard/components/CreateAudioCategory';
 
 
 const notificationData =[
@@ -107,6 +108,7 @@ const Dashboard = ({children}) => {
                     {currentindex === 6 && <AllDesignation/>}
                     {currentindex === 7 && <AllWriterBio/>}
                     {currentindex === 9 && <CreatEbook />}
+                    {currentindex === 10 && <CreateAudioCategory/>}
                 </div>
             </div>
         </div>

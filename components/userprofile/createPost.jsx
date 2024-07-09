@@ -420,11 +420,7 @@ export default function CreatePost() {
                                         styles={customStyles}
                                         options={writersOptions}
                                     />
-
                                 </div>
-
-
-
                             </div>
                         </>
                     }

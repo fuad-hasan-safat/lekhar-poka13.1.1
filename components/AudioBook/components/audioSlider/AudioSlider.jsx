@@ -34,7 +34,7 @@ export default function AudioSlider() {
       }))
 
     } catch (error) {
-      console.log({error})
+      console.log({ error })
     }
 
   }
@@ -46,13 +46,21 @@ export default function AudioSlider() {
       {homeSlider.audioSlider.map((sliderData, index) => {
         console.log(sliderData)
         return (
+
           <Fragment key={index}>
-            <div className='hm__audio__see__more'>
-              <h3>{sliderData.category}</h3>
-              <Link className='hm__audio__common__btn' href='/audiobook/seemorelist' onClick={() => setSliderInfo(sliderData.background, sliderData.category)}>সব দেখুন</Link>
-            </div>
-            {sliderData.background === 'no_background' && <WithoutBgSlider sliderData={sliderData.sliderData} />}
-            {sliderData.background === 'background' && <BackGroundSlider sliderData={sliderData.sliderData} />}
+            {sliderData.sliderData.length ?
+              <>
+                <div className='hm__audio__see__more'>
+                  <h3>{sliderData.category}</h3>
+                  <Link className='hm__audio__common__btn' href='/audiobook/seemorelist' onClick={() => setSliderInfo(sliderData.background, sliderData.category)}>সব দেখুন</Link>
+                </div>
+                {sliderData.background === 'no_background' && <WithoutBgSlider sliderData={sliderData.sliderData} />}
+                {sliderData.background === 'background' && <BackGroundSlider sliderData={sliderData.sliderData} />}
+              </> :
+              <>
+              <div></div>
+              </>
+            }
           </Fragment>
         )
       })}

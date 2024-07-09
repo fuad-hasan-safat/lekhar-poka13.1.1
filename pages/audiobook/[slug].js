@@ -67,7 +67,7 @@ export default function Home({ singleAudioData }) {
                     <div className="relative  flex justify-center items-center  w-full xl:h-[380px] lg:h-[380px] md:h-[360px] sm:h-[280px] xs:h-[270px]  overflow-hidden" style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat` }}>
                         <div className='audio_banner__info__wrap flex flex-row place-content-center justify-center items-center'>
                             <div className=''>
-                                <img className='lg:w-[180px] md:w-[170px] sm:w-[140px] xs:w-[75px] lg:h-[270px] md:h-[260px] sm:h-[190px] xs:h-[130px] -rotate-[19deg]' src={`${apiBasePath}/${singleAudioData?.banner_img}`} alt='' />
+                                <img className='object-cover lg:w-[180px] md:w-[170px] sm:w-[140px] xs:w-[75px] lg:h-[270px] md:h-[260px] sm:h-[190px] xs:h-[130px] -rotate-[19deg]' src={`${apiBasePath}/${singleAudioData?.banner_img}`} alt='' />
 
                             </div>
                             <div className='lg:ml-[98px] lg:ml-[90px] sm:ml-[80px] xs:ml-[30px] text-center relative'>

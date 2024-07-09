@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { SeeAllSliderContext } from '../../../../store/seeall-slider-context';
 import { useRouter } from 'next/router';
+import { apiBasePath } from '../../../../../utils/constant';
 
 export default function AudioSingleCategory({ color, title, image, background }) {
     const router = useRouter();
@@ -24,7 +25,7 @@ export default function AudioSingleCategory({ color, title, image, background })
                         <h5> {title} </h5>
                     </div>
                     <div className='audio__cat__image'>
-                        <img src={image} alt='Audio Cat Image' />
+                        <img src={`${apiBasePath}/${image}`} alt='Audio Cat Image' />
                     </div>
 
                 </div>

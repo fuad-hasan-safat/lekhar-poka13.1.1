@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useRouter } from 'next/router';
+import { apiBasePath } from '../../../../../utils/constant';
 
 export default function BackGroundSlider({ sliderData, category }) {
     console.log('BACKGROUND SLIDER', sliderData)
@@ -53,10 +54,10 @@ export default function BackGroundSlider({ sliderData, category }) {
                             key={index} 
                             className='backgroundSlider__single__iteam' 
                             style={{ backgroundColor: `${color}` }}
-                            onClick={()=>sliderClickHandler(iteam.id)}
+                            onClick={()=>sliderClickHandler(iteam._id)}
                             >
                                 <div className='audio__bgslider__image'>
-                                    <img src={iteam.image} alt='' />
+                                    <img src={`${apiBasePath}/${iteam.image}`} alt='' />
                                 </div>
                                 <div className='audio__bgslider__text'>
                                     <h5> {iteam.title} </h5>

@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
+import { apiBasePath } from '../../../../utils/constant';
 
 export default function SeeMoreListBackground(audioData) {
     console.log(audioData.audioData)
@@ -42,7 +43,7 @@ export default function SeeMoreListBackground(audioData) {
                         onClick={()=>sliderClickHandler(iteam?._id)}
                         >
                             <div className='audio__bgslider__image'>
-                                <img src={iteam.image} alt='' />
+                                <img src={`${apiBasePath}/${iteam.image}`} alt='' />
                             </div>
                             <div className='audio__bgslider__text'>
                                 <h5> {iteam.title} </h5>

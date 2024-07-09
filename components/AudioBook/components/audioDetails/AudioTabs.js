@@ -22,10 +22,6 @@ const AudioTabs = ({singleAudioData}) => {
     ToggleState === index ? className : "";
 
 
-
-
- 
-
   return (
     <>
 

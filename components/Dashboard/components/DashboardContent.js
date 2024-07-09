@@ -146,7 +146,7 @@ function DashboardContent() {
                 <h3>Lekharpoka</h3>
                 <ul>
                     {dashboardCtData.map((item,index)=>(
-                      <li>
+                      <li key={index}>
                         <div className='dashboard__cmpt__grid' style={{backgroundColor:`${item.color}`}}>
                             <div>
                                 <h5>{item.title}</h5>
@@ -162,7 +162,7 @@ function DashboardContent() {
                 <h3>Audio Book</h3>
                 <ul>
                     {AudioCategoryData.map((item,index)=>(
-                      <li>
+                      <li key={index + 9}>
                         <div className='dashboard__cmpt__grid' style={{backgroundColor:`${item.color}`}}>
                             <div>
                                 <h5>{item.title}</h5>

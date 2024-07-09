@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
+import { apiBasePath } from '../../../../utils/constant';
 
 export default function SeeMoreListGrid({audioData}) {
     console.log(audioData)
@@ -33,7 +34,7 @@ export default function SeeMoreListGrid({audioData}) {
                 <div key={index} className='hm__audio__recent__slide__item'>
                     <div className='hm__audio__recent__slide__item__innr' onClick={() => sliderClickHandler(item?._id)}>
                         <div className='hm__audio__recent__slide__item__img'>
-                            <img src={item.image} alt='Slider Img' />
+                            <img src={`${apiBasePath}/${item.image}`} alt='Slider Img' />
                         </div>
                         <div className='hm__audio__recent__slide__dsc'>
                             <h5>{item.title}</h5>
