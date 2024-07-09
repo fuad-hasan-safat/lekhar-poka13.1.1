@@ -1,29 +1,41 @@
 import React, { useState } from 'react'
 import { apiBasePath } from '../../../../utils/constant';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 
 export default function CreateRating({singleAudioData}) {
+    const router = useRouter();
 
     const [userRating, setUserRating] = useState('');
 
     async function submitRating() {
-        const postData = {
-            rating: userRating,
-        };
+        if(localStorage.getItem('uuid').length > 0 && localStorage.getItem('uuid')){
+            const postData = {
+                ebook_id:`${router.query.slug}`,
+                name:localStorage.getItem('name'),
+                comment: userRating,
+                user_id:localStorage.getItem('uuid')
+            };
 
-        try {
-            const response = await fetch(`${apiBasePath}/commentaudiobook`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(postData),
-            });
+            console.log({postData})
 
-            const result = await response.json();
-            console.log('Response:', result); // Handle the response as needed
-        } catch (error) {
-            console.error('Error submitting rating:', error);
+            if(postData.comment.trim() === '') return;
+        
+            try {
+                const response = await axios.post(`${apiBasePath}/commentaudiobook`, postData, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+        
+                const result = response.data;
+                console.log('Response:', result); // Handle the response as needed
+            } catch (error) {
+                console.error('Error submitting rating:', error);
+            }
+
         }
+       
     }
 
     return (
