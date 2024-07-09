@@ -38,6 +38,16 @@ const notificationData =[
     info:'John Doe added new task ',
     time:'40 Mintes Age',
     },
+    {
+    image:'/images/dashboard/profile-img.jpg',
+    info:'John Doe added new task ',
+    time:'40 Mintes Age',
+    },
+    {
+    image:'/images/dashboard/profile-img.jpg',
+    info:'John Doe added new task ',
+    time:'40 Mintes Age',
+    },
 ]
 
 const Dashboard = ({children}) => {
