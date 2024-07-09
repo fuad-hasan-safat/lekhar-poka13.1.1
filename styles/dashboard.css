@@ -538,6 +538,14 @@ all__page__content__block
 .audio__book__input__field input:focus{
     border-color: #F9A106;
 }
+.audio__book__input__fields label input{
+    margin-right: 5px;
+    display: inline-block;
+    vertical-align: baseline;
+} 
+.audio__book__input__radio div label{
+    font-size: 14px;
+}
 
 
 

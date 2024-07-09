@@ -222,7 +222,7 @@ function MyAudioUploadForm() {
                     </div>
                 </div>
                 <div className='audio__book__input__fields clearfix flex w-full'>
-                    <div className='w-[33.333%] text-black'>
+                    <div className='audio__book__input__radio w-[33.333%] text-black mr-[10px] ml-[10px]'>
                         <label>পূর্ণবয়স্ক উপাদান?</label>
                         <div>
                             <label>
@@ -247,7 +247,7 @@ function MyAudioUploadForm() {
                             </label>
                         </div>
                     </div>
-                    <div className='w-[33.333%] text-black'>
+                    <div className='audio__book__input__radio w-[33.333%] text-black'>
                         <label>বইটি কি প্রিমিয়াম ?</label>
                         <div>
                             <label>
@@ -272,7 +272,7 @@ function MyAudioUploadForm() {
                             </label>
                         </div>
                     </div>
-                    <div className='w-[33.333%] text-black'>
+                    <div className='audio__book__input__radio w-[33.333%] text-black'>
                         <label>ব্যাকগ্রাউন্ড</label>
                         <div className=''>
                             <label>

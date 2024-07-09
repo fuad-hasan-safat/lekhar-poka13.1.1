@@ -16,7 +16,6 @@ const Sidebar = () => {
         { text: 'Slider List', icon: 'ri-progress-8-fill', href: '/admin/allslidertable' },
         { text: 'Designation List', icon: 'ri-progress-8-fill', href: '/admin/alldesignation' },
         { text: 'Bio List', icon: 'ri-progress-8-fill', href: '/admin/allWriterBio' },
-        { text: 'Website', icon: 'ri-progress-8-fill', href: '/' },
     ];
     const menuItemsAudio = [
         { textA: 'Creat Ebook', iconA: 'ri-progress-8-fill', href: '/admin/createbook' },
@@ -26,7 +25,6 @@ const Sidebar = () => {
         { textA: 'Slider List', iconA: 'ri-progress-8-fill', href: '/admin/allslidertable' },
         { textA: 'Designation List', iconA: 'ri-progress-8-fill', href: '/admin/alldesignation' },
         { textA: 'Bio List', iconA: 'ri-progress-8-fill', href: '/admin/allWriterBio' },
-        { textA: 'Website', iconA: 'ri-progress-8-fill', href: '/' },
     ];
 
     const isActive = (href) => {
@@ -54,7 +52,7 @@ const Sidebar = () => {
                 <ul>
                     {menuItemsAudio.map((items,index)=>(
                         <li key={index}>
-                            <button onClick={()=>handleIndexClick(index + 9, items.textA)}>
+                            <button onClick={()=>handleIndexClick(index + 8, items.textA)}>
                                 <i className={`ri ${items.iconA} text-black`}></i>
                                 {items.textA}
                             </button>
