@@ -35,9 +35,10 @@
 .d__account__wrap{
     display: flex;
 }
-.d__account__wrap span{
+.d__account__wrap span {
     display: inline-block;
     vertical-align: baseline;
+    cursor: pointer;
 }
 .d__account__wrap span img{
     width: 50px;
@@ -65,10 +66,31 @@
 .d__account__wrap.open ul{
     display: block;
     top: 100%;
+    border: 1px solid rgba(182, 182, 182, 0.1);
+    border-radius: 2px;
+	box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.13);
     transition: all 0.5s;
     -ms-transition: all 0.5s;
     -webkit-transition: all 0.5s;
 }
+
+/* .d__account__wrap.open ul,
+.d__notifation__wrap.open ul{
+    display: block;
+	margin-top:20px;
+	position: absolute;
+	right: 0;
+	left: auto;
+	border: 1px solid rgba(182, 182, 182, 0.1);
+	min-width: 100%;
+	border-radius: 2px;
+	box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.13);
+	overflow-x: hidden;
+	height: 350px;
+	overflow-y: auto;
+	overflow: hidden;
+} */
+
 .d__notifation__wrap{
     margin-right: 20px;
     position: relative;
@@ -81,6 +103,7 @@
     height: 40px;
     background: #F9A106;
     border-radius: 30px;
+    cursor: pointer;
 }
 .d__notifation__wrap span i{
     color: #fff;
@@ -104,6 +127,11 @@
     -webkit-transition: all 0.5s;
     height: 265px;
     overflow-y: scroll;
+}
+.d__notifation__wrap ul::-webkit-scrollbar {
+    width:5px;
+    background: #F9A106;
+    border-radius: 5px;
 }
 .d__account__wrap ul li{
     padding: 10px 0;
