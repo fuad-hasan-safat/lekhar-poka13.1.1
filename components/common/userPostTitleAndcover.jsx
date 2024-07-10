@@ -118,9 +118,13 @@ export default function UserPostTitleAndcover({
     postuploadedBy = profileName;
   }
 
-  let shortenTitle = title?.length > 23 ? `${title?.slice(0, 22)}...` : title;
-  let shortenWriter = writer?.length > 26 ? `${writer?.slice(0, 25)}...` : writer;
-  let shortenUploadedBy = postuploadedBy?.length > 12 ? `${postuploadedBy?.slice(0, 12)}...` : postuploadedBy;
+  // let shortenTitle = title?.length > 23 ? `${title?.slice(0, 22)}...` : title;
+  // let shortenWriter = writer?.length > 26 ? `${writer?.slice(0, 25)}...` : writer;
+  // let shortenUploadedBy = postuploadedBy?.length > 12 ? `${postuploadedBy?.slice(0, 12)}...` : postuploadedBy;
+
+  let shortenTitle = title;
+  let shortenWriter = writer;
+  let shortenUploadedBy = postuploadedBy;
 
   let defaultBannerImage = '/images/defaultUserPic/square/null.png'
 
@@ -148,69 +152,74 @@ export default function UserPostTitleAndcover({
 
         </div>
 
-        <div className="hm__post__profile__grid lg:w-[400px] md:w-[270px] sm:w-[270px] xs:w-[240px] relative">
+        <div className="hm__post__profile__grid  relative">
           <div className="">
-            <h1 className="lg:text-[32] md:text-[28px] sm:text-[24px] xs:text-[14px] leading-7 lg:pr-[50px] text-[#FCD200] font-bold" style={{ lineHeight: '1.2' }}>{shortenTitle}</h1>
+            <h1 className="lg:text-[32] md:text-[25px] sm:text-[23px] xs:text-[14px] leading-7 lg:pr-[50px] text-[#FCD200] font-bold" style={{ lineHeight: '1.2' }}>{shortenTitle}</h1>
           </div>
 
-          <Link className="lg:text-[22px] md:text-[16px] sm:text-[16px] xs:text-[12px]  font-semibold text-[#595D5B] " href={`/postswriter/${writer_id}`} >{shortenWriter}</Link>
-            <div className="hm__post__profile__info text-[16px] font-thin leading-1 pt-[5px]">
-              <Link className="flex place-content-start items-center leading-1 lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[12px]  text-[#595D5B]" href={`/postswriter/${writer_id}`} style={{ lineHeight: '1' }} >
+          <Link className="flex items-center lg:text-[18px] md:text-[16px] sm:text-[14px] xs:text-[12px]  font-semibold text-[#595D5B] " href={`/postswriter/${writer_id}`} > 
+          <span className='inline-block mr-[10px]'>
+            <img className="w-[24px] h-[24px] rounded-full block m-auto shadow-lg" src={writerImage === '' ? defaultBannerImage : `${apiBasePath}/${writerImage?.slice(writerImage.indexOf('/') + 1)}`} alt="" />
+          </span>
+          
+          <span className='inline-block'> {shortenWriter} </span></Link>
+          <div className="hm__post__profile__info text-[16px] font-thin leading-1 pt-[5px]">
+            <Link className="flex place-content-start items-center leading-1 lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[12px]  text-[#595D5B]" href={`/postswriter/${writer_id}`} style={{ lineHeight: '1' }} >
 
-                {((uploadedBy !== null) && uploadedBy.length > 0) && <> <span className='inline-block mr-[10px]'>
-                  <img className="w-[24px] h-[24px] rounded-full block m-auto shadow-lg" src={writerImage === '' ? defaultBannerImage : `${apiBasePath}/${writerImage?.slice(writerImage.indexOf('/') + 1)}`} alt="" />
-                </span>
-                  <span className='inline-block lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[11px] text-[#595D5B] mr-[15px]'>
-                    {shortenUploadedBy}
+              {/* {((uploadedBy !== null) && uploadedBy.length > 0) && <> <span className='inline-block mr-[10px]'>
+                <img className="w-[24px] h-[24px] rounded-full block m-auto shadow-lg" src={writerImage === '' ? defaultBannerImage : `${apiBasePath}/${writerImage?.slice(writerImage.indexOf('/') + 1)}`} alt="" />
+              </span>
+                <span className='inline-block lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[11px] text-[#595D5B] mr-[15px]'>
+                  {shortenUploadedBy}
 
-                  </span></>}
-                {updatedAt.length > 0 && <>  <span className='inline-block '>
-                  <img src='/images/usericons/calender.svg' />
-                </span>
-                  <span className='inline-block leading-1 ml-[10px] lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[11px] text-[#595D5B]'>
-                    {banglaDate}
-                  </span></>}
-              </Link>
-            </div>
-
-            {isProfile &&
-              <>
-                <button
-                  onClick={moreOptionHandler}
-                  className='absolute top-0 right-0 text-[20px] rounded-full bg-[#EFEFEF] w-[38px]'><i class="ri-more-2-line"></i>
-                </button>
-                {isMoreClick &&
-                  <ul ref={editPostRef} className=' mt-[15px] absolute top-[35px] right-0 lg:text-[15px] sm:text-[13px] xs:text-[13px] backdrop-blur-md shadow-xl bg-[#FCF7E8] z-[1000] origin-top-right w-[110px] rounded-md  ring-opacity-5 focus:outline-none'>
-                    <li
-                      className="block cursor-pointer hover:bg-[#F9A106]  hover:text-white"
-
-                    >
-                      <button onClick={() => router.push(`/user/editpost/${id}`)} className=' w-full text-center'>সম্পাদন</button>
-                    </li>
-                    <hr />
-
-
-                    <li
-                      className="block cursor-pointer  hover:bg-[#F9A106]  hover:text-white"
-
-                    >
-                      <button onClick={() => dialogueRef.current.showModal()} className=' w-full text-center'>মুছে ফেলুন</button>
-                    </li>
-
-
-                  </ul>}
-              </>
-            }
-
+                </span></>} */}
+              {updatedAt.length > 0 && <>  <span className='inline-block '>
+                <img src='/images/usericons/calender.svg' />
+              </span>
+                <span className='inline-block leading-1 ml-[10px] lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[11px] text-[#595D5B]'>
+                  {banglaDate}
+                </span></>}
+            </Link>
           </div>
+
+          {isProfile &&
+            <>
+              <button
+                onClick={moreOptionHandler}
+                className='absolute top-0 right-0 text-[20px] rounded-full bg-[#EFEFEF] w-[38px]'><i class="ri-more-2-line"></i>
+              </button>
+              {isMoreClick &&
+                <ul ref={editPostRef} className=' mt-[15px] absolute top-[35px] right-0 lg:text-[15px] sm:text-[13px] xs:text-[13px] backdrop-blur-md shadow-xl bg-[#FCF7E8] z-[1000] origin-top-right w-[110px] rounded-md  ring-opacity-5 focus:outline-none'>
+                  <li
+                    className="block cursor-pointer hover:bg-[#F9A106]  hover:text-white"
+
+                  >
+                    <button onClick={() => router.push(`/user/editpost/${id}`)} className=' w-full text-center'>সম্পাদন</button>
+                  </li>
+                  <hr />
+
+
+                  <li
+                    className="block cursor-pointer  hover:bg-[#F9A106]  hover:text-white"
+
+                  >
+                    <button onClick={() => dialogueRef.current.showModal()} className=' w-full text-center'>মুছে ফেলুন</button>
+                  </li>
+
+
+                </ul>}
+            </>
+          }
 
         </div>
 
-        <div className='text-[16px]'>
-          <ToastContainer />
-        </div>
+      </div>
+
+      <div className='text-[16px]'>
+        <ToastContainer />
+      </div>
 
 
-      </>
-      )
+    </>
+  )
 }
