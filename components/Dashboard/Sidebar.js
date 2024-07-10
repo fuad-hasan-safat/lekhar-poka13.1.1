@@ -30,10 +30,8 @@ const Sidebar = () => {
         { textA: 'Creat Ebook', iconA: 'ri-progress-8-fill', href: '/admin/createbook' },
         { textA: 'Create Category', iconA: 'ri-progress-8-fill', href: '/admin/allcategory' },
         { textA: 'Create Quote', iconA: 'ri-progress-8-fill', href: '/admin/slider' },
-        { textA: 'All Writer', iconA: 'ri-progress-8-fill', href: '/admin/writerlist' },
-        { textA: 'Slider List', iconA: 'ri-progress-8-fill', href: '/admin/allslidertable' },
-        { textA: 'Designation List', iconA: 'ri-progress-8-fill', href: '/admin/alldesignation' },
-        { textA: 'Bio List', iconA: 'ri-progress-8-fill', href: '/admin/allWriterBio' },
+        { textA: 'Add Audioo', iconA: 'ri-progress-8-fill', href: '/admin/writerlist' },
+        
     ];
 
     const handleIndexClick = (index, page) => {
