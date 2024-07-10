@@ -7,6 +7,7 @@ import { convertToBengaliDate } from '../../utils/convertToBanglaDate'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DialugueModal from './notification/DialugueModal'
+import Link from 'next/link'
 
 export default function UserPostTitleAndcover({
   id,
@@ -75,22 +76,22 @@ export default function UserPostTitleAndcover({
   }
 
   async function deletePost() {
-    console.log('Delete id----',id)
-      try {
-        const response = await axios.delete(`${apiBasePath}/posts/${id}`);
-        console.log('Delete successful:', response.data);
+    console.log('Delete id----', id)
+    try {
+      const response = await axios.delete(`${apiBasePath}/posts/${id}`);
+      console.log('Delete successful:', response.data);
 
-        notification = 'পোস্টটি মুছে ফেলা হয়েছে'
-        notify();
+      notification = 'পোস্টটি মুছে ফেলা হয়েছে'
+      notify();
 
-        dialogueRef.current.close();
+      dialogueRef.current.close();
 
-        reloadPage();
-        return response.data;
-      } catch (error) {
-        console.error('Error deleting data:', error);
-        throw error;
-      }
+      reloadPage();
+      return response.data;
+    } catch (error) {
+      console.error('Error deleting data:', error);
+      throw error;
+    }
 
 
   }
@@ -117,9 +118,13 @@ export default function UserPostTitleAndcover({
     postuploadedBy = profileName;
   }
 
-  let shortenTitle = title?.length > 23 ? `${title?.slice(0, 22)}...` : title;
-  let shortenWriter = writer?.length > 26 ? `${writer?.slice(0, 25)}...` : writer;
-  let shortenUploadedBy = postuploadedBy?.length > 12 ? `${postuploadedBy?.slice(0, 12)}...` : postuploadedBy;
+  // let shortenTitle = title?.length > 23 ? `${title?.slice(0, 22)}...` : title;
+  // let shortenWriter = writer?.length > 26 ? `${writer?.slice(0, 25)}...` : writer;
+  // let shortenUploadedBy = postuploadedBy?.length > 12 ? `${postuploadedBy?.slice(0, 12)}...` : postuploadedBy;
+
+  let shortenTitle = title;
+  let shortenWriter = writer;
+  let shortenUploadedBy = postuploadedBy;
 
   let defaultBannerImage = '/images/defaultUserPic/square/null.png'
 
@@ -147,29 +152,34 @@ export default function UserPostTitleAndcover({
 
         </div>
 
-        <div className="hm__post__profile__grid lg:w-[400px] md:w-[270px] sm:w-[270px] xs:w-[240px] relative">
+        <div className="hm__post__profile__grid  relative">
           <div className="">
-            <h1 className="lg:text-[32] md:text-[28px] sm:text-[24px] xs:text-[17px] leading-7 lg:pr-[50px] text-[#FCD200] font-bold" style={{ lineHeight: '1.2' }}>{shortenTitle}</h1>
+            <h1 className="lg:text-[32] md:text-[25px] sm:text-[23px] xs:text-[14px] leading-7 lg:pr-[50px] text-[#FCD200] font-bold" style={{ lineHeight: '1.2' }}>{shortenTitle}</h1>
           </div>
 
-          <a className="lg:text-[22px] md:text-[16px] sm:text-[16px] xs:text-[14px]  font-semibold text-[#595D5B] " href={`/postswriter/${writer_id}`} >{shortenWriter}</a>
-
+          <Link className="flex items-center lg:text-[18px] md:text-[16px] sm:text-[14px] xs:text-[12px]  font-semibold text-[#595D5B] " href={`/postswriter/${writer_id}`} > 
+          <span className='inline-block mr-[10px]'>
+            <img className="w-[24px] h-[24px] rounded-full block m-auto shadow-lg" src={writerImage === '' ? defaultBannerImage : `${apiBasePath}/${writerImage?.slice(writerImage.indexOf('/') + 1)}`} alt="" />
+          </span>
+          
+          <span className='inline-block'> {shortenWriter} </span></Link>
           <div className="hm__post__profile__info text-[16px] font-thin leading-1 pt-[5px]">
-            <a className="flex place-content-start items-center leading-1 lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[11px]  text-[#595D5B]" href={`/postswriter/${writer_id}`} style={{ lineHeight: '1' }} >
-              {((uploadedBy !== null) && uploadedBy.length > 0) && <> <span className='inline-block mr-[10px]'>
+            <Link className="flex place-content-start items-center leading-1 lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[12px]  text-[#595D5B]" href={`/postswriter/${writer_id}`} style={{ lineHeight: '1' }} >
+
+              {/* {((uploadedBy !== null) && uploadedBy.length > 0) && <> <span className='inline-block mr-[10px]'>
                 <img className="w-[24px] h-[24px] rounded-full block m-auto shadow-lg" src={writerImage === '' ? defaultBannerImage : `${apiBasePath}/${writerImage?.slice(writerImage.indexOf('/') + 1)}`} alt="" />
               </span>
                 <span className='inline-block lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[11px] text-[#595D5B] mr-[15px]'>
                   {shortenUploadedBy}
 
-                </span></>}
+                </span></>} */}
               {updatedAt.length > 0 && <>  <span className='inline-block '>
                 <img src='/images/usericons/calender.svg' />
               </span>
                 <span className='inline-block leading-1 ml-[10px] lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[11px] text-[#595D5B]'>
                   {banglaDate}
                 </span></>}
-            </a>
+            </Link>
           </div>
 
           {isProfile &&
@@ -208,8 +218,6 @@ export default function UserPostTitleAndcover({
       <div className='text-[16px]'>
         <ToastContainer />
       </div>
-
-
     </>
   )
 }
