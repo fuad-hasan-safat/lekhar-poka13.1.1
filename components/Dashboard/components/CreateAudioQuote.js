@@ -61,7 +61,7 @@ export default function CreateAudioQuote() {
             <div className='submit__btn flex  !mt-[27px]'>
                 <div className='w-[50%] pl-[12px]'>
                     <button
-                        className="page__common__yello__btn w-[80%] h-[50px] bg-[#FCA000] rounded-md text-[16px] text-white items-center profile__btn__midl"
+                        className="page__common__yello__btn w-[80%] h-[45px] bg-[#FCA000] rounded-md text-[16px] text-white items-center profile__btn__midl"
                         type="submit"
                         onClick={handleSubmit}
                     >
