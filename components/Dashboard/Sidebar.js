@@ -70,7 +70,7 @@ const Sidebar = () => {
                             <ul>
                                 {menuItemsAudio.map((item, index) => (
                                     <li key={index + menuItems.length} className={`text-black ${currentindex === index + 8 ? 'active' : ''}`}>
-                                        <button onClick={() => handleIndexClick(index + 8, item.text)}>
+                                        <button onClick={() => handleIndexClick(index + 8, item.textA)}>
                                             <i className={`ri ${item.iconA} text-black`}></i>
                                             {item.textA}
                                         </button>
