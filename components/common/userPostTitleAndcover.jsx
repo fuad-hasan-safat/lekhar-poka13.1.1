@@ -173,10 +173,10 @@ export default function UserPostTitleAndcover({
                   {shortenUploadedBy}
 
                 </span></>} */}
-              {updatedAt.length > 0 && <>  <span className='inline-block '>
+              {updatedAt.length > 0 && <>  <span className='inline-block pl-[5px]'>
                 <img src='/images/usericons/calender.svg' />
               </span>
-                <span className='inline-block leading-1 ml-[10px] lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[11px] text-[#595D5B]'>
+                <span className='inline-block leading-1 ml-[14px] lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[11px] text-[#595D5B]'>
                   {banglaDate}
                 </span></>}
             </Link>
