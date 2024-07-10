@@ -15,12 +15,19 @@ import SeeAllSliderContextProvider from '../components/store/seeall-slider-conte
 import AudioPlayer from '../components/AudioBook/AudioPlayer/AudioPlayer';
 import SearchContextProvider from '../components/lekharpokaStore/search-context';
 import SearchResult from '../components/common/SearchResult'
-import AdminContextProvider from '../components/store/adminpanel-context';
+import AdminContextProvider, { AdminContext } from '../components/store/adminpanel-context';
+import useRouteChange from '../utils/useRouteChange';
+import { useContext } from 'react';
 
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const { pathname } = router;
   console.log("pathname : ", pathname);
+  const { setCurrentComponentIndex } = useContext(AdminContext)
+  useRouteChange((url) => {
+    console.log('Route changed to:', url);
+    setCurrentComponentIndex(0, 'Dashboard');
+  });
 
   // /account/login
   // /account/signup
@@ -32,22 +39,7 @@ export default function MyApp({ Component, pageProps }) {
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
   } else if (pathname == "/account/recoverpassword") {
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
-  } else if (pathname == "/admin/allposttable") {
-    result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
-  } else if (pathname == "/admin/slider") {
-    result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
-  } else if (pathname == "/admin/allslidertable") {
-    result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
-  } else if (pathname == "/admin/writerlist") {
-    result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
-  }
-  else if (pathname == "/admin/allcategory") {
-    result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
-  }
-  else if (pathname == "/admin/admin") {
-    result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
-  }
-  else if (pathname == '/dashboard/dashboard') {
+  } else if (pathname == '/dashboard/dashboard') {
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
   }
   else if (pathname == "/account/otp") {

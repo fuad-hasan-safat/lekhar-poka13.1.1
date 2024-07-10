@@ -10,10 +10,10 @@ const Sidebar = () => {
     const [activeMenu, setActiveMenu] = useState(0); // State to track the active menu
     const [openSubMenus, setOpenSubMenus] = useState({ 0: true }); // State to track open sub-menus
 
-    useEffect(() => {
-        // Set Lekhar Poka as active by default on the initial render
-        setCurrentComponentIndex(0, 'Dashboard');
-    }, []);
+    // useEffect(() => {
+    //     // Set Lekhar Poka as active by default on the initial render
+    //     // setCurrentComponentIndex(0, 'Dashboard');
+    // }, []);
 
     const menuItems = [
         { text: 'Dashboard', icon: 'ri-dashboard-fill', href: '/admin/allposttable' },
@@ -34,10 +34,14 @@ const Sidebar = () => {
         
     ];
 
-    const handleIndexClick = (index, page) => {
+    function handleIndexClick(index, page){
         setCurrentComponentIndex(index, page);
         setActiveMenu(index); // Set the clicked menu as active
-    };
+    }
+
+    // const handleIndexClick = (index, page) => {
+       
+    // };
 
     const toggleSubMenu = (index) => {
         setOpenSubMenus({ [index]: !openSubMenus[index] });
@@ -69,8 +73,8 @@ const Sidebar = () => {
                         {openSubMenus[1] && (
                             <ul>
                                 {menuItemsAudio.map((item, index) => (
-                                    <li key={index + menuItems.length} className={`text-black ${currentindex === index + 8 ? 'active' : ''}`}>
-                                        <button onClick={() => handleIndexClick(index + 8, item.text)}>
+                                    <li key={index + menuItems.length} className={`text-black ${currentindex === index + menuItems.length ? 'active' : ''}`}>
+                                        <button onClick={() => handleIndexClick(index + menuItems.length, item.textA)}>
                                             <i className={`ri ${item.iconA} text-black`}></i>
                                             {item.textA}
                                         </button>

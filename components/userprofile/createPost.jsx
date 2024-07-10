@@ -116,13 +116,14 @@ export default function CreatePost() {
             .then((response) => response.json())
             .then((data) => {
                 setWriters(data);
+                console.log('writer list on ---', data)
             })
             .catch((error) => console.error("Error fetching data:", error));
 
         fetch(`${apiBasePath}/categories`)
             .then((response) => response.json())
             .then((data) => {
-                console.log('Create post category -',data)
+                console.log('Create post category -', data)
                 setCategory(data);
             })
             .catch((error) => console.error("Error fetching data:", error))
@@ -139,10 +140,13 @@ export default function CreatePost() {
         setSelectedOption(selected); // Selected option object
     };
 
-    const writerhandleChange = (selected) => {
-        setSelectedWriter(selected); // Selected option object
-        setWriter(selected?.label)
-        setWriterId(selected?.value)
+    const writerhandleChange = (event) => {
+        // setSelectedWriter(selected); // Selected option object
+        // setWriter(selected?.label)
+        // setWriterId(selected?.value)
+        console.log('Writer select --', event.target.value.name)
+        setWriter(event.target.value.writerName);
+        setWriterId(event.target.value.writerId)
     };
 
     const customStyles = {
@@ -166,12 +170,12 @@ export default function CreatePost() {
     //     Categoryoptions.push(data);
     // }
 
-    let writersOptions = [];
-    for (let i = 0; i < writers.length; i++) {
-        let data = { value: writers[i]._id, label: writers[i].name };
-        // console.log('---data -----------'. data)
-        writersOptions.push(data);
-    }
+    // let writersOptions = [];
+    // for (let i = 0; i < writers.length; i++) {
+    //     let data = { value: writers[i]._id, label: writers[i].name };
+    //     // console.log('---data -----------'. data)
+    //     writersOptions.push(data);
+    // }
 
     const handleTitle = (e) => {
         setTitle(e.target.value);
@@ -267,37 +271,37 @@ export default function CreatePost() {
 
                     console.log(writer, writerId)
 
-                    try {
+                    // try {
 
-                        const response = await fetch(`${apiBasePath}/posts`, {
-                            method: "POST",
-                            headers: {
+                    //     const response = await fetch(`${apiBasePath}/posts`, {
+                    //         method: "POST",
+                    //         headers: {
 
-                            },
-                            body: formData,
-                        });
+                    //         },
+                    //         body: formData,
+                    //     });
 
-                        if (response.ok) {
-                            const data = await response.json();
-                            notification = 'আপনার লেখাটি অনুমোদনের জন্য এডমিনের কাছে পাঠানো হয়েছে। লেখাটি শীঘ্রই প্রকাশিত হবে। ধন্যবাদ';
-                            notify();
+                    //     if (response.ok) {
+                    //         const data = await response.json();
+                    //         notification = 'আপনার লেখাটি অনুমোদনের জন্য এডমিনের কাছে পাঠানো হয়েছে। লেখাটি শীঘ্রই প্রকাশিত হবে। ধন্যবাদ';
+                    //         notify();
 
-                            setSelectedFile(null);
-                            setTitle('');
-                            setCategory('');
-                            setWriters('');
-                            setContent('');
-                            setSummary('');
+                    //         setSelectedFile(null);
+                    //         setTitle('');
+                    //         setCategory('');
+                    //         setWriters('');
+                    //         setContent('');
+                    //         setSummary('');
 
-                            reloadPage();
+                    //         reloadPage();
 
-                        } else {
-                            console.error("Failed to update writing:", response.statusText);
-                        }
-                    } catch (error) {
-                        console.error("Error creating post:", error);
-                        notification = error
-                    }
+                    //     } else {
+                    //         console.error("Failed to update writing:", response.statusText);
+                    //     }
+                    // } catch (error) {
+                    //     console.error("Error creating post:", error);
+                    //     notification = error
+                    // }
                 } else {
                     notification = 'শিরোনাম, লেখার ধরণ ও সারসংক্ষেপ লিখুন';
                     notify();
@@ -369,11 +373,11 @@ export default function CreatePost() {
 
     }
 
-   
 
-    console.log({category})
 
-    if(!isLoading) return null;
+    console.log({ category })
+
+    if (!isLoading) return null;
 
     return (
         <>
@@ -405,21 +409,34 @@ export default function CreatePost() {
                         </select>
                     </div>
 
-
-
-
                     {userType === 'admin' &&
                         <>
                             <div className="text-[#F9A106] font-bold text-[20px] mt-[10px] !mb-[2px]">লেখক নির্বাচন করুন</div>
                             <div className=" place-content-center justify-center">
 
                                 <div className="">
-                                    <Select
+                                    {/* <Select
                                         value={selectedWriter}
                                         onChange={writerhandleChange}
                                         styles={customStyles}
                                         options={writersOptions}
-                                    />
+                                    /> */}
+
+                                    <select
+                                        id='writer'
+                                        name='writer'
+                                        className={`h-[45px] w-full px-[16px] text-black border-[1px] border-[#ddd] rounded-[7px]`}
+                                        required
+                                        onChange={writerhandleChange}
+                                    >
+                                        <option value="">লেখক নির্বাচন করুন</option>
+                                        {writers?.map((wrt)=>(
+                                            <option key={wrt._id} value={wrt.name}>
+                                                {wrt.name}
+                                            </option>
+                                        ))}
+
+                                    </select>
                                 </div>
                             </div>
                         </>
