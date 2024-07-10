@@ -116,13 +116,14 @@ export default function CreatePost() {
             .then((response) => response.json())
             .then((data) => {
                 setWriters(data);
+                console.log('writer list on ---', data)
             })
             .catch((error) => console.error("Error fetching data:", error));
 
         fetch(`${apiBasePath}/categories`)
             .then((response) => response.json())
             .then((data) => {
-                console.log('Create post category -',data)
+                console.log('Create post category -', data)
                 setCategory(data);
             })
             .catch((error) => console.error("Error fetching data:", error))
@@ -135,14 +136,14 @@ export default function CreatePost() {
     }, [isWriterAdded, isCategoryAdded])
 
 
-    const categoryhandleChange = (selected) => {
-        setSelectedOption(selected); // Selected option object
-    };
 
-    const writerhandleChange = (selected) => {
-        setSelectedWriter(selected); // Selected option object
-        setWriter(selected?.label)
-        setWriterId(selected?.value)
+
+    const writerhandleChange = (event) => {
+        const [id, name] = event.target.value.split('|');
+
+        console.log('Writer select --', id, name)
+        setWriter(name);
+        setWriterId(id)
     };
 
     const customStyles = {
@@ -155,23 +156,6 @@ export default function CreatePost() {
         }),
     };
 
-
-
-    // // Drop down category
-    // let Categoryoptions = [];
-    // let writersOptions = [];
-    // for (let i = 0; i < category.length; i++) {
-    //     let data = { value: category[i]._id, label: category[i].title };
-    //     // console.log('---data -----------'. data)
-    //     Categoryoptions.push(data);
-    // }
-
-    let writersOptions = [];
-    for (let i = 0; i < writers.length; i++) {
-        let data = { value: writers[i]._id, label: writers[i].name };
-        // console.log('---data -----------'. data)
-        writersOptions.push(data);
-    }
 
     const handleTitle = (e) => {
         setTitle(e.target.value);
@@ -250,7 +234,6 @@ export default function CreatePost() {
                 formData.append("file", selectedFile);
                 formData.append("image", image);
                 formData.append("category", selectedOption);
-                // formData.append("cat_id", selectedOption?.value);
                 formData.append("writer", writer);
                 formData.append("writer_id", writerId);
                 formData.append("title", title);
@@ -369,11 +352,11 @@ export default function CreatePost() {
 
     }
 
-   
 
-    console.log({category})
 
-    if(!isLoading) return null;
+    console.log({ category })
+
+    if (!isLoading) return null;
 
     return (
         <>
@@ -397,7 +380,7 @@ export default function CreatePost() {
                             value={selectedOption}
                             onChange={(e) => setSelectedOption(e.target.value)}>
                             <option value="">লেখার ধরণ</option>
-                            {category?.map((cat) => (
+                            {category?.length > 0 && category?.map((cat) => (
                                 <option key={cat._id} value={cat.title}>
                                     {cat.title}
                                 </option>
@@ -405,21 +388,34 @@ export default function CreatePost() {
                         </select>
                     </div>
 
-
-
-
                     {userType === 'admin' &&
                         <>
                             <div className="text-[#F9A106] font-bold text-[20px] mt-[10px] !mb-[2px]">লেখক নির্বাচন করুন</div>
                             <div className=" place-content-center justify-center">
 
                                 <div className="">
-                                    <Select
+                                    {/* <Select
                                         value={selectedWriter}
                                         onChange={writerhandleChange}
                                         styles={customStyles}
                                         options={writersOptions}
-                                    />
+                                    /> */}
+
+                                    <select
+                                        id='writer'
+                                        name='writer'
+                                        className={`h-[45px] w-full px-[16px] text-black border-[1px] border-[#ddd] rounded-[7px]`}
+                                        required
+                                        onChange={writerhandleChange}
+                                    >
+                                        <option value="">লেখক নির্বাচন করুন</option>
+                                        {writers.length > 0 && writers?.map((wrt)=>(
+                                            <option key={wrt._id} value={`${wrt._id}|${wrt.name}`}>
+                                                {wrt.name}
+                                            </option>
+                                        ))}
+
+                                    </select>
                                 </div>
                             </div>
                         </>

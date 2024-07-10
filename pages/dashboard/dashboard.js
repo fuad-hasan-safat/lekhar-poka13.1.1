@@ -79,8 +79,8 @@ const Dashboard = ({children}) => {
             </Head>
             <div className='dashboard__header'>
                 <div className='header-left'>
-                    <div className="d-logo">
-                        <Link href="/">
+                    <div className="d-logo cursor-pointer z-[9999]">
+                        <Link href='/'>
                             <img src='/images/svgs/lekhapokaBlack.svg' alt='lekhapo kaBlack' />
                         </Link>
                     </div>

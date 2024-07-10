@@ -21,21 +21,22 @@ export default function AdminContextProvider({ children }) {
         currentPage: 'Dashboard',
         viewPostid: '',
         editPostid: '',
-        deletePostId:'',
+        deletePostId: '',
         isEditpost: false,
         isViewPost: false,
     })
 
     useEffect(() => {
-        const currentDashboardIndex = localStorage.getItem("dashBordPageIndex");
+        const currentDashboardIndex = parseInt(localStorage.getItem("dashBordPageIndex"));
         const currentDashboardPageScope = localStorage.getItem("dashBordPageScope");
 
         console.log({ currentDashboardIndex, currentDashboardPageScope })
-        if (currentDashboardIndex) {
-            setDashboard({
-                currentindex: parseInt(currentDashboardIndex),
+        if (currentDashboardIndex != null) {
+            setDashboard((prevState) => ({
+                ...prevState,
+                currentindex: currentDashboardIndex,
                 currentPage: currentDashboardPageScope
-            })
+            }))
         }
 
 
@@ -44,13 +45,16 @@ export default function AdminContextProvider({ children }) {
     function updateCurrentComponentIndex(index, page) {
         localStorage.setItem("dashBordPageIndex", index);
         localStorage.setItem("dashBordPageScope", page);
-
+        console.log({ index, page })
         setDashboard((prevDashboard) => ({
             ...prevDashboard,
             currentindex: index,
             currentPage: page,
             isViewPost: false,
             isEditpost: false,
+            viewPostid: '',
+            editPostid: '',
+            deletePostId: '',
         }))
 
     }
@@ -71,10 +75,10 @@ export default function AdminContextProvider({ children }) {
         }))
     }
 
-    function setPostIdToDelete(id){
+    function setPostIdToDelete(id) {
         setDashboard((prevdashboard) => ({
             ...prevdashboard,
-            deletePostId:id
+            deletePostId: id
         }))
     }
 
