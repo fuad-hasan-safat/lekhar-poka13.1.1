@@ -159,7 +159,7 @@ export default function UserPostTitleAndcover({
 
           <Link className="flex items-center lg:text-[18px] md:text-[16px] sm:text-[14px] xs:text-[12px]  font-semibold text-[#595D5B] " href={`/postswriter/${writer_id}`} > 
           <span className='inline-block mr-[10px]'>
-            <img className="w-[24px] h-[24px] rounded-full block m-auto shadow-lg" src={writerImage === '' ? defaultBannerImage : `${apiBasePath}/${writerImage?.slice(writerImage.indexOf('/') + 1)}`} alt="" />
+            <img className="lg:w-[24px] lg:h-[24px] md:w-[22px] md:h-[22px] sm:w-[20px] sm:h-[20px] xs:w-[18px] xs:h-[18px] rounded-full block m-auto shadow-lg" src={writerImage === '' ? defaultBannerImage : `${apiBasePath}/${writerImage?.slice(writerImage.indexOf('/') + 1)}`} alt="" />
           </span>
           
           <span className='inline-block'> {shortenWriter} </span></Link>
