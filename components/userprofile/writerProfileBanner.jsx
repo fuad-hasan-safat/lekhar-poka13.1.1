@@ -129,6 +129,12 @@ export default function WriterProfileBanner({
 
 
     async function followUserhandler(user_id, following) {
+        if(!localStorage.getItem('uuid') || localStorage.getItem('uuid').length > 0 ){
+            notification = 'অনুসরণ করতে লগইন করুন'
+            notify();
+
+            return;
+        }
         if (!isAlreadyFollowing) {
             try {
                 const response = await axios.post(
