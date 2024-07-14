@@ -4,30 +4,37 @@ import axios from "axios";
 import { apiBasePath } from "../../../utils/constant";
 import NotFound from "../../common/nofFound";
 import DialugueModal from "../../common/notification/DialugueModal";
+import CreateWriter from "../../userprofile/createWriter";
 
 const WriterList = () => {
-
+  const router = useRouter();
   const dialogueRef = useRef();
   const [userType, setUserType] = useState("");
   const [writerList, setWriterList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [writersPerPage] = useState(5); // Number of writers per page
+  const [writersPerPage] = useState(10); // Number of writers per page
   const [searchTerm, setSearchTerm] = useState(""); // State for search term
   const [selectedWriterId, settSelectedWriterId] = useState(null);
+  const [isWriterAdded, setIsWriterAdded] = useState(false)
+
 
   useEffect(() => {
     setUserType(localStorage.getItem("usertype") || "");
   }, []);
 
   useEffect(() => {
+    if(isWriterAdded){
+      router.refresh();
+    }
     fetchWriterList();
-  }, []);
+  }, [isWriterAdded]);
 
   const fetchWriterList = () => {
     fetch(`${apiBasePath}/writers`)
       .then((response) => response.json())
       .then((data) => {
         setWriterList(data);
+        console.log('dashboard writer ', data)
       })
       .catch((error) => console.error("Error fetching data:", error));
   };
@@ -60,9 +67,14 @@ const WriterList = () => {
   };
 
   // Pagination logic
-  const indexOfLastWriter = currentPage * writersPerPage;
-  const indexOfFirstWriter = indexOfLastWriter - writersPerPage;
-  const currentWriters = writerList.slice(indexOfFirstWriter, indexOfLastWriter);
+    // Filter writers based on search term
+    const filteredWriterList = writerList.filter((writer) =>
+      writer.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    const indexOfLastWriter = currentPage * writersPerPage;
+    const indexOfFirstWriter = indexOfLastWriter - writersPerPage;
+    const currentWriters = filteredWriterList.slice(indexOfFirstWriter, indexOfLastWriter);
+
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -84,12 +96,11 @@ const WriterList = () => {
     setCurrentPage(1); // Reset pagination when search term changes
   };
 
-  // Filter writers based on search term
-  const filteredWriterList = writerList.filter((writer) =>
-    writer.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
-  function handleWriterDlete(id){
+
+  
+
+  function handleWriterDlete(id) {
     settSelectedWriterId(id);
     dialogueRef.current.showModal();
   }
@@ -97,7 +108,10 @@ const WriterList = () => {
   if (userType === "admin") {
     return (
       <div className="all__page__content__block clearfix">
-      <DialugueModal ref={dialogueRef} alert='আপনি কি লেখক মুছে ফেলতে চান' address={deleteWriter} type='delete' />
+        <div className='profile__btn__midl'>
+          <CreateWriter setIsWriterAdded={setIsWriterAdded} />
+        </div>
+        <DialugueModal ref={dialogueRef} alert='আপনি কি লেখক মুছে ফেলতে চান' address={deleteWriter} type='delete' />
         <div className="all__post__search">
           <input
             type="search"
@@ -119,8 +133,8 @@ const WriterList = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredWriterList.length > 0 ? (
-                filteredWriterList.map((writer, index) => (
+              {currentWriters.length > 0 ? (
+                currentWriters.map((writer, index) => (
                   <tr key={writer._id}>
                     <td>{indexOfFirstWriter + index + 1}</td>
                     <td>{writer.name}</td>

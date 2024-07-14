@@ -5,6 +5,7 @@ import { apiBasePath } from "../../../utils/constant";
 import NotFound from "../../common/nofFound";
 import ContentList from "./ContentList";
 import DialugueModal from "../../common/notification/DialugueModal";
+import CreateCategory from '../../userprofile/createCategory';
 
 const Allcategory = () => {
   const router = useRouter();
@@ -15,14 +16,19 @@ const Allcategory = () => {
   const [categoriesPerPage] = useState(5);
   const [searchTerm, setSearchTerm] = useState(""); // State for search term
   const [selectedCatId, setSelectedId] = useState(null);
+  const [isCategoryAdded, setIsCategoryAdded] = useState(false)
+
 
   useEffect(() => {
     setUserType(localStorage.getItem("usertype") || "");
   }, []);
 
   useEffect(() => {
+    if(isCategoryAdded){
+      router.refresh();
+    }
     fetchCategoryList();
-  }, []);
+  }, [isCategoryAdded]);
 
   const fetchCategoryList = () => {
     fetch(`${apiBasePath}/categories`)
@@ -84,7 +90,7 @@ const Allcategory = () => {
   };
 
 
-  function handleCategoryDelete(id){
+  function handleCategoryDelete(id) {
     setSelectedId(id);
     dialogueRef.current.showModal();
   }
@@ -92,7 +98,10 @@ const Allcategory = () => {
   if (userType === "admin") {
     return (
       <div className="all__page__content__block clearfix">
-      <DialugueModal ref={dialogueRef} alert='আপনি কি লেখার ধরণ মুছে ফেলতে চান' address={deleteCategory} type='delete' />
+        <div className='profile__btn__midl'>
+          <CreateCategory setIsCategoryAdded={setIsCategoryAdded} />
+        </div>
+        <DialugueModal ref={dialogueRef} alert='আপনি কি লেখার ধরণ মুছে ফেলতে চান' address={deleteCategory} type='delete' />
 
         <div className="all__post__search">
           <input
