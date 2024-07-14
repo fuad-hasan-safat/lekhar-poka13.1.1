@@ -105,7 +105,7 @@ export default function UserPostTitleAndcover({
   let bannerImage = image;
 
   if (image === undefined || image === null || image === 'undefined') {
-    bannerImage = ''
+    bannerImage = writerImage;
   }
 
   let writerImage = writer_image
