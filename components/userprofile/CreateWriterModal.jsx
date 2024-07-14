@@ -2,16 +2,12 @@ import { useState } from 'react';
 import { apiBasePath } from '../../utils/constant';
 import ImageCropProvider from './cropComponents/ImageCropProvider';
 import ImageCrop from './cropComponents/ImageCrop';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const CreateWriterModal = ({ showModal, handleClose, setIsWriterAdded }) => {
   const [name, setName] = useState('');
   const [birthDate, setBirthDate] = useState('');
   const [deathDate, setDeathDate] = useState('');
   const [image, setImage] = useState(null);
-  let notification = '';
-
 
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
@@ -27,46 +23,32 @@ const CreateWriterModal = ({ showModal, handleClose, setIsWriterAdded }) => {
     formData.append('file', image);
 
 
-    if (image && name.trim() !== '' && birthDate.trim() !== '' && deathDate.trim() !== '') {
-      try {
-        const response = await fetch(`${apiBasePath}/writers`, {
-          method: 'POST',
-          body: formData
-        });
-        setIsWriterAdded(true)
-        setName('')
-        setBirthDate('')
-        setDeathDate('')
-        setImage(null)
-        handleClose();
-      } catch (error) {
-        console.error('Error creating writer:', error);
-      }
-    } else {
-      if(!image){
-        notification = 'ছবি আপলোড করুন ';
-      }else if(name.trim() === ''){
-        notification = 'নাম লিখুন';
-      }else if(birthDate.trim() === ''){
-        notification = 'জন্ম তারিখ প্রদান করুন ';
-      }else if(deathDate.trim() === ''){
-        notification = 'মৃত্যু তারিখ প্রদান করুন ';
-      }
-      notify();
+    setName('')
+    setBirthDate('')
+    setDeathDate('')
+    setImage(null)
+
+    try {
+      const response = await fetch(`${apiBasePath}/writers`, {
+        method: 'POST',
+        body: formData
+      });
+      setIsWriterAdded(true)
+
+     
+
+      handleClose();
+
+      // if (response.ok) {
+      //   console.log('Writer created successfully');
+      //   handleClose();
+      // } else {
+      //   console.error('Failed to create writer');
+      // }
+    } catch (error) {
+      console.error('Error creating writer:', error);
     }
-
-
   };
-
-  const notify = () => toast.warn(notification, {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: false,
-    pauseOnHover: false,
-    draggable: true,
-
-  });
 
   return (
     <div className={`${showModal ? 'block' : 'hidden'} fixed z-[9999999999] inset-0 overflow-y-auto flex items-center justify-center`} aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -130,6 +112,14 @@ const CreateWriterModal = ({ showModal, handleClose, setIsWriterAdded }) => {
                     <label className="pt-[15px] block text-gray-700 font-bold" htmlFor="image">
                       ছবি আপলোড করুন
                     </label>
+                    {/* <input
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="image"
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                        required
+                      /> */}
                     <div className='table m-auto mt-[30px] ' id='image'>
                       <ImageCropProvider>
                         <ImageCrop image={'/images/defaultUserPic/profile.jpg'} type="createWriter" setWriterImage={setImage} />
@@ -159,7 +149,6 @@ const CreateWriterModal = ({ showModal, handleClose, setIsWriterAdded }) => {
 
         </div>
       </div>
-      <ToastContainer/>
     </div>
   );
 };

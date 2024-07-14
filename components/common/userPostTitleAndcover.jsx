@@ -161,7 +161,7 @@ export default function UserPostTitleAndcover({
 
           <Link className="flex items-center lg:text-[18px] md:text-[16px] sm:text-[14px] xs:text-[12px]  font-semibold text-[#595D5B] " href={`/postswriter/${writer_id}`} > 
           <span className='inline-block mr-[10px]'>
-            <img className="lg:w-[24px] lg:h-[24px] md:w-[22px] md:h-[22px] sm:w-[20px] sm:h-[20px] xs:w-[18px] xs:h-[18px] rounded-full block m-auto shadow-lg" src={writerImage === '' ? defaultBannerImage : `${apiBasePath}/${writerImage?.slice(writerImage.indexOf('/') + 1)}`} alt="" />
+            <img className="w-[24px] h-[24px] rounded-full block m-auto shadow-lg" src={writerImage === '' ? defaultBannerImage : `${apiBasePath}/${writerImage?.slice(writerImage.indexOf('/') + 1)}`} alt="" />
           </span>
           
           <span className='inline-block'> {shortenWriter} </span></Link>
@@ -175,10 +175,10 @@ export default function UserPostTitleAndcover({
                   {shortenUploadedBy}
 
                 </span></>} */}
-              {updatedAt.length > 0 && <>  <span className='inline-block lg:pl-[5px] md:pl-[5px] sm:pl-[5px] xs:pl-[2px]'>
+              {updatedAt.length > 0 && <>  <span className='inline-block '>
                 <img src='/images/usericons/calender.svg' />
               </span>
-                <span className='inline-block leading-1 ml-[14px] lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[11px] text-[#595D5B]'>
+                <span className='inline-block leading-1 ml-[10px] lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[11px] text-[#595D5B]'>
                   {banglaDate}
                 </span></>}
             </Link>
@@ -220,6 +220,8 @@ export default function UserPostTitleAndcover({
       <div className='text-[16px]'>
         <ToastContainer />
       </div>
+
+
     </>
   )
 }

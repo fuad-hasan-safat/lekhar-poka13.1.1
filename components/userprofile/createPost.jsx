@@ -380,7 +380,7 @@ export default function CreatePost() {
                             value={selectedOption}
                             onChange={(e) => setSelectedOption(e.target.value)}>
                             <option value="">লেখার ধরণ</option>
-                            {category.length && category?.map((cat) => (
+                            {category?.length > 0 && category?.map((cat) => (
                                 <option key={cat._id} value={cat.title}>
                                     {cat.title}
                                 </option>

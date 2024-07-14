@@ -17,8 +17,6 @@ export async function getServerSideProps(context) {
   const res = await fetch(`${apiBasePath}/getpost/${slug}`)
   const postData = await res.json()
 
-  console.log('single post data', postData);
-
   return { props: { postData } }
 }
 
