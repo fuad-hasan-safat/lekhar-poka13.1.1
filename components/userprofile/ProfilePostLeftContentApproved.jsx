@@ -85,7 +85,17 @@ export default function ProfilePostLeftContentApproved() {
               <div className="lakha__main__content text-3xl lg:mr-[100px] md:mr-[50px]">
                 
                 {postList.length && (
-                  postList.map((post, index) => (
+                  postList.map((post, index) => {
+                    console.log('full post', post)
+                    
+                    let bannerImage = post?.image;
+
+                    if(post?.image === null || post?.image === '' || post?.image === undefined || post?.image === 'undefined'){
+                      bannerImage = post?.writer_image;
+                    }
+                    console.log('approved banner image', bannerImage)
+                    
+                    return (
                     <>
                       <div key={index}>
                         <SinglePostConponent
@@ -93,7 +103,7 @@ export default function ProfilePostLeftContentApproved() {
                           title={post.title}
                           writer={post.writer}
                           writer_id={post.writer_id}
-                          image={post?.image}
+                          image={bannerImage}
                           content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 20).join(" ")}` : `${post.content.split(/\s+/).slice(0, 30).join(" ")}`} // Truncate content
                           category={post.category}
                           postStatus={post.status}
@@ -107,7 +117,7 @@ export default function ProfilePostLeftContentApproved() {
                       </div>
                       {index < displayedPosts.length - 1 && <MainContentDivider />}
                     </>
-                  ))
+                  )})
                 )}
               </div>
             </div> :

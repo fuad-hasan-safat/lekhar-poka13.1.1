@@ -126,7 +126,7 @@ export default function PostOfWriterPage() {
                             </div>
 
                             <div className='lg:w-[60%] lg:p-[40px] mb-[40px]'>
-                                <WriterPostList writerInfo={writerInfo}  postList={postList} />
+                                <WriterPostList profileInfo={profileInfo}  postList={postList} />
                             </div>
 
                         </div>
