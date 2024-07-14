@@ -22,6 +22,8 @@ export default function UserPostTitleAndcover({
   profileName = '',
   updatedAt = '',
 }) {
+
+  console.log('single post banner ', title, image)
   const router = useRouter()
 
   const dialogueRef = useRef()

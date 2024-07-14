@@ -105,7 +105,7 @@ export default function SobJiboniLeftContent() {
                             image={post?.image}
                             uploadedBy={post?.uploader_name}
                             updatedAt={post?.updatedAt}
-                            writer_image={post?.writer_image}
+                            writer_image={post?.profile_image}
                             profileName={post?.profile_name}
                             content={countWords(post.content, 70)}
                           />
