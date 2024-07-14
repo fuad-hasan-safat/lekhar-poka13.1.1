@@ -10,6 +10,8 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function PassRecovertFormAterOTP({ phonenumber }) {
 
     const router = useRouter()
+    const [showPassword, setShowPassword] = useState(false);
+    const [showRePassword, setShowRePassword] = useState(false);
 
     let notification = ''
     const [numberPrefix, setNumberPrefix] = useState("88");
@@ -20,6 +22,10 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
         error: null,
         isDisabled: true, // Button initially disabled
     });
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -150,11 +156,11 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
                     পাসওয়ার্ড রিসেট করুন
                 </div>
 
-                <div className="mb-5">
+                <div className="mb-5 relative">
 
                     <input
                         id="password"
-                        type="password"
+                        type={showPassword ? 'text' : 'password'}
                         name="password"
                         placeholder="পাসওয়ার্ড দিন"
                         value={state.password}
@@ -163,13 +169,16 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
                         className="w-full h-[62px] p-4 bg-[#FCF7E8]  rounded-2xl   text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
                         required
                     />
+                    <button className="absolute right-[20px]  pt-[18px]" type="button" onClick={togglePasswordVisibility}>
+                        {showPassword ? <i class="ri-eye-off-line"></i> : <i class="ri-eye-line"></i>}
+                    </button>
 
                 </div>
 
-                <div className="mb-5">
+                <div className="mb-5 relative">
 
                     <input
-                        type="password"
+                        type={showRePassword ? 'text' : 'password'}
                         name="retypePassword"
                         placeholder="আবার পাসওয়ার্ড দিন"
                         value={state.retypePassword}
@@ -179,6 +188,9 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
                         className="w-full h-[62px] p-4 bg-[#FCF7E8]  rounded-2xl   text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
                         required
                     />
+                    <button className="absolute right-[20px]  pt-[18px]" type="button" onClick={()=>setShowRePassword(!showRePassword)}>
+                        {showRePassword ? <i class="ri-eye-off-line"></i> : <i class="ri-eye-line"></i>}
+                    </button>
                     {state.error && <p className="error">{state.error}</p>}
 
                 </div>

@@ -2911,4 +2911,12 @@ transition: all 0.5s !important;
   .banner__bg__wrap h2 {
     top: 42%;
   }
+
+  .hm__post__profile__grid{
+    max-width: 235px;
+    width: 100%;
+  }
+  .hm__post__profile__grid h1{
+    line-height: 1.4 !important;
+  }
 }
