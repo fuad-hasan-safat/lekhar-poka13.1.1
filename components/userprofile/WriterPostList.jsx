@@ -5,7 +5,7 @@ import MainContentDivider from "../common/mainContentDivider";
 import Loading from "../common/loading";
 import SinglePostConponent from "../common/singlePostComponent";
 
-export default function WriterPostList({writerInfo, postList }) {
+export default function WriterPostList({ postList }) {
   //   const [selectedId, setSelectedId] = useState("sob");
 
 
@@ -50,7 +50,7 @@ export default function WriterPostList({writerInfo, postList }) {
                         category={post.category}
                         postStatus={post.status}
                         uploadedBy={post?.uploader_name}
-                        writer_image={writerInfo?.image}
+                        writer_image={post?.writer_image}
                         profileName={post?.profile_name}
                         updatedAt={post?.updatedAt}
 

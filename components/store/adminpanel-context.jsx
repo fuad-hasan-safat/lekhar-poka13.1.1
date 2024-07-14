@@ -31,7 +31,7 @@ export default function AdminContextProvider({ children }) {
         const currentDashboardPageScope = localStorage.getItem("dashBordPageScope");
 
         console.log({ currentDashboardIndex, currentDashboardPageScope })
-        if (currentDashboardIndex) {
+        if (currentDashboardIndex != null) {
             setDashboard((prevState) => ({
                 ...prevState,
                 currentindex: currentDashboardIndex,
