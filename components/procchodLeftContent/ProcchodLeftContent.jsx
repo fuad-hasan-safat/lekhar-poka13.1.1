@@ -153,7 +153,7 @@ export default function ProcchodLeftContent() {
                           writer_id={post.writer_id}
                           writer_image={post?.profile_image}
                           profileName={post?.profile_name}
-                          uploadedBy={post.uploader_name}
+                          uploadedBy={post.uploaded_by}
                           updatedAt={post?.updatedAt}
                           content={post.category === 'কবিতা' ? countWords(post.content, 20) : countWords(post.content, 50)}
                         />

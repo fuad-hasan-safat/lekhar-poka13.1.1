@@ -25,8 +25,6 @@ export default function Createpost() {
                         <div className="w-full">
 
                             <CreatePost />
-
-
                         </div>
                     </div>
                 </div>

@@ -194,6 +194,7 @@ export default function EditPost() {
     editFormData.append('summary', formData?.summary);
     editFormData.append('content', content);
     editFormData.append('category', selectedOption);
+    editFormData.append('status', false);
 
 
     if (image) {
@@ -216,7 +217,7 @@ export default function EditPost() {
       });
 
       // alert("আপনার লেখাটির আপডেট সম্পন্ন হয়েছে");
-      notification = 'আপনার লেখাটির আপডেট সম্পন্ন হয়েছে';
+      notification = 'আপনার লেখাটির আপডেট সম্পন্ন হয়েছে, অনুমোদনের জন্য এডমিনের নিকট পাঠানো হয়েছে';
 
       reloadPage();
       console.log('edit response', response);
@@ -225,7 +226,7 @@ export default function EditPost() {
       console.error(error);
       // Handle error
     }
-    notify();
+    notify1();
 
   };
 
