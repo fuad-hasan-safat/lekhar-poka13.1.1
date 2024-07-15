@@ -1,14 +1,10 @@
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Head from 'next/head';
-
-
 import FullPost from '../../components/common/fullContent'
 import RatingComponent from '../../components/common/starRating'
-import { fetchData } from "../../function/api";
 import { apiBasePath } from "../../utils/constant";
 import MusicPlayer from "../../components/musicbar/MusicPlayer";
-import ShareOnFacebook from "../../components/share/share";
 import ReaderModeModal from "../../components/readerMode/ReaderModeModal";
 import FullPostReaderMode from "../../components/common/fullContentReadermood";
 import { ToastContainer, toast } from 'react-toastify';
@@ -17,11 +13,20 @@ import 'react-toastify/dist/ReactToastify.css';
 export async function getServerSideProps(context) {
 
   const { slug } = context.params;
+  let postData;
 
-  const res = await fetch(`${apiBasePath}/getpost/${slug}`)
-  const postData = await res.json()
+  try {
+    const res = await fetch(`${apiBasePath}/getpost/${slug}`)
+    postData = await res.json()
 
-  console.log('single post data', postData);
+    console.log('single post data', postData);
+
+  } catch (error) {
+    postData = {
+      status:'failed'
+    }
+  }
+
 
   return { props: { postData } }
 }
@@ -59,7 +64,7 @@ export default function PostDetails({ postData }) {
 
   function removeHtmlTags(str) {
     return str?.replace(/<\/?[^>]+(>|$)/g, "");
-}
+  }
 
 
   // select image
@@ -72,11 +77,11 @@ export default function PostDetails({ postData }) {
 
   let pageTitle = data?.title
   let withoutTagDes = removeHtmlTags(data?.content?.slice(0, 700))
-  console.log({withoutTagDes})
+  console.log({ withoutTagDes })
   let description = withoutTagDes;
   let postLink = `https://lekharpoka.com${asPath}`;
   let imageLink = `https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/') + 1)}`
-  console.log({pageTitle, description, postLink, imageLink})
+  console.log({ pageTitle, description, postLink, imageLink })
 
   return (
 
@@ -86,12 +91,12 @@ export default function PostDetails({ postData }) {
         <Head>
 
           <title>{data?.title}</title>
-          <meta property="og:title" content={pageTitle} key="og:title"/>
+          <meta property="og:title" content={pageTitle} key="og:title" />
           <meta property="og:description" content={`${description} #lekharpoka`} />
-          <meta property="og:image" content={imageLink}  key="og:image"/>
+          <meta property="og:image" content={imageLink} key="og:image" />
           <meta property="og:url" content={postLink} />
           <meta property="og:type" content="website" key="og:type" />
-          <meta name="twitter:card" content={imageLink}  />
+          <meta name="twitter:card" content={imageLink} />
           <meta name="twitter:title" content={pageTitle} />
           <meta name="twitter:description" content={description} />
           <meta name="twitter:image" content={imageLink} />
@@ -140,9 +145,9 @@ export default function PostDetails({ postData }) {
                         </div>
                         <div className="rating__share__wrap">
                           <button
-                          className="facebook__share bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 rounded flex items-center"
-                           onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=https://lekharpoka.com/post/${slug}`, '_blank')}>
-                           <i class="ri-facebook-circle-fill mr-[4px]"></i> শেয়ার করুন 
+                            className="facebook__share bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 rounded flex items-center"
+                            onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=https://lekharpoka.com/post/${slug}`, '_blank')}>
+                            <i class="ri-facebook-circle-fill mr-[4px]"></i> শেয়ার করুন
                           </button>
 
                           {/* <ShareOnFacebook url={`lekharpoka.com/post/${slug}`} title={'লেখার পোকায় আপনাকে স্বাগতম'} image={''} /> */}
@@ -170,7 +175,7 @@ export default function PostDetails({ postData }) {
 
 
           </section>
-      <ToastContainer />
+          <ToastContainer />
 
         </div>
 
