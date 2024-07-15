@@ -102,7 +102,7 @@ export default function SobKobitaLeftContent() {
                             writer_id={post.writer_id}
                             category={post.category}
                             image={post?.image}
-                            uploadedBy={post?.uploader_name}
+                            uploadedBy={post?.uploaded_by}
                             writer_image={post?.profile_image}
                             profileName={post?.profile_name}
                             updatedAt={post?.updatedAt}

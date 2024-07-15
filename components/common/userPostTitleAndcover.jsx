@@ -142,6 +142,12 @@ export default function UserPostTitleAndcover({
 
   });
 
+  let writerClickLink = `/postswriter/${writer_id}`;
+
+  if (localStorage.getItem('uuid')?.trim() === uploadedBy) {
+      writerClickLink = `/user/${uploadedBy}`;
+  }
+
   return (
     <>
       <DialugueModal ref={dialogueRef} alert='আপনি কি পোস্ট মুছে ফেলতে চান' address={deletePost} type='delete' />
@@ -156,17 +162,17 @@ export default function UserPostTitleAndcover({
 
         <div className="hm__post__profile__grid  relative">
           <div className="">
-            <h1 className="lg:text-[32] md:text-[25px] sm:text-[23px] xs:text-[14px] leading-7 lg:pr-[50px] text-[#FCD200] font-bold" style={{ lineHeight: '1.2' }}>{shortenTitle}</h1>
+            <h1 className="lg:text-[32] md:text-[25px] sm:text-[23px] xs:text-[14px] leading-7 pr-[40px] text-[#FCD200] font-bold" style={{ lineHeight: '1.2' }}>{shortenTitle}</h1>
           </div>
 
-          <Link className="flex items-center lg:text-[18px] md:text-[16px] sm:text-[14px] xs:text-[12px]  font-semibold text-[#595D5B] " href={`/postswriter/${writer_id}`} > 
-          <span className='inline-block mr-[10px]'>
-            <img className="w-[24px] h-[24px] rounded-full block m-auto shadow-lg" src={writerImage === '' ? defaultBannerImage : `${apiBasePath}/${writerImage?.slice(writerImage.indexOf('/') + 1)}`} alt="" />
-          </span>
-          
-          <span className='inline-block'> {shortenWriter} </span></Link>
+          <Link className="flex items-center lg:text-[18px] md:text-[16px] sm:text-[14px] xs:text-[12px]  font-semibold text-[#595D5B] " href={writerClickLink} >
+            <span className='inline-block mr-[10px]'>
+              <img className="lg:w-[24px] lg:h-[24px] md:w-[22px] md:h-[22px] sm:w-[20px] sm:h-[20px] xs:w-[18px] xs:h-[18px] rounded-full block m-auto shadow-lg" src={writerImage === '' ? defaultBannerImage : `${apiBasePath}/${writerImage?.slice(writerImage.indexOf('/') + 1)}`} alt="" />
+            </span>
+
+            <span className='inline-block'> {shortenWriter} </span></Link>
           <div className="hm__post__profile__info text-[16px] font-thin leading-1 pt-[5px]">
-            <Link className="flex place-content-start items-center leading-1 lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[12px]  text-[#595D5B]" href={`/postswriter/${writer_id}`} style={{ lineHeight: '1' }} >
+            <Link className="flex place-content-start items-center leading-1 lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[12px]  text-[#595D5B]" href={writerClickLink} style={{ lineHeight: '1' }} >
 
               {/* {((uploadedBy !== null) && uploadedBy.length > 0) && <> <span className='inline-block mr-[10px]'>
                 <img className="w-[24px] h-[24px] rounded-full block m-auto shadow-lg" src={writerImage === '' ? defaultBannerImage : `${apiBasePath}/${writerImage?.slice(writerImage.indexOf('/') + 1)}`} alt="" />
@@ -188,7 +194,7 @@ export default function UserPostTitleAndcover({
             <>
               <button
                 onClick={moreOptionHandler}
-                className='absolute top-0 right-0 text-[20px] rounded-full bg-[#EFEFEF] w-[38px]'><i class="ri-more-2-line"></i>
+                className='absolute top-0 right-[-40px] text-[20px] rounded-full bg-[#EFEFEF] w-[38px]'><i class="ri-more-2-line"></i>
               </button>
               {isMoreClick &&
                 <ul ref={editPostRef} className=' mt-[15px] absolute top-[35px] right-0 lg:text-[15px] sm:text-[13px] xs:text-[13px] backdrop-blur-md shadow-xl bg-[#FCF7E8] z-[1000] origin-top-right w-[110px] rounded-md  ring-opacity-5 focus:outline-none'>

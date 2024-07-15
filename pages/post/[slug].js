@@ -14,8 +14,20 @@ import { AudioPlayListContext } from "../../components/store/audioPlayer-context
 export async function getServerSideProps(context) {
 
   const { slug } = context.params;
-  const res = await fetch(`${apiBasePath}/getpost/${slug}`)
-  const postData = await res.json()
+  let postData;
+
+  try {
+    const res = await fetch(`${apiBasePath}/getpost/${slug}`)
+    postData = await res.json()
+
+    console.log('single post data', postData);
+
+  } catch (error) {
+    postData = {
+      status:'failed'
+    }
+  }
+
 
   return { props: { postData } }
 }

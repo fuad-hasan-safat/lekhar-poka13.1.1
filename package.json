@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev -p 3008",
     "build": "next build",
-    "start": "NODE_ENV=production pm2 start lekha-poka-ui-beta.js --watch",
+    "start": "NODE_ENV=production pm2 start lekha-poka-ui.js --watch",
     "lint": "next lint"
   },
   "dependencies": {
