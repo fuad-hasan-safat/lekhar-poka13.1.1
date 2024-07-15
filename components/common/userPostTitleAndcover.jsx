@@ -194,7 +194,7 @@ export default function UserPostTitleAndcover({
             <>
               <button
                 onClick={moreOptionHandler}
-                className='absolute top-0 right-0 text-[20px] rounded-full bg-[#EFEFEF] w-[38px]'><i class="ri-more-2-line"></i>
+                className='absolute top-0 right-[-40px] text-[20px] rounded-full bg-[#EFEFEF] w-[38px]'><i class="ri-more-2-line"></i>
               </button>
               {isMoreClick &&
                 <ul ref={editPostRef} className=' mt-[15px] absolute top-[35px] right-0 lg:text-[15px] sm:text-[13px] xs:text-[13px] backdrop-blur-md shadow-xl bg-[#FCF7E8] z-[1000] origin-top-right w-[110px] rounded-md  ring-opacity-5 focus:outline-none'>
