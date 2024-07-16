@@ -129,7 +129,7 @@ export default function WriterProfileBanner({
 
 
     async function followUserhandler(user_id, following) {
-        if(!localStorage.getItem('uuid') || localStorage.getItem('uuid').length > 0 ){
+        if(!localStorage.getItem('uuid') || localStorage.getItem('uuid').length <= 0 ){
             notification = 'অনুসরণ করতে লগইন করুন'
             notify();
 

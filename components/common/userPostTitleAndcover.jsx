@@ -26,22 +26,25 @@ export default function UserPostTitleAndcover({
   console.log('single post banner ', title, image)
   const router = useRouter()
 
+  const [isMounted, setIsMounted] = useState(false)
+
   const dialogueRef = useRef()
   const editPostRef = useRef()
   useOutsideAlerter(editPostRef);
 
   let notification = '';
-
   const [isMoreClick, setIsMoreClick] = useState(false)
-
+  const formattedDate = formatDate(updatedAt);
 
   function moreOptionHandler() {
     setIsMoreClick((prevState) => !prevState)
   }
 
-  const formattedDate = formatDate(updatedAt);
 
 
+  useEffect(() => {
+    setIsMounted(true);
+  }, [])
 
   function useOutsideAlerter(ref) {
     useEffect(() => {
@@ -62,6 +65,9 @@ export default function UserPostTitleAndcover({
       };
     }, [ref]);
   }
+
+
+  if(!isMounted) return null;
 
   function formatDate(isoString) {
     const date = new Date(isoString);
@@ -145,7 +151,7 @@ export default function UserPostTitleAndcover({
   let writerClickLink = `/postswriter/${writer_id}`;
 
   if (localStorage.getItem('uuid')?.trim() === uploadedBy) {
-      writerClickLink = `/user/${uploadedBy}`;
+    writerClickLink = `/user/${uploadedBy}`;
   }
 
   return (
