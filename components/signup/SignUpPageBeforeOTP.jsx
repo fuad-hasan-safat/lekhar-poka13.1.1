@@ -77,7 +77,7 @@ const SignUpPageBeforeOTP = () => {
                           title="অথবা সাইন ইন করুন"
                           icon1="/images/loginOptionIcon/google.svg"
                           lowermessege1="একাউন্ট আছে? "
-                          lowermessege2=" লগইন করুন ।"
+                          lowermessege2=" লগইন করুন"
                           signLogLink="/account/login"
                         />
 

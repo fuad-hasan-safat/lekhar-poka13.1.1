@@ -63,7 +63,7 @@ const LoginPage = () => {
                           title="অথবা সাইন ইন করুন"
                           icon1="/images/loginOptionIcon/google.svg"
                           lowermessege1="একাউন্ট নেই? "
-                          lowermessege2="একাউন্ট তৈরী করুন ।"
+                          lowermessege2="একাউন্ট তৈরী করুন"
                           signLogLink="/account/signup"
                         />
                       </>
