@@ -32,7 +32,6 @@ export default function UserProfile({ slug }) {
 
   const [bio, setBio] = useState('')
   const [bioId, setBioId] = useState('')
-  const [following, setFollowing] = useState(0);
   const [canPostStatus, setCanPostStatus] = useState(false)
   // 
 

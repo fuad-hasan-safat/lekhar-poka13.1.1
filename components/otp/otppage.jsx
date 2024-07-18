@@ -55,24 +55,51 @@ const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus,
     }
   };
 
+  // const handleOtpChange = (index, value) => {
+  //   const newOtp = [...otp];
+  //   newOtp[index] = value.slice(-1);
+  //   setOtp(newOtp);
+
+  //   if (newOtp.every((value) => value !== "")) {
+  //     setIsButtonDisabled(false);
+  //   } else {
+  //     setIsButtonDisabled(true);
+  //   }
+
+  //   // Focus on the next field
+  //   if (value && inputRefs.current[index + 1]) {
+  //     inputRefs.current[index + 1].focus();
+  //   }
+
+  //   setOtp(newOtp);
+
+  //   console.log(otp.join(''))
+  //   console.log(typeof (otp.join()))
+  // };
+
   const handleOtpChange = (index, value) => {
     const newOtp = [...otp];
-    newOtp[index] = value.slice(-1);
+    newOtp[index] = value.slice(-1); // Limit input to one character
     setOtp(newOtp);
-
+  
+    // Handle backspace and focus previous field
+    if (value === '' && index > 0) {
+      newOtp[index] = ''; // Clear current field value
+      setOtp(newOtp);
+      inputRefs.current[index - 1].focus(); // Focus previous field
+    }
+  
     if (newOtp.every((value) => value !== "")) {
       setIsButtonDisabled(false);
     } else {
       setIsButtonDisabled(true);
     }
-
-    // Focus on the next field
+  
+    // Focus on the next field (unchanged logic)
     if (value && inputRefs.current[index + 1]) {
       inputRefs.current[index + 1].focus();
     }
-
-    setOtp(newOtp);
-
+  
     console.log(otp.join(''))
     console.log(typeof (otp.join()))
   };
