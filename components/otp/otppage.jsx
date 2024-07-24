@@ -4,7 +4,7 @@ import { apiBasePath } from "../../utils/constant";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus, otpStatus }) => {
+const OtpPage = ({otpProp, SetIsOtpSucess, phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus, otpStatus }) => {
 
   let notification = ''
   const [otp, setOtp] = useState(["", "", "", ""]);
@@ -55,85 +55,80 @@ const OtpPage = ({ phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus,
     }
   };
 
-  // const handleOtpChange = (index, value) => {
-  //   const newOtp = [...otp];
-  //   newOtp[index] = value.slice(-1);
-  //   setOtp(newOtp);
+  const handleSendOtpAgain = async () => {
+    const formattedPhoneNumber = `88${phonenumber?.trim()}`;
+    console.log(formattedPhoneNumber)
 
-  //   if (newOtp.every((value) => value !== "")) {
-  //     setIsButtonDisabled(false);
-  //   } else {
-  //     setIsButtonDisabled(true);
-  //   }
 
-  //   // Focus on the next field
-  //   if (value && inputRefs.current[index + 1]) {
-  //     inputRefs.current[index + 1].focus();
-  //   }
+    try {
+      const response = await axios.post(`${apiBasePath}/send-otp`, {
+          phone: formattedPhoneNumber
+      });
 
-  //   setOtp(newOtp);
+      console.log('Resend otp response', response)
 
-  //   console.log(otp.join(''))
-  //   console.log(typeof (otp.join()))
-  // };
+      setOtpStatus(response.data.otp_status)
+
+      if (response.data.status === 'failed') {
+
+          // alert('এই নাম্বার এ লগইন করা নেই ')
+          notification = 'এই নাম্বার এ লগইন করা নেই ';
+          notify();
+      }
+
+      if (response.data.otp_status === "SENT") {
+          notification = 'ওটিপি প্রেরণ করা হয়েছে';
+          notify1();
+
+          SetIsOtpSucess(true)
+
+      }
+      if (response.data.otp_status === "LIMIT_CROSSED") {
+
+          // alert('আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন');
+          notification = 'আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন';
+          notify();
+          SetIsOtpSucess(false)
+
+      }
+    } catch (error) {
+      console.error('Signup error:', error);
+      notification = 'খারাপ এপিআই রিকুয়েস্ট';
+      notify();
+
+    }
+
+  }
+
 
   const handleOtpChange = (index, value) => {
     const newOtp = [...otp];
     newOtp[index] = value.slice(-1); // Limit input to one character
     setOtp(newOtp);
-  
+
     // Handle backspace and focus previous field
     if (value === '' && index > 0) {
       newOtp[index] = ''; // Clear current field value
       setOtp(newOtp);
       inputRefs.current[index - 1].focus(); // Focus previous field
     }
-  
+
     if (newOtp.every((value) => value !== "")) {
       setIsButtonDisabled(false);
     } else {
       setIsButtonDisabled(true);
     }
-  
+
     // Focus on the next field (unchanged logic)
     if (value && inputRefs.current[index + 1]) {
       inputRefs.current[index + 1].focus();
     }
-  
+
     console.log(otp.join(''))
     console.log(typeof (otp.join()))
   };
 
-  const handleSendOtpAgain = async () => {
-    console.log('phone number in otp page ----', phonenumber)
 
-    try {
-      const response = await axios.post(`${apiBasePath}/send-otp`, {
-        phone: `${numberPrefix}${phonenumber}`,
-      });
-      // console.log(`full number ------>>> ${numberPrefix}`)
-      console.log('sigh up OTP In otp page  ------>> ', response)
-      setOtpStatus(response.data.otp_status)
-
-      if (response.data.otp_status === "SENT") {
-        setTimer(60)
-        setOtpStatus(true)
-        setOtpStatus('SENT')
-        notification = 'ওটিপি পাঠানো হয়েছে';
-        notify1();
-      }
-      if (response.data.otp_status === "LIMIT_CROSSED") {
-        setIsOtpSuccess(false)
-        setOtpStatus(false)
-        // alert('আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন');
-        notification = 'আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন';
-      }
-    } catch (error) {
-      console.error('Signup error:', error);
-
-    }
-
-  }
 
 
   const notify = () => toast.warn(notification, {

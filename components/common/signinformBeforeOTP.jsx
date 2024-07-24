@@ -66,23 +66,23 @@ export default function SigninFormBeforeOTP({ type, logreg, btntext, SetIsOtpSuc
 
         if (!state.mobileNumber) {
 
-            setState((prevState) => ({ ...prevState, phoneError: 'Mobile number is required.' }));
+            setState((prevState) => ({ ...prevState, phoneError: 'ফোন নাম্বার অবশ্যই দিতে হবে' }));
             isValid = false;
 
-        } else if (!validateMobileNumber(state.mobileNumber)) {
+        } else if (!validateMobileNumber(state.mobileNumber?.trim())) {
 
-            let errorMessage = 'Mobile number must start with 01 and be 11 digits long.';
-            if (state.mobileNumber.length < 3) {
+            let errorMessage = 'ফোন নাম্বার ০১ দিয়ে শুরু এবং অবশ্যই ১১ অক্ষরের হবে';
+            if (state.mobileNumber?.trim().length < 3) {
 
-                errorMessage = 'Mobile number is too short.';
+                errorMessage = '১১ অক্ষরের ের ফোন নাম্বার দিন';
 
-            } else if (state.mobileNumber.length > 11) {
+            } else if (state.mobileNumber?.trim().length > 11) {
 
-                errorMessage = 'Mobile number is too long.';
+                errorMessage = '১১ অক্ষরের ের ফোন নাম্বার দিন';
 
             } else if (!state.mobileNumber.startsWith('01')) {
 
-                errorMessage = 'Mobile number must start with 01.';
+                errorMessage = 'ফোন নাম্বার ০১ দিয়ে শুরু করুন';
 
             }
 
@@ -110,9 +110,11 @@ export default function SigninFormBeforeOTP({ type, logreg, btntext, SetIsOtpSuc
             if (type === 'recoveryPass') {
                 console.log(' in re pass ------------')
 
+                
+
                 try {
                     const response = await axios.post(`${apiBasePath}/${otpProp}`, {
-                        phone: `${numberPrefix}${state.mobileNumber}`,
+                        phone: `${numberPrefix}${state.mobileNumber?.trim()}`,
                     });
 
                     setOtpStatus(response.data.otp_status)
@@ -231,7 +233,7 @@ export default function SigninFormBeforeOTP({ type, logreg, btntext, SetIsOtpSuc
                             required
                         />
 
-                        {state.phoneError && state.mobileNumber && <p className="error text-red-500">{state.phoneError}</p>}
+                        {state.phoneError && state.mobileNumber && <p className="error pt-[10px] text-black">{state.phoneError}</p>}
 
                     </div>
 
