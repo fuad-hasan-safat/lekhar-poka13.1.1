@@ -122,7 +122,7 @@ export default function CreatePost() {
         fetch(`${apiBasePath}/categories`)
             .then((response) => response.json())
             .then((data) => {
-                console.log('Create post category -',data)
+                console.log('Create post category -', data)
                 setCategory(data);
             })
             .catch((error) => console.error("Error fetching data:", error))
@@ -369,11 +369,19 @@ export default function CreatePost() {
 
     }
 
-   
+    // Drop down category
+    let Categoryoptions = [];
+    for (let i = 0; i < category.length; i++) {
+        let data = { value: category[i]._id, label: category[i].title };
+        // console.log('---data -----------'. data)
+        Categoryoptions.push(data);
+    }
 
-    console.log({category})
 
-    if(!isLoading) return null;
+
+    console.log({ category })
+
+    if (!isLoading) return null;
 
     return (
         <>
@@ -381,24 +389,24 @@ export default function CreatePost() {
                 <div className='create__post__rgt lg:w-[25%] lg:order-last pt-[10px]'>
                     <div className="text-[#F9A106] font-bold text-[20px] !mb-[5px]">আপনার লেখার ধরণ নির্বাচন করুন</div>
 
-                    <div>
+                    <div className='select__control'>
                         {/* <Select
                             value={selectedOption}
                             onChange={categoryhandleChange}
                             styles={customStyles}
                             options={Categoryoptions}
                         /> */}
-
+                        
                         <select
                             id="category"
                             name="category"
-                            className={`h-[45px] w-full px-[16px] text-black border-[1px] border-[#ddd] rounded-[7px]`}
+                            className={`h-[45px] w-full px-[16px] text-black border-[1px] border-[#ddd] rounded-[7px] focus:bg-transparent `}
                             required
                             value={selectedOption}
                             onChange={(e) => setSelectedOption(e.target.value)}>
                             <option value="">লেখার ধরণ</option>
                             {category.length && category?.map((cat) => (
-                                <option key={cat._id} value={cat.title}>
+                                <option className='p-[10px]' key={cat._id} value={cat.title}>
                                     {cat.title}
                                 </option>
                             ))}
