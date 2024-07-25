@@ -57,12 +57,12 @@ const OtpPage = ({otpProp, SetIsOtpSucess, phonenumber, setIsOtpVerified, setIsO
 
   const handleSendOtpAgain = async () => {
     const formattedPhoneNumber = `88${phonenumber?.trim()}`;
-    console.log(formattedPhoneNumber)
+    console.log('before otp ',formattedPhoneNumber)
 
 
     try {
-      const response = await axios.post(`${apiBasePath}/send-otp`, {
-          phone: formattedPhoneNumber
+      const response = await axios.post(`${apiBasePath}/${otpProp}`, {
+          phone: formattedPhoneNumber,
       });
 
       console.log('Resend otp response', response)
@@ -93,8 +93,6 @@ const OtpPage = ({otpProp, SetIsOtpSucess, phonenumber, setIsOtpVerified, setIsO
       }
     } catch (error) {
       console.error('Signup error:', error);
-      notification = 'খারাপ এপিআই রিকুয়েস্ট';
-      notify();
 
     }
 

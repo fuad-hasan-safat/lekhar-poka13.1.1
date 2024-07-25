@@ -452,6 +452,10 @@ input[type="number"] {
   margin-left: 0;
   margin-right: 0;
   padding: 0;
+  line-height: 2.4;
+}
+.linecntrl{
+  line-height: 2.2;
 }
 
 .rating__share__wrap {

@@ -74,11 +74,11 @@ export default function SigninFormBeforeOTP({ type, logreg, btntext, SetIsOtpSuc
             let errorMessage = 'ফোন নাম্বার ০১ দিয়ে শুরু এবং অবশ্যই ১১ অক্ষরের হবে';
             if (state.mobileNumber?.trim().length < 3) {
 
-                errorMessage = '১১ অক্ষরের ের ফোন নাম্বার দিন';
+                errorMessage = '১১ অক্ষরের ফোন নাম্বার দিন';
 
             } else if (state.mobileNumber?.trim().length > 11) {
 
-                errorMessage = '১১ অক্ষরের ের ফোন নাম্বার দিন';
+                errorMessage = '১১ অক্ষরের ফোন নাম্বার দিন';
 
             } else if (!state.mobileNumber.startsWith('01')) {
 
