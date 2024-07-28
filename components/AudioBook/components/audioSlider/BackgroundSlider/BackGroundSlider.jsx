@@ -56,8 +56,8 @@ export default function BackGroundSlider({ sliderData, category }) {
                             style={{ backgroundColor: `${color}` }}
                             onClick={()=>sliderClickHandler(iteam._id)}
                             >
-                                <div className='audio__bgslider__image'>
-                                    <img src={`${apiBasePath}/${iteam.image}`} alt='' />
+                                <div className='audio__bgslider__image '>
+                                    <img src={`${apiBasePath}/${iteam.image.slice(iteam.image.indexOf('/') + 1)}`} alt='' />
                                 </div>
                                 <div className='audio__bgslider__text'>
                                     <h5> {iteam.title} </h5>

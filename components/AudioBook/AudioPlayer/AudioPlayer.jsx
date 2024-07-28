@@ -130,7 +130,7 @@ export default function AudioPlayer() {
               <div className="lg:flex lg:flex-row lg:w-[380px] justify-left items-center md:hidden sm:hidden xs:hidden">
                 <div className="">
                   <img
-                    src={`${apiBasePath}/${currentSong?.image}`}
+                    src={`${apiBasePath}/${currentSong?.image?.slice(currentSong?.image.indexOf('/') + 1)}`}
                     alt={currentSong?.title}
                     width={70}
                     height={70}
@@ -138,8 +138,8 @@ export default function AudioPlayer() {
                   ></img>
                 </div>
                 <div className="lg:flex lg:flex-col text-gray-600 pt-[5px] pl-[10px]">
-                  <div className="pb-[5px]">
-                    <div className="text-xl  font-bold text-left">{currentSong?.title.substring(0, 20) + (currentSong?.title.length >= 20 ? '...' : '')}</div>
+                  <div className="pb-[5px] audio__title">
+                    <div className="text-xl title_content font-bold text-left">{currentSong?.title}</div>
                   </div>
                   <div>
                     <div className="text-left">{currentSong?.writer}</div>
@@ -150,7 +150,7 @@ export default function AudioPlayer() {
             <div className="flex flex-col text-center items-center content-center justify-center space-y-3  lg:w-full">
               <div>
                 <audio
-                  src={`${apiBasePath}/${currentSong?.audio}`}
+                  src={`${apiBasePath}/${currentSong?.audio.slice(currentSong.audio.indexOf('/') + 1)}`}
                   ref={audioPlayer}
                   onTimeUpdate={handleTimeUpdate}
                   onLoadedMetadata={handleLoadedMetadata}

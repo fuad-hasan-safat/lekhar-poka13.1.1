@@ -25,7 +25,7 @@ export default function AudioSingleCategory({ color, title, image, background })
                         <h5> {title} </h5>
                     </div>
                     <div className='audio__cat__image'>
-                        <img src={`${apiBasePath}/${image}`} alt='Audio Cat Image' />
+                        <img src={`${apiBasePath}/${image.slice(image.indexOf('/') + 1)}`} alt='Audio Cat Image' />
                     </div>
 
                 </div>

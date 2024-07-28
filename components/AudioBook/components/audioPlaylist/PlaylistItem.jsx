@@ -45,14 +45,14 @@ export default function PlaylistItem({ songInfo, songIndex, songList, audioScope
         <div className='audio__playlist__item'>
             <div className='audio__playlist__left'>
                 <div>
-                    <img src={`${apiBasePath}/${songInfo.image}`} className='w-[41px] h-[41px] rounded-full' />
+                    <img src={`${apiBasePath}/${songInfo.image.slice(songInfo.image.indexOf('/') + 1)}`} className='w-[41px] h-[41px] rounded-full' />
                 </div>
                 <div className='audio__playlist__info'>
                     <h6 className=''>
                         {songInfo.title.substring(0, 40) + (songInfo?.title.length >= 52 ? '...' : '')}
                     </h6>
                     <audio ref={audioRef}>
-                        <source src={`${apiBasePath}/${songInfo?.audio}`} type="audio/mpeg" />
+                        <source src={`${apiBasePath}/${songInfo?.audio.slice(songInfo?.audio.indexOf('/') + 1)}`} type="audio/mpeg" />
                         Your browser does not support the audio element.
                     </audio>
                     {audioRef.current?.duration && <p> <i class="ri-time-line"></i> {(duration / 60).toFixed(2)} মিনিট</p>}

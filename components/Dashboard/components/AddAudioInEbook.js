@@ -96,10 +96,11 @@ export default function AddAudioInEbook() {
                 }))
             }
             if (name === 'audio') {
-                
+                const selectedFile = files[0];
+                console.log('audio file ---', selectedFile)
                 setAudioData((prevData) => ({
                     ...prevData,
-                    file:[...files]
+                    file:selectedFile
                 }))
             }
         }
