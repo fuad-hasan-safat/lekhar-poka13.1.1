@@ -72,7 +72,7 @@ export default function SearchResult() {
 
                         <div className="container">
 
-                            <div className=" flex flex-row ">
+                            <div className=" lg:flex lg:flex-row ">
                                 <div className="lg:w-[70%] text-gray-600">
                                     {searchKey.trim().length > 0 && searchResult.length <= 0 && <h5 className='mt-[25px]'>কোন তথ্য খুঁজে পাওয়া যায় নি!</h5>}
 
