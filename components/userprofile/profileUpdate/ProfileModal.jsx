@@ -161,8 +161,10 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
 
     function reloadPage() {
         setTimeout(() => {
+            setIsSubMit(true)
+            setShowModal(false)
             router.reload()
-        }, 3000)
+        }, 2000)
     }
     //  handle submit
 
@@ -216,7 +218,7 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
         console.log('outside check,', image, imageFile)
         //  update profile data
 
-        if(username.trim().length<= 0){
+        if (username.trim().length <= 0) {
             notification = 'দয়া করে প্রোফাইল এর নাম নির্বাচন করুন';
             notify();
         }
@@ -267,8 +269,7 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
                     notification = 'প্রোফাইল সফলভাবে আপডেট হয়েছে';
                     notify1();
                     console.log('Profile updated successfully:', data);
-                    setIsSubMit(true)
-                    setShowModal(false)
+
 
                     reloadPage()
 
@@ -286,7 +287,7 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
         if (e.key === 'Enter') {
             handleSubmit();
         }
-      };
+    };
 
     const notify = () => toast.warn(notification, {
         position: "top-center",
@@ -313,13 +314,13 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
         <>
 
             <div className={`${showModal ? 'block' : 'hidden'} fixed z-[9999] inset-0 overflow-y-auto flex items-center justify-center bg-black/70`} aria-labelledby="modal-title" role="dialog" aria-modal="true">
-            <ToastContainer />
+                <ToastContainer />
 
                 <div className=" inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
                 <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
                 <div className="inline-block align-bottom mt-[650px] mb-[300px] bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all lg:max-w-[700px] sm:align-middle sm:max-w-lg sm:w-full xs:max-w-[340px] w-full">
 
-               
+
                     <div className="bg-white pb-[60px] ">
 
                         <div className=" sm:flex sm:items-start h-[140px] bg-[#FFC973]">
@@ -480,7 +481,7 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
             </div>
 
 
-          
+
 
         </>
 

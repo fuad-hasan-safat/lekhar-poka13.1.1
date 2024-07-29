@@ -65,19 +65,19 @@ export default function SigninFormAterOTP({ logreg, btntext, phonenumber }) {
 
         if (!state.password) {
 
-            setState((prevState) => ({ ...prevState, error: 'Password is required.' }));
+            setState((prevState) => ({ ...prevState, error: 'পাসওয়ার্ড অবশ্যই দিতে হবে' }));
             isValid = false;
 
         } else if (state.password.length < 8) {
 
-            setState((prevState) => ({ ...prevState, error: 'Password must be at least 8 characters long.' }));
+            setState((prevState) => ({ ...prevState, error: 'পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হবে' }));
             isValid = false;
 
         }
 
         if (state.password !== state.retypePassword) {
 
-            setState((prevState) => ({ ...prevState, error: 'Passwords do not match.' }));
+            setState((prevState) => ({ ...prevState, error: 'পাসওয়ার্ড দুটি এক হয়নি'}));
             isValid = false;
 
         }
@@ -156,7 +156,7 @@ export default function SigninFormAterOTP({ logreg, btntext, phonenumber }) {
         <>
             <div className="login__form__dsc">
 
-                <div className="lg:text-[48px] text-left md:text-[45px] sm:text-[35px] xs:text-[32px] mb-5  font-semibold ">
+                <div className="lg:text-[48px] md:text-[45px] sm:text-[35px] xs:text-[32px] mb-5  font-semibold text-[#000000] text-left">
                     {logreg}
                 </div>
 
@@ -214,14 +214,14 @@ export default function SigninFormAterOTP({ logreg, btntext, phonenumber }) {
                         <button className="absolute right-0 p-4" type="button" onClick={togglerePasswordVisibility}>
                             {reshowPassword ? <i class="ri-eye-off-line"></i> : <i class="ri-eye-line"></i>}
                         </button>
-                        {state.error && <p className="error">{state.error}</p>}
+                        {state.error && <p className="error pt-[10px]">{state.error}</p>}
 
                     </div>
 
 
                     <button
                         onClick={handleSubmit}
-                        className="page__common__yello__btn mt-8 px-[90px] bg-[#F9A106] rounded-[8px] lg:text-[35px] md:text-[30px] sm:text-[25px] xs:text-[25px] text-white h-[75px] "
+                        className="page__common__yello__btn mt-8 lg:px-[90px] md:px-[85px] sm:px-[80px] xs:px-[30px] bg-[#F9A106] rounded-[8px] lg:text-[35px] md:text-[30px] sm:text-[25px]  text-white lg:h-[75px] md:h-[75px] sm:h-[70px] xs:h-[60px] "
                     >
                         {btntext}
                     </button>

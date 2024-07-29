@@ -250,7 +250,7 @@ export default function Login() {
               icon1="/images/loginOptionIcon/google.svg"
               icon2='/images/loginOptionIcon/facebook_squre.svg'
               lowermessege1="একাউন্ট নেই? "
-              lowermessege2="একাউন্ট তৈরী করুন ।"
+              lowermessege2="একাউন্ট তৈরী করুন"
               signLogLink="/account/signup"
             />
           </div>

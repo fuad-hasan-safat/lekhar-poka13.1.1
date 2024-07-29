@@ -107,7 +107,7 @@ export default function ProfilePostLeftContentApproved() {
                           content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 20).join(" ")}` : `${post.content.split(/\s+/).slice(0, 30).join(" ")}`} // Truncate content
                           category={post.category}
                           postStatus={post.status}
-                          uploadedBy={post?.uploader_name}
+                          uploadedBy={post?.uploaded_by}
                           writer_image={post?.writer_image}
                           profileName={post?.profile_name}
                           updatedAt={post?.updatedAt}
@@ -115,7 +115,7 @@ export default function ProfilePostLeftContentApproved() {
 
                         />
                       </div>
-                      {index < displayedPosts.length - 1 && <MainContentDivider />}
+                      {index < postList?.length - 1 && <MainContentDivider />}
                     </>
                   )})
                 )}

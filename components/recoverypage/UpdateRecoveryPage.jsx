@@ -29,8 +29,8 @@ const PassRecoveryPageBeforeOTP = () => {
     error: null,
     phoneError: null,
     isDisabled: true, // Button initially disabled
-});
-const [uuid, setUuid] = useState("");
+  });
+  const [uuid, setUuid] = useState("");
 
   useEffect(() => {
     setUuid(localStorage.getItem("uuid") || "");
@@ -53,12 +53,11 @@ const [uuid, setUuid] = useState("");
                 <div className="login__form__right bg-white rounded-l-[46px] text-black grid place-items-center ">
                   <div className="w-full">
                     {/* <SigninForm logreg="Create Account" btntext="Sign Up" /> */}
-                    {/* {!isOtpSucess && !isOtpVarified  && <SigninFormBeforeOTP type='recoveryPass' logreg="পাসওয়ার্ড রিসেট করুন" btntext="সাবমিট" SetIsOtpSucess={SetIsOtpSucess}  setState={setState} state={state} otpStatus={otpStatus} setOtpStatus={setOtpStatus} otpProp='send-otp-reset-password'/> }
-                    {isOtpSucess && !isOtpVarified && <OtpPage phonenumber={state.mobileNumber} setIsOtpSuccess={SetIsOtpSucess} setIsOtpVerified={setIsOtpVarified} otpStatus={otpStatus} setOtpStatus={setOtpStatus}/> }
-                    {isOtpVarified && <PassRecovertFormAterOTP phonenumber={state.mobileNumber}/> } */}
+                    {!isOtpSucess && !isOtpVarified  && <SigninFormBeforeOTP type='recoveryPass' logreg="পাসওয়ার্ড রিসেট করুন" btntext="সাবমিট" SetIsOtpSucess={SetIsOtpSucess}  setState={setState} state={state} otpStatus={otpStatus} setOtpStatus={setOtpStatus} otpProp='send-otp-reset-password'/> }
+                    {isOtpSucess && !isOtpVarified && <OtpPage phonenumber={state.mobileNumber} setIsOtpSuccess={SetIsOtpSucess} setIsOtpVerified={setIsOtpVarified} otpStatus={otpStatus} setOtpStatus={setOtpStatus} otpProp={'send-otp-reset-password'} /> }
+                    {isOtpVarified && <PassRecovertFormAterOTP phonenumber={state.mobileNumber}/> }
 
-                    <PassRecovertFormAterOTP phonenumber={state.mobileNumber}/>
-                                       
+
                     <SignInOption
                       user={user}
                       setUser={setUser}

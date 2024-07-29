@@ -57,6 +57,7 @@ useEffect(() => {
                    writer_id={item.writer_id}
                    id={item._id}
                    star={item.rating}
+                   uploaded_by= {item.uploaded_by}
                   />
                 </div>
 

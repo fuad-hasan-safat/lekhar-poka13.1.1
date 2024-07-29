@@ -2,6 +2,7 @@ import Star from "./Star";
 import Image from "next/image";
 import Link from "next/link";
 import { apiBasePath } from "../../utils/constant";
+import { useState } from "react";
 
 const LekhaPokaProfile = ({
   image,
@@ -10,7 +11,22 @@ const LekhaPokaProfile = ({
   writer,
   writer_id,
   star,
+  uploaded_by,
 }) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useState(()=>{
+    setIsMounted(true);
+  },[])
+
+
+  if(!isMounted) return null;
+
+  let redurectUrl = `/postswriter/${writer_id}`;
+  if(localStorage.getItem('uuid')?.length > 0){
+    if(localStorage.getItem('uuid') === uploaded_by)
+    redurectUrl = `/user/${uploaded_by}`;
+  }
 
   let shortenTitle = title?.length > 26 ? `${title?.slice(0,25)}...` : title;
   let shortenWriter = writer?.length > 26 ? `${writer?.slice(0,25)}...` : writer;
@@ -24,7 +40,7 @@ const LekhaPokaProfile = ({
 
           <div className="iteam absolute left-0">
 
-            <a href={`/postswriter/${writer_id}`}>
+            <a href={redurectUrl}>
 
               <img
                 className="border border-[#A5A5A536] "
@@ -49,7 +65,7 @@ const LekhaPokaProfile = ({
 
               <a
                 className="text-[16px] text-gray-600"
-                href={`/postswriter/${writer_id}`}>
+                href={redurectUrl}>
                 {shortenWriter}
               </a>
 

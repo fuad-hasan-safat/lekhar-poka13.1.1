@@ -93,7 +93,7 @@ export default function ProfilePostLeftContentUnApproved() {
                           content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 20).join(" ")}` : `${post.content.split(/\s+/).slice(0, 30).join(" ")}`} // Truncate content
                           category={post.category}
                           postStatus={post.status}
-                          uploadedBy={post?.uploader_name}
+                          uploadedBy={post?.uploaded_by}
                           writer_image={post?.writer_image}
                           profileName={post?.profile_name}
                           updatedAt={post?.updatedAt}
@@ -104,7 +104,7 @@ export default function ProfilePostLeftContentUnApproved() {
 
                       </div>
 
-                      {index < displayedPosts.length && <MainContentDivider />}
+                      {index < postList?.length && <MainContentDivider />}
 
                     </>
                   ))

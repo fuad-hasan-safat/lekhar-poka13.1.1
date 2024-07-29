@@ -61,8 +61,8 @@ const SignUpPageBeforeOTP = () => {
                       </>
                       : <>
 
-                        {!isOtpSucess && !isOtpVarified && <SigninFormBeforeOTP logreg="একাউন্ট তৈরি করুন" btntext="সাইন আপ" SetIsOtpSucess={SetIsOtpSucess} setState={setState} state={state} otpStatus={otpStatus} setOtpStatus={setOtpStatus} otpProp='send-otp' />}
-                        {isOtpSucess && !isOtpVarified && <OtpPage phonenumber={state.mobileNumber} setIsOtpSuccess={SetIsOtpSucess} setIsOtpVerified={setIsOtpVarified} otpStatus={otpStatus} setOtpStatus={setOtpStatus} />}
+                        {!isOtpSucess && !isOtpVarified && <SigninFormBeforeOTP logreg="একাউন্ট তৈরি করুন" btntext="সাইন আপ" SetIsOtpSucess={SetIsOtpSucess} setState={setState} state={state} otpStatus={otpStatus} setOtpStatus={setOtpStatus} otpProp={'send-otp'} />}
+                        {isOtpSucess && !isOtpVarified && <OtpPage phonenumber={state.mobileNumber} setIsOtpSuccess={SetIsOtpSucess} setIsOtpVerified={setIsOtpVarified} otpStatus={otpStatus} setOtpStatus={setOtpStatus} otpProp={'send-otp'} SetIsOtpSucess={SetIsOtpSucess} />}
                         {isOtpVarified && <SigninFormAterOTP logreg="একাউন্ট তৈরি করুন" btntext="সাইন আপ" phonenumber={state.mobileNumber} />} 
 
                         <SignInOption
@@ -77,7 +77,7 @@ const SignUpPageBeforeOTP = () => {
                           title="অথবা সাইন ইন করুন"
                           icon1="/images/loginOptionIcon/google.svg"
                           lowermessege1="একাউন্ট আছে? "
-                          lowermessege2=" লগইন করুন ।"
+                          lowermessege2=" লগইন করুন"
                           signLogLink="/account/login"
                         />
 

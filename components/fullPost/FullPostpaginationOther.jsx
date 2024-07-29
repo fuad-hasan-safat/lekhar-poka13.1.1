@@ -151,7 +151,7 @@ const FullPostPaginationOthers = ({ logText, customclass }) => {
         {logLines
           ?.slice(startIndex, endIndex)
           .map((line, index) => (
-            <div key={startIndex + index} className={`mt-[15px] lg:text-[18px] md:text-[17px] sm:text-[16px] xs:text-[14px] text-justify  mb-[20px] ${customclass}`} dangerouslySetInnerHTML={{ __html: line }} ></div>
+            <div key={startIndex + index} className={`mt-[15px] lg:text-[18px] md:text-[17px] sm:text-[16px] xs:text-[14px] text-justify  mb-[20px] ${customclass} linecntrl`} dangerouslySetInnerHTML={{ __html: line }} ></div>
 
           ))}
 
