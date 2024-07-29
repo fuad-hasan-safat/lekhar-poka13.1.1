@@ -15,6 +15,7 @@ export const AudioPlayListContext = createContext({
   isShuffle: false,
   isRepeat: false,
   currentPlayingIndex: 0,
+  isAudioPlayerClosed: 1,
   setCurrentAudioIndex: () => { },
   setPlayListScope: () => { },
   setPlayListRenderScope: () => { },
@@ -33,6 +34,7 @@ export default function AudioPlaylistContextProvider({ children }) {
     myplayList: [],
     latestPlayList: [],
     isPlayListAddedChanged: 0,
+    isAudioPlayerClosed: 1,
     audioPlace: 'none',
     playListRenderScope: 'none',
     isShuffle: false,
@@ -191,8 +193,11 @@ export default function AudioPlaylistContextProvider({ children }) {
       playListRenderScope: 'none',
       isShuffle: false,
       isRepeat: false,
+      isAudioPlayerClosed: 0,
       isAudiobarVisible: false,
     })
+
+    setCurrentPlayingIndex(-1)
   }
 
   function updateMyplayList(playlist) {
@@ -231,6 +236,7 @@ export default function AudioPlaylistContextProvider({ children }) {
     isRepeat: audioBar.isRepeat,
     currentPlayingIndex: currentPlayingIndex,
     isAudiobarVisible: audioBar.isAudiobarVisible,
+    isAudioPlayerClosed: audioBar.isAudioPlayerClosed,
     setPlaylist: setCurrentPlaylist,
     setPlayListScope: setcurrentPlaylistScope,
     setPlayListRenderScope: setCurrentPlaylistRenderScope,

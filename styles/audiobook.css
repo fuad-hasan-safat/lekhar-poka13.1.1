@@ -4,29 +4,29 @@ hm__audio__book__wrap
 ----------------------- 
 */
 .audio__title {
-    position: absolute;
-    /* top: 0;
-    left: 0; */
+    /* position: absolute; */
+    top: 0;
+    left: 0;
 
     /* width: 100%; */
     /* padding: 25px 0; */
 
     /* background-color: #e74c3c; */
-    color: black;
+    /* color: black;
 
     font-family: Gelasio;
-    font-size: 18px;
+    font-size: 18px; */
 }
 .title_content {
     display: block;
     /* Important to give the content a width */
 
     width: 100%;
-    transform: translateX(100%);
+    transform: translateX(-10%);
     /* Animation start out of the screen */
 
     /* Add the animation */
-    animation: move 30s linear infinite
+    animation: move 10s linear infinite
         /* infinite make reapeat the animation indefinitely */
     ;
 }

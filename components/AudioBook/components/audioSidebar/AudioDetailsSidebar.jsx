@@ -9,7 +9,7 @@ import { fetchDataWithAxios } from '../../../../utils/apiService';
 import { apiBasePath } from '../../../../utils/constant';
 
 export default function AudioDetailsSideBar() {
-    const { setPlayListRenderScope,setLatestPlaylist, setMyPlayList ,isPlayListAddedChanged, myPlayList, latestPlayList} = useContext(AudioPlayListContext);
+    const { setPlayListRenderScope,setLatestPlaylist, setMyPlayList ,isPlayListAddedChanged, myPlayList, latestPlayList, currentPlayingIndex} = useContext(AudioPlayListContext);
 
     const [playList, setPlaylist] = useState({
         myPlaylist: [],
@@ -19,7 +19,7 @@ export default function AudioDetailsSideBar() {
 
     useEffect(() => {
         getData();
-    },[isPlayListAddedChanged])
+    },[isPlayListAddedChanged,currentPlayingIndex])
 
 
     const getData = async () => {

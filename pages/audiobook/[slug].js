@@ -44,7 +44,7 @@ export default function Home({ singleAudioData }) {
     const router = useRouter();
     const currentUrl = router.asPath;
 
-    console.log({ singleAudioData })
+    console.log(singleAudioData.audio)
 
     const [isLoading, setIsLoading] = useState(false)
 

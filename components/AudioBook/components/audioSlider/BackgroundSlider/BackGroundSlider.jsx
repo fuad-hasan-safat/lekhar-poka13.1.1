@@ -62,7 +62,7 @@ export default function BackGroundSlider({ sliderData, category }) {
                                 <div className='audio__bgslider__text'>
                                     <h5> {iteam.title} </h5>
                                     <p>লেখকঃ {iteam.writer}</p>
-                                    <p>কণ্ঠ {iteam.voice}</p>
+                                    <p>কণ্ঠঃ {iteam.voice}</p>
                                     <p style={{marginBottom:'0'}}><i class="ri-time-line"></i> {iteam.duration}</p>
                                 </div>
 
