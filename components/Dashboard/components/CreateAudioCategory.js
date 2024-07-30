@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import ColorPicker, { themes } from 'react-pick-color'
 import { apiBasePath } from '../../../utils/constant';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function CreateAudioCategory() {
-
+    let notification = '';
     const [audioCategory, setAudioCategory] = useState({
         file: null,
         title: '',
@@ -27,7 +29,8 @@ export default function CreateAudioCategory() {
         if (type === 'file') {
             const selectedFile = files[0];
             if (!selectedFile.type.match('image/*')) {
-                alert('Please select an image file.');
+                notification = "দয়া করে ইমেজ নির্বাচন করুন";
+                notify();
                 return;
             } else {
                 setAudioCategory((prevAudiocategory) => ({ ...prevAudiocategory, file: selectedFile }));
@@ -40,7 +43,8 @@ export default function CreateAudioCategory() {
     const validateFields = () => {
         for (const key in audioCategory) {
             if (audioCategory[key] === '' || audioCategory[key] === null) {
-                alert(`Please fill in the ${key} field.`);
+                notification = `দয়া করে ${key} ফিল্ড পূরণ করুন.`;
+                notify();
                 return false;
             }
         }
@@ -57,13 +61,13 @@ export default function CreateAudioCategory() {
         const formData = new FormData();
         for (const key in audioCategory) {
             const data = audioCategory[key];
-            console.log(typeof(data))
+            console.log(typeof (data))
             let solidData = data
-            if(typeof(data) === 'string'){
-             solidData = data.trim();
+            if (typeof (data) === 'string') {
+                solidData = data.trim();
             }
-            
-            console.log({data, solidData})
+
+            console.log({ data, solidData })
             formData.append(key, solidData);
         }
 
@@ -78,15 +82,40 @@ export default function CreateAudioCategory() {
             }
             const result = await response.json();
             console.log('Success:', result);
+            notification = 'বইয়ের ধরণ সফলভাবে ক্রিয়েট হয়েছে';
+            notify1();
             resetAudioCategory();
         } catch (error) {
             console.log('Audio category create error', error);
+            notification = "বইয়ের ধরণ সম্পন্ন হয়নি";
+            notify();
         }
     }
+
+    const notify = () => toast.warn(notification, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+
+    });
+
+    const notify1 = () => toast.success(notification, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+
+    });
 
 
     return (
         <div className='admin__add__slider__wrap'>
+            <ToastContainer/>
             <form onSubmit={createAudioCategory}>
                 <div className='audio__book__input__fields clearfix'>
                     <div className='audio__book__input__field'>

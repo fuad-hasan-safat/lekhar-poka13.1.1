@@ -4,6 +4,8 @@ import ColorPicker, { themes } from 'react-pick-color';
 import dynamic from 'next/dynamic';
 import { apiBasePath } from '../../../utils/constant';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CustomEditor = dynamic(() => {
     return import('../../custom-editor');
@@ -13,6 +15,8 @@ function MyAudioUploadForm() {
     const [message, setMessage] = useState('');
     const [category, setCategory] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+
+    let notification = '';
 
     const [ebook, setEbook] = useState({
         file: null,
@@ -30,6 +34,7 @@ function MyAudioUploadForm() {
         info: '',
         message: ''
     })
+
 
     function resetEbook() {
         setEbook({
@@ -107,7 +112,8 @@ function MyAudioUploadForm() {
         event.preventDefault();
 
         if (!validateFields()) {
-            alert("সব ফিল্ড পূরণ করুন")
+            notification = "সব ফিল্ড পূরণ করুন" ;
+            notify();
             return
         };
 
@@ -131,10 +137,14 @@ function MyAudioUploadForm() {
             const result = await response.json();
             console.log('Success:', result);
             resetEbook();
+            notification = 'ইবুক সফলভাবে ক্রিয়েট হয়েছে';
             setMessage('Ebook created successfully!');
+            notify1();
         } catch (error) {
             console.error('Error:', error);
             setMessage('Error creating ebook');
+            notification = "ইবুক সম্পন্ন হয়নি" ;
+            notify();
         }
 
         setIsLoading(false);
@@ -142,8 +152,29 @@ function MyAudioUploadForm() {
 
     console.log('ebook data', ebook);
 
+    const notify = () => toast.warn(notification, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+
+    });
+
+    const notify1 = () => toast.success(notification, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+
+    });
+
     return (
         <div className='admin__add__slider__wrap'>
+            <ToastContainer/>
             <form onSubmit={handleSubmit}>
                 <div className='audio__book__input__fields clearfix'>
                     <div className='audio__book__input__field'>

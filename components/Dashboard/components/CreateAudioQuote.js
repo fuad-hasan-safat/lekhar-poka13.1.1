@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
 import { apiBasePath } from '../../../utils/constant';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function CreateAudioQuote() {
+
+    let notification = '';
+
     const [quote, setQuote] = useState({
         title: ''
     })
@@ -14,7 +19,6 @@ export default function CreateAudioQuote() {
     const validateFields = () => {
         for (const key in quote) {
             if (quote[key].trim() === '' || quote[key] === null) {
-                alert(`Please fill in the ${key} field.`);
                 return false;
             }
         }
@@ -25,10 +29,12 @@ export default function CreateAudioQuote() {
         event.preventDefault();
 
         if (!validateFields()) {
+            notification = "সব ফিল্ড পূরণ করুন";
+            notify();
             return
         };
 
-      
+
         console.log('Submit quote --', quote.title)
 
         try {
@@ -37,15 +43,41 @@ export default function CreateAudioQuote() {
             });
 
             console.log('Success:', response.data);
+            notification = 'বাণী সফলভাবে ক্রিয়েট হয়েছে';
+            notify1();
             setQuote({ title: '' });
         } catch (error) {
             console.error('Error:', error);
+            notification = "বাণী ক্রিয়েট হয়নি";
+            notify();
         }
     }
+
+
+    const notify = () => toast.warn(notification, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+
+    });
+
+    const notify1 = () => toast.success(notification, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+
+    });
 
     console.log('Quote --->>', quote.title)
     return (
         <div className='admin__add__slider__wrap'>
+            <ToastContainer/>
             <form onSubmit={handleSubmit}>
                 <div className='audio__book__input__field'>
                     <label>উক্তি লিখুন</label>

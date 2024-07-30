@@ -138,8 +138,8 @@ export default function AudioPlayer() {
                   ></img>
                 </div>
                 <div className="lg:flex lg:flex-col text-gray-600 pt-[5px] pl-[10px]">
-                  <div className="pb-[5px] audio__title">
-                    <div className="text-xl title_content font-bold text-left">{currentSong?.title}</div>
+                  <div className="pb-[5px] ">
+                    <div className="text-xl font-bold text-left">{currentSong?.title.slice(0,30)}</div>
                   </div>
                   <div>
                     <div className="text-left">{currentSong?.writer}</div>
@@ -200,9 +200,13 @@ export default function AudioPlayer() {
                 <button className="">
                   <img src="/images/icons/ic_fav.svg"></img>
                 </button>
+                <button className="">
+                  <img src="/images/icons/audioControl.svg"></img>
+                </button>
+                
                 {/* volume icon */}
-                {!isMute && <img onClick={() => { setIsMute(true); audioPlayer.current.volume = 0; }} width={30} height={30} src="/images/icons/ic_volumeon.svg"></img>}
-                {isMute && <img onClick={() => { setIsMute(false); audioPlayer.current.volume = volume }} width={30} height={30} src="/images/icons/ic_volumeoff.svg"></img>}
+                {!isMute && <img className="cursor-pointer" onClick={() => { setIsMute(true); audioPlayer.current.volume = 0; }} width={30} height={30} src="/images/icons/ic_volumeon.svg"></img>}
+                {isMute && <img className="cursor-pointer" onClick={() => { setIsMute(false); audioPlayer.current.volume = volume }} width={30} height={30} src="/images/icons/ic_volumeoff.svg"></img>}
                 {/* volume bar */}
                 <div className="text-center items-center content-center justify-center ">
                   <ProgressBar

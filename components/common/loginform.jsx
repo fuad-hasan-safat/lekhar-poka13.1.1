@@ -154,7 +154,6 @@ export default function LoginForm({ logreg, btntext, url = '/' }) {
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
-
   });
 
   const notify1 = () => toast.success(notification, {
