@@ -70,7 +70,7 @@ const Lekhok = () => {
                   <div key={index}>
                     <div className="pb-3">
                       <LekhokDetails
-                        image={`${apiBasePath}/${item.image.replace('/uploads/', '/')
+                        image={`${apiBasePath}/${item.image?.slice(item.image?.indexOf('/') + 1)
                           }`}
                         writer={item.name}
                         writer_id={item._id}

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import Sidebar from '../../components/Dashboard/Sidebar';
@@ -16,6 +16,7 @@ import CreatEbook from '../../components/Dashboard/components/CreatEbook';
 import CreateAudioCategory from '../../components/Dashboard/components/CreateAudioCategory';
 import CreateAudioQuote from '../../components/Dashboard/components/CreateAudioQuote';
 import AddAudioInEbook from '../../components/Dashboard/components/AddAudioInEbook';
+import DeleteAudioCategory from '../../components/Dashboard/components/DeleteAudioCategory';
 
 
 const notificationData =[
@@ -54,9 +55,55 @@ const notificationData =[
 const Dashboard = ({children}) => {
 
     const {currentindex} = useContext(AdminContext)
-
+    const notificationRef = useRef(null);
+    const profileRef = useRef(null);
     const [isOpen,setIsOpen] = useState(false);
     const [isNotifation,setIsNotifation] = useState(false);
+
+    useOutsideNotification(notificationRef);
+    useOutsideProfile(profileRef);
+
+    function useOutsideNotification(ref) {
+        useEffect(() => {
+            /**
+             * Alert if clicked on outside of element
+             */
+            function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    // alert("You clicked outside of me!");
+                    setIsNotifation(false)
+                    // setIsSearchbarActive(false)
+                }
+            }
+            // Bind the event listener
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                // Unbind the event listener on clean up
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [ref]);
+    }
+
+    function useOutsideProfile(ref) {
+        useEffect(() => {
+            /**
+             * Alert if clicked on outside of element
+             */
+            function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    // alert("You clicked outside of me!");
+                    setIsOpen(false)
+                    // setIsSearchbarActive(false)
+                }
+            }
+            // Bind the event listener
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                // Unbind the event listener on clean up
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [ref]);
+    }
 
     const toggleMenu=()=>{
         setIsOpen(!isOpen);
@@ -86,7 +133,7 @@ const Dashboard = ({children}) => {
                     </div>
                 </div>
                 <div className='header-rgt'>
-                    <div className={`d__notifation__wrap ${isNotifation ? 'open' : ''}`}>
+                    <div ref={notificationRef} className={`d__notifation__wrap ${isNotifation ? 'open' : ''}`}>
                         <p>2</p>
                         <span onClick={toggleNoti}><i class="ri-notification-fill"></i></span>
                         <ul>
@@ -103,7 +150,7 @@ const Dashboard = ({children}) => {
                             ))}
                         </ul>
                     </div>
-                    <div className={`d__account__wrap ${isOpen ? 'open' : ''}`}>
+                    <div ref={profileRef} className={`d__account__wrap ${isOpen ? 'open' : ''}`}>
                         <span onClick={toggleMenu}><img src='/images/dashboard/profile-img.jpg' alt='Profile Img' /></span>
                         <ul>
                             <li><a href='#'><i class="ri-men-line"></i> Md Milon Sarker</a></li>
@@ -130,6 +177,7 @@ const Dashboard = ({children}) => {
                     {currentindex === 9 && <CreateAudioCategory/>}
                     {currentindex === 10 && <CreateAudioQuote/>}
                     {currentindex === 11 && <AddAudioInEbook/>}
+                    {currentindex === 12 && <DeleteAudioCategory/>}
                 </div>
             </div>
         </div>
