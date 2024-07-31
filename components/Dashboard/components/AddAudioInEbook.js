@@ -140,7 +140,6 @@ export default function AddAudioInEbook() {
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
-
     });
 
     return (
