@@ -100,8 +100,8 @@ const SeeMoreList = () => {
                                     <SeeMoreListBackground audioData={seeAllRenderInfo.allbooks} />
                                 }
                             </div> :
-                            <div className='text-gray-700 text-[24px]'>
-                                কোন অডিওবুক খুঁজে পাওয়া যায় নি ।  
+                            <div className='text-gray-700 text-[20px]'>
+                                কোন অডিওবুক খুঁজে পাওয়া যায় নি ! 
                             </div>
                             }
                         </div>
