@@ -2613,7 +2613,7 @@ transition: all 0.5s !important;
   color: #FCD200;
   font-size: 44px;
   position: absolute;
-  right: -25px;
+  right: 0px;
 }
 
 .audio__playlist__devider {
@@ -2883,7 +2883,7 @@ transition: all 0.5s !important;
   }
 
   .audio__tab__info h6 {
-    font-size: 19px;
+    font-size: 18px;
   }
 
   .banner-sec-wrap {
@@ -2907,7 +2907,7 @@ transition: all 0.5s !important;
   }
 
   .audio__tab__info h6 {
-    font-size: 18px;
+    font-size: 16px;
     padding-top: 5px;
   }
 

@@ -85,13 +85,13 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
 
     return (
         <div className='audio__tab__item'>
-            <div className='audio__tab__left'>
+            <div className='audio__tab__left relative'>
                 <div>
-                    <img src={`${apiBasePath}/${songInfo.image.slice(songInfo.image.indexOf('/') + 1)}`} className='lg:w-[78px] md:w-[70px] sm:w-[65px] xs:w-[50px] lg:h-[78px] md:h-[70px] sm:h-[65px] xs:h-[50px] rounded-full' />
+                    <img src={`${apiBasePath}/${songInfo.image.slice(songInfo.image.indexOf('/') + 1)}`} className='absolute lg:w-[78px] md:w-[70px] sm:w-[65px] xs:w-[50px] lg:h-[78px] md:h-[70px] sm:h-[65px] xs:h-[50px] rounded-full' />
                 </div>
                 <div className='audio__tab__info'>
-                    <h6 className='pr-[35px]'>
-                        {songInfo.title.substring(0, 52) + (songInfo?.title.length >= 52 ? '...' : '')}
+                    <h6 className=''>
+                        {songInfo.title}
                     </h6>
                     <audio ref={audioRef}>
                         <source src={`${apiBasePath}/${songInfo?.audio.slice(songInfo?.audio.indexOf('/') + 1)}`} type="audio/mpeg" />
