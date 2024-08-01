@@ -49,13 +49,12 @@ export default function AudioSidebarLekhok() {
                                     <div key={index}>
                                         <div className="pb-3">
                                             <LekhokDetails
-                                                image={`${apiBasePath}/${item.image?.slice(item.image?.indexOf('/')+1)})
-                                                    }`}
+                                                image={`${apiBasePath}/${item.image?.slice(item.image?.indexOf('/')+1)}`}
                                                 writer={item.name}
                                                 writer_id={item._id}
                                                 id={item._id}
                                                 user_id={item.user_id}
-                                                lifeCycle={`  ${item.birth_date === null ? `বর্তমান` : `${banglaBirthdate} `} থেকে  ${item.expiry_date === null ? '' : ` ${banglaExpiredate}`} `}
+                                                lifeCycle={`  ${item.birth_date === null ? `` : `${banglaBirthdate} `} থেকে  ${item.expiry_date === null ? 'বর্তমান' : ` ${banglaExpiredate}`} `}
                                             />
                                         </div>
                                         <div className="pb-3">

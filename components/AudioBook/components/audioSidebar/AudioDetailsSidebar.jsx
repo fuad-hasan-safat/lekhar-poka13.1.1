@@ -41,9 +41,22 @@ export default function AudioDetailsSideBar() {
                 isPlayListrender: true
             }))
         }
+
+        try {
+            const latestPlayList = await fetchDataWithAxios(latestPlayListUrl);
+            console.log('latest playlist get response', latestPlayList);
+            setLatestPlaylist(latestPlayList.object);
+        } catch (error) {
+            console.log('playlist api call error', error)
+        } finally {
+            setPlaylist((prevPlaylist)=>({
+                ...prevPlaylist,
+                isPlayListrender: true
+            }))
+        }
     };
 
-    // if(!playList.isPlayListrender) return null;
+    if(!playList.isPlayListrender) return null;
 
     return (
         <>

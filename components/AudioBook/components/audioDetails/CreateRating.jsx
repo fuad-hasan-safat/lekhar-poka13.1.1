@@ -22,7 +22,11 @@ export default function CreateRating({ singleAudioData }) {
 
             console.log({ postData })
 
-            if (postData.comment.trim() === '') return;
+            if (postData.comment.trim() === '') {
+                notification = 'দয়া করে আপনার মন্তব্য লিখুন ।';
+                notify();
+                return;
+            };
 
             try {
                 const response = await axios.post(`${apiBasePath}/commentaudiobook`, postData, {
@@ -34,6 +38,7 @@ export default function CreateRating({ singleAudioData }) {
                 const result = response.data;
                 notification = 'আপনার মন্তব্য প্রেরণ সফল হয়েছে।';
                 notify1();
+                setUserRating('')
                 console.log('Response:', result); // Handle the response as needed
             } catch (error) {
                 console.error('Error submitting rating:', error);
@@ -68,7 +73,7 @@ export default function CreateRating({ singleAudioData }) {
 
     return (
         <div className={``}>
-             <ToastContainer />
+            <ToastContainer />
 
             <textarea
                 id="message"
