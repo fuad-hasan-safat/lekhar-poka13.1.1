@@ -2586,20 +2586,33 @@ transition: all 0.5s !important;
 
 }
 
-.audio__tab__left {
+/* .audio__tab__left {
   display: flex;
   justify-content: space-between;
+} */
+.audio__tab__left {
+  width: 100%;
+  padding: 0 110px 0 85px;
 }
-
-.audio__tab__info {
+.audio__tab__left div img{
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+}
+/* .audio__tab__info {
   padding-left: 11px;
-}
+} */
 
 .audio__tab__info h6 {
   font-size: 24px;
   font-weight: 600;
   color: #F9A106;
-  padding-top: 10px;
+  /* padding-top: 10px; */
 }
 
 .audio__tab__info p {
@@ -2858,7 +2871,9 @@ transition: all 0.5s !important;
   }
 
   .audio__tab__info h6 {
-    font-size: 20px;
+      font-size: 20px;
+      line-height: 1.1;
+      margin-bottom: 5px;
   }
 
   .audio__cat_iteam {
@@ -2869,6 +2884,9 @@ transition: all 0.5s !important;
     padding-left: 5px;
     padding-bottom: 10px;
     padding-right: 5px;
+  }
+  .audio__tab__left {
+      padding: 0 110px 0 60px;
   }
 }
 
