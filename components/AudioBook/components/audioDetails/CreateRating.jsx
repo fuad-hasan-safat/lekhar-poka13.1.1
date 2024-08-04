@@ -11,6 +11,12 @@ export default function CreateRating({ singleAudioData }) {
     const [userRating, setUserRating] = useState('');
     let notification = '';
 
+    function reloadPage(){
+        setTimeout(()=>{
+        router.reload();
+        }, 1000)
+      }
+
     async function submitRating() {
         if (localStorage.getItem('uuid').length > 0 && localStorage.getItem('uuid')) {
             const postData = {
@@ -40,6 +46,7 @@ export default function CreateRating({ singleAudioData }) {
                 notify1();
                 setUserRating('')
                 console.log('Response:', result); // Handle the response as needed
+                reloadPage();
             } catch (error) {
                 console.error('Error submitting rating:', error);
                 notification = 'আপনার মন্তব্য যায়নি।';

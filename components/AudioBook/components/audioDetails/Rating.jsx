@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import CreateRating from './CreateRating'
 
 export default function Rating({singleAudioData}) {
-    const userComments = singleAudioData.rating
+    const userComments = singleAudioData.rating;
+    
     return (
         <div className='audio__tab__content_wrap'>
             <div className='audio__tab__caption'>
