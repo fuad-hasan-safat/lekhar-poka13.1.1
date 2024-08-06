@@ -8,18 +8,20 @@ import Rating from './Rating';
 import AudioTabComponent from './AudioTabComponent';
 import AudioPlayer from '../../AudioPlayer/AudioPlayer';
 import { singleAudioData } from '../sampleData/singleAudioDetailsPage';
+import { AudioDetailsTabContext } from '../../../store/audiodetailstab-context';
 
 const AudioTabs = ({singleAudioData}) => {
 
-  const [ToggleState, setToggleState] = useState(1);
+  // const [ToggleState, setToggleState] = useState(1);
+  const {audioTabToggleState, setAudioTabToggleState} = useContext(AudioDetailsTabContext);
   
   const toggleTab = (index) => {
-    setToggleState(index);
+    setAudioTabToggleState(index);
 
   };
 
   const getActiveClass = (index, className) =>
-    ToggleState === index ? className : "";
+    audioTabToggleState === index ? className : "";
 
 
   return (
@@ -57,12 +59,12 @@ const AudioTabs = ({singleAudioData}) => {
         </ul>
         <div className="audio__tab__content">
 
-          <div className={`content ${getActiveClass(ToggleState, "active-content")}`}>
-            {ToggleState === 1 && <AudioTabComponent audioData={singleAudioData.audio}/>}
-            {ToggleState === 2 && <Summary summary={singleAudioData?.summary} />}
-            {ToggleState === 3 && <TechnicalDetails technicalDetails={singleAudioData?.technical_team} />}
-            {ToggleState === 4 && <CommentsOfWriter commentsOfWriter={singleAudioData?.comment_of_writer} />}
-            {ToggleState === 5 && <Rating singleAudioData={singleAudioData} />}
+          <div className={`content ${getActiveClass(audioTabToggleState, "active-content")}`}>
+            {audioTabToggleState === 1 && <AudioTabComponent audioData={singleAudioData.audio}/>}
+            {audioTabToggleState === 2 && <Summary summary={singleAudioData?.summary} />}
+            {audioTabToggleState === 3 && <TechnicalDetails technicalDetails={singleAudioData?.technical_team} />}
+            {audioTabToggleState === 4 && <CommentsOfWriter commentsOfWriter={singleAudioData?.comment_of_writer} />}
+            {audioTabToggleState === 5 && <Rating singleAudioData={singleAudioData} />}
           </div>
         </div>
       </div>
