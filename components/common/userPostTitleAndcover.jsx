@@ -120,11 +120,7 @@ export default function UserPostTitleAndcover({
     writerImage = ''
   }
 
-  let postuploadedBy = uploadedBy;
 
-  if (profileName) {
-    postuploadedBy = profileName;
-  }
 
   // let shortenTitle = title?.length > 23 ? `${title?.slice(0, 22)}...` : title;
   // let shortenWriter = writer?.length > 26 ? `${writer?.slice(0, 25)}...` : writer;
@@ -132,7 +128,6 @@ export default function UserPostTitleAndcover({
 
   let shortenTitle = title;
   let shortenWriter = writer;
-  let shortenUploadedBy = postuploadedBy;
 
   let defaultBannerImage = '/images/defaultUserPic/square/null.png'
 

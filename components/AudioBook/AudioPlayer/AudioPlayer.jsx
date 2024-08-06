@@ -117,8 +117,6 @@ export default function AudioPlayer() {
 
   if (!mounted) return null;
 
-  console.log('song length',songs?.length)
-
   if (songs.length <= 0) return null;
 
   return createPortal((
