@@ -16,6 +16,14 @@ export default function DeleteEbookAndAudio() {
         ebookTitle: '',
         deleteType:''   // 'audio' or 'ebook'
     });
+    
+    const resetAudioData = () => {
+        setAudioData({
+            file: null,
+            image: null,
+            ebook_id: '',
+        })
+    }
 
     const [allBooks, setAllBooks] = useState([]);
     const [audiosOfSelectedBook, setAudioOfSelectedBook] = useState([]);
@@ -31,13 +39,7 @@ export default function DeleteEbookAndAudio() {
         }
     }, [audioData.ebook_id])
 
-    const resetAudioData = () => {
-        setAudioData({
-            file: null,
-            image: null,
-            ebook_id: '',
-        })
-    }
+
 
     async function getAudioBookList() {
         try {
