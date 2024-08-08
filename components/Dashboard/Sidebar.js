@@ -27,7 +27,8 @@ const Sidebar = () => {
     ];
 
     const menuItemsAudio = [
-        { textA: 'Creat Ebook', iconA: 'ri-progress-8-fill', href: '/admin/createbook' },
+        { textA: 'Creat Audio Book', iconA: 'ri-progress-8-fill', href: '' },
+        { textA: 'Edit Audio Book', iconA: 'ri-progress-8-fill', href: '' },
         { textA: 'Create Category', iconA: 'ri-progress-8-fill', href: '/admin/allcategory' },
         { textA: 'Create Quote', iconA: 'ri-progress-8-fill', href: '/admin/slider' },
         { textA: 'Add Audioo', iconA: 'ri-progress-8-fill', href: '/admin/writerlist' },

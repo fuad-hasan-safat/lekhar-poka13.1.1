@@ -5,11 +5,17 @@ import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function CreateRating({ singleAudioData }) {
+export default function CreateRating({ setUserComments }) {
     const router = useRouter();
 
     const [userRating, setUserRating] = useState('');
     let notification = '';
+
+    function reloadPage(){
+        setTimeout(()=>{
+        router.reload();
+        }, 1000)
+      }
 
     async function submitRating() {
         if (localStorage.getItem('uuid').length > 0 && localStorage.getItem('uuid')) {
@@ -39,7 +45,12 @@ export default function CreateRating({ singleAudioData }) {
                 notification = 'আপনার মন্তব্য প্রেরণ সফল হয়েছে।';
                 notify1();
                 setUserRating('')
+                setUserComments((prevData) => ([
+                    ...prevData,
+                    postData
+                ]))
                 console.log('Response:', result); // Handle the response as needed
+                // reloadPage();
             } catch (error) {
                 console.error('Error submitting rating:', error);
                 notification = 'আপনার মন্তব্য যায়নি।';

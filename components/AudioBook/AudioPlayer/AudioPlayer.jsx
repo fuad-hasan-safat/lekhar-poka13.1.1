@@ -117,8 +117,6 @@ export default function AudioPlayer() {
 
   if (!mounted) return null;
 
-  console.log('song length',songs?.length)
-
   if (songs.length <= 0) return null;
 
   return createPortal((
@@ -197,12 +195,12 @@ export default function AudioPlayer() {
               {/* left part */}
               <div className="flex lg:justify-left md:justify-left sm:justify-center xs:justify-center items-center flex-row  space-x-5 ">
                 {/* fav icon */}
-                <button className="">
+                {/* <button className="">
                   <img src="/images/icons/ic_fav.svg"></img>
                 </button>
                 <button className="">
                   <img src="/images/icons/audioControl.svg"></img>
-                </button>
+                </button> */}
                 
                 {/* volume icon */}
                 {!isMute && <img className="cursor-pointer" onClick={() => { setIsMute(true); audioPlayer.current.volume = 0; }} width={30} height={30} src="/images/icons/ic_volumeon.svg"></img>}

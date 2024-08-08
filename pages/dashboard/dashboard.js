@@ -18,6 +18,7 @@ import CreateAudioQuote from '../../components/Dashboard/components/CreateAudioQ
 import AddAudioInEbook from '../../components/Dashboard/components/AddAudioInEbook';
 import DeleteAudioCategory from '../../components/Dashboard/components/DeleteAudioCategory';
 import DeleteEbookAndAudio from '../../components/Dashboard/components/DeleteEbookAndAudio';
+import EditAudioBook from '../../components/Dashboard/components/EditAudioBook';
 
 
 const notificationData =[
@@ -175,11 +176,12 @@ const Dashboard = ({children}) => {
                     {currentindex === 6 && <AllDesignation/>}
                     {currentindex === 7 && <AllWriterBio/>}
                     {currentindex === 8 && <CreatEbook />}
-                    {currentindex === 9 && <CreateAudioCategory/>}
-                    {currentindex === 10 && <CreateAudioQuote/>}
-                    {currentindex === 11 && <AddAudioInEbook/>}
-                    {currentindex === 12 && <DeleteAudioCategory/>}
-                    {currentindex === 13 && <DeleteEbookAndAudio/>}
+                    {currentindex === 9 && <EditAudioBook/>}
+                    {currentindex === 10 && <CreateAudioCategory/>}
+                    {currentindex === 11 && <CreateAudioQuote/>}
+                    {currentindex === 12 && <AddAudioInEbook/>}
+                    {currentindex === 13 && <DeleteAudioCategory/>}
+                    {currentindex === 14 && <DeleteEbookAndAudio/>}
                 </div>
             </div>
         </div>

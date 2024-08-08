@@ -87,7 +87,7 @@ const CreateWriterBioModal = ({ setBioList, showModal, handleClose, setIsCategor
 
             <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
               <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-                নতুন পদবী ক্রিয়েট করুন
+                নতুন বায়ো ক্রিয়েট করুন
               </h3>
               <div className="mt-2">
                 <form onSubmit={handleSubmit}>
@@ -103,7 +103,7 @@ const CreateWriterBioModal = ({ setBioList, showModal, handleClose, setIsCategor
                       <select
                         id="designation"
                         name="designation"
-                        className='bg-transparent w-[93%]'
+                        className='bg-transparent w-[93%] text-black'
                         required
                         value={writerId}
                         onChange={(e) => setWriterId(e.target.value)}>

@@ -99,7 +99,8 @@ const AllWriterBio = () => {
                 >
                     BioAdd
                 </button>
-                {showModal && <CreateDesignationModal setDesignation={setDesignation} showModal={showModal} handleClose={handleClose} setIsCategoryAdded={setIsCategoryAdded} />}
+                {/* {showModal && <CreateDesignationModal setDesignation={setDesignation} showModal={showModal} handleClose={handleClose} setIsCategoryAdded={setIsCategoryAdded} />} */}
+                <CreateWriterBioModal showModal={showModal} handleClose={handleClose} setIsCategoryAdded={setIsCategoryAdded} />
             </div>
             <div className="all__post__list__wrap all__post__category">
                 <table class="table">
