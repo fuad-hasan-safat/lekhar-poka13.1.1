@@ -128,27 +128,31 @@ const CreateSliderPage = () => {
                     </div>
                     <div className='admin__form__wrap clearfix'>
                         <form onSubmit={handleProfileUpdate}>
-                            <div className='admin__input'>
-                                <label>Title</label>
-                                <input type='text' value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Title' />
+                            <div className='admin__input__flds clearfix'>
+                                <div className='admin__input'>
+                                    <label>Title</label>
+                                    <input type='text' value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Title' />
+                                </div>
+                                <div className='admin__input text-black'>
+                                    <label>Post Title</label>
+                                    <select
+                                        name="optons" id="options"
+                                        onChange={(e) => setRelated(e.target.value)} >
+                                        {options}
+                                    </select>
+                                </div>
                             </div>
-                            <div className='admin__input text-black'>
-                                <label>Post Title</label>
-                                <select
-                                    name="optons" id="options"
-                                    onChange={(e) => setRelated(e.target.value)} >
-                                    {options}
-                                </select>
+                            <div className='admin__input__flds clearfix'>
+                                <div className='admin__input'>
+                                    <label>Content</label>
+                                    <textarea type='text' value={content} onChange={(e) => setContent(e.target.value)} placeholder='Content' />
+                                </div>
+                                <div className='admin__input'>
+                                    <label>Caption</label>
+                                    <textarea type='text' value={caption} onChange={(e) => setCaption(e.target.value)} placeholder='Caption' />
+                                </div>
                             </div>
-                            <div className='admin__input'>
-                                <label>Content</label>
-                                <textarea type='text' value={content} onChange={(e) => setContent(e.target.value)} placeholder='Content' />
-                            </div>
-                            <div className='admin__input'>
-                                <label>Caption</label>
-                                <textarea type='text' value={caption} onChange={(e) => setCaption(e.target.value)} placeholder='Caption' />
-                            </div>
-                            <div className='admin__submit'>
+                            <div className='admin__submit clearfix'>
                                 <button type='button' onClick={saveData}>Submit</button>
                             </div>
                         </form>

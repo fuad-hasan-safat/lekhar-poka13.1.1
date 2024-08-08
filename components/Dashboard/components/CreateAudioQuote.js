@@ -76,7 +76,7 @@ export default function CreateAudioQuote() {
 
     console.log('Quote --->>', quote.title)
     return (
-        <div className='admin__add__slider__wrap'>
+        <div className='admin__add__slider__wrap clearfix'>
             <ToastContainer/>
             <form onSubmit={handleSubmit}>
                 <div className='audio__book__input__field'>

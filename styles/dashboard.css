@@ -94,6 +94,7 @@
 .d__notifation__wrap{
     margin-right: 20px;
     position: relative;
+    display:none;
 }
 .d__notifation__wrap > span{
     display: flex;
@@ -361,12 +362,13 @@
     padding:10px 10px;
 }
 .dashboard__cmpt__grid{
-    padding: 10px 10px;
+    padding: 10px 55px 10px 10px;
     border-radius: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 85px;
+    position: relative;
 }
 .dashboard__cmpt__grid h5{
     font-size: 16px;
@@ -391,6 +393,14 @@
     border-radius: 30px;
     text-align: center;
     border: 2px dotted#000;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
 }
 
 /*
@@ -511,9 +521,10 @@ all__page__content__block
     margin: 0 -10px;
 }
 .admin__input{
-    width: 48%;
+    width: 50%;
     float: left;
-    margin: 0 10px 15px;
+    padding: 0 10px;
+    margin-bottom:15px;
 }
 .dashboard__pagination{
     display: flex;
@@ -619,6 +630,168 @@ all__page__content__block
     color:#000;
     opacity: 1;
   }
+
+/*
+------------------
+Sidebar Css
+------------------ 
+*/
+.sidebar__toggle__menu{
+    display: none;
+}
+
+@media(max-width:1399px){
+    .dashboard__cmpt__grid strong {
+        font-size: 13px;
+        line-height: 34px;
+        width: 35px;
+        height: 35px;
+    }
+}
+@media(max-width:1299px){
+    .dashboard__cmpt__grid {
+        padding: 10px 50px 10px 10px;
+    }
+    .dashboard__category ul li {
+        width: 25%;
+    }
+}
+@media(max-width:1199px){
+    .dashboard__category ul li {
+        width: 33.3333%;
+    }
+}
+@media(max-width:991px){
+    .d__sidebar {
+        width: 200px;
+        background: #fff;
+        left: -200px;
+    }
+    .d__sidebar.addActive {
+        left: 0;
+        /* z-index: 9999; */
+    }
+    .page-wrapper {
+        margin: 0;
+    }
+    .page__content {
+        padding: 15px 15px;
+    }
+    .dashboard__component {
+        padding: 15px 15px 20px;
+    }
+    .dashboard__cmpt__grid strong {
+        font-size: 12px;
+        line-height: 30px;
+        width: 30px;
+        height: 30px;
+    }
+    .sidebar__toggle__menu {
+        display: block;
+        position: fixed;
+        right: 80px;
+        z-index: 999;
+        top: 25px;
+    }
+    .sidebar__toggle__menu button {
+        background: #F9A106;
+        padding: 5px;
+        display: inline-block;
+        vertical-align: baseline;
+        width: 35px;
+        height: 30px;
+        position: relative;
+        border-radius: 3px;
+    }
+    .sidebar__toggle__menu button i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        color: #fff;
+        font-size: 20px;
+    }
+    .dashboard__cmpt__grid {
+        padding: 10px 45px 10px 10px;
+    }
+    
+}
+@media(max-width:767px){
+    .dashboard__cmpt__grid p {
+        font-size: 12px;
+        line-height: 1.2;
+    }
+    .dashboard__cmpt__grid h5 {
+        font-size: 14px;
+        line-height: 1.2;
+    }
+    .admin__input {
+        width: 100%;
+    }
+    .audio__book__input__field {
+        width: 100%;
+        padding-bottom: 10px;
+    }
+    .submit__btn{
+        display: block;
+    }
+}
+@media(max-width:575px){
+    .dashboard__category ul li{
+        width: 50%;
+    }
+    .admin__input {
+        width: 100%;
+    }
+    .admin__input textarea {
+        height: 120px;
+    }
+    .breadcrumb__wrap h5 {
+        font-size: 18px;
+    }
+    .breadcrumb__wrap ul li a {
+        font-size: 14px;
+    }
+    .audio__book__input__field {
+        width: 100%;
+        padding-bottom: 10px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .audio__book__input__fields {
+        margin: 0 -10px 0;
+    }
+    .audio__book__input__fields{
+        display:block;
+    }
+    .audio__book__input__radio{
+        width:50%;
+        float:left;
+        margin:0;
+        padding-bottom:10px;
+    }
+    .audio__book__input__fields label {
+        font-size: 14px;
+    }
+}
+@media(max-width:479px){
+    .dashboard__category ul li{
+        width: 100%;
+    }
+    .audio__book__input__radio{
+        width:100%;
+        float:left;
+    }
+    .submit__btn{
+        margin-top:20px !important;
+    }
+    .submit__btn div{
+        padding-left:0 !important;
+    }
+    .submit__btn button{
+        margin-left:0 !important;
+    }
+}
 
 
 

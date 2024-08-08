@@ -49,8 +49,20 @@ const Sidebar = () => {
         setOpenSubMenus({ [index]: !openSubMenus[index] });
     };
 
+    //Responsive Js
+
+    const [isOpen, setIsopen] = useState(false);
+
+    const ToggleSidebar = () => {
+        isOpen === true ? setIsopen(false) : setIsopen(true);
+    }
+
     return (
-        <div className='d__sidebar'>
+        <>
+        <div className='sidebar__toggle__menu'>
+            <button onClick={ToggleSidebar}><i class="ri-menu-line"></i></button>
+        </div>
+        <div className={`d__sidebar ${isOpen == true ? 'addActive' : ''}`}>
             <div className='d__sidebar__menu'>
                 <ul>
                     <li>
@@ -88,6 +100,7 @@ const Sidebar = () => {
                 </ul>
             </div>
         </div>
+     </>
     );
 };
 
