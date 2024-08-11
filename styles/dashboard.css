@@ -630,7 +630,26 @@ all__page__content__block
     color:#000;
     opacity: 1;
   }
-
+/*
+---------------------
+ Table Css
+--------------------- 
+*/
+.all__post__list__wrap{
+    overflow: hidden;
+    position: relative;
+}
+.all__post__list__overflow{
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+.all__post__list__overflow table thead tr,
+.all__post__list__overflow table tbody tr,
+.all__post__list__overflow table tbody,
+.all__post__list__overflow table thead{
+    display: block;
+}
 /*
 ------------------
 Sidebar Css

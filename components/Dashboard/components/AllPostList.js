@@ -139,6 +139,7 @@ const AllPostList = () => {
     return (
       <div className="all__page__content__block clearfix">
       <DialugueModal ref={dialogueRef} alert='আপনি কি পোস্ট মুছে ফেলতে চান' address={deletePost} type='delete' />
+       <div className="w-full clearfix">
         <div className="all__post__search">
           <input
             type="search"
@@ -150,56 +151,85 @@ const AllPostList = () => {
             <i className="ri-search-eye-line"></i>
           </button>
         </div>
-        <div className="all__post__list__wrap">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th scope="col">Post Name</th>
-                <th scope="col">Category</th>
-                <th scope="col">Created By</th>
-                <th scope="col">Status</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentPosts.length > 0 ? (
-                currentPosts.map((post, index) => (
-                  <tr key={post._id}>
-                    <td>{indexOfFirstPost + index + 1}</td>
-                    <td>{post.title}</td>
-                    <td>{post.category}</td>
-                    <td>{post.writer}</td>
-                    <td>
-                      <button
-                        className={`${
-                          post.status ? "text-green-500" : "text-red-500"
-                        }`}
-                        onClick={() => {
-                          revokeStatus(post._id, post.status);
-                        }}
-                      >
-                        {post.status ? "Revoke Status" : "Give Status"}
-                      </button>
-                    </td>
-                    <td>
-                      <i onClick={()=>setViewPost(post._id, true)} className="ri-eye-fill"></i>
-                      <i onClick={()=>setEditPost(post._id, true) } className="ri-edit-line"></i>
-                      <i
-                        className="ri-delete-bin-6-line"
-                        onClick={() => handleDeletePost(post._id)}
-                      ></i>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="6">No posts found</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
         </div>
+        <div className="all__post__list__wrap clearfix">
+          <div className="all__post__list__overflow">
+            <table className="table">
+              <thead>
+                <tr className="clearfix">
+                  <th>No</th>
+                  <th scope="col">Post Name</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Created By</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentPosts.length > 0 ? (
+                  currentPosts.map((post, index) => (
+                    <tr key={post._id} className="clearfix">
+                      <td>{indexOfFirstPost + index + 1}</td>
+                      <td>{post.title}</td>
+                      <td>{post.category}</td>
+                      <td>{post.writer}</td>
+                      <td>
+                        <button
+                          className={`${
+                            post.status ? "text-green-500" : "text-red-500"
+                          }`}
+                          onClick={() => {
+                            revokeStatus(post._id, post.status);
+                          }}
+                        >
+                          {post.status ? "Revoke Status" : "Give Status"}
+                        </button>
+                      </td>
+                      <td>
+                        <i onClick={()=>setViewPost(post._id, true)} className="ri-eye-fill"></i>
+                        <i onClick={()=>setEditPost(post._id, true) } className="ri-edit-line"></i>
+                        <i
+                          className="ri-delete-bin-6-line"
+                          onClick={() => handleDeletePost(post._id)}
+                        ></i>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="6">No posts found</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <table class="table-fixed">
+  <thead>
+    <tr>
+      <th>Song</th>
+      <th>Artist</th>
+      <th>Year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
+      <td>Malcolm Lockyer</td>
+      <td>1961</td>
+    </tr>
+    <tr>
+      <td>Witchy Woman</td>
+      <td>The Eagles</td>
+      <td>1972</td>
+    </tr>
+    <tr>
+      <td>Shining Star</td>
+      <td>Earth, Wind, and Fire</td>
+      <td>1975</td>
+    </tr>
+  </tbody>
+</table>
         <div className="dashboard__pagination">
           <button
             className="dashboard__prev_next"
