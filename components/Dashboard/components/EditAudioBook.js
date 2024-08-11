@@ -191,12 +191,23 @@ export default function EditAudioBook() {
                 audioId: arr[0],
                 audioTitle: arr[1]
             }))
+
+            setEbook((prevData) => ({
+                ...prevData,
+                audioId: arr[0],
+                audioTitle: arr[1]
+            }))
         }
 
         if (name === 'book') {
             const arr = value.split(',');
             console.log({ value, arr });
             setEditedEbook((prevData) => ({
+                ...prevData,
+                ebook_id: arr[0],
+                ebookTitle: arr[1]
+            }))
+            setEbook((prevData) => ({
                 ...prevData,
                 ebook_id: arr[0],
                 ebookTitle: arr[1]
@@ -210,6 +221,8 @@ export default function EditAudioBook() {
                 return;
             } else {
                 setEditedEbook(prevState => ({ ...prevState, file: selectedFile }));
+                // setEditedEbook(prevState => ({ ...prevState, file: selectedFile }));
+
             }
         } else if (type === 'radio') {
             if (value === 'true' || value === 'false') {
@@ -220,9 +233,13 @@ export default function EditAudioBook() {
                 }
             } else {
                 setEditedEbook(prevState => ({ ...prevState, [name]: value }));
+                setEbook(prevState => ({ ...prevState, [name]: value }));
+
             }
         } else {
             setEditedEbook(prevState => ({ ...prevState, [name]: value }));
+            setEbook(prevState => ({ ...prevState, [name]: value }));
+
         }
     };
 
@@ -248,19 +265,12 @@ export default function EditAudioBook() {
             console.log(key, editedEbook[key])
         }
 
-        console.log('edit ebook id,', audioData.ebook_id)
+        console.log(`${apiBasePath}/updatebook/${audioData.ebook_id}`)
 
         try {
-            const response = await fetch(`${apiBasePath}/updatebook/${audioData.ebook_id}`, {
-                method: 'PUT',
-                body: formData
-            });
+            const response = await axios.put(`${apiBasePath}/updatebook/${audioData.ebook_id}`, editedEbook);
 
             console.log('Edit book response', response)
-
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
 
             const result = await response.json();
             console.log('Success:', result);
@@ -277,6 +287,14 @@ export default function EditAudioBook() {
 
         setIsLoading(false);
     };
+
+
+    const deleteCoverImage = () =>{
+        setEbook((prevData) =>({
+            ...prevData,
+            file: null,
+        }))
+    }
 
     console.log('ebook data', ebook);
 
@@ -299,6 +317,8 @@ export default function EditAudioBook() {
         draggable: true,
 
     });
+
+
 
     // if(!isMounted) return null;
 
