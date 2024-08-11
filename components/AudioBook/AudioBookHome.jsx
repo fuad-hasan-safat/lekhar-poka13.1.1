@@ -32,7 +32,7 @@ export default function AudioBookHome() {
 
         try {
             const url = `${apiBasePath}/quotes`;
-            const url2 = `${apiBasePath}/books`;
+            const url2 = `${apiBasePath}/recentbooks`;
 
             const response = await axios.get(url);
             console.log('audio book quote response', response)
@@ -40,6 +40,7 @@ export default function AudioBookHome() {
 
             const response2 = await axios.get(url2);
             const recentSliderData = response2.data;
+            console.log('recent book', recentSliderData)
 
             setData((prevData) => ({
                 ...prevData,
@@ -87,12 +88,12 @@ export default function AudioBookHome() {
                         </Slider>}
 
                         {
-                            data.recentSlider.length > 0 && <div className='hm__audio__recent__wrap'>
+                            data.recentSlider.books.length > 0 && <div className='hm__audio__recent__wrap'>
                                 <div className='hm__audio__see__more'>
                                     <h3>সাম্প্রতিক</h3>
                                     <Link className='hm__audio__common__btn' href='audiobook/seemorelist/' onClick={() => setSliderInfo('no_background', 'সাম্প্রতিক')}>সব দেখুন</Link>
                                 </div>
-                                <AudioRecentSlider recentSliderData={data.recentSlider} />
+                                <AudioRecentSlider recentSliderData={data.recentSlider.books} />
                             </div>
                         }
                     </div>

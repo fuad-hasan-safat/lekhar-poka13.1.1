@@ -6,8 +6,6 @@ import RatingComponent from '../../components/common/starRating'
 import { apiBasePath } from "../../utils/constant";
 import ReaderModeModal from "../../components/readerMode/ReaderModeModal";
 import FullPostReaderMode from "../../components/common/fullContentReadermood";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { AudioPlayListContext } from "../../components/store/audioPlayer-context";
 
 
@@ -202,7 +200,6 @@ export default function PostDetails({ postData }) {
 
 
           </section>
-          <ToastContainer />
 
         </div>
 
