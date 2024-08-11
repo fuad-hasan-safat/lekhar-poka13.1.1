@@ -271,9 +271,6 @@ export default function EditAudioBook() {
             const response = await axios.put(`${apiBasePath}/updatebook/${audioData.ebook_id}`, editedEbook);
 
             console.log('Edit book response', response)
-
-            const result = await response.json();
-            console.log('Success:', result);
             resetEbook();
             notification = 'ইবুক সফলভাবে ক্রিয়েট হয়েছে';
             setMessage('Ebook created successfully!');

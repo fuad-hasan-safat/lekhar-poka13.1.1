@@ -16,8 +16,8 @@ export default function WriterProfileBanner({
     follower = 0,
     following = 0,
     setProfileController,
-    writerInfo,
-    writerBio,
+    // writerInfo,
+    // writerBio,
     profileInfo,
     isSelfWriter,
 
@@ -114,7 +114,7 @@ export default function WriterProfileBanner({
             rendredBio = bio;
 
         } else {
-            rendredBio = writerBio?.content;
+            // rendredBio = writerBio?.content;
         }
 
     } else {
@@ -194,7 +194,7 @@ export default function WriterProfileBanner({
                         src={image?.length > 0 ? `${apiBasePath}/${image.slice(image.indexOf("/") + 1)}` : '/images/defaultUserPic/profile.jpg'}
                     />
                 </div>
-                <h1><span className='text-[35px] text-[#FCD200]'>{writerInfo?.name}</span> <span className='text-[#595D5B] pl-[20px] text-[22px]'>{profileInfo?.designation}</span></h1>
+                <h1><span className='text-[35px] text-[#FCD200]'>{profileInfo?.name}</span> <span className='text-[#595D5B] pl-[20px] text-[22px]'>{profileInfo?.designation}</span></h1>
 
                 <ul className='profile__info__wrap flex flex-row text-[#737373] text-[20px] lg:mt-[10px]'>
 
