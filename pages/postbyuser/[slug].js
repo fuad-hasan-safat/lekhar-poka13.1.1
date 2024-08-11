@@ -40,11 +40,11 @@ export default function PostOfWriterPage() {
         const fetchPosts = async () => {
             console.log('------------------slug of writers ---------------', slug)
             try {
-                const response = await fetch(`${apiBasePath}/postswriter/${slug}`);
+                const response = await fetch(`${apiBasePath}/postsprofile/${slug}`);
                 const data = await response.json();
-                setPostList(data.object);
+                setPostList(data.posts);
                 setWriterInfo(data.writer_info)
-                setProfileInfo(data?.user_profile)
+                setProfileInfo(data?.profile)
                 setWriterBio(data?.writer_bio)
                 setBio(data.writer_bio?.content)
                 setIsSelfWriter(data.self_writer)
@@ -106,10 +106,10 @@ export default function PostOfWriterPage() {
 
                                 <WriterProfileBanner
                                     setProfileController={setProfileController}
-                                    writerInfo={writerInfo}
-                                    writerBio={writerBio}
+                                    // writerInfo={writerInfo}
+                                    // writerBio={writerBio}
                                     profileInfo={profileInfo}
-                                    isSelfWriter={isSelfWriter}
+                                    isSelfWriter={true}
                                 />
 
 

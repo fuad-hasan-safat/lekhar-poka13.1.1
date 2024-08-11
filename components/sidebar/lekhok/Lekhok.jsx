@@ -18,10 +18,11 @@ const Lekhok = () => {
 
   useEffect(() => {
 
-    fetch(`${apiBasePath}/writers`)
+    fetch(`${apiBasePath}/profilelist`)
       .then((response) => response.json())
       .then((data) => {
         setLekhokList(data);
+        console.log('writer list ----', data)
       })
       .catch((error) => console.error("Error fetching data:", error));
 
@@ -63,8 +64,16 @@ const Lekhok = () => {
 
             {getVisibleWriters().length > 0 &&
               getVisibleWriters().map((item, index) => {
+                console.log(item?.birth_date)
                 const banglaBirthdate = item?.birth_date ? convertToBengaliDate(item?.birth_date) : '';
+                console.log({banglaBirthdate})
                 const banglaExpiredate = item?.expiry_date? convertToBengaliDate(item?.expiry_date) : '';
+
+                let lifeCycle = `${banglaBirthdate} থেকে  বর্তমান `;
+
+                if(!item?.birth_date){
+                  lifeCycle = '';
+                }
                 return (
 
                   <div key={index}>
@@ -73,10 +82,10 @@ const Lekhok = () => {
                         image={`${apiBasePath}/${item.image?.slice(item.image?.indexOf('/') + 1)
                           }`}
                         writer={item.name}
-                        writer_id={item._id}
+                        writer_id={item.user_id}
                         id={item._id}
-                        user_id={item.user_id}
-                        lifeCycle={`  ${item.birth_date === null ? `` : `${banglaBirthdate} `} থেকে  ${item.expiry_date === null ? 'বর্তমান' : ` ${banglaExpiredate}`} `}
+                        user_id={item._id}
+                        lifeCycle={lifeCycle}
                       />
                     </div>
                     <div className="pb-3">
