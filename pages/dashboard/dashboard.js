@@ -19,6 +19,7 @@ import AddAudioInEbook from '../../components/Dashboard/components/AddAudioInEbo
 import DeleteAudioCategory from '../../components/Dashboard/components/DeleteAudioCategory';
 import DeleteEbookAndAudio from '../../components/Dashboard/components/DeleteEbookAndAudio';
 import EditAudioBook from '../../components/Dashboard/components/EditAudioBook';
+import AllProfileList from '../../components/Dashboard/components/AllProfileList';
 
 
 const notificationData =[
@@ -172,16 +173,17 @@ const Dashboard = ({children}) => {
                     {currentindex === 2 && <Allcategory/>}
                     {currentindex === 3 && <CreateSliderPage/>}
                     {currentindex === 4 && <WriterList/>}
-                    {currentindex === 5 && <AllSliderList/>}
-                    {currentindex === 6 && <AllDesignation/>}
-                    {currentindex === 7 && <AllWriterBio/>}
-                    {currentindex === 8 && <CreatEbook />}
-                    {currentindex === 9 && <EditAudioBook/>}
-                    {currentindex === 10 && <CreateAudioCategory/>}
-                    {currentindex === 11 && <CreateAudioQuote/>}
-                    {currentindex === 12 && <AddAudioInEbook/>}
-                    {currentindex === 13 && <DeleteAudioCategory/>}
-                    {currentindex === 14 && <DeleteEbookAndAudio/>}
+                    {currentindex === 5 && <AllProfileList/>}
+                    {currentindex === 6 && <AllSliderList/>}
+                    {currentindex === 7 && <AllDesignation/>}
+                    {currentindex === 8 && <AllWriterBio/>}
+                    {currentindex === 9 && <CreatEbook />}
+                    {currentindex === 10 && <EditAudioBook/>}
+                    {currentindex === 11 && <CreateAudioCategory/>}
+                    {currentindex === 12 && <CreateAudioQuote/>}
+                    {currentindex === 13 && <AddAudioInEbook/>}
+                    {currentindex === 14 && <DeleteAudioCategory/>}
+                    {currentindex === 15 && <DeleteEbookAndAudio/>}
                 </div>
             </div>
         </div>

@@ -21,6 +21,7 @@ const Sidebar = () => {
         { text: 'All Category', icon: 'ri-progress-8-fill', href: '/admin/allcategory' },
         { text: 'Create Slider', icon: 'ri-progress-8-fill', href: '/admin/slider' },
         { text: 'All Writer', icon: 'ri-progress-8-fill', href: '/admin/writerlist' },
+        { text: 'All Profile', icon: 'ri-progress-8-fill', href: '/admin/writerlist' },
         { text: 'Slider List', icon: 'ri-progress-8-fill', href: '/admin/allslidertable' },
         { text: 'Designation List', icon: 'ri-progress-8-fill', href: '/admin/alldesignation' },
         { text: 'Bio List', icon: 'ri-progress-8-fill', href: '/admin/allWriterBio' },
