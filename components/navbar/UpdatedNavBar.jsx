@@ -212,7 +212,7 @@ export default function UpdatedNavBar() {
 
     return (
         <>
-            <div className="fixed w-full bg-white z-[9900]">
+            <div className="fixed w-full bg-white z-[99]">
                 <header className="header shadow-md">
                     {/* Logo */}
                     <DialugueModal ref={dialogueRef} alert='আপনি কি লগআউট করতে চান' address={`/account/login`} type='logout' />

@@ -56,7 +56,7 @@ export default function AudioDetailsSideBar() {
         }
     };
 
-    if(!playList.isPlayListrender) return null;
+    // if(!playList.isPlayListrender) return null;
 
     return (
         <>

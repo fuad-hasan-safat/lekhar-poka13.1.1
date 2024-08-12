@@ -9,7 +9,7 @@ export default function CreateAudioCategory() {
     const [audioCategory, setAudioCategory] = useState({
         file: null,
         title: '',
-        background: 'background',
+        background: '',
         color: '',
     })
 
@@ -18,7 +18,7 @@ export default function CreateAudioCategory() {
         setAudioCategory({
             file: null,
             title: '',
-            background: 'background',
+            background: '',
             color: '',
         })
     }
@@ -71,6 +71,7 @@ export default function CreateAudioCategory() {
             formData.append(key, solidData);
         }
 
+        
         try {
 
             const response = await fetch(`${apiBasePath}/createaudiocategory`, {
@@ -115,7 +116,7 @@ export default function CreateAudioCategory() {
 
     return (
         <div className='admin__add__slider__wrap'>
-            <ToastContainer/>
+            <ToastContainer />
             <form onSubmit={createAudioCategory}>
                 <div className='audio__book__input__fields clearfix'>
                     <div className='audio__book__input__field'>
@@ -151,6 +152,32 @@ export default function CreateAudioCategory() {
                             onChange={(color) => setAudioCategory(prevState => ({ ...prevState, color: color.hex }))}
                         />
                     </div>
+                    <label>ব্যাকগ্রাউন্ড</label>
+                    <div className=''>
+                        <label>
+                            <input
+                                type="radio"
+                                name="background"
+                                value="background"
+                                checked={audioCategory.background === 'background'}
+                                onChange={handleChange}
+                            />
+                            ব্যাকগ্রাউন্ড সহ
+                        </label>
+                        <label className='ml-[30px]'>
+                            <input
+                                type="radio"
+                                name="background"
+                                value="no_background"
+                                checked={audioCategory.background === 'no_background'}
+                                onChange={handleChange}
+                            />
+                            ব্যাকগ্রাউন্ড ছাড়া
+                        </label>
+                    </div>
+                </div>
+                <div className='audio__book__input__radio w-[33.333%] text-black'>
+                    
                 </div>
             </form>
             <div className='submit__btn'>

@@ -14,7 +14,7 @@ export default function AudioSidebarLekhok() {
 
     useEffect(() => {
 
-        fetch(`${apiBasePath}/writers`)
+        fetch(`${apiBasePath}/profilelist`)
             .then((response) => response.json())
             .then((data) => {
                 setLekhokList(data);
@@ -44,6 +44,13 @@ export default function AudioSidebarLekhok() {
                             lekhokList?.slice(0,4)?.map((item, index) => {
                                 const banglaBirthdate = item?.birth_date ? convertToBengaliDate(item?.birth_date) : '';
                                 const banglaExpiredate = item?.expiry_date ? convertToBengaliDate(item?.expiry_date) : '';
+
+                                let lifeCycle = `${banglaBirthdate} থেকে  বর্তমান `;
+
+                                if(!item?.birth_date){
+                                  lifeCycle = '';
+                                }
+
                                 return (
 
                                     <div key={index}>
@@ -54,7 +61,7 @@ export default function AudioSidebarLekhok() {
                                                 writer_id={item._id}
                                                 id={item._id}
                                                 user_id={item.user_id}
-                                                lifeCycle={`  ${item.birth_date === null ? `` : `${banglaBirthdate} `} থেকে  ${item.expiry_date === null ? 'বর্তমান' : ` ${banglaExpiredate}`} `}
+                                                lifeCycle={lifeCycle}
                                             />
                                         </div>
                                         <div className="pb-3">

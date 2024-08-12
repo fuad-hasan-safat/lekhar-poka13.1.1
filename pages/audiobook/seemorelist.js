@@ -40,10 +40,22 @@ const SeeMoreList = () => {
 
 
     async function getData(category) {
+        console.log('CCCCAAATAGORy', category)
+        let apiurl = `${apiBasePath}/books/${category}`;
+        if (category === 'সাম্প্রতিক') {
+            apiurl = `${apiBasePath}/recentbooks`;
+        }
         try {
-            const url = `${apiBasePath}/books/${category}`;
+            const url = apiurl;
             const response = await axios.get(url);
-            const bookList = response.data.ebooks;
+            let bookList;
+            if (category === 'সাম্প্রতিক') {
+                bookList = response.data.books;
+
+            } else {
+                bookList = response.data.ebooks;
+
+            }
 
             setSeeAllRenderInfo((prevSeeAllRenderInfo) => ({
                 ...prevSeeAllRenderInfo,
@@ -52,7 +64,7 @@ const SeeMoreList = () => {
             }))
 
         } catch (error) {
-            console.log({error})
+            console.log({ error })
 
         }
 
@@ -90,19 +102,19 @@ const SeeMoreList = () => {
                     <div className="all__post__content flex flex-row">
                         <div className="lg:w-[70%]">
                             {seeAllRenderInfo.allbooks.length ?
-                            <div className='see__more__list__wrap clearfix'>
-                                {
-                                    seeAllRenderInfo.sliderType === 'no_background' &&
-                                    <SeeMoreListGrid audioData={seeAllRenderInfo.allbooks} />
-                                }
-                                {
-                                    seeAllRenderInfo.sliderType === 'background' &&
-                                    <SeeMoreListBackground audioData={seeAllRenderInfo.allbooks} />
-                                }
-                            </div> :
-                            <div className='text-gray-700 text-[20px]'>
-                                কোন অডিওবুক খুঁজে পাওয়া যায় নি ! 
-                            </div>
+                                <div className='see__more__list__wrap clearfix'>
+                                    {
+                                        seeAllRenderInfo.sliderType === 'no_background' &&
+                                        <SeeMoreListGrid audioData={seeAllRenderInfo.allbooks} />
+                                    }
+                                    {
+                                        seeAllRenderInfo.sliderType === 'background' &&
+                                        <SeeMoreListBackground audioData={seeAllRenderInfo.allbooks} />
+                                    }
+                                </div> :
+                                <div className='text-gray-700 text-[20px]'>
+                                    কোন অডিওবুক খুঁজে পাওয়া যায় নি !
+                                </div>
                             }
                         </div>
                         <div className="lg:w-[30%]">

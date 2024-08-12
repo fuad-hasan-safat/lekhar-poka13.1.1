@@ -6,8 +6,6 @@ import RatingComponent from '../../components/common/starRating'
 import { apiBasePath } from "../../utils/constant";
 import ReaderModeModal from "../../components/readerMode/ReaderModeModal";
 import FullPostReaderMode from "../../components/common/fullContentReadermood";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { AudioPlayListContext } from "../../components/store/audioPlayer-context";
 
 
@@ -132,7 +130,7 @@ export default function PostDetails({ postData }) {
             <div className="container">
               <div className="lg:flex lg:flex-row">
                 {(
-                  <div className="flex flex-col w-full relative z-50">
+                  <div className="flex flex-col w-full ">
                     {isdataFetch &&
                       <>
                         <div className="kobita__dsc__lft relative flex lg:mb-[110px] md:mb-[84px]">
@@ -202,7 +200,6 @@ export default function PostDetails({ postData }) {
 
 
           </section>
-          <ToastContainer />
 
         </div>
 
