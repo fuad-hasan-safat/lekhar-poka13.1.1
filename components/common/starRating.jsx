@@ -105,11 +105,14 @@ export default function RatingComponent({ post_id, setRating, rating, notificati
 
 
   return (
-    <>
-      <ToastContainer />
+    <div className=''>
 
-      <div className='start__rating place-content-center justify-center  mt-[50px] pt-[50px] pb-[50px] mx-[40px] mb-[50px] rounded-xl float-left text-center border-2 text-black border-gray-400 z-[999]'>
 
+      <div className='relative start__rating place-content-center justify-center  mt-[50px] pt-[50px] pb-[50px] mx-[40px] mb-[50px] rounded-xl float-left text-center border-2 text-black border-gray-400'>
+
+        <div className=''>
+          <ToastContainer />
+        </div>
         <p>রেটিং দিন ।</p>
 
         <div>
@@ -133,6 +136,6 @@ export default function RatingComponent({ post_id, setRating, rating, notificati
         </button>
 
       </div>
-    </>
+    </div>
   )
 }

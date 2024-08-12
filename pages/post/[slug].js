@@ -130,7 +130,7 @@ export default function PostDetails({ postData }) {
             <div className="container">
               <div className="lg:flex lg:flex-row">
                 {(
-                  <div className="flex flex-col w-full relative z-50">
+                  <div className="flex flex-col w-full ">
                     {isdataFetch &&
                       <>
                         <div className="kobita__dsc__lft relative flex lg:mb-[110px] md:mb-[84px]">
