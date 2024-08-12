@@ -98,6 +98,7 @@ const WriterList = () => {
     return (
       <div className="all__page__content__block clearfix">
       <DialugueModal ref={dialogueRef} alert='আপনি কি লেখক মুছে ফেলতে চান' address={deleteWriter} type='delete' />
+       <div className="clearfix">
         <div className="all__post__search">
           <input
             type="search"
@@ -109,10 +110,12 @@ const WriterList = () => {
             <i className="ri-search-eye-line"></i>
           </button>
         </div>
-        <div className="all__post__list__wrap all__post__category">
+        </div>
+        <div className="all__post__list__wrap clearfix">
+          <div className="all__post__category all__post__list__overflow clearfix">
           <table className="table">
             <thead>
-              <tr>
+              <tr className="clearfix">
                 <th>No</th>
                 <th scope="col">Writer Name</th>
                 <th scope="col">Action</th>
@@ -121,7 +124,7 @@ const WriterList = () => {
             <tbody>
               {filteredWriterList.length > 0 ? (
                 filteredWriterList.map((writer, index) => (
-                  <tr key={writer._id}>
+                  <tr key={writer._id} className="clearfix">
                     <td>{indexOfFirstWriter + index + 1}</td>
                     <td>{writer.name}</td>
                     <td>
@@ -135,12 +138,13 @@ const WriterList = () => {
                   </tr>
                 ))
               ) : (
-                <tr>
+                <tr className="clearfix">
                   <td colSpan="3">No writers found</td>
                 </tr>
               )}
             </tbody>
           </table>
+          </div>
         </div>
         <div className="dashboard__pagination">
           <button onClick={prevPage} disabled={currentPage === 1}>

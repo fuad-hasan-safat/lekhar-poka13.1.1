@@ -625,7 +625,7 @@ all__page__content__block
     color:#000;
     opacity: 1;
   }
-  .audio__book__input__field input::-moz-placeholder,
+.audio__book__input__field input::-moz-placeholder,
 .admin__input input:-moz-placeholder {
     color:#000;
     opacity: 1;
@@ -635,15 +635,6 @@ all__page__content__block
  Table Css
 --------------------- 
 */
-.all__post__list__wrap{
-    overflow: hidden;
-    position: relative;
-}
-.all__post__list__overflow{
-    overflow-x: scroll;
-    overflow-y: hidden;
-    white-space: nowrap;
-}
 .all__post__list__overflow table thead tr,
 .all__post__list__overflow table tbody tr,
 .all__post__list__overflow table tbody,
@@ -682,9 +673,9 @@ Sidebar Css
 }
 @media(max-width:991px){
     .d__sidebar {
-        width: 200px;
+        width: 210px;
         background: #fff;
-        left: -200px;
+        left: -210px;
     }
     .d__sidebar.addActive {
         left: 0;
@@ -733,6 +724,16 @@ Sidebar Css
     .dashboard__cmpt__grid {
         padding: 10px 45px 10px 10px;
     }
+    .all__post__list__wrap{
+        overflow: hidden;
+        position: relative;
+    }
+    .all__post__category,
+    .all__post__list__overflow{
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+    }
     
 }
 @media(max-width:767px){
@@ -754,6 +755,20 @@ Sidebar Css
     .submit__btn{
         display: block;
     }
+    .all__post__list__overflow table{
+        width: 800px;
+    }
+    .designation__btn{
+        display: block;
+    }
+    .designation__btn button{
+        margin-top: 0;
+    }
+    .all__post__search {
+        float: right;
+        max-width: 340px;
+        width: 100%;
+    }
 }
 @media(max-width:575px){
     .dashboard__category ul li{
@@ -761,6 +776,7 @@ Sidebar Css
     }
     .admin__input {
         width: 100%;
+        padding: 0;
     }
     .admin__input textarea {
         height: 120px;
@@ -809,6 +825,9 @@ Sidebar Css
     }
     .submit__btn button{
         margin-left:0 !important;
+    }
+    .all__post__category table{
+        width: 400px !important;
     }
 }
 
