@@ -12,7 +12,7 @@ export default function AllProfileList() {
     const [writerList, setWriterList] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [isMounted, setismounted] = useState(faBedPulse)
-    const [writersPerPage] = useState(5); // Number of writers per page
+    const [writersPerPage] = useState(20); // Number of writers per page
     const [searchTerm, setSearchTerm] = useState(""); // State for search term
     const [selectedWriterId, settSelectedWriterId] = useState(null);
 
@@ -130,6 +130,7 @@ export default function AllProfileList() {
                                 filteredWriterList.map((writer, index) => (
                                     <tr key={writer._id}>
                                         <td>{indexOfFirstWriter + index + 1}</td>
+                                        <td><img src={`${apiBasePath}/${writer?.image?.slice(writer?.image?.indexOf('/')+1)}`}/></td>
                                         <td>{writer?.name}</td>
                                         <td>
 
