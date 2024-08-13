@@ -134,19 +134,16 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
         };
     }, [showModal]);
 
-
-
-    //  functions
-    const designationChange = (selected) => {
-        // console.log({ selected })
-        setSelectedDesignation(selected); // Selected option object
-        setDesignation(selected?.label)
-        setDesigNationId(selected?.value)
-    };
-
-    const handleDate = (date) => {
-        setBirthOfDate(date);
-    };
+    function validatePhoneNumber(input) {
+        const isValid = /^01\d{9}$/.test(input);
+    
+        if (isValid) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
 
     function saveImageFromURL(url, filename) {
         fetch(url)
@@ -170,6 +167,15 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
 
     const handleSubmit = async (e) => {
         e?.preventDefault();
+
+        const isValidPhone = validatePhoneNumber(phoneNumber);
+
+        if(!isValidPhone){
+            notification = 'মোবাইল নাম্বার অবশ্যই ০১ দিয়ে শুরু হবে এবং ১১ ডিজিট হবে!';
+            notify(); // This will show a toast notification
+
+            return;
+        }
 
         //  update bio
         try {
