@@ -93,50 +93,53 @@ const Allcategory = () => {
     return (
       <div className="all__page__content__block clearfix">
       <DialugueModal ref={dialogueRef} alert='আপনি কি লেখার ধরণ মুছে ফেলতে চান' address={deleteCategory} type='delete' />
-
-        <div className="all__post__search">
-          <input
-            type="search"
-            placeholder="Enter Search.."
-            value={searchTerm}
-            onChange={handleChange}
-          />
-          <button>
-            <i className="ri-search-eye-line"></i>
-          </button>
+        <div className="clearfix">
+          <div className="all__post__search">
+            <input
+              type="search"
+              placeholder="Enter Search.."
+              value={searchTerm}
+              onChange={handleChange}
+            />
+            <button>
+              <i className="ri-search-eye-line"></i>
+            </button>
+          </div>
         </div>
-        <div className="all__post__list__wrap all__post__category">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th scope="col">Category Name</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentCategories.length > 0 ? (
-                currentCategories.map((category, index) => (
-                  <tr key={category._id}>
-                    <td>{indexOfFirstCategory + index + 1}</td>
-                    <td>{category.title}</td>
-                    <td>
-                      {/* <i className="ri-eye-fill"></i> */}
-                      {/* <i className="ri-edit-line"></i> */}
-                      <i
-                        className="ri-delete-bin-6-line"
-                        onClick={() => handleCategoryDelete(category._id)}
-                      ></i>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="3">No categories found</td>
+        <div className="all__post__list__wrap clearfix">
+          <div className="all__post__category all__post__list__overflow">
+            <table className="table">
+              <thead>
+                <tr className="clearfix">
+                  <th>No</th>
+                  <th scope="col">Category Name</th>
+                  <th scope="col">Action</th>
                 </tr>
-              )}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {currentCategories.length > 0 ? (
+                  currentCategories.map((category, index) => (
+                    <tr key={category._id} className="clearfix">
+                      <td>{indexOfFirstCategory + index + 1}</td>
+                      <td>{category.title}</td>
+                      <td>
+                        {/* <i className="ri-eye-fill"></i> */}
+                        {/* <i className="ri-edit-line"></i> */}
+                        <i
+                          className="ri-delete-bin-6-line"
+                          onClick={() => handleCategoryDelete(category._id)}
+                        ></i>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr className="clearfix">
+                    <td colSpan="3">No categories found</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
         <div className="dashboard__pagination">
           <button onClick={prevPage} disabled={currentPage === 1}>

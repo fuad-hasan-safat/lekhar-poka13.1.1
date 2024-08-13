@@ -158,7 +158,7 @@ const Dashboard = ({children}) => {
                         <ul>
                             <li><a href='#'><i class="ri-men-line"></i> Md Milon Sarker</a></li>
                             <li><a href='#'><i class="ri-user-3-line"></i>My Profile</a></li>
-                            <li><a href='#'><i class="ri-settings-2-line"></i>Setting</a></li>
+                            {/* <li><a href='#'><i class="ri-settings-2-line"></i>Setting</a></li> */}
                             <li><a href='#'><i class="ri-login-circle-line"></i>Logout</a></li>
                         </ul>
                     </div>

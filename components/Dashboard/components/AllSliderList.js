@@ -78,34 +78,38 @@ const AllSliderList = () => {
         return (
             <div className="all__page__content__block clearfix">
                 <DialugueModal ref={dialogueRef} alert={`আপনি কি ${selectedSlider.title} স্লাইডার মুছে ফেলতে চান`} address={deleteSlider} type='delete' />
-                <div className="all__post__search">
-                    <input type="search" placeholder="Enter Search.." />
-                    <button><i class="ri-search-eye-line"></i></button>
+                <div className="clearfix w-full">
+                    <div className="all__post__search">
+                        <input type="search" placeholder="Enter Search.." />
+                        <button><i class="ri-search-eye-line"></i></button>
+                    </div>
                 </div>
-                <div className="all__post__list__wrap all__post__category">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th scope="col">Title</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {sliderList.length &&
-                                sliderList.map((slider, index) => (
-                                    <tr>
-                                        <td>{index + 1}</td>
-                                        <td>{slider.title}</td>
-                                        <td>
-                                            {/* <i class="ri-eye-fill"></i> */}
-                                            {/* <i class="ri-edit-line"></i> */}
-                                            <i onClick={()=>handleDeleteSlider(slider._id, slider.title)} class="ri-delete-bin-6-line"></i>
-                                        </td>
-                                    </tr>
-                                ))}
-                        </tbody>
-                    </table>
+                <div className="all__post__list__wrap">
+                    <div className="all__post__category all__post__list__overflow">
+                        <table class="table">
+                            <thead className="clearfix">
+                                <tr className="clearfix">
+                                    <th>No</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {sliderList.length &&
+                                    sliderList.map((slider, index) => (
+                                        <tr className="clearfix">
+                                            <td>{index + 1}</td>
+                                            <td>{slider.title}</td>
+                                            <td>
+                                                {/* <i class="ri-eye-fill"></i> */}
+                                                {/* <i class="ri-edit-line"></i> */}
+                                                <i onClick={()=>handleDeleteSlider(slider._id, slider.title)} class="ri-delete-bin-6-line"></i>
+                                            </td>
+                                        </tr>
+                                    ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         )

@@ -77,23 +77,26 @@ const AllDesignation = () => {
         return (
             <div className="all__page__content__block clearfix">
                 <DialugueModal ref={dialogueRef} alert='আপনি কি পদবী মুছে ফেলতে চান' address={deteteDesignation} type='delete'/>
-                <div className="all__post__search">
-                    <input type="search" placeholder="Enter Search.." />
-                    <button><i class="ri-search-eye-line"></i></button>
+                <div className="w-full clearfix">
+                    <div className="all__post__search">
+                        <input type="search" placeholder="Enter Search.." />
+                        <button><i class="ri-search-eye-line"></i></button>
+                    </div>
+                    <div className="designation__btn">
+                        <button
+                            className="bg-[#FCA000] hover:bg-[#eeb249] text-white py-2 px-[25px] rounded mt-[20px]"
+                            onClick={handleShow}
+                        >
+                            নতুন পদবী
+                        </button>
+                        {showModal && <CreateDesignationModal setDesignation={setDesignation} showModal={showModal} handleClose={handleClose} setIsCategoryAdded={setIsCategoryAdded} />}
+                    </div>
                 </div>
-                <div>
-                    <button
-                        className="bg-[#FCA000] hover:bg-[#eeb249] text-white py-2 px-[25px] rounded mt-[20px]"
-                        onClick={handleShow}
-                    >
-                        নতুন পদবী
-                    </button>
-                    {showModal && <CreateDesignationModal setDesignation={setDesignation} showModal={showModal} handleClose={handleClose} setIsCategoryAdded={setIsCategoryAdded} />}
-                </div>
-                <div className="all__post__list__wrap all__post__category">
+                <div className="all__post__list__wrap clearfix">
+                    <div className="all__post__category all__post__list__overflow">
                     <table class="table">
                         <thead>
-                            <tr>
+                            <tr className="clearfix">
                                 <th>No</th>
                                 <th scope="col">Designation</th>
                                 <th scope="col">Action</th>
@@ -102,7 +105,7 @@ const AllDesignation = () => {
                         <tbody>
                             {designation.length &&
                                 designation.map((slider, index) => (
-                                    <tr>
+                                    <tr className="clearfix">
                                         <td>{index + 1}</td>
                                         <td>{slider.title}</td>
                                         <td>
@@ -114,6 +117,7 @@ const AllDesignation = () => {
                                 ))}
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         )
