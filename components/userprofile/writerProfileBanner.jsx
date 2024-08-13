@@ -129,7 +129,7 @@ export default function WriterProfileBanner({
 
 
     async function followUserhandler(user_id, following) {
-        if(!localStorage.getItem('uuid') || localStorage.getItem('uuid').length <= 0 ){
+        if (!localStorage.getItem('uuid') || localStorage.getItem('uuid').length <= 0) {
             notification = 'অনুসরণ করতে লগইন করুন'
             notify();
 
@@ -157,7 +157,7 @@ export default function WriterProfileBanner({
             }
         } else {
             // alert(`আপনি ইতিমধ্যেই ${writerInfo.name} কে অনুসরণ করছেন `)
-            notification = `আপনি ইতিমধ্যেই ${writerInfo.name} কে অনুসরণ করছেন `;
+            notification = `আপনি ইতিমধ্যেই অনুসরণ করছেন `;
             notify();
         }
     }
@@ -225,6 +225,7 @@ export default function WriterProfileBanner({
 
                 {isSelfWriter && <div className='w-full mt-[44px] mb-[44px]'>
                     <button
+                        disabled={isAlreadyFollowing}
                         className='page__common__yello__btn w-full py-[13px] bg-[#F9A106] px-[75px] p-1 rounded-md text-white text-[16px]'
                         onClick={() => followUserhandler(profileInfo?.user_id, userUuid)}
                     >
