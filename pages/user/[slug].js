@@ -12,15 +12,9 @@ export default function Home() {
   return (
     router.isReady &&
     <>
-      {/* <div>
-        <head>
-          <title>প্রোফাইল</title>
-        </head>
-      </div> */}
       <div className=''>
       <Head>
         <title>প্রোফাইল</title>
-        {/* Other meta tags or link elements can be added here */}
       </Head>
         <UserProfile slug={slug} />
       </div>

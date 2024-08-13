@@ -8,7 +8,7 @@ export default function Summary({summary}) {
         <hr></hr>
     </div>
 
-    <div className='audio__tab__details' dangerouslySetInnerHTML={{__html:summary}}>
+    <div className='audio__tab__details mb-[30px]' dangerouslySetInnerHTML={{__html:summary}}>
      
     </div>
 

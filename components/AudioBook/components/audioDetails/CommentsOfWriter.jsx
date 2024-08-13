@@ -8,7 +8,7 @@ export default function CommentsOfWriter({commentsOfWriter}) {
                 <hr></hr>
             </div>
 
-            <div className='audio__tab__details' dangerouslySetInnerHTML={{__html:commentsOfWriter}}>
+            <div className='audio__tab__details mb-[30px]' dangerouslySetInnerHTML={{__html:commentsOfWriter}}>
 
             </div>
         </div>
