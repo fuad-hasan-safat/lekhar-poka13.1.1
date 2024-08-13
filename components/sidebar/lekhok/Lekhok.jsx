@@ -86,7 +86,7 @@ const Lekhok = () => {
                         writer={item.name}
                         writer_id={item.user_id}
                         id={item._id}
-                        user_id={item._id}
+                        user_id={item.user_id}
                         lifeCycle={lifeCycle}
                       />
                     </div>

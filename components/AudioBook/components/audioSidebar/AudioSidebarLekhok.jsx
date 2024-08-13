@@ -61,7 +61,7 @@ export default function AudioSidebarLekhok() {
                                                 writer={item.name}
                                                 writer_id={item._id}
                                                 id={item._id}
-                                                user_id={item._id}
+                                                user_id={item.user_id}
                                                 lifeCycle={lifeCycle}
                                             />
                                         </div>

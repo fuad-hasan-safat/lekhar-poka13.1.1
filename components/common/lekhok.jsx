@@ -9,7 +9,7 @@ const LekhokDetails = ({
     lifeCycle,
 }) => {
     console.log({ writer, writer_id, user_id })
-    let redirectAddress = `/postbyuser/${user_id}`;
+    let redirectAddress = `/postbyuser/${writer_id}`;
     console.log({ redirectAddress })
 
     if (user_id) {
