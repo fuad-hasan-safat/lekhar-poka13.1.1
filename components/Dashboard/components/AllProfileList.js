@@ -130,7 +130,6 @@ export default function AllProfileList() {
                                 filteredWriterList.map((writer, index) => (
                                     <tr key={writer._id}>
                                         <td>{indexOfFirstWriter + index + 1}</td>
-                                        <td><img src={`${apiBasePath}/${writer?.image?.slice(writer?.image?.indexOf('/')+1)}`}/></td>
                                         <td>{writer?.name}</td>
                                         <td>
 
