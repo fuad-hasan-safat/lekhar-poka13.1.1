@@ -105,48 +105,52 @@ export default function AllProfileList() {
         return (
             <div className="all__page__content__block clearfix">
                 <DialugueModal ref={dialogueRef} alert='আপনি কি লেখক মুছে ফেলতে চান' address={deleteWriter} type='delete' />
-                <div className="all__post__search">
-                    <input
-                        type="search"
-                        placeholder="Enter Search.."
-                        value={searchTerm}
-                        onChange={handleChange}
-                    />
-                    <button>
-                        <i className="ri-search-eye-line"></i>
-                    </button>
+                <div className='w-full clearfix'>
+                    <div className="all__post__search">
+                        <input
+                            type="search"
+                            placeholder="Enter Search.."
+                            value={searchTerm}
+                            onChange={handleChange}
+                        />
+                        <button>
+                            <i className="ri-search-eye-line"></i>
+                        </button>
+                    </div>
                 </div>
-                <div className="all__post__list__wrap all__post__category">
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th scope="col">Writer Name</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {filteredWriterList.length > 0 ? (
-                                filteredWriterList.map((writer, index) => (
-                                    <tr key={writer._id}>
-                                        <td>{indexOfFirstWriter + index + 1}</td>
-                                        <td>{writer?.name}</td>
-                                        <td>
-
-                                            <i
-                                                className="ri-delete-bin-6-line"
-                                                onClick={() => handleWriterDlete(writer._id)}
-                                            ></i>
-                                        </td>
-                                    </tr>
-                                ))
-                            ) : (
-                                <tr>
-                                    <td colSpan="3">No writers found</td>
+                <div className="all__post__list__wrap">
+                    <div className='all__post__category all__post__list__overflow'>
+                        <table className="table">
+                            <thead>
+                                <tr className='clearfix'>
+                                    <th>No</th>
+                                    <th scope="col">Writer Name</th>
+                                    <th scope="col">Action</th>
                                 </tr>
-                            )}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {filteredWriterList.length > 0 ? (
+                                    filteredWriterList.map((writer, index) => (
+                                        <tr key={writer._id} className='clearfix'>
+                                            <td>{indexOfFirstWriter + index + 1}</td>
+                                            <td>{writer?.name}</td>
+                                            <td>
+
+                                                <i
+                                                    className="ri-delete-bin-6-line"
+                                                    onClick={() => handleWriterDlete(writer._id)}
+                                                ></i>
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr className='clearfix'>
+                                        <td colSpan="3">No writers found</td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div className="dashboard__pagination">
                     <button onClick={prevPage} disabled={currentPage === 1}>
