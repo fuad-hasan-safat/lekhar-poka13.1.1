@@ -45,7 +45,7 @@ export default function PlaylistItem({ songInfo, songIndex, songList, audioScope
         <div className='audio__playlist__item'>
             <div className='audio__playlist__left'>
                 <div>
-                    <img src={`${apiBasePath}/${songInfo.image.slice(songInfo.image.indexOf('/') + 1)}`} className='w-[41px] h-[41px] rounded-full' />
+                    <img src={`${apiBasePath}/${songInfo.image.slice(songInfo.image.indexOf('/') + 1)}`} className='w-[41px] object-cover h-[41px] rounded-full' />
                 </div>
                 <div className='audio__playlist__info'>
                     <h6 className=''>

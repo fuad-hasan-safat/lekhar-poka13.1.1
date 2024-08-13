@@ -125,7 +125,7 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
             <div className='audio__tab__item'>
                 <div className='audio__tab__left relative'>
                     <div>
-                        <img src={`${apiBasePath}/${songInfo.image.slice(songInfo.image.indexOf('/') + 1)}`} className='absolute lg:w-[78px] md:w-[70px] sm:w-[65px] xs:w-[50px] lg:h-[78px] md:h-[70px] sm:h-[65px] xs:h-[50px] rounded-full' />
+                        <img src={`${apiBasePath}/${songInfo.image.slice(songInfo.image.indexOf('/') + 1)}`} className='absolute object-cover lg:w-[78px] md:w-[70px] sm:w-[65px] xs:w-[50px] lg:h-[78px] md:h-[70px] sm:h-[65px] xs:h-[50px] rounded-full' />
                     </div>
                     <div className='audio__tab__info'>
                         <h6 className=''>
