@@ -55,6 +55,8 @@ export default function AllWriterList() {
 
                                 return (
                                     <div key={index}>
+
+                                       {item?.birth_date && <>
                                         <div className="pb-3">
 
                                             <LekhokDetails
@@ -72,6 +74,8 @@ export default function AllWriterList() {
                                         <div className="pb-3">
                                             {index <= lekhokList.length - 2 ? <SidebarPostDivider /> : ""}
                                         </div>
+                                        </>
+                                        }
 
                                     </div>
 

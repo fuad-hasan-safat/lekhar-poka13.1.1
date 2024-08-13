@@ -66,18 +66,20 @@ const Lekhok = () => {
               getVisibleWriters().map((item, index) => {
                 console.log(item?.birth_date)
                 const banglaBirthdate = item?.birth_date ? convertToBengaliDate(item?.birth_date) : '';
-                console.log({banglaBirthdate})
-                const banglaExpiredate = item?.expiry_date? convertToBengaliDate(item?.expiry_date) : '';
+                console.log({ banglaBirthdate })
+                const banglaExpiredate = item?.expiry_date ? convertToBengaliDate(item?.expiry_date) : '';
 
                 let lifeCycle = `${banglaBirthdate} থেকে  বর্তমান `;
 
-                if(!item?.birth_date){
+                if (!item?.birth_date) {
                   lifeCycle = '';
                 }
                 return (
 
                   <div key={index}>
+                  {item?.birth_date &&  <>
                     <div className="pb-3">
+
                       <LekhokDetails
                         image={`${apiBasePath}/${item.image?.slice(item.image?.indexOf('/') + 1)
                           }`}
@@ -95,10 +97,12 @@ const Lekhok = () => {
                         ""
                       )}
                     </div>
+
+                    </>
+              }
+
                   </div>
-
                 )
-
               })}
           </div> :
           <div className="pt-10"> লেখক নেই </div>

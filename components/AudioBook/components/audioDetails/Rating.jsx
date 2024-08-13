@@ -13,7 +13,7 @@ export default function Rating({singleAudioData}) {
             </div>
             <CreateRating setUserComments={setUserComments} singleAudioData={singleAudioData} />
 
-            <div className='audio__tab__details mt-[40px]'>
+            <div className='audio__tab__details my-[40px]'>
                 {userComments?.map((comment, index)=>{
                     return(
                         <div key={index}>
