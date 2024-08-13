@@ -61,7 +61,7 @@ export default function SearchResult() {
 
     return createPortal((
         <>
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex z-[999]">
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex z-[10]">
                 <div className="bg-white rounded-lg overflow-scroll w-full shadow-lg">
                     <section className="banner-sec-wrap place-content-center">
                         <div className="relative w-full xl:h-[190px] lg:h-[180px] md:h-[180px] sm:h-[180px] xs:h-[170px]  overflow-hidden" style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat` }}>

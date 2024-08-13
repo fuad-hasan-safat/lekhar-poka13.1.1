@@ -14,7 +14,7 @@ export async function getServerSideProps(context) {
         const res = await fetch(`${apiBasePath}/getaudiobook/${slug}`);
         const singleAudioData = await res.json()
 
-
+        console.log({ singleAudioData })
         const postRes = await fetch(`${apiBasePath}/updateview/${slug}`, {
             method: 'POST',
             headers: {
@@ -28,10 +28,10 @@ export async function getServerSideProps(context) {
 
         return { props: { singleAudioData } }
 
-    }catch(error){
+    } catch (error) {
         console.log(error)
     }
-    
+
 
     const singleAudioData = []
 
@@ -54,7 +54,7 @@ export default function Home({ singleAudioData }) {
 
     if (!isLoading) return null;
 
-    
+
 
     return (
         <>{localStorage.getItem('uuid')?.trim().length > 0 ?
