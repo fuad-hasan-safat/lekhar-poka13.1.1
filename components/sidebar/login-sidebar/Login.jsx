@@ -160,25 +160,7 @@ export default function Login() {
 
   return (
     <>
-      {status === 'success' ? (
-        <>
-          <div className="flex flex-col items-center">
-
-            {localStorage.getItem("usertype") === 'admin' &&
-              <button
-                onClick={() => { 
-                  setCurrentComponentIndex(0, 'Dashboard')
-                  router.push('/dashboard/dashboard')} }
-                className="page__common__yello__btn text-white rounded-[6px] bg-[#F9A106] px-[20px] h-[40px] mt-[25px]"
-              >অ্যাডমিন প্যানেল</button>
-            }
-
-            {/* <Divider /> */}
-
-          </div>
-
-        </>
-      ) : (
+      {status !== 'success' && (
         <div>
           <div>
 
