@@ -416,7 +416,17 @@ Bg Slider Css
     }
 }
 
-@media(max-width:575px) {}
+@media(max-width:575px) {
+    .backgroundSlider .slick-prev::before,
+    .hmCategorySlider .slick-prev:before {
+        background-size: 28px 28px !important;
+    }
+
+    .backgroundSlider .slick-next::before,
+    .hmCategorySlider .slick-next:before {
+        background-size: 28px 28px !important;
+    }
+}
 
 @media(max-width:479px) {
     .hm__audio__book__sec {
