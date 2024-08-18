@@ -84,7 +84,7 @@ const Lekhok = () => {
                         image={`${apiBasePath}/${item.image?.slice(item.image?.indexOf('/') + 1)
                           }`}
                         writer={item.name}
-                        writer_id={item.user_id}
+                        writer_id={item._id}
                         id={item._id}
                         user_id={item.user_id}
                         lifeCycle={lifeCycle}
