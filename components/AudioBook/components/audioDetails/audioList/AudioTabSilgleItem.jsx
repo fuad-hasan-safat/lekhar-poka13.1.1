@@ -78,7 +78,7 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
     }
 
     async function handlePlayButton() {
-        toggleAudioPlay(audioIndex, audioList, 'details');
+        toggleAudioPlay(audioIndex, audioList, `details${songInfo._id}`);
 
         const data = {
             ebook_id: songInfo.ebook_id,
@@ -158,7 +158,7 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
                 </div>
 
                 <div className='audio__tab__playbutton'>
-                    <button onClick={handlePlayButton}>{isAudioPlaying && audioIndex === currentPlayingIndex && audioPlace === 'details' ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</button>
+                    <button onClick={handlePlayButton}>{isAudioPlaying && audioIndex === currentPlayingIndex && audioPlace === `details${songInfo._id}` ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</button>
                     <button onClick={handleAddMyPlaylist} className='text-[#484848] text-opacity-[50%] lg:ml-[18px] md:ml-[15px] sm:ml-[12px] xs:ml-[10px]'><i class="ri-add-circle-fill"></i></button>
                 </div>
 
