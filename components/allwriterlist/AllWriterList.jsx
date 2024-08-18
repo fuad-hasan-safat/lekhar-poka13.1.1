@@ -11,7 +11,7 @@ export default function AllWriterList() {
 
     useEffect(() => {
 
-        fetch(`${apiBasePath}/writers`)
+        fetch(`${apiBasePath}/profilelist`)
             .then((response) => response.json())
             .then((data) => {
                 setLekhokList(data);
@@ -46,9 +46,17 @@ export default function AllWriterList() {
                                 banglaBirthdate = banglaBirthdate || '';
                                 banglaExpiredate = banglaExpiredate || '';
 
+                                let lifeCycle = `${banglaBirthdate} থেকে  বর্তমান `;
+
+                                if(!item?.birth_date){
+                                  lifeCycle = '';
+                                }
+
 
                                 return (
                                     <div key={index}>
+
+                                       {item?.birth_date && <>
                                         <div className="pb-3">
 
                                             <LekhokDetails
@@ -58,7 +66,7 @@ export default function AllWriterList() {
                                                 writer_id={item._id}
                                                 id={item._id}
                                                 user_id={item.user_id}
-                                                lifeCycle={`  ${item.birth_date === null ? `` : `${banglaBirthdate} `} থেকে  ${item.expiry_date === null ? 'বর্তমান' : ` ${banglaExpiredate}`} `}
+                                                lifeCycle={lifeCycle}
 
                                             />
                                         </div>
@@ -66,6 +74,8 @@ export default function AllWriterList() {
                                         <div className="pb-3">
                                             {index <= lekhokList.length - 2 ? <SidebarPostDivider /> : ""}
                                         </div>
+                                        </>
+                                        }
 
                                     </div>
 
