@@ -4,7 +4,7 @@ import { apiBasePath } from "../../utils/constant";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const OtpPage = ({otpProp, SetIsOtpSucess, phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus, otpStatus }) => {
+const OtpPage = ({ otpProp, SetIsOtpSucess, phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus, otpStatus }) => {
 
   let notification = ''
   const [otp, setOtp] = useState(["", "", "", ""]);
@@ -57,12 +57,12 @@ const OtpPage = ({otpProp, SetIsOtpSucess, phonenumber, setIsOtpVerified, setIsO
 
   const handleSendOtpAgain = async () => {
     const formattedPhoneNumber = `88${phonenumber?.trim()}`;
-    console.log('before otp ',formattedPhoneNumber)
+    console.log('before otp ', formattedPhoneNumber)
 
 
     try {
       const response = await axios.post(`${apiBasePath}/${otpProp}`, {
-          phone: formattedPhoneNumber,
+        phone: formattedPhoneNumber,
       });
 
       console.log('Resend otp response', response)
@@ -71,24 +71,24 @@ const OtpPage = ({otpProp, SetIsOtpSucess, phonenumber, setIsOtpVerified, setIsO
 
       if (response.data.status === 'failed') {
 
-          // alert('এই নাম্বার এ লগইন করা নেই ')
-          notification = 'এই নাম্বার এ লগইন করা নেই ';
-          notify();
+        // alert('এই নাম্বার এ লগইন করা নেই ')
+        notification = 'এই নাম্বার এ লগইন করা নেই ';
+        notify();
       }
 
       if (response.data.otp_status === "SENT") {
-          notification = 'ওটিপি প্রেরণ করা হয়েছে';
-          notify1();
+        notification = 'ওটিপি প্রেরণ করা হয়েছে';
+        notify1();
 
-          SetIsOtpSucess(true)
+        SetIsOtpSucess(true)
 
       }
       if (response.data.otp_status === "LIMIT_CROSSED") {
 
-          // alert('আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন');
-          notification = 'আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন';
-          notify();
-          SetIsOtpSucess(false)
+        // alert('আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন');
+        notification = 'আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন';
+        notify();
+        SetIsOtpSucess(false)
 
       }
     } catch (error) {
@@ -166,6 +166,7 @@ const OtpPage = ({otpProp, SetIsOtpSucess, phonenumber, setIsOtpVerified, setIsO
             type="number"
             className="w-[51px] h-[65px] border-solid bg-gray-100 rounded-xl text-center"
             value={otp[index]}
+            onKeyDown={handleKeyDown}
             onChange={(e) => handleOtpChange(index, e.target.value)}
             ref={(ref) => (inputRefs.current[index] = ref)}
             maxLength="1" // Limit input to one character
