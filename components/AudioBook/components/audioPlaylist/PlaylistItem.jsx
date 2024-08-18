@@ -2,6 +2,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { AudioPlayListContext } from '../../../store/audioPlayer-context';
 import { apiBasePath } from '../../../../utils/constant';
+import { replaceUnderscoresWithSpaces } from '../../../../function/api';
 
 export default function PlaylistItem({ songInfo, songIndex, songList, audioScope }) {
     console.log('song info-----', songInfo)
@@ -40,6 +41,13 @@ export default function PlaylistItem({ songInfo, songIndex, songList, audioScope
 
     }, [songInfo?.audio]);
 
+    const title = replaceUnderscoresWithSpaces(songInfo.title)
+    console.log(title);
+
+    let shortenedTitle = title;
+    if (title?.length > 30) {
+        shortenedTitle = title?.slice(0, 27) + '...'
+    }
 
     return (
         <div className='audio__playlist__item'>
@@ -49,7 +57,7 @@ export default function PlaylistItem({ songInfo, songIndex, songList, audioScope
                 </div>
                 <div className='audio__playlist__info'>
                     <h6 className=''>
-                        {songInfo.title.substring(0, 40) + (songInfo?.title.length >= 52 ? '...' : '')}
+                        {shortenedTitle}
                     </h6>
                     <audio ref={audioRef}>
                         <source src={`${apiBasePath}/${songInfo?.audio.slice(songInfo?.audio.indexOf('/') + 1)}`} type="audio/mpeg" />

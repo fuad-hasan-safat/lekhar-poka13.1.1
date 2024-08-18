@@ -14,6 +14,7 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import { useRouter } from "next/navigation";
 import { AudioPlayListContext } from "../../store/audioPlayer-context";
 import { apiBasePath } from "../../../utils/constant";
+import { replaceUnderscoresWithSpaces } from "../../../function/api";
 
 export default function AudioPlayer() {
 
@@ -119,6 +120,14 @@ export default function AudioPlayer() {
 
   if (songs.length <= 0) return null;
 
+  const title = replaceUnderscoresWithSpaces(currentSong?.title)
+  console.log(title);
+
+  let shortenedTitle = title;
+  if(title?.length > 25) {
+      shortenedTitle = title?.slice(0,22) + '...'
+  }
+
   return createPortal((
     <>
       <div className="audio-player-wrap fixed text-black  backdrop-blur-lg  text-center bottom-[0] bg-yellow-500/30  w-full z-[999999]">
@@ -137,7 +146,7 @@ export default function AudioPlayer() {
                 </div>
                 <div className="lg:flex lg:flex-col text-gray-600 pt-[5px] pl-[10px]">
                   <div className="pb-[5px] ">
-                    <div className="text-xl font-bold text-left">{currentSong?.title.slice(0,30)}</div>
+                    <div className="text-xl font-bold text-left">{shortenedTitle}</div>
                   </div>
                   <div>
                     <div className="text-left">{currentSong?.writer}</div>

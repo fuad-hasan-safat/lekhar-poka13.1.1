@@ -25,6 +25,7 @@ export default function AudioDetailsSideBar() {
     const getData = async () => {
         const myPlayListUrl = `${apiBasePath}/showplaylist/${localStorage.getItem('uuid')}`;
         const latestPlayListUrl = `${apiBasePath}/showlatestplaylist/${localStorage.getItem('uuid')}`;
+        console.log({myPlayListUrl, latestPlayListUrl})
         try {
             const myplayList = await fetchDataWithAxios(myPlayListUrl);
             console.log('my play list', myplayList)
@@ -75,6 +76,7 @@ export default function AudioDetailsSideBar() {
                         <Link className='sidebar__audio__common__btn' href='/audiobook/playlist' onClick={() => setPlayListRenderScope('latestPlayList')}>সব দেখুন</Link>
                     </div>
                 </div>}
+                {/* {latestPlayList?.length >= 0 && <div  className='text-black'>No Audio</div>} */}
                 <div className='sidebar__iteam__wrap'>
                     <h2 className='audio__sidebar__heading'>লেখক</h2>
                     <div className='py-[10px]'>
@@ -96,6 +98,8 @@ export default function AudioDetailsSideBar() {
                         <Link className='sidebar__audio__common__btn' href='/audiobook/playlist' onClick={() => setPlayListRenderScope('myPlayList')}>সব দেখুন</Link>
                     </div>
                 </div>}
+                {/* {myPlayList?.length >= 0 && <div className='text-black'>No Audio</div>} */}
+
             </div>
         </>
     )

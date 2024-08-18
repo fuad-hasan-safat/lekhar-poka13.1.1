@@ -2,6 +2,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { AudioPlayListContext } from '../../../../store/audioPlayer-context';
 import { apiBasePath } from '../../../../../utils/constant';
+import { replaceUnderscoresWithSpaces } from '../../../../../function/api';
 
 export default function AudioPlayListSingleItem({ songInfo, audioIndex, audioList }) {
     const { playList, setPlaylist, audioPlace, playListRenderScope, currentPlayingIndex, setCurrentAudioIndex, toggleAudioPlay, isAudioPlaying } = useContext(AudioPlayListContext)
@@ -40,7 +41,13 @@ export default function AudioPlayListSingleItem({ songInfo, audioIndex, audioLis
 
     }, []);
 
+    const title = replaceUnderscoresWithSpaces(songInfo.title)
+    console.log(title);
 
+    let shortenedTitle = title;
+    if(title?.length > 84) {
+        shortenedTitle = title?.slice(0,81) + '...'
+    }
 
     return (
         <div className='audio__tab__item'>
@@ -50,7 +57,7 @@ export default function AudioPlayListSingleItem({ songInfo, audioIndex, audioLis
                 </div>
                 <div className='audio__tab__info'>
                     <h6 className='pr-[35px]'>
-                        {songInfo.title.substring(0, 52) + (songInfo?.title.length >= 52 ? '...' : '')}
+                        {shortenedTitle}
                     </h6>
                     <audio ref={audioRef}>
                         <source src={`${apiBasePath}/${songInfo?.audio.slice(songInfo.audio.indexOf('/') + 1 )}`} type="audio/mpeg" />

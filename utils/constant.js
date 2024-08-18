@@ -1,5 +1,5 @@
 require("dotenv").config(); // Load environment variables from .env
-export const apiBasePath =  'https://api.lekharpoka.com';
+ export const apiBasePath =  'https://api.lekharpoka.com';
 
 
 // export const apiBasePath = 'http://103.4.145.125:3097';

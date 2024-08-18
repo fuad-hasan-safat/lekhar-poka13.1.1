@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { replaceUnderscoresWithSpaces } from '../../../../../function/api';
 
 export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) {
     const { playList, setPlaylist, audioPlace, playListRenderScope, currentPlayingIndex, setCurrentAudioIndex, toggleAudioPlay, isAudioPlaying, setMyPlayList, myPlayList, setLatestPlaylist, latestPlayList } = useContext(AudioPlayListContext)
@@ -54,6 +55,8 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
             userId: localStorage.getItem('uuid')
         }
 
+        console.log('Add to playlist data -,', data);
+
         try {
             const response = await axios.post(`${apiBasePath}/addtoplaylist`, data);
             console.log('add playlist response', response);
@@ -82,6 +85,9 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
             audio_id: songInfo._id,
             userId: localStorage.getItem('uuid')
         }
+
+        console.log('Add to latest playlist data -,', data);
+
 
         try {
             const response = await axios.post(`${apiBasePath}/addtolatestplaylist`, data);
@@ -118,6 +124,16 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
 
     });
 
+    const title = replaceUnderscoresWithSpaces(songInfo.title)
+    console.log(title);
+
+    let shortenedTitle = title;
+    if(title?.length > 84) {
+        shortenedTitle = title?.slice(0,81) + '...'
+    }
+
+
+
     return (
         <>
             <ToastContainer />
@@ -129,7 +145,7 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
                     </div>
                     <div className='audio__tab__info'>
                         <h6 className=''>
-                            {songInfo.title}
+                            {shortenedTitle}
                         </h6>
                         <audio ref={audioRef}>
                             <source src={`${apiBasePath}/${songInfo?.audio.slice(songInfo?.audio.indexOf('/') + 1)}`} type="audio/mpeg" />
@@ -147,7 +163,6 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
                 </div>
 
             </div>
-
         </>
 
     )
