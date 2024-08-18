@@ -149,7 +149,7 @@ export default function ProcchodLeftContent() {
                           id={post._id}
                           image={selectedCoverImage}
                           title={post.title}
-                          writer={post.writer}
+                          writer={post.profile_name}
                           writer_id={post.writer_id}
                           writer_image={post?.profile_image}
                           profileName={post?.profile_name}

@@ -101,7 +101,7 @@ export default function ProfilePostLeftContentApproved() {
                         <SinglePostConponent
                           id={post._id} // Assuming '_id' is the unique identifier
                           title={post.title}
-                          writer={post.writer}
+                          writer={post.profile_name}
                           writer_id={post.writer_id}
                           image={bannerImage}
                           content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 20).join(" ")}` : `${post.content.split(/\s+/).slice(0, 30).join(" ")}`} // Truncate content

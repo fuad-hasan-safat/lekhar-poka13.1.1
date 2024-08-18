@@ -139,7 +139,7 @@ export default function PostDetails({ postData }) {
                               id={slug}
                               content={data?.content}
                               title={data?.title}
-                              writer={data?.writer}
+                              writer={profileName}
                               writer_id={data?.writer_id}
                               image={selectedCoverImage}
                               uploadedBy={data?.uploaded_by}
