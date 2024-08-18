@@ -2,16 +2,10 @@
 import React, { useState, useEffect } from 'react'
 import Loading from '../../components/common/loading';
 import { apiBasePath } from '../../utils/constant';
-import Sidebar from '../../components/sidebar/Sidebar';
-import MainContentDivider from '../../components/common/mainContentDivider'
-import SobPostsOfWriterBody from '../../components/postOfWriter/sobPostsOfWriterBody'
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { countWords } from '../../function/api';
-import SinglePostConponent from '../../components/common/singlePostComponent';
 import WriterProfileBanner from '../../components/userprofile/writerProfileBanner';
-import FollowerList from '../../components/userprofile/followerList';
-import FollowingList from '../../components/userprofile/followingList';
 import WriterPostList from '../../components/userprofile/WriterPostList';
 
 
