@@ -235,7 +235,6 @@ export default function PostDetails({ postData }) {
             <p>দুঃখিত লেখাটি পাওয়া যাচ্ছে না!</p>
           </div>
         </>
-
       }
     </>
   );
