@@ -75,12 +75,9 @@ export default function SobGolpoLeftContent() {
 
     setCurrentPage(currentPage + 1)
 
-    if (currentPage <= totalPages) {
-      // fetchPosts();
-    } else {
+    if (currentPage >= totalPages) {
       setisHasMore(false)
     }
-
   }
 
 
