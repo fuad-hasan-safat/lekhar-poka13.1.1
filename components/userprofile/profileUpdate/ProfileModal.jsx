@@ -196,7 +196,7 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
         }
 
         const isEmailValidated = validateEmail(email);
-        if(!isEmailValidated){
+        if (!isEmailValidated) {
             notification = 'সঠিক ইমেইল দিন!';
             notify(); // This will show a toast notification
 
@@ -398,7 +398,7 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
                                     required
                                     value={email}
                                     onChange={handleEmailChange}
-                                // disabled={isSubmitEmail}
+                                    disabled={isSubmitEmail}
                                 ></input>
                                 {error && <div className="pb-[8px] text-[#FCA000]">{error}</div>}
 
