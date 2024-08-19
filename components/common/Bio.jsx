@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 
-function Bio({ bio }) {
+function Bio({ bio= '' }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const wordCount = bio.split(' ').length;
+  if(bio.length <= 0) return;
+
+  const wordCount = bio?.split(' ').length;
   const truncatedBio = wordCount > 50 ? `${bio.split(' ').slice(0, 50).join(' ')}...` : bio;
 
   const handleSeeMore = () => {
