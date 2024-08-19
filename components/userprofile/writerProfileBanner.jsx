@@ -9,6 +9,7 @@ import axios from 'axios'
 import { convertToBanglaPhoneNumber, convertToBengaliDate } from '../../utils/convertToBanglaDate'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Bio from '../common/Bio'
 
 export default function WriterProfileBanner({
     apprevedPost = 0,
@@ -253,7 +254,8 @@ export default function WriterProfileBanner({
 
                 {rendredBio?.length > 0 && <div className='mb-[25px]'>
                     <h1 className='mt-[30px] text-[#F9A106] text-[20px]'>সংক্ষিপ্ত বায়ো</h1>
-                    <p className='text-[20px] text-[#737373] mt-[10px]'>{rendredBio}</p>
+                    {/* <p className='text-[20px] text-[#737373] mt-[10px]'>{rendredBio}</p> */}
+                    <Bio bio={rendredBio}/>
                 </div>}
 
             </div>
