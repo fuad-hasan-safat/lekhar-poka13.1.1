@@ -64,7 +64,7 @@ export default function SobKobitaLeftContent() {
   useEffect(() => {
     setPostList([])
     fetchPosts();
-  }, []);
+  }, [currentPage]);
 
 
   const loadnextPage = () => {
@@ -72,7 +72,7 @@ export default function SobKobitaLeftContent() {
     setCurrentPage(currentPage + 1)
 
     if (currentPage <= totalPages) {
-      fetchPosts();
+      // fetchPosts();
     } else {
       setisHasMore(false)
     }
@@ -98,7 +98,7 @@ export default function SobKobitaLeftContent() {
                           <SinglePostConponent
                             id={post._id}
                             title={post.title}
-                            writer={post.writer}
+                            writer={post.profile_name}
                             writer_id={post.writer_id}
                             category={post.category}
                             image={post?.image}

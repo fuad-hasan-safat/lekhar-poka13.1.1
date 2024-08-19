@@ -62,7 +62,7 @@ export default function UponnasList() {
 
     useEffect(() => {
         fetchPosts();
-    }, []);
+    }, [currentPage]);
 
 
     const loadnextPage = () => {
@@ -71,7 +71,7 @@ export default function UponnasList() {
         setCurrentPage(currentPage + 1)
 
         if (currentPage <= totalPages) {
-            fetchPosts();
+            // fetchPosts();
         } else {
             setisHasMore(false)
         }
@@ -91,7 +91,7 @@ export default function UponnasList() {
                                             <SinglePostConponent
                                                 id={post._id}
                                                 title={post.title}
-                                                writer={post.writer}
+                                                writer={post.profile_name}
                                                 writer_id={post.writer_id}
                                                 image={post?.image}
                                                 uploadedBy={post?.uploaded_by}

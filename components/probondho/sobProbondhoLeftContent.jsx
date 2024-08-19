@@ -64,7 +64,7 @@ export default function SobProbondhoLeftContent() {
 
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [currentPage]);
 
 
   const loadnextPage = () => {
@@ -72,7 +72,7 @@ export default function SobProbondhoLeftContent() {
     setCurrentPage(currentPage + 1)
 
     if (currentPage <= totalPages) {
-      fetchPosts();
+      // fetchPosts();
     } else {
       setisHasMore(false)
     }
@@ -101,7 +101,7 @@ export default function SobProbondhoLeftContent() {
                             id={post._id}
                             title={post.title}
                             image={post?.image}
-                            writer={post.writer}
+                            writer={post.profile_name}
                             writer_id={post.writer_id}
                             uploadedBy={post?.uploaded_by}
                             writer_image={post?.profile_image}
