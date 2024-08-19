@@ -24,6 +24,7 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
     const [address, setAddress] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [email, setemail] = useState('');
+    const [error, setError] = useState('');
     const [imageFile, setImageFile] = useState(null);
     const [bio, setBio] = useState('')
     const [bioId, setBioId] = useState('')
@@ -136,14 +137,31 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
 
     function validatePhoneNumber(input) {
         const isValid = /^01\d{9}$/.test(input);
-    
+
         if (isValid) {
             return true;
         } else {
             return false;
         }
     }
-    
+
+
+    const validateEmail = (email) => {
+        // Your email validation logic here
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
+    const handleEmailChange = (event) => {
+        const newEmail = event.target.value;
+        setemail(newEmail);
+        if (!validateEmail(newEmail)) {
+            setError('সঠিক ইমেইল দিন !');
+        } else {
+            setError('');
+        }
+    }
+
 
     function saveImageFromURL(url, filename) {
         fetch(url)
@@ -170,12 +188,21 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
 
         const isValidPhone = validatePhoneNumber(phoneNumber);
 
-        if(!isValidPhone && !isSubmit){
+        if (!isValidPhone && !isSubmit) {
             notification = 'মোবাইল নাম্বার অবশ্যই ০১ দিয়ে শুরু হবে এবং ১১ ডিজিট হবে!';
             notify(); // This will show a toast notification
 
             return;
         }
+
+        const isEmailValidated = validateEmail(email);
+        if(!isEmailValidated){
+            notification = 'সঠিক ইমেইল দিন!';
+            notify(); // This will show a toast notification
+
+            return;
+        }
+
 
         //  update bio
         try {
@@ -361,17 +388,21 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
                                 disabled={isSubmit}
                             ></input>
 
-                            <input
-                                type='email'
-                                id='email'
-                                name='email'
-                                className={`${Class.profile__input} h-[40px] px-[16px]`}
-                                placeholder='mail@domain.com'
-                                required
-                                value={email}
-                                onChange={(e) => setemail(e.target.value)}
-                                disabled={isSubmitEmail}
-                            ></input>
+                            <div>
+                                <input
+                                    type='email'
+                                    id='email'
+                                    name='email'
+                                    className={`${Class.profile__input} h-[40px] px-[16px]`}
+                                    placeholder='mail@domain.com'
+                                    required
+                                    value={email}
+                                    onChange={handleEmailChange}
+                                // disabled={isSubmitEmail}
+                                ></input>
+                                {error && <div className="pb-[8px] text-[#FCA000]">{error}</div>}
+
+                            </div>
 
                             <input
                                 id='birthdate'
