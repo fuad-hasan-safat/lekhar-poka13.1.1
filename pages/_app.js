@@ -8,6 +8,7 @@ import LayoutNoSidebar from '../components/layoutnosidebar'
 import { useRouter } from 'next/router'
 import SearchContextProvider from '../components/lekharpokaStore/search-context';
 import SearchResult from '../components/common/SearchResult'
+import UserContextProvider from '../components/lekharpokaStore/user-context';
 
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -45,10 +46,10 @@ export default function MyApp({ Component, pageProps }) {
   else if (pathname == "/post/readermood/[slug]") {
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
   }
-  else if (pathname == "/admin/alldesignation"){
+  else if (pathname == "/admin/alldesignation") {
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
   }
-  else if (pathname == "/admin/allWriterBio"){
+  else if (pathname == "/admin/allWriterBio") {
     result = <LayoutNoSidebar><Component {...pageProps} /></LayoutNoSidebar>
   }
   else {
@@ -66,9 +67,11 @@ export default function MyApp({ Component, pageProps }) {
       />
       <GoogleOAuthProvider clientId="854926132475-sm4btto49sresu4g5o9qpuk9lgtqor9f.apps.googleusercontent.com">
         <SearchContextProvider>
-        <>
-          {result}
-        </>
+          <UserContextProvider>
+            <>
+              {result}
+            </>
+          </UserContextProvider>
         </SearchContextProvider>
       </GoogleOAuthProvider>
     </>
