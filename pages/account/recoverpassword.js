@@ -9,7 +9,7 @@ export default function Home() {
   const [isLanded, setIsLanded] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem('uuid').length > 0) {
+    if (localStorage.getItem('uuid')) {
       router.push('/')
     }
     setIsLanded(true);
@@ -24,7 +24,7 @@ export default function Home() {
       </Head>
 
       <div className="">
-        {localStorage.getItem('uuid').length > 0 ? <>
+        {localStorage.getItem('uuid') ? <>
 
         </> : <>
           <PassRecoveryPageBeforeOTP />
