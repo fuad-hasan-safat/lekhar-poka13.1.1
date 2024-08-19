@@ -19,6 +19,7 @@ import AdminContextProvider, { AdminContext } from '../components/store/adminpan
 import useRouteChange from '../utils/useRouteChange';
 import { useContext } from 'react';
 import AudioDetailsTabContextProvider from '../components/store/audiodetailstab-context';
+import UserContextProvider from '../components/lekharpokaStore/user-context';
 
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -70,20 +71,22 @@ export default function MyApp({ Component, pageProps }) {
       />
 
       <AdminContextProvider>
-        <AudioPlaylistContextProvider>
-          <SeeAllSliderContextProvider>
-            <SearchContextProvider>
-           <AudioDetailsTabContextProvider>
-              <GoogleOAuthProvider clientId="854926132475-sm4btto49sresu4g5o9qpuk9lgtqor9f.apps.googleusercontent.com">
-                <>
-                  {result}
-                  <AudioPlayer />
-                </>
-              </GoogleOAuthProvider>
-              </AudioDetailsTabContextProvider>
-            </SearchContextProvider>
-          </SeeAllSliderContextProvider>
-        </AudioPlaylistContextProvider>
+        <UserContextProvider>
+          <AudioPlaylistContextProvider>
+            <SeeAllSliderContextProvider>
+              <SearchContextProvider>
+                <AudioDetailsTabContextProvider>
+                  <GoogleOAuthProvider clientId="854926132475-sm4btto49sresu4g5o9qpuk9lgtqor9f.apps.googleusercontent.com">
+                    <>
+                      {result}
+                      <AudioPlayer />
+                    </>
+                  </GoogleOAuthProvider>
+                </AudioDetailsTabContextProvider>
+              </SearchContextProvider>
+            </SeeAllSliderContextProvider>
+          </AudioPlaylistContextProvider>
+        </UserContextProvider>
       </AdminContextProvider>
     </>
 
