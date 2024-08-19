@@ -111,7 +111,7 @@ export default function UserPostTitleAndcover({
   let bannerImage = image;
 
   if (image === undefined || image === null || image === 'undefined') {
-    bannerImage = writer_image;
+    bannerImage = writerImage;
   }
 
   let writerImage = writer_image
@@ -120,7 +120,11 @@ export default function UserPostTitleAndcover({
     writerImage = ''
   }
 
+  let postuploadedBy = uploadedBy;
 
+  if (profileName) {
+    postuploadedBy = profileName;
+  }
 
   // let shortenTitle = title?.length > 23 ? `${title?.slice(0, 22)}...` : title;
   // let shortenWriter = writer?.length > 26 ? `${writer?.slice(0, 25)}...` : writer;
@@ -128,6 +132,7 @@ export default function UserPostTitleAndcover({
 
   let shortenTitle = title;
   let shortenWriter = writer;
+  let shortenUploadedBy = postuploadedBy;
 
   let defaultBannerImage = '/images/defaultUserPic/square/null.png'
 
@@ -182,10 +187,10 @@ export default function UserPostTitleAndcover({
                   {shortenUploadedBy}
 
                 </span></>} */}
-              {updatedAt.length > 0 && <>  <span className='inline-block '>
+              {updatedAt.length > 0 && <>  <span className='inline-block lg:pl-[5px] md:pl-[5px] sm:pl-[5px] xs:pl-[2px]'>
                 <img src='/images/usericons/calender.svg' />
               </span>
-                <span className='inline-block leading-1 ml-[10px] lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[11px] text-[#595D5B]'>
+                <span className='inline-block leading-1 ml-[14px] lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[11px] text-[#595D5B]'>
                   {banglaDate}
                 </span></>}
             </Link>
@@ -227,8 +232,6 @@ export default function UserPostTitleAndcover({
       <div className='text-[16px]'>
         <ToastContainer />
       </div>
-
-
     </>
   )
 }
