@@ -184,6 +184,9 @@ export default function WriterProfileBanner({
     });
 
     console.log('image --------- length >>>>>', profileInfo?.image)
+
+    const phoneNumber =  convertToBanglaPhoneNumber(profileInfo?.phone);
+    const maskedNumber =  phoneNumber.substring(0,5) + '*'.repeat(phoneNumber.length - 5);
     return (
         <>
 
@@ -215,7 +218,7 @@ export default function WriterProfileBanner({
                     </li>}
 
                     {profileInfo?.phone?.length > 0 && <li>
-                        <span className='text-[#F9A106] '><img src='/images/usericons/phone.svg' /></span> <span className='text-[#737373] '>+{convertToBanglaPhoneNumber(profileInfo?.phone)}</span>
+                        <span className='text-[#F9A106] '><img src='/images/usericons/phone.svg' /></span> <span className='text-[#737373] '>+{maskedNumber}</span>
                     </li>}
 
                     {profileInfo?.email?.length > 0 && <li>
