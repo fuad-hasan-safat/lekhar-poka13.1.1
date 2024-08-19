@@ -128,9 +128,9 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
     console.log(title);
 
     let shortenedTitle = title;
-    if(title?.length > 84) {
-        shortenedTitle = title?.slice(0,81) + '...'
-    }
+    // if(title?.length > 84) {
+    //     shortenedTitle = title?.slice(0,81) + '...'
+    // }
 
 
 
@@ -144,7 +144,7 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
                         <img src={`${apiBasePath}/${songInfo.image.slice(songInfo.image.indexOf('/') + 1)}`} className='absolute object-cover lg:w-[78px] md:w-[70px] sm:w-[65px] xs:w-[50px] lg:h-[78px] md:h-[70px] sm:h-[65px] xs:h-[50px] rounded-full' />
                     </div>
                     <div className='audio__tab__info'>
-                        <h6 className=''>
+                        <h6 className='charLim'>
                             {shortenedTitle}
                         </h6>
                         <audio ref={audioRef}>

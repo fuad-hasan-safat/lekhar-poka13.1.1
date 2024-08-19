@@ -45,18 +45,18 @@ export default function PlaylistItem({ songInfo, songIndex, songList, audioScope
     console.log(title);
 
     let shortenedTitle = title;
-    if (title?.length > 30) {
-        shortenedTitle = title?.slice(0, 27) + '...'
-    }
+    // if (title?.length > 30) {
+    //     shortenedTitle = title?.slice(0, 27) + '...'
+    // }
 
     return (
         <div className='audio__playlist__item'>
-            <div className='audio__playlist__left'>
+            <div className='audio__playlist__left '>
                 <div>
                     <img src={`${apiBasePath}/${songInfo.image.slice(songInfo.image.indexOf('/') + 1)}`} className='w-[41px] object-cover h-[41px] rounded-full' />
                 </div>
-                <div className='audio__playlist__info'>
-                    <h6 className=''>
+                <div className='audio__playlist__info lg:max-w-[250px] md:max-w-[450px] sm:max-w-[200px] xs:max-w-[200px]'>
+                    <h6 className='charLim'>
                         {shortenedTitle}
                     </h6>
                     <audio ref={audioRef}>

@@ -45,9 +45,9 @@ export default function AudioPlayListSingleItem({ songInfo, audioIndex, audioLis
     console.log(title);
 
     let shortenedTitle = title;
-    if(title?.length > 84) {
-        shortenedTitle = title?.slice(0,81) + '...'
-    }
+    // if(title?.length > 54) {
+    //     shortenedTitle = title?.slice(0,51) + '...'
+    // }
 
     return (
         <div className='audio__tab__item'>
@@ -56,7 +56,7 @@ export default function AudioPlayListSingleItem({ songInfo, audioIndex, audioLis
                     <img src={`${apiBasePath}/${songInfo.image.slice(songInfo.image.indexOf('/') + 1)}`} className='lg:w-[78px] object-cover md:w-[70px] sm:w-[65px] xs:w-[50px] lg:h-[78px] md:h-[70px] sm:h-[65px] xs:h-[50px] rounded-full' />
                 </div>
                 <div className='audio__tab__info'>
-                    <h6 className='pr-[35px]'>
+                    <h6 className='charLim'>
                         {shortenedTitle}
                     </h6>
                     <audio ref={audioRef}>

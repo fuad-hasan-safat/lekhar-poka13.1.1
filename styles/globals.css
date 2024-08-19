@@ -2791,6 +2791,14 @@ transition: all 0.5s !important;
   padding: 15px 0;
 }
 
+
+.charLim {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: inherit;
+}
+
 /*
 -------------------
  Responsive Css
