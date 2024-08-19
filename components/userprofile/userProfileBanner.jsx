@@ -7,6 +7,7 @@ import UserAchivement from './userAchivement'
 import { countWords } from '../../function/api'
 import ProfileModal from './profileUpdate/ProfileModal'
 import { convertToBanglaPhoneNumber, convertToBengaliDate } from '../../utils/convertToBanglaDate'
+import Bio from '../common/Bio'
 
 export default function UserProfileBanner({
     bio,
@@ -19,6 +20,7 @@ export default function UserProfileBanner({
     setProfileController,
 }) {
     const selectedBio = countWords(bio, 55);
+
     const [showModal, setShowModal] = useState(false);
 
     const handleClose = () => setShowModal(false);
@@ -91,7 +93,8 @@ export default function UserProfileBanner({
 
             {selectedBio.length > 0 && <>
                 <h1 className='mt-[35px] text-[#F9A106] font-semibold text-[20px]'>সংক্ষিপ্ত বায়ো</h1>
-                <p className='text-[16px] text-[#737373] mt-[10px]'>{selectedBio}</p>
+                {/* <p className='text-[16px] text-[#737373] mt-[10px] text-justify'>{selectedBio}</p> */}
+                <Bio bio={bio} />
             </>}
 
             <div className='w-full'>
