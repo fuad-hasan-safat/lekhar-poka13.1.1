@@ -66,14 +66,10 @@ export default function UponnasList() {
 
 
     const loadnextPage = () => {
-
-        console.log({ currentPage, totalPages })
         setCurrentPage(currentPage + 1)
 
-        if (currentPage <= totalPages) {
-            fetchPosts();
-        } else {
-            setisHasMore(false)
+        if (currentPage >= totalPages) {
+          setisHasMore(false)
         }
     }
 

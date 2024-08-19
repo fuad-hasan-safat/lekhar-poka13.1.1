@@ -73,9 +73,9 @@ export default function SobJiboniLeftContent() {
 
     setCurrentPage(currentPage + 1)
 
-    if (currentPage <= totalPages) {
-      fetchPosts();
-    } else {
+    setCurrentPage(currentPage + 1)
+
+    if (currentPage >= totalPages) {
       setisHasMore(false)
     }
 
