@@ -20,7 +20,7 @@ export default function SeeMoreListBackground(audioData) {
             setTimeout(() => {
                 setDisplayCount((prevCount) => Math.min(prevCount + 3, audioData.audioData.length));
                 setLoading(false);
-            }, 1500);
+            }, 100);
         }
     }, [inView, loading]);
 

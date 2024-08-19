@@ -11,15 +11,24 @@ export default function SeeMoreListPlayList({ audioPlaylist, playListScope }) {
         rootMargin: '0px 0px 200px 0px',
     });
 
+    const [isLanded, setIsLanded] = useState(false);
+
     useEffect(() => {
         if (inView && !loading) {
             setLoading(true);
             setTimeout(() => {
-                setDisplayCount((prevCount) => Math.min(prevCount + 3, audioPlaylist.length));
+                setDisplayCount((prevCount) => Math.min(prevCount + 10, audioPlaylist.length));
                 setLoading(false);
-            }, 1500);
+            }, 100);
         }
     }, [inView, loading]);
+
+
+    useEffect(()=>{
+        setIsLanded(true);
+    },[]);
+
+    if(!isLanded) return null;
 
     return (
         <div>

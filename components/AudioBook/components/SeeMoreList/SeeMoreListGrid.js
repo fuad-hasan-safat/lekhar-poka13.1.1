@@ -19,7 +19,7 @@ export default function SeeMoreListGrid({audioData}) {
             setTimeout(() => {
                 setDisplayCount((prevCount) => Math.min(prevCount + 3, audioData?.length));
                 setLoading(false);
-            }, 1500);
+            }, 100);
         }
     }, [inView, loading]);
 
