@@ -108,13 +108,14 @@ export default function UserPostTitleAndcover({
 
   const banglaDate = convertToBengaliDate(formattedDate)
 
+  let writerImage = writer_image;
   let bannerImage = image;
 
   if (image === undefined || image === null || image === 'undefined') {
     bannerImage = writerImage;
   }
 
-  let writerImage = writer_image
+  
 
   if (writer_image === undefined || writer_image === null || writer_image === 'undefined') {
     writerImage = ''

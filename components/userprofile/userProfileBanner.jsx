@@ -18,7 +18,8 @@ export default function UserProfileBanner({
     profileStats,
     setProfileController,
 }) {
-    const selectedBio = countWords(bio, 55);
+    // const selectedBio = countWords(bio, 55);
+    const selectedBio = bio;
     const [showModal, setShowModal] = useState(false);
 
     const handleClose = () => setShowModal(false);
