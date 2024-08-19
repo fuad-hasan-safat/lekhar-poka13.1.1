@@ -87,6 +87,7 @@ export default function PostDetails({ postData }) {
   return (
 
     <>
+    { poststatus ? <>
 
       <div>
         <Head>
@@ -215,6 +216,12 @@ export default function PostDetails({ postData }) {
 
         )}
       </div>
+
+      </> : 
+      <>
+      
+      </>
+}
     </>
   );
 }
