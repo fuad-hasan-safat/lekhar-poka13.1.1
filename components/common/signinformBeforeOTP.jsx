@@ -105,6 +105,10 @@ export default function SigninFormBeforeOTP({ type, logreg, btntext, SetIsOtpSuc
 
         console.log({ state })
 
+        if(!validateMobileNumber(state.mobileNumber?.trim())){
+            return;
+        }
+
         if (!state.isDisabled) {
 
             if (type === 'recoveryPass') {
