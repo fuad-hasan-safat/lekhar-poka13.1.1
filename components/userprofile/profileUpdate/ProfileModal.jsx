@@ -100,8 +100,6 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
             const data = await response.json();
             setBio(data?.content)
             setBioId(data?._id)
-            // console.log('------------>>> BIO  <<<-------------', data)
-
         };
 
         fetchUserBioData();
@@ -112,17 +110,13 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
             .then((response) => response.json())
             .then((data) => {
                 setDesignationFromApi(data);
-                // console.log('DESIGNATION 000000000000000000 )', data)
             })
             .catch((error) => console.error("Error fetching data:", error));
-
-        // console.log({ address, phoneNumber })
     }, []);
 
 
 
     useEffect(() => {
-        // Prevent scrolling of background page when modal is open
         if (showModal) {
             document.body.style.overflow = 'hidden';
         } else {
@@ -130,7 +124,6 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
         }
 
         return () => {
-            // Revert overflow setting when component unmounts
             document.body.style.overflow = 'unset';
         };
     }, [showModal]);
