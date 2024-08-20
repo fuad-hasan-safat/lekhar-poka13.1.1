@@ -220,6 +220,9 @@ export default function CreatePost() {
             else if (!summary) {
                 notification = 'দয়া করে আপনার লেখার সারমর্ম লিখুন';
                 notify();
+            }else if(content.trim().length <= 0){
+                notification = 'দয়া করে আপনার মূল লেখা লিখুন';
+                notify();
             }
             else {
 
