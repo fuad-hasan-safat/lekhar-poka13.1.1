@@ -35,6 +35,7 @@ export default function WriterProfileBanner({
     const [bio, setBio] = useState('')
     const [bioId, setBioId] = useState('')
     const [profileStats, setProfileStats] = useState([])
+    const [followerNumber, setFollowerNumber] = useState(0)
     const [approvedPost, setApprovedPost] = useState(0)
     const [unapprovedPost, setUnapprovedPost] = useState(0)
 
@@ -67,6 +68,7 @@ export default function WriterProfileBanner({
                 .then((data) => {
                     console.log('pofile details writer profile--------------->>>>>>>', data);
                     setProfileStats(data.object.stats)
+                    setFollowerNumber(data.object.stats?.follower)
                     setApprovedPost(data.object.approved_post)
                     setUnapprovedPost(data.object.unapproved_post)
 
@@ -150,6 +152,8 @@ export default function WriterProfileBanner({
                         },
                     }
                 );
+                setIsAlreadyFollowing(true);
+                setFollowerNumber(followerNumber+1)
                 console.log('following ------------------------- writer in response message---------------->>>>>>', response)
                 notification = 'অনুসরণ করছেন'
                 notify1();
@@ -244,7 +248,7 @@ export default function WriterProfileBanner({
                 {isSelfWriter && <div className='mt-[30px] mb-[40px] flex justify-center'>
                     <UserAchivement
                         setProfileController={setProfileController}
-                        follower={profileStats?.follower}
+                        follower={followerNumber}
                         following={profileStats?.following}
                         apprevedPost={approvedPost}
                         unApprovedPost={unapprovedPost} />

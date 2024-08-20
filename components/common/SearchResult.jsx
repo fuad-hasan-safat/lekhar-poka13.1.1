@@ -16,17 +16,12 @@ export default function SearchResult() {
     useEffect(() => {
         const handleRouteChange = (url) => {
             console.log('App is changing to: ', url);
-            // Your custom function here
             const data = [];
             setIsSearchbarActive(false);
             setSearchResult(data);
             setSearchKey('')
         };
-
-        // Subscribe to route changes
         router.events.on('routeChangeComplete', handleRouteChange);
-
-        // Cleanup the subscription on unmount
         return () => {
             router.events.off('routeChangeComplete', handleRouteChange);
         };

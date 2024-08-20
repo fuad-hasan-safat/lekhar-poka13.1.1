@@ -141,7 +141,6 @@ export default function UserProfile({ slug }) {
   }
 
 
-
   if (isLoading) {
     return <Loading />;
   } else {
