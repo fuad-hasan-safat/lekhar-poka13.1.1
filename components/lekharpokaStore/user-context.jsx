@@ -39,11 +39,11 @@ export default function UserContextProvider({ children }) {
     }
 
     const cntxtValue = {
-        userName: userData.userName,
-        userUuid: userData.userUuid,
-        userImage: userData.userImage,
-        isLoggedIn: userData.isLoggedIn,
-        isloggedOut: userData.isloggedOut,
+        userName: userData?.userName,
+        userUuid: userData?.userUuid,
+        userImage: userData?.userImage,
+        isLoggedIn: userData?.isLoggedIn,
+        isloggedOut: userData?.isloggedOut,
         setUser: setUserValue,
     }
 

@@ -7,6 +7,7 @@ import { apiBasePath } from "../../utils/constant";
 import ReaderModeModal from "../../components/readerMode/ReaderModeModal";
 import FullPostReaderMode from "../../components/common/fullContentReadermood";
 import { AudioPlayListContext } from "../../components/store/audioPlayer-context";
+import { UserContext } from "../../components/lekharpokaStore/user-context";
 
 
 export async function getServerSideProps(context) {
@@ -38,7 +39,7 @@ export default function PostDetails({ postData }) {
   console.log({ postData })
 
   const { toggleAudioPlay, audioPlace, currentPlayingIndex, isAudioPlaying } = useContext(AudioPlayListContext);
-
+  const {userUuid} = useContext(UserContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const data = postData.object;
@@ -46,6 +47,7 @@ export default function PostDetails({ postData }) {
   const uploaderName = postData?.uploader_name;
   const profileName = postData?.profile_name;
   const poststatus = postData?.object?.status;
+  const postWonnerUuid = postData?.object?.uploaded_by;
   let isAudioAvailable = postData.object?.audio ? true : false;
   let isdataFetch = postData?.status === "success" ? true : false;
 
@@ -102,7 +104,7 @@ export default function PostDetails({ postData }) {
 
   return (
     <>
-      {poststatus ?
+      {poststatus || userUuid=== postWonnerUuid ?
         <>
 
           <div>
