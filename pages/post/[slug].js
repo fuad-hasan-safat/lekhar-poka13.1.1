@@ -155,9 +155,9 @@ export default function PostDetails({ postData }) {
                                 />
 
                                 {isAudioAvailable && (
-                                  <div className="audio__tab__playbutton absolute  lg:left-[15px] md:left-[15px] sm:left-[15px] xs:left-[12px]  lg:top-[150px] md:top-[140px] sm:top-[130px] xs:top-[110px]">
+                                  <div className="audio__tab__playbutton absolute  lg:left-[18px] md:left-[15px] sm:left-[15px] xs:left-[12px]  lg:top-[150px] md:top-[140px] sm:top-[130px] xs:top-[110px]">
                                     <button className="text-center text-[#F9A106]  flex justify-center items-center" onClick={() => toggleAudioPlay(0, audioList, slug)}>
-                                      <span className="inline-block text-[24px]"> {isAudioPlaying && 0 === currentPlayingIndex && audioPlace === slug ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</span> <span className="inline-block font-[600] text-[14px]"> প্লে করুন</span>
+                                      <span className="inline-block text-[26px]"> {isAudioPlaying && 0 === currentPlayingIndex && audioPlace === slug ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</span> <span className="inline-block font-[600] text-[16px]"> প্লে করুন</span>
                                     </button>
                                   </div>
 
@@ -201,10 +201,7 @@ export default function PostDetails({ postData }) {
             </div> */}
                   </div>
                 </div>
-
-
               </section>
-
             </div>
 
 

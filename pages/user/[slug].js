@@ -13,6 +13,8 @@ export default function Home() {
   const slug = router.query.slug;
   const { userUuid } = useContext(UserContext)
 
+  if(!router.isReady) return null;
+
   return (
     router.isReady && userUuid?.length > 0 ?
       <>
