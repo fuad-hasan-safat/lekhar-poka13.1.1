@@ -19,17 +19,21 @@ import AdminContextProvider, { AdminContext } from '../components/store/adminpan
 import useRouteChange from '../utils/useRouteChange';
 import { useContext } from 'react';
 import AudioDetailsTabContextProvider from '../components/store/audiodetailstab-context';
-import UserContextProvider from '../components/lekharpokaStore/user-context';
+import UserContextProvider, { UserContext } from '../components/lekharpokaStore/user-context';
 
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const { pathname } = router;
   console.log("pathname : ", pathname);
-  const { setCurrentComponentIndex } = useContext(AdminContext)
+
+  const { setCurrentComponentIndex } = useContext(AdminContext);
+
   useRouteChange((url) => {
     console.log('Route changed to:', url);
     setCurrentComponentIndex(0, 'Dashboard');
   });
+
+
 
   // /account/login
   // /account/signup

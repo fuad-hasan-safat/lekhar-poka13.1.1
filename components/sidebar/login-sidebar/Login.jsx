@@ -8,18 +8,22 @@ import Divider from '../../common/sidebardivider';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AdminContext } from "../../store/adminpanel-context";
+import { UserContext } from "../../lekharpokaStore/user-context";
+import useTabSyncAuth from "../../../utils/useReloadUrl";
 
 export default function Login() {
 
   const router = useRouter();
 
-  const {setCurrentComponentIndex} = useContext(AdminContext)
+  const {setUser} = useContext(UserContext);
+  const {setCurrentComponentIndex} = useContext(AdminContext);
+  const {triggerLogin} = useTabSyncAuth();
 
   let notification = ''
 
   const [number, setnumber] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState(null);
+  const [user, setUserData] = useState(null);
   const [status, setStatus] = useState("");
   const [username, setUsername] = useState("");
   const [userUuid, setUserUuid] = useState("");
@@ -105,7 +109,7 @@ export default function Login() {
 
         setStatus(data.status);
         setUserUuid(data.uuid);
-        setUser(data);
+        setUserData(data);
 
         localStorage.setItem("status", data.status);
         localStorage.setItem("name", data.name);
@@ -115,6 +119,18 @@ export default function Login() {
         localStorage.setItem("usertype", data.usertype);
         localStorage.setItem("phone", data.phone);
 
+        const user = {
+          userName: data.name,
+          userUuid: data.uuid,
+          userImage: data?.image,
+          userToken: data.access_token,
+          userType: data.usertype,
+          isLoggedIn: true,
+          isloggedOut: false,
+        };
+
+        setUser(user);
+        triggerLogin();
         setnumber("");
         setPassword("");
 
@@ -221,7 +237,7 @@ export default function Login() {
 
             <SignInOption
               user={user}
-              setUser={setUser}
+              setUserData={setUserData}
               profile={profile}
               setProfile={setProfile}
               setStatus={setStatus}

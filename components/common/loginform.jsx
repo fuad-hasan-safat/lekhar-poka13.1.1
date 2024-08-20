@@ -3,22 +3,26 @@
 import { apiBasePath } from "../../utils/constant";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Loading from "./loading";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { UserContext } from "../lekharpokaStore/user-context";
+import useTabSyncAuth from "../../utils/useReloadUrl";
 
 
 export default function LoginForm({ logreg, btntext, url = '/' }) {
 
   const router = useRouter();
+  const { setUser } = useContext(UserContext);
+  const {triggerLogin} = useTabSyncAuth();
 
   let notification = ''
 
   const [number, setnumber] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState({
+  const [user, setUserData] = useState({
     status: '',
     name: '',
     phone: '',
@@ -72,11 +76,11 @@ export default function LoginForm({ logreg, btntext, url = '/' }) {
   };
 
 
-  function reloadPage(url){
-    setTimeout(()=>{
-      if(url === '/'){
+  function reloadPage(url) {
+    setTimeout(() => {
+      if (url === '/') {
         router.push(url)
-      } else{
+      } else {
         router.refresh(url)
       }
     }, 1000)
@@ -116,7 +120,7 @@ export default function LoginForm({ logreg, btntext, url = '/' }) {
 
         setStatus(data.status);
         setUserUuid(data.uuid);
-        setUser(data);
+        setUserData(data);
 
         localStorage.setItem("status", data.status);
         localStorage.setItem("name", data.name);
@@ -126,8 +130,20 @@ export default function LoginForm({ logreg, btntext, url = '/' }) {
         localStorage.setItem("usertype", data.usertype);
         localStorage.setItem("phone", data.phone);
 
-        setnumber('')
-        setPassword('')
+        const user = {
+          userName: data.name,
+          userUuid: data.uuid,
+          userImage: data?.image,
+          userToken: data.access_token,
+          userType: data.usertype,
+          isLoggedIn: true,
+          isloggedOut: false,
+        };
+
+        setUser(user);
+        triggerLogin();
+        setnumber('');
+        setPassword('');
 
         // router.push(`/`)
         reloadPage(url);

@@ -1,10 +1,12 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 
 export const UserContext = createContext({
     userName: '',
     userUuid: '',
     userImage: '',
+    userToken: '',
+    userType: '',
     isLoggedIn: false,
     isloggedOut: true,
 
@@ -16,12 +18,21 @@ export default function UserContextProvider({ children }) {
         userName: '',
         userUuid: '',
         userImage: '',
+        userToken: '',
+        userType: '',
         isLoggedIn: false,
         isloggedOut: true,
     })
 
-    function setUserValue(userObj){
-        setUserData((prevData)=> ({
+    useEffect(()=>{
+        const userObj = JSON.parse(localStorage.getItem('loggedInUser'));
+        console.log('user object user context ', userObj );
+        setUserData(userObj)
+    },[])
+
+    function setUserValue(userObj) {
+        localStorage.setItem('loggedInUser', JSON.stringify(userObj))
+        setUserData((prevData) => ({
             ...prevData,
             ...userObj,
         }))
@@ -30,13 +41,13 @@ export default function UserContextProvider({ children }) {
     const cntxtValue = {
         userName: userData.userName,
         userUuid: userData.userUuid,
-        userImage:userData.userImage,
+        userImage: userData.userImage,
         isLoggedIn: userData.isLoggedIn,
         isloggedOut: userData.isloggedOut,
         setUser: setUserValue,
     }
 
-    return(
+    return (
         <UserContext.Provider value={cntxtValue}>
             {children}
         </UserContext.Provider>
