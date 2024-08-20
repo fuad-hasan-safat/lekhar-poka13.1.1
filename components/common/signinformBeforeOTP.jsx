@@ -95,6 +95,7 @@ export default function SigninFormBeforeOTP({ type, logreg, btntext, SetIsOtpSuc
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
+            console.log('Enter clicked in sign up')
             handleSubmitBeforeOTP();
         }
       };
@@ -106,10 +107,13 @@ export default function SigninFormBeforeOTP({ type, logreg, btntext, SetIsOtpSuc
         console.log({ state })
 
         if(!validateMobileNumber(state.mobileNumber?.trim())){
+            console.log('Inside ----  iffffffffff    1') 
+
             return;
         }
 
         if (!state.isDisabled) {
+            console.log('Inside ----  iffffffffff  2')
 
             if (type === 'recoveryPass') {
                 console.log(' in re pass ------------')
