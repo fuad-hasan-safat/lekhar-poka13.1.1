@@ -37,10 +37,10 @@ export default function SeeMoreListGrid({audioData}) {
                             <img src={`${apiBasePath}/${item.image.slice(item.image.indexOf('/') + 1)}`} alt='Slider Img' />
                         </div>
                         <div className='hm__audio__recent__slide__dsc'>
-                            <h5>{item.title}</h5>
-                            <p>{item.writer}</p>
+                            <h5 className='charLim'>{item.title}</h5>
+                            <p className='charLim'>{item.writer}</p>
                             <ul className='clearfix reset-list'>
-                                <li>{item.voice}</li>
+                                <li className='charLim'>{item.voice}</li>
                                 <li><i className="ri-time-line"></i> {item.duration}</li>
                             </ul>
                         </div>
