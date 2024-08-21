@@ -186,7 +186,7 @@ hm audio recent slide item innr
 
 .hm__audio__recent__slide__dsc p {
     font-size: 10px;
-    line-height: 1;
+    line-height: 1.5;
     color: #5D5A88;
     margin-bottom: 8px;
 }
@@ -199,7 +199,7 @@ hm audio recent slide item innr
 
 .hm__audio__recent__slide__dsc ul li {
     font-size: 10px;
-    line-height: 1;
+    line-height: 1.5;
     color: #5D5A88;
     padding-right: 5px;
 }
@@ -268,7 +268,7 @@ Bg Slider Css
 
 .audio__bgslider__text h5 {
     font-size: 16px;
-    line-height: 1.1;
+    line-height: 1.4;
     color: #fff;
     font-weight: 600;
     margin-bottom: 8px;
@@ -276,7 +276,7 @@ Bg Slider Css
 
 .audio__bgslider__text p {
     font-size: 12px;
-    line-height: 1;
+    line-height: 1.5;
     color: #fff;
     margin-bottom: 10px;
 }
