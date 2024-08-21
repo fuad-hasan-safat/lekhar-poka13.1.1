@@ -38,6 +38,9 @@ export default function MyApp({ Component, pageProps }) {
       if (event.ctrlKey && event.key === 'a') {
         event.preventDefault();
       }
+      if (event.ctrlKey && event.key === 'p') {
+        event.preventDefault();
+      }
     };
 
     window.addEventListener('keydown', handleKeyDown);

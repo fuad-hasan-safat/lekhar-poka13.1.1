@@ -66,7 +66,7 @@ export default function AudioDetailsSideBar() {
                 {!localStorage.getItem('uuid') && <div className="sidebar__iteam__wrap">
                     <Login />
                 </div>}
-                {latestPlayList?.length > 0 && <div className='sidebar__iteam__wrap'>
+                {latestPlayList?.length > 0 && <div className='sidebar__iteam__wrap mt-[32px]'>
                     <h2 className='audio__sidebar__heading'>সর্বশেষ প্লেলিস্ট</h2>
                     <div className='py-[10px]'>
                         <hr></hr>

@@ -1,14 +1,13 @@
 import React, { Fragment } from 'react'
 import AudioTabSingleItem from './audioList/AudioTabSilgleItem';
 
-import { singleAudioData } from '../sampleData/singleAudioDetailsPage';
-
-
 export default function AudioTabComponent({audioData}) {
-  // const audioData = singleAudioData.audio;
   console.log({audioData})
   return (
     <div className='w-full'>
+      {audioData?.length <= 0 && <div>
+        <p className='text-black pt-[15px]'>এই মুহূর্তে কোন অডিও নাই</p>
+         </div>}
       {audioData?.map((songInfo, index)=>{
          const length = audioData?.length;
       

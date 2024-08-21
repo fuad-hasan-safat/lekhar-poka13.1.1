@@ -7,8 +7,10 @@ export default function TechnicalDetails({ technicalDetails }) {
                 <h5>কলাকুশলী</h5>
                 <hr></hr>
             </div>
-
-            <div className='audio__tab__details' dangerouslySetInnerHTML={{__html:technicalDetails}}>
+            {technicalDetails?.trim()?.length <= 0 && <div>
+                <p className='text-black pt-[15px]'>এই মুহূর্তে কোন কলাকুশলী নাই</p>
+            </div>}
+            <div className='audio__tab__details' dangerouslySetInnerHTML={{ __html: technicalDetails }}>
             </div>
 
 
