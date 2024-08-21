@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { apiBasePath } from '../../../../utils/constant';
 import axios from 'axios';
 import { useRouter } from 'next/router';
@@ -9,7 +9,21 @@ export default function CreateRating({ setUserComments }) {
     const router = useRouter();
 
     const [userRating, setUserRating] = useState('');
+    const [profileInfo, setProfileInfo] = useState([]);
+
     let notification = '';
+
+    useEffect(()=>{
+
+        fetch(`${apiBasePath}/getprofile/${localStorage.getItem("uuid")}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('pofile details on user profile--------------->>>>>>>', data);
+        setProfileInfo(data.object.profile)
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+
+    },[])
 
     function reloadPage(){
         setTimeout(()=>{
@@ -21,7 +35,7 @@ export default function CreateRating({ setUserComments }) {
         if (localStorage.getItem('uuid').length > 0 && localStorage.getItem('uuid')) {
             const postData = {
                 ebook_id: `${router.query.slug}`,
-                name: localStorage.getItem('name'),
+                name: profileInfo?.name,
                 comment: userRating,
                 user_id: localStorage.getItem('uuid')
             };
