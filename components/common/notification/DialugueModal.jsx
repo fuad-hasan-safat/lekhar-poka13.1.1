@@ -2,11 +2,14 @@ import { useRouter } from "next/router";
 import { forwardRef, useContext } from "react"
 import { UserContext } from "../../lekharpokaStore/user-context";
 import useTabSyncAuth from "../../../utils/useReloadUrl";
+import { AudioPlayListContext } from "../../store/audioPlayer-context";
 const DialugueModal = forwardRef(function DialugueModal({ alert, address, type }, ref) {
 
     const { triggerLogout } = useTabSyncAuth();
 
     const { setUser } = useContext(UserContext);
+    const {resetAudioPlayer} = useContext(AudioPlayListContext);
+
     const router = useRouter();
     function logout() {
         localStorage.removeItem("status");
@@ -26,6 +29,7 @@ const DialugueModal = forwardRef(function DialugueModal({ alert, address, type }
             isLoggedIn: false,
             isloggedOut: true,
         }
+        resetAudioPlayer();
         setUser(user);
         triggerLogout();
         ref.current.close();
