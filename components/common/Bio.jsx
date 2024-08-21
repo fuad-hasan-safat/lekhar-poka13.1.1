@@ -20,7 +20,7 @@ function Bio({ bio= '' }) {
     <div className='text-[16px] text-[#737373] mt-[10px] text-justify'>
       {isExpanded ? <p>{bio}</p> : <p>{truncatedBio}</p>}
       {wordCount > 50 && !isExpanded && <button className='text-[#F9A106]' onClick={handleSeeMore}>আরো দেখুন</button>}
-      {isExpanded && <button className='text-[#F9A106]' onClick={handleSeeLess}>কম দেখুন</button>}
+      {isExpanded && <button className='text-[#F9A106]' onClick={handleSeeLess}>কমিয়ে দেখুন </button>}
     </div>
   );
 }
