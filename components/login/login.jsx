@@ -53,7 +53,7 @@ const LoginPage = ({url = '/'}) => {
 
                         <SignInOption
                           user={user}
-                          setUser={setUser}
+                          setUserLog={setUser}
                           profile={profile}
                           setProfile={setProfile}
                           setStatus={setStatus}

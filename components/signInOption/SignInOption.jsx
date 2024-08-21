@@ -1,9 +1,10 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import { apiBasePath } from '../../utils/constant';
 import { useRouter } from 'next/router';
+import { UserContext } from '../lekharpokaStore/user-context';
 
 // import { LoginSocialFacebook } from "reactjs-social-login";
 // import { FacebookLoginButton } from "react-social-login-buttons";
@@ -16,7 +17,7 @@ export default function SignInOption({
     lowermessege2,
     signLogLink,
     user,
-    setUser,
+    setUserLog,
     setProfile,
     setStatus,
     setUsername,
@@ -24,10 +25,12 @@ export default function SignInOption({
 }) {
 
     const router = useRouter();
+  const { setUser } = useContext(UserContext);
+
 
     const login = useGoogleLogin({
         onSuccess: (codeResponse) => {
-            setUser(codeResponse)
+            setUserLog(codeResponse)
             router.push('/')
 
         },
@@ -64,7 +67,7 @@ export default function SignInOption({
 
                 setStatus(data.status);
                 setUserUuid(data.uuid);
-                setUser(data);
+                setUserLog(data);
 
                 localStorage.setItem("status", data.status);
                 localStorage.setItem("name", data.name);
@@ -73,6 +76,18 @@ export default function SignInOption({
                 localStorage.setItem("token", data.access_token);
                 localStorage.setItem("usertype", data.usertype);
                 localStorage.setItem("phone", data.phone);
+
+                const user = {
+                    userName: data.name,
+                    userUuid: data.uuid,
+                    userImage: data?.image,
+                    userToken: data.access_token,
+                    userType: data.usertype,
+                    isLoggedIn: true,
+                    isloggedOut: false,
+                  };
+          
+                  setUser(user);
 
                 router.reload();
 
