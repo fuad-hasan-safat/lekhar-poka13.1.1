@@ -1,6 +1,6 @@
 "use client";
 import Loading from '../common/loading'
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import UserProfileBanner from '../userprofile/userProfileBanner'
 import { apiBasePath } from "../../utils/constant";
 import Link from "next/link";
@@ -9,10 +9,12 @@ import FollowingList from './followingList';
 import { useRouter } from 'next/router';
 import ProfilePostLeftContentUnApproved from './ProfilePostLeftContentUnapproved';
 import ProfilePostLeftContentApproved from './ProfilePostLeftContentApproved';
+import { UserContext } from '../lekharpokaStore/user-context';
 
 export default function UserProfile({ slug }) {
 
   const router = useRouter();
+  const {setIsProfileLoaded} = useContext(UserContext);
 
   const [writer, setWriter] = useState('');
   const [isLoading, setIsLoading] = useState(true);
@@ -51,6 +53,7 @@ export default function UserProfile({ slug }) {
   const handleClose = () => setProfileController('profile');
 
   useEffect(() => {
+    setIsProfileLoaded(false);
     setUsername(localStorage.getItem("name") || "");
     setUserToken(localStorage.getItem("token") || "");
     setUserUuid(localStorage.getItem("uuid") || "");
@@ -116,6 +119,7 @@ export default function UserProfile({ slug }) {
     setIsCategoryAdded(false)
     setIsWriterAdded(false)
     setIsProfileUpdated(false)
+    setIsProfileLoaded(true);
   }, [slug, isWriterAdded, isCategoryAdded]);
 
 

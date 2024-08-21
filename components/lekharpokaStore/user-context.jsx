@@ -9,8 +9,10 @@ export const UserContext = createContext({
     userType: '',
     isLoggedIn: false,
     isloggedOut: true,
+    isProfileLoaded: true,
 
     setUser: () => { },
+    setIsProfileLoaded:() =>{},
 })
 
 export default function UserContextProvider({ children }) {
@@ -22,6 +24,7 @@ export default function UserContextProvider({ children }) {
         userType: '',
         isLoggedIn: false,
         isloggedOut: true,
+        isProfileLoaded: false,
     })
 
     useEffect(()=>{
@@ -38,13 +41,22 @@ export default function UserContextProvider({ children }) {
         }))
     }
 
+    function updateUserPofileLoaded(status){
+        setUserData((prevData) => ({
+            ...prevData,
+            isProfileLoaded: status,
+        }))
+    }
+
     const cntxtValue = {
         userName: userData?.userName,
         userUuid: userData?.userUuid,
         userImage: userData?.userImage,
         isLoggedIn: userData?.isLoggedIn,
         isloggedOut: userData?.isloggedOut,
+        isProfileLoaded: userData?.isProfileLoaded,
         setUser: setUserValue,
+        setIsProfileLoaded:updateUserPofileLoaded,
     }
 
     return (

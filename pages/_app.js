@@ -17,7 +17,7 @@ import SearchContextProvider from '../components/lekharpokaStore/search-context'
 import SearchResult from '../components/common/SearchResult'
 import AdminContextProvider, { AdminContext } from '../components/store/adminpanel-context';
 import useRouteChange from '../utils/useRouteChange';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import AudioDetailsTabContextProvider from '../components/store/audiodetailstab-context';
 import UserContextProvider, { UserContext } from '../components/lekharpokaStore/user-context';
 
@@ -33,7 +33,21 @@ export default function MyApp({ Component, pageProps }) {
     setCurrentComponentIndex(0, 'Dashboard');
   });
 
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.ctrlKey && event.key === 'a') {
+        event.preventDefault();
+      }
+    };
 
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
+ 
 
   // /account/login
   // /account/signup
