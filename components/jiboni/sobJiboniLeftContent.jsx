@@ -72,7 +72,7 @@ export default function SobJiboniLeftContent() {
   const loadnextPage = () => {
     
     setCurrentPage(currentPage + 1)
-
+    
     if (currentPage >= totalPages) {
       setisHasMore(false)
     }

@@ -1,14 +1,18 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 
 export const UserContext = createContext({
     userName: '',
     userUuid: '',
     userImage: '',
+    userToken: '',
+    userType: '',
     isLoggedIn: false,
     isloggedOut: true,
+    isProfileLoaded: true,
 
     setUser: () => { },
+    setIsProfileLoaded:() =>{},
 })
 
 export default function UserContextProvider({ children }) {
@@ -16,27 +20,46 @@ export default function UserContextProvider({ children }) {
         userName: '',
         userUuid: '',
         userImage: '',
+        userToken: '',
+        userType: '',
         isLoggedIn: false,
         isloggedOut: true,
+        isProfileLoaded: false,
     })
 
-    function setUserValue(userObj){
-        setUserData((prevData)=> ({
+    useEffect(()=>{
+        const userObj = JSON.parse(localStorage.getItem('loggedInUser'));
+        console.log('user object user context ', userObj );
+        setUserData(userObj)
+    },[])
+
+    function setUserValue(userObj) {
+        localStorage.setItem('loggedInUser', JSON.stringify(userObj))
+        setUserData((prevData) => ({
             ...prevData,
             ...userObj,
         }))
     }
 
-    const cntxtValue = {
-        userName: userData.userName,
-        userUuid: userData.userUuid,
-        userImage:userData.userImage,
-        isLoggedIn: userData.isLoggedIn,
-        isloggedOut: userData.isloggedOut,
-        setUser: setUserValue,
+    function updateUserPofileLoaded(status){
+        setUserData((prevData) => ({
+            ...prevData,
+            isProfileLoaded: status,
+        }))
     }
 
-    return(
+    const cntxtValue = {
+        userName: userData?.userName,
+        userUuid: userData?.userUuid,
+        userImage: userData?.userImage,
+        isLoggedIn: userData?.isLoggedIn,
+        isloggedOut: userData?.isloggedOut,
+        isProfileLoaded: userData?.isProfileLoaded,
+        setUser: setUserValue,
+        setIsProfileLoaded:updateUserPofileLoaded,
+    }
+
+    return (
         <UserContext.Provider value={cntxtValue}>
             {children}
         </UserContext.Provider>

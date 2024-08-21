@@ -39,7 +39,7 @@ export default function SobKobitaLeftContent() {
       }
 
     };
-
+    setPostList([]);
     fetchTotalPage();
 
   }, []);
@@ -62,7 +62,7 @@ export default function SobKobitaLeftContent() {
   };
 
   useEffect(() => {
-    setPostList([])
+   
     fetchPosts();
   }, [currentPage]);
 

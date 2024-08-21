@@ -17,9 +17,9 @@ const editorConfiguration = {
         'outdent',
         'indent',
         '|',
-        'imageUpload',
+       
         'blockQuote',
-        'insertTable',
+      
         'mediaEmbed',
         'undo',
         'redo'

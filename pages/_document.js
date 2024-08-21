@@ -20,6 +20,7 @@ export default function Document() {
 
       </Head>
       <body>
+        <div id="audio-root"></div>
         <div id='search-result'></div>
         <Main />
         <NextScript />

@@ -4,6 +4,7 @@ import MyFooter from '../components/footer/Footer'
 import UpdatedNavBar from './navbar/UpdatedNavBar'
  
 export default function Layout({ children }) {
+  
   return (
     <>
     

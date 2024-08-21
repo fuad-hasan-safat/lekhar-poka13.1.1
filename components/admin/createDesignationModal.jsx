@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { apiBasePath } from '../../utils/constant';
 
-const CreateDesignationModal = ({ showModal, handleClose, setIsCategoryAdded }) => {
+const CreateDesignationModal = ({ setDesignation, showModal, handleClose, setIsCategoryAdded }) => {
   
   const [title, setTitle] = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -36,9 +36,8 @@ const CreateDesignationModal = ({ showModal, handleClose, setIsCategoryAdded }) 
         title: title
       }
       const response = await axios.post(`${apiBasePath}/designation`,{ title });
-
+      setDesignation(prevDegignation=>[...prevDegignation, {title: title}])
       setIsCategoryAdded(true)
-
       handleClose();
 
     } catch (error) {

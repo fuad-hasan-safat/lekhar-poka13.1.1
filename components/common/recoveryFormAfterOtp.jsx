@@ -40,27 +40,22 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
         let isValid = true;
         setState((prevState) => ({ ...prevState, error: null }));
 
-        if (state.password.trim().length <= 0) {
-            isValid = false;
-            notification = 'দয়া করে পাসওয়ার্ড দিন';
-            notify()
-        }
 
         if (!state.password) {
 
-            setState((prevState) => ({ ...prevState, error: 'Password is required.' }));
+            setState((prevState) => ({ ...prevState, error: 'পাসওয়ার্ড অবশ্যই দিতে হবে!' }));
             isValid = false;
 
         } else if (state.password.length < 8) {
 
-            setState((prevState) => ({ ...prevState, error: 'Password must be at least 8 characters long.' }));
+            setState((prevState) => ({ ...prevState, error: 'পাসওয়ার্ড অবশ্যই ৮ অক্ষরের হতে হবে' }));
             isValid = false;
 
         }
 
         if (state.password !== state.retypePassword) {
 
-            setState((prevState) => ({ ...prevState, error: 'Passwords do not match.' }));
+            setState((prevState) => ({ ...prevState, error: 'পাসওয়ার্ড এক হয়নি!' }));
             isValid = false;
 
         }
@@ -81,13 +76,22 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
+
             handleUpdatePassword();
         }
     };
 
     const handleUpdatePassword = async () => {
 
+        if (state.password.trim().length <= 0) {
+            notification = 'দয়া করে পাসওয়ার্ড দিন';
+            notify()
+
+            return;
+        }
+
         const isValid = validate();
+
 
         if (isValid) {
             const data = {
@@ -123,10 +127,7 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
                 console.error("Error:", error);
             }
 
-
         }
-
-
     }
 
     const notify1 = () => toast.success(notification, {
@@ -152,7 +153,7 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
         <>
             <div className="login__form__dsc">
 
-                <div className="lg:text-[48px] md:text-[45px] sm:text-[40px] xs:text-[30px] mb-5  font-semibold text-yellow-500">
+                <div className="lg:text-[48px] md:text-[45px] sm:text-[40px] xs:text-[30px] mb-5  font-semibold text-black text-left">
                     পাসওয়ার্ড রিসেট করুন
                 </div>
 
@@ -188,7 +189,7 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
                         className="w-full h-[62px] p-4 bg-[#FCF7E8]  rounded-2xl   text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
                         required
                     />
-                    <button className="absolute right-[20px]  pt-[18px]" type="button" onClick={()=>setShowRePassword(!showRePassword)}>
+                    <button className="absolute right-[20px]  pt-[18px]" type="button" onClick={() => setShowRePassword(!showRePassword)}>
                         {showRePassword ? <i class="ri-eye-off-line"></i> : <i class="ri-eye-line"></i>}
                     </button>
                     {state.error && <p className="error">{state.error}</p>}

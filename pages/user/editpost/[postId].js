@@ -1,9 +1,6 @@
 
 import React from 'react'
 import Head from 'next/head'
-import { useRouter } from 'next/router';
-import { apiBasePath } from '../../../utils/constant';
-import axios from 'axios';
 import EditPost from '../../../components/userprofile/EditPost';
 
 

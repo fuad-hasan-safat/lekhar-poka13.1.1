@@ -23,7 +23,6 @@ export default function Createpost() {
 
                     <div className="lg:flex lg:flex-row">
                         <div className="w-full">
-
                             <CreatePost />
                         </div>
                     </div>

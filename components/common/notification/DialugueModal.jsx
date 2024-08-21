@@ -1,6 +1,12 @@
 import { useRouter } from "next/router";
-import { forwardRef } from "react"
+import { forwardRef, useContext } from "react"
+import { UserContext } from "../../lekharpokaStore/user-context";
+import useTabSyncAuth from "../../../utils/useReloadUrl";
 const DialugueModal = forwardRef(function DialugueModal({ alert, address, type }, ref) {
+
+    const { triggerLogout } = useTabSyncAuth();
+
+    const { setUser } = useContext(UserContext);
     const router = useRouter();
     function logout() {
         localStorage.removeItem("status");
@@ -11,14 +17,25 @@ const DialugueModal = forwardRef(function DialugueModal({ alert, address, type }
         localStorage.removeItem("usertype");
         localStorage.removeItem("email");
 
+        const user = {
+            userName: '',
+            userUuid: '',
+            userImage: '',
+            userToken: '',
+            userType: '',
+            isLoggedIn: false,
+            isloggedOut: true,
+        }
+        setUser(user);
+        triggerLogout();
         ref.current.close();
-        router.push(address);
+        router.push(address)
     }
 
-    function handleClick(){
-        if(type === 'logout'){
+    function handleClick() {
+        if (type === 'logout') {
             logout();
-        }else if(type === 'delete'){
+        } else if (type === 'delete') {
             address();
         }
     }
