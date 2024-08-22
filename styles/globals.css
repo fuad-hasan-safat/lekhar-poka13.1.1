@@ -114,7 +114,12 @@ body {
   color: black;
   /* Set the default text color to black */
 }
-
+.ck-sticky-panel__content{
+  z-index: 1;
+}
+.ck.ck-sticky-panel__content.ck-sticky-panel__content_sticky{
+  z-index: 1 !important;
+}
 .dashboardCk .ck-editor__editable{
   height: 200px;
 }
