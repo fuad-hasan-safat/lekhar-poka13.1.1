@@ -383,14 +383,22 @@ export default function UpdatedNavBar() {
                                                     </ul>
                                                 )}
                                             </li>
-                                            <li onClick={() => { setSelectedNav("zogazog"); closeMenu(); }}
+                                            <li onClick={() => { setSelectedNav("audiobook"); closeMenu(); }}
+                                                className={`hover:text-[#F9A106] ${selectedNav === "audiobook"
+                                                    ? "text-[#F9A106] font-semibold  underline"
+                                                    : ""
+                                                    }`}
+                                            >
+                                                <Link href="/audiobook">অডিও বুক</Link>
+                                            </li>
+                                            {/* <li onClick={() => { setSelectedNav("zogazog"); closeMenu(); }}
                                                 className={`hover:text-[#F9A106] ${selectedNav === "zogazog"
                                                     ? "text-[#F9A106] font-semibold  underline"
                                                     : ""
                                                     }`}
                                             >
                                                 <Link href="/contacts">যোগাযোগ</Link>
-                                            </li>
+                                            </li> */}
                                             <li
                                                 onClick={() => { setSelectedNav("amader_somporke"); closeMenu(); }}
                                                 className={` lg:w-[130px] sm:w-[100px] hover:text-[#F9A106] ${selectedNav === "amader_somporke"

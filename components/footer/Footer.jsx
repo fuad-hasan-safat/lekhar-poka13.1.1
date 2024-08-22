@@ -38,6 +38,7 @@ const MyFooter = () => {
                       <FooterLink
                         title="গুরুত্বপূর্ণ লিঙ্ক"
                         links={[
+                          { url: "/audiobook", label: "অডিও বুক" },
                           { url: "/golpo", label: "গল্প" },
                           { url: "/kobita", label: "কবিতা" },
                           { url: "/probondho", label: "প্রবন্ধ" },
@@ -55,6 +56,7 @@ const MyFooter = () => {
                         links={[
                           { url: "/privacypolicy", label: "প্রাইভেসি" },
                           { url: "/termsandconditions", label: "শর্তাবলি" },
+                          { url: "/contactus", label: "যোগাযোগ" },
                           { url: "/aboutus", label: "আমাদের সম্পর্কে" },
                         ]}
                       />
