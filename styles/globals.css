@@ -2550,7 +2550,7 @@ transition: all 0.5s !important;
   width: 100%;
   height: 140px;
   border-radius: 16px;
-  padding: 15px;
+  padding: 15px 15px 15px 75px;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -2919,7 +2919,7 @@ transition: all 0.5s !important;
 
 @media(max-width:479px) {
   .backgroundSlider__single {
-    width: 100%;
+    width: 100% !important;
   }
 
   .audio__tab__playbutton {

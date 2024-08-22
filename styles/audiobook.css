@@ -334,6 +334,16 @@ Bg Slider Css
     display: flex;
 }
 
+.audio__bgslider__image{
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+}
+
+
 /*
 ---------------------
  Responsive Css
@@ -370,6 +380,21 @@ Bg Slider Css
 @media(max-width:1199px) {
     .audio__bgslider__text {
         padding-left: 10px;
+    }
+    .backgroundSlider__single {
+        width: 50%;
+    }
+    .audio__bgslider__image {
+        left: 10px;
+    }
+    .audio__bgslider__text h5 {
+        margin-bottom: 4px;
+    }
+    .audio__bgslider__text p {
+        margin-bottom: 4px;
+    }
+    .backgroundSlider__single__iteam {
+        padding: 15px 15px 15px 55px;
     }
 }
 
@@ -424,6 +449,9 @@ Bg Slider Css
     .backgroundSlider .slick-next::before,
     .hmCategorySlider .slick-next:before {
         background-size: 28px 28px !important;
+    }
+    .audio__bgslider__text p {
+        font-size: 10px;
     }
 }
 
