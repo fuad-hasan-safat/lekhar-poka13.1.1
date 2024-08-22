@@ -56,7 +56,7 @@ const MyFooter = () => {
                         links={[
                           { url: "/privacypolicy", label: "প্রাইভেসি" },
                           { url: "/termsandconditions", label: "শর্তাবলি" },
-                          { url: "/contactus", label: "যোগাযোগ" },
+                          { url: "/contacts", label: "যোগাযোগ" },
                           { url: "/aboutus", label: "আমাদের সম্পর্কে" },
                         ]}
                       />
