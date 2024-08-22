@@ -45,8 +45,8 @@ export default function SeeMoreListBackground(audioData) {
                             <div className='audio__bgslider__image'>
                                 <img src={`${apiBasePath}/${iteam.image.slice(iteam.image.indexOf('/') + 1)}`} alt='' />
                             </div>
-                            <div className='audio__bgslider__text'>
-                                <h5 className='charLim'> {iteam.title} </h5>
+                            <div className='audio__bgslider__text md:max-w-[175px] xs:max-w-[220px]'>
+                                <h5 className='charLim '> {iteam.title} </h5>
                                 <p className='charLim'>লেখকঃ {iteam.writer}</p>
                                 <p className='charLim'>কণ্ঠঃ {iteam.voice}</p>
                                 <p style={{ marginBottom: '0' }}><i class="ri-time-line"></i> {iteam.duration}</p>
