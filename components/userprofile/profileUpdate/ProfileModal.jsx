@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ImageCropProvider from '../cropComponents/ImageCropProvider'
 import ImageCrop from '../cropComponents/ImageCrop'
 import { apiBasePath } from '../../../utils/constant'
@@ -9,9 +9,13 @@ import axios from 'axios'
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { UserContext } from '../../lekharpokaStore/user-context'
+import { readFile } from '../cropComponents/cropImage'
 
-export default function ProfileModal({ setShowModal, showModal, handleClose, image = '' }) {
+export default function ProfileModal({ setShowModal, setuserprofiledata , showModal, handleClose, image = '' }) {
+   
     const router = useRouter();
+    const { setUser } = useContext(UserContext);
 
     let notification = ''
 
@@ -148,6 +152,10 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
     const handleEmailChange = (event) => {
         const newEmail = event.target.value;
         setemail(newEmail);
+        setuserprofiledata((prevData) => ({
+            ...prevData,
+            userEmail: newEmail,
+        }))
         if (!validateEmail(newEmail)) {
             setError('সঠিক ইমেইল দিন !');
         } else {
@@ -292,12 +300,23 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
                 if (response.ok) {
                     const data = await response.json();
                     // alert('প্রোফাইল সফলভাবে আপডেট হয়েছে')
+
+                    const imageDataUrl = await readFile(imageFile);
+                    console.log({imageDataUrl})
+
+                    setuserprofiledata((prevData) => ({
+                        ...prevData,
+                        userImage: imageDataUrl,
+                    }));
+                    setUser({ userImage: imageDataUrl });
+
                     notification = 'প্রোফাইল সফলভাবে আপডেট হয়েছে';
                     notify1();
                     console.log('Profile updated successfully:', data);
+                    setIsSubMit(true);
+                    setShowModal(false);
 
-
-                    reloadPage()
+                    // reloadPage()
 
                 } else {
                     console.error('Failed to update profile:', response.statusText);
@@ -355,7 +374,7 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
 
                         <div className='-mt-[80px]'>
                             <ImageCropProvider>
-                                <ImageCrop setImageFile={setImageFile} image={image === '' ? '/images/defaultUserPic/profile.jpg' : `${apiBasePath}/${image?.slice(image.indexOf('/') + 1)}`} />
+                                <ImageCrop setuserprofiledata={setuserprofiledata} setImageFile={setImageFile} image={image === '' ? '/images/defaultUserPic/profile.jpg' : image }/>
                             </ImageCropProvider>
 
                         </div>
@@ -366,7 +385,12 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
                                 className={`${Class.profile__input} h-[40px] px-[16px]`}
                                 placeholder='আপনার নাম '
                                 value={username}
-                                onChange={(e) => setUsername(e.target.value)}
+                                onChange={(e) => {setUsername(e.target.value);
+                                    setuserprofiledata((prevData)=>({
+                                        ...prevData,
+                                        userName:e.target.value,
+                                    }))
+                                }}
                             ></input>
 
 
@@ -377,7 +401,12 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
                                 placeholder='মোবাইল নাম্বার'
                                 required
                                 value={phoneNumber}
-                                onChange={(e) => setPhoneNumber(e.target.value)}
+                                onChange={(e) => {setPhoneNumber(e.target.value);
+                                    setuserprofiledata((prevData)=>({
+                                        ...prevData,
+                                        userPhone:e.target.value,
+                                    }))
+                                }}
                                 disabled={isSubmit}
                             ></input>
 
@@ -403,7 +432,12 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
                                 className={`${Class.profile__input} h-[40px] px-[16px]`}
                                 placeholder='জন্ম তারিখ'
                                 value={birthOfDate}
-                                onChange={(e) => setBirthOfDate(e.target.value)}
+                                onChange={(e) => {setBirthOfDate(e.target.value);
+                                    setuserprofiledata((prevData)=>({
+                                        ...prevData,
+                                        userBirthDatte:e.target.value,
+                                    }))
+                                }}
                             ></input>
 
                             {/* <input
@@ -417,7 +451,12 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
                                     className={`${Class.profile__input} h-[40px] px-[16px]`}
                                     required
                                     value={designation}
-                                    onChange={(e) => setDesignation(e.target.value)}>
+                                    onChange={(e) => {setDesignation(e.target.value);
+                                        setuserprofiledata((prevData)=>({
+                                            ...prevData,
+                                            userDesignation:e.target.value,
+                                        }))
+                                    }}>
                                     <option value="">পদবী</option>
                                     {designationFromApi.map((category) => (
                                         <option key={category._id} value={category.title}>
@@ -432,7 +471,12 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
                                     className={`${Class.profile__input} h-[40px] px-[16px]`}
                                     required
                                     value={gender}
-                                    onChange={(e) => setGender(e.target.value)}>
+                                    onChange={(e) => {setGender(e.target.value);
+                                        setuserprofiledata((prevData)=>({
+                                            ...prevData,
+                                            userGender:e.target.value,
+                                        }))
+                                    }}>
                                     <option value="">লিঙ্গ</option>
                                     <option value="male">পুরুষ</option>
                                     <option value="female">নারী</option>
@@ -446,7 +490,12 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
                                 placeholder='স্ট্যাটাস'
                                 className={`${Class.profile__input} h-[40px] px-[16px]`}
                                 value={`${profileStatus === 'undefined' ? '' : profileStatus}`}
-                                onChange={(e) => setProfileStatus(e.target.value)}
+                                onChange={(e) => {setProfileStatus(e.target.value);
+                                    setuserprofiledata((prevData)=>({
+                                        ...prevData,
+                                        userStatus:e.target.value,
+                                    }))
+                                }}
                             >
                             </input>
 
@@ -458,7 +507,12 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
                                 className={`${Class.profile__input} h-[40px] px-[16px]`}
                                 placeholder='ঠিকানা'
                                 value={`${address === ('undefined' || undefined) ? '' : address}`}
-                                onChange={(e) => setAddress(e.target.value)}
+                                onChange={(e) => {setAddress(e.target.value);
+                                    setuserprofiledata((prevData)=>({
+                                        ...prevData,
+                                        userAddress:e.target.value,
+                                    }))
+                                }}
 
                             ></input>
 
@@ -475,7 +529,12 @@ export default function ProfileModal({ setShowModal, showModal, handleClose, ima
                                 required
                                 className={`h-[180px] ${Class.profile__input} px-[16px] py-[16px] `}
                                 value={bio}
-                                onChange={(e) => setBio(e.target.value)}
+                                onChange={(e) => {setBio(e.target.value);
+                                    setuserprofiledata((prevData)=>({
+                                        ...prevData,
+                                        userBio:e.target.value,
+                                    }))
+                                }}
                             />
 
                         </div>

@@ -16,7 +16,7 @@ export default function Home() {
   if(!router.isReady) return null;
 
   return (
-    router.isReady && userUuid?.length > 0 ?
+    router.isReady ?
       <>
         <div className=''>
           <Head>

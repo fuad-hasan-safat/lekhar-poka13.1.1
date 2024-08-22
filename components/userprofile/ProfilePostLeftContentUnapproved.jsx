@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import MainContentDivider from "../common/mainContentDivider";
 import { apiBasePath } from "../../utils/constant";
 import Loading from "../common/loading";
 import axios from "axios";
 import SinglePostConponent from "../common/singlePostComponent";
+import { UserContext } from "../lekharpokaStore/user-context";
 
 
 export default function ProfilePostLeftContentUnApproved() {
@@ -19,6 +20,8 @@ export default function ProfilePostLeftContentUnApproved() {
   const [username, setUsername] = useState("");
   const [slug, setUserUuid] = useState("");
   const [userToken, setUserToken] = useState("");
+
+  const {userImage} = useContext(UserContext);
 
   useEffect(() => {
 
@@ -51,7 +54,7 @@ export default function ProfilePostLeftContentUnApproved() {
 
     fetchPosts();
 
-  }, []);
+  }, [userImage]);
 
 
   const handlePageChange = (pageNumber) => {

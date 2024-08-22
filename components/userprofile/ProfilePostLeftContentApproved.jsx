@@ -1,12 +1,13 @@
 
 "use client";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import MainContentDivider from "../common/mainContentDivider";
 import { apiBasePath } from "../../utils/constant";
 import SobUserPostBody from "./SobUserPostBody";
 import Loading from "../common/loading";
 import axios from "axios";
 import SinglePostConponent from "../common/singlePostComponent";
+import { UserContext } from "../lekharpokaStore/user-context";
 
 export default function ProfilePostLeftContentApproved() {
   //   const [selectedId, setSelectedId] = useState("sob");
@@ -23,6 +24,8 @@ export default function ProfilePostLeftContentApproved() {
   const [username, setUsername] = useState("");
   const [slug, setUserUuid] = useState("");
   const [userToken, setUserToken] = useState("");
+
+  const {userImage} = useContext(UserContext);
 
   useEffect(() => {
     setUsername(localStorage.getItem("name") || "");
@@ -55,7 +58,7 @@ export default function ProfilePostLeftContentApproved() {
 
     fetchPosts();
 
-  }, []);
+  }, [userImage]);
 
 
   const handlePageChange = (pageNumber) => {

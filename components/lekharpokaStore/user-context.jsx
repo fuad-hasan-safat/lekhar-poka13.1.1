@@ -12,7 +12,7 @@ export const UserContext = createContext({
     isProfileLoaded: true,
 
     setUser: () => { },
-    setIsProfileLoaded:() =>{},
+    setIsProfileLoaded: () => { },
 })
 
 export default function UserContextProvider({ children }) {
@@ -27,11 +27,22 @@ export default function UserContextProvider({ children }) {
         isProfileLoaded: false,
     })
 
-    useEffect(()=>{
-        const userObj = JSON.parse(localStorage.getItem('loggedInUser'));
-        console.log('user object user context ', userObj );
-        setUserData(userObj)
-    },[])
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem('loggedInUser');
+
+        if (loggedInUser) {
+          try {
+            const userObj = JSON.parse(loggedInUser);
+            console.log('user object user context ', userObj);
+            setUserData(userObj);
+          } catch (error) {
+            console.error('Failed to parse loggedInUser from localStorage:', error);
+            localStorage.removeItem('loggedInUser');
+          }
+        }
+    
+
+    }, [])
 
     function setUserValue(userObj) {
         localStorage.setItem('loggedInUser', JSON.stringify(userObj))
@@ -41,7 +52,7 @@ export default function UserContextProvider({ children }) {
         }))
     }
 
-    function updateUserPofileLoaded(status){
+    function updateUserPofileLoaded(status) {
         setUserData((prevData) => ({
             ...prevData,
             isProfileLoaded: status,
@@ -56,7 +67,7 @@ export default function UserContextProvider({ children }) {
         isloggedOut: userData?.isloggedOut,
         isProfileLoaded: userData?.isProfileLoaded,
         setUser: setUserValue,
-        setIsProfileLoaded:updateUserPofileLoaded,
+        setIsProfileLoaded: updateUserPofileLoaded,
     }
 
     return (

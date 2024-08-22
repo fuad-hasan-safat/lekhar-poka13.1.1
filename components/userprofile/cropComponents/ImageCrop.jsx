@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import Modal from './Modal';
 import { readFile } from './cropImage';
@@ -6,8 +6,9 @@ import ImageCropModalContent from './ImageCropModalContent';
 import { useImageCropContext } from './ImageCropProvider';
 import { apiBasePath } from '../../../utils/constant';
 import { useRouter } from 'next/router';
+import { UserContext } from '../../lekharpokaStore/user-context';
 
-const ImageCrop = ({setImageFile, image, type = "profilePic", setWriterImage}) => {
+const ImageCrop = ({ setuserprofiledata, setImageFile, image, type = "profilePic", setWriterImage }) => {
     const router = useRouter();
     // console.log({ image })
 
@@ -26,28 +27,30 @@ const ImageCrop = ({setImageFile, image, type = "profilePic", setWriterImage}) =
         setUserUuid(localStorage.getItem("uuid") || "");
 
     }, [])
-    useEffect(()=>{
+    useEffect(() => {
         setPreview(image)
 
 
-    },[image.length])
+    }, [image.length])
 
     const handleDone = async () => {
         const avatar = await getProcessedImage();
-        setPreview(window.URL.createObjectURL(avatar));
+        const avaterUrl = window.URL.createObjectURL(avatar);
+        console.log('avater url ---', avaterUrl);
+        setPreview(avaterUrl);
         resetStates();
         setOpenModal(false);
-        
+
 
         //  sent data to backend 
 
         if (type === "createWriter") {
             setWriterImage(avatar)
 
-        } else{
+        } else {
             setImageFile(avatar)
         }
-        
+
 
     };
 

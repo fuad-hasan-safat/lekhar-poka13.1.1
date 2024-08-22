@@ -7,12 +7,13 @@ import { apiBasePath } from '../../utils/constant';
 import Link from 'next/link';
 import DialugueModal from '../common/notification/DialugueModal';
 import { SearchContext } from '../lekharpokaStore/search-context';
+import { UserContext } from '../lekharpokaStore/user-context';
 
 export default function UpdatedNavBar() {
     const router = useRouter();
 
     const { selectedIteam, handleKeyDown, setSelectedIteam, searchAreaRef, setIsSearchbarActive, isSearchbarActive, setSearchResult, searchKey, setSearchKey } = useContext(SearchContext)
-
+    const {setUser, userImage} = useContext(UserContext)
     const [selectedNav, setSelectedNav] = useState("");
     const [postList, setPostList] = useState(null);
     const [search, setSearch] = useState("");
@@ -22,7 +23,6 @@ export default function UpdatedNavBar() {
     const [username, setUsername] = useState("");
     const [userUuid, setUserUuid] = useState("");
     const [userToken, setUserToken] = useState("");
-    const [userImage, setUserImage] = useState(null);
 
     // ------
     const dialogueRef = useRef()
@@ -104,7 +104,8 @@ export default function UpdatedNavBar() {
             try {
                 const response = await fetch(`${apiBasePath}/getprofilepic/${localStorage.getItem("uuid")}`);
                 const data = await response.json();
-                setUserImage(data.image);
+                console.log('user image in navbar --', data.image)
+                setUser({userImage:`${apiBasePath}/${data.image?.slice(data.image?.indexOf('/')+1)}`})
                 //console.log( "------------------->>>> POST LIST ------------------>>>>>>>",postList );
             } catch (error) {
                 // alert("Error Fetching data");
@@ -405,7 +406,7 @@ export default function UpdatedNavBar() {
                                                     <li
                                                         className='relative cursor-pointer -mt-[5px]'
                                                         onClick={() => { toggleVisibility(2); }}>
-                                                        {userImage?.length > 0 ? <img src={`${apiBasePath}/${userImage.slice(userImage.indexOf("/") + 1)}`} alt={userImage} className='h-[35px] w-[35px] rounded-full' /> :
+                                                        {userImage?.length > 0 ? <img src={userImage} alt={userImage} className='h-[35px] w-[35px] rounded-full' /> :
                                                             <img src='/images/user/deafultProfile.png' alt='profile pic' className='h-[35px] w-[35px] rounded-full' />}
 
                                                         {visibleItem === 2 && (
