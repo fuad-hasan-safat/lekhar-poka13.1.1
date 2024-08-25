@@ -16,6 +16,7 @@ export default function ProfilePostLeftContentUnApproved() {
   const dispatch = useDispatch();
   const unapprovedItems = useSelector((state) => state.userpost.unapprovedItems);
   const userUuid = useSelector((state) => state.usersession.userUuid);
+  const createdPostAt = useSelector((state) => state.userpost.createdPostAt);
 
   const [postList, setPostList] = useState([])
   const [isLoading, setIsLoading] = useState(true);
@@ -66,7 +67,7 @@ export default function ProfilePostLeftContentUnApproved() {
 
     fetchPosts();
 
-  }, [userImage]);
+  }, [userImage, createdPostAt]);
 
 
   const handlePageChange = (pageNumber) => {

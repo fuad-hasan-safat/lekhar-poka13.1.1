@@ -4,7 +4,8 @@ const userPostSlice = createSlice({
     name: 'userpost',
     initialState: {
         unapprovedItems: [],
-        approvedItems: []
+        approvedItems: [],
+        createdPostAt: null,
     }, reducers: {
         addApiPostsToUnapproved(state, action) {
             console.log('payload - ',action.payload)
@@ -22,6 +23,8 @@ const userPostSlice = createSlice({
         deleteApost(state, action){
             state.approvedItems = state.approvedItems.filter(post => post._id !== action.payload);
             state.unapprovedItems = state.unapprovedItems.filter(post => post._id !== action.payload);
+        }, postCreatedAt(state, action){
+            state.createdPostAt = action.payload;
         }
     }
 });

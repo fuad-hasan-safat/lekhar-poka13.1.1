@@ -13,6 +13,9 @@ import dynamic from 'next/dynamic';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { userPostAction } from '../redux/userpost-slice';
+import { generateUUID } from '../../function/api';
 
 
 
@@ -25,6 +28,11 @@ const fileTypes = ["JPEG", "PNG", "GIF"];
 
 
 export default function CreatePost() {
+
+    const dispatch = useDispatch();
+
+    const useruuid = useSelector((state)=> state.usersession.userUuid);
+    
     const router = useRouter()
 
     const [content, setContent] = useState("");
@@ -183,11 +191,11 @@ export default function CreatePost() {
         return modifiedString;
     }
 
-    function reloadPage() {
-        setTimeout(() => {
-            router.push(`/user/${localStorage.getItem("uuid")}`)
-        }, 3000)
-    }
+    // function reloadPage() {
+    //     setTimeout(() => {
+    //         router.push(`/user/${localStorage.getItem("uuid")}`)
+    //     }, 3000)
+    // }
 
     let notification = ''
 
@@ -275,7 +283,9 @@ export default function CreatePost() {
                             setContent('');
                             setSummary('');
 
-                            reloadPage();
+                            dispatch(userPostAction.postCreatedAt(generateUUID()))
+                            router.push(`/user/${useruuid}`)
+                            // reloadPage();
 
                         } else {
                             console.error("Failed to update writing:", response.statusText);
