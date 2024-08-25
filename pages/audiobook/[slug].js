@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import RequiredLogin from '../../components/common/RequiredLogIn';
 import LoginPage from '../../components/login/login';
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 
 export async function getServerSideProps(context) {
     const { slug } = context.params;
@@ -44,6 +45,8 @@ export default function Home({ singleAudioData }) {
     const router = useRouter();
     const currentUrl = router.asPath;
 
+    const userUuid = useSelector(state => state.usersession.userUuid);
+
     console.log(singleAudioData.audio)
 
     const [isLoading, setIsLoading] = useState(false)
@@ -57,7 +60,7 @@ export default function Home({ singleAudioData }) {
 
 
     return (
-        <>{localStorage.getItem('uuid')?.trim().length > 0 ?
+        <>{userUuid ?
             <div>
                 <Head>
                     <title>{singleAudioData?.title}</title>

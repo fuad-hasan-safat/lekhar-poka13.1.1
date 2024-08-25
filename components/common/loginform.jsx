@@ -82,11 +82,7 @@ export default function LoginForm({ logreg, btntext, url = '/' }) {
 
   function reloadPage(url) {
     setTimeout(() => {
-      if (url === '/') {
-        router.push(url)
-      } else {
-        router.refresh(url)
-      }
+        router.push(url);
     }, 1000)
   }
 
