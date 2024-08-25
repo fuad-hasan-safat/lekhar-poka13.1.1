@@ -15,7 +15,7 @@ export default function ProfilePostLeftContentUnApproved() {
 
   const dispatch = useDispatch();
   const unapprovedItems = useSelector((state) => state.userpost.unapprovedItems);
-
+  const userUuid = useSelector((state) => state.usersession.userUuid);
 
   const [postList, setPostList] = useState([])
   const [isLoading, setIsLoading] = useState(true);
@@ -28,7 +28,7 @@ export default function ProfilePostLeftContentUnApproved() {
   const [slug, setUserUuid] = useState("");
   const [userToken, setUserToken] = useState("");
 
-  const {userImage} = useContext(UserContext);
+  const { userImage } = useContext(UserContext);
 
   useEffect(() => {
 
@@ -44,15 +44,18 @@ export default function ProfilePostLeftContentUnApproved() {
     const fetchPosts = async () => {
       try {
 
-        const response = await axios.get(`${apiBasePath}/unverifiedpostsbyuser/${localStorage.getItem("uuid")}`); // Use Axios
-        const data = response.data;
-        console.log('UN-APPROVED POST----->>', data)
+        if (userUuid) {
+          const response = await axios.get(`${apiBasePath}/unverifiedpostsbyuser/${userUuid}`); // Use Axios
+          const data = response.data;
+          console.log('UN-APPROVED POST----->>', data)
 
 
-      setPostList(data.object);
-        setTotalPages(Math.ceil(data.object.length / postsPerPage));
+          setPostList(data.object);
+          setTotalPages(Math.ceil(data.object.length / postsPerPage));
 
-        dispatch(userPostAction.addApiPostsToUnapproved(data.object))
+          dispatch(userPostAction.addApiPostsToUnapproved(data.object))
+        }
+
 
       } catch (error) {
         setError(error);

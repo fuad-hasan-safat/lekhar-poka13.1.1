@@ -24,7 +24,7 @@ const userPostSlice = createSlice({
             state.unapprovedItems = state.unapprovedItems.filter(post => post._id !== action.payload);
         }
     }
-})
+});
 
 export const userPostAction = userPostSlice.actions;
 

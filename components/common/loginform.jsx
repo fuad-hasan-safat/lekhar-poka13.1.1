@@ -10,13 +10,17 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { UserContext } from "../lekharpokaStore/user-context";
 import useTabSyncAuth from "../../utils/useReloadUrl";
+import { useDispatch } from "react-redux";
+import { userSessionAction } from "../redux/usersession-slice";
 
 
 export default function LoginForm({ logreg, btntext, url = '/' }) {
 
+  const dispatch = useDispatch();
+
   const router = useRouter();
   const { setUser } = useContext(UserContext);
-  const {triggerLogin} = useTabSyncAuth();
+  const { triggerLogin } = useTabSyncAuth();
 
   let notification = ''
 
@@ -115,6 +119,15 @@ export default function LoginForm({ logreg, btntext, url = '/' }) {
 
         const data = await response.data;
 
+        dispatch(userSessionAction.addValidUser({
+          isLoggedIn: true,
+          userToken: data?.access_token,
+          userUuid: data?.uuid,
+          userName: data?.name,
+          userType: data?.usertype,
+          accountType: 'create with phone number',
+        }));
+
         notification = 'সফলভাবে লগইন করেছেন';
         notify1();
 
@@ -130,12 +143,13 @@ export default function LoginForm({ logreg, btntext, url = '/' }) {
         localStorage.setItem("usertype", data.usertype);
         localStorage.setItem("phone", data.phone);
 
+
         const user = {
-          userName: data.name,
-          userUuid: data.uuid,
+          userName: data?.name,
+          userUuid: data?.uuid,
           userImage: data?.image,
-          userToken: data.access_token,
-          userType: data.usertype,
+          userToken: data?.access_token,
+          userType: data?.usertype,
           isLoggedIn: true,
           isloggedOut: false,
         };
@@ -156,6 +170,7 @@ export default function LoginForm({ logreg, btntext, url = '/' }) {
     } catch (error) {
       // alert('সঠিক পাসওয়ার্ড দিন');
       notification = 'সঠিক পাসওয়ার্ড দিন';
+      console.log(error);
       notify();
 
     }

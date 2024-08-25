@@ -65,6 +65,16 @@ export default function SignInOption({
 
                 const data = await response.data;
 
+
+                dispatch(userSessionAction.addValidUser({
+                    isLoggedIn: true,
+                    userToken: data?.access_token,
+                    userUuid: data?.uuid,
+                    userName: data?.name,
+                    userType: data?.usertype,
+                    accountType: 'create with gmail',
+                  }));
+
                 setStatus(data.status);
                 setUserUuid(data.uuid);
                 setUserLog(data);

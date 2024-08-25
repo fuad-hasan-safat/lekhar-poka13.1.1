@@ -22,7 +22,7 @@ export default function Home() {
         <Head>
           <title>প্রোফাইল</title>
         </Head>
-        <UserProfile slug={slug} />
+        <UserProfile/>
       </div>
     </>
   )

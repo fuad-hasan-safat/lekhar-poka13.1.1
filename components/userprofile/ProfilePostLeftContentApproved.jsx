@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 export default function ProfilePostLeftContentApproved() {
   const dispatch = useDispatch();
   const approvedItems = useSelector((state) => state.userpost.approvedItems);
+  const userUuid = useSelector((state) => state.usersession.userUuid);
 
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -29,14 +30,18 @@ export default function ProfilePostLeftContentApproved() {
 
     const fetchPosts = async () => {
       try {
-        const response = await axios.get(`${apiBasePath}/postsbyuser/${slug}`);
-        const data = response.data;
-        console.log('APPROVED POST----->>', response);
+        if(userUuid){
+          const response = await axios.get(`${apiBasePath}/postsbyuser/${userUuid}`);
+          const data = response.data;
+          console.log('APPROVED POST----->>', response);
+  
+          // Dispatch to Redux store
+          dispatch(userPostAction.addApiPostsToApproved(data.object));
+  
+          setIsLoading(false);
 
-        // Dispatch to Redux store
-        dispatch(userPostAction.addApiPostsToApproved(data.object));
-
-        setIsLoading(false);
+        }
+     
       } catch (error) {
         setError(error);
         setIsLoading(false);

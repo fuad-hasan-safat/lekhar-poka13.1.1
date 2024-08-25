@@ -10,10 +10,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AdminContext } from "../../store/adminpanel-context";
 import { UserContext } from "../../lekharpokaStore/user-context";
 import useTabSyncAuth from "../../../utils/useReloadUrl";
+import { userSessionAction } from "../../redux/usersession-slice";
+import { useDispatch } from "react-redux";
 
 export default function Login() {
 
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const {setUser} = useContext(UserContext);
   const {setCurrentComponentIndex} = useContext(AdminContext);
@@ -103,6 +106,15 @@ export default function Login() {
 
       if (response.data.status === 'success') {
         const data = await response.data;
+
+        dispatch(userSessionAction.addValidUser({
+          isLoggedIn: true,
+          userToken: data?.access_token,
+          userUuid: data?.uuid,
+          userName: data?.name,
+          userType: data?.usertype,
+          accountType: 'create with phone number',
+        }));
 
         notification = 'সফলভাবে লগইন করেছেন';
         notify1();

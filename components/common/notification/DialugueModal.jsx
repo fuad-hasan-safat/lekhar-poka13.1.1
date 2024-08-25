@@ -3,10 +3,12 @@ import { forwardRef, useContext } from "react"
 import { UserContext } from "../../lekharpokaStore/user-context";
 import useTabSyncAuth from "../../../utils/useReloadUrl";
 import { AudioPlayListContext } from "../../store/audioPlayer-context";
+import { useDispatch } from "react-redux";
+import { userSessionAction } from "../../redux/usersession-slice";
 const DialugueModal = forwardRef(function DialugueModal({ alert, address, type }, ref) {
 
     const { triggerLogout } = useTabSyncAuth();
-
+    const dispatch = useDispatch();
     const { setUser } = useContext(UserContext);
     const {resetAudioPlayer} = useContext(AudioPlayListContext);
 
@@ -19,6 +21,8 @@ const DialugueModal = forwardRef(function DialugueModal({ alert, address, type }
         localStorage.removeItem("token");
         localStorage.removeItem("usertype");
         localStorage.removeItem("email");
+
+        dispatch(userSessionAction.removeUser());
 
         const user = {
             userName: '',
