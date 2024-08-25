@@ -8,6 +8,7 @@ import ReaderModeModal from "../../components/readerMode/ReaderModeModal";
 import FullPostReaderMode from "../../components/common/fullContentReadermood";
 import { AudioPlayListContext } from "../../components/store/audioPlayer-context";
 import { UserContext } from "../../components/lekharpokaStore/user-context";
+import { useSelector } from "react-redux";
 
 
 export async function getServerSideProps(context) {
@@ -39,7 +40,8 @@ export default function PostDetails({ postData }) {
   console.log({ postData })
 
   const { toggleAudioPlay, audioPlace, currentPlayingIndex, isAudioPlaying } = useContext(AudioPlayListContext);
-  const { userUuid } = useContext(UserContext);
+  const userUuid = useSelector(state => state.usersession.userUuid)
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const data = postData.object;
