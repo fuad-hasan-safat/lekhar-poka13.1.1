@@ -8,7 +8,7 @@ import { apiBasePath } from '../../../utils/constant';
 import { useRouter } from 'next/router';
 import { UserContext } from '../../lekharpokaStore/user-context';
 
-const ImageCrop = ({ setuserprofiledata, setImageFile, image, type = "profilePic", setWriterImage }) => {
+const ImageCrop = ({ setuserprofiledata, setUpdatedImage, setImageFile, image, type = "profilePic", setWriterImage }) => {
     const router = useRouter();
     // console.log({ image })
 
@@ -49,6 +49,7 @@ const ImageCrop = ({ setuserprofiledata, setImageFile, image, type = "profilePic
 
         } else {
             setImageFile(avatar)
+            setUpdatedImage(avatar)
         }
 
 

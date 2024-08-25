@@ -12,8 +12,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { UserContext } from '../../lekharpokaStore/user-context'
 import { readFile } from '../cropComponents/cropImage'
 
-export default function ProfileModal({ setShowModal, setuserprofiledata , showModal, handleClose, image = '' }) {
-   
+export default function ProfileModal({ setShowModal, setuserprofiledata, showModal, handleClose, image = '' }) {
+
     const router = useRouter();
     const { setUser } = useContext(UserContext);
 
@@ -30,6 +30,7 @@ export default function ProfileModal({ setShowModal, setuserprofiledata , showMo
     const [email, setemail] = useState('');
     const [error, setError] = useState('');
     const [imageFile, setImageFile] = useState(null);
+    const [updatedImage, setUpdatedImage] = useState(null);
     const [bio, setBio] = useState('')
     const [bioId, setBioId] = useState('')
     const [isSubmit, setIsSubMit] = useState(false)
@@ -152,10 +153,6 @@ export default function ProfileModal({ setShowModal, setuserprofiledata , showMo
     const handleEmailChange = (event) => {
         const newEmail = event.target.value;
         setemail(newEmail);
-        setuserprofiledata((prevData) => ({
-            ...prevData,
-            userEmail: newEmail,
-        }))
         if (!validateEmail(newEmail)) {
             setError('সঠিক ইমেইল দিন !');
         } else {
@@ -187,6 +184,8 @@ export default function ProfileModal({ setShowModal, setuserprofiledata , showMo
     const handleSubmit = async (e) => {
         e?.preventDefault();
 
+        console.log('Inside submit')
+
         const isValidPhone = validatePhoneNumber(phoneNumber);
 
         if (!isValidPhone && !isSubmit) {
@@ -206,25 +205,29 @@ export default function ProfileModal({ setShowModal, setuserprofiledata , showMo
 
 
         //  update bio
-        try {
-            const response = await axios.post(
-                `${apiBasePath}/bio`,
-                {
-                    user_id: `${localStorage.getItem("uuid")}`,
-                    content: bio,
-                },
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                }
-            );
+        // try {
+        //     const response = await axios.post(
+        //         `${apiBasePath}/bio`,
+        //         {
+        //             user_id: `${localStorage.getItem("uuid")}`,
+        //             content: bio,
+        //         },
+        //         {
+        //             headers: {
+        //                 "Content-Type": "application/json",
+        //             },
+        //         }
+        //     );
 
-            console.log('bio post res', response)
+        //     console.log('bio post res', response)
+        //     setuserprofiledata((prevData) => ({
+        //         ...prevData,
+        //         userBio: bio,
+        //     }))
 
-        } catch (error) {
-            console.error('Error updating profile:', error);
-        }
+        // } catch (error) {
+        //     console.error('Error updating profile:', error);
+        // }
 
 
 
@@ -242,6 +245,10 @@ export default function ProfileModal({ setShowModal, setuserprofiledata , showMo
                 }
             );
             console.log('bio PUT res', response)
+            setuserprofiledata((prevData) => ({
+                ...prevData,
+                userBio: bio,
+            }))
 
 
         } catch (error) {
@@ -271,6 +278,7 @@ export default function ProfileModal({ setShowModal, setuserprofiledata , showMo
             notification = 'আপনার জন্ম তারিখ প্রদান করুন';
             notify();
         } else {
+            console.log('Inside formdata -----------')
 
             //const formattedDate = moment(startDate).format('DD-MM-YYYY');
             console.log({ selectedDesignation, designation })
@@ -287,6 +295,8 @@ export default function ProfileModal({ setShowModal, setuserprofiledata , showMo
             formData.append('user_id', localStorage.getItem("uuid"));
             // const token = JSON.parse(localStorage.getItem('token'));
             try {
+                console.log('before call api -----------')
+
                 const response = await fetch(`${apiBasePath}/profile`, {
                     method: 'PUT',
                     headers: {
@@ -294,29 +304,58 @@ export default function ProfileModal({ setShowModal, setuserprofiledata , showMo
                     },
                     body: formData
                 });
+                console.log('after call api -----------')
 
-                // console.log('------>>>> PROFILE RESPONSE <<<<<<--------', response)
+                console.log('------>>>> PROFILE RESPONSE <<<<<<--------', response)
 
                 if (response.ok) {
-                    const data = await response.json();
+                    // const data = await response.json();
                     // alert('প্রোফাইল সফলভাবে আপডেট হয়েছে')
+                    console.log('image file', imageFile)
 
-                    const imageDataUrl = await readFile(imageFile);
-                    console.log({imageDataUrl})
 
+                  if(updatedImage) {
+                    setImageFile(updatedImage);
+                    console.log('image file 2', updatedImage)
+
+                    const imageDataUrl = await readFile(updatedImage);
+                    console.log('Image url ---->>>>>>>', imageDataUrl)
                     setuserprofiledata((prevData) => ({
                         ...prevData,
                         userImage: imageDataUrl,
-                    }));
+                    }))
                     setUser({ userImage: imageDataUrl });
+                    console.log('Image url  set  image file---->>>>>>>', imageDataUrl)
+
+                  } 
+
+                    setuserprofiledata((prevData) => ({
+                        ...prevData,
+                        userName: username,
+                        userPhone: phoneNumber,
+                        userEmail: email,
+                        userBirthDate: birthOfDate,
+                        userDesignation: designation,
+                        userGender: gender,
+                        userStatus: profileStatus,
+                        userAddress: address,
+                    }));
+                    console.log('clicked')
 
                     notification = 'প্রোফাইল সফলভাবে আপডেট হয়েছে';
                     notify1();
-                    console.log('Profile updated successfully:', data);
-                    setIsSubMit(true);
-                    setShowModal(false);
+                    handleClose();
 
-                    // reloadPage()
+
+
+
+
+
+                    // console.log('Profile updated successfully:', data);
+                    // setIsSubMit(true);
+                    // setShowModal(false);
+
+                    //  reloadPage()
 
                 } else {
                     console.error('Failed to update profile:', response.statusText);
@@ -374,7 +413,7 @@ export default function ProfileModal({ setShowModal, setuserprofiledata , showMo
 
                         <div className='-mt-[80px]'>
                             <ImageCropProvider>
-                                <ImageCrop setuserprofiledata={setuserprofiledata} setImageFile={setImageFile} image={image === '' ? '/images/defaultUserPic/profile.jpg' : image }/>
+                                <ImageCrop setuserprofiledata={setuserprofiledata} setUpdatedImage={setUpdatedImage} setImageFile={setImageFile} image={image === '' ? '/images/defaultUserPic/profile.jpg' : image} />
                             </ImageCropProvider>
 
                         </div>
@@ -385,11 +424,8 @@ export default function ProfileModal({ setShowModal, setuserprofiledata , showMo
                                 className={`${Class.profile__input} h-[40px] px-[16px]`}
                                 placeholder='আপনার নাম '
                                 value={username}
-                                onChange={(e) => {setUsername(e.target.value);
-                                    setuserprofiledata((prevData)=>({
-                                        ...prevData,
-                                        userName:e.target.value,
-                                    }))
+                                onChange={(e) => {
+                                    setUsername(e.target.value);
                                 }}
                             ></input>
 
@@ -401,11 +437,8 @@ export default function ProfileModal({ setShowModal, setuserprofiledata , showMo
                                 placeholder='মোবাইল নাম্বার'
                                 required
                                 value={phoneNumber}
-                                onChange={(e) => {setPhoneNumber(e.target.value);
-                                    setuserprofiledata((prevData)=>({
-                                        ...prevData,
-                                        userPhone:e.target.value,
-                                    }))
+                                onChange={(e) => {
+                                    setPhoneNumber(e.target.value);
                                 }}
                                 disabled={isSubmit}
                             ></input>
@@ -432,11 +465,8 @@ export default function ProfileModal({ setShowModal, setuserprofiledata , showMo
                                 className={`${Class.profile__input} h-[40px] px-[16px]`}
                                 placeholder='জন্ম তারিখ'
                                 value={birthOfDate}
-                                onChange={(e) => {setBirthOfDate(e.target.value);
-                                    setuserprofiledata((prevData)=>({
-                                        ...prevData,
-                                        userBirthDatte:e.target.value,
-                                    }))
+                                onChange={(e) => {
+                                    setBirthOfDate(e.target.value);
                                 }}
                             ></input>
 
@@ -451,11 +481,8 @@ export default function ProfileModal({ setShowModal, setuserprofiledata , showMo
                                     className={`${Class.profile__input} h-[40px] px-[16px]`}
                                     required
                                     value={designation}
-                                    onChange={(e) => {setDesignation(e.target.value);
-                                        setuserprofiledata((prevData)=>({
-                                            ...prevData,
-                                            userDesignation:e.target.value,
-                                        }))
+                                    onChange={(e) => {
+                                        setDesignation(e.target.value);
                                     }}>
                                     <option value="">পদবী</option>
                                     {designationFromApi.map((category) => (
@@ -471,11 +498,8 @@ export default function ProfileModal({ setShowModal, setuserprofiledata , showMo
                                     className={`${Class.profile__input} h-[40px] px-[16px]`}
                                     required
                                     value={gender}
-                                    onChange={(e) => {setGender(e.target.value);
-                                        setuserprofiledata((prevData)=>({
-                                            ...prevData,
-                                            userGender:e.target.value,
-                                        }))
+                                    onChange={(e) => {
+                                        setGender(e.target.value);
                                     }}>
                                     <option value="">লিঙ্গ</option>
                                     <option value="male">পুরুষ</option>
@@ -490,11 +514,8 @@ export default function ProfileModal({ setShowModal, setuserprofiledata , showMo
                                 placeholder='স্ট্যাটাস'
                                 className={`${Class.profile__input} h-[40px] px-[16px]`}
                                 value={`${profileStatus === 'undefined' ? '' : profileStatus}`}
-                                onChange={(e) => {setProfileStatus(e.target.value);
-                                    setuserprofiledata((prevData)=>({
-                                        ...prevData,
-                                        userStatus:e.target.value,
-                                    }))
+                                onChange={(e) => {
+                                    setProfileStatus(e.target.value);
                                 }}
                             >
                             </input>
@@ -507,11 +528,8 @@ export default function ProfileModal({ setShowModal, setuserprofiledata , showMo
                                 className={`${Class.profile__input} h-[40px] px-[16px]`}
                                 placeholder='ঠিকানা'
                                 value={`${address === ('undefined' || undefined) ? '' : address}`}
-                                onChange={(e) => {setAddress(e.target.value);
-                                    setuserprofiledata((prevData)=>({
-                                        ...prevData,
-                                        userAddress:e.target.value,
-                                    }))
+                                onChange={(e) => {
+                                    setAddress(e.target.value);
                                 }}
 
                             ></input>
@@ -529,11 +547,8 @@ export default function ProfileModal({ setShowModal, setuserprofiledata , showMo
                                 required
                                 className={`h-[180px] ${Class.profile__input} px-[16px] py-[16px] `}
                                 value={bio}
-                                onChange={(e) => {setBio(e.target.value);
-                                    setuserprofiledata((prevData)=>({
-                                        ...prevData,
-                                        userBio:e.target.value,
-                                    }))
+                                onChange={(e) => {
+                                    setBio(e.target.value);
                                 }}
                             />
 
