@@ -13,22 +13,17 @@ export default function Home() {
   const slug = router.query.slug;
   const { userUuid } = useContext(UserContext)
 
-  if(!router.isReady) return null;
+  if (!router.isReady) return null;
 
   return (
-    router.isReady ?
-      <>
-        <div className=''>
-          <Head>
-            <title>প্রোফাইল</title>
-          </Head>
-          <UserProfile slug={slug} />
-        </div>
-      </> :
-      <>
-        <div className='pb-[-80px]'>
-          <LoginPage url={currentUrl} />
-        </div>
-      </>
+    router.isReady &&
+    <>
+      <div className=''>
+        <Head>
+          <title>প্রোফাইল</title>
+        </Head>
+        <UserProfile slug={slug} />
+      </div>
+    </>
   )
 }

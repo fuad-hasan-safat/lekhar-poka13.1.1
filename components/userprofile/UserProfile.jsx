@@ -107,6 +107,8 @@ export default function UserProfile({ slug }) {
         } else {
           setCanPostStatus(true)
         }
+        
+        if(data.object.name === null) return ;
 
         // console.log(' profile image----------->>>>', image)
       })
