@@ -1,57 +1,79 @@
 'use client'
-import React, { useEffect, useRef, useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Logo from '../common/Logo';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { apiBasePath } from '../../utils/constant';
 import Link from 'next/link';
-
-
-
+import DialugueModal from '../common/notification/DialugueModal';
+import { SearchContext } from '../lekharpokaStore/search-context';
+import { UserContext } from '../lekharpokaStore/user-context';
 
 export default function UpdatedNavBar() {
     const router = useRouter();
+
+    const { selectedIteam, handleKeyDown, setSelectedIteam, searchAreaRef, setIsSearchbarActive, isSearchbarActive, setSearchResult, searchKey, setSearchKey } = useContext(SearchContext)
+    const {setUser, userImage} = useContext(UserContext)
     const [selectedNav, setSelectedNav] = useState("");
-    const [isSearchActive, setIsSearchActive] = useState(false);
     const [postList, setPostList] = useState(null);
     const [search, setSearch] = useState("");
     const [searchData, setSearchData] = useState([]);
-    const [selectedIteam, setSelectedIteam] = useState(-1);
 
 
     const [username, setUsername] = useState("");
     const [userUuid, setUserUuid] = useState("");
     const [userToken, setUserToken] = useState("");
-    const [userImage, setUserImage] = useState(null);
 
     // ------
+    const dialogueRef = useRef()
     const popupRef1 = useRef(null);
     const popupRef2 = useRef(null);
+    const searchBarRef = useRef(null);
     useOutsideAlerter(popupRef1);
     useOutsideAlerter(popupRef2);
 
-    
-function useOutsideAlerter(ref) {
-    useEffect(() => {
-        /**
-         * Alert if clicked on outside of element
-         */
-        function handleClickOutside(event) {
-            if (ref.current && !ref.current.contains(event.target)) {
-                // alert("You clicked outside of me!");
-                setVisibleItem(null)
+    useOutsideAlerterSearch(searchAreaRef);
+
+    function useOutsideAlerter(ref) {
+        useEffect(() => {
+            /**
+             * Alert if clicked on outside of element
+             */
+            function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    // alert("You clicked outside of me!");
+                    setVisibleItem(null)
+                    // setIsSearchbarActive(false)
+                }
             }
-        }
-        // Bind the event listener
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            // Unbind the event listener on clean up
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [ref]);
-}
+            // Bind the event listener
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                // Unbind the event listener on clean up
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [ref]);
+    }
+
+    function useOutsideAlerterSearch(ref) {
+        useEffect(() => {
+            /**
+             * Alert if clicked on outside of element
+             */
+            function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    // alert("You clicked outside of me!");
+                    //  setIsSearchbarActive(false)
+                }
+            }
+            // Bind the event listener
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                // Unbind the event listener on clean up
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [ref]);
+    }
 
 
 
@@ -82,7 +104,8 @@ function useOutsideAlerter(ref) {
             try {
                 const response = await fetch(`${apiBasePath}/getprofilepic/${localStorage.getItem("uuid")}`);
                 const data = await response.json();
-                setUserImage(data.image);
+                console.log('user image in navbar --', data.image)
+                setUser({userImage:`${apiBasePath}/${data.image?.slice(data.image?.indexOf('/')+1)}`})
                 //console.log( "------------------->>>> POST LIST ------------------>>>>>>>",postList );
             } catch (error) {
                 // alert("Error Fetching data");
@@ -114,9 +137,10 @@ function useOutsideAlerter(ref) {
 
     //  search ---
     const handleChange = (e) => {
-        setSearch(e.target.value);
+        // setSearch(e.target.value);
+        setSearchKey(e.target.value);
     };
-    const handleKeyDown = (e) => {
+    const handleKeyDown1 = (e) => {
         // console.log(e.key)
         if (selectedIteam < searchData.length) {
             if (e.key === "ArrowUp" && selectedIteam > 0) {
@@ -128,7 +152,8 @@ function useOutsideAlerter(ref) {
                 setSelectedIteam((prev) => prev + 1);
             } else if (e.key === "Enter") {
                 // window.open(searchData[selectedIteam]?.link);
-                setSearch('')
+                // setSearch('')
+                setSearchKey('')
                 router.push(`/post/${searchData[selectedIteam]?._id}`)
 
             }
@@ -138,33 +163,42 @@ function useOutsideAlerter(ref) {
     };
     const handleClose = () => {
         setSearch("");
+        setSearchKey('')
         setSearchData([]);
+        const data = [];
+        setSearchResult(data)
         setSelectedIteam(-1);
     };
 
 
 
     useEffect(() => {
-        if (search !== "") {
+        if (searchKey !== "") {
 
             try {
                 const newFiltreddata = postList.filter((post) => {
                     return post.title
                         .toLocaleLowerCase()
-                        .includes(search.toLocaleLowerCase());
+                        .includes(searchKey.toLocaleLowerCase());
                 });
                 setSearchData(newFiltreddata);
+                setSearchResult(newFiltreddata)
             } catch (error) { }
         } else {
             setSearchData([]);
+            const data = [];
+            setSearchResult(data)
         }
-    }, [search]);
+    }, [searchKey]);
 
 
     function goToSearchPost(id) {
-        setSearch("");
+        // setSearch("");
+        setSearchKey('')
         setSearchData([]);
         setSelectedIteam(-1);
+        const data = [];
+        setSearchResult(data)
         router.push(`/post/${id}`)
         // router.refresh()
     }
@@ -173,28 +207,16 @@ function useOutsideAlerter(ref) {
     //   logout
 
     function Logout() {
-        const confirmLogout = window.confirm('আপনি কি লগ আউট করতে চান?');
-        if (confirmLogout) {
-            // alert('Logging out...'); 
-            localStorage.removeItem("status");
-            localStorage.removeItem("name");
-            localStorage.removeItem("uuid");
-            localStorage.removeItem("phone");
-            localStorage.removeItem("token");
-            localStorage.removeItem("usertype");
-            localStorage.removeItem("email");
-
-            // setisLogOut(true)
-
-            router.push('/account/login');
-        }
+        dialogueRef.current.showModal();
     }
+
 
     return (
         <>
-            <div className="fixed w-full bg-white z-[9900]">
+            <div className="fixed w-full bg-white z-[99]">
                 <header className="header shadow-md">
                     {/* Logo */}
+                    <DialugueModal ref={dialogueRef} alert='আপনি কি লগআউট করতে চান' address={`/account/login`} type='logout' />
 
                     <div className="container">
                         <div className="row-span-12">
@@ -209,31 +231,31 @@ function useOutsideAlerter(ref) {
                                         />
                                     </Link>
                                 </div>
-                                <div className={`flex justify-between items-center text-black lg:text-[16px] sm:text-[15px] pt-1  place-content-center `}>
+                                <div className={`flex justify-between items-center text-black lg:text-[16px] md:text-[11px] sm:text-[11px] xs:text-[11px] pt-1  place-content-center `}>
 
-                                    <div className="search__bar relative flex flex-row place-content-center">
+                                    <div ref={searchAreaRef} className="search__bar relative flex flex-row place-content-center">
                                         <Image
                                             src="/images/svgs/search.svg"
                                             height={50}
                                             width={50}
                                             alt=""
                                             className={` cursor-pointer`}
-                                            onClick={() => setIsSearchActive(true)}
+                                            onClick={() => setIsSearchbarActive(true)}
                                         />
 
-                                        {isSearchActive && (
+                                        {isSearchbarActive && (
                                             <input
                                                 type="text"
-                                                className={` lg:w-[200px] md:w-[200px] sm:w-[150px] sx:w-[150px] text-[16px] bg-transparent text-black py-2 pr-10 rounded-md focus:outline-none`}
+                                                className={` lg:w-[200px] md:w-[200px] sm:w-[150px] sx:w-[150px] text-[12px]  bg-transparent text-black py-2 pr-10 rounded-md focus:outline-none`}
                                                 placeholder=" অনুসন্ধান..."
                                                 autoComplete="off"
                                                 onChange={handleChange}
-                                                value={search}
-                                                onKeyDown={handleKeyDown}
+                                                value={searchKey}
+                                                onKeyDown={(e) => handleKeyDown(e)}
                                             />
                                         )}
-                                        <div
-                                            className={`search_result ${isSearchActive ? "visible" : "hidden"
+                                        {/* <div
+                                            className={`search_result ${setIsSearchbarActive ? "visible" : "hidden"
                                                 }`}
                                         >
                                             {searchData.map((data, index) => {
@@ -254,14 +276,14 @@ function useOutsideAlerter(ref) {
                                             {searchData.length === 0 && search !== "" && (
                                                 <h1>No Result Found</h1>
                                             )}
-                                        </div>
+                                        </div> */}
 
 
-                                        {isSearchActive && (
+                                        {isSearchbarActive && (
 
                                             <button
                                                 className='lg:px-[15px] md:px-[15px] sm:px-[10px] xs:px-[10px]'
-                                                onClick={() => setIsSearchActive(false)}
+                                                onClick={() => setIsSearchbarActive(false)}
                                             >
                                                 <i class="ri-list-check"></i>
                                             </button>
@@ -281,7 +303,7 @@ function useOutsideAlerter(ref) {
                                             <li
                                                 onClick={() => { setSelectedNav("procchod"); closeMenu(); }}
                                                 className={`hover:text-[#F9A106] ${selectedNav === "procchod"
-                                                    ? "text-[#F9A106] font-semibold underline"
+                                                    ? "text-[#F9A106] font-semibold  underline"
                                                     : ""
                                                     }`}
                                             >
@@ -290,17 +312,17 @@ function useOutsideAlerter(ref) {
                                             <li className={`relative cursor-pointer`} onClick={() => { toggleVisibility(0); setSelectedNav("soblekha"); }}>
                                                 <Link
                                                     className={`hover:text-[#F9A106] ${selectedNav === "soblekha"
-                                                        ? "text-[#F9A106] font-semibold underline"
+                                                        ? "text-[#F9A106] font-semibold border-b-[2px] border-[#F9A106]"
                                                         : "text-black"
                                                         }`}
-                                                    href="#">সব লেখা <span style={{position: 'relative',top:'-3px'}}><i class="ri-arrow-down-s-line"></i></span></Link>
+                                                    href="#">সব লেখা <span style={{ position: 'relative', top: '-1px' }}><i class="ri-arrow-down-s-line"></i></span></Link>
                                                 {/* <FontAwesomeIcon icon={faAngleDown} className="ml-2 pt-1 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-4 sm:w-4 xs:h-4 xs:w-4 focus:text-[#F9A106]" /> */}
                                                 {visibleItem === 0 && (
                                                     <ul ref={popupRef1}
                                                         className='absolute lg:text-[16px] sm:text-[13px]
                                                     lg:backdrop-blur-md md:backdrop-blur-md  
                                                      lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none 
-                                                     lg:bg-[#FCF7E8] md:bg-[#FCF7E8] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none'>
+                                                     lg:bg-[#FCF7E8] md:bg-[#FCF7E8] sm:bg-transparent xs:bg-transparent !z-[999999] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none'>
                                                         <li
 
                                                             className="block px-4 py-2 hover:bg-[#F9A106]  hover:text-white"
@@ -361,67 +383,52 @@ function useOutsideAlerter(ref) {
                                                     </ul>
                                                 )}
                                             </li>
-                                            <li onClick={() => { setSelectedNav("zogazog"); closeMenu(); }}
+                                            <li onClick={() => { setSelectedNav("audiobook"); closeMenu(); }}
+                                                className={`hover:text-[#F9A106] ${selectedNav === "audiobook"
+                                                    ? "text-[#F9A106] font-semibold  underline"
+                                                    : ""
+                                                    }`}
+                                            >
+                                                <Link href="/audiobook">অডিও বুক</Link>
+                                            </li>
+                                            {/* <li onClick={() => { setSelectedNav("zogazog"); closeMenu(); }}
                                                 className={`hover:text-[#F9A106] ${selectedNav === "zogazog"
-                                                    ? "text-[#F9A106] font-semibold underline"
+                                                    ? "text-[#F9A106] font-semibold  underline"
                                                     : ""
                                                     }`}
                                             >
                                                 <Link href="/contacts">যোগাযোগ</Link>
-                                            </li>
+                                            </li> */}
                                             <li
                                                 onClick={() => { setSelectedNav("amader_somporke"); closeMenu(); }}
                                                 className={` lg:w-[130px] sm:w-[100px] hover:text-[#F9A106] ${selectedNav === "amader_somporke"
-                                                    ? "text-[#F9A106] font-semibold underline"
+                                                    ? "text-[#F9A106] font-semibold  underline"
                                                     : ""
                                                     }`}
                                             >
                                                 <Link href="/aboutus">আমাদের সম্পর্কে</Link>
                                             </li>
-                                            {/* {
-                                                userUuid.length > 0 &&
-                                                <li
 
-                                                    className='relative cursor-pointer '
-                                                    onClick={() => { toggleVisibility(1); setSelectedNav("post"); }}>
-
-                                                    <Link
-                                                        className={`hover:text-[#F9A106] ${selectedNav === "post"
-                                                            ? "text-[#F9A106] font-semibold underline"
-                                                            : "text-black"
-                                                            }`}
-                                                        href="#">পোস্ট <span><i class="ri-arrow-down-s-line"></i></span></Link>
-
-                                                    {visibleItem === 1 && (
-                                                        <ul className='absolute lg:text-[16px] sm:text-[13px] lg:backdrop-blur-md md:backdrop-blur-md  lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none lg:bg-[#FCF7E8] md:bg-[#FCF7E8] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none'>
-                                                            <li
-                                                                className="block cursor-pointer px-4 py-2  hover:bg-[#F9A106]  hover:text-white"
-                                                                onClick={() => closeMenu()}
-
-                                                            >
-                                                                <Link className='block' href="/user/alluserpost">সকল</Link>
-                                                            </li>
-                                                            <hr />
-
-                                                            <li
-                                                                className="block cursor-pointer px-4 py-2 hover:bg-[#F9A106]  hover:text-white"
-                                                                onClick={() => closeMenu()}
-
-                                                            ><Link className='block' href="/user/createpost">লিখুন</Link></li>
-                                                        </ul>
-                                                    )}
-                                                </li>
-                                            } */}
                                             {
                                                 userUuid.length > 0 ?
                                                     <li
                                                         className='relative cursor-pointer -mt-[5px]'
                                                         onClick={() => { toggleVisibility(2); }}>
-                                                        {userImage?.length > 0 ? <img src={`${apiBasePath}/${userImage.slice(userImage.indexOf("/") + 1)}`} alt={userImage} className='h-[35px] w-[35px] rounded-full' /> :
+                                                        {userImage?.length > 0 ? <img src={userImage} alt={userImage} className='h-[35px] w-[35px] rounded-full' /> :
                                                             <img src='/images/user/deafultProfile.png' alt='profile pic' className='h-[35px] w-[35px] rounded-full' />}
 
                                                         {visibleItem === 2 && (
                                                             <ul ref={popupRef1} className='absolute lg:text-[16px] sm:text-[13px] lg:backdrop-blur-md md:backdrop-blur-md  lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none lg:bg-[#FCF7E8] md:bg-[#FCF7E8] sm:bg-transparent xs:bg-transparent z-[1000] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none'>
+                                                                <li
+                                                                    className="block cursor-pointer px-4 py-2 hover:bg-[#F9A106]  hover:text-white"
+                                                                    onClick={() => closeMenu()}
+
+                                                                >
+                                                                    <Link className='block' href="/user/createpost">লিখুন</Link>
+                                                                </li>
+
+                                                                <hr className='lg:block md:hidden sm:hidden xs:hidden' />
+
                                                                 <li
                                                                     className="block cursor-pointer px-4 py-2 hover:bg-[#F9A106]  hover:text-white"
                                                                     onClick={() => closeMenu()}
@@ -443,7 +450,7 @@ function useOutsideAlerter(ref) {
                                                         )}
                                                     </li> :
                                                     <li>
-                                                        <button onClick={() => router.push('/account/login')}><i class="ri-account-circle-fill"></i></button>
+                                                        <button className="text-[25px]" onClick={() => router.push('/account/login')}><i class="ri-account-circle-fill"></i></button>
                                                     </li>
                                             }
                                         </ul>

@@ -5,6 +5,7 @@ import LekhokDetails from "../../common/lekhok";
 import SidebarPostDivider from '../../common/sidebarpostdivider'
 import { apiBasePath } from "../../../utils/constant";
 import { useRouter } from "next/navigation";
+import { convertToBengaliDate } from "../../../utils/convertToBanglaDate";
 
 
 const Lekhok = () => {
@@ -17,13 +18,14 @@ const Lekhok = () => {
 
   useEffect(() => {
 
-    fetch(`${apiBasePath}/writers`)
+    fetch(`${apiBasePath}/profilelist`)
       .then((response) => response.json())
       .then((data) => {
         setLekhokList(data);
+        console.log('writer list ----', data)
       })
       .catch((error) => console.error("Error fetching data:", error));
-      
+
   }, []);
 
 
@@ -55,34 +57,53 @@ const Lekhok = () => {
     <>
       <div>
         <div>
-          <h1 className="text-[20px] text-yellow-500 font-semibold">লেখক</h1>
+          <h1 className="text-[20px] text-[#F9A106] font-semibold">লেখক</h1>
         </div>
         {lekhokList.length > 0 ?
           <div className="pt-[23px] ">
 
             {getVisibleWriters().length > 0 &&
-              getVisibleWriters().map((item, index) => (
-                <div key={index}>
-                  <div className="pb-3">
-                    <LekhokDetails
-                      image={`${apiBasePath}/${item.image.replace('/uploads/', '/')
-                        }`}
-                      writer={item.name}
-                      writer_id={item._id}
-                      id={item._id}
-                      user_id={item.user_id}
-                      lifeCycle={`  ${item.birth_date === null ? `বর্তমান` : `${item.birth_date} `} থেকে  ${item.expiry_date === null? '' : ` ${item.expiry_date}` } `}
-                    />
+              getVisibleWriters().map((item, index) => {
+                console.log(item?.birth_date)
+                const banglaBirthdate = item?.birth_date ? convertToBengaliDate(item?.birth_date) : '';
+                console.log({ banglaBirthdate })
+                const banglaExpiredate = item?.expiry_date ? convertToBengaliDate(item?.expiry_date) : '';
+
+                let lifeCycle = `${banglaBirthdate} থেকে  বর্তমান `;
+
+                if (!item?.birth_date) {
+                  lifeCycle = '';
+                }
+                return (
+
+                  <div key={index}>
+                  {item?.birth_date &&  <>
+                    <div className="pb-3">
+
+                      <LekhokDetails
+                        image={`${apiBasePath}/${item.image?.slice(item.image?.indexOf('/') + 1)
+                          }`}
+                        writer={item.name}
+                        writer_id={item._id}
+                        id={item._id}
+                        user_id={item.user_id}
+                        lifeCycle={lifeCycle}
+                      />
+                    </div>
+                    <div className="pb-3">
+                      {index < getVisibleWriters().length - 1 ? (
+                        <SidebarPostDivider />
+                      ) : (
+                        ""
+                      )}
+                    </div>
+
+                    </>
+              }
+
                   </div>
-                  <div className="pb-3">
-                    {index < getVisibleWriters().length - 1 ? (
-                      <SidebarPostDivider />
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                </div>
-              ))}
+                )
+              })}
           </div> :
           <div className="pt-10"> লেখক নেই </div>
 

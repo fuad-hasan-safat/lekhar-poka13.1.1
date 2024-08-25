@@ -66,16 +66,14 @@ export default function SobJiboniLeftContent() {
 
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [currentPage]);
 
 
   const loadnextPage = () => {
-
+    
     setCurrentPage(currentPage + 1)
-
-    if (currentPage <= totalPages) {
-      fetchPosts();
-    } else {
+    
+    if (currentPage >= totalPages) {
       setisHasMore(false)
     }
 
@@ -100,12 +98,12 @@ export default function SobJiboniLeftContent() {
                           <SinglePostConponent
                             id={post._id}
                             title={post.title}
-                            writer={post.writer}
+                            writer={post.profile_name}
                             writer_id={post.writer_id}
                             image={post?.image}
-                            uploadedBy={post?.uploader_name}
+                            uploadedBy={post?.uploaded_by}
                             updatedAt={post?.updatedAt}
-                            writer_image={post?.writer_image}
+                            writer_image={post?.profile_image}
                             profileName={post?.profile_name}
                             content={countWords(post.content, 70)}
                           />

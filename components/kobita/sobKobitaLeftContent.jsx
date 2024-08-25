@@ -39,7 +39,7 @@ export default function SobKobitaLeftContent() {
       }
 
     };
-
+    setPostList([]);
     fetchTotalPage();
 
   }, []);
@@ -62,18 +62,16 @@ export default function SobKobitaLeftContent() {
   };
 
   useEffect(() => {
-    setPostList([])
+   
     fetchPosts();
-  }, []);
+  }, [currentPage]);
 
 
   const loadnextPage = () => {
 
     setCurrentPage(currentPage + 1)
 
-    if (currentPage <= totalPages) {
-      fetchPosts();
-    } else {
+    if (currentPage >= totalPages) {
       setisHasMore(false)
     }
 
@@ -98,12 +96,12 @@ export default function SobKobitaLeftContent() {
                           <SinglePostConponent
                             id={post._id}
                             title={post.title}
-                            writer={post.writer}
+                            writer={post.profile_name}
                             writer_id={post.writer_id}
                             category={post.category}
                             image={post?.image}
-                            uploadedBy={post?.uploader_name}
-                            writer_image={post?.writer_image}
+                            uploadedBy={post?.uploaded_by}
+                            writer_image={post?.profile_image}
                             profileName={post?.profile_name}
                             updatedAt={post?.updatedAt}
                             content={countWords(post.content, 20)}

@@ -1,19 +1,29 @@
 "use client";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
 import SignInOption from '../../signInOption/SignInOption'
 import { apiBasePath } from "../../../utils/constant";
 import { useRouter } from "next/navigation";
 import Divider from '../../common/sidebardivider';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { AdminContext } from "../../store/adminpanel-context";
+import { UserContext } from "../../lekharpokaStore/user-context";
+import useTabSyncAuth from "../../../utils/useReloadUrl";
 
 export default function Login() {
 
   const router = useRouter();
 
+  const {setUser} = useContext(UserContext);
+  const {setCurrentComponentIndex} = useContext(AdminContext);
+  const {triggerLogin} = useTabSyncAuth();
+
+  let notification = ''
+
   const [number, setnumber] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState(null);
+  const [user, setUserData] = useState(null);
   const [status, setStatus] = useState("");
   const [username, setUsername] = useState("");
   const [userUuid, setUserUuid] = useState("");
@@ -61,6 +71,18 @@ export default function Login() {
     setPassword(e.target.value);
   };
 
+  function reloadPage() {
+    setTimeout(() => {
+      router.refresh()
+
+    }, 1000)
+  }
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      submitLogin();
+    }
+  };
 
   async function submitLogin() {
 
@@ -82,9 +104,12 @@ export default function Login() {
       if (response.data.status === 'success') {
         const data = await response.data;
 
+        notification = 'সফলভাবে লগইন করেছেন';
+        notify1();
+
         setStatus(data.status);
         setUserUuid(data.uuid);
-        setUser(data);
+        setUserData(data);
 
         localStorage.setItem("status", data.status);
         localStorage.setItem("name", data.name);
@@ -94,46 +119,68 @@ export default function Login() {
         localStorage.setItem("usertype", data.usertype);
         localStorage.setItem("phone", data.phone);
 
+        const user = {
+          userName: data.name,
+          userUuid: data.uuid,
+          userImage: data?.image,
+          userToken: data.access_token,
+          userType: data.usertype,
+          isLoggedIn: true,
+          isloggedOut: false,
+        };
+
+        setUser(user);
+        triggerLogin();
         setnumber("");
         setPassword("");
 
-        router.refresh()
+        reloadPage()
       }
       else if (response.data.status === "failed") {
-        alert(' সঠিক নাম্বার দিন ')
+        // alert(' সঠিক নাম্বার দিন ')
+        notification = 'সঠিক নাম্বার দিন';
+        notify();
+
       }
 
 
     } catch (error) {
-      alert('সঠিক পাসওয়ার্ড দিন');
+      // alert('সঠিক পাসওয়ার্ড দিন');
+      notification = 'সঠিক পাসওয়ার্ড দিন';
+      notify();
     }
+
+
+
   }
 
+  const notify = () => toast.warn(notification, {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
 
+  });
+
+  const notify1 = () => toast.success(notification, {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+
+  });
 
   return (
     <>
-      {status === 'success' ? (
-        <>
-          <div className="flex flex-col items-center">
-
-            {localStorage.getItem("usertype") === 'admin' &&
-              <button
-                onClick={() => router.push('/admin/admin')}
-                className="page__common__yello__btn text-white rounded-[6px] bg-[#F9A106] px-[20px] h-[40px] mt-[25px]"
-              >অ্যাডমিন প্যানেল</button>
-            }
-
-            {/* <Divider /> */}
-
-          </div>
-
-        </>
-      ) : (
+      {status !== 'success' && (
         <div>
           <div>
 
-            <div className=" text-[20px] text-yellow-500 h-[28px]  pt-5 pb-[28px]">
+            <div className=" text-[20px] text-[#F9A106] font-semibold h-[28px]  pt-5 pb-[28px]">
               লগইন
             </div>
 
@@ -159,6 +206,7 @@ export default function Login() {
                 placeholder="পাসওয়ার্ড দিন"
                 required
                 onChange={handlePasswordChange}
+                onKeyDown={handleKeyDown}
                 value={password}
               />
 
@@ -183,11 +231,13 @@ export default function Login() {
               >
                 লগইন করুন
               </button>
+              <ToastContainer />
+
             </div>
 
             <SignInOption
               user={user}
-              setUser={setUser}
+              setUserData={setUserData}
               profile={profile}
               setProfile={setProfile}
               setStatus={setStatus}
@@ -198,7 +248,7 @@ export default function Login() {
               icon1="/images/loginOptionIcon/google.svg"
               icon2='/images/loginOptionIcon/facebook_squre.svg'
               lowermessege1="একাউন্ট নেই? "
-              lowermessege2="একাউন্ট তৈরী করুন ।"
+              lowermessege2="একাউন্ট তৈরী করুন"
               signLogLink="/account/signup"
             />
           </div>

@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import MainContentDivider from "../common/mainContentDivider";
 import { apiBasePath } from "../../utils/constant";
 import Loading from "../common/loading";
 import axios from "axios";
 import SinglePostConponent from "../common/singlePostComponent";
+import { UserContext } from "../lekharpokaStore/user-context";
 
 
 export default function ProfilePostLeftContentUnApproved() {
@@ -19,6 +20,8 @@ export default function ProfilePostLeftContentUnApproved() {
   const [username, setUsername] = useState("");
   const [slug, setUserUuid] = useState("");
   const [userToken, setUserToken] = useState("");
+
+  const {userImage} = useContext(UserContext);
 
   useEffect(() => {
 
@@ -51,7 +54,7 @@ export default function ProfilePostLeftContentUnApproved() {
 
     fetchPosts();
 
-  }, []);
+  }, [userImage]);
 
 
   const handlePageChange = (pageNumber) => {
@@ -87,13 +90,13 @@ export default function ProfilePostLeftContentUnApproved() {
                         <SinglePostConponent
                           id={post._id} // Assuming '_id' is the unique identifier
                           title={post.title}
-                          writer={post.writer}
+                          writer={post.profile_name}
                           writer_id={post?.writer_id}
                           image={post?.image}
                           content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 20).join(" ")}` : `${post.content.split(/\s+/).slice(0, 30).join(" ")}`} // Truncate content
                           category={post.category}
                           postStatus={post.status}
-                          uploadedBy={post?.uploader_name}
+                          uploadedBy={post?.uploaded_by}
                           writer_image={post?.writer_image}
                           profileName={post?.profile_name}
                           updatedAt={post?.updatedAt}
@@ -104,7 +107,7 @@ export default function ProfilePostLeftContentUnApproved() {
 
                       </div>
 
-                      {index < displayedPosts.length && <MainContentDivider />}
+                      {index < postList?.length && <MainContentDivider />}
 
                     </>
                   ))

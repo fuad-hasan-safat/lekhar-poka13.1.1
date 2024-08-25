@@ -36,7 +36,7 @@ const Jonopriyo = () => {
     <>
       <div>
         <div>
-          <h1 className="text-[18px] text-yellow-500 font-semibold">জনপ্রিয়</h1>
+          <h1 className="text-[18px] text-[#F9A106] font-semibold">জনপ্রিয়</h1>
         </div>
         {jonopriyoData.length > 0 ?
           <div className="pt-[23px]">
@@ -48,10 +48,11 @@ const Jonopriyo = () => {
                     <LekhaPokaProfile
                       image={item.image}
                       title={item.title}
-                      writer={item.writer}
+                      writer={item?.profile_name}
                       writer_id={item.writer_id}
                       id={item._id}
                       star={item.rating}
+                      uploaded_by= {item.uploaded_by}
                     />
                   </div>
 

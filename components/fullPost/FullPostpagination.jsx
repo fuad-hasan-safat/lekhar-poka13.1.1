@@ -27,47 +27,60 @@ const FullPostPagination = ({ logText, customclass }) => {
 
     getSavedpage();
 
+    const uuid = localStorage.getItem("uuid") || "";
+
+    if (uuid?.length <= 0) {
+      setCurrentPage(0);
+    }
+
   }, [router.query])
 
 
-  useEffect(() => {
-    if (currentPage !== 0) {
-      saveCurrentPage();
-    }
+  // useEffect(() => {
 
-  }, [currentPage, router.query])
+  //   if (currentPage !== -1) {
+  //     saveCurrentPage();
+  //   }
+
+  // }, [currentPage, router.query])
 
 
   const getSavedpage = async () => {
-    // console.log("get saved page")
-    const userUUID = localStorage.getItem("uuid")
+    
+    const userUUID = localStorage.getItem("uuid") || ''
     console.log({ userUUID, slug, userUuid })
 
-    try {
-      const response = await axios.post(
-        `${apiBasePath}/getpostpage`,
-        {
-          userId: userUUID,
-          postId: slug,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
+    if(userUUID?.length > 0){
+
+      try {
+        const response = await axios.post(
+          `${apiBasePath}/getpostpage`,
+          {
+            userId: userUUID,
+            postId: slug,
           },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log('get page---', response)
+  
+        if (response.data.status === 'success') {
+          setCurrentPage(response.data.saved_page)
+        } else {
+          setCurrentPage(0)
         }
-      );
-      console.log('get page---', response)
-
-      if (response.data.status === 'success') {
-        setCurrentPage(response.data.saved_page)
-      } else {
+  
+      } catch (error) {
         setCurrentPage(0)
+  
       }
-
-    } catch (error) {
-      setCurrentPage(0)
-
+    }else{
+      setCurrentPage(0);
     }
+
 
   }
 
@@ -76,44 +89,55 @@ const FullPostPagination = ({ logText, customclass }) => {
 
     const userUUID = localStorage.getItem("uuid")
 
-    try {
-      const response = await axios.post(
-        `${apiBasePath}/recordpostpage`,
-        {
-          userId: userUUID,
-          postId: slug,
-          currentPage: currentPage,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
+    console.log({ userUUID })
+
+    if (userUUID?.length > 0) {
+      console.log('current gage --', selected)
+      try {
+        const response = await axios.post(
+          `${apiBasePath}/recordpostpage`,
+          {
+            userId: userUUID,
+            postId: slug,
+            currentPage: selected,
           },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        console.log('save  page---', response)
+
+
+        if (response.status === 'success') {
+          console.log("page save ----", response.msg)
         }
-      );
 
-      console.log('save  page---', response)
+        if (response.status === 'failed') {
+          console.log("page save ----", response.msg)
+        }
 
+      } catch (error) {
 
-      if (response.status === 'success') {
-        console.log("page save ----", response.msg)
       }
-
-      if (response.status === 'failed') {
-        console.log("page save ----", response.msg)
-      }
-
-    } catch (error) {
 
     }
+
+
   }
 
   const handlePageChange = ({ selected }) => {
 
-    saveCurrentPage(selected);
     setCurrentPage(selected);
+    saveCurrentPage(selected);
 
   };
 
+  if(currentPage > totalPages -1 ){
+    setCurrentPage(totalPages-1)
+  }
 
   return (
     router.isReady &&
@@ -123,7 +147,7 @@ const FullPostPagination = ({ logText, customclass }) => {
         {logLines
           ?.slice(startIndex, endIndex)
           .map((line, index) => (
-            <div key={startIndex + index} className={'lg:text-[18px] md:text-[17px] sm:text-[16px] xs:text-[14px] '} dangerouslySetInnerHTML={{ __html: line }} ></div>
+            <div key={startIndex + index} className={'mt-[15px] lg:text-[18px] md:text-[17px] sm:text-[16px] xs:text-[14px] linecntrl'} dangerouslySetInnerHTML={{ __html: line }} ></div>
 
           ))}
       </div>

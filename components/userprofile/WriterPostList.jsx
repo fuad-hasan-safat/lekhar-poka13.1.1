@@ -5,7 +5,7 @@ import MainContentDivider from "../common/mainContentDivider";
 import Loading from "../common/loading";
 import SinglePostConponent from "../common/singlePostComponent";
 
-export default function WriterPostList({ postList }) {
+export default function WriterPostList({profileInfo, postList }) {
   //   const [selectedId, setSelectedId] = useState("sob");
 
 
@@ -43,14 +43,14 @@ export default function WriterPostList({ postList }) {
                       <SinglePostConponent
                         id={post._id} // Assuming '_id' is the unique identifier
                         title={post.title}
-                        writer={post.writer}
+                        writer={profileInfo?.name}
                         writer_id={post.writer_id}
                         image={post?.image}
                         content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 20).join(" ")}` : `${post.content.split(/\s+/).slice(0, 40).join(" ")}`} // Truncate content
                         category={post.category}
                         postStatus={post.status}
                         uploadedBy={post?.uploader_name}
-                        writer_image={post?.writer_image}
+                        writer_image={profileInfo?.image}
                         profileName={post?.profile_name}
                         updatedAt={post?.updatedAt}
 

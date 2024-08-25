@@ -3,17 +3,26 @@
 import { apiBasePath } from "../../utils/constant";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Loading from "./loading";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { UserContext } from "../lekharpokaStore/user-context";
+import useTabSyncAuth from "../../utils/useReloadUrl";
 
-export default function LoginForm({ logreg, btntext }) {
+
+export default function LoginForm({ logreg, btntext, url = '/' }) {
 
   const router = useRouter();
+  const { setUser } = useContext(UserContext);
+  const {triggerLogin} = useTabSyncAuth();
+
+  let notification = ''
 
   const [number, setnumber] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState({
+  const [user, setUserData] = useState({
     status: '',
     name: '',
     phone: '',
@@ -66,6 +75,25 @@ export default function LoginForm({ logreg, btntext }) {
     setPassword(e.target.value);
   };
 
+
+  function reloadPage(url) {
+    setTimeout(() => {
+      if (url === '/') {
+        router.push(url)
+      } else {
+        router.refresh(url)
+      }
+    }, 1000)
+  }
+
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      submitLogin();
+    }
+  };
+
+
   async function submitLogin() {
 
     try {
@@ -87,9 +115,12 @@ export default function LoginForm({ logreg, btntext }) {
 
         const data = await response.data;
 
+        notification = 'সফলভাবে লগইন করেছেন';
+        notify1();
+
         setStatus(data.status);
         setUserUuid(data.uuid);
-        setUser(data);
+        setUserData(data);
 
         localStorage.setItem("status", data.status);
         localStorage.setItem("name", data.name);
@@ -99,26 +130,64 @@ export default function LoginForm({ logreg, btntext }) {
         localStorage.setItem("usertype", data.usertype);
         localStorage.setItem("phone", data.phone);
 
-        setnumber('')
-        setPassword('')
+        const user = {
+          userName: data.name,
+          userUuid: data.uuid,
+          userImage: data?.image,
+          userToken: data.access_token,
+          userType: data.usertype,
+          isLoggedIn: true,
+          isloggedOut: false,
+        };
 
-        router.push(`/`)
+        setUser(user);
+        triggerLogin();
+        setnumber('');
+        setPassword('');
+
+        // router.push(`/`)
+        reloadPage(url);
 
       } else {
-        alert('সঠিক নাম্বার দিন');
+        // alert('সঠিক নাম্বার দিন');
+        notification = 'সঠিক নাম্বার দিন';
+        notify();
       }
     } catch (error) {
-      alert('সঠিক পাসওয়ার্ড দিন');
+      // alert('সঠিক পাসওয়ার্ড দিন');
+      notification = 'সঠিক পাসওয়ার্ড দিন';
+      notify();
+
     }
 
+
   }
+
+  const notify = () => toast.warn(notification, {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+  });
+
+  const notify1 = () => toast.success(notification, {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+
+  });
 
 
   return (
     <>
       <div className="login__form__dsc">
 
-        <div className="text-[48px] mb-[79px] text-left font-semibold text-black">
+        <div className="lg:text-[48px] md:text-[45px] sm:text-[40px] xs:text-[30px] mb-[65px] text-left font-semibold text-black">
           {logreg}
         </div>
 
@@ -128,6 +197,7 @@ export default function LoginForm({ logreg, btntext }) {
 
             <input
               onChange={handleNumberhange}
+              onKeyDown={handleKeyDown}
               value={number}
               className="h-[62px] p-4 bg-[#FCF7E8] rounded-[8px] text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="phone"
@@ -143,6 +213,7 @@ export default function LoginForm({ logreg, btntext }) {
 
             <input
               onChange={handlePasswordChange}
+              onKeyDown={handleKeyDown}
               value={password}
               className="h-[62px] p-4 pr-[40px] bg-[#FCF7E8] rounded-[8px] text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
               id="password"
@@ -173,6 +244,7 @@ export default function LoginForm({ logreg, btntext }) {
             >
               {btntext}
             </button>
+            <ToastContainer />
 
           </div>
 

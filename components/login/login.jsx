@@ -4,7 +4,7 @@ import LoginReg from '../common/loginform'
 import LoginSignInOtpLeftPartDesign from '../common/login-signup-otp-left-design'
 import SignInOption from "../signInOption/SignInOption";
 
-const LoginPage = () => {
+const LoginPage = ({url = '/'}) => {
 
   const [userToken, setUserToken] = useState("");
   const [user, setUser] = useState(null);
@@ -49,11 +49,11 @@ const LoginPage = () => {
                       </>
                       :
                       <>
-                        <LoginReg logreg="লগইন করুন" btntext="লগইন" />
+                        <LoginReg logreg="লগইন করুন" btntext="লগইন" url={url} />
 
                         <SignInOption
                           user={user}
-                          setUser={setUser}
+                          setUserLog={setUser}
                           profile={profile}
                           setProfile={setProfile}
                           setStatus={setStatus}
@@ -63,7 +63,7 @@ const LoginPage = () => {
                           title="অথবা সাইন ইন করুন"
                           icon1="/images/loginOptionIcon/google.svg"
                           lowermessege1="একাউন্ট নেই? "
-                          lowermessege2="একাউন্ট তৈরী করুন ।"
+                          lowermessege2="একাউন্ট তৈরী করুন"
                           signLogLink="/account/signup"
                         />
                       </>

@@ -9,7 +9,7 @@ export default function Home() {
         </Head>
     {/* lg:pt-[95px] sm:pt-[90px] xm:pt-[85] */}
 
-      <div className="  ">
+      <div className="">
         <SobKobita />
       </div>
       </div>

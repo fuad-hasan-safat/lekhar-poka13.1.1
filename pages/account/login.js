@@ -11,7 +11,7 @@ export default function Home() {
         <title>লগ ইন</title>
       </Head>
       <div className="">
-        <LoginPage />
+        <LoginPage url='/' />
       </div>
     </div>
   );

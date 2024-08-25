@@ -1,10 +1,21 @@
 import Head from 'next/head';
-import RecoveryPage from '../../components/recoverypage/RecoveryPage'
 import PassRecoveryPageBeforeOTP from '../../components/recoverypage/UpdateRecoveryPage';
-
-
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 export default function Home() {
+
+  const router = useRouter();
+  const [isLanded, setIsLanded] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem('uuid')) {
+      router.push('/')
+    }
+    setIsLanded(true);
+  }, []);
+
+  if (!isLanded) return null;
 
   return (
     <div>
@@ -13,7 +24,11 @@ export default function Home() {
       </Head>
 
       <div className="">
-        <PassRecoveryPageBeforeOTP/>
+        {localStorage.getItem('uuid') ? <>
+
+        </> : <>
+          <PassRecoveryPageBeforeOTP />
+        </>}
       </div>
     </div>
   );

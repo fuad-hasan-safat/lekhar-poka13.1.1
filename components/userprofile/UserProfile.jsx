@@ -1,19 +1,20 @@
 "use client";
 import Loading from '../common/loading'
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import UserProfileBanner from '../userprofile/userProfileBanner'
 import { apiBasePath } from "../../utils/constant";
 import Link from "next/link";
-import UserInformationsAndBio from '../user/userInformationsAndBio';
 import FollowerList from './followerList';
 import FollowingList from './followingList';
 import { useRouter } from 'next/router';
 import ProfilePostLeftContentUnApproved from './ProfilePostLeftContentUnapproved';
 import ProfilePostLeftContentApproved from './ProfilePostLeftContentApproved';
+import { UserContext } from '../lekharpokaStore/user-context';
 
 export default function UserProfile({ slug }) {
 
   const router = useRouter();
+  const { setIsProfileLoaded } = useContext(UserContext);
 
   const [writer, setWriter] = useState('');
   const [isLoading, setIsLoading] = useState(true);
@@ -21,6 +22,18 @@ export default function UserProfile({ slug }) {
   const [userUuid, setUserUuid] = useState("");
   const [userPhone, setUserPhone] = useState("");
   const [userToken, setUserToken] = useState("");
+  const [userProfileData, setuserprofiledata] = useState({
+    userName: '',
+    userImage: '',
+    userPhone: '',
+    userEmail: '',
+    userBirthDate: '',
+    userDesignation: '',
+    userGender: '',
+    userStatus: '',
+    userAddress: '',
+    userBio: '',
+  })
 
   //  category and writer fetch
   const [category, setCategory] = useState([]);
@@ -33,7 +46,6 @@ export default function UserProfile({ slug }) {
 
   const [bio, setBio] = useState('')
   const [bioId, setBioId] = useState('')
-  const [following, setFollowing] = useState(0);
   const [canPostStatus, setCanPostStatus] = useState(false)
   // 
 
@@ -53,6 +65,7 @@ export default function UserProfile({ slug }) {
   const handleClose = () => setProfileController('profile');
 
   useEffect(() => {
+    setIsProfileLoaded(false);
     setUsername(localStorage.getItem("name") || "");
     setUserToken(localStorage.getItem("token") || "");
     setUserUuid(localStorage.getItem("uuid") || "");
@@ -76,6 +89,18 @@ export default function UserProfile({ slug }) {
         setProfileName(data.object.name)
         setProfileStatus(data.object.status)
         setProfileStats(data.object.stats)
+        setuserprofiledata((prevData) => ({
+          ...prevData,
+          userName: data.object.profile?.name,
+          userImage: `${apiBasePath}/${ data.object.profile?.image.slice( data.object.profile?.image?.indexOf("/") + 1)}`,
+          userPhone: data.object.profile?.phone,
+          userEmail: data.object.profile?.email,
+          userBirthDate: data.object.profile?.dob,
+          userGender: data.object.profile?.gender,
+          userDesignation: data.object.profile?.designation,
+          userStatus: data.object.profile?.profileStatus,
+          userAddress: data.object.profile?.address,
+        }))
 
         if (!data.object.stats) {
           setCanPostStatus(false)
@@ -110,6 +135,10 @@ export default function UserProfile({ slug }) {
       const data = await response.json();
       setBio(data?.content)
       setBioId(data?._id)
+      setuserprofiledata((prevData) => ({
+        ...prevData,
+        userBio: data?.content,
+      }))
       // console.log('------------>>> BIO  <<<-------------', data)
 
     };
@@ -118,6 +147,7 @@ export default function UserProfile({ slug }) {
     setIsCategoryAdded(false)
     setIsWriterAdded(false)
     setIsProfileUpdated(false)
+    setIsProfileLoaded(true);
   }, [slug, isWriterAdded, isCategoryAdded]);
 
 
@@ -143,7 +173,6 @@ export default function UserProfile({ slug }) {
   }
 
 
-
   if (isLoading) {
     return <Loading />;
   } else {
@@ -159,6 +188,8 @@ export default function UserProfile({ slug }) {
               {/* left part */}
               <div className='lg:w-[30%] lg:mb-[110px] md:mb-[50px] sm:mb-[40px] xs:mb-[40px]'>
                 <UserProfileBanner
+                  userProfileData={userProfileData}
+                  setuserprofiledata={setuserprofiledata}
                   bio={bio}
                   profileInfo={profileInfo}
                   profileName={profileName}
