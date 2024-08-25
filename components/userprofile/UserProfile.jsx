@@ -133,14 +133,19 @@ export default function UserProfile({ slug }) {
 
 
     const fetchUserBioData = async () => {
-      const response = await fetch(`${apiBasePath}/bio/${localStorage.getItem("uuid")}`);
-      const data = await response.json();
-      setBio(data?.content)
-      setBioId(data?._id)
-      setuserprofiledata((prevData) => ({
-        ...prevData,
-        userBio: data?.content,
-      }))
+      try{
+        const response = await fetch(`${apiBasePath}/bio/${localStorage.getItem("uuid")}`);
+        const data = await response.json();
+        setBio(data?.content)
+        setBioId(data?._id)
+        setuserprofiledata((prevData) => ({
+          ...prevData,
+          userBio: data?.content,
+        }))
+      }catch(error){
+        console.log('Bio fetch error')
+      }
+    
       // console.log('------------>>> BIO  <<<-------------', data)
 
     };

@@ -40,7 +40,7 @@ const LekhaPokaProfile = ({
 
           <div className="iteam absolute left-0">
 
-            <a href={redurectUrl}>
+            <Link href={redurectUrl}>
 
               <img
                 className="border border-[#A5A5A536] "
@@ -48,7 +48,7 @@ const LekhaPokaProfile = ({
                 height={100} width={100} alt={''}
               />
 
-            </a>
+            </Link>
 
           </div>
 
@@ -63,11 +63,11 @@ const LekhaPokaProfile = ({
 
             <diV>
 
-              <a
+              <Link
                 className="text-[16px] text-gray-600"
                 href={redurectUrl}>
                 {shortenWriter}
-              </a>
+              </Link>
 
             </diV>
 

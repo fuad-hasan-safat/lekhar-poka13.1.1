@@ -3,6 +3,7 @@ import storage from 'redux-persist/lib/storage';
 import { persistStore, persistReducer } from 'redux-persist';
 import { combineReducers } from 'redux';
 import userPostSlice from './userpost-slice';
+import userSessionSlice from './usersession-slice';
 
 // Persist configuration
 const persistConfig = {
@@ -13,6 +14,7 @@ const persistConfig = {
 // Combine your reducers
 const rootReducer = combineReducers({
     userpost: userPostSlice.reducer,
+    usersession:userSessionSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
