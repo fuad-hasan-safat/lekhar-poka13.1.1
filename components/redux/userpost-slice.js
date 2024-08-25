@@ -7,11 +7,12 @@ const userPostSlice = createSlice({
         unapprovedItems: [],
         approvedItems: []
     }, reducers: {
-        addApiPostsToUnapproved(state, actioon) {
-
+        addApiPostsToUnapproved(state, action) {
+            console.log('payload - ',action.payload)
+            state.unapprovedItems = action.payload;
         },
         addApiPostsToApproved(state, action) {
-
+            state.approvedItems = action.payload;
         },
         addSinglePostToUnapproved(state, action) {
 
@@ -19,6 +20,10 @@ const userPostSlice = createSlice({
         addSinglePostToApproved(state, action) {
 
         },
+        deleteApost(state, action){
+            state.approvedItems = state.approvedItems.filter(post => post._id !== action.payload);
+            state.unapprovedItems = state.unapprovedItems.filter(post => post._id !== action.payload);
+        }
     }
 })
 

@@ -7,9 +7,16 @@ import Loading from "../common/loading";
 import axios from "axios";
 import SinglePostConponent from "../common/singlePostComponent";
 import { UserContext } from "../lekharpokaStore/user-context";
+import { useDispatch, useSelector } from "react-redux";
+import { userPostAction } from "../redux/userpost-slice";
 
 
 export default function ProfilePostLeftContentUnApproved() {
+
+  const dispatch = useDispatch();
+  const unapprovedItems = useSelector((state) => state.userpost.unapprovedItems);
+
+
   const [postList, setPostList] = useState([])
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(null); // State to store fetched data
@@ -42,8 +49,10 @@ export default function ProfilePostLeftContentUnApproved() {
         console.log('UN-APPROVED POST----->>', data)
 
 
-        setPostList(data.object);
+      setPostList(data.object);
         setTotalPages(Math.ceil(data.object.length / postsPerPage));
+
+        dispatch(userPostAction.addApiPostsToUnapproved(data.object))
 
       } catch (error) {
         setError(error);
@@ -77,14 +86,14 @@ export default function ProfilePostLeftContentUnApproved() {
       ) : (
         <>
           {/* <div className='container'> */}
-          {postList.length > 0 &&
+          {unapprovedItems.length > 0 &&
             <div className='flex'>
               <div className="lakha__main__content pt-[40px] text-3xl lg:mr-[100px] md:mr-[50px]">
 
                 {/* <h1 className='lg:text-5xl md:text-3xl sm:text-xl xs:text-2xl text-black mb-[35px]'>অনুমোদনহীন  পোস্ট </h1> */}
 
-                {postList.length && (
-                  postList.map((post, index) => (
+                {unapprovedItems.length && (
+                  unapprovedItems.map((post, index) => (
                     <>
                       <div key={index}>
                         <SinglePostConponent
@@ -107,7 +116,7 @@ export default function ProfilePostLeftContentUnApproved() {
 
                       </div>
 
-                      {index < postList?.length && <MainContentDivider />}
+                      {index < unapprovedItems?.length && <MainContentDivider />}
 
                     </>
                   ))
