@@ -9,7 +9,6 @@ import FullPostReaderMode from "../../components/common/fullContentReadermood";
 import { AudioPlayListContext } from "../../components/store/audioPlayer-context";
 import { useSelector } from "react-redux";
 
-
 export async function getServerSideProps(context) {
 
   const { slug } = context.params;
