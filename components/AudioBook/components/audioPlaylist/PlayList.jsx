@@ -6,7 +6,7 @@ export default function PlayList({ audioPlaylist, audioScope }) {
   console.log('My play list',audioPlaylist)
   return (
     <>
-      {audioPlaylist.map((songInfo, index) => {
+      {audioPlaylist?.slice(0,5).map((songInfo, index) => {
         const length = audioPlaylist?.length;
 
         return (
