@@ -10,8 +10,11 @@ import { useRouter } from 'next/router';
 import ProfilePostLeftContentUnApproved from './ProfilePostLeftContentUnapproved';
 import ProfilePostLeftContentApproved from './ProfilePostLeftContentApproved';
 import { UserContext } from '../lekharpokaStore/user-context';
+import { useSelector } from 'react-redux';
 
-export default function UserProfile({ slug }) {
+export default function UserProfile() {
+
+  const userUuid = useSelector(state => state.usersession.userUuid)
 
   const router = useRouter();
   const { setIsProfileLoaded } = useContext(UserContext);
@@ -19,7 +22,7 @@ export default function UserProfile({ slug }) {
   const [writer, setWriter] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [username, setUsername] = useState("");
-  const [userUuid, setUserUuid] = useState("");
+  // const [userUuid, setUserUuid] = useState("");
   const [userPhone, setUserPhone] = useState("");
   const [userToken, setUserToken] = useState("");
   const [userProfileData, setuserprofiledata] = useState({
@@ -68,7 +71,6 @@ export default function UserProfile({ slug }) {
     setIsProfileLoaded(false);
     setUsername(localStorage.getItem("name") || "");
     setUserToken(localStorage.getItem("token") || "");
-    setUserUuid(localStorage.getItem("uuid") || "");
     setUserPhone(localStorage.getItem("phone") || "");
     setWriter(localStorage.getItem("name"));
   }, []);
@@ -79,7 +81,9 @@ export default function UserProfile({ slug }) {
 
   useEffect(() => {
 
-    fetch(`${apiBasePath}/getprofile/${localStorage.getItem("uuid")}`)
+    if(!userUuid) return;
+
+    fetch(`${apiBasePath}/getprofile/${userUuid}`)
       .then((response) => response.json())
       .then((data) => {
         console.log('pofile details on user profile--------------->>>>>>>', data);
@@ -107,6 +111,8 @@ export default function UserProfile({ slug }) {
         } else {
           setCanPostStatus(true)
         }
+        
+        if(data.object.name === null) return ;
 
         // console.log(' profile image----------->>>>', image)
       })
@@ -131,14 +137,22 @@ export default function UserProfile({ slug }) {
 
 
     const fetchUserBioData = async () => {
-      const response = await fetch(`${apiBasePath}/bio/${localStorage.getItem("uuid")}`);
-      const data = await response.json();
-      setBio(data?.content)
-      setBioId(data?._id)
-      setuserprofiledata((prevData) => ({
-        ...prevData,
-        userBio: data?.content,
-      }))
+      try{
+        if(userUuid){
+          const response = await fetch(`${apiBasePath}/bio/${userUuid}`);
+          const data = await response.json();
+          setBio(data?.content)
+          setBioId(data?._id)
+          setuserprofiledata((prevData) => ({
+            ...prevData,
+            userBio: data?.content,
+          }))
+        }
+    
+      }catch(error){
+        console.log('Bio fetch error')
+      }
+    
       // console.log('------------>>> BIO  <<<-------------', data)
 
     };
@@ -148,7 +162,7 @@ export default function UserProfile({ slug }) {
     setIsWriterAdded(false)
     setIsProfileUpdated(false)
     setIsProfileLoaded(true);
-  }, [slug, isWriterAdded, isCategoryAdded]);
+  }, [isWriterAdded, isCategoryAdded]);
 
 
 

@@ -8,6 +8,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DialugueModal from './notification/DialugueModal'
 import Link from 'next/link'
+import { useDispatch } from 'react-redux'
+import { userPostAction } from '../redux/userpost-slice'
 
 export default function UserPostTitleAndcover({
   id,
@@ -24,7 +26,9 @@ export default function UserPostTitleAndcover({
 }) {
 
   console.log('single post banner ', title, image)
-  const router = useRouter()
+  const router = useRouter();
+
+  const dispatch = useDispatch();
 
   const [isMounted, setIsMounted] = useState(false)
 
@@ -92,9 +96,11 @@ export default function UserPostTitleAndcover({
       notification = 'পোস্টটি মুছে ফেলা হয়েছে'
       notify();
 
+      dispatch(userPostAction.deleteApost(id))
+
       dialogueRef.current.close();
 
-      reloadPage();
+      // reloadPage();
       return response.data;
     } catch (error) {
       console.error('Error deleting data:', error);

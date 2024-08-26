@@ -13,6 +13,9 @@ import dynamic from 'next/dynamic';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { userPostAction } from '../redux/userpost-slice';
+import { generateUUID } from '../../function/api';
 
 
 
@@ -25,6 +28,11 @@ const fileTypes = ["JPEG", "PNG", "GIF"];
 
 
 export default function CreatePost() {
+
+    const dispatch = useDispatch();
+
+    const useruuid = useSelector((state)=> state.usersession.userUuid);
+    
     const router = useRouter()
 
     const [content, setContent] = useState("");
@@ -32,59 +40,20 @@ export default function CreatePost() {
 
     //--------------- catagory -----------------
     const [selectedOption, setSelectedOption] = useState('');
-    const [selectedWriter, setSelectedWriter] = useState(null);
-
-    // determine writer and writer id
     const [writer, setWriter] = useState('');
     const [writerId, setWriterId] = useState(null);
-
-    // check box ---- (writer creation)
-    const [checkboxValue, setCheckboxValue] = useState(false);
-
-
     const [title, setTitle] = useState("");
-
     const [isLoading, setIsLoading] = useState(false);
-
     const [status, setStatus] = useState("");
-    const [username, setUsername] = useState("");
-    const [userUuid, setUserUuid] = useState("");
-    const [userPhone, setUserPhone] = useState("");
-    const [userToken, setUserToken] = useState("");
-    const [userPost, setUserPost] = useState([]);
-
-    //  category and writer fetch
     const [category, setCategory] = useState([]);
     const [writers, setWriters] = useState([]);
-    // -------
     const [isWriterAdded, setIsWriterAdded] = useState(false)
     const [isCategoryAdded, setIsCategoryAdded] = useState(false)
     const [isProfileUpdated, setIsProfileUpdated] = useState(false)
     const [canPostStatus, setCanPostStatus] = useState(false)
-    const [userType, setUserType] = useState('')
-    // ------------
-
     const [image, setImage] = useState(null);
     const [preview, setPreview] = useState('');
-
-
-
-    // summary
     const [summary, setSummary] = useState('')
-
-
-    useEffect(() => {
-        setUsername(localStorage.getItem("name") || "");
-        setUserToken(localStorage.getItem("token") || "");
-        setUserUuid(localStorage.getItem("uuid") || "");
-        setUserPhone(localStorage.getItem("phone") || "");
-        setUserType(localStorage.getItem("usertype") || "");
-
-        setIsLoading(true)
-
-    }, []);
-
-
 
     useEffect(() => {
         setStatus(localStorage.getItem("status") || "");
@@ -92,22 +61,16 @@ export default function CreatePost() {
 
 
     useEffect(() => {
-        fetch(`${apiBasePath}/getprofile/${localStorage.getItem("uuid")}`)
+        fetch(`${apiBasePath}/getprofile/${useruuid}`)
             .then((response) => response.json())
             .then((data) => {
-                // console.log('pofile details on user profile--------------->>>>>>>', data);
-
-
-                console.log('pofile post )()()() details on user profile--------------->>>>>>>', data);
-
-
+                
                 if (!data.object.profile_completion_status) {
                     setCanPostStatus(false)
                 } else {
                     setCanPostStatus(true)
                 }
 
-                // console.log(' profile image----------->>>>', image)
             })
             .catch((error) => console.error("Error fetching data:", error));
 
@@ -116,14 +79,12 @@ export default function CreatePost() {
             .then((response) => response.json())
             .then((data) => {
                 setWriters(data);
-                console.log('writer list on ---', data)
             })
             .catch((error) => console.error("Error fetching data:", error));
 
         fetch(`${apiBasePath}/categories`)
             .then((response) => response.json())
             .then((data) => {
-                console.log('Create post category -', data)
                 setCategory(data);
             })
             .catch((error) => console.error("Error fetching data:", error))
@@ -141,7 +102,6 @@ export default function CreatePost() {
     const writerhandleChange = (event) => {
         const [id, name] = event.target.value.split('|');
 
-        console.log('Writer select --', id, name)
         setWriter(name);
         setWriterId(id)
     };
@@ -169,26 +129,6 @@ export default function CreatePost() {
     // audio file 
     const [selectedFile, setSelectedFile] = useState(null);
 
-
-    function extractText(htmlString) {
-        // Split the string by the opening `<p>` tag
-        const paragraphs = htmlString.split(/<p>/);
-
-        // Loop through each paragraph except the first one
-        let modifiedString = paragraphs[0]; // Keep the first paragraph as-is
-        for (let i = 1; i < paragraphs.length; i++) {
-            modifiedString += `\n<p>${paragraphs[i]}</p>`; // Add newline and re-join with opening tag
-        }
-
-        return modifiedString;
-    }
-
-    function reloadPage() {
-        setTimeout(() => {
-            router.push(`/user/${localStorage.getItem("uuid")}`)
-        }, 3000)
-    }
-
     let notification = ''
 
 
@@ -203,7 +143,7 @@ export default function CreatePost() {
         if (!canPostStatus) {
             const confirmLogout = window.confirm('দয়া করে প্রোফাইল তৈরি করুন');
             if (confirmLogout) {
-                router.push(`/user/${localStorage.getItem("uuid")}`)
+                router.push(`/user/${useruuid}`)
             }
 
         }
@@ -225,13 +165,7 @@ export default function CreatePost() {
                 notify();
             }
             else {
-
-                console.log({ userUuid, isWriter, writer, writerId })
                 var isWriter = true;
-
-                if (userType === 'admin') {
-                    isWriter = false;
-                }
 
                 const formData = new FormData();
                 formData.append("file", selectedFile);
@@ -244,14 +178,10 @@ export default function CreatePost() {
                 formData.append("content", content);
                 formData.append("rating", 1);
                 formData.append("status", false);
-                formData.append("uploaded_by", userUuid);
+                formData.append("uploaded_by", useruuid);
                 formData.append("new_writer", isWriter);
 
-                console.log('form data ---', userUuid)
-
                 if (title && selectedOption && summary) {
-
-                    console.log(writer, writerId)
 
                     try {
 
@@ -275,7 +205,8 @@ export default function CreatePost() {
                             setContent('');
                             setSummary('');
 
-                            reloadPage();
+                            dispatch(userPostAction.postCreatedAt(generateUUID()))
+                            router.push(`/user/${useruuid}`)
 
                         } else {
                             console.error("Failed to update writing:", response.statusText);
@@ -376,12 +307,6 @@ export default function CreatePost() {
                     <div className="text-[#F9A106] font-bold text-[20px] !mb-[5px]">আপনার লেখার ধরণ নির্বাচন করুন</div>
 
                     <div className='select__control'>
-                        {/* <Select
-                            value={selectedOption}
-                            onChange={categoryhandleChange}
-                            styles={customStyles}
-                            options={Categoryoptions}
-                        /> */}
                         
                         <select
                             id="category"
@@ -399,50 +324,7 @@ export default function CreatePost() {
                         </select>
                     </div>
 
-                    {userType === 'admin' &&
-                        <>
-                            <div className="text-[#F9A106] font-bold text-[20px] mt-[10px] !mb-[2px]">লেখক নির্বাচন করুন</div>
-                            <div className=" place-content-center justify-center">
 
-                                <div className="">
-                                    {/* <Select
-                                        value={selectedWriter}
-                                        onChange={writerhandleChange}
-                                        styles={customStyles}
-                                        options={writersOptions}
-                                    /> */}
-
-                                    <select
-                                        id='writer'
-                                        name='writer'
-                                        className={`h-[45px] w-full px-[16px] text-black border-[1px] border-[#ddd] rounded-[7px]`}
-                                        required
-                                        onChange={writerhandleChange}
-                                    >
-                                        <option value="">লেখক নির্বাচন করুন</option>
-                                        {writers.length > 0 && writers?.map((wrt)=>(
-                                            <option key={wrt._id} value={`${wrt._id}|${wrt.name}`}>
-                                                {wrt.name}
-                                            </option>
-                                        ))}
-
-                                    </select>
-                                </div>
-                            </div>
-                        </>
-                    }
-
-                    {userType === 'admin' &&
-                        <>
-                            <div className='profile__btn__midl'>
-                                <CreateCategory setIsCategoryAdded={setIsCategoryAdded} />
-                            </div>
-
-                            <div className='profile__btn__midl'>
-                                <CreateWriter setIsWriterAdded={setIsWriterAdded} />
-                            </div>
-                        </>
-                    }
                     <hr class="my-5 border-gray-200" />
                     <div className='text-black'>
                         <div className='mb-[15px]'>

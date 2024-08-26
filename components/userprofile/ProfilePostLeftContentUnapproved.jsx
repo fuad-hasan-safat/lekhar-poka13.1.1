@@ -7,9 +7,17 @@ import Loading from "../common/loading";
 import axios from "axios";
 import SinglePostConponent from "../common/singlePostComponent";
 import { UserContext } from "../lekharpokaStore/user-context";
+import { useDispatch, useSelector } from "react-redux";
+import { userPostAction } from "../redux/userpost-slice";
 
 
 export default function ProfilePostLeftContentUnApproved() {
+
+  const dispatch = useDispatch();
+  const unapprovedItems = useSelector((state) => state.userpost.unapprovedItems);
+  const userUuid = useSelector((state) => state.usersession.userUuid);
+  const createdPostAt = useSelector((state) => state.userpost.createdPostAt);
+
   const [postList, setPostList] = useState([])
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(null); // State to store fetched data
@@ -21,7 +29,7 @@ export default function ProfilePostLeftContentUnApproved() {
   const [slug, setUserUuid] = useState("");
   const [userToken, setUserToken] = useState("");
 
-  const {userImage} = useContext(UserContext);
+  const { userImage } = useContext(UserContext);
 
   useEffect(() => {
 
@@ -37,13 +45,18 @@ export default function ProfilePostLeftContentUnApproved() {
     const fetchPosts = async () => {
       try {
 
-        const response = await axios.get(`${apiBasePath}/unverifiedpostsbyuser/${localStorage.getItem("uuid")}`); // Use Axios
-        const data = response.data;
-        console.log('UN-APPROVED POST----->>', data)
+        if (userUuid) {
+          const response = await axios.get(`${apiBasePath}/unverifiedpostsbyuser/${userUuid}`); // Use Axios
+          const data = response.data;
+          console.log('UN-APPROVED POST----->>', data)
 
 
-        setPostList(data.object);
-        setTotalPages(Math.ceil(data.object.length / postsPerPage));
+          setPostList(data.object);
+          setTotalPages(Math.ceil(data.object.length / postsPerPage));
+
+          dispatch(userPostAction.addApiPostsToUnapproved(data.object))
+        }
+
 
       } catch (error) {
         setError(error);
@@ -54,7 +67,7 @@ export default function ProfilePostLeftContentUnApproved() {
 
     fetchPosts();
 
-  }, [userImage]);
+  }, [userImage, createdPostAt]);
 
 
   const handlePageChange = (pageNumber) => {
@@ -77,14 +90,14 @@ export default function ProfilePostLeftContentUnApproved() {
       ) : (
         <>
           {/* <div className='container'> */}
-          {postList.length > 0 &&
+          {unapprovedItems.length > 0 &&
             <div className='flex'>
               <div className="lakha__main__content pt-[40px] text-3xl lg:mr-[100px] md:mr-[50px]">
 
                 {/* <h1 className='lg:text-5xl md:text-3xl sm:text-xl xs:text-2xl text-black mb-[35px]'>অনুমোদনহীন  পোস্ট </h1> */}
 
-                {postList.length && (
-                  postList.map((post, index) => (
+                {unapprovedItems.length && (
+                  unapprovedItems.map((post, index) => (
                     <>
                       <div key={index}>
                         <SinglePostConponent
@@ -107,7 +120,7 @@ export default function ProfilePostLeftContentUnApproved() {
 
                       </div>
 
-                      {index < postList?.length && <MainContentDivider />}
+                      {index < unapprovedItems?.length && <MainContentDivider />}
 
                     </>
                   ))

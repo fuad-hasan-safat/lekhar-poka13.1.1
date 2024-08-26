@@ -10,6 +10,7 @@ import LoginPage from '../../components/login/login';
 import { useRouter } from 'next/router';
 import { apiBasePath } from '../../utils/constant';
 import { fetchDataWithAxios } from '../../utils/apiService';
+import { useSelector } from 'react-redux';
 
 
 
@@ -19,6 +20,7 @@ const PlaylistSeeAll = () => {
     const router = useRouter();
     const currentUrl = router.asPath;
 
+    const userUuid = useSelector((state) => state.usersession.userUuid);
     const { playListRenderScope } = useContext(AudioPlayListContext)
 
     const [seeAllRenderInfo, setSeeAllRenderInfo] = useState({
@@ -51,9 +53,9 @@ const PlaylistSeeAll = () => {
 
 
         // api call
-    let playListUrl = `${apiBasePath}/showlatestplaylist/${localStorage.getItem('uuid')}`;
+    let playListUrl = `${apiBasePath}/showlatestplaylist/${userUuid}`;
     if(scope === 'আমার প্লেলিস্ট'){
-        playListUrl = `${apiBasePath}/showplaylist/${localStorage.getItem('uuid')}`;
+        playListUrl = `${apiBasePath}/showplaylist/${userUuid}`;
     }
 
     getdata(playListUrl);
@@ -79,7 +81,7 @@ const PlaylistSeeAll = () => {
 
 
     return (
-        <>{localStorage.getItem('uuid')?.trim().length ?
+        <>{ userUuid?
             <>
                 <Head>
                     <title>প্লেলিস্ট</title>

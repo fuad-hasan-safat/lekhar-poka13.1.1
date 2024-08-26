@@ -8,21 +8,20 @@ import Link from 'next/link';
 import DialugueModal from '../common/notification/DialugueModal';
 import { SearchContext } from '../lekharpokaStore/search-context';
 import { UserContext } from '../lekharpokaStore/user-context';
+import { useSelector } from 'react-redux';
 
 export default function UpdatedNavBar() {
+
+    const userUuid = useSelector(state => state.usersession.userUuid);
     const router = useRouter();
 
     const { selectedIteam, handleKeyDown, setSelectedIteam, searchAreaRef, setIsSearchbarActive, isSearchbarActive, setSearchResult, searchKey, setSearchKey } = useContext(SearchContext)
-    const {setUser, userImage} = useContext(UserContext)
+    const { setUser, userImage } = useContext(UserContext)
+
     const [selectedNav, setSelectedNav] = useState("");
     const [postList, setPostList] = useState(null);
     const [search, setSearch] = useState("");
     const [searchData, setSearchData] = useState([]);
-
-
-    const [username, setUsername] = useState("");
-    const [userUuid, setUserUuid] = useState("");
-    const [userToken, setUserToken] = useState("");
 
     // ------
     const dialogueRef = useRef()
@@ -76,14 +75,26 @@ export default function UpdatedNavBar() {
     }
 
 
-
     useEffect(() => {
 
-        setUsername(localStorage.getItem("name") || "");
-        setUserToken(localStorage.getItem("token") || "");
-        setUserUuid(localStorage.getItem("uuid") || "");
+        const fetchUserPhoto = async () => {
+            try {
+                const response = await fetch(`${apiBasePath}/getprofilepic/${userUuid}`);
+                const data = await response.json();
+                console.log('user image in navbar --', data.image)
+                setUser({ userImage: `${apiBasePath}/${data.image?.slice(data.image?.indexOf('/') + 1)}` })
+                //console.log( "------------------->>>> POST LIST ------------------>>>>>>>",postList );
+            } catch (error) {
+                // alert("Error Fetching data");
+            }
+        };
+        if (userUuid) {
+            fetchUserPhoto();
 
-    }, []);
+        }
+
+    }, [userUuid])
+
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -99,20 +110,6 @@ export default function UpdatedNavBar() {
 
         fetchPosts();
 
-
-        const fetchUserPhoto = async () => {
-            try {
-                const response = await fetch(`${apiBasePath}/getprofilepic/${localStorage.getItem("uuid")}`);
-                const data = await response.json();
-                console.log('user image in navbar --', data.image)
-                setUser({userImage:`${apiBasePath}/${data.image?.slice(data.image?.indexOf('/')+1)}`})
-                //console.log( "------------------->>>> POST LIST ------------------>>>>>>>",postList );
-            } catch (error) {
-                // alert("Error Fetching data");
-            }
-        };
-
-        fetchUserPhoto();
 
     }, []);
 
@@ -410,10 +407,10 @@ export default function UpdatedNavBar() {
                                             </li>
 
                                             {
-                                                userUuid.length > 0 ?
+                                                userUuid ?
                                                     <li
                                                         className='relative cursor-pointer -mt-[5px]'
-                                                        onClick={() => { toggleVisibility(2); }}>
+                                                        onClick={() => toggleVisibility(2)}>
                                                         {userImage?.length > 0 ? <img src={userImage} alt={userImage} className='h-[35px] w-[35px] rounded-full' /> :
                                                             <img src='/images/user/deafultProfile.png' alt='profile pic' className='h-[35px] w-[35px] rounded-full' />}
 
@@ -434,7 +431,7 @@ export default function UpdatedNavBar() {
                                                                     onClick={() => closeMenu()}
 
                                                                 >
-                                                                    <Link className='block' href={`/user/${localStorage.getItem("uuid")}`}>প্রোফাইল</Link>
+                                                                    <Link className='block' href={`/user/${userUuid}`}>প্রোফাইল</Link>
                                                                 </li>
                                                                 <hr className='lg:block md:hidden sm:hidden xs:hidden' />
 

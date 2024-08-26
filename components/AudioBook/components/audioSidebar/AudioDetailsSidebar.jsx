@@ -7,10 +7,11 @@ import AudioSidebarLekhok from './AudioSidebarLekhok';
 import { AudioPlayListContext } from '../../../store/audioPlayer-context';
 import { fetchDataWithAxios } from '../../../../utils/apiService';
 import { apiBasePath } from '../../../../utils/constant';
+import { useSelector } from 'react-redux';
 
 export default function AudioDetailsSideBar() {
     const { setPlayListRenderScope,setLatestPlaylist, setMyPlayList ,isPlayListAddedChanged, myPlayList, latestPlayList, currentPlayingIndex} = useContext(AudioPlayListContext);
-
+    const userUuid = useSelector(state=> state.usersession.userUuid);
     const [playList, setPlaylist] = useState({
         myPlaylist: [],
         latestPlayList: [],
@@ -23,8 +24,8 @@ export default function AudioDetailsSideBar() {
 
 
     const getData = async () => {
-        const myPlayListUrl = `${apiBasePath}/showplaylist/${localStorage.getItem('uuid')}`;
-        const latestPlayListUrl = `${apiBasePath}/showlatestplaylist/${localStorage.getItem('uuid')}`;
+        const myPlayListUrl = `${apiBasePath}/showplaylist/${userUuid}`;
+        const latestPlayListUrl = `${apiBasePath}/showlatestplaylist/${userUuid}`;
         console.log({myPlayListUrl, latestPlayListUrl})
         try {
             const myplayList = await fetchDataWithAxios(myPlayListUrl);

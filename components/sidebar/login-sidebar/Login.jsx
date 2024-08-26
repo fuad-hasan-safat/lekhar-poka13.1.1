@@ -10,39 +10,29 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AdminContext } from "../../store/adminpanel-context";
 import { UserContext } from "../../lekharpokaStore/user-context";
 import useTabSyncAuth from "../../../utils/useReloadUrl";
+import { userSessionAction } from "../../redux/usersession-slice";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Login() {
+  const isLoggedIn = useSelector((state) => state.usersession.isLoggedIn);
 
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const {setUser} = useContext(UserContext);
-  const {setCurrentComponentIndex} = useContext(AdminContext);
   const {triggerLogin} = useTabSyncAuth();
 
   let notification = ''
 
   const [number, setnumber] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUserData] = useState(null);
-  const [status, setStatus] = useState("");
-  const [username, setUsername] = useState("");
-  const [userUuid, setUserUuid] = useState("");
+
   const [error, setError] = useState(null);
   const [numberPrefix, setNumberPrefix] = useState('88');
   const [showPassword, setShowPassword] = useState(false);
   // google login state start
   const [profile, setProfile] = useState([]);
   const [email, setEmail] = useState('')
-
-  useEffect(() => {
-    setStatus(localStorage.getItem("status") || "");
-  }, []);
-
-  useEffect(() => {
-    setStatus(localStorage.getItem("status") || "");
-    setUsername(localStorage.getItem("name") || "");
-    setUserUuid(localStorage.getItem("uuid") || "");
-  }, [status]);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -104,20 +94,17 @@ export default function Login() {
       if (response.data.status === 'success') {
         const data = await response.data;
 
+        dispatch(userSessionAction.addValidUser({
+          isLoggedIn: true,
+          userToken: data?.access_token,
+          userUuid: data?.uuid,
+          userName: data?.name,
+          userType: data?.usertype,
+          accountType: 'create with phone number',
+        }));
+
         notification = 'সফলভাবে লগইন করেছেন';
         notify1();
-
-        setStatus(data.status);
-        setUserUuid(data.uuid);
-        setUserData(data);
-
-        localStorage.setItem("status", data.status);
-        localStorage.setItem("name", data.name);
-        localStorage.setItem("uuid", data.uuid);
-        localStorage.setItem("phone", data.phone);
-        localStorage.setItem("token", data.access_token);
-        localStorage.setItem("usertype", data.usertype);
-        localStorage.setItem("phone", data.phone);
 
         const user = {
           userName: data.name,
@@ -133,8 +120,6 @@ export default function Login() {
         triggerLogin();
         setnumber("");
         setPassword("");
-
-        reloadPage()
       }
       else if (response.data.status === "failed") {
         // alert(' সঠিক নাম্বার দিন ')
@@ -174,9 +159,12 @@ export default function Login() {
 
   });
 
+  if(isLoggedIn){
+    return null;
+  }
+
   return (
     <>
-      {status !== 'success' && (
         <div>
           <div>
 
@@ -236,14 +224,6 @@ export default function Login() {
             </div>
 
             <SignInOption
-              user={user}
-              setUserData={setUserData}
-              profile={profile}
-              setProfile={setProfile}
-              setStatus={setStatus}
-              setUsername={setUsername}
-              setUserUuid={setUserUuid}
-              setEmail={setEmail}
               title="অথবা সাইন ইন করুন"
               icon1="/images/loginOptionIcon/google.svg"
               icon2='/images/loginOptionIcon/facebook_squre.svg'
@@ -254,7 +234,6 @@ export default function Login() {
           </div>
           <Divider />
         </div>
-      )}
     </>
   );
 }

@@ -10,13 +10,17 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { UserContext } from "../lekharpokaStore/user-context";
 import useTabSyncAuth from "../../utils/useReloadUrl";
+import { useDispatch } from "react-redux";
+import { userSessionAction } from "../redux/usersession-slice";
 
 
-export default function LoginForm({ logreg, btntext, url = '/' }) {
+export default function LoginForm({ logreg, btntext}) {
+
+  const dispatch = useDispatch();
 
   const router = useRouter();
   const { setUser } = useContext(UserContext);
-  const {triggerLogin} = useTabSyncAuth();
+  const { triggerLogin } = useTabSyncAuth();
 
   let notification = ''
 
@@ -29,8 +33,6 @@ export default function LoginForm({ logreg, btntext, url = '/' }) {
     uuid: '',
   });
   const [status, setStatus] = useState("");
-  const [username, setUsername] = useState("");
-  const [userUuid, setUserUuid] = useState("");
   const [error, setError] = useState(null);
   const [numberPrefix, setNumberPrefix] = useState('88');
   const [showPassword, setShowPassword] = useState(false);
@@ -40,13 +42,6 @@ export default function LoginForm({ logreg, btntext, url = '/' }) {
     setStatus(localStorage.getItem("status") || "");
 
   }, [status]);
-
-  useEffect(() => {
-
-    setUsername(localStorage.getItem('name') || '');
-    setUserUuid(localStorage.getItem('uuid') || '')
-
-  }, []);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -78,11 +73,7 @@ export default function LoginForm({ logreg, btntext, url = '/' }) {
 
   function reloadPage(url) {
     setTimeout(() => {
-      if (url === '/') {
-        router.push(url)
-      } else {
-        router.refresh(url)
-      }
+        router.push(url);
     }, 1000)
   }
 
@@ -115,27 +106,26 @@ export default function LoginForm({ logreg, btntext, url = '/' }) {
 
         const data = await response.data;
 
+        dispatch(userSessionAction.addValidUser({
+          isLoggedIn: true,
+          userToken: data?.access_token,
+          userUuid: data?.uuid,
+          userName: data?.name,
+          userType: data?.usertype,
+          accountType: 'create with phone number',
+        }));
+
         notification = 'সফলভাবে লগইন করেছেন';
         notify1();
 
         setStatus(data.status);
-        setUserUuid(data.uuid);
-        setUserData(data);
-
-        localStorage.setItem("status", data.status);
-        localStorage.setItem("name", data.name);
-        localStorage.setItem("uuid", data.uuid);
-        localStorage.setItem("phone", data.phone);
-        localStorage.setItem("token", data.access_token);
-        localStorage.setItem("usertype", data.usertype);
-        localStorage.setItem("phone", data.phone);
 
         const user = {
-          userName: data.name,
-          userUuid: data.uuid,
+          userName: data?.name,
+          userUuid: data?.uuid,
           userImage: data?.image,
-          userToken: data.access_token,
-          userType: data.usertype,
+          userToken: data?.access_token,
+          userType: data?.usertype,
           isLoggedIn: true,
           isloggedOut: false,
         };
@@ -144,10 +134,6 @@ export default function LoginForm({ logreg, btntext, url = '/' }) {
         triggerLogin();
         setnumber('');
         setPassword('');
-
-        // router.push(`/`)
-        reloadPage(url);
-
       } else {
         // alert('সঠিক নাম্বার দিন');
         notification = 'সঠিক নাম্বার দিন';
@@ -156,6 +142,7 @@ export default function LoginForm({ logreg, btntext, url = '/' }) {
     } catch (error) {
       // alert('সঠিক পাসওয়ার্ড দিন');
       notification = 'সঠিক পাসওয়ার্ড দিন';
+      console.log(error);
       notify();
 
     }

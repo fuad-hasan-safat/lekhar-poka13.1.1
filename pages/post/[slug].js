@@ -7,8 +7,7 @@ import { apiBasePath } from "../../utils/constant";
 import ReaderModeModal from "../../components/readerMode/ReaderModeModal";
 import FullPostReaderMode from "../../components/common/fullContentReadermood";
 import { AudioPlayListContext } from "../../components/store/audioPlayer-context";
-import { UserContext } from "../../components/lekharpokaStore/user-context";
-
+import { useSelector } from "react-redux";
 
 export async function getServerSideProps(context) {
 
@@ -39,7 +38,8 @@ export default function PostDetails({ postData }) {
   console.log({ postData })
 
   const { toggleAudioPlay, audioPlace, currentPlayingIndex, isAudioPlaying } = useContext(AudioPlayListContext);
-  const { userUuid } = useContext(UserContext);
+  const userUuid = useSelector(state => state.usersession.userUuid)
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const data = postData.object;
@@ -51,27 +51,16 @@ export default function PostDetails({ postData }) {
   let isAudioAvailable = postData.object?.audio ? true : false;
   let isdataFetch = postData?.status === "success" ? true : false;
 
-
-  //  focus mood ----
-
   const [rating, setRating] = useState(0);
-
-
-  function readMoodHandler(postId) {
-    router.push(`/post/readermood/${postId}`)
-  }
 
   function readerModeClosehandler() {
     setIsModalOpen(false);
-    // router.reload()
   }
 
   function removeHtmlTags(str) {
     return str?.replace(/<\/?[^>]+(>|$)/g, "");
   }
 
-
-  // select image
 
   let selectedCoverImage = postData?.writer_image;
 
@@ -189,13 +178,8 @@ export default function PostDetails({ postData }) {
                           </>
                         }
                       </div>
-
                     )
-
                     }
-                    {/* <div className="kobita__dsc__rgt lg:w-[30%]">
-              <Sidebar />
-            </div> */}
                   </div>
                 </div>
               </section>
@@ -219,11 +203,7 @@ export default function PostDetails({ postData }) {
                   </div>
                 </div>
               </section>
-
             </ReaderModeModal>
-
-
-
           </div>
         </> :
         <>

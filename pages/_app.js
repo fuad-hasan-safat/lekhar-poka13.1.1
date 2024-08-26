@@ -21,6 +21,10 @@ import { useContext, useEffect } from 'react';
 import AudioDetailsTabContextProvider from '../components/store/audiodetailstab-context';
 import UserContextProvider, { UserContext } from '../components/lekharpokaStore/user-context';
 
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import store, { persistor } from '../components/redux/store';
+
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const { pathname } = router;
@@ -50,7 +54,7 @@ export default function MyApp({ Component, pageProps }) {
     };
   }, []);
 
- 
+
 
   // /account/login
   // /account/signup
@@ -90,25 +94,29 @@ export default function MyApp({ Component, pageProps }) {
         src="https://connect.facebook.net/en_US/sdk.js/xfbml.js?appId=1103079424285739&version=v16.0"
         crossOrigin="anonymous"
       />
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <AdminContextProvider>
+            <UserContextProvider>
+              <AudioPlaylistContextProvider>
+                <SeeAllSliderContextProvider>
+                  <SearchContextProvider>
+                    <AudioDetailsTabContextProvider>
+                      <GoogleOAuthProvider clientId="854926132475-sm4btto49sresu4g5o9qpuk9lgtqor9f.apps.googleusercontent.com">
+                        <>
+                          {result}
+                          <AudioPlayer />
+                        </>
+                      </GoogleOAuthProvider>
+                    </AudioDetailsTabContextProvider>
+                  </SearchContextProvider>
+                </SeeAllSliderContextProvider>
+              </AudioPlaylistContextProvider>
+            </UserContextProvider>
+          </AdminContextProvider>
+        </PersistGate>
+      </Provider>
 
-      <AdminContextProvider>
-        <UserContextProvider>
-          <AudioPlaylistContextProvider>
-            <SeeAllSliderContextProvider>
-              <SearchContextProvider>
-                <AudioDetailsTabContextProvider>
-                  <GoogleOAuthProvider clientId="854926132475-sm4btto49sresu4g5o9qpuk9lgtqor9f.apps.googleusercontent.com">
-                    <>
-                      {result}
-                      <AudioPlayer />
-                    </>
-                  </GoogleOAuthProvider>
-                </AudioDetailsTabContextProvider>
-              </SearchContextProvider>
-            </SeeAllSliderContextProvider>
-          </AudioPlaylistContextProvider>
-        </UserContextProvider>
-      </AdminContextProvider>
     </>
 
 
