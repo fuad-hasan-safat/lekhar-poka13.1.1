@@ -5,6 +5,7 @@ import axios from 'axios';
 import { apiBasePath } from '../../utils/constant';
 import { useRouter } from 'next/router';
 import { UserContext } from '../lekharpokaStore/user-context';
+import useTabSyncAuth from '../../utils/useReloadUrl';
 
 // import { LoginSocialFacebook } from "reactjs-social-login";
 // import { FacebookLoginButton } from "react-social-login-buttons";
@@ -16,31 +17,31 @@ export default function SignInOption({
     lowermessege1,
     lowermessege2,
     signLogLink,
-    user,
-    setUserLog,
-    setProfile,
-    setStatus,
-    setUsername,
-    setUserUuid,
+    // user,
+    // setUserLog,
+    // setProfile,
+    // setStatus,
+    // setUsername,
+    // setUserUuid,
 }) {
 
+
     const router = useRouter();
-  const { setUser } = useContext(UserContext);
+    const { setUser } = useContext(UserContext);
+    let google_accessToken = null;
+
+    const { triggerLogin } = useTabSyncAuth();
 
 
     const login = useGoogleLogin({
         onSuccess: (codeResponse) => {
-            setUserLog(codeResponse)
+            google_accessToken = codeResponse.access_token;
             router.push('/')
 
         },
         onError: (error) => console.log('Login Failed:', error)
     });
 
-
-    function fblogin() {
-        //  need to implement
-    }
 
     async function sendDataToBackend(id, email, name, picture, access_token) {
         try {
@@ -65,7 +66,6 @@ export default function SignInOption({
 
                 const data = await response.data;
 
-
                 dispatch(userSessionAction.addValidUser({
                     isLoggedIn: true,
                     userToken: data?.access_token,
@@ -73,19 +73,7 @@ export default function SignInOption({
                     userName: data?.name,
                     userType: data?.usertype,
                     accountType: 'create with gmail',
-                  }));
-
-                setStatus(data.status);
-                setUserUuid(data.uuid);
-                setUserLog(data);
-
-                localStorage.setItem("status", data.status);
-                localStorage.setItem("name", data.name);
-                localStorage.setItem("uuid", data.uuid);
-                localStorage.setItem("phone", data.phone);
-                localStorage.setItem("token", data.access_token);
-                localStorage.setItem("usertype", data.usertype);
-                localStorage.setItem("phone", data.phone);
+                }));
 
                 const user = {
                     userName: data.name,
@@ -95,56 +83,37 @@ export default function SignInOption({
                     userType: data.usertype,
                     isLoggedIn: true,
                     isloggedOut: false,
-                  };
-          
-                  setUser(user);
+                };
 
-                router.reload();
-
+                setUser(user);
+                triggerLogin();
             }
 
         } catch (error) {
         }
     }
 
+
     useEffect(
         () => {
-            if (user) {
+            if (google_accessToken) {
                 axios
-                    .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
+                    .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${google_accessToken}`, {
                         headers: {
                             Authorization: `Bearer ${user.access_token}`,
                             Accept: 'application/json'
                         }
                     })
                     .then((res) => {
-
-                        setProfile(res.data);
-                        setUserUuid(res.data.id)
-                        setUsername(res.data.name)
-                        setStatus('success')
-
-
-                        localStorage.setItem("status", 'success');
-                        localStorage.setItem("name", res.data.name);
-                        localStorage.setItem("uuid", '');
-                        localStorage.setItem("phone", '');
-                        localStorage.setItem("token", res.data.id);
-                        localStorage.setItem("usertype", 'user');
-                        localStorage.setItem("phone", '');
-                        localStorage.setItem("email", res.data.email);
-
                         sendDataToBackend(res.data.id, res.data.email, res.data.name, res.data.picture, user.access_token)
 
                         router.push('/')
-
                     })
                     .catch((err) => console.log(err));
             }
         },
-        [user]
+        [google_accessToken]
     );
-
 
 
     return (
@@ -163,7 +132,7 @@ export default function SignInOption({
             {icon1?.length &&
                 <div className="flex place-content-center justify-center space-x-[8px]">
 
-                    <button 
+                    <button
                         className="page__common__yello__btn flex border border-solid rounded-md shadow-md p-1 py-[9px] px-[5px]"
                         onClick={login}
                     >

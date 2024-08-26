@@ -33,8 +33,6 @@ export default function LoginForm({ logreg, btntext, url = '/' }) {
     uuid: '',
   });
   const [status, setStatus] = useState("");
-  const [username, setUsername] = useState("");
-  const [userUuid, setUserUuid] = useState("");
   const [error, setError] = useState(null);
   const [numberPrefix, setNumberPrefix] = useState('88');
   const [showPassword, setShowPassword] = useState(false);
@@ -44,13 +42,6 @@ export default function LoginForm({ logreg, btntext, url = '/' }) {
     setStatus(localStorage.getItem("status") || "");
 
   }, [status]);
-
-  useEffect(() => {
-
-    setUsername(localStorage.getItem('name') || '');
-    setUserUuid(localStorage.getItem('uuid') || '')
-
-  }, []);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -128,17 +119,6 @@ export default function LoginForm({ logreg, btntext, url = '/' }) {
         notify1();
 
         setStatus(data.status);
-        setUserUuid(data.uuid);
-        setUserData(data);
-
-        localStorage.setItem("status", data.status);
-        localStorage.setItem("name", data.name);
-        localStorage.setItem("uuid", data.uuid);
-        localStorage.setItem("phone", data.phone);
-        localStorage.setItem("token", data.access_token);
-        localStorage.setItem("usertype", data.usertype);
-        localStorage.setItem("phone", data.phone);
-
 
         const user = {
           userName: data?.name,
@@ -155,9 +135,7 @@ export default function LoginForm({ logreg, btntext, url = '/' }) {
         setnumber('');
         setPassword('');
 
-        // router.push(`/`)
-        reloadPage(url);
-
+        router.push(`/`)
       } else {
         // alert('সঠিক নাম্বার দিন');
         notification = 'সঠিক নাম্বার দিন';
