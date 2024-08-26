@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux";
 import { userSessionAction } from "../redux/usersession-slice";
 
 
-export default function LoginForm({ logreg, btntext, url = '/' }) {
+export default function LoginForm({ logreg, btntext}) {
 
   const dispatch = useDispatch();
 
@@ -134,8 +134,6 @@ export default function LoginForm({ logreg, btntext, url = '/' }) {
         triggerLogin();
         setnumber('');
         setPassword('');
-
-        router.push(`/`)
       } else {
         // alert('সঠিক নাম্বার দিন');
         notification = 'সঠিক নাম্বার দিন';

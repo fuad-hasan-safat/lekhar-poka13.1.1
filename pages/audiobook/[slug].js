@@ -44,7 +44,7 @@ export default function Home({ singleAudioData }) {
 
     const router = useRouter();
     const currentUrl = router.asPath;
-
+    console.log('current url', currentUrl);
     const userUuid = useSelector(state => state.usersession.userUuid);
 
     console.log(singleAudioData.audio)

@@ -10,7 +10,7 @@ const LoginPage = ({url = '/'}) => {
   const router = useRouter();
  const isLoggedIn = useSelector((state) => state.usersession.isLoggedIn);
  if(isLoggedIn){
-  router.push('/')
+  router.push(url);
  }
   return (
     <>
@@ -28,7 +28,7 @@ const LoginPage = ({url = '/'}) => {
                 <div className="login__form__right relative bg-white rounded-l-[46px] text-black grid place-items-center ">
 
                   <div className="w-full">
-                        <LoginReg logreg="লগইন করুন" btntext="লগইন" url={url} />
+                        <LoginReg logreg="লগইন করুন" btntext="লগইন" />
 
                         <SignInOption
                           title="অথবা সাইন ইন করুন"

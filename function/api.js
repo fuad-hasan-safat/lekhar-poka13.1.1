@@ -30,11 +30,6 @@ export function countWords(content = '  ', limit) {
     } else if (char === '>') {
       inTag = false;
     }
-    // else if(char === '&'){
-    //   inTag = true;
-    // }else if(char === ';'){
-    //   inTag = false;
-    // }
 
     if (currentWord <= limit) {
       substring += char;
