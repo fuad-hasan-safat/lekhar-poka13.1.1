@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
 const LekhokDetails = ({
     image,
@@ -8,12 +9,14 @@ const LekhokDetails = ({
     writer_id,
     lifeCycle,
 }) => {
+
+    const userUuid = useSelector((state)=> state.usersession.userUuid);
     console.log({ writer, writer_id, user_id })
     let redirectAddress = `/postbyuser/${writer_id}`;
     console.log({ redirectAddress })
 
     if (user_id) {
-        if (user_id === localStorage.getItem('uuid')) {
+        if (user_id === userUuid) {
             redirectAddress = `/user/${user_id}`;
         }
     }

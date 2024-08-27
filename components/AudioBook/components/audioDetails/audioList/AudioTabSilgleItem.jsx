@@ -4,11 +4,12 @@ import { AudioPlayListContext } from '../../../../store/audioPlayer-context';
 import { apiBasePath } from '../../../../../utils/constant';
 import axios from 'axios';
 import { replaceUnderscoresWithSpaces } from '../../../../../function/api';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toastAction } from '../../../../redux/toast-slice';
 
 export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) {
     const dispatch = useDispatch();
+    const userUuid = useSelector((state) => state.usersession.userUuid);
     const { audioPlace, playListRenderScope, currentPlayingIndex, toggleAudioPlay, isAudioPlaying, setMyPlayList, myPlayList, setLatestPlaylist, latestPlayList } = useContext(AudioPlayListContext)
     const [duration, setDuration] = useState(null);
     const [error, setError] = useState(false);
@@ -51,7 +52,7 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
         const data = {
             ebook_id: songInfo.ebook_id,
             audio_id: songInfo._id,
-            userId: localStorage.getItem('uuid')
+            userId: userUuid
         }
 
         console.log('Add to playlist data -,', data);
@@ -78,13 +79,13 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
     }
 
     async function handlePlayButton() {
-        toggleAudioPlay(audioIndex, audioList, `details${songInfo._id}`);
+        toggleAudioPlay(audioIndex, audioList, `details`);
         console.log({ audioPlace, playListRenderScope, currentPlayingIndex, audioIndex })
 
         const data = {
             ebook_id: songInfo.ebook_id,
             audio_id: songInfo._id,
-            userId: localStorage.getItem('uuid')
+            userId: userUuid,
         }
 
         console.log('Add to latest playlist data -,', data);
@@ -131,7 +132,7 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
                 </div>
 
                 <div className='audio__tab__playbutton'>
-                    <button onClick={handlePlayButton}>{isAudioPlaying && audioIndex === currentPlayingIndex && audioPlace === `details${songInfo._id}` ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</button>
+                    <button onClick={handlePlayButton}>{isAudioPlaying && audioIndex === currentPlayingIndex && audioPlace === `details` ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</button>
                     <button onClick={handleAddMyPlaylist} className='text-[#484848] text-opacity-[50%] lg:ml-[18px] md:ml-[15px] sm:ml-[12px] xs:ml-[10px]'><i class="ri-add-circle-fill"></i></button>
                 </div>
 

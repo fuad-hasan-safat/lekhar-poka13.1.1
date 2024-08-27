@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { apiBasePath } from "../../utils/constant";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const LekhaPokaProfile = ({
   image,
@@ -13,6 +14,8 @@ const LekhaPokaProfile = ({
   star,
   uploaded_by,
 }) => {
+
+  const userUuid = useSelector((state)=> state.usersession.userUuid);
   const [isMounted, setIsMounted] = useState(false);
 
   useState(()=>{
@@ -23,8 +26,8 @@ const LekhaPokaProfile = ({
   if(!isMounted) return null;
 
   let redurectUrl = `/postswriter/${writer_id}`;
-  if(localStorage.getItem('uuid')?.length > 0){
-    if(localStorage.getItem('uuid') === uploaded_by)
+  if(userUuid){
+    if(userUuid === uploaded_by)
     redurectUrl = `/user/${uploaded_by}`;
   }
 
