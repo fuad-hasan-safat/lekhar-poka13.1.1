@@ -15,7 +15,13 @@ export async function getServerSideProps(context) {
   let postData;
 
   try {
-    const res = await fetch(`${apiBasePath}/getpost/${slug}`)
+    const res = await fetch(`${apiBasePath}/getpost/${slug}`, {
+      method: 'POST', // Use POST method
+      headers: {
+        'Content-Type': 'application/json', // Set the content type to JSON if necessary
+      },
+      // No body data
+    });
     postData = await res.json()
 
     console.log('single post data', postData);

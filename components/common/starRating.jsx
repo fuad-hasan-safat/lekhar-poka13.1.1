@@ -1,55 +1,75 @@
 'use client'
-
 import { useRouter } from 'next/router'
 import { apiBasePath } from '../../utils/constant'
 import React, { useEffect, useState } from 'react'
 import { Rating } from 'react-simple-star-rating'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useSelector } from 'react-redux'
+import axios from 'axios'
 
 
 export default function RatingComponent({ post_id, setRating, rating, notification }) {
-  const router = useRouter()
-  const [status, setStatus] = useState("");
-  const [username, setUsername] = useState("");
-  const [userUuid, setUserUuid] = useState("");
-  const [userToken, setUserToken] = useState("");
-  // let notification = ''
 
-  // check if user is logged in
+  const userUuid = useSelector((state) => state.usersession.userUuid);
+  const isLoogedIn = useSelector((state) => state.usersession.isLoggedIn);
+
+  const [isMounted, setIsMounted] = useState(false);
+  const [userRating, setUserrating] = useState(0);
+
   useEffect(() => {
-    setStatus(localStorage.getItem("status") || "");
-    setUsername(localStorage.getItem("name") || "");
-    setUserToken(localStorage.getItem("token") || "");
-    setUserUuid(localStorage.getItem("uuid") || "");
+
+    async function getPostData() {
+      try {
+        const res = await axios.post(`${apiBasePath}/getpost/${post_id}`, {
+          'logged_in': isLoogedIn,
+          'user_id': userUuid,
+        });
+        setRating(res.data.object.rating)
+        setUserrating(res.data.object.rating)
+        console.log('Rating log', res.data.object);
+      } catch (error) {
+        console.log('Rating error ', error);
+      }
+    }
+
+    if (userUuid) {
+      getPostData();
+    }
+    setIsMounted(true)
   }, []);
 
-  // Catch Rating value
+
+
   const handleRating = (rate) => {
-
     setRating(rate)
-
   }
-
 
   async function submitRating(id) {
 
-    if (userUuid.length > 0) {
+    if(userRating > 0 ){
+      notification = 'আপনি ইতিমধ্যে রেটিং দিয়েছেন';
+      notify();
+
+      return;
+    }
+
+    if (userUuid) {
 
       const data = {
+        user_id: userUuid,
         rating: rating,
       }
 
       const response = await fetch(`${apiBasePath}/rating/${id}`, {
-
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
-
       });
 
+      console.log('Rating sesponse ', response);
 
       if (!response.ok) {
 
@@ -57,7 +77,6 @@ export default function RatingComponent({ post_id, setRating, rating, notificati
 
       } else {
 
-        // alert('রেটিং সফলভাবে সম্পন্ন হয়েছে');
         notification = 'রেটিং সফলভাবে সম্পন্ন হয়েছে';
         notify1();
 
@@ -67,13 +86,6 @@ export default function RatingComponent({ post_id, setRating, rating, notificati
 
       notification = 'দয়া করে লগইন করুন';
       notify();
-
-      //   const confirmLogout = window.confirm('দয়া করে লগইন করুন');
-
-      //   if (confirmLogout) {
-      //     router.push('/account/login')
-      //   }
-
     }
 
   }
@@ -102,7 +114,7 @@ export default function RatingComponent({ post_id, setRating, rating, notificati
 
   });
 
-
+  if (!isMounted) return null;
 
   return (
     <div className=''>
@@ -123,6 +135,7 @@ export default function RatingComponent({ post_id, setRating, rating, notificati
             onPointerEnter={onPointerEnter}
             onPointerLeave={onPointerLeave}
             onPointerMove={onPointerMove}
+            initialValue={userRating}
           /* Available Props */
           />
 
@@ -131,6 +144,7 @@ export default function RatingComponent({ post_id, setRating, rating, notificati
         <button
           onClick={() => submitRating(post_id)}
           className='bg-orange-400 px-2 py-1 text-white h-[34px] w-[195px] rounded-md'
+          // disabled={userRating > 0}
         >
           সাবমিট
         </button>

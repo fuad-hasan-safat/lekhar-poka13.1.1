@@ -4,6 +4,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import { combineReducers } from 'redux';
 import userPostSlice from './userpost-slice';
 import userSessionSlice from './usersession-slice';
+import toastSlice from './toast-slice';
 
 // Persist configuration
 const persistConfig = {
@@ -15,6 +16,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
     userpost: userPostSlice.reducer,
     usersession:userSessionSlice.reducer,
+    toast: toastSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

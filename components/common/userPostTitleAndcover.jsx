@@ -4,12 +4,13 @@ import { apiBasePath } from '../../utils/constant'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import { convertToBengaliDate } from '../../utils/convertToBanglaDate'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 import DialugueModal from './notification/DialugueModal'
 import Link from 'next/link'
 import { useDispatch } from 'react-redux'
 import { userPostAction } from '../redux/userpost-slice'
+import { toastAction } from '../redux/toast-slice'
 
 export default function UserPostTitleAndcover({
   id,
@@ -94,9 +95,8 @@ export default function UserPostTitleAndcover({
       console.log('Delete successful:', response.data);
 
       notification = 'পোস্টটি মুছে ফেলা হয়েছে'
-      notify();
-
-      dispatch(userPostAction.deleteApost(id))
+      dispatch(toastAction.setWarnedNotification(notification));
+      dispatch(userPostAction.deleteApost(id));
 
       dialogueRef.current.close();
 
@@ -234,10 +234,6 @@ export default function UserPostTitleAndcover({
 
         </div>
 
-      </div>
-
-      <div className='text-[16px]'>
-        <ToastContainer />
       </div>
     </>
   )

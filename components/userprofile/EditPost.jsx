@@ -5,8 +5,8 @@ import { FileUploader } from "react-drag-drop-files";
 import dynamic from 'next/dynamic';
 import { apiBasePath } from '../../utils/constant';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { toastAction } from '../redux/toast-slice';
 
 const CustomEditor = dynamic(() => {
   return import('../../components/custom-editor');
@@ -16,16 +16,12 @@ export default function EditPost() {
 
   const router = useRouter();
   const slug = router.query.postId;
-  console.log({ router })
-
+  const dispatch = useDispatch();
+  const userUuid = useSelector((state) => state.usersession.userUuid);
   let notification = ''
 
   const [fetchedPost, setFeathedPost] = useState([]);
-
   const [formData, setFormData] = useState();
-
-  console.log({ formData })
-
   const [selectedOption, setSelectedOption] = useState('');
   const [category, setCategory] = useState([]);
   const [content, setContent] = useState('')
@@ -33,10 +29,6 @@ export default function EditPost() {
   const [preview, setPreview] = useState('');
   const [audioPreview, setAudioPreview] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
-
-
-
-
 
 
   useEffect(() => {
@@ -59,10 +51,11 @@ export default function EditPost() {
 
     try {
       console.log('Inside try')
-      const result = await axios.get(
+      const result = await axios.post(
         `${apiBasePath}/getpost/${slug}`
       );
-      console.log('hello slug---', router)
+      console.log('hello slug---', router);
+      console.log('Edite post data ', result.data);
 
       setFeathedPost(result.data.object)
       setFormData(result.data.object)
@@ -140,22 +133,16 @@ export default function EditPost() {
       } else {
         // alert('ছবি আপলোড করুন')
         notification = 'ছবি আপলোড করুন';
-        notify1();
+        dispatch(toastAction.setWarnedNotification(notification));
       }
 
     }
-
-
   };
 
   const handleAudioFile = (acceptedFiles) => {
     console.log('file', acceptedFiles)
     if (acceptedFiles?.length > 0) {
-      console.log('IS ARRAY ', acceptedFiles)
-      // const imageFiles = acceptedFiles.map((file) => {
-      //     return file.type.startsWith('image/');
-      // });
-
+      console.log('IS ARRAY ', acceptedFiles);
       if (acceptedFiles[0].type.startsWith('audio/')) {
         const file = acceptedFiles[0];
         if (file) {
@@ -166,21 +153,14 @@ export default function EditPost() {
       } else {
         // alert('অডিও আপলোড করুন')
         notification = 'অডিও আপলোড করুন';
-        notify1();
+        dispatch(toastAction.setWarnedNotification(notification));
+
       }
 
     }
 
 
   }
-
-
-  function reloadPage(){
-    setTimeout(()=>{
-        router.push(`/user/${localStorage.getItem("uuid")}`)
-    }, 3000)
-}
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -218,42 +198,17 @@ export default function EditPost() {
 
       // alert("আপনার লেখাটির আপডেট সম্পন্ন হয়েছে");
       notification = 'আপনার লেখাটির আপডেট সম্পন্ন হয়েছে, অনুমোদনের জন্য এডমিনের নিকট পাঠানো হয়েছে';
-
-      reloadPage();
+      dispatch(toastAction.setWarnedNotification(notification));
       console.log('edit response', response);
+      router.push(`/user/${userUuid}`)
+
       // Handle successful update
     } catch (error) {
       console.error(error);
       // Handle error
     }
-    notify1();
 
   };
-
-
-  let postImage = preview;
-
-
-  const notify = () => toast.success(notification, {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  });
-
-  const notify1 = () => toast.warn(notification, {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-
-  });
-
 
   return (
     router.isReady &&
@@ -399,7 +354,6 @@ export default function EditPost() {
               >
                 পোস্ট আপডেট করুন
               </button>
-              <ToastContainer />
             </div>
           </div>
         </div>

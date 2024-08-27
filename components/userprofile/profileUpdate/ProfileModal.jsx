@@ -6,20 +6,23 @@ import { apiBasePath } from '../../../utils/constant'
 import Class from './profileEdit.module.css'
 import { useRouter } from 'next/router'
 import axios from 'axios'
-
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { UserContext } from '../../lekharpokaStore/user-context'
 import { readFile } from '../cropComponents/cropImage'
+import { useDispatch, useSelector } from 'react-redux'
+import Toast from '../../toast/Toast'
+import { toastAction } from '../../redux/toast-slice'
 
 export default function ProfileModal({ setShowModal, setuserprofiledata, showModal, handleClose, image = '' }) {
 
+    const dispatch = useDispatch();
     const router = useRouter();
     const { setUser } = useContext(UserContext);
+    const userUuid = useSelector((state) => state.usersession.userUuid);
 
     let notification = ''
 
-    const [fullName, setFullName] = useState('');
     const [gender, setGender] = useState('');
     const [designation, setDesignation] = useState('');
     const [designationFromApi, setDesignationFromApi] = useState([])
@@ -39,28 +42,15 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
     const [following, setFollowing] = useState(0);
     const [approvedPostNum, setApprovedPostNum] = useState(0);
     const [unapprovedPostNum, setunApprovedPostNum] = useState(0);
-
-
-    // get saved info
-    const [status, setStatus] = useState("");
     const [username, setUsername] = useState("");
-    const [userUuid, setUserUuid] = useState("");
-    const [userToken, setUserToken] = useState("");
-    const [number, setnumber] = useState("");
-
-    // designation list
     const [selectedDesignation, setSelectedDesignation] = useState(null);
-    const [desigNationId, setDesigNationId] = useState('')
 
     // Fetch user data on component mount
     useEffect(() => {
-        setUsername(localStorage.getItem("name") || "");
-        setUserToken(localStorage.getItem("token") || "");
-        setUserUuid(localStorage.getItem("uuid") || "");
-        setnumber(localStorage.getItem("phone") || "");
+
 
         //  ge tprofile data-----
-        fetch(`${apiBasePath}/getprofile/${localStorage.getItem("uuid")}`)
+        fetch(`${apiBasePath}/getprofile/${userUuid}`)
             .then((response) => response.json())
             .then((data) => {
                 // console.log('pofile details MODAL--------------->>>>>>>', data);
@@ -101,7 +91,7 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
 
 
         const fetchUserBioData = async () => {
-            const response = await fetch(`${apiBasePath}/bio/${localStorage.getItem("uuid")}`);
+            const response = await fetch(`${apiBasePath}/bio/${userUuid}`);
             const data = await response.json();
             setBio(data?.content)
             setBioId(data?._id)
@@ -170,15 +160,6 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
             .catch(error => console.error('Error:', error));
     }
 
-
-
-    function reloadPage() {
-        setTimeout(() => {
-            setIsSubMit(true)
-            setShowModal(false)
-            router.reload()
-        }, 2000)
-    }
     //  handle submit
 
     const handleSubmit = async (e) => {
@@ -190,44 +171,42 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
 
         if (!isValidPhone && !isSubmit) {
             notification = 'মোবাইল নাম্বার অবশ্যই ০১ দিয়ে শুরু হবে এবং ১১ ডিজিট হবে!';
-            notify(); // This will show a toast notification
-
+            dispatch(toastAction.setWarnedNotification(notification));
             return;
         }
 
         const isEmailValidated = validateEmail(email);
         if (!isEmailValidated) {
             notification = 'সঠিক ইমেইল দিন!';
-            notify(); // This will show a toast notification
+            dispatch(toastAction.setWarnedNotification(notification));
 
             return;
         }
 
 
-        //  update bio
-        // try {
-        //     const response = await axios.post(
-        //         `${apiBasePath}/bio`,
-        //         {
-        //             user_id: `${localStorage.getItem("uuid")}`,
-        //             content: bio,
-        //         },
-        //         {
-        //             headers: {
-        //                 "Content-Type": "application/json",
-        //             },
-        //         }
-        //     );
+        try {
+            const response = await axios.post(
+                `${apiBasePath}/bio`,
+                {
+                    user_id: `${userUuid}`,
+                    content: bio,
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
 
-        //     console.log('bio post res', response)
-        //     setuserprofiledata((prevData) => ({
-        //         ...prevData,
-        //         userBio: bio,
-        //     }))
+            console.log('bio post res', response)
+            setuserprofiledata((prevData) => ({
+                ...prevData,
+                userBio: bio,
+            }))
 
-        // } catch (error) {
-        //     console.error('Error updating profile:', error);
-        // }
+        } catch (error) {
+            console.error('Error updating profile:', error);
+        }
 
 
 
@@ -261,22 +240,26 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
 
         if (username.trim().length <= 0) {
             notification = 'দয়া করে প্রোফাইল এর নাম নির্বাচন করুন';
-            notify();
+            dispatch(toastAction.setWarnedNotification(notification));
+            
         }
         else if ((image?.length <= 0) && (!imageFile)) {
             notification = 'দয়া করে প্রোফাইল এর জন্য স্থিরচিত্র নির্বাচন করুন';
-            notify();
+            dispatch(toastAction.setWarnedNotification(notification));
+            
         }
         else if (designation?.length <= 0) {
             notification = 'আপনার পদবী প্রদান করুন';
-            notify();
+            dispatch(toastAction.setWarnedNotification(notification));
         }
         else if (!gender) {
             notification = 'আপনার লিঙ্গ নির্ধারণ করুন';
-            notify();
+            dispatch(toastAction.setWarnedNotification(notification));
+
         } else if (!birthOfDate) {
-            notification = 'আপনার জন্ম তারিখ প্রদান করুন';
-            notify();
+            // notification = 'আপনার জন্ম তারিখ প্রদান করুন';
+            // notify();
+            dispatch(toastAction.setWarnedNotification('আপনার জন্ম তারিখ প্রদান করুন'));
         } else {
             console.log('Inside formdata -----------')
 
@@ -292,7 +275,7 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
             formData.append('address', address);
             formData.append('email', email);
             formData.append('phone', phoneNumber);
-            formData.append('user_id', localStorage.getItem("uuid"));
+            formData.append('user_id', userUuid);
             // const token = JSON.parse(localStorage.getItem('token'));
             try {
                 console.log('before call api -----------')
@@ -340,22 +323,10 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
                         userStatus: profileStatus,
                         userAddress: address,
                     }));
-                    console.log('clicked')
-
-                    notification = 'প্রোফাইল সফলভাবে আপডেট হয়েছে';
-                    notify1();
+                    // notification = 'প্রোফাইল সফলভাবে আপডেট হয়েছে';
+                    // notify1();
+                    dispatch(toastAction.setSucessNotification('প্রোফাইল সফলভাবে আপডেট হয়েছে'));
                     handleClose();
-
-
-
-
-
-
-                    // console.log('Profile updated successfully:', data);
-                    // setIsSubMit(true);
-                    // setShowModal(false);
-
-                    //  reloadPage()
 
                 } else {
                     console.error('Failed to update profile:', response.statusText);
@@ -373,33 +344,38 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
         }
     };
 
-    const notify = () => toast.warn(notification, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: false,
-        draggable: true,
+    // const notify = () => toast.warn(notification, {
+    //     position: "top-center",
+    //     autoClose: 3000,
+    //     hideProgressBar: true,
+    //     closeOnClick: false,
+    //     pauseOnHover: false,
+    //     draggable: true,
+    //     progress: undefined,
+    //     theme: "light",
+    //     closeButton: false,
+    //     // transition: Bounce,
+    //     });
 
-    });
-
-    const notify1 = () => toast.success(notification, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: false,
-        draggable: true,
-
-    });
+    // const notify1 = () => toast.success(notification, {
+    //     position: "top-center",
+    //     autoClose: 3000,
+    //     hideProgressBar: true,
+    //     closeOnClick: false,
+    //     pauseOnHover: false,
+    //     draggable: true,
+    //     progress: undefined,
+    //     theme: "light",
+    //     closeButton: false,
+    //     // transition: Bounce,
+    //     });
 
 
     return (
         <>
 
             <div className={`${showModal ? 'block' : 'hidden'} fixed z-[9999] inset-0 overflow-y-auto flex items-center justify-center bg-black/70`} aria-labelledby="modal-title" role="dialog" aria-modal="true">
-                <ToastContainer />
-
+                {/* <ToastContainer /> */}
                 <div className=" inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
                 <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
                 <div className="inline-block align-bottom mt-[650px] mb-[300px] bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all lg:max-w-[700px] sm:align-middle sm:max-w-lg sm:w-full xs:max-w-[340px] w-full">
