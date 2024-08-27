@@ -185,27 +185,45 @@ export default function EditPost() {
       editFormData.append("file", selectedFile);
     }
 
-    try {
-      console.log({})
-      // const response = await axios.put(`${apiBasePath}/posts/${formData?._id}`, changedData);
-      const response = await fetch(`${apiBasePath}/posts/${formData?._id}`, {
-        method: "PUT",
-        headers: {
-
-        },
-        body: editFormData,
-      });
-
-      // alert("আপনার লেখাটির আপডেট সম্পন্ন হয়েছে");
-      notification = 'আপনার লেখাটির আপডেট সম্পন্ন হয়েছে, অনুমোদনের জন্য এডমিনের নিকট পাঠানো হয়েছে';
+    if (!formData?.title) {
+      notification = 'দয়া করে আপনার লেখার শিরোনাম দিন';
       dispatch(toastAction.setWarnedNotification(notification));
-      console.log('edit response', response);
-      router.push(`/user/${userUuid}`)
+    }
+    else if (!selectedOption) {
+      notification = 'দয়া করে আপনার লেখার ধরণ নির্বাচন করুন';
+      dispatch(toastAction.setWarnedNotification(notification));
+    }
+    else if (!formData?.summary) {
+      notification = 'দয়া করে আপনার লেখার সারমর্ম লিখুন';
+      dispatch(toastAction.setWarnedNotification(notification));
+    } else if (content.trim().length <= 0) {
+      notification = 'দয়া করে আপনার মূল লেখা লিখুন';
+      dispatch(toastAction.setWarnedNotification(notification));
+    } else {
 
-      // Handle successful update
-    } catch (error) {
-      console.error(error);
-      // Handle error
+      try {
+        console.log({})
+        // const response = await axios.put(`${apiBasePath}/posts/${formData?._id}`, changedData);
+        const response = await fetch(`${apiBasePath}/posts/${formData?._id}`, {
+          method: "PUT",
+          headers: {
+
+          },
+          body: editFormData,
+        });
+
+        // alert("আপনার লেখাটির আপডেট সম্পন্ন হয়েছে");
+        notification = 'আপনার লেখাটির আপডেট সম্পন্ন হয়েছে, অনুমোদনের জন্য এডমিনের নিকট পাঠানো হয়েছে';
+        dispatch(toastAction.setWarnedNotification(notification));
+        console.log('edit response', response);
+        router.push(`/user/${userUuid}`)
+
+        // Handle successful update
+      } catch (error) {
+        console.error(error);
+        // Handle error
+      }
+
     }
 
   };
