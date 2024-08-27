@@ -2,16 +2,9 @@
 import React, { useState, useEffect } from 'react'
 import Loading from '../../components/common/loading';
 import { apiBasePath } from '../../utils/constant';
-import Sidebar from '../../components/sidebar/Sidebar';
-import MainContentDivider from '../../components/common/mainContentDivider'
-import SobPostsOfWriterBody from '../../components/postOfWriter/sobPostsOfWriterBody'
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import { countWords } from '../../function/api';
-import SinglePostConponent from '../../components/common/singlePostComponent';
 import WriterProfileBanner from '../../components/userprofile/writerProfileBanner';
-import FollowerList from '../../components/userprofile/followerList';
-import FollowingList from '../../components/userprofile/followingList';
 import WriterPostList from '../../components/userprofile/WriterPostList';
 
 
@@ -35,8 +28,6 @@ export default function PostOfWriterPage() {
     const handleClose = () => setProfileController('profile');
 
     useEffect(() => {
-
-        // console.log("QUERY ", router.query.slug);
         const fetchPosts = async () => {
             console.log('------------------slug of writers ---------------', slug)
             try {
@@ -106,8 +97,6 @@ export default function PostOfWriterPage() {
 
                                 <WriterProfileBanner
                                     setProfileController={setProfileController}
-                                    // writerInfo={writerInfo}
-                                    // writerBio={writerBio}
                                     profileInfo={profileInfo}
                                     isSelfWriter={true}
                                 />

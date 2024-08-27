@@ -1,17 +1,15 @@
 "use client";
-import { ChangeEvent, useContext, useEffect, useState } from "react";
-import axios, { AxiosError } from "axios";
+import {useContext, useState } from "react";
+import axios from "axios";
 import SignInOption from '../../signInOption/SignInOption'
 import { apiBasePath } from "../../../utils/constant";
 import { useRouter } from "next/navigation";
 import Divider from '../../common/sidebardivider';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { AdminContext } from "../../store/adminpanel-context";
 import { UserContext } from "../../lekharpokaStore/user-context";
 import useTabSyncAuth from "../../../utils/useReloadUrl";
 import { userSessionAction } from "../../redux/usersession-slice";
 import { useDispatch, useSelector } from "react-redux";
+import { toastAction } from "../../redux/toast-slice";
 
 export default function Login() {
   const isLoggedIn = useSelector((state) => state.usersession.isLoggedIn);
@@ -43,12 +41,12 @@ export default function Login() {
     const newValue = e.target.value.replace(/[^0-9\b]/g, "");
 
     if (newValue.length > 11) {
-      setError("Phone number cannot exceed 11 digits.");
+      setError("১১ ডিজিট এর বেশি গ্রহণযোগ্য নয়!");
       return;
     }
 
     if (newValue.length > 1 && newValue.slice(0, 2) !== "01") {
-      setError("Phone number must start with 01.");
+      setError("০১ দিয়ে নাম্বার শুরু হবে !");
       return;
     }
 
@@ -104,7 +102,7 @@ export default function Login() {
         }));
 
         notification = 'সফলভাবে লগইন করেছেন';
-        notify1();
+        dispatch(toastAction.setSucessNotification(notification))
 
         const user = {
           userName: data.name,
@@ -124,15 +122,14 @@ export default function Login() {
       else if (response.data.status === "failed") {
         // alert(' সঠিক নাম্বার দিন ')
         notification = 'সঠিক নাম্বার দিন';
-        notify();
-
+        dispatch(toastAction.setWarnedNotification(notification));
       }
 
 
     } catch (error) {
       // alert('সঠিক পাসওয়ার্ড দিন');
       notification = 'সঠিক পাসওয়ার্ড দিন';
-      notify();
+      dispatch(toastAction.setWarnedNotification(notification));
     }
 
 
@@ -182,7 +179,7 @@ export default function Login() {
                 onChange={handleNumberhange}
                 value={number}
               />
-              {error && <p className="error text-red-500">{error}</p>}
+              {error && <p className="error text-red-500 pt-[5px]">{error}</p>}
             </div>
 
             <div className="relative">
@@ -219,8 +216,6 @@ export default function Login() {
               >
                 লগইন করুন
               </button>
-              <ToastContainer />
-
             </div>
 
             <SignInOption

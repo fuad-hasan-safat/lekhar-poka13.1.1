@@ -3,15 +3,13 @@
 import { apiBasePath } from "../../utils/constant";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Loading from "./loading";
-
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { UserContext } from "../lekharpokaStore/user-context";
 import useTabSyncAuth from "../../utils/useReloadUrl";
 import { useDispatch } from "react-redux";
 import { userSessionAction } from "../redux/usersession-slice";
+import { toastAction } from "../redux/toast-slice";
 
 
 export default function LoginForm({ logreg, btntext}) {
@@ -37,11 +35,6 @@ export default function LoginForm({ logreg, btntext}) {
   const [numberPrefix, setNumberPrefix] = useState('88');
   const [showPassword, setShowPassword] = useState(false);
 
-  useEffect(() => {
-
-    setStatus(localStorage.getItem("status") || "");
-
-  }, [status]);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -52,12 +45,12 @@ export default function LoginForm({ logreg, btntext}) {
     const newValue = e.target.value.replace(/[^0-9\b]/g, "");
 
     if (newValue.length > 11) {
-      setError("Phone number cannot exceed 11 digits.");
+      setError("১১ ডিজিট এর বেশি গ্রহণযোগ্য নয়!");
       return;
     }
 
     if (newValue.length > 1 && newValue.slice(0, 2) !== "01") {
-      setError("Phone number must start with 01.");
+      setError("০১ দিয়ে নাম্বার শুরু হবে !");
       return;
     }
 
@@ -116,7 +109,7 @@ export default function LoginForm({ logreg, btntext}) {
         }));
 
         notification = 'সফলভাবে লগইন করেছেন';
-        notify1();
+        dispatch(toastAction.setSucessNotification(notification))
 
         setStatus(data.status);
 
@@ -137,37 +130,15 @@ export default function LoginForm({ logreg, btntext}) {
       } else {
         // alert('সঠিক নাম্বার দিন');
         notification = 'সঠিক নাম্বার দিন';
-        notify();
+        dispatch(toastAction.setWarnedNotification(notification));
       }
     } catch (error) {
       // alert('সঠিক পাসওয়ার্ড দিন');
       notification = 'সঠিক পাসওয়ার্ড দিন';
       console.log(error);
-      notify();
-
+      dispatch(toastAction.setWarnedNotification(notification));
     }
-
-
   }
-
-  const notify = () => toast.warn(notification, {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-  });
-
-  const notify1 = () => toast.success(notification, {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-
-  });
 
 
   return (
@@ -231,8 +202,6 @@ export default function LoginForm({ logreg, btntext}) {
             >
               {btntext}
             </button>
-            <ToastContainer />
-
           </div>
 
         </div>

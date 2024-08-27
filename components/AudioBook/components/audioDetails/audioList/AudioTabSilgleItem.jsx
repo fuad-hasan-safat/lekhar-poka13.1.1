@@ -3,20 +3,19 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { AudioPlayListContext } from '../../../../store/audioPlayer-context';
 import { apiBasePath } from '../../../../../utils/constant';
 import axios from 'axios';
-
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { replaceUnderscoresWithSpaces } from '../../../../../function/api';
+import { useDispatch } from 'react-redux';
+import { toastAction } from '../../../../redux/toast-slice';
 
 export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) {
-    const { playList, setPlaylist, audioPlace, playListRenderScope, currentPlayingIndex, setCurrentAudioIndex, toggleAudioPlay, isAudioPlaying, setMyPlayList, myPlayList, setLatestPlaylist, latestPlayList } = useContext(AudioPlayListContext)
+    const dispatch = useDispatch();
+    const { audioPlace, playListRenderScope, currentPlayingIndex, toggleAudioPlay, isAudioPlaying, setMyPlayList, myPlayList, setLatestPlaylist, latestPlayList } = useContext(AudioPlayListContext)
     const [duration, setDuration] = useState(null);
     const [error, setError] = useState(false);
     const audioRef = useRef(null);
 
     let notification = '';
 
-    console.log({ audioPlace, playListRenderScope, currentPlayingIndex })
 
     useEffect(() => {
         const audioElement = audioRef.current;
@@ -63,15 +62,16 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
             if (response.data.status === "failed") {
                 if (response.data.msg === 'Audio Already in playlist') {
                     notification = `${songInfo.title} ইতিমধ্যে প্লেলিস্টে যুক্ত আছে!`;
+                    dispatch(toastAction.setWarnedNotification(notification))
                 } else {
                     notification = `${songInfo.title} প্লেলিস্টে যুক্ত করা যাচ্ছে না!`;
+                    dispatch(toastAction.setWarnedNotification(notification))
                 }
-                notify();
                 return;
             }
             setMyPlayList([...myPlayList, songInfo])
             notification = `${songInfo.title} প্লেলিস্টে যুক্ত হয়েছে!`;
-            notify1();
+            dispatch(toastAction.setSucessNotification(notification))
         } catch (error) {
             console.error('Error posting data:', error);
         }
@@ -79,6 +79,7 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
 
     async function handlePlayButton() {
         toggleAudioPlay(audioIndex, audioList, `details${songInfo._id}`);
+        console.log({ audioPlace, playListRenderScope, currentPlayingIndex, audioIndex })
 
         const data = {
             ebook_id: songInfo.ebook_id,
@@ -103,41 +104,13 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
     }
 
 
-
-    const notify1 = () => toast.success(notification, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-
-    });
-
-    const notify = () => toast.warn(notification, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-
-    });
-
     const title = replaceUnderscoresWithSpaces(songInfo.title)
     console.log(title);
 
     let shortenedTitle = title;
-    // if(title?.length > 84) {
-    //     shortenedTitle = title?.slice(0,81) + '...'
-    // }
-
-
 
     return (
         <>
-            <ToastContainer />
-
             <div className='audio__tab__item'>
                 <div className='audio__tab__left relative'>
                     <div>

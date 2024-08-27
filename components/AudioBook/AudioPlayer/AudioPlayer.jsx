@@ -44,7 +44,7 @@ export default function AudioPlayer() {
 
   useEffect(() => {
     currentSong = songs[currentPlayingIndex];
-  })
+  },[])
 
   useEffect(() => {
     setDuration(audioPlayer?.current?.duration);
@@ -121,7 +121,6 @@ export default function AudioPlayer() {
   if (songs.length <= 0) return null;
 
   const title = replaceUnderscoresWithSpaces(currentSong?.title)
-  console.log(title);
 
   let shortenedTitle = title;
   if(title?.length > 25) {

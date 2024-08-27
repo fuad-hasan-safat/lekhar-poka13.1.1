@@ -3,14 +3,14 @@ import { useRouter } from 'next/router'
 import { apiBasePath } from '../../utils/constant'
 import React, { useEffect, useState } from 'react'
 import { Rating } from 'react-simple-star-rating'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
+import { toastAction } from '../redux/toast-slice'
 
 
 export default function RatingComponent({ post_id, setRating, rating, notification }) {
 
+  const dispatch = useDispatch();
   const userUuid = useSelector((state) => state.usersession.userUuid);
   const isLoogedIn = useSelector((state) => state.usersession.isLoggedIn);
 
@@ -47,10 +47,9 @@ export default function RatingComponent({ post_id, setRating, rating, notificati
 
   async function submitRating(id) {
 
-    if(userRating > 0 ){
+    if (userRating > 0) {
       notification = 'আপনি ইতিমধ্যে রেটিং দিয়েছেন';
-      notify();
-
+      dispatch(toastAction.setWarnedNotification(notification));
       return;
     }
 
@@ -78,14 +77,14 @@ export default function RatingComponent({ post_id, setRating, rating, notificati
       } else {
 
         notification = 'রেটিং সফলভাবে সম্পন্ন হয়েছে';
-        notify1();
+        dispatch(toastAction.setSucessNotification(notification));
 
       }
 
     } else {
 
       notification = 'দয়া করে লগইন করুন';
-      notify();
+      dispatch(toastAction.setWarnedNotification(notification));
     }
 
   }
@@ -94,26 +93,6 @@ export default function RatingComponent({ post_id, setRating, rating, notificati
   const onPointerLeave = () => console.log('Leave')
   const onPointerMove = (value, index) => console.log(value, index, rating)
 
-  const notify = () => toast.warn(notification, {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-
-  });
-
-  const notify1 = () => toast.success(notification, {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-
-  });
-
   if (!isMounted) return null;
 
   return (
@@ -121,14 +100,9 @@ export default function RatingComponent({ post_id, setRating, rating, notificati
 
 
       <div className='relative start__rating place-content-center justify-center  mt-[50px] pt-[50px] pb-[50px] mx-[40px] mb-[50px] rounded-xl float-left text-center border-2 text-black border-gray-400'>
-
-        <div className=''>
-          <ToastContainer />
-        </div>
         <p>রেটিং দিন ।</p>
 
         <div>
-
           <Rating
             style={{ float: 'left', textAlign: 'center' }}
             onClick={handleRating}
@@ -144,7 +118,7 @@ export default function RatingComponent({ post_id, setRating, rating, notificati
         <button
           onClick={() => submitRating(post_id)}
           className='bg-orange-400 px-2 py-1 text-white h-[34px] w-[195px] rounded-md'
-          // disabled={userRating > 0}
+        // disabled={userRating > 0}
         >
           সাবমিট
         </button>

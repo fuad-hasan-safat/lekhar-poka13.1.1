@@ -1,13 +1,11 @@
 'use client'
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import TechnicalDetails from './technicalDetails';
 import Summary from './Summary';
 import CommentsOfWriter from './CommentsOfWriter';
 import Rating from './Rating';
 import AudioTabComponent from './AudioTabComponent';
-import AudioPlayer from '../../AudioPlayer/AudioPlayer';
-import { singleAudioData } from '../sampleData/singleAudioDetailsPage';
 import { AudioDetailsTabContext } from '../../../store/audiodetailstab-context';
 
 const AudioTabs = ({singleAudioData}) => {

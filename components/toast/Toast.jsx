@@ -26,7 +26,7 @@ const Toast = () => {
     >
         {toastType === 'failed' &&  <p>  <span className='text-[#F9A106] text-[26px]'><i class="ri-error-warning-fill"></i></span><span className='pl-[10px] text-gray-900'>{toastMessage} </span></p>}
    
-        {toastType === 'done' &&  <p>  <span className='text-[#2bca0f99]'><i class="ri-check-double-line"></i></span><span className='pl-[10px] text-gray-900'>{toastMessage} </span></p>}
+        {toastType === 'done' &&  <p>  <span className='text-[#2bca0f99] text-[26px]'><i class="ri-check-double-line"></i></span><span className='pl-[10px] text-gray-900'>{toastMessage} </span></p>}
     </div>
   );
 };

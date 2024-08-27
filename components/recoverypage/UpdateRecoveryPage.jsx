@@ -9,13 +9,6 @@ import PassRecovertFormAterOTP from "../common/recoveryFormAfterOtp";
 
 
 const PassRecoveryPageBeforeOTP = () => {
-
-  const [user, setUser] = useState(null);
-  const [status, setStatus] = useState("");
-  const [username, setUsername] = useState("");
-  const [userUuid, setUserUuid] = useState("");
-  // google login state start
-  const [profile, setProfile] = useState([]);
   const [email, setEmail] = useState('')
   const [isOtpSucess, SetIsOtpSucess] = useState(false)
   const [isOtpVarified, setIsOtpVarified] = useState(false)
@@ -59,13 +52,6 @@ const PassRecoveryPageBeforeOTP = () => {
 
 
                     <SignInOption
-                      user={user}
-                      setUser={setUser}
-                      profile={profile}
-                      setProfile={setProfile}
-                      setStatus={setStatus}
-                      setUsername={setUsername}
-                      setUserUuid={setUserUuid}
                       setEmail={setEmail}
                       title="অথবা সাইন ইন করুন"
                       icon1="/images/loginOptionIcon/google.svg"

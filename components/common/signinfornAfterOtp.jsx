@@ -4,14 +4,14 @@ import { apiBasePath } from "../../utils/constant";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toastAction } from "../redux/toast-slice";
+import { useDispatch } from "react-redux";
 
 
 export default function SigninFormAterOTP({ logreg, btntext, phonenumber }) {
 
-    const router = useRouter()
-
+    const router = useRouter();
+    const dispatch = useDispatch();
     const [state, setState] = useState({
         fullName: '',
         password: '',
@@ -77,7 +77,7 @@ export default function SigninFormAterOTP({ logreg, btntext, phonenumber }) {
 
         if (state.password !== state.retypePassword) {
 
-            setState((prevState) => ({ ...prevState, error: 'পাসওয়ার্ড দুটি এক হয়নি'}));
+            setState((prevState) => ({ ...prevState, error: 'পাসওয়ার্ড দুটি এক হয়নি' }));
             isValid = false;
 
         }
@@ -86,19 +86,18 @@ export default function SigninFormAterOTP({ logreg, btntext, phonenumber }) {
     };
 
 
-    function reloadPage(){
-        setTimeout(()=>{
+    function reloadPage() {
+        setTimeout(() => {
             router.push(`/account/login`)
-      
         }, 1000)
-      }
+    }
 
 
-      const handleKeyDown = (e) => {
+    const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
             handleSubmit();
         }
-      };  
+    };
 
     const handleSubmit = async () => {
 
@@ -118,39 +117,18 @@ export default function SigninFormAterOTP({ logreg, btntext, phonenumber }) {
 
                 // alert('আপনার রেজিস্ট্রেশন সম্পূর্ণ হয়েছে। অনুগ্রহ করে লগইন করুন।')
                 notification = 'আপনার রেজিস্ট্রেশন সম্পূর্ণ হয়েছে। অনুগ্রহ করে লগইন করুন।';
-                notify1();
-
+                dispatch(toastAction.setSucessNotification(notification));
                 reloadPage()
-                
+
             } catch (error) {
 
                 // alert('আপনি আগে থেকেই সাইন আপ করেছেন');
                 notification = 'আপনি আগে থেকেই সাইন আপ করেছেন';
-                notify()
+                dispatch(toastAction.setWarnedNotification(notification));
             }
         }
     };
 
-
-    const notify = () => toast.warn(notification, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-    
-      });
-    
-      const notify1 = () => toast.success(notification, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-    
-      });
 
     return (
         <>
