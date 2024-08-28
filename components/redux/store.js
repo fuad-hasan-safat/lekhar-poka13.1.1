@@ -5,6 +5,7 @@ import { combineReducers } from 'redux';
 import userPostSlice from './userpost-slice';
 import userSessionSlice from './usersession-slice';
 import toastSlice from './toast-slice';
+import audioplayerSlice from './audioplayer-slice';
 
 // Persist configuration
 const persistConfig = {
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
     userpost: userPostSlice.reducer,
     usersession:userSessionSlice.reducer,
     toast: toastSlice.reducer,
+    audioplayer: audioplayerSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

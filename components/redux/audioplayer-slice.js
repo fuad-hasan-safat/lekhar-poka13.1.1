@@ -4,27 +4,65 @@ const audioplayerSlice = createSlice({
     name: 'audioplayer',
     initialState: {
         isAudioPlaying: false,
-        currentPlaylistindex: -1,
+        currentAudioIndex: -1,
+        currentSongId: null,
         currentAudioScope: null,
-        currentAudio: {
-            id: null,
-            title: null,
-            src: null,
-            writer: null,
-            image: null
-        },
-        currentPlaylist: []
-    }, reducers:{
-        togglePlay(state, action){
-            if(state.isAudioPlaying){
-                state.isAudioPlaying = false;
+        currentPlaylist: [],
+        isShuffle: false,
+        isRepeat: false,
+
+    }, reducers: {
+        togglePlay(state, action) {
+            if (state.isAudioPlaying) {
+                if (state.currentAudioIndex === action.payload.audioIndex && state.currentAudioScope === action.payload.audioscope) {
+                    state.isAudioPlaying = false;
+                } else if (state.currentAudioScope === action.payload.audioscope && state.currentAudioIndex !== action.payload.audioIndex) {
+                    state.currentAudioIndex = action.payload.audioIndex;
+                    state.currentSongId = action.payload.currentSongId;
+
+                }else{
+                    state.currentAudioIndex = action.payload.audioIndex;
+                    state.currentAudioScope = action.payload.audioscope;
+                    state.currentPlaylist = action.payload.audioList;
+                    state.currentSongId = action.payload.currentSongId;
+                }
             }
 
-            if(!state.isAudioPlaying){
-                state.currentPlaylistindex = action.payload.audioIndex;
+            else if (!state.isAudioPlaying && state.currentAudioScope && state.currentAudioScope === action.payload.audioscope) {
+                state.isAudioPlaying = true;
+            }
+
+            else if (!state.isAudioPlaying) {
+                state.currentAudioIndex = action.payload.audioIndex;
                 state.currentAudioScope = action.payload.audioscope;
                 state.currentPlaylist = action.payload.audioList;
+                state.currentSongId = action.payload.currentSongId;
+                state.isAudioPlaying = true;
             }
+        },
+        togglePlayAudioBar(state) {
+            state.isAudioPlaying = !state.isAudioPlaying;
+        },
+        toggleShuffle(state) {
+            state.isShuffle = !state.isShuffle;
+        },
+        toggleRepeat(state) {
+            state.isRepeat = !state.isRepeat;
+        },
+        stopAudioPlaying(state) {
+            state.isAudioPlaying = false;
+        },
+        setCurrentAudioIndex(state, action) {
+            state.currentAudioIndex = action.payload;
+        },
+        setCurrntAudioId(state, action){
+            state.currentSongId = action.payload;
+
         }
+
     }
 })
+
+export const audioPlayerAction = audioplayerSlice.actions;
+
+export default audioplayerSlice;

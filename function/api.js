@@ -52,11 +52,12 @@ export function countWords(content = '  ', limit) {
 
 
 export function replaceUnderscoresWithSpaces(str) {
-  str = str.replace(/_/g, ' ');
+  if(!str) return;
+  str = str?.replace(/_/g, ' ');
 
-  const dotIndex = str.indexOf('.');
+  const dotIndex = str?.indexOf('.');
   if (dotIndex !== -1) {
-    str = str.substring(0, dotIndex);
+    str = str?.substring(0, dotIndex);
   }
 
   return str;

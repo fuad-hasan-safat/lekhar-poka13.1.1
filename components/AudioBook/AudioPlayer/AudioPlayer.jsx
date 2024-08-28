@@ -15,19 +15,27 @@ import { useRouter } from "next/navigation";
 import { AudioPlayListContext } from "../../store/audioPlayer-context";
 import { apiBasePath } from "../../../utils/constant";
 import { replaceUnderscoresWithSpaces } from "../../../function/api";
+import { useDispatch, useSelector } from "react-redux";
+import { audioPlayerAction } from "../../redux/audioplayer-slice";
 
 export default function AudioPlayer() {
 
-  const { playList, isShuffle, isRepeat, toggleReapet, toggleShuffle, currentPlayingIndex, audioPlace, nextSongPlay, prevSongPlay, toggleAudioPlay, isAudioPlaying, resetAudioPlayer } = useContext(AudioPlayListContext)
+  const dispatch = useDispatch();
+  const songs = useSelector((state) => state.audioplayer.currentPlaylist);
+  const currentAudioIndex = useSelector((state) => state.audioplayer.currentAudioIndex);
+  const isAudioPlaying = useSelector((state) => state.audioplayer.isAudioPlaying);
+  const { isShuffle, isRepeat } = useSelector((state) => state.audioplayer);
 
-  const songs = playList;
+
+  // const { playList, isShuffle, isRepeat, toggleReapet, toggleShuffle, currentPlayingIndex, audioPlace, nextSongPlay, prevSongPlay, toggleAudioPlay, isAudioPlaying, resetAudioPlayer } = useContext(AudioPlayListContext)
+
+  // const songs = playList;
   const audioPlayer = useRef(null);
-  const [currentSongIndex, setCurrentSongIndex] = useState(currentPlayingIndex);
   const [volume, setVolume] = useState(0.5);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isMute, setIsMute] = useState(false);
-  var currentSong = songs[currentPlayingIndex];
+  var currentSong = songs[currentAudioIndex];
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -37,8 +45,8 @@ export default function AudioPlayer() {
 
 
   useEffect(() => {
-    currentSong = songs[currentPlayingIndex];
-  }, [])
+    currentSong = songs[currentAudioIndex];
+  }, [currentAudioIndex])
 
   useEffect(() => {
     setDuration(audioPlayer?.current?.duration);
@@ -96,18 +104,96 @@ export default function AudioPlayer() {
 
     if (!isMute) {
       const rect = e.target.getBoundingClientRect();
-
       const x = e.clientX - rect.left;
       const width = rect.width;
       const newVolume = x / width;
 
       audioPlayer.current.volume = newVolume;
-
       setVolume(newVolume);
+    }
+  };
+
+  function toggleShuffle() {
+    dispatch(audioPlayerAction.toggleShuffle());
+  }
+  function toggleReapet() {
+    dispatch(audioPlayerAction.toggleRepeat());
+  }
+
+  function prevSongPlay() {
+    if (isAudioPlaying) {
+      let newIndex = 0;
+      if (isShuffle) {
+        newIndex = Math.floor(Math.random() * songs?.length)
+      } else if (currentAudioIndex === 0) {
+        newIndex = songs?.length - 1;
+      } else {
+        newIndex = currentAudioIndex - 1;
+      }
+
+      dispatch(audioPlayerAction.setCurrentAudioIndex(newIndex));
+      dispatch(audioPlayerAction.setCurrntAudioId(songs[newIndex]?._id));
+
+    } else {
+      let newIndex = 0;
+      if (currentAudioIndex === 0) {
+        newIndex = songs?.length - 1;
+      } else {
+        newIndex = currentAudioIndex - 1;
+      }
+      dispatch(audioPlayerAction.setCurrentAudioIndex(newIndex));
+      dispatch(audioPlayerAction.setCurrntAudioId(songs[newIndex]?._id));
 
     }
 
-  };
+  }
+
+  function nextSongPlay() {
+    if (isAudioPlaying) {
+      if (isAudioPlaying && songs?.length <= 1) {
+        dispatch(audioPlayerAction.stopAudioPlaying());
+      } else {
+        if (isShuffle) {
+          const randomIndex = Math.floor(Math.random() * songs?.length);
+          dispatch(audioPlayerAction.setCurrentAudioIndex(randomIndex));
+          dispatch(audioPlayerAction.setCurrntAudioId(songs[randomIndex]?._id));
+        } else {
+          let newIndex = 0;
+          if (currentAudioIndex === songs?.length - 1) {
+            newIndex = 0;
+          } else {
+            newIndex = currentAudioIndex + 1;
+          }
+
+          dispatch(audioPlayerAction.setCurrentAudioIndex(newIndex));
+          dispatch(audioPlayerAction.setCurrntAudioId(songs[newIndex]?._id));
+
+
+        }
+      }
+    } else {
+      let newIndex = 0;
+      if (currentAudioIndex === songs?.length - 1) {
+        newIndex = 0;
+      } else {
+        newIndex = currentAudioIndex + 1;
+      }
+
+      dispatch(audioPlayerAction.setCurrentAudioIndex(newIndex));
+      dispatch(audioPlayerAction.setCurrntAudioId(songs[newIndex]?._id));
+
+
+    }
+
+  }
+
+  function resetAudioPlayer() {
+
+  }
+
+  function toggleAudioPlayer() {
+    dispatch(audioPlayerAction.togglePlayAudioBar());
+  }
 
 
   if (!mounted) return null;
@@ -163,7 +249,7 @@ export default function AudioPlayer() {
                   <button onClick={prevSongPlay}>
                     <MdSkipPrevious />
                   </button>
-                  <button className="text-4xl" onClick={() => toggleAudioPlay(currentPlayingIndex, playList, audioPlace)}>
+                  <button className="text-4xl" onClick={toggleAudioPlayer}>
                     {isAudioPlaying ?
                       //  <MdPause /> 
                       <>

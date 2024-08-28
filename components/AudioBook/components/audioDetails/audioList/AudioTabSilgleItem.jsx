@@ -6,11 +6,17 @@ import axios from 'axios';
 import { replaceUnderscoresWithSpaces } from '../../../../../function/api';
 import { useDispatch, useSelector } from 'react-redux';
 import { toastAction } from '../../../../redux/toast-slice';
+import { audioPlayerAction } from '../../../../redux/audioplayer-slice';
 
 export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) {
     const dispatch = useDispatch();
     const userUuid = useSelector((state) => state.usersession.userUuid);
-    const { audioPlace, playListRenderScope, currentPlayingIndex, toggleAudioPlay, isAudioPlaying, setMyPlayList, myPlayList, setLatestPlaylist, latestPlayList } = useContext(AudioPlayListContext)
+    const currentSongId = useSelector((state)=> state.audioplayer.currentSongId);
+    const isAudioPlaying = useSelector((state)=> state.audioplayer.isAudioPlaying);
+    const currentAudioScope = useSelector((state) => state.audioplayer.currentAudioScope);
+
+    const isPlayButton = songInfo._id === currentSongId;
+
     const [duration, setDuration] = useState(null);
     const [error, setError] = useState(false);
     const audioRef = useRef(null);
@@ -45,7 +51,7 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
         };
 
 
-    }, [songInfo?.audio]);
+    }, [songInfo?.audio, songInfo?.id]);
 
     async function handleAddMyPlaylist() {
         console.log({ songInfo })
@@ -79,8 +85,14 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
     }
 
     async function handlePlayButton() {
-        toggleAudioPlay(audioIndex, audioList, `details`);
-        console.log({ audioPlace, playListRenderScope, currentPlayingIndex, audioIndex })
+
+        dispatch(audioPlayerAction.togglePlay({
+            audioIndex: audioIndex,
+            audioscope: `details`,
+            audioList: audioList,
+            currentSongId: songInfo._id,
+        }))
+
 
         const data = {
             ebook_id: songInfo.ebook_id,
@@ -132,7 +144,7 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
                 </div>
 
                 <div className='audio__tab__playbutton'>
-                    <button onClick={handlePlayButton}>{isAudioPlaying && audioIndex === currentPlayingIndex && audioPlace === `details` ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</button>
+                    <button onClick={handlePlayButton}>{ isAudioPlaying &&  currentAudioScope === 'details' && currentSongId === songInfo._id ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</button>
                     <button onClick={handleAddMyPlaylist} className='text-[#484848] text-opacity-[50%] lg:ml-[18px] md:ml-[15px] sm:ml-[12px] xs:ml-[10px]'><i class="ri-add-circle-fill"></i></button>
                 </div>
 

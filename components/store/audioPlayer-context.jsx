@@ -91,9 +91,6 @@ export default function AudioPlaylistContextProvider({ children }) {
           ? 0
           : prevIndex + 1
     );
-
-
-
   };
 
   const playPreviousSong = () => {
