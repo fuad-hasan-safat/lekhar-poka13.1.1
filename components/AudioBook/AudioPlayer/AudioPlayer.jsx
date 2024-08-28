@@ -20,8 +20,6 @@ export default function AudioPlayer() {
 
   const { playList, isShuffle, isRepeat, toggleReapet, toggleShuffle, currentPlayingIndex, audioPlace, nextSongPlay, prevSongPlay, toggleAudioPlay, isAudioPlaying, resetAudioPlayer } = useContext(AudioPlayListContext)
 
-
-
   const songs = playList;
   const audioPlayer = useRef(null);
   const [currentSongIndex, setCurrentSongIndex] = useState(currentPlayingIndex);
@@ -29,10 +27,6 @@ export default function AudioPlayer() {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isMute, setIsMute] = useState(false);
-
-
-
-
   var currentSong = songs[currentPlayingIndex];
   const [mounted, setMounted] = useState(false);
 
@@ -44,7 +38,7 @@ export default function AudioPlayer() {
 
   useEffect(() => {
     currentSong = songs[currentPlayingIndex];
-  },[])
+  }, [])
 
   useEffect(() => {
     setDuration(audioPlayer?.current?.duration);
@@ -79,7 +73,7 @@ export default function AudioPlayer() {
       audioPlayer.current?.play();
     } else {
       nextSongPlay();
-     
+
     }
   };
 
@@ -123,8 +117,8 @@ export default function AudioPlayer() {
   const title = replaceUnderscoresWithSpaces(currentSong?.title)
 
   let shortenedTitle = title;
-  if(title?.length > 25) {
-      shortenedTitle = title?.slice(0,22) + '...'
+  if (title?.length > 25) {
+    shortenedTitle = title?.slice(0, 22) + '...'
   }
 
   return createPortal((
@@ -178,8 +172,8 @@ export default function AudioPlayer() {
                         ></img>
                       </>
                       :
-                      <MdPlayArrow
-                      />}
+                      <MdPlayArrow />
+                    }
                   </button>
                   <button onClick={nextSongPlay}>
                     <MdSkipNext />
@@ -209,7 +203,7 @@ export default function AudioPlayer() {
                 <button className="">
                   <img src="/images/icons/audioControl.svg"></img>
                 </button> */}
-                
+
                 {/* volume icon */}
                 {!isMute && <img className="cursor-pointer" onClick={() => { setIsMute(true); audioPlayer.current.volume = 0; }} width={30} height={30} src="/images/icons/ic_volumeon.svg"></img>}
                 {isMute && <img className="cursor-pointer" onClick={() => { setIsMute(false); audioPlayer.current.volume = volume }} width={30} height={30} src="/images/icons/ic_volumeoff.svg"></img>}
