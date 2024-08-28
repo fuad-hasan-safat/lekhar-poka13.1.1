@@ -11,8 +11,6 @@ import {
   MdRepeat
 } from "react-icons/md";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import { useRouter } from "next/navigation";
-import { AudioPlayListContext } from "../../store/audioPlayer-context";
 import { apiBasePath } from "../../../utils/constant";
 import { replaceUnderscoresWithSpaces } from "../../../function/api";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,49 +22,71 @@ export default function AudioPlayer() {
   const songs = useSelector((state) => state.audioplayer.currentPlaylist);
   const currentAudioIndex = useSelector((state) => state.audioplayer.currentAudioIndex);
   const isAudioPlaying = useSelector((state) => state.audioplayer.isAudioPlaying);
+  const currentSongPlayedTime = useSelector((state) => state.audioplayer.currentSongPlayedTime);
   const { isShuffle, isRepeat } = useSelector((state) => state.audioplayer);
 
-
-  // const { playList, isShuffle, isRepeat, toggleReapet, toggleShuffle, currentPlayingIndex, audioPlace, nextSongPlay, prevSongPlay, toggleAudioPlay, isAudioPlaying, resetAudioPlayer } = useContext(AudioPlayListContext)
-
-  // const songs = playList;
   const audioPlayer = useRef(null);
   const [volume, setVolume] = useState(0.5);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isMute, setIsMute] = useState(false);
-  var currentSong = songs[currentAudioIndex];
   const [mounted, setMounted] = useState(false);
+  const currentSong = songs[currentAudioIndex];
+
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  useEffect(() => {
+    if (mounted && audioPlayer.current) {
+      const interval = setInterval(() => {
+
+        const currentTime = audioPlayer.current.currentTime;
+        dispatch(audioPlayerAction.setCurrentSongPlayedTime(currentTime));
+
+      }, 100); // Every 10 seconds
+
+      return () => clearInterval(interval);
+    }
+  }, [mounted, isAudioPlaying, dispatch]);
+
 
 
   useEffect(() => {
-    currentSong = songs[currentAudioIndex];
-  }, [currentAudioIndex])
+    if (mounted) {
 
-  useEffect(() => {
-    setDuration(audioPlayer?.current?.duration);
+      if (audioPlayer.current) {
 
-  }, [currentSong]);
+        if (isAudioPlaying) {
+          console.log('Trying to play audio...');
+          audioPlayer.current.play().then(() => {
+            console.log('Audio playing');
+          }).catch((error) => {
+            dispatch(audioPlayerAction.stopAudioPlaying())
+            audioPlayer.current.currentTime = currentSongPlayedTime;
+            console.error('Playback error:', error);
+          });
+        } else {
+          console.log('Pausing audio...');
+          audioPlayer.current.pause();
+          // audioPlayer.current.currentTime = currentSongPlayedTime;
 
-  useEffect(() => {
-
-    if (isAudioPlaying) {
-
-      audioPlayer.current?.play();
-
-    } else {
-
-      audioPlayer.current?.pause();
-
+        }
+      } else {
+        console.error('Audio player is null');
+      }
     }
 
-  }, [isAudioPlaying, currentSong]);
 
+  }, [isAudioPlaying, currentSong, mounted]);
+
+  useEffect(() => {
+    if (audioPlayer.current) {
+      audioPlayer.current.volume = volume;
+      audioPlayer.current.muted = isMute;
+    }
+  }, [volume, isMute]);
 
   const handleTimeUpdate = () => {
     setCurrentTime(audioPlayer.current?.currentTime);
@@ -196,9 +216,8 @@ export default function AudioPlayer() {
   }
 
 
-  if (!mounted) return null;
+  if (!mounted || songs.length <= 0) return null;
 
-  if (songs.length <= 0) return null;
 
   const title = replaceUnderscoresWithSpaces(currentSong?.title)
 
@@ -238,6 +257,7 @@ export default function AudioPlayer() {
                 <audio
                   src={`${apiBasePath}/${currentSong?.audio.slice(currentSong.audio.indexOf('/') + 1)}`}
                   ref={audioPlayer}
+                  key={currentSong?._id || 'default'}
                   onTimeUpdate={handleTimeUpdate}
                   onLoadedMetadata={handleLoadedMetadata}
                   onEnded={handleEnded}

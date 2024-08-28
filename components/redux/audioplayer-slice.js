@@ -6,6 +6,7 @@ const audioplayerSlice = createSlice({
         isAudioPlaying: false,
         currentAudioIndex: -1,
         currentSongId: null,
+        currentSongPlayedTime: 0,
         currentAudioScope: null,
         currentPlaylist: [],
         isShuffle: false,
@@ -57,7 +58,9 @@ const audioplayerSlice = createSlice({
         },
         setCurrntAudioId(state, action){
             state.currentSongId = action.payload;
-
+        },
+        setCurrentSongPlayedTime(state, action){
+            state.currentSongPlayedTime = action.payload;
         }
 
     }
