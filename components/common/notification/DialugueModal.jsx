@@ -2,26 +2,22 @@ import { useRouter } from "next/router";
 import { forwardRef, useContext } from "react"
 import { UserContext } from "../../lekharpokaStore/user-context";
 import useTabSyncAuth from "../../../utils/useReloadUrl";
-import { AudioPlayListContext } from "../../store/audioPlayer-context";
 import { useDispatch } from "react-redux";
 import { userSessionAction } from "../../redux/usersession-slice";
+import { audioPlayerAction } from "../../redux/audioplayer-slice";
+import { userPostAction } from "../../redux/userpost-slice";
+import { playlistAction } from "../../redux/playlist-slice";
 const DialugueModal = forwardRef(function DialugueModal({ alert, address, type }, ref) {
 
     const { triggerLogout } = useTabSyncAuth();
     const dispatch = useDispatch();
     const { setUser } = useContext(UserContext);
-    const {resetAudioPlayer} = useContext(AudioPlayListContext);
 
     const router = useRouter();
     function logout() {
-        localStorage.removeItem("status");
-        localStorage.removeItem("name");
-        localStorage.removeItem("uuid");
-        localStorage.removeItem("phone");
-        localStorage.removeItem("token");
-        localStorage.removeItem("usertype");
-        localStorage.removeItem("email");
-
+        dispatch(playlistAction.removePlayList());
+        dispatch(userPostAction.removePost());
+        dispatch(audioPlayerAction.resetAudioPlayer());
         dispatch(userSessionAction.removeUser());
 
         const user = {
@@ -33,7 +29,6 @@ const DialugueModal = forwardRef(function DialugueModal({ alert, address, type }
             isLoggedIn: false,
             isloggedOut: true,
         }
-        resetAudioPlayer();
         setUser(user);
         triggerLogout();
         ref.current.close();

@@ -9,9 +9,6 @@ import useTabSyncAuth from '../../utils/useReloadUrl';
 import { userSessionAction } from '../redux/usersession-slice';
 import { useDispatch } from 'react-redux';
 
-// import { LoginSocialFacebook } from "reactjs-social-login";
-// import { FacebookLoginButton } from "react-social-login-buttons";
-
 export default function SignInOption({
     title,
     icon1,
@@ -19,12 +16,6 @@ export default function SignInOption({
     lowermessege1,
     lowermessege2,
     signLogLink,
-    // user,
-    // setUserLog,
-    // setProfile,
-    // setStatus,
-    // setUsername,
-    // setUserUuid,
 }) {
 
 

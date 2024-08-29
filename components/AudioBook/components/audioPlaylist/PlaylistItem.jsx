@@ -1,13 +1,16 @@
 'use client'
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import { AudioPlayListContext } from '../../../store/audioPlayer-context';
+import React, { useEffect, useRef, useState } from 'react'
 import { apiBasePath } from '../../../../utils/constant';
 import { replaceUnderscoresWithSpaces } from '../../../../function/api';
+import { useDispatch, useSelector } from 'react-redux';
+import { audioPlayerAction } from '../../../redux/audioplayer-slice';
 
 export default function PlaylistItem({ songInfo, songIndex, songList, audioScope }) {
     console.log('song info-----', songInfo)
-    const { currentPlayingIndex, playList, audioPlace, toggleAudioPlay, isAudioPlaying } = useContext(AudioPlayListContext)
-
+    const dispatch = useDispatch();
+    const isAudioPlaying = useSelector((state) => state.audioplayer.isAudioPlaying);
+    const currentAudioScope = useSelector((state) => state.audioplayer.currentAudioScope);
+    const currentSongId = useSelector((state) =>state.audioplayer.currentSongId);
     const [duration, setDuration] = useState(null);
     const [error, setError] = useState(false);
     const audioRef = useRef(null);
@@ -41,6 +44,16 @@ export default function PlaylistItem({ songInfo, songIndex, songList, audioScope
 
     }, [songInfo?.audio]);
 
+
+    function handlePlayButton(){
+        dispatch(audioPlayerAction.togglePlay({
+            audioIndex: songIndex,
+            audioscope: audioScope,
+            audioList: songList,
+            currentSongId: songInfo._id,
+        }))
+    }
+
     const title = replaceUnderscoresWithSpaces(songInfo.title)
     console.log(title);
 
@@ -69,7 +82,7 @@ export default function PlaylistItem({ songInfo, songIndex, songList, audioScope
             </div>
 
             <div className='audio__playlist__playbutton'>
-                <button onClick={() => toggleAudioPlay(songIndex, songList, audioScope)}>{isAudioPlaying && songIndex === currentPlayingIndex && audioPlace === audioScope ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</button>
+                <button onClick={handlePlayButton}>{isAudioPlaying && currentAudioScope === audioScope && songInfo._id ===  currentSongId ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</button>
             </div>
 
         </div>

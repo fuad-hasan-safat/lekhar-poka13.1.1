@@ -1,16 +1,20 @@
 'use client'
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import { AudioPlayListContext } from '../../../../store/audioPlayer-context';
+import React, { useEffect, useRef, useState } from 'react'
 import { apiBasePath } from '../../../../../utils/constant';
 import { replaceUnderscoresWithSpaces } from '../../../../../function/api';
+import { audioPlayerAction } from '../../../../redux/audioplayer-slice';
+import { useDispatch, useSelector } from 'react-redux';
 
-export default function AudioPlayListSingleItem({ songInfo, audioIndex, audioList }) {
-    const { playList, setPlaylist, audioPlace, playListRenderScope, currentPlayingIndex, setCurrentAudioIndex, toggleAudioPlay, isAudioPlaying } = useContext(AudioPlayListContext)
+export default function AudioPlayListSingleItem({ songInfo, audioIndex, audioList, playListScope }) {
+  
+    const dispatch = useDispatch();
+    const isAudioPlaying = useSelector((state) => state.audioplayer.isAudioPlaying);
+    const currentAudioScope = useSelector((state) => state.audioplayer.currentAudioScope)
+    const currentSongId = useSelector((state) => state.audioplayer.currentSongId);
     const [duration, setDuration] = useState(null);
     const [error, setError] = useState(false);
     const audioRef = useRef(null);
 
-    console.log({ audioPlace, playListRenderScope, currentPlayingIndex })
 
     useEffect(() => {
         const audioElement = audioRef.current;
@@ -41,13 +45,19 @@ export default function AudioPlayListSingleItem({ songInfo, audioIndex, audioLis
 
     }, []);
 
+    function handlePlayButton(){
+        dispatch(audioPlayerAction.togglePlay({
+            audioIndex: audioIndex,
+            audioscope: playListScope,
+            audioList: audioList,
+            currentSongId: songInfo._id,
+        }))
+    }
+
     const title = replaceUnderscoresWithSpaces(songInfo.title)
     console.log(title);
 
     let shortenedTitle = title;
-    // if(title?.length > 54) {
-    //     shortenedTitle = title?.slice(0,51) + '...'
-    // }
 
     return (
         <div className='audio__tab__item'>
@@ -70,7 +80,7 @@ export default function AudioPlayListSingleItem({ songInfo, audioIndex, audioLis
             </div>
 
             <div className='audio__tab__playbutton'>
-                <button onClick={() => { toggleAudioPlay(audioIndex, audioList, playListRenderScope) }}>{isAudioPlaying && audioIndex === currentPlayingIndex && audioPlace === playListRenderScope ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</button>
+                <button onClick={handlePlayButton}>{isAudioPlaying &&  playListScope === currentAudioScope && songInfo._id === currentSongId ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</button>
                 {/* <button className='text-[#484848] text-opacity-[50%] lg:ml-[18px] md:ml-[15px] sm:ml-[12px] xs:ml-[10px]'><i class="ri-add-circle-fill"></i></button> */}
             </div>
 

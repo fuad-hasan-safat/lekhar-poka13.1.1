@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const audioplayerSlice = createSlice({
     name: 'audioplayer',
     initialState: {
+        isAudioPlayerShouldOpen: false,
         isAudioPlaying: false,
         currentAudioIndex: -1,
         currentSongId: null,
@@ -13,7 +14,12 @@ const audioplayerSlice = createSlice({
         isRepeat: false,
 
     }, reducers: {
+        resetAudioPlayer(state) {
+            state.isAudioPlayerShouldOpen = false;
+            state.isAudioPlaying = false;
+        },
         togglePlay(state, action) {
+            state.isAudioPlayerShouldOpen = true;
             if (state.isAudioPlaying) {
                 if (state.currentAudioIndex === action.payload.audioIndex && state.currentAudioScope === action.payload.audioscope) {
                     state.isAudioPlaying = false;
@@ -24,7 +30,7 @@ const audioplayerSlice = createSlice({
                     state.currentSongId = action.payload.currentSongId;
                     state.isAudioPlaying = true;
 
-                }else{
+                } else {
                     state.currentAudioIndex = action.payload.audioIndex;
                     state.currentAudioScope = action.payload.audioscope;
                     state.currentPlaylist = action.payload.audioList;
@@ -64,10 +70,10 @@ const audioplayerSlice = createSlice({
         setCurrentAudioIndex(state, action) {
             state.currentAudioIndex = action.payload;
         },
-        setCurrntAudioId(state, action){
+        setCurrntAudioId(state, action) {
             state.currentSongId = action.payload;
         },
-        setCurrentSongPlayedTime(state, action){
+        setCurrentSongPlayedTime(state, action) {
             state.currentSongPlayedTime = action.payload;
         }
 

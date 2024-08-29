@@ -21,6 +21,7 @@ export default function AudioPlayer() {
   const dispatch = useDispatch();
   const songs = useSelector((state) => state.audioplayer.currentPlaylist);
   const currentAudioIndex = useSelector((state) => state.audioplayer.currentAudioIndex);
+  const isAudioPlayerShouldOpen = useSelector((state)=> state.audioplayer.isAudioPlayerShouldOpen);
   const isAudioPlaying = useSelector((state) => state.audioplayer.isAudioPlaying);
   const currentSongPlayedTime = useSelector((state) => state.audioplayer.currentSongPlayedTime);
   const { isShuffle, isRepeat } = useSelector((state) => state.audioplayer);
@@ -42,7 +43,7 @@ export default function AudioPlayer() {
     if (mounted && audioPlayer.current) {
       const interval = setInterval(() => {
 
-        const currentTime = audioPlayer.current.currentTime;
+        const currentTime = audioPlayer.current?.currentTime;
         dispatch(audioPlayerAction.setCurrentSongPlayedTime(currentTime));
 
       }, 100); // Every 10 seconds
@@ -208,6 +209,7 @@ export default function AudioPlayer() {
   }
 
   function resetAudioPlayer() {
+    dispatch(audioPlayerAction.resetAudioPlayer());
 
   }
 
@@ -216,7 +218,9 @@ export default function AudioPlayer() {
   }
 
 
-  if (!mounted || songs.length <= 0) return null;
+  if (!mounted) return null;
+
+  if(!isAudioPlayerShouldOpen) return null;
 
 
   const title = replaceUnderscoresWithSpaces(currentSong?.title)
