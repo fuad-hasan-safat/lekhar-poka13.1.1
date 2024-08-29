@@ -19,17 +19,25 @@ const audioplayerSlice = createSlice({
                     state.isAudioPlaying = false;
                 } else if (state.currentAudioScope === action.payload.audioscope && state.currentAudioIndex !== action.payload.audioIndex) {
                     state.currentAudioIndex = action.payload.audioIndex;
+                    state.currentAudioScope = action.payload.audioscope;
+                    state.currentPlaylist = action.payload.audioList;
                     state.currentSongId = action.payload.currentSongId;
+                    state.isAudioPlaying = true;
 
                 }else{
                     state.currentAudioIndex = action.payload.audioIndex;
                     state.currentAudioScope = action.payload.audioscope;
                     state.currentPlaylist = action.payload.audioList;
                     state.currentSongId = action.payload.currentSongId;
+                    state.isAudioPlaying = true;
                 }
             }
 
             else if (!state.isAudioPlaying && state.currentAudioScope && state.currentAudioScope === action.payload.audioscope) {
+                state.currentAudioIndex = action.payload.audioIndex;
+                state.currentAudioScope = action.payload.audioscope;
+                state.currentPlaylist = action.payload.audioList;
+                state.currentSongId = action.payload.currentSongId;
                 state.isAudioPlaying = true;
             }
 
