@@ -21,7 +21,7 @@ export default function AudioPlayer() {
   const dispatch = useDispatch();
   const songs = useSelector((state) => state.audioplayer.currentPlaylist);
   const currentAudioIndex = useSelector((state) => state.audioplayer.currentAudioIndex);
-  const isAudioPlayerShouldOpen = useSelector((state)=> state.audioplayer.isAudioPlayerShouldOpen);
+  const isAudioPlayerShouldOpen = useSelector((state) => state.audioplayer.isAudioPlayerShouldOpen);
   const isAudioPlaying = useSelector((state) => state.audioplayer.isAudioPlaying);
   const currentSongPlayedTime = useSelector((state) => state.audioplayer.currentSongPlayedTime);
   const { isShuffle, isRepeat } = useSelector((state) => state.audioplayer);
@@ -38,6 +38,12 @@ export default function AudioPlayer() {
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // useEffect(() => {
+  //   if (mounted) {
+  //     audioPlayer.current.currentTime = 0;
+  //   }
+  // }, [audioPlayer.current])
 
   useEffect(() => {
     if (mounted && audioPlayer.current) {
@@ -95,6 +101,7 @@ export default function AudioPlayer() {
 
   const handleLoadedMetadata = () => {
     setDuration(audioPlayer.current?.duration);
+    setCurrentTime(0);
   };
 
   const handleEnded = () => {
@@ -155,6 +162,8 @@ export default function AudioPlayer() {
       dispatch(audioPlayerAction.setCurrentAudioIndex(newIndex));
       dispatch(audioPlayerAction.setCurrntAudioId(songs[newIndex]?._id));
 
+      audioPlayer.current.currentTime = 0;
+
     } else {
       let newIndex = 0;
       if (currentAudioIndex === 0) {
@@ -165,11 +174,14 @@ export default function AudioPlayer() {
       dispatch(audioPlayerAction.setCurrentAudioIndex(newIndex));
       dispatch(audioPlayerAction.setCurrntAudioId(songs[newIndex]?._id));
 
+      audioPlayer.current.currentTime = 0;
+
     }
 
   }
 
   function nextSongPlay() {
+    // audioPlayer.current.currentTime = 0.0;
     if (isAudioPlaying) {
       if (isAudioPlaying && songs?.length <= 1) {
         dispatch(audioPlayerAction.stopAudioPlaying());
@@ -188,7 +200,7 @@ export default function AudioPlayer() {
 
           dispatch(audioPlayerAction.setCurrentAudioIndex(newIndex));
           dispatch(audioPlayerAction.setCurrntAudioId(songs[newIndex]?._id));
-
+          audioPlayer.current.currentTime = 0;
 
         }
       }
@@ -203,7 +215,7 @@ export default function AudioPlayer() {
       dispatch(audioPlayerAction.setCurrentAudioIndex(newIndex));
       dispatch(audioPlayerAction.setCurrntAudioId(songs[newIndex]?._id));
 
-
+      audioPlayer.current.currentTime = 0;
     }
 
   }
@@ -220,7 +232,7 @@ export default function AudioPlayer() {
 
   if (!mounted) return null;
 
-  if(!isAudioPlayerShouldOpen) return null;
+  if (!isAudioPlayerShouldOpen) return null;
 
 
   const title = replaceUnderscoresWithSpaces(currentSong?.title)
