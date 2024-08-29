@@ -24,13 +24,12 @@ export default function AudioPlayer() {
   const isAudioPlayerShouldOpen = useSelector((state) => state.audioplayer.isAudioPlayerShouldOpen);
   const isAudioPlaying = useSelector((state) => state.audioplayer.isAudioPlaying);
   const currentSongPlayedTime = useSelector((state) => state.audioplayer.currentSongPlayedTime);
-  const { isShuffle, isRepeat } = useSelector((state) => state.audioplayer);
+  const { isShuffle, isRepeat, isMute } = useSelector((state) => state.audioplayer);
 
   const audioPlayer = useRef(null);
   const [volume, setVolume] = useState(0.5);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [isMute, setIsMute] = useState(false);
   const [mounted, setMounted] = useState(false);
   const currentSong = songs[currentAudioIndex];
 
@@ -90,10 +89,12 @@ export default function AudioPlayer() {
 
   useEffect(() => {
     if (audioPlayer.current) {
+
       audioPlayer.current.volume = volume;
+
       audioPlayer.current.muted = isMute;
     }
-  }, [volume, isMute]);
+  }, [volume, isMute, mounted]);
 
   const handleTimeUpdate = () => {
     setCurrentTime(audioPlayer.current?.currentTime);
@@ -229,6 +230,11 @@ export default function AudioPlayer() {
     dispatch(audioPlayerAction.togglePlayAudioBar());
   }
 
+  function toggleMute() {
+    dispatch(audioPlayerAction.toggleMute());
+  }
+
+
 
   if (!mounted) return null;
 
@@ -327,8 +333,8 @@ export default function AudioPlayer() {
                 </button> */}
 
                 {/* volume icon */}
-                {!isMute && <img className="cursor-pointer" onClick={() => { setIsMute(true); audioPlayer.current.volume = 0; }} width={30} height={30} src="/images/icons/ic_volumeon.svg"></img>}
-                {isMute && <img className="cursor-pointer" onClick={() => { setIsMute(false); audioPlayer.current.volume = volume }} width={30} height={30} src="/images/icons/ic_volumeoff.svg"></img>}
+                {!isMute && <img className="cursor-pointer" onClick={toggleMute} width={30} height={30} src="/images/icons/ic_volumeon.svg"></img>}
+                {isMute && <img className="cursor-pointer" onClick={toggleMute} width={30} height={30} src="/images/icons/ic_volumeoff.svg"></img>}
                 {/* volume bar */}
                 <div className="text-center items-center content-center justify-center ">
                   <ProgressBar

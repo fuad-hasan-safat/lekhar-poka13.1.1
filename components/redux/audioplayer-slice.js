@@ -12,6 +12,7 @@ const audioplayerSlice = createSlice({
         currentPlaylist: [],
         isShuffle: false,
         isRepeat: false,
+        isMute: false,
 
     }, reducers: {
         resetAudioPlayer(state) {
@@ -75,6 +76,9 @@ const audioplayerSlice = createSlice({
         },
         setCurrentSongPlayedTime(state, action) {
             state.currentSongPlayedTime = action.payload;
+        },
+        toggleMute(state){
+            state.isMute = !state.isMute;
         }
 
     }
