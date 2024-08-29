@@ -7,7 +7,8 @@ import { apiBasePath } from "../../utils/constant";
 import ReaderModeModal from "../../components/readerMode/ReaderModeModal";
 import FullPostReaderMode from "../../components/common/fullContentReadermood";
 import { AudioPlayListContext } from "../../components/store/audioPlayer-context";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { audioPlayerAction } from "../../components/redux/audioplayer-slice";
 
 export async function getServerSideProps(context) {
 
@@ -43,7 +44,11 @@ export default function PostDetails({ postData }) {
 
   console.log({ postData })
 
-  const { toggleAudioPlay, audioPlace, currentPlayingIndex, isAudioPlaying } = useContext(AudioPlayListContext);
+  const dispatch = useDispatch();
+  const isAudioPlaying = useSelector(state => state.audioplayer.isAudioPlaying);
+  const currentAudioScope = useSelector(state => state.audioplayer.currentAudioScope);
+  const currentSongId = useSelector(state => state.audioplayer.currentSongId);
+
   const userUuid = useSelector(state => state.usersession.userUuid)
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -58,6 +63,15 @@ export default function PostDetails({ postData }) {
   let isdataFetch = postData?.status === "success" ? true : false;
 
   const [rating, setRating] = useState(0);
+
+  function handlePlayButton(audioList ){
+    dispatch(audioPlayerAction.togglePlay({
+      audioIndex: 0,
+      audioscope: `lekharPokaPostdetails`,
+      audioList: audioList,
+      currentSongId: audioList.id,
+  }))
+  }
 
   function readerModeClosehandler() {
     setIsModalOpen(false);
@@ -151,8 +165,8 @@ export default function PostDetails({ postData }) {
 
                                 {isAudioAvailable && (
                                   <div className="audio__tab__playbutton absolute  lg:left-[18px] md:left-[18px] sm:left-[18px] xs:left-[12px]  lg:top-[150px] md:top-[140px] sm:top-[130px] xs:top-[110px]">
-                                    <button className="text-center text-[#F9A106]  flex justify-center items-center" onClick={() => toggleAudioPlay(0, audioList, slug)}>
-                                      <span className="inline-block text-[26px]"> {isAudioPlaying && 0 === currentPlayingIndex && audioPlace === slug ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</span> <span className="inline-block font-[600] text-[16px]"> প্লে করুন</span>
+                                    <button className="text-center text-[#F9A106]  flex justify-center items-center" onClick={()=>handlePlayButton(audioList)}>
+                                      <span className="inline-block text-[26px]"> {isAudioPlaying && currentSongId === audioList.id ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</span> <span className="inline-block font-[600] text-[16px]"> প্লে করুন</span>
                                     </button>
                                   </div>
 

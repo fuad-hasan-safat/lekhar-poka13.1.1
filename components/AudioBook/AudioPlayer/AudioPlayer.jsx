@@ -48,8 +48,10 @@ export default function AudioPlayer() {
     if (mounted && audioPlayer.current) {
       const interval = setInterval(() => {
 
-        const currentTime = audioPlayer.current?.currentTime;
-        dispatch(audioPlayerAction.setCurrentSongPlayedTime(currentTime));
+        if(isAudioPlayerShouldOpen && isAudioPlaying){
+          const currentTime = audioPlayer.current?.currentTime;
+          dispatch(audioPlayerAction.setCurrentSongPlayedTime(currentTime));
+        }
 
       }, 100); // Every 10 seconds
 
