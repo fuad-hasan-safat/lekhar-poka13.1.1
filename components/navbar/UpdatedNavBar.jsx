@@ -9,6 +9,7 @@ import DialugueModal from '../common/notification/DialugueModal';
 import { SearchContext } from '../lekharpokaStore/search-context';
 import { UserContext } from '../lekharpokaStore/user-context';
 import { useSelector } from 'react-redux';
+import { FetchCategory, fetchData } from '../../function/api';
 
 export default function UpdatedNavBar() {
 
@@ -35,20 +36,13 @@ export default function UpdatedNavBar() {
 
     function useOutsideAlerter(ref) {
         useEffect(() => {
-            /**
-             * Alert if clicked on outside of element
-             */
             function handleClickOutside(event) {
                 if (ref.current && !ref.current.contains(event.target)) {
-                    // alert("You clicked outside of me!");
                     setVisibleItem(null)
-                    // setIsSearchbarActive(false)
                 }
             }
-            // Bind the event listener
             document.addEventListener("mousedown", handleClickOutside);
             return () => {
-                // Unbind the event listener on clean up
                 document.removeEventListener("mousedown", handleClickOutside);
             };
         }, [ref]);
@@ -56,19 +50,12 @@ export default function UpdatedNavBar() {
 
     function useOutsideAlerterSearch(ref) {
         useEffect(() => {
-            /**
-             * Alert if clicked on outside of element
-             */
             function handleClickOutside(event) {
                 if (ref.current && !ref.current.contains(event.target)) {
-                    // alert("You clicked outside of me!");
-                    //  setIsSearchbarActive(false)
                 }
             }
-            // Bind the event listener
             document.addEventListener("mousedown", handleClickOutside);
             return () => {
-                // Unbind the event listener on clean up
                 document.removeEventListener("mousedown", handleClickOutside);
             };
         }, [ref]);
@@ -97,6 +84,19 @@ export default function UpdatedNavBar() {
 
 
     useEffect(() => {
+
+        async function fetchDataAsync() {
+            try {
+              const result = await fetchData(`${apiBasePath}/categories`);
+              console.log('Navbar ------- category ---', result)
+        
+            } catch (error) {
+              alert(error)
+            }
+          }
+      
+          fetchDataAsync();
+
         const fetchPosts = async () => {
             try {
                 const response = await fetch(`${apiBasePath}/posts`);
