@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import PlayList from "../AudioBook/components/audioPlaylist/PlayList";
 
 const playlistSlice = createSlice({
     name: 'playlist',

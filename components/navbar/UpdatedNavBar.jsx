@@ -8,11 +8,14 @@ import Link from 'next/link';
 import DialugueModal from '../common/notification/DialugueModal';
 import { SearchContext } from '../lekharpokaStore/search-context';
 import { UserContext } from '../lekharpokaStore/user-context';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FetchCategory, fetchData } from '../../function/api';
+import { categoryActions } from '../redux/category-slice';
 
 export default function UpdatedNavBar() {
 
+    const dispatch = useDispatch();
+    const lekharpokaCategory = useSelector(state => state.category.lekharpokaCategory);
     const userUuid = useSelector(state => state.usersession.userUuid);
     const router = useRouter();
 
@@ -87,15 +90,15 @@ export default function UpdatedNavBar() {
 
         async function fetchDataAsync() {
             try {
-              const result = await fetchData(`${apiBasePath}/categories`);
-              console.log('Navbar ------- category ---', result)
-        
+                const result = await fetchData(`${apiBasePath}/categories`);
+                console.log('Navbar ------- category ---', result)
+                dispatch(categoryActions.addLekharPokaCategory(result))
             } catch (error) {
-              alert(error)
+                alert(error)
             }
-          }
-      
-          fetchDataAsync();
+        }
+
+        fetchDataAsync();
 
         const fetchPosts = async () => {
             try {
@@ -307,12 +310,12 @@ export default function UpdatedNavBar() {
                                                 <Link href="/">প্রচ্ছদ</Link>
                                             </li>
                                             <li className={`relative cursor-pointer`} onClick={() => { toggleVisibility(0); setSelectedNav("soblekha"); }}>
-                                                <Link
+                                                <button
                                                     className={`hover:text-[#F9A106] ${selectedNav === "soblekha"
                                                         ? "text-[#F9A106] font-semibold border-b-[2px] border-[#F9A106]"
                                                         : "text-black"
                                                         }`}
-                                                    href="#">সব লেখা <span style={{ position: 'relative', top: '-1px' }}><i class="ri-arrow-down-s-line"></i></span></Link>
+                                                    >সব লেখা <span style={{ position: 'relative', top: '-1px' }}><i class="ri-arrow-down-s-line"></i></span></button>
                                                 {/* <FontAwesomeIcon icon={faAngleDown} className="ml-2 pt-1 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-4 sm:w-4 xs:h-4 xs:w-4 focus:text-[#F9A106]" /> */}
                                                 {visibleItem === 0 && (
                                                     <ul ref={popupRef1}
@@ -320,63 +323,20 @@ export default function UpdatedNavBar() {
                                                     lg:backdrop-blur-md md:backdrop-blur-md  
                                                      lg:shadow-xl md:shadow-xl sm:shadow-none xs:shadow-none 
                                                      lg:bg-[#FCF7E8] md:bg-[#FCF7E8] sm:bg-transparent xs:bg-transparent !z-[999999] origin-top-right lg:absolute md:absolute sm:static xs:static right-0 mt-2 w-56 rounded-md  ring-opacity-5 focus:outline-none'>
-                                                        <li
+                                                        {
+                                                            lekharpokaCategory?.map((category, index) => <>
+                                                                <li
+                                                                    key={category._id}
+                                                                    className="block px-4 py-2  hover:bg-[#F9A106]  hover:text-white"
+                                                                    onClick={() => {dispatch(categoryActions.selectNavbarCategory(category.title)) ;closeMenu(); }}
 
-                                                            className="block px-4 py-2 hover:bg-[#F9A106]  hover:text-white"
-                                                            onClick={() => closeMenu()}
+                                                                >
+                                                                    <Link className='block' href={`/category/${category.title}`}>{category.title}</Link>
+                                                                </li>
+                                                                {index <= (lekharpokaCategory.length - 1) && <hr className='lg:block md:hidden sm:hidden xs:hidden' /> }
+                                                            </>)
+                                                        }
 
-                                                        >
-                                                            <Link className='block' href="/kobita">কবিতা</Link>
-                                                            {/* <hr/> */}
-                                                        </li>
-                                                        <hr className='lg:block md:hidden sm:hidden xs:hidden' />
-
-                                                        <li
-                                                            className="block px-4 py-2  hover:bg-[#F9A106]  hover:text-white"
-                                                            onClick={() => closeMenu()}
-
-                                                        >
-                                                            <Link className='block' href="/golpo">গল্প</Link>
-                                                        </li>
-                                                        <hr className='lg:block md:hidden sm:hidden xs:hidden' />
-
-
-                                                        <li
-                                                            className="block px-4 py-2 hover:bg-[#F9A106]  hover:text-white"
-                                                            onClick={() => closeMenu()}
-
-                                                        >
-                                                            <Link className='block' href="/onugolpo">অনুগল্প</Link>
-                                                        </li>
-                                                        <hr className='lg:block md:hidden sm:hidden xs:hidden' />
-
-
-                                                        <li
-                                                            className="block px-4 py-2  hover:bg-[#F9A106]  hover:text-white"
-                                                            onClick={() => closeMenu()}
-
-                                                        >
-                                                            <Link className='block' href="/probondho">প্রবন্ধ</Link>
-                                                        </li>
-                                                        <hr className='lg:block md:hidden sm:hidden xs:hidden' />
-
-
-                                                        <li
-                                                            className="block px-4 py-2   hover:bg-[#F9A106]  hover:text-white"
-                                                            onClick={() => closeMenu()}
-
-                                                        >
-                                                            <Link className='block' href="/jiboni">জীবনী</Link>
-                                                        </li>
-                                                        <hr className='lg:block md:hidden sm:hidden xs:hidden' />
-
-                                                        <li
-                                                            className="block px-4 py-2   hover:bg-[#F9A106]  hover:text-white"
-                                                            onClick={() => closeMenu()}
-
-                                                        >
-                                                            <Link className='block' href="/uponnas">উপন্যাস</Link>
-                                                        </li>
                                                     </ul>
                                                 )}
                                             </li>

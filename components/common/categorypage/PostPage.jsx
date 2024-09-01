@@ -1,9 +1,11 @@
 import Image from "next/image";
 import PostPageLeftContent from "./PostPageLeftContent";
 import Sidebar from "../../sidebar/Sidebar";
+import { useSelector } from "react-redux";
 
 
-export default function PostPage({catTitle}) {
+export default function PostPage() {
+    const catTitle = useSelector(state => state.category.selectedNavbarCategory);
 
     return (
         <>
@@ -22,7 +24,7 @@ export default function PostPage({catTitle}) {
                     <div className="all__post__content flex flex-row">
 
                         <div className="lg:w-[70%]">
-                            <PostPageLeftContent catTitle={catTitle} />
+                            <PostPageLeftContent />
                         </div>
 
                         <div className="lg:w-[30%]">

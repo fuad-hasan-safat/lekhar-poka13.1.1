@@ -7,6 +7,7 @@ import userSessionSlice from './usersession-slice';
 import toastSlice from './toast-slice';
 import audioplayerSlice from './audioplayer-slice';
 import playlistSlice from './playlist-slice';
+import categorySlice from './category-slice';
 
 // Persist configuration
 const persistConfig = {
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
     toast: toastSlice.reducer,
     audioplayer: audioplayerSlice.reducer,
     playlist: playlistSlice.reducer,
+    category: categorySlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

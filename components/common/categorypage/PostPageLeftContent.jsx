@@ -7,8 +7,11 @@ import Loading from "../loading";
 import { countWords } from "../../../function/api";
 import MainContentDivider from "../mainContentDivider";
 import SinglePostConponent from "../singlePostComponent";
+import { useSelector } from "react-redux";
 
-export default function PostPageLeftContent({catTitle}) {
+export default function PostPageLeftContent() {
+    const router = useRouter();
+    const catTitle = useSelector(state => state.category.selectedNavbarCategory);
     const [postList, setPostList] = useState([])
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null); // State to store any errors
@@ -40,7 +43,7 @@ export default function PostPageLeftContent({catTitle}) {
         setPostList([]);
         fetchTotalPage();
 
-    }, [catTitle]);
+    }, [catTitle, router.catTitle]);
 
 
     const fetchPosts = async () => {
@@ -62,7 +65,7 @@ export default function PostPageLeftContent({catTitle}) {
     useEffect(() => {
 
         fetchPosts();
-    }, [currentPage]);
+    }, [currentPage, catTitle, router.catTitle]);
 
 
     const loadnextPage = () => {
@@ -82,6 +85,7 @@ export default function PostPageLeftContent({catTitle}) {
             ) : error ? (
                 <div></div>
             ) : (
+                router.isReady &&
                 <>
                     <div className=''>
                         {postList.length ?
@@ -124,7 +128,7 @@ export default function PostPageLeftContent({catTitle}) {
 
                             </div> :
 
-                            <div className="pt-10">  এই মুহূর্তে কোনো লেখা নেই </div>
+                            <div className="pt-10 text-gray-800">  এই মুহূর্তে কোনো লেখা নেই </div>
                         }
 
                     </div>
