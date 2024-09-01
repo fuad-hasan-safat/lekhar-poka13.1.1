@@ -55,6 +55,13 @@ export default function RatingComponent({ post_id, setRating, rating, notificati
 
     if (userUuid) {
 
+      if(rating <= 0){
+      notification = 'দয়া করে সঠিক রেটিং দিন!';
+      dispatch(toastAction.setWarnedNotification(notification));
+
+      return;
+      }
+
       const data = {
         user_id: userUuid,
         rating: rating,
