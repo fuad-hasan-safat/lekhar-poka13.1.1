@@ -3,7 +3,6 @@ import AudioDetailsSideBar from '../../components/AudioBook/components/audioSide
 import AudioTabs from '../../components/AudioBook/components/audioDetails/AudioTabs';
 import { apiBasePath } from '../../utils/constant';
 import { useEffect, useState } from 'react';
-import RequiredLogin from '../../components/common/RequiredLogIn';
 import LoginPage from '../../components/login/login';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
@@ -32,8 +31,6 @@ export async function getServerSideProps(context) {
     } catch (error) {
         console.log(error)
     }
-
-
     const singleAudioData = []
 
     return { props: { singleAudioData } }
@@ -71,7 +68,6 @@ export default function Home({ singleAudioData }) {
                         <div className='audio_banner__info__wrap flex flex-row place-content-center justify-center items-center'>
                             <div className=''>
                                 <img className='object-cover lg:w-[180px] md:w-[170px] sm:w-[140px] xs:w-[75px] lg:h-[270px] md:h-[260px] sm:h-[190px] xs:h-[130px] -rotate-[19deg]' src={`${apiBasePath}/${singleAudioData?.banner_img?.slice(singleAudioData?.banner_img.indexOf('/') + 1)}`} alt='' />
-
                             </div>
                             <div className='lg:ml-[98px] lg:ml-[90px] sm:ml-[80px] xs:ml-[30px] text-center relative'>
                                 <h5 className='text-[#F9A106] lg:text-[48px] md:text-[45px] sm:text-[42px] xs:text-[24px] font-semibold'>{singleAudioData?.title}</h5>
@@ -79,7 +75,6 @@ export default function Home({ singleAudioData }) {
                                 <h5 className='text-[#484848] lg:text-[28px] md:text-[26px] sm:text-[24px] xs:text-[16px] font-semibold'>{singleAudioData.type} | {singleAudioData.writer} </h5>
                                 <div className='flex flex-row text-center place-content-center'><img src='/audioBook/listiningIcon.png' />
                                     <p className='text-[16px] text-[#484848] ml-[4px]'>{singleAudioData?.lisening_time}</p></div>
-
                             </div>
 
                         </div>
@@ -93,7 +88,6 @@ export default function Home({ singleAudioData }) {
                         <AudioTabs singleAudioData={singleAudioData} />
                     </div>
 
-
                     <div className='lg:w-[30%] md:w-[30%] sm:w-full xs:w-full'>
                         <AudioDetailsSideBar />
                     </div>
@@ -102,7 +96,6 @@ export default function Home({ singleAudioData }) {
 
 
             </div> : <div className='pb-[-80px]'>
-                {/* <RequiredLogin/> */}
                 <LoginPage url={currentUrl} />
             </div>
         }

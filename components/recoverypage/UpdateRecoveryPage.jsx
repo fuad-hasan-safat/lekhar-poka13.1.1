@@ -49,8 +49,6 @@ const PassRecoveryPageBeforeOTP = () => {
                     {!isOtpSucess && !isOtpVarified  && <SigninFormBeforeOTP type='recoveryPass' logreg="পাসওয়ার্ড রিসেট করুন" btntext="সাবমিট" SetIsOtpSucess={SetIsOtpSucess}  setState={setState} state={state} otpStatus={otpStatus} setOtpStatus={setOtpStatus} otpProp='send-otp-reset-password'/> }
                     {isOtpSucess && !isOtpVarified && <OtpPage phonenumber={state.mobileNumber} setIsOtpSuccess={SetIsOtpSucess} setIsOtpVerified={setIsOtpVarified} otpStatus={otpStatus} setOtpStatus={setOtpStatus} otpProp={'send-otp-reset-password'} /> }
                     {isOtpVarified && <PassRecovertFormAterOTP phonenumber={state.mobileNumber}/> }
-
-
                     <SignInOption
                       setEmail={setEmail}
                       title="অথবা সাইন ইন করুন"

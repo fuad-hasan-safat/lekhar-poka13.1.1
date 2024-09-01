@@ -13,7 +13,6 @@ export default function SigninFormBeforeOTP({
   SetIsOtpSucess,
   setState,
   state,
-  otpStatus,
   setOtpStatus,
   otpProp
 }) {
@@ -72,7 +71,7 @@ export default function SigninFormBeforeOTP({
       if (response.data.status === 'failed') {
         dispatch(toastAction.setWarnedNotification('এই নাম্বার এ লগইন করা নেই'));
       } else if (response.data.otp_status === "SENT") {
-        dispatch(toastAction.setWarnedNotification('ওটিপি প্রেরণ করা হয়েছে'));
+        dispatch(toastAction.setSucessNotification('ওটিপি প্রেরণ করা হয়েছে'));
         SetIsOtpSucess(true);
       } else if (response.data.otp_status === "LIMIT_CROSSED") {
         dispatch(toastAction.setWarnedNotification('আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন'));

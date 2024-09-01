@@ -8,6 +8,7 @@ import { fetchDataWithAxios } from '../../../../utils/apiService';
 import { apiBasePath } from '../../../../utils/constant';
 import { useDispatch, useSelector } from 'react-redux';
 import { playlistAction } from '../../../redux/playlist-slice';
+import Loading from '../../../common/loading';
 
 export default function AudioDetailsSideBar() {
 
@@ -16,6 +17,7 @@ export default function AudioDetailsSideBar() {
     const myPlaylist = useSelector((state) => state.playlist.myPlaylist);
     const lattestPlaylist = useSelector((state) => state.playlist.lattestPlaylist);
     const isPlayListChanged = useSelector((state) => state.playlist.isPlayListChanged);
+
 
     useEffect(() => {
         getData();
@@ -52,7 +54,6 @@ export default function AudioDetailsSideBar() {
     function setPlayListRenderScope(scope){
         dispatch(playlistAction.setPlayListScope(scope))
     }
-
 
     return (
         <>

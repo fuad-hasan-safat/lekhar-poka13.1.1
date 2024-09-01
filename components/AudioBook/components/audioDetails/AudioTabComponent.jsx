@@ -1,7 +1,8 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import AudioTabSingleItem from './audioList/AudioTabSilgleItem';
 
 export default function AudioTabComponent({audioData}) {
+
   console.log({audioData})
   return (
     <div className='w-full'>
