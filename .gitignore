@@ -5,7 +5,6 @@
 /.pnp
 .pnp.js
 .lekha-poka-ui.js
-.ckeditor5
 # testing
 /coverage
 
