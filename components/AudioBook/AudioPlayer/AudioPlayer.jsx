@@ -15,6 +15,7 @@ import { apiBasePath } from "../../../utils/constant";
 import { replaceUnderscoresWithSpaces } from "../../../function/api";
 import { useDispatch, useSelector } from "react-redux";
 import { audioPlayerAction } from "../../redux/audioplayer-slice";
+import { playlistAction } from "../../redux/playlist-slice";
 
 export default function AudioPlayer() {
 
@@ -48,7 +49,7 @@ export default function AudioPlayer() {
     if (mounted && audioPlayer.current) {
       const interval = setInterval(() => {
 
-        if(isAudioPlayerShouldOpen && isAudioPlaying){
+        if (isAudioPlayerShouldOpen && isAudioPlaying) {
           const currentTime = audioPlayer.current?.currentTime;
           dispatch(audioPlayerAction.setCurrentSongPlayedTime(currentTime));
         }
@@ -77,6 +78,7 @@ export default function AudioPlayer() {
           });
         } else {
           console.log('Pausing audio...');
+          
           audioPlayer.current.pause();
           // audioPlayer.current.currentTime = currentSongPlayedTime;
 
@@ -164,6 +166,7 @@ export default function AudioPlayer() {
 
       dispatch(audioPlayerAction.setCurrentAudioIndex(newIndex));
       dispatch(audioPlayerAction.setCurrntAudioId(songs[newIndex]?._id));
+      dispatch(playlistAction.addSingleSongToLatestPlaylist(songs[newIndex]));
 
       audioPlayer.current.currentTime = 0;
 
@@ -176,6 +179,7 @@ export default function AudioPlayer() {
       }
       dispatch(audioPlayerAction.setCurrentAudioIndex(newIndex));
       dispatch(audioPlayerAction.setCurrntAudioId(songs[newIndex]?._id));
+      dispatch(playlistAction.addSingleSongToLatestPlaylist(songs[newIndex]));
 
       audioPlayer.current.currentTime = 0;
 
@@ -193,6 +197,8 @@ export default function AudioPlayer() {
           const randomIndex = Math.floor(Math.random() * songs?.length);
           dispatch(audioPlayerAction.setCurrentAudioIndex(randomIndex));
           dispatch(audioPlayerAction.setCurrntAudioId(songs[randomIndex]?._id));
+          dispatch(playlistAction.addSingleSongToLatestPlaylist(songs[randomIndex]));
+
         } else {
           let newIndex = 0;
           if (currentAudioIndex === songs?.length - 1) {
@@ -203,6 +209,8 @@ export default function AudioPlayer() {
 
           dispatch(audioPlayerAction.setCurrentAudioIndex(newIndex));
           dispatch(audioPlayerAction.setCurrntAudioId(songs[newIndex]?._id));
+          dispatch(playlistAction.addSingleSongToLatestPlaylist(songs[newIndex]));
+
           audioPlayer.current.currentTime = 0;
 
         }
@@ -217,6 +225,7 @@ export default function AudioPlayer() {
 
       dispatch(audioPlayerAction.setCurrentAudioIndex(newIndex));
       dispatch(audioPlayerAction.setCurrntAudioId(songs[newIndex]?._id));
+      dispatch(playlistAction.addSingleSongToLatestPlaylist(songs[newIndex]));
 
       audioPlayer.current.currentTime = 0;
     }
