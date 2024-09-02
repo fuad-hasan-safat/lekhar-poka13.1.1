@@ -106,9 +106,9 @@ export default function WriterProfileBanner({
         }
 
     } else {
-        image = writerInfo?.image;
-        rendredBio = writerBio?.content;
-        birthDate = writerInfo?.birth_date;
+        // image = writerInfo?.image;
+        // rendredBio = writerBio?.content;
+        // birthDate = writerInfo?.birth_date;
     }
 
     const banglaBirthDate = convertToBengaliDate(birthDate)
@@ -154,7 +154,7 @@ export default function WriterProfileBanner({
     console.log('image --------- length >>>>>', profileInfo?.image)
 
     const phoneNumber = convertToBanglaPhoneNumber(profileInfo?.phone);
-    const maskedNumber = phoneNumber.substring(0, 5) + '*'.repeat(phoneNumber.length - 5);
+    const maskedNumber = phoneNumber?.substring(0, 5) + '*'.repeat(phoneNumber?.length - 5);
     return (
         <>
 
@@ -162,7 +162,7 @@ export default function WriterProfileBanner({
                 <div className="flex justify-center">
                     <img
                         className="lg:w-[264px] lg:h-[264px]  md:w-[200px] md:h-[200px] sm:w-[180px] sm:h-[180px] xs:w-[180px] xs:h-[180px] rounded-full  border-4 border-solid border-white -mt-[110px]  "
-                        src={image?.length > 0 ? `${apiBasePath}/${image.slice(image.indexOf("/") + 1)}` : '/images/defaultUserPic/profile.jpg'}
+                        src={image?.length > 0 ? `${apiBasePath}/${image?.slice(image?.indexOf("/") + 1)}` : '/images/defaultUserPic/profile.jpg'}
                     />
                 </div>
                 <h1><span className='text-[35px] text-[#FCD200]'>{profileInfo?.name}</span> <span className='text-[#595D5B] pl-[20px] text-[22px]'>{profileInfo?.designation}</span></h1>
