@@ -61,7 +61,7 @@ export default function AudioDetailsSideBar() {
         <>
             <div className="flex flex-col pr-[]">
 
-                {!localStorage.getItem('uuid') && <div className="sidebar__iteam__wrap">
+                {!userUuid && <div className="sidebar__iteam__wrap">
                     <Login />
                 </div>}
                 {lattestPlaylist?.length > 0 && <div className='sidebar__iteam__wrap mt-[32px]'>
