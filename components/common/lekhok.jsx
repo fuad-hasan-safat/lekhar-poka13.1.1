@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 
 const LekhokDetails = ({
@@ -10,6 +11,7 @@ const LekhokDetails = ({
     lifeCycle,
 }) => {
 
+    const router = useRouter();
     const userUuid = useSelector((state)=> state.usersession.userUuid);
     console.log({ writer, writer_id, user_id })
     let redirectAddress = `/postbyuser/${writer_id}`;
@@ -21,6 +23,9 @@ const LekhokDetails = ({
         }
     }
 
+    function handleClick(){
+        router.push(redirectAddress);
+    }
 
     console.log('redirected --- url', redirectAddress)
     return (
@@ -42,9 +47,9 @@ const LekhokDetails = ({
 
                 <div className="pl-4 text-[16px] text-gray-900 font-semibold">
 
-                    <Link href={redirectAddress}>
+                    <button onClick={handleClick}>
                         {writer}
-                    </Link>
+                    </button>
 
                     <h1 className="text-[14px] text-gray-600 font-[400]">{lifeCycle}</h1>
 

@@ -263,7 +263,7 @@ export default function AudioPlayer() {
                     alt={currentSong?.title}
                     width={70}
                     height={70}
-                    className="h-[70px] w-[70px] rounded-full"
+                    className="h-[70px] w-[70px] rounded-full object-cover"
                   ></img>
                 </div>
                 <div className="lg:flex lg:flex-col text-gray-600 pt-[5px] pl-[10px]">
