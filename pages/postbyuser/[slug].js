@@ -48,11 +48,11 @@ export default function PostOfWriterPage() {
                 setError(error);
                 console.log('writer post ---', error)
             } finally {
-                setIsLoading(false)
             }
         };
         if (router.isReady) {
             fetchPosts();
+            setIsLoading(false)
         }
 
     }, [router.query]);
@@ -74,7 +74,7 @@ export default function PostOfWriterPage() {
 
     if (isLoading) {
         return <Loading />;
-    } else {
+    } else if(!isLoading) {
 
 
         return (
