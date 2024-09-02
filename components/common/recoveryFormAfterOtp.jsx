@@ -1,15 +1,16 @@
 "use client"
 
 import { apiBasePath } from "../../utils/constant";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from "react-redux";
+import { toastAction } from "../redux/toast-slice";
+
 
 export default function PassRecovertFormAterOTP({ phonenumber }) {
 
-    const router = useRouter()
+    const dispatch = useDispatch();
+    const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
     const [showRePassword, setShowRePassword] = useState(false);
 
@@ -85,8 +86,7 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
 
         if (state.password.trim().length <= 0) {
             notification = 'দয়া করে পাসওয়ার্ড দিন';
-            notify()
-
+            dispatch(toastAction.setWarnedNotification(notification))
             return;
         }
 
@@ -119,7 +119,7 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
 
                 // alert('পাসওয়ার্ড রিকভারি সফলভাবে সম্পন্ন হয়েছে, অনুগ্রহ করে লগইন করুন')
                 notification = 'পাসওয়ার্ড রিকভারি সফলভাবে সম্পন্ন হয়েছে, অনুগ্রহ করে লগইন করুন';
-                notify1()
+                dispatch(toastAction.setSucessNotification(notification))
 
                 reloadPage()
 
@@ -129,25 +129,6 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
 
         }
     }
-
-    const notify1 = () => toast.success(notification, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-
-    });
-    const notify = () => toast.warn(notification, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-
-    });
 
     return (
         <>
@@ -205,7 +186,6 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
                 </button>
 
             </div>
-            <ToastContainer />
         </>
     );
 }

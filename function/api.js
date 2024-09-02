@@ -1,3 +1,5 @@
+import { apiBasePath } from "../utils/constant";
+
 export async function fetchData(url) {
   try {
     const response = await fetch(url);
@@ -52,11 +54,12 @@ export function countWords(content = '  ', limit) {
 
 
 export function replaceUnderscoresWithSpaces(str) {
-  str = str.replace(/_/g, ' ');
+  if(!str) return;
+  str = str?.replace(/_/g, ' ');
 
-  const dotIndex = str.indexOf('.');
+  const dotIndex = str?.indexOf('.');
   if (dotIndex !== -1) {
-    str = str.substring(0, dotIndex);
+    str = str?.substring(0, dotIndex);
   }
 
   return str;
@@ -69,3 +72,5 @@ export function generateUUID() {
     (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
   );
 }
+
+

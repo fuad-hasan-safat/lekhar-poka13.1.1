@@ -1,15 +1,16 @@
 import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import { apiBasePath } from "../../utils/constant";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from "react-redux";
+import { toastAction } from "../redux/toast-slice";
 
 const OtpPage = ({ otpProp, SetIsOtpSucess, phonenumber, setIsOtpVerified, setIsOtpSuccess, setOtpStatus, otpStatus }) => {
 
+
   let notification = ''
+  const dispatch = useDispatch();
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const [numberPrefix, setNumberPrefix] = useState('88');
   const [timer, setTimer] = useState(60);
   const inputRefs = useRef([]);
 
@@ -48,7 +49,7 @@ const OtpPage = ({ otpProp, SetIsOtpSucess, phonenumber, setIsOtpVerified, setIs
       } else {
         // alert("ওটিপি সফলভাবে সম্পন্ন হয়নি");
         notification = 'ওটিপি সফলভাবে সম্পন্ন হয়নি'
-        notify();
+        dispatch(toastAction.setWarnedNotification(notification));
       }
     } catch (error) {
       console.error("Otp Send Error:", error);
@@ -73,12 +74,12 @@ const OtpPage = ({ otpProp, SetIsOtpSucess, phonenumber, setIsOtpVerified, setIs
 
         // alert('এই নাম্বার এ লগইন করা নেই ')
         notification = 'এই নাম্বার এ লগইন করা নেই ';
-        notify();
+        dispatch(toastAction.setWarnedNotification(notification));
       }
 
       if (response.data.otp_status === "SENT") {
         notification = 'ওটিপি প্রেরণ করা হয়েছে';
-        notify1();
+        dispatch(toastAction.setSucessNotification(notification));
 
         SetIsOtpSucess(true)
 
@@ -87,7 +88,7 @@ const OtpPage = ({ otpProp, SetIsOtpSucess, phonenumber, setIsOtpVerified, setIs
 
         // alert('আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন');
         notification = 'আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন';
-        notify();
+        dispatch(toastAction.setWarnedNotification(notification));
         SetIsOtpSucess(false)
 
       }
@@ -127,26 +128,6 @@ const OtpPage = ({ otpProp, SetIsOtpSucess, phonenumber, setIsOtpVerified, setIs
   };
 
 
-
-
-  const notify = () => toast.warn(notification, {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-
-  });
-  const notify1 = () => toast.success(notification, {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-
-  });
 
   return (
     <div className="w-full">
@@ -195,7 +176,6 @@ const OtpPage = ({ otpProp, SetIsOtpSucess, phonenumber, setIsOtpVerified, setIs
         }
 
       </div>
-      <ToastContainer />
     </div>
   );
 };

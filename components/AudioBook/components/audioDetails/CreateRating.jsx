@@ -2,49 +2,50 @@ import React, { useEffect, useState } from 'react'
 import { apiBasePath } from '../../../../utils/constant';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { toastAction } from '../../../redux/toast-slice';
 
 export default function CreateRating({ setUserComments }) {
     const router = useRouter();
-
+    const dispatch = useDispatch();
+    const userUuid = useSelector((state) => state.usersession.userUuid);
     const [userRating, setUserRating] = useState('');
     const [profileInfo, setProfileInfo] = useState([]);
 
     let notification = '';
 
-    useEffect(()=>{
+    useEffect(() => {
 
-        fetch(`${apiBasePath}/getprofile/${localStorage.getItem("uuid")}`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('pofile details on user profile--------------->>>>>>>', data);
-        setProfileInfo(data.object.profile)
-      })
-      .catch((error) => console.error("Error fetching data:", error));
+        fetch(`${apiBasePath}/getprofile/${userUuid}`)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('pofile details on user profile--------------->>>>>>>', data);
+                setProfileInfo(data.object.profile)
+            })
+            .catch((error) => console.error("Error fetching data:", error));
 
-    },[])
+    }, [])
 
-    function reloadPage(){
-        setTimeout(()=>{
-        router.reload();
+    function reloadPage() {
+        setTimeout(() => {
+            router.reload();
         }, 1000)
-      }
+    }
 
     async function submitRating() {
-        if (localStorage.getItem('uuid').length > 0 && localStorage.getItem('uuid')) {
+        if (userUuid) {
             const postData = {
                 ebook_id: `${router.query.slug}`,
                 name: profileInfo?.name,
                 comment: userRating,
-                user_id: localStorage.getItem('uuid')
+                user_id: userUuid
             };
 
             console.log({ postData })
 
             if (postData.comment.trim() === '') {
                 notification = 'দয়া করে আপনার মন্তব্য লিখুন ।';
-                notify();
+                dispatch(toastAction.setWarnedNotification(notification));
                 return;
             };
 
@@ -57,7 +58,7 @@ export default function CreateRating({ setUserComments }) {
 
                 const result = response.data;
                 notification = 'আপনার মন্তব্য প্রেরণ সফল হয়েছে।';
-                notify1();
+                dispatch(toastAction.setSucessNotification(notification));
                 setUserRating('')
                 setUserComments((prevData) => ([
                     ...prevData,
@@ -68,7 +69,7 @@ export default function CreateRating({ setUserComments }) {
             } catch (error) {
                 console.error('Error submitting rating:', error);
                 notification = 'আপনার মন্তব্য যায়নি।';
-                notify();
+                dispatch(toastAction.setWarnedNotification(notification));
             }
 
         }
@@ -77,29 +78,9 @@ export default function CreateRating({ setUserComments }) {
 
 
 
-    const notify1 = () => toast.success(notification, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-
-    });
-    const notify = () => toast.warn(notification, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-
-    });
 
     return (
         <div className={``}>
-            <ToastContainer />
-
             <textarea
                 id="message"
                 name="message"

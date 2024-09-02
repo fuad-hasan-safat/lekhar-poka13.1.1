@@ -2,16 +2,12 @@ import React, { useContext } from 'react'
 import UserProfile from '../../components/userprofile/UserProfile'
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import { UserContext } from '../../components/lekharpokaStore/user-context';
-import LoginPage from '../../components/login/login';
-
-
+import Toast from '../../components/toast/Toast';
+import { useSelector } from 'react-redux';
 
 export default function Home() {
   const router = useRouter();
-  const currentUrl = router.asPath;
-  const slug = router.query.slug;
-  const { userUuid } = useContext(UserContext)
+  const isToastShow = useSelector((state) => state.toast.isToastShow);
 
   if (!router.isReady) return null;
 
@@ -22,6 +18,7 @@ export default function Home() {
         <Head>
           <title>প্রোফাইল</title>
         </Head>
+      
         <UserProfile/>
       </div>
     </>

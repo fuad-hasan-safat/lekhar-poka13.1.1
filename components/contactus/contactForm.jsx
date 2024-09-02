@@ -3,15 +3,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { apiBasePath } from '../../utils/constant';
-
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
+import { toastAction } from '../redux/toast-slice';
 
 const ContactForm = () => {
 
+    const dispatch = useDispatch();
     let notification = ''
-
-
     const [formData, setFormData] = useState({
         fullName: '',
         phoneNumber: '',
@@ -27,10 +25,26 @@ const ContactForm = () => {
         });
     };
 
+    function validatePhoneNumber(input) {
+        const isValid = /^01\d{9}$/.test(input);
+
+        if (isValid) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     const handleSubmit = async (e) => {
 
         e.preventDefault();
+
+        if(!validatePhoneNumber(formData.phoneNumber)){
+            notification = 'সঠিক মোবাইল নাম্বার দিন !'
+            dispatch(toastAction.setWarnedNotification(notification));
+            return;
+        }
 
         try {
 
@@ -42,9 +56,10 @@ const ContactForm = () => {
 
             // alert('ধন্যবাদ আপনার মন্তব্যের জন্য')
             notification = 'ধন্যবাদ আপনার মন্তব্যের জন্য'
-
+            dispatch(toastAction.setSucessNotification(notification));
         } catch (error) {
-            console.error('Signup error:', error);
+            notification = 'মন্তব্য প্রেরণ সফল হয়নি !'
+            dispatch(toastAction.setWarnedNotification(notification));
         }
 
 
@@ -56,18 +71,8 @@ const ContactForm = () => {
             message: ''
         });
 
-        notify();
     };
 
-    const notify = () => toast.warn(notification, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-
-    });
 
     return (
         <form onSubmit={handleSubmit} >
@@ -120,9 +125,6 @@ const ContactForm = () => {
                 >
                     সাবমিট
                 </button>
-                <ToastContainer />
-
-
             </div>
 
         </form>

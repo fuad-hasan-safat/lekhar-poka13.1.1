@@ -11,60 +11,94 @@ import {
   MdRepeat
 } from "react-icons/md";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import { useRouter } from "next/navigation";
-import { AudioPlayListContext } from "../../store/audioPlayer-context";
 import { apiBasePath } from "../../../utils/constant";
 import { replaceUnderscoresWithSpaces } from "../../../function/api";
+import { useDispatch, useSelector } from "react-redux";
+import { audioPlayerAction } from "../../redux/audioplayer-slice";
+import { playlistAction } from "../../redux/playlist-slice";
 
 export default function AudioPlayer() {
 
-  const { playList, isShuffle, isRepeat, toggleReapet, toggleShuffle, currentPlayingIndex, audioPlace, nextSongPlay, prevSongPlay, toggleAudioPlay, isAudioPlaying, resetAudioPlayer } = useContext(AudioPlayListContext)
+  const dispatch = useDispatch();
+  const songs = useSelector((state) => state.audioplayer.currentPlaylist);
+  const currentAudioIndex = useSelector((state) => state.audioplayer.currentAudioIndex);
+  const isAudioPlayerShouldOpen = useSelector((state) => state.audioplayer.isAudioPlayerShouldOpen);
+  const isAudioPlaying = useSelector((state) => state.audioplayer.isAudioPlaying);
+  const currentSongPlayedTime = useSelector((state) => state.audioplayer.currentSongPlayedTime);
+  const { isShuffle, isRepeat, isMute } = useSelector((state) => state.audioplayer);
 
-
-
-  const songs = playList;
   const audioPlayer = useRef(null);
-  const [currentSongIndex, setCurrentSongIndex] = useState(currentPlayingIndex);
   const [volume, setVolume] = useState(0.5);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [isMute, setIsMute] = useState(false);
-
-
-
-
-  var currentSong = songs[currentPlayingIndex];
   const [mounted, setMounted] = useState(false);
+  const currentSong = songs[currentAudioIndex];
+
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  // useEffect(() => {
+  //   if (mounted) {
+  //     audioPlayer.current.currentTime = 0;
+  //   }
+  // }, [audioPlayer.current])
+
+  useEffect(() => {
+    if (mounted && audioPlayer.current) {
+      const interval = setInterval(() => {
+
+        if (isAudioPlayerShouldOpen && isAudioPlaying) {
+          const currentTime = audioPlayer.current?.currentTime;
+          dispatch(audioPlayerAction.setCurrentSongPlayedTime(currentTime));
+        }
+
+      }, 100); // Every 10 seconds
+
+      return () => clearInterval(interval);
+    }
+  }, [mounted, isAudioPlaying, dispatch]);
+
 
 
   useEffect(() => {
-    currentSong = songs[currentPlayingIndex];
-  })
+    if (mounted) {
 
-  useEffect(() => {
-    setDuration(audioPlayer?.current?.duration);
+      if (audioPlayer.current) {
 
-  }, [currentSong]);
+        if (isAudioPlaying) {
+          console.log('Trying to play audio...');
+          audioPlayer.current.play().then(() => {
+            console.log('Audio playing');
+          }).catch((error) => {
+            dispatch(audioPlayerAction.stopAudioPlaying())
+            audioPlayer.current.currentTime = currentSongPlayedTime;
+            console.error('Playback error:', error);
+          });
+        } else {
+          console.log('Pausing audio...');
+          
+          audioPlayer.current.pause();
+          // audioPlayer.current.currentTime = currentSongPlayedTime;
 
-  useEffect(() => {
-
-    if (isAudioPlaying) {
-
-      audioPlayer.current?.play();
-
-    } else {
-
-      audioPlayer.current?.pause();
-
+        }
+      } else {
+        console.error('Audio player is null');
+      }
     }
 
-  }, [isAudioPlaying, currentSong]);
 
+  }, [isAudioPlaying, currentSong, mounted]);
+
+  useEffect(() => {
+    if (audioPlayer.current) {
+
+      audioPlayer.current.volume = volume;
+
+      audioPlayer.current.muted = isMute;
+    }
+  }, [volume, isMute, mounted]);
 
   const handleTimeUpdate = () => {
     setCurrentTime(audioPlayer.current?.currentTime);
@@ -72,6 +106,7 @@ export default function AudioPlayer() {
 
   const handleLoadedMetadata = () => {
     setDuration(audioPlayer.current?.duration);
+    setCurrentTime(0);
   };
 
   const handleEnded = () => {
@@ -79,7 +114,7 @@ export default function AudioPlayer() {
       audioPlayer.current?.play();
     } else {
       nextSongPlay();
-     
+
     }
   };
 
@@ -102,30 +137,126 @@ export default function AudioPlayer() {
 
     if (!isMute) {
       const rect = e.target.getBoundingClientRect();
-
       const x = e.clientX - rect.left;
       const width = rect.width;
       const newVolume = x / width;
 
       audioPlayer.current.volume = newVolume;
-
       setVolume(newVolume);
+    }
+  };
+
+  function toggleShuffle() {
+    dispatch(audioPlayerAction.toggleShuffle());
+  }
+  function toggleReapet() {
+    dispatch(audioPlayerAction.toggleRepeat());
+  }
+
+  function prevSongPlay() {
+    if (isAudioPlaying) {
+      let newIndex = 0;
+      if (isShuffle) {
+        newIndex = Math.floor(Math.random() * songs?.length)
+      } else if (currentAudioIndex === 0) {
+        newIndex = songs?.length - 1;
+      } else {
+        newIndex = currentAudioIndex - 1;
+      }
+
+      dispatch(audioPlayerAction.setCurrentAudioIndex(newIndex));
+      dispatch(audioPlayerAction.setCurrntAudioId(songs[newIndex]?._id));
+      dispatch(playlistAction.addSingleSongToLatestPlaylist(songs[newIndex]));
+
+      audioPlayer.current.currentTime = 0;
+
+    } else {
+      let newIndex = 0;
+      if (currentAudioIndex === 0) {
+        newIndex = songs?.length - 1;
+      } else {
+        newIndex = currentAudioIndex - 1;
+      }
+      dispatch(audioPlayerAction.setCurrentAudioIndex(newIndex));
+      dispatch(audioPlayerAction.setCurrntAudioId(songs[newIndex]?._id));
+      dispatch(playlistAction.addSingleSongToLatestPlaylist(songs[newIndex]));
+
+      audioPlayer.current.currentTime = 0;
 
     }
 
-  };
+  }
+
+  function nextSongPlay() {
+    // audioPlayer.current.currentTime = 0.0;
+    if (isAudioPlaying) {
+      if (isAudioPlaying && songs?.length <= 1) {
+        dispatch(audioPlayerAction.stopAudioPlaying());
+      } else {
+        if (isShuffle) {
+          const randomIndex = Math.floor(Math.random() * songs?.length);
+          dispatch(audioPlayerAction.setCurrentAudioIndex(randomIndex));
+          dispatch(audioPlayerAction.setCurrntAudioId(songs[randomIndex]?._id));
+          dispatch(playlistAction.addSingleSongToLatestPlaylist(songs[randomIndex]));
+
+        } else {
+          let newIndex = 0;
+          if (currentAudioIndex === songs?.length - 1) {
+            newIndex = 0;
+          } else {
+            newIndex = currentAudioIndex + 1;
+          }
+
+          dispatch(audioPlayerAction.setCurrentAudioIndex(newIndex));
+          dispatch(audioPlayerAction.setCurrntAudioId(songs[newIndex]?._id));
+          dispatch(playlistAction.addSingleSongToLatestPlaylist(songs[newIndex]));
+
+          audioPlayer.current.currentTime = 0;
+
+        }
+      }
+    } else {
+      let newIndex = 0;
+      if (currentAudioIndex === songs?.length - 1) {
+        newIndex = 0;
+      } else {
+        newIndex = currentAudioIndex + 1;
+      }
+
+      dispatch(audioPlayerAction.setCurrentAudioIndex(newIndex));
+      dispatch(audioPlayerAction.setCurrntAudioId(songs[newIndex]?._id));
+      dispatch(playlistAction.addSingleSongToLatestPlaylist(songs[newIndex]));
+
+      audioPlayer.current.currentTime = 0;
+    }
+
+  }
+
+  function resetAudioPlayer() {
+    dispatch(audioPlayerAction.resetAudioPlayer());
+
+  }
+
+  function toggleAudioPlayer() {
+    dispatch(audioPlayerAction.togglePlayAudioBar());
+  }
+
+  function toggleMute() {
+    dispatch(audioPlayerAction.toggleMute());
+  }
+
 
 
   if (!mounted) return null;
 
-  if (songs.length <= 0) return null;
+  if (!isAudioPlayerShouldOpen) return null;
+
 
   const title = replaceUnderscoresWithSpaces(currentSong?.title)
-  console.log(title);
 
   let shortenedTitle = title;
-  if(title?.length > 25) {
-      shortenedTitle = title?.slice(0,22) + '...'
+  if (title?.length > 25) {
+    shortenedTitle = title?.slice(0, 22) + '...'
   }
 
   return createPortal((
@@ -141,7 +272,7 @@ export default function AudioPlayer() {
                     alt={currentSong?.title}
                     width={70}
                     height={70}
-                    className="h-[70px] w-[70px] rounded-full"
+                    className="h-[70px] w-[70px] rounded-full object-cover"
                   ></img>
                 </div>
                 <div className="lg:flex lg:flex-col text-gray-600 pt-[5px] pl-[10px]">
@@ -159,6 +290,7 @@ export default function AudioPlayer() {
                 <audio
                   src={`${apiBasePath}/${currentSong?.audio.slice(currentSong.audio.indexOf('/') + 1)}`}
                   ref={audioPlayer}
+                  key={currentSong?._id || 'default'}
                   onTimeUpdate={handleTimeUpdate}
                   onLoadedMetadata={handleLoadedMetadata}
                   onEnded={handleEnded}
@@ -170,7 +302,7 @@ export default function AudioPlayer() {
                   <button onClick={prevSongPlay}>
                     <MdSkipPrevious />
                   </button>
-                  <button className="text-4xl" onClick={() => toggleAudioPlay(currentPlayingIndex, playList, audioPlace)}>
+                  <button className="text-4xl" onClick={toggleAudioPlayer}>
                     {isAudioPlaying ?
                       //  <MdPause /> 
                       <>
@@ -179,8 +311,8 @@ export default function AudioPlayer() {
                         ></img>
                       </>
                       :
-                      <MdPlayArrow
-                      />}
+                      <MdPlayArrow />
+                    }
                   </button>
                   <button onClick={nextSongPlay}>
                     <MdSkipNext />
@@ -210,10 +342,10 @@ export default function AudioPlayer() {
                 <button className="">
                   <img src="/images/icons/audioControl.svg"></img>
                 </button> */}
-                
+
                 {/* volume icon */}
-                {!isMute && <img className="cursor-pointer" onClick={() => { setIsMute(true); audioPlayer.current.volume = 0; }} width={30} height={30} src="/images/icons/ic_volumeon.svg"></img>}
-                {isMute && <img className="cursor-pointer" onClick={() => { setIsMute(false); audioPlayer.current.volume = volume }} width={30} height={30} src="/images/icons/ic_volumeoff.svg"></img>}
+                {!isMute && <img className="cursor-pointer" onClick={toggleMute} width={30} height={30} src="/images/icons/ic_volumeon.svg"></img>}
+                {isMute && <img className="cursor-pointer" onClick={toggleMute} width={30} height={30} src="/images/icons/ic_volumeoff.svg"></img>}
                 {/* volume bar */}
                 <div className="text-center items-center content-center justify-center ">
                   <ProgressBar

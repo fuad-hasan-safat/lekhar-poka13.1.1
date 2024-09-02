@@ -2,10 +2,9 @@
 
 import { apiBasePath } from "../../utils/constant";
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from "react-redux";
+import { toastAction } from "../redux/toast-slice";
 
 export default function SigninFormBeforeOTP({
   type,
@@ -14,17 +13,12 @@ export default function SigninFormBeforeOTP({
   SetIsOtpSucess,
   setState,
   state,
-  otpStatus,
   setOtpStatus,
   otpProp
 }) {
-  const router = useRouter();
-  const [numberPrefix] = useState('88');
-  const [showPassword, setShowPassword] = useState(false);
-  const [reshowPassword, setReShowPassword] = useState(false);
+  const dispatch = useDispatch();
 
-  const togglePasswordVisibility = () => setShowPassword(!showPassword);
-  const togglerePasswordVisibility = () => setReShowPassword(!reshowPassword);
+  const [numberPrefix] = useState('88');
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -71,19 +65,24 @@ export default function SigninFormBeforeOTP({
         phone: `${numberPrefix}${state.mobileNumber.trim()}`,
       });
 
+      console.log(response.data);
       setOtpStatus(response.data.otp_status);
 
       if (response.data.status === 'failed') {
-        notify('এই নাম্বার এ লগইন করা নেই');
+        dispatch(toastAction.setWarnedNotification('এই নাম্বার এ লগইন করা নেই'));
       } else if (response.data.otp_status === "SENT") {
-        notify1('ওটিপি প্রেরণ করা হয়েছে');
+        dispatch(toastAction.setSucessNotification('ওটিপি প্রেরণ করা হয়েছে'));
         SetIsOtpSucess(true);
       } else if (response.data.otp_status === "LIMIT_CROSSED") {
-        notify('আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন');
+        dispatch(toastAction.setWarnedNotification('আপনি আজ ইতিমধ্যে ৩ বার চেষ্টা করেছেন'));
         SetIsOtpSucess(false);
       }
     } catch (error) {
-      notify('এই ফোন নম্বর দিয়ে কোনো ব্যবহারকারী নিবন্ধিত নয়');
+      if(type === 'recoveryPass'){
+        dispatch(toastAction.setWarnedNotification('এই ফোন নম্বর দিয়ে কোনো ব্যবহারকারী নিবন্ধিত নয়'));
+      }else{
+       dispatch(toastAction.setWarnedNotification('আপনি ইতিমধ্যে সাইন আপ করেছেন'));
+      }
     }
   };
 
@@ -93,23 +92,6 @@ export default function SigninFormBeforeOTP({
     }
   };
 
-  const notify = (message) => toast.warn(message, {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-  });
-
-  const notify1 = (message) => toast.success(message, {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-  });
 
   return (
     <>
@@ -140,14 +122,13 @@ export default function SigninFormBeforeOTP({
           <button
             onClick={validateAndSubmit}
             className="page__common__yello__btn mt-8 px-[90px] bg-[#F9A106] rounded-[8px] lg:text-[35px] md:text-[30px] sm:text-[25px] xs:text-[25px] text-white lg:h-[70px] md:h-[70px] sm:h-[60px] xs:h-[55px]"
-            disabled={state.isDisabled}
+            // disabled={state.isDisabled}
           >
             {btntext}
           </button>
         </div>
       </div>
 
-      <ToastContainer />
     </>
   );
 }

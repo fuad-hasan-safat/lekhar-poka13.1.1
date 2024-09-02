@@ -1,36 +1,26 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { apiBasePath } from '../../utils/constant'
-import ImageCrop from './cropComponents/ImageCrop'
-import ImageCropProvider from './cropComponents/ImageCropProvider'
 import UserAchivement from './userAchivement'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import { convertToBanglaPhoneNumber, convertToBengaliDate } from '../../utils/convertToBanglaDate'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import Bio from '../common/Bio'
+import { useDispatch, useSelector } from 'react-redux'
+import { toastAction } from '../redux/toast-slice'
 
 export default function WriterProfileBanner({
-    apprevedPost = 0,
-    unApprovedPost = 0,
-    follower = 0,
-    following = 0,
     setProfileController,
-    // writerInfo,
-    // writerBio,
     profileInfo,
     isSelfWriter,
 
 }) {
     const router = useRouter()
     const slug = router.query.slug;
+    const dispatch = useDispatch();
+    const userUuid = useSelector((state) => state.usersession.userUuid);
 
     let notification = ''
-
-    const [loggedInUser, setLoggedInUser] = useState("");
-    const [userUuid, setUserUuid] = useState("");
-    const [userToken, setUserToken] = useState("");
     const [isAlreadyFollowing, setIsAlreadyFollowing] = useState(false)
     const [bio, setBio] = useState('')
     const [bioId, setBioId] = useState('')
@@ -41,11 +31,6 @@ export default function WriterProfileBanner({
 
 
     useEffect(() => {
-        setLoggedInUser(localStorage.getItem("name") || "");
-        setUserToken(localStorage.getItem("token") || "");
-        setUserUuid(localStorage.getItem("uuid") || "");
-        // setUserPhone(localStorage.getItem("phone") || "");
-
         if (isSelfWriter) {
             const fetchUserBioData = async () => {
                 const response = await fetch(`${apiBasePath}/bio/${profileInfo?.user_id}`);
@@ -58,7 +43,7 @@ export default function WriterProfileBanner({
 
             fetchUserBioData();
 
-            getFollowingStatus(profileInfo?.user_id, localStorage.getItem("uuid"))
+            getFollowingStatus(profileInfo?.user_id, userUuid)
 
 
             // 
@@ -121,9 +106,9 @@ export default function WriterProfileBanner({
         }
 
     } else {
-        image = writerInfo?.image;
-        rendredBio = writerBio?.content;
-        birthDate = writerInfo?.birth_date;
+        // image = writerInfo?.image;
+        // rendredBio = writerBio?.content;
+        // birthDate = writerInfo?.birth_date;
     }
 
     const banglaBirthDate = convertToBengaliDate(birthDate)
@@ -132,10 +117,9 @@ export default function WriterProfileBanner({
 
 
     async function followUserhandler(user_id, following) {
-        if (!localStorage.getItem('uuid') || localStorage.getItem('uuid').length <= 0) {
-            notification = 'অনুসরণ করতে লগইন করুন'
-            notify();
-
+        if (!userUuid) {
+            notification = 'অনুসরণ করতে লগইন করুন';
+            dispatch(toastAction.setWarnedNotification(notification));
             return;
         }
         if (!isAlreadyFollowing) {
@@ -153,45 +137,24 @@ export default function WriterProfileBanner({
                     }
                 );
                 setIsAlreadyFollowing(true);
-                setFollowerNumber(followerNumber+1)
+                setFollowerNumber(followerNumber + 1)
                 console.log('following ------------------------- writer in response message---------------->>>>>>', response)
                 notification = 'অনুসরণ করছেন'
-                notify1();
+                dispatch(toastAction.setSucessNotification(notification));
+
             } catch (error) {
-                // console.log("inside catch ----------------", error);
             }
         } else {
-            // alert(`আপনি ইতিমধ্যেই ${writerInfo.name} কে অনুসরণ করছেন `)
             notification = `আপনি ইতিমধ্যেই অনুসরণ করছেন `;
-            notify();
+            dispatch(toastAction.setWarnedNotification(notification));
         }
     }
 
 
-    const notify = () => toast.warn(notification, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-
-    });
-
-    const notify1 = () => toast.success(notification, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-    });
-
     console.log('image --------- length >>>>>', profileInfo?.image)
 
-    const phoneNumber =  convertToBanglaPhoneNumber(profileInfo?.phone);
-    const maskedNumber =  phoneNumber.substring(0,5) + '*'.repeat(phoneNumber.length - 5);
+    const phoneNumber = convertToBanglaPhoneNumber(profileInfo?.phone);
+    const maskedNumber = phoneNumber?.substring(0, 5) + '*'.repeat(phoneNumber?.length - 5);
     return (
         <>
 
@@ -199,7 +162,7 @@ export default function WriterProfileBanner({
                 <div className="flex justify-center">
                     <img
                         className="lg:w-[264px] lg:h-[264px]  md:w-[200px] md:h-[200px] sm:w-[180px] sm:h-[180px] xs:w-[180px] xs:h-[180px] rounded-full  border-4 border-solid border-white -mt-[110px]  "
-                        src={image?.length > 0 ? `${apiBasePath}/${image.slice(image.indexOf("/") + 1)}` : '/images/defaultUserPic/profile.jpg'}
+                        src={image?.length > 0 ? `${apiBasePath}/${image?.slice(image?.indexOf("/") + 1)}` : '/images/defaultUserPic/profile.jpg'}
                     />
                 </div>
                 <h1><span className='text-[35px] text-[#FCD200]'>{profileInfo?.name}</span> <span className='text-[#595D5B] pl-[20px] text-[22px]'>{profileInfo?.designation}</span></h1>
@@ -239,7 +202,6 @@ export default function WriterProfileBanner({
                     >
                         <span><i class="ri-add-box-fill"></i></span> <span> {isAlreadyFollowing ? 'অনুসরণ করছেন' : 'অনুসরণ করুন'}</span>
                     </button>
-                    <ToastContainer />
                 </div>}
 
                 {isSelfWriter && <hr></hr>}
@@ -258,8 +220,7 @@ export default function WriterProfileBanner({
 
                 {rendredBio?.length > 0 && <div className='mb-[25px]'>
                     <h1 className='mt-[30px] text-[#F9A106] text-[20px]'>সংক্ষিপ্ত বায়ো</h1>
-                    {/* <p className='text-[20px] text-[#737373] mt-[10px]'>{rendredBio}</p> */}
-                    <Bio bio={rendredBio}/>
+                    <Bio bio={rendredBio} />
                 </div>}
 
             </div>

@@ -3,20 +3,25 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { AudioPlayListContext } from '../../../../store/audioPlayer-context';
 import { apiBasePath } from '../../../../../utils/constant';
 import axios from 'axios';
-
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { replaceUnderscoresWithSpaces } from '../../../../../function/api';
+import { useDispatch, useSelector } from 'react-redux';
+import { toastAction } from '../../../../redux/toast-slice';
+import { audioPlayerAction } from '../../../../redux/audioplayer-slice';
+import { playlistAction } from '../../../../redux/playlist-slice';
 
 export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) {
-    const { playList, setPlaylist, audioPlace, playListRenderScope, currentPlayingIndex, setCurrentAudioIndex, toggleAudioPlay, isAudioPlaying, setMyPlayList, myPlayList, setLatestPlaylist, latestPlayList } = useContext(AudioPlayListContext)
+    const dispatch = useDispatch();
+    const userUuid = useSelector((state) => state.usersession.userUuid);
+    const currentSongId = useSelector((state)=> state.audioplayer.currentSongId);
+    const isAudioPlaying = useSelector((state)=> state.audioplayer.isAudioPlaying);
+    const currentAudioScope = useSelector((state) => state.audioplayer.currentAudioScope);
+
     const [duration, setDuration] = useState(null);
     const [error, setError] = useState(false);
     const audioRef = useRef(null);
 
     let notification = '';
 
-    console.log({ audioPlace, playListRenderScope, currentPlayingIndex })
 
     useEffect(() => {
         const audioElement = audioRef.current;
@@ -45,14 +50,14 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
         };
 
 
-    }, [songInfo?.audio]);
+    }, [songInfo?.audio, songInfo?.id]);
 
     async function handleAddMyPlaylist() {
         console.log({ songInfo })
         const data = {
             ebook_id: songInfo.ebook_id,
             audio_id: songInfo._id,
-            userId: localStorage.getItem('uuid')
+            userId: userUuid
         }
 
         console.log('Add to playlist data -,', data);
@@ -63,31 +68,43 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
             if (response.data.status === "failed") {
                 if (response.data.msg === 'Audio Already in playlist') {
                     notification = `${songInfo.title} ইতিমধ্যে প্লেলিস্টে যুক্ত আছে!`;
+                    dispatch(toastAction.setWarnedNotification(notification))
                 } else {
                     notification = `${songInfo.title} প্লেলিস্টে যুক্ত করা যাচ্ছে না!`;
+                    dispatch(toastAction.setWarnedNotification(notification))
                 }
-                notify();
                 return;
             }
-            setMyPlayList([...myPlayList, songInfo])
+            // setMyPlayList([...myPlayList, songInfo])
+            dispatch(playlistAction.addSingleSongToMyPlaylist(songInfo));
             notification = `${songInfo.title} প্লেলিস্টে যুক্ত হয়েছে!`;
-            notify1();
+            dispatch(toastAction.setSucessNotification(notification))
         } catch (error) {
             console.error('Error posting data:', error);
         }
     }
 
     async function handlePlayButton() {
-        toggleAudioPlay(audioIndex, audioList, `details${songInfo._id}`);
+
+        dispatch(audioPlayerAction.togglePlay({
+            audioIndex: audioIndex,
+            audioscope: `details`,
+            audioList: audioList,
+            currentSongId: songInfo._id,
+        }))
+
+        dispatch(playlistAction.addSingleSongToLatestPlaylist(songInfo));
+
+
 
         const data = {
             ebook_id: songInfo.ebook_id,
             audio_id: songInfo._id,
-            userId: localStorage.getItem('uuid')
+            userId: userUuid,
         }
 
         console.log('Add to latest playlist data -,', data);
-
+        console.log('SongInfo--', songInfo);
 
         try {
             const response = await axios.post(`${apiBasePath}/addtolatestplaylist`, data);
@@ -95,7 +112,7 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
             if (response.data.status === "failed") {
                 return;
             }
-            setLatestPlaylist([...latestPlayList, songInfo])
+            // setLatestPlaylist([...latestPlayList, songInfo])
         } catch (error) {
             console.error('Error posting data:', error);
         }
@@ -103,41 +120,13 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
     }
 
 
-
-    const notify1 = () => toast.success(notification, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-
-    });
-
-    const notify = () => toast.warn(notification, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-
-    });
-
     const title = replaceUnderscoresWithSpaces(songInfo.title)
     console.log(title);
 
     let shortenedTitle = title;
-    // if(title?.length > 84) {
-    //     shortenedTitle = title?.slice(0,81) + '...'
-    // }
-
-
 
     return (
         <>
-            <ToastContainer />
-
             <div className='audio__tab__item'>
                 <div className='audio__tab__left relative'>
                     <div>
@@ -158,7 +147,7 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
                 </div>
 
                 <div className='audio__tab__playbutton'>
-                    <button onClick={handlePlayButton}>{isAudioPlaying && audioIndex === currentPlayingIndex && audioPlace === `details${songInfo._id}` ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</button>
+                    <button onClick={handlePlayButton}>{ isAudioPlaying && currentSongId === songInfo._id ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</button>
                     <button onClick={handleAddMyPlaylist} className='text-[#484848] text-opacity-[50%] lg:ml-[18px] md:ml-[15px] sm:ml-[12px] xs:ml-[10px]'><i class="ri-add-circle-fill"></i></button>
                 </div>
 

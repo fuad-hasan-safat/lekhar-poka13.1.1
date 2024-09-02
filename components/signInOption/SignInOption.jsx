@@ -6,9 +6,8 @@ import { apiBasePath } from '../../utils/constant';
 import { useRouter } from 'next/router';
 import { UserContext } from '../lekharpokaStore/user-context';
 import useTabSyncAuth from '../../utils/useReloadUrl';
-
-// import { LoginSocialFacebook } from "reactjs-social-login";
-// import { FacebookLoginButton } from "react-social-login-buttons";
+import { userSessionAction } from '../redux/usersession-slice';
+import { useDispatch } from 'react-redux';
 
 export default function SignInOption({
     title,
@@ -17,26 +16,22 @@ export default function SignInOption({
     lowermessege1,
     lowermessege2,
     signLogLink,
-    // user,
-    // setUserLog,
-    // setProfile,
-    // setStatus,
-    // setUsername,
-    // setUserUuid,
 }) {
 
 
     const router = useRouter();
+    const dispatch = useDispatch();
     const { setUser } = useContext(UserContext);
-    let google_accessToken = null;
+    const [google_accessToken, setGoogle_accessToken] = useState()
 
     const { triggerLogin } = useTabSyncAuth();
 
 
     const login = useGoogleLogin({
         onSuccess: (codeResponse) => {
-            google_accessToken = codeResponse.access_token;
-            router.push('/')
+            setGoogle_accessToken(codeResponse.access_token);
+            console.log('google log in response , ', codeResponse);
+            // router.push('/')
 
         },
         onError: (error) => console.log('Login Failed:', error)
@@ -45,6 +40,7 @@ export default function SignInOption({
 
     async function sendDataToBackend(id, email, name, picture, access_token) {
         try {
+
             const response = await axios.post(
                 `${apiBasePath}/google-login`,
                 {
@@ -60,11 +56,12 @@ export default function SignInOption({
                     },
                 }
             );
-
+            console.log('Google log in backend response', response)
 
             if (response.data.status === 'success') {
 
-                const data = await response.data;
+                const data = response.data;
+                console.log('Google back end log in sucess', data);
 
                 dispatch(userSessionAction.addValidUser({
                     isLoggedIn: true,
@@ -100,14 +97,15 @@ export default function SignInOption({
                 axios
                     .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${google_accessToken}`, {
                         headers: {
-                            Authorization: `Bearer ${user.access_token}`,
+                            Authorization: `Bearer ${google_accessToken}`,
                             Accept: 'application/json'
                         }
                     })
                     .then((res) => {
-                        sendDataToBackend(res.data.id, res.data.email, res.data.name, res.data.picture, user.access_token)
+                        console.log('Google details response', res);
+                         sendDataToBackend(res.data.id, res.data.email, res.data.name, res.data.picture, google_accessToken)
 
-                        router.push('/')
+                         router.push('/')
                     })
                     .catch((err) => console.log(err));
             }

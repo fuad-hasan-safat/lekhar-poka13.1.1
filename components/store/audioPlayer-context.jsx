@@ -91,9 +91,6 @@ export default function AudioPlaylistContextProvider({ children }) {
           ? 0
           : prevIndex + 1
     );
-
-
-
   };
 
   const playPreviousSong = () => {
@@ -140,7 +137,6 @@ export default function AudioPlaylistContextProvider({ children }) {
       if (prevIndex !== songIndex || prevScope !== audioScope) {
         localStorage.setItem("playlistScope", audioScope);
         setCurrentAudioIndex(songIndex)
-
         //  audioScope: 'details'(details page), 'latestPlayList', 'myPlayList'
         setAudioBar((prevAudioBar) => ({ ...prevAudioBar, playList: songList, audioPlace: audioScope }))
 

@@ -4,6 +4,10 @@ import { persistStore, persistReducer } from 'redux-persist';
 import { combineReducers } from 'redux';
 import userPostSlice from './userpost-slice';
 import userSessionSlice from './usersession-slice';
+import toastSlice from './toast-slice';
+import audioplayerSlice from './audioplayer-slice';
+import playlistSlice from './playlist-slice';
+import categorySlice from './category-slice';
 
 // Persist configuration
 const persistConfig = {
@@ -15,6 +19,10 @@ const persistConfig = {
 const rootReducer = combineReducers({
     userpost: userPostSlice.reducer,
     usersession:userSessionSlice.reducer,
+    toast: toastSlice.reducer,
+    audioplayer: audioplayerSlice.reducer,
+    playlist: playlistSlice.reducer,
+    category: categorySlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

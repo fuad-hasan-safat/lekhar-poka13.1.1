@@ -2,14 +2,16 @@ import Head from 'next/head';
 import PassRecoveryPageBeforeOTP from '../../components/recoverypage/UpdateRecoveryPage';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 
 export default function Home() {
 
   const router = useRouter();
+  const userUuid = useSelector((state) => state.usersession.userUuid);
   const [isLanded, setIsLanded] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem('uuid')) {
+    if (userUuid) {
       router.push('/')
     }
     setIsLanded(true);
@@ -24,7 +26,7 @@ export default function Home() {
       </Head>
 
       <div className="">
-        {localStorage.getItem('uuid') ? <>
+        {userUuid ? <>
 
         </> : <>
           <PassRecoveryPageBeforeOTP />

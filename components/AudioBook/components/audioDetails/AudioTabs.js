@@ -1,13 +1,11 @@
 'use client'
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import TechnicalDetails from './technicalDetails';
 import Summary from './Summary';
 import CommentsOfWriter from './CommentsOfWriter';
 import Rating from './Rating';
 import AudioTabComponent from './AudioTabComponent';
-import AudioPlayer from '../../AudioPlayer/AudioPlayer';
-import { singleAudioData } from '../sampleData/singleAudioDetailsPage';
 import { AudioDetailsTabContext } from '../../../store/audiodetailstab-context';
 
 const AudioTabs = ({singleAudioData}) => {
@@ -27,7 +25,7 @@ const AudioTabs = ({singleAudioData}) => {
   return (
     <>
 
-      <div className="audio__tabs__wrap">
+      <div className="audio__tabs__wrap z-[999]">
         <ul className="tab-list">
           <li
             className={`tabs ${getActiveClass(1, "active-tabs")}`}
@@ -60,7 +58,7 @@ const AudioTabs = ({singleAudioData}) => {
         <div className="audio__tab__content">
 
           <div className={`content ${getActiveClass(audioTabToggleState, "active-content")}`}>
-            {audioTabToggleState === 1 && <AudioTabComponent audioData={singleAudioData.audio}/>}
+            {audioTabToggleState === 1 && <AudioTabComponent singleAudioData={singleAudioData}/>}
             {audioTabToggleState === 2 && <Summary summary={singleAudioData?.summary} />}
             {audioTabToggleState === 3 && <TechnicalDetails technicalDetails={singleAudioData?.technical_team} />}
             {audioTabToggleState === 4 && <CommentsOfWriter commentsOfWriter={singleAudioData?.comment_of_writer} />}

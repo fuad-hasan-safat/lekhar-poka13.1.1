@@ -27,6 +27,7 @@ const ProcchodButtonList = ({
     async function fetchDataAsync() {
       try {
         const result = await fetchData(`${apiBasePath}/categories`);
+        console.log('Proccod ------- category ---', result)
         setButtons(result);
       } catch (error) {
         alert(error)

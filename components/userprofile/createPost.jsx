@@ -1,21 +1,16 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import Link from "next/link";
-import Select from "react-select";
 import { apiBasePath } from '../../utils/constant';
-import CreateCategory from './createCategory';
-import CreateWriter from './createWriter';
-import Checkbox from '../common/Checkbox'
-import AudioFileUpload from './AudiofileUpload';
 import { useRouter } from 'next/router';
 import { FileUploader } from "react-drag-drop-files";
 import dynamic from 'next/dynamic';
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { userPostAction } from '../redux/userpost-slice';
 import { generateUUID } from '../../function/api';
+import { toastAction } from '../redux/toast-slice';
 
 
 
@@ -31,8 +26,8 @@ export default function CreatePost() {
 
     const dispatch = useDispatch();
 
-    const useruuid = useSelector((state)=> state.usersession.userUuid);
-    
+    const useruuid = useSelector((state) => state.usersession.userUuid);
+
     const router = useRouter()
 
     const [content, setContent] = useState("");
@@ -64,7 +59,7 @@ export default function CreatePost() {
         fetch(`${apiBasePath}/getprofile/${useruuid}`)
             .then((response) => response.json())
             .then((data) => {
-                
+
                 if (!data.object.profile_completion_status) {
                     setCanPostStatus(false)
                 } else {
@@ -151,18 +146,18 @@ export default function CreatePost() {
 
             if (!title) {
                 notification = 'দয়া করে আপনার লেখার শিরোনাম দিন';
-                notify();
+                dispatch(toastAction.setWarnedNotification(notification));
             }
             else if (!selectedOption) {
                 notification = 'দয়া করে আপনার লেখার ধরণ নির্বাচন করুন';
-                notify();
+                dispatch(toastAction.setWarnedNotification(notification));
             }
             else if (!summary) {
                 notification = 'দয়া করে আপনার লেখার সারমর্ম লিখুন';
-                notify();
-            }else if(content.trim().length <= 0){
+                dispatch(toastAction.setWarnedNotification(notification));
+            } else if (content.trim().length <= 0) {
                 notification = 'দয়া করে আপনার মূল লেখা লিখুন';
-                notify();
+                dispatch(toastAction.setWarnedNotification(notification));
             }
             else {
                 var isWriter = true;
@@ -196,7 +191,7 @@ export default function CreatePost() {
                         if (response.ok) {
                             const data = await response.json();
                             notification = 'আপনার লেখাটি অনুমোদনের জন্য এডমিনের কাছে পাঠানো হয়েছে। লেখাটি শীঘ্রই প্রকাশিত হবে। ধন্যবাদ';
-                            notify();
+                            dispatch(toastAction.setWarnedNotification(notification));
 
                             setSelectedFile(null);
                             setTitle('');
@@ -217,7 +212,7 @@ export default function CreatePost() {
                     }
                 } else {
                     notification = 'শিরোনাম, লেখার ধরণ ও সারসংক্ষেপ লিখুন';
-                    notify();
+                    dispatch(toastAction.setWarnedNotification(notification));
                 }
             }
 
@@ -225,16 +220,6 @@ export default function CreatePost() {
 
 
     };
-
-    const notify = () => toast.warn(notification, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: false,
-        draggable: true,
-
-    });
 
 
 
@@ -279,7 +264,8 @@ export default function CreatePost() {
                 }
             } else {
                 notification = 'অডিও আপলোড করুন';
-                notify()
+                dispatch(toastAction.setWarnedNotification(notification));
+
             }
 
         }
@@ -307,7 +293,7 @@ export default function CreatePost() {
                     <div className="text-[#F9A106] font-bold text-[20px] !mb-[5px]">আপনার লেখার ধরণ নির্বাচন করুন</div>
 
                     <div className='select__control'>
-                        
+
                         <select
                             id="category"
                             name="category"
@@ -447,7 +433,7 @@ export default function CreatePost() {
 
                 <hr class="my-4 border-gray-200" />
             </div>
-            <ToastContainer />
+
         </>
     )
 }

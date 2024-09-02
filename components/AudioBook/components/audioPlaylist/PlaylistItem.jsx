@@ -1,13 +1,16 @@
 'use client'
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import { AudioPlayListContext } from '../../../store/audioPlayer-context';
+import React, { useEffect, useRef, useState } from 'react'
 import { apiBasePath } from '../../../../utils/constant';
 import { replaceUnderscoresWithSpaces } from '../../../../function/api';
+import { useDispatch, useSelector } from 'react-redux';
+import { audioPlayerAction } from '../../../redux/audioplayer-slice';
 
 export default function PlaylistItem({ songInfo, songIndex, songList, audioScope }) {
     console.log('song info-----', songInfo)
-    const { currentPlayingIndex, playList, audioPlace, toggleAudioPlay, isAudioPlaying } = useContext(AudioPlayListContext)
-
+    const dispatch = useDispatch();
+    const isAudioPlaying = useSelector((state) => state.audioplayer.isAudioPlaying);
+    const currentAudioScope = useSelector((state) => state.audioplayer.currentAudioScope);
+    const currentSongId = useSelector((state) =>state.audioplayer.currentSongId);
     const [duration, setDuration] = useState(null);
     const [error, setError] = useState(false);
     const audioRef = useRef(null);
@@ -41,10 +44,21 @@ export default function PlaylistItem({ songInfo, songIndex, songList, audioScope
 
     }, [songInfo?.audio]);
 
-    const title = replaceUnderscoresWithSpaces(songInfo.title)
+
+    function handlePlayButton(){
+        dispatch(audioPlayerAction.togglePlay({
+            audioIndex: songIndex,
+            audioscope: audioScope,
+            audioList: songList,
+            currentSongId: songInfo._id,
+        }))
+    }
+    console.log('song info', songInfo)
+
+    const title = replaceUnderscoresWithSpaces(songInfo?.title)
     console.log(title);
 
-    let shortenedTitle = title;
+    let shortenedTitle = title || '' ;
     // if (title?.length > 30) {
     //     shortenedTitle = title?.slice(0, 27) + '...'
     // }
@@ -53,7 +67,7 @@ export default function PlaylistItem({ songInfo, songIndex, songList, audioScope
         <div className='audio__playlist__item'>
             <div className='audio__playlist__left '>
                 <div>
-                    <img src={`${apiBasePath}/${songInfo.image.slice(songInfo.image.indexOf('/') + 1)}`} className='w-[41px] object-cover h-[41px] rounded-full' />
+                    <img src={`${apiBasePath}/${songInfo?.image?.slice(songInfo?.image?.indexOf('/') + 1)}`} className='w-[41px] object-cover h-[41px] rounded-full' />
                 </div>
                 <div className='audio__playlist__info mid:max-w-[280px] lg:max-w-[180px] md:max-w-[120px] sm:max-w-[200px] xs:max-w-[200px]'>
                     <h6 className='charLim'>
@@ -69,7 +83,7 @@ export default function PlaylistItem({ songInfo, songIndex, songList, audioScope
             </div>
 
             <div className='audio__playlist__playbutton'>
-                <button onClick={() => toggleAudioPlay(songIndex, songList, audioScope)}>{isAudioPlaying && songIndex === currentPlayingIndex && audioPlace === audioScope ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</button>
+                <button onClick={handlePlayButton}>{isAudioPlaying && songInfo._id ===  currentSongId ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</button>
             </div>
 
         </div>

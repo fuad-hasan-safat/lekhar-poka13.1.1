@@ -36,11 +36,16 @@ const SeeMoreList = () => {
 
         getData(category);
 
+        
+        setSeeAllRenderInfo((prevSeeAllRenderInfo) => ({
+            ...prevSeeAllRenderInfo,
+            isLoadedDone: true,
+        }))
+
     }, [])
 
 
     async function getData(category) {
-        console.log('CCCCAAATAGORy', category)
         let apiurl = `${apiBasePath}/books/${category}`;
         if (category === 'সাম্প্রতিক') {
             apiurl = `${apiBasePath}/recentbooks`;
@@ -59,7 +64,6 @@ const SeeMoreList = () => {
 
             setSeeAllRenderInfo((prevSeeAllRenderInfo) => ({
                 ...prevSeeAllRenderInfo,
-                isLoadedDone: true,
                 allbooks: bookList
             }))
 
@@ -71,6 +75,7 @@ const SeeMoreList = () => {
     }
 
 
+    if (!seeAllRenderInfo.isLoadedDone) return <Loading />;
 
 
     let audioData = audioList.data;
@@ -82,9 +87,9 @@ const SeeMoreList = () => {
     }
 
 
-    if (!seeAllRenderInfo.isLoadedDone) return <Loading />;
 
     return (
+        seeAllRenderInfo.isLoadedDone&& 
         <>
             <Head>
                 <title>সব দেখুন</title>

@@ -1,55 +1,81 @@
 'use client'
-
 import { useRouter } from 'next/router'
 import { apiBasePath } from '../../utils/constant'
 import React, { useEffect, useState } from 'react'
 import { Rating } from 'react-simple-star-rating'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch, useSelector } from 'react-redux'
+import axios from 'axios'
+import { toastAction } from '../redux/toast-slice'
 
 
 export default function RatingComponent({ post_id, setRating, rating, notification }) {
-  const router = useRouter()
-  const [status, setStatus] = useState("");
-  const [username, setUsername] = useState("");
-  const [userUuid, setUserUuid] = useState("");
-  const [userToken, setUserToken] = useState("");
-  // let notification = ''
 
-  // check if user is logged in
+  const dispatch = useDispatch();
+  const userUuid = useSelector((state) => state.usersession.userUuid);
+  const isLoogedIn = useSelector((state) => state.usersession.isLoggedIn);
+
+  const [isMounted, setIsMounted] = useState(false);
+  const [userRating, setUserrating] = useState(0);
+
   useEffect(() => {
-    setStatus(localStorage.getItem("status") || "");
-    setUsername(localStorage.getItem("name") || "");
-    setUserToken(localStorage.getItem("token") || "");
-    setUserUuid(localStorage.getItem("uuid") || "");
+
+    async function getPostData() {
+      try {
+        const res = await axios.post(`${apiBasePath}/getpost/${post_id}`, {
+          'logged_in': isLoogedIn,
+          'user_id': userUuid,
+        });
+        setRating(res.data.object.rating)
+        setUserrating(res.data.object.rating)
+        console.log('Rating log', res.data.object);
+      } catch (error) {
+        console.log('Rating error ', error);
+      }
+    }
+
+    if (userUuid) {
+      getPostData();
+    }
+    setIsMounted(true)
   }, []);
 
-  // Catch Rating value
+
+
   const handleRating = (rate) => {
-
     setRating(rate)
-
   }
-
 
   async function submitRating(id) {
 
-    if (userUuid.length > 0) {
+    if (userRating > 0) {
+      notification = 'আপনি ইতিমধ্যে রেটিং দিয়েছেন';
+      dispatch(toastAction.setWarnedNotification(notification));
+      return;
+    }
+
+    if (userUuid) {
+
+      if(rating <= 0){
+      notification = 'দয়া করে সঠিক রেটিং দিন!';
+      dispatch(toastAction.setWarnedNotification(notification));
+
+      return;
+      }
 
       const data = {
+        user_id: userUuid,
         rating: rating,
       }
 
       const response = await fetch(`${apiBasePath}/rating/${id}`, {
-
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
-
       });
 
+      console.log('Rating sesponse ', response);
 
       if (!response.ok) {
 
@@ -57,23 +83,15 @@ export default function RatingComponent({ post_id, setRating, rating, notificati
 
       } else {
 
-        // alert('রেটিং সফলভাবে সম্পন্ন হয়েছে');
         notification = 'রেটিং সফলভাবে সম্পন্ন হয়েছে';
-        notify1();
+        dispatch(toastAction.setSucessNotification(notification));
 
       }
 
     } else {
 
       notification = 'দয়া করে লগইন করুন';
-      notify();
-
-      //   const confirmLogout = window.confirm('দয়া করে লগইন করুন');
-
-      //   if (confirmLogout) {
-      //     router.push('/account/login')
-      //   }
-
+      dispatch(toastAction.setWarnedNotification(notification));
     }
 
   }
@@ -82,47 +100,23 @@ export default function RatingComponent({ post_id, setRating, rating, notificati
   const onPointerLeave = () => console.log('Leave')
   const onPointerMove = (value, index) => console.log(value, index, rating)
 
-  const notify = () => toast.warn(notification, {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-
-  });
-
-  const notify1 = () => toast.success(notification, {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-
-  });
-
-
+  if (!isMounted) return null;
 
   return (
     <div className=''>
 
 
       <div className='relative start__rating place-content-center justify-center  mt-[50px] pt-[50px] pb-[50px] mx-[40px] mb-[50px] rounded-xl float-left text-center border-2 text-black border-gray-400'>
-
-        <div className=''>
-          <ToastContainer />
-        </div>
         <p>রেটিং দিন ।</p>
 
         <div>
-
           <Rating
             style={{ float: 'left', textAlign: 'center' }}
             onClick={handleRating}
             onPointerEnter={onPointerEnter}
             onPointerLeave={onPointerLeave}
             onPointerMove={onPointerMove}
+            initialValue={userRating}
           /* Available Props */
           />
 
@@ -131,6 +125,7 @@ export default function RatingComponent({ post_id, setRating, rating, notificati
         <button
           onClick={() => submitRating(post_id)}
           className='bg-orange-400 px-2 py-1 text-white h-[34px] w-[195px] rounded-md'
+        // disabled={userRating > 0}
         >
           সাবমিট
         </button>

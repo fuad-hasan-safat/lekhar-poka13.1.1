@@ -24,6 +24,7 @@ import UserContextProvider, { UserContext } from '../components/lekharpokaStore/
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import store, { persistor } from '../components/redux/store';
+import Toast from '../components/toast/Toast';
 
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -104,6 +105,7 @@ export default function MyApp({ Component, pageProps }) {
                     <AudioDetailsTabContextProvider>
                       <GoogleOAuthProvider clientId="854926132475-sm4btto49sresu4g5o9qpuk9lgtqor9f.apps.googleusercontent.com">
                         <>
+                          <Toast />
                           {result}
                           <AudioPlayer />
                         </>
