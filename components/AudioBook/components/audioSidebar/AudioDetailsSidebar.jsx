@@ -29,29 +29,31 @@ export default function AudioDetailsSideBar() {
         const latestPlayListUrl = `${apiBasePath}/showlatestplaylist/${userUuid}`;
         console.log({ myPlayListUrl, latestPlayListUrl })
 
-        
-            try {
-                const myplayList = await fetchDataWithAxios(myPlayListUrl);
-                console.log('my play list', myplayList)
-                dispatch(playlistAction.addMyPlaylist(myplayList.object))
 
-            } catch (error) {
-                console.log('playlist api call error', error)
-            }
-        
-            try {
-                const latestPlayList = await fetchDataWithAxios(latestPlayListUrl);
-                console.log('latest playlist get response', latestPlayList);
+        try {
+            const myplayList = await fetchDataWithAxios(myPlayListUrl);
+            console.log('my play list', myplayList)
+            dispatch(playlistAction.addMyPlaylist(myplayList.object))
+
+        } catch (error) {
+            console.log('playlist api call error', error)
+        }
+
+        try {
+            const latestPlayList = await fetchDataWithAxios(latestPlayListUrl);
+            console.log('latest playlist get response', latestPlayList);
+            if (lattestPlaylist?.length <= 0) {
                 dispatch(playlistAction.addLatestPlaylist(latestPlayList.object))
-
-            } catch (error) {
-                console.log('playlist api call error', error)
             }
-        
+
+        } catch (error) {
+            console.log('playlist api call error', error)
+        }
+
 
     };
 
-    function setPlayListRenderScope(scope){
+    function setPlayListRenderScope(scope) {
         dispatch(playlistAction.setPlayListScope(scope))
     }
 

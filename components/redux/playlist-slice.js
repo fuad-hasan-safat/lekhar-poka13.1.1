@@ -11,16 +11,29 @@ const playlistSlice = createSlice({
         addMyPlaylist(state, action) {
             state.myPlaylist = action.payload;
         },
+        addSingleSongToMyPlaylist(state, action) {
+            console.log('action --', action.payload)
+             const existSong = state.lattestPlaylist.find(obj => obj._id === action.payload._id);
+             console.log('Existing song -', existSong);
+
+            if (existSong) {
+                const restObjects = state.lattestPlaylist.filter(obj => obj._id !== action.payload._id);
+                state.lattestPlaylist = [existSong, ...restObjects]
+
+            }else{
+                state.lattestPlaylist = [action.payload, ...state.lattestPlaylist]
+            }
+
+        },
         addLatestPlaylist(state, action) {
             state.lattestPlaylist = action.payload;
         }, removePlayList(state) {
             state.isPlayListChanged = null;
             state.playListScope = null;
             state.myPlaylist = [];
-            state.lattestPlaylist = [];
-        }, setPlayListChanged(state, action){
+        }, setPlayListChanged(state, action) {
             state.isPlayListChanged = action.payload;
-        }, setPlayListScope(state, action){
+        }, setPlayListScope(state, action) {
             state.playListScope = action.payload;
         }
     }
