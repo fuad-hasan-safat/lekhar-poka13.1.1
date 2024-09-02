@@ -11,29 +11,35 @@ const playlistSlice = createSlice({
         addMyPlaylist(state, action) {
             state.myPlaylist = action.payload;
         },
-        addSingleSongToMyPlaylist(state, action) {
+        addSingleSongToMyPlaylist(state, action){
+            state.myPlaylist = [ action.payload, ...state.myPlaylist];
+        },
+        addLatestPlaylist(state, action) {
+            state.lattestPlaylist = action.payload;
+        },
+        addSingleSongToLatestPlaylist(state, action) {
             console.log('action --', action.payload)
-             const existSong = state.lattestPlaylist.find(obj => obj._id === action.payload._id);
-             console.log('Existing song -', existSong);
+            const existSong = state.lattestPlaylist.find(obj => obj._id === action.payload._id);
+            console.log('Existing song -', existSong);
 
             if (existSong) {
                 const restObjects = state.lattestPlaylist.filter(obj => obj._id !== action.payload._id);
                 state.lattestPlaylist = [existSong, ...restObjects]
 
-            }else{
+            } else {
                 state.lattestPlaylist = [action.payload, ...state.lattestPlaylist]
             }
 
         },
-        addLatestPlaylist(state, action) {
-            state.lattestPlaylist = action.payload;
-        }, removePlayList(state) {
+        removePlayList(state) {
             state.isPlayListChanged = null;
             state.playListScope = null;
             state.myPlaylist = [];
-        }, setPlayListChanged(state, action) {
+        },
+        setPlayListChanged(state, action) {
             state.isPlayListChanged = action.payload;
-        }, setPlayListScope(state, action) {
+        },
+        setPlayListScope(state, action) {
             state.playListScope = action.payload;
         }
     }

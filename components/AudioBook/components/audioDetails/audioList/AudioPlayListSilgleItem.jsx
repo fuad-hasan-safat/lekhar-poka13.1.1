@@ -4,6 +4,7 @@ import { apiBasePath } from '../../../../../utils/constant';
 import { replaceUnderscoresWithSpaces } from '../../../../../function/api';
 import { audioPlayerAction } from '../../../../redux/audioplayer-slice';
 import { useDispatch, useSelector } from 'react-redux';
+import { playlistAction } from '../../../../redux/playlist-slice';
 
 export default function AudioPlayListSingleItem({ songInfo, audioIndex, audioList, playListScope }) {
   
@@ -52,6 +53,8 @@ export default function AudioPlayListSingleItem({ songInfo, audioIndex, audioLis
             audioList: audioList,
             currentSongId: songInfo._id,
         }))
+
+        dispatch(playlistAction.addSingleSongToLatestPlaylist(songInfo));
     }
 
     const title = replaceUnderscoresWithSpaces(songInfo.title)
@@ -80,7 +83,7 @@ export default function AudioPlayListSingleItem({ songInfo, audioIndex, audioLis
             </div>
 
             <div className='audio__tab__playbutton'>
-                <button onClick={handlePlayButton}>{isAudioPlaying &&  playListScope === currentAudioScope && songInfo._id === currentSongId ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</button>
+                <button onClick={handlePlayButton}>{isAudioPlaying && songInfo._id === currentSongId ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</button>
                 {/* <button className='text-[#484848] text-opacity-[50%] lg:ml-[18px] md:ml-[15px] sm:ml-[12px] xs:ml-[10px]'><i class="ri-add-circle-fill"></i></button> */}
             </div>
 

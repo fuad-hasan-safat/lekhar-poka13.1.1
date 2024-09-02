@@ -63,7 +63,7 @@ export default function Home({ singleAudioData }) {
                     <title>{singleAudioData?.title}</title>
                 </Head>
 
-                <section className='banner-sec-wrap lg:pt-[96px] md:pt-[75px] sm:pt-[85px] xs:pt-[60px]'>
+                <section className='banner-sec-wrap lg:pt-[96px] md:pt-[75px] sm:pt-[85px] xs:pt-[60px] z-[999]'>
                     <div className="relative  flex justify-center items-center  w-full xl:h-[380px] lg:h-[380px] md:h-[360px] sm:h-[280px] xs:h-[270px]  overflow-hidden" style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat` }}>
                         <div className='audio_banner__info__wrap flex flex-row place-content-center justify-center items-center'>
                             <div className=''>
@@ -82,7 +82,7 @@ export default function Home({ singleAudioData }) {
 
                 </section>
 
-                <div className='container lg:flex md:flex sm:block xs:block flex-row lg:pt-[95px] md:pt-[90px] sm:pt-[60px] xs:pt-[60px]'>
+                <div className='container lg:flex md:flex sm:block xs:block flex-row lg:pt-[95px] md:pt-[90px] sm:pt-[60px] xs:pt-[60px] z-[999]'>
 
                     <div className='lg:w-[70%] md:w-[70%] sm:w-full xs:w-full'>
                         <AudioTabs singleAudioData={singleAudioData} />

@@ -76,6 +76,7 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
                 return;
             }
             // setMyPlayList([...myPlayList, songInfo])
+            dispatch(playlistAction.addSingleSongToMyPlaylist(songInfo));
             notification = `${songInfo.title} প্লেলিস্টে যুক্ত হয়েছে!`;
             dispatch(toastAction.setSucessNotification(notification))
         } catch (error) {
@@ -92,7 +93,7 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
             currentSongId: songInfo._id,
         }))
 
-        dispatch(playlistAction.addSingleSongToMyPlaylist(songInfo));
+        dispatch(playlistAction.addSingleSongToLatestPlaylist(songInfo));
 
 
 

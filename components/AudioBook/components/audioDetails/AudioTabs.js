@@ -25,7 +25,7 @@ const AudioTabs = ({singleAudioData}) => {
   return (
     <>
 
-      <div className="audio__tabs__wrap">
+      <div className="audio__tabs__wrap z-[999]">
         <ul className="tab-list">
           <li
             className={`tabs ${getActiveClass(1, "active-tabs")}`}
@@ -58,7 +58,7 @@ const AudioTabs = ({singleAudioData}) => {
         <div className="audio__tab__content">
 
           <div className={`content ${getActiveClass(audioTabToggleState, "active-content")}`}>
-            {audioTabToggleState === 1 && <AudioTabComponent audioData={singleAudioData.audio}/>}
+            {audioTabToggleState === 1 && <AudioTabComponent singleAudioData={singleAudioData}/>}
             {audioTabToggleState === 2 && <Summary summary={singleAudioData?.summary} />}
             {audioTabToggleState === 3 && <TechnicalDetails technicalDetails={singleAudioData?.technical_team} />}
             {audioTabToggleState === 4 && <CommentsOfWriter commentsOfWriter={singleAudioData?.comment_of_writer} />}
