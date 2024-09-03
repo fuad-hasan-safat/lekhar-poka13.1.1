@@ -53,7 +53,6 @@
     "react-select": "^5.8.0",
     "react-share": "^5.1.0",
     "react-simple-star-rating": "^5.1.7",
-    "ckeditor5-custom-build": "file:ckeditor5",
     "react-simple-wysiwyg": "^3.0.2",
     "react-slick": "^0.30.2",
     "redux": "^5.0.1",
