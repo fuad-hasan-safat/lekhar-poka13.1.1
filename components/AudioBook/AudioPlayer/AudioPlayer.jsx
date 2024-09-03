@@ -98,7 +98,7 @@ export default function AudioPlayer() {
 
       audioPlayer.current.muted = isMute;
     }
-  }, [volume, isMute, mounted]);
+  }, [volume, isMute, mounted, currentSong]);
 
   const handleTimeUpdate = () => {
     setCurrentTime(audioPlayer.current?.currentTime);

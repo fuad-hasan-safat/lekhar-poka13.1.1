@@ -32,7 +32,6 @@ export default function PostOfWriterPage() {
 
         // console.log("QUERY ", router.query.slug);
         const fetchPosts = async () => {
-            console.log('------------------slug of writers ---------------', slug)
             try {
                 const response = await fetch(`${apiBasePath}/postswriter/${slug}`);
                 const data = await response.json();
