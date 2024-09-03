@@ -33,6 +33,8 @@ export default function SeeMoreListPlayList({ audioPlaylist, playListScope }) {
     return (
         <div>
             {audioPlaylist.slice(0, displayCount).map((songInfo, index) => {
+                console.log('See more playlist ', songInfo)
+                if(songInfo.title === 'Not Found') return;
                 return (
                     <div key={index} className='audio__tab__wrap'>
                         <AudioPlayListSingleItem songInfo={songInfo} audioIndex={index} audioList={audioPlaylist} playListScope={playListScope} />
