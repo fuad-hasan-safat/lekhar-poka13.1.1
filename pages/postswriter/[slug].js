@@ -42,9 +42,6 @@ export default function PostOfWriterPage() {
                 setWriterBio(data?.writer_bio)
                 setBio(data.writer_bio?.content)
                 setIsSelfWriter(data.self_writer)
-
-                console.log('posts of writer ----------------------------------', data)
-
                 setTotalPages(Math.ceil(data.object.length / postsPerPage));
 
 
@@ -52,12 +49,11 @@ export default function PostOfWriterPage() {
                 setError(error);
                 console.log('writer post ---', error)
             } finally {
-
+                setIsLoading(false);
             }
         };
         if (router.isReady) {
             fetchPosts();
-            setIsLoading(false)
         }
 
     }, [router.query]);
@@ -79,16 +75,12 @@ export default function PostOfWriterPage() {
 
     if (isLoading) {
         return <Loading />;
-    } else if(!isLoading) {
-
-
+    } else{
         return (
 
             <div>
                 <Head>
                     <title>লেখক পোস্ট</title>
-                 
-
                 </Head>
                 <section className="all__post__sec__wrap">
                     <div className="relative w-full xl:h-[380px] lg:h-[360px] md:h-[340px] sm:h-[280px] xs:h-[220px] -z-10  overflow-hidden" style={{ background: `url('/images/usericons/userbanner.svg')center center / cover no-repeat` }}>
@@ -122,7 +114,7 @@ export default function PostOfWriterPage() {
                             </div>
 
                             <div className='lg:w-[60%] my-[40px] ml-[40px]'>
-                                <WriterPostList profileInfo={profileInfo}  postList={postList} />
+                                <WriterPostList profileInfo={profileInfo}  postList={postList} isLoading={isLoading}/>
                             </div>
 
                         </div>

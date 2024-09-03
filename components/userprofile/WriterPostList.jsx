@@ -5,7 +5,7 @@ import MainContentDivider from "../common/mainContentDivider";
 import Loading from "../common/loading";
 import SinglePostConponent from "../common/singlePostComponent";
 
-export default function WriterPostList({profileInfo, postList }) {
+export default function WriterPostList({ profileInfo, postList, isLoading }) {
   //   const [selectedId, setSelectedId] = useState("sob");
 
 
@@ -24,7 +24,7 @@ export default function WriterPostList({profileInfo, postList }) {
   const startIndex = (currentPage - 1) * postsPerPage;
   const endIndex = Math.min(startIndex + postsPerPage, postList.length); // Ensure endIndex doesn't exceed posts length
   const displayedPosts = postList.slice(startIndex, endIndex);
-
+  if (isLoading) return null;
 
   return (
 
@@ -62,7 +62,10 @@ export default function WriterPostList({profileInfo, postList }) {
               )}
             </div>
           </div> :
-          <div className="pt-10"> এই মুহূর্তে কোনো লেখা নেই </div>
+          <>
+            {!isLoading && <div className="pt-10"> এই মুহূর্তে কোনো লেখা নেই </div>}
+
+          </>
 
         }
         {/* {totalPages > 1 && <div className="py-10 space-x-4">
