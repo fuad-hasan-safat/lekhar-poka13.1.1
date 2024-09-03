@@ -6,6 +6,7 @@
 .pnp.js
 .lekha-poka-ui.js
 # testing
+/ckeditor5/node_modules
 /coverage
 
 # next.js
