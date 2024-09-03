@@ -8,8 +8,8 @@ export default function PlayList({ audioPlaylist, audioScope }) {
     <>
       {audioPlaylist?.slice(0,5).map((songInfo, index) => {
         const length = audioPlaylist?.length;
-        console.log('playlist audio title: ---', songInfo.title);
-        if(songInfo.title === 'Not Found') return;
+        console.log('playlist audio title: ---', songInfo?.title);
+        if(songInfo?.title === 'Not Found') return;
         return (
           <div key={index} className='audio__playlist__wrap'>
             <PlaylistItem songInfo={songInfo} songIndex={index} songList={audioPlaylist} audioScope = {audioScope} />

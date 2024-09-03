@@ -59,15 +59,20 @@ export default function PlaylistItem({ songInfo, songIndex, songList, audioScope
     console.log(title);
 
     let shortenedTitle = title || '' ;
-    // if (title?.length > 30) {
-    //     shortenedTitle = title?.slice(0, 27) + '...'
-    // }
+
+    let image = songInfo?.image?.slice(songInfo?.image?.indexOf('/') + 1);
+
+    if(image === 'Not Found'){
+      image = '/images/defaultUserPic/rounded/null.png';
+    } else{
+      image = `${apiBasePath}/${image}`;
+    }
 
     return (
         <div className='audio__playlist__item'>
             <div className='audio__playlist__left '>
                 <div>
-                    <img src={`${apiBasePath}/${songInfo?.image?.slice(songInfo?.image?.indexOf('/') + 1)}`} className='w-[41px] object-cover h-[41px] rounded-full' />
+                    <img src={image} className='w-[41px] object-cover h-[41px] rounded-full' />
                 </div>
                 <div className='audio__playlist__info mid:max-w-[280px] lg:max-w-[180px] md:max-w-[120px] sm:max-w-[200px] xs:max-w-[200px]'>
                     <h6 className='charLim'>

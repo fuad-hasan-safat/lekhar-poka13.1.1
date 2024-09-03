@@ -22,7 +22,7 @@ const audioplayerSlice = createSlice({
         togglePlay(state, action) {
             state.isAudioPlayerShouldOpen = true;
             if (state.isAudioPlaying) {
-                if (state.currentAudioIndex === action.payload.audioIndex && state.currentAudioScope === action.payload.audioscope) {
+                if (state.currentSongId === action.payload.currentSongId && state.currentAudioScope === action.payload.audioscope) {
                     state.isAudioPlaying = false;
                 } else if (state.currentAudioScope === action.payload.audioscope && state.currentAudioIndex !== action.payload.audioIndex) {
                     state.currentAudioIndex = action.payload.audioIndex;

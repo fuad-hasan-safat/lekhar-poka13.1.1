@@ -49,7 +49,6 @@ export default function PostPageLeftContent() {
         try {
             const response = await fetch(`${apiBasePath}/categoryposts/${catTitle}/${currentPage}`);
             const data = await response.json();
-            console.log("Posts: ", data);
             setPostList((prevPosts) => prevPosts.concat(data));
 
         } catch (error) {
