@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import Sidebar from '../../../sidebar/Sidebar'
 import AudioCategory from './audioCategory/AudioCategory'
 import AudioSlider from '../audioSlider/AudioSlider'
-import AudioPlaylistContextProvider from '../../../store/audioPlayer-context'
 
 export default function AudioHomePage() {
   return (

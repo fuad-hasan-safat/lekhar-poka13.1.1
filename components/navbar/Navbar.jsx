@@ -2,7 +2,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import 'remixicon/fonts/remixicon.css'
 
 import Logo from "../common/Logo";
 import SobLekha from "./sobLekhaDropDown";

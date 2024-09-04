@@ -1,8 +1,5 @@
 
 import React, { useState } from 'react'
-import { apiBasePath } from '../../utils/constant'
-import ImageCrop from './cropComponents/ImageCrop'
-import ImageCropProvider from './cropComponents/ImageCropProvider'
 import UserAchivement from './userAchivement'
 import { countWords } from '../../function/api'
 import ProfileModal from './profileUpdate/ProfileModal'

@@ -1,16 +1,13 @@
 "use client";
-import Loading from '../common/loading'
 import { useContext, useEffect, useState } from "react";
+import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import Loading from '../common/loading'
 import UserProfileBanner from '../userprofile/userProfileBanner'
 import { apiBasePath } from "../../utils/constant";
-import Link from "next/link";
-import FollowerList from './followerList';
-import FollowingList from './followingList';
-import { useRouter } from 'next/router';
 import ProfilePostLeftContentUnApproved from './ProfilePostLeftContentUnapproved';
 import ProfilePostLeftContentApproved from './ProfilePostLeftContentApproved';
 import { UserContext } from '../lekharpokaStore/user-context';
-import { useSelector } from 'react-redux';
 
 export default function UserProfile() {
 

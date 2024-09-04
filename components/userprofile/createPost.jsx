@@ -19,6 +19,7 @@ const CustomEditor = dynamic(() => {
 }, { ssr: false });
 
 
+
 const fileTypes = ["JPEG", "PNG", "GIF"];
 
 
