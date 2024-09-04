@@ -160,7 +160,7 @@ export default function UserPostTitleAndcover({
 
         </div>
 
-        <div className="hm__post__profile__grid min-w-[160px] relative">
+        <div className="hm__post__profile__grid min-w-[180px] relative">
           <div className="">
             <h1 className="lg:text-[32] md:text-[25px] sm:text-[23px] xs:text-[14px] leading-7 pr-[40px] text-[#FCD200] font-bold" style={{ lineHeight: '1.2' }}>{shortenTitle}</h1>
           </div>
