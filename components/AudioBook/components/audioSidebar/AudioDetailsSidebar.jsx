@@ -67,7 +67,7 @@ export default function AudioDetailsSideBar() {
                 {!userUuid && <div className="sidebar__iteam__wrap">
                     <Login />
                 </div>}
-                {lattestPlaylist?.length > 0 && <div className='sidebar__iteam__wrap mt-[32px]'>
+                {lattestPlaylist?.length > 0 && <div className='sidebar__iteam__wrap mt-[16px]'>
                     <h2 className='audio__sidebar__heading'>সর্বশেষ প্লেলিস্ট</h2>
                     <div className='py-[10px]'>
                         <hr></hr>
