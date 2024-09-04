@@ -82,7 +82,7 @@ export default function PostPageLeftContent() {
                     <div>
                         {postList.length ? (
                             <div className='flex'>
-                                <div className="lakha__main__content pt-20 text-3xl lg:mr-[100px] md:mr-[70px]">
+                                <div className="lakha__main__content text-3xl lg:mr-[100px] md:mr-[70px]">
                                     {postList.map((post, index) => (
                                         <div key={index}>
                                             <SinglePostConponent
