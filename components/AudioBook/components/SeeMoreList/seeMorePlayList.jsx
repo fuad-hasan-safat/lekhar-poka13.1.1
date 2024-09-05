@@ -24,27 +24,37 @@ export default function SeeMoreListPlayList({ audioPlaylist, playListScope }) {
     }, [inView, loading]);
 
 
-    useEffect(()=>{
+    useEffect(() => {
         setIsLanded(true);
-    },[]);
+    }, []);
 
-    if(!isLanded) return null;
+    if (!isLanded) return null;
 
     return (
-        <div>
-            {audioPlaylist.slice(0, displayCount).map((songInfo, index) => {
-                console.log('See more playlist ', songInfo)
-                if(songInfo?.title === 'Not Found') return;
-                return (
-                    <div key={index} className='audio__tab__wrap'>
-                        <AudioPlayListSingleItem songInfo={songInfo} audioIndex={index} audioList={audioPlaylist} playListScope={playListScope} />
+        <>
+            {audioPlaylist?.length ?
+                <>
+                    <div>
+                        {audioPlaylist.slice(0, displayCount).map((songInfo, index) => {
+                            console.log('See more playlist ', songInfo)
+                            if (songInfo?.title === 'Not Found') return;
+                            return (
+                                <div key={index} className='audio__tab__wrap'>
+                                    <AudioPlayListSingleItem songInfo={songInfo} audioIndex={index} audioList={audioPlaylist} playListScope={playListScope} />
+                                </div>
+                            )
+                        }
+                        )}
+                        {loading && <p></p>}
+                        <div ref={inViewRef} />
                     </div>
-                )
+                </> :
+                <div>
+                    <p className='text-black'>আপনার কোন অডিও প্লেলিস্টে নাই!</p>
+                </div>
             }
-            )}
-            {loading && <p></p>}
-            <div ref={inViewRef} />
-        </div>
+
+        </>
     );
 };
 

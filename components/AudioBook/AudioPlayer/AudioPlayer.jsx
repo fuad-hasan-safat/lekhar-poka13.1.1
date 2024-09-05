@@ -89,7 +89,7 @@ export default function AudioPlayer() {
     }
 
 
-  }, [isAudioPlaying, currentSong, mounted]);
+  }, [isAudioPlaying, currentSong, mounted, songs]);
 
   useEffect(() => {
     if (audioPlayer.current) {

@@ -79,7 +79,7 @@ export default function AudioPlayListSingleItem({ songInfo, audioIndex, audioLis
       
            const notification = `${songInfo.title} মুছে ফেলা হয়েছে`
             dispatch(toastAction.setSucessNotification(notification));
-            dispatch(playlistAction.removeSingleAudioFromPlaylist(songInfo._id))
+            dispatch(playlistAction.removeSingleAudioFromPlaylist(songInfo._id));
       
             dialogueRef.current.close();
       

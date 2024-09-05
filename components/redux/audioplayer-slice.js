@@ -16,8 +16,16 @@ const audioplayerSlice = createSlice({
 
     }, reducers: {
         resetAudioPlayer(state) {
-            state.isAudioPlayerShouldOpen = false;
             state.isAudioPlaying = false;
+            state.isAudioPlayerShouldOpen = false;
+            state.currentAudioIndex = -1;
+            state.currentSongId = null;
+            state.currentSongPlayedTime = 0;
+            state.currentAudioScope = null;
+            state.currentPlaylist = [];
+            state.isShuffle = false;
+            state.isRepeat = false;
+            state.isMute = false;
         },
         togglePlay(state, action) {
             state.isAudioPlayerShouldOpen = true;
@@ -77,10 +85,9 @@ const audioplayerSlice = createSlice({
         setCurrentSongPlayedTime(state, action) {
             state.currentSongPlayedTime = action.payload;
         },
-        toggleMute(state){
+        toggleMute(state) {
             state.isMute = !state.isMute;
-        }
-
+        }  
     }
 })
 
