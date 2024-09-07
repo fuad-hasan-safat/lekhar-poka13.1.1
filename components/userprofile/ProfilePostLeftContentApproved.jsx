@@ -75,7 +75,7 @@ export default function ProfilePostLeftContentApproved() {
         <>
           {approvedItems.length > 0 ? (
             <div className="flex">
-              <div className="lakha__main__content text-3xl lg:mr-[100px] md:mr-[50px]">
+              <div className="lakha__main__content text-3xl">
                 {displayedPosts.map((post, index) => {
                   console.log('Rendering post:', post); // Debugging: Log each post being rendered
 

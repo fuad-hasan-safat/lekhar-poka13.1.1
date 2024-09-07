@@ -162,7 +162,7 @@ export default function UserPostTitleAndcover({
 
         <div className="hm__post__profile__grid min-w-[180px] sm:w-[600px] xs:w-[200px] relative">
           <div className="">
-            <h1 className="charLim lg:text-[32] md:text-[25px] sm:text-[23px] xs:text-[14px] leading-7 pr-[40px] text-[#FCD200] font-bold" style={{ lineHeight: '1.2' }}>{shortenTitle}</h1>
+            <h1 className="charLim lg:text-[32] md:text-[25px] sm:text-[23px] xs:text-[14px] leading-7 pr-[40px] text-[#FCD200] font-bold" style={{ lineHeight: '1.4' }}>{shortenTitle}</h1>
           </div>
 
           <Link className="flex items-center lg:text-[18px] md:text-[16px] sm:text-[14px] xs:text-[12px]  font-semibold text-[#595D5B] " href={writerClickLink} >
