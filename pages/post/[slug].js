@@ -64,13 +64,13 @@ export default function PostDetails({ postData }) {
 
   const [rating, setRating] = useState(0);
 
-  function handlePlayButton(audioList ){
+  function handlePlayButton(audioList) {
     dispatch(audioPlayerAction.togglePlay({
       audioIndex: 0,
       audioscope: `lekharPokaPostdetails`,
       audioList: audioList,
       currentSongId: audioList.id,
-  }))
+    }))
   }
 
   function readerModeClosehandler() {
@@ -113,25 +113,24 @@ export default function PostDetails({ postData }) {
 
   return (
     <>
+      <div>
+        <Head>
+
+          <title>{data?.title}</title>
+          <meta property="og:title" content={pageTitle} key="og:title" />
+          <meta property="og:description" content={`${description} #lekharpoka`} />
+          <meta property="og:image" content={imageLink} key="og:image" />
+          <meta property="og:url" content={postLink} />
+          <meta property="og:type" content="website" key="og:type" />
+          <meta name="twitter:card" content={imageLink} />
+          <meta name="twitter:title" content={pageTitle} />
+          <meta name="twitter:description" content={description} />
+          <meta name="twitter:image" content={imageLink} />
+
+        </Head>
+      </div>
       {poststatus || userUuid === postWonnerUuid ?
         <>
-
-          <div>
-            <Head>
-
-              <title>{data?.title}</title>
-              <meta property="og:title" content={pageTitle} key="og:title" />
-              <meta property="og:description" content={`${description} #lekharpoka`} />
-              <meta property="og:image" content={imageLink} key="og:image" />
-              <meta property="og:url" content={postLink} />
-              <meta property="og:type" content="website" key="og:type" />
-              <meta name="twitter:card" content={imageLink} />
-              <meta name="twitter:title" content={pageTitle} />
-              <meta name="twitter:description" content={description} />
-              <meta name="twitter:image" content={imageLink} />
-
-            </Head>
-          </div>
           <div className=" body__control" >
             <div className="all__post__content__overlay">
               <section className="banner-sec-wrap place-content-center">
@@ -165,7 +164,7 @@ export default function PostDetails({ postData }) {
 
                                 {isAudioAvailable && (
                                   <div className="audio__tab__playbutton absolute  lg:left-[18px] md:left-[18px] sm:left-[18px] xs:left-[12px]  lg:top-[150px] md:top-[140px] sm:top-[130px] xs:top-[110px]">
-                                    <button className="text-center text-[#F9A106]  flex justify-center items-center" onClick={()=>handlePlayButton(audioList)}>
+                                    <button className="text-center text-[#F9A106]  flex justify-center items-center" onClick={() => handlePlayButton(audioList)}>
                                       <span className="inline-block text-[26px]"> {isAudioPlaying && currentSongId === audioList.id ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</span> <span className="inline-block font-[600] text-[16px]"> প্লে করুন</span>
                                     </button>
                                   </div>
