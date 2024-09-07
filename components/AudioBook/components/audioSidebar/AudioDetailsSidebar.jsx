@@ -33,7 +33,8 @@ export default function AudioDetailsSideBar() {
         try {
             const myplayList = await fetchDataWithAxios(myPlayListUrl);
             console.log('my play list', myplayList)
-            dispatch(playlistAction.addMyPlaylist(myplayList.object))
+            const playList = myplayList?.object?.filter((obj) => obj.title !== 'Not Found');
+            dispatch(playlistAction.addMyPlaylist(playList));
 
         } catch (error) {
             console.log('playlist api call error', error)
@@ -43,7 +44,9 @@ export default function AudioDetailsSideBar() {
             const latestPlayList = await fetchDataWithAxios(latestPlayListUrl);
             console.log('latest playlist get response', latestPlayList);
             if (lattestPlaylist?.length <= 0) {
-                dispatch(playlistAction.addLatestPlaylist(latestPlayList.object))
+                const playList = latestPlayList?.object?.filter((obj) => obj.title !== 'Not Found');
+
+                dispatch(playlistAction.addLatestPlaylist(playList));
             }
 
         } catch (error) {
@@ -64,7 +67,7 @@ export default function AudioDetailsSideBar() {
                 {!userUuid && <div className="sidebar__iteam__wrap">
                     <Login />
                 </div>}
-                {lattestPlaylist?.length > 0 && <div className='sidebar__iteam__wrap mt-[32px]'>
+                {lattestPlaylist?.length > 0 && <div className='sidebar__iteam__wrap mt-[16px]'>
                     <h2 className='audio__sidebar__heading'>সর্বশেষ প্লেলিস্ট</h2>
                     <div className='py-[10px]'>
                         <hr></hr>

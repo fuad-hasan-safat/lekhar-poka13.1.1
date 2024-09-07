@@ -98,7 +98,7 @@ export default function AudioPlayer() {
 
       audioPlayer.current.muted = isMute;
     }
-  }, [volume, isMute, mounted]);
+  }, [volume, isMute, mounted, currentSong]);
 
   const handleTimeUpdate = () => {
     setCurrentTime(audioPlayer.current?.currentTime);
@@ -259,6 +259,14 @@ export default function AudioPlayer() {
     shortenedTitle = title?.slice(0, 22) + '...'
   }
 
+  let image = currentSong?.image?.slice(currentSong?.image.indexOf('/') + 1);
+
+  if(image === 'Not Found'){
+    image = '/images/defaultUserPic/rounded/null.png';
+  } else{
+    image = `${apiBasePath}/${image}`;
+  }
+
   return createPortal((
     <>
       <div className="audio-player-wrap fixed text-black  backdrop-blur-lg  text-center bottom-[0] bg-yellow-500/30  w-full z-[999999]">
@@ -268,8 +276,8 @@ export default function AudioPlayer() {
               <div className="lg:flex lg:flex-row lg:w-[380px] justify-left items-center md:hidden sm:hidden xs:hidden">
                 <div className="">
                   <img
-                    src={`${apiBasePath}/${currentSong?.image?.slice(currentSong?.image.indexOf('/') + 1)}`}
-                    alt={currentSong?.title}
+                    src={image}
+                    alt={currentSong?.image}
                     width={70}
                     height={70}
                     className="h-[70px] w-[70px] rounded-full object-cover"

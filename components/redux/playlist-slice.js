@@ -11,8 +11,8 @@ const playlistSlice = createSlice({
         addMyPlaylist(state, action) {
             state.myPlaylist = action.payload;
         },
-        addSingleSongToMyPlaylist(state, action){
-            state.myPlaylist = [ action.payload, ...state.myPlaylist];
+        addSingleSongToMyPlaylist(state, action) {
+            state.myPlaylist = [action.payload, ...state.myPlaylist];
         },
         addLatestPlaylist(state, action) {
             state.lattestPlaylist = action.payload;
@@ -41,6 +41,14 @@ const playlistSlice = createSlice({
         },
         setPlayListScope(state, action) {
             state.playListScope = action.payload;
+        },
+        removeSingleAudioFromPlaylist(state, action) {
+            if (state.playListScope === 'myPlayList') {
+
+                state.myPlaylist = state.myPlaylist.filter(song => song._id !== action.payload);
+            } else if (state.playListScope === 'latestPlayList') {
+                state.lattestPlaylist = state.lattestPlaylist.filter(song => song._id !== action.payload);
+            }
         }
     }
 })

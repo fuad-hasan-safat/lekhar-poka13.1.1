@@ -134,10 +134,6 @@ export default function UserPostTitleAndcover({
     postuploadedBy = profileName;
   }
 
-  // let shortenTitle = title?.length > 23 ? `${title?.slice(0, 22)}...` : title;
-  // let shortenWriter = writer?.length > 26 ? `${writer?.slice(0, 25)}...` : writer;
-  // let shortenUploadedBy = postuploadedBy?.length > 12 ? `${postuploadedBy?.slice(0, 12)}...` : postuploadedBy;
-
   let shortenTitle = title;
   let shortenWriter = writer;
   let shortenUploadedBy = postuploadedBy;
@@ -164,7 +160,7 @@ export default function UserPostTitleAndcover({
 
         </div>
 
-        <div className="hm__post__profile__grid  relative">
+        <div className="hm__post__profile__grid min-w-[160px] relative">
           <div className="">
             <h1 className="lg:text-[32] md:text-[25px] sm:text-[23px] xs:text-[14px] leading-7 pr-[40px] text-[#FCD200] font-bold" style={{ lineHeight: '1.2' }}>{shortenTitle}</h1>
           </div>
@@ -178,13 +174,6 @@ export default function UserPostTitleAndcover({
           <div className="hm__post__profile__info text-[16px] font-thin leading-1 pt-[5px]">
             <Link className="flex place-content-start items-center leading-1 lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[12px]  text-[#595D5B]" href={writerClickLink} style={{ lineHeight: '1' }} >
 
-              {/* {((uploadedBy !== null) && uploadedBy.length > 0) && <> <span className='inline-block mr-[10px]'>
-                <img className="w-[24px] h-[24px] rounded-full block m-auto shadow-lg" src={writerImage === '' ? defaultBannerImage : `${apiBasePath}/${writerImage?.slice(writerImage.indexOf('/') + 1)}`} alt="" />
-              </span>
-                <span className='inline-block lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[11px] text-[#595D5B] mr-[15px]'>
-                  {shortenUploadedBy}
-
-                </span></>} */}
               {updatedAt.length > 0 && <>  <span className='inline-block lg:pl-[5px] md:pl-[5px] sm:pl-[5px] xs:pl-[2px]'>
                 <img src='/images/usericons/calender.svg' />
               </span>

@@ -48,11 +48,11 @@ export default function PostOfWriterPage() {
                 setError(error);
                 console.log('writer post ---', error)
             } finally {
+                setIsLoading(false)
             }
         };
         if (router.isReady) {
             fetchPosts();
-            setIsLoading(false)
         }
 
     }, [router.query]);
@@ -74,7 +74,7 @@ export default function PostOfWriterPage() {
 
     if (isLoading) {
         return <Loading />;
-    } else if(!isLoading) {
+    } else if (!isLoading) {
 
 
         return (
@@ -82,7 +82,7 @@ export default function PostOfWriterPage() {
             <div>
                 <Head>
                     <title>লেখক পোস্ট</title>
-                 
+
 
                 </Head>
                 <section className="all__post__sec__wrap">
@@ -115,7 +115,7 @@ export default function PostOfWriterPage() {
                             </div>
 
                             <div className='lg:w-[60%] my-[40px] ml-[40px]'>
-                                <WriterPostList profileInfo={profileInfo}  postList={postList} />
+                                <WriterPostList profileInfo={profileInfo} postList={postList} />
                             </div>
 
                         </div>

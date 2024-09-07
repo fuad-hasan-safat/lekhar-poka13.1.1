@@ -7,6 +7,10 @@
 .lekha-poka-ui.js
 # testing
 /ckeditor5/node_modules
+/ckeditor5/package-lock.json
+
+.ckeditor5/node_modules
+.ckeditor5/package-lock.json
 /coverage
 
 # next.js

@@ -370,7 +370,7 @@ export default function UpdatedNavBar() {
                                                 userUuid ?
                                                     <li
                                                         className='relative cursor-pointer -mt-[5px]'
-                                                        onClick={() => toggleVisibility(2)}>
+                                                        onClick={() => {toggleVisibility(2);}}>
                                                         {userImage?.length > 0 ? <img src={userImage} alt={userImage} className='h-[35px] w-[35px] rounded-full' /> :
                                                             <img src='/images/user/deafultProfile.png' alt='profile pic' className='h-[35px] w-[35px] rounded-full' />}
 
@@ -381,7 +381,7 @@ export default function UpdatedNavBar() {
                                                                     onClick={() => closeMenu()}
 
                                                                 >
-                                                                    <Link className='block' href="/user/createpost">লিখুন</Link>
+                                                                    <Link onClick={()=> setSelectedNav('profile')} className='block' href="/user/createpost">লিখুন</Link>
                                                                 </li>
 
                                                                 <hr className='lg:block md:hidden sm:hidden xs:hidden' />
@@ -391,7 +391,7 @@ export default function UpdatedNavBar() {
                                                                     onClick={() => closeMenu()}
 
                                                                 >
-                                                                    <Link className='block' href={`/user/${userUuid}`}>প্রোফাইল</Link>
+                                                                    <Link onClick={()=> setSelectedNav('profile')} className='block' href={`/user/${userUuid}`}>প্রোফাইল</Link>
                                                                 </li>
                                                                 <hr className='lg:block md:hidden sm:hidden xs:hidden' />
 
