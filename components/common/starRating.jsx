@@ -1,5 +1,4 @@
 'use client'
-import { useRouter } from 'next/router'
 import { apiBasePath } from '../../utils/constant'
 import React, { useEffect, useState } from 'react'
 import { Rating } from 'react-simple-star-rating'

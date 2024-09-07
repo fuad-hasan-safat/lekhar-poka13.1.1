@@ -6,10 +6,8 @@ import RatingComponent from '../../components/common/starRating'
 import { apiBasePath } from "../../utils/constant";
 import ReaderModeModal from "../../components/readerMode/ReaderModeModal";
 import FullPostReaderMode from "../../components/common/fullContentReadermood";
-import { AudioPlayListContext } from "../../components/store/audioPlayer-context";
 import { useDispatch, useSelector } from "react-redux";
 import { audioPlayerAction } from "../../components/redux/audioplayer-slice";
-
 export async function getServerSideProps(context) {
 
   const { slug } = context.params;
