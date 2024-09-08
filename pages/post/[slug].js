@@ -3,19 +3,18 @@ import React, { useContext, useState } from "react";
 import Head from 'next/head';
 import FullPost from '../../components/common/fullContent'
 import RatingComponent from '../../components/common/starRating'
-import { apiBasePath, serverEndApiBasePath } from "../../utils/constant";
+import { apiBasePath } from "../../utils/constant";
 import ReaderModeModal from "../../components/readerMode/ReaderModeModal";
 import FullPostReaderMode from "../../components/common/fullContentReadermood";
 import { useDispatch, useSelector } from "react-redux";
 import { audioPlayerAction } from "../../components/redux/audioplayer-slice";
-
 export async function getServerSideProps(context) {
 
   const { slug } = context.params;
   let postData;
 
   try {
-    const res = await fetch(`${serverEndApiBasePath}/getpost/${slug}`, {
+    const res = await fetch(`${apiBasePath}/getpost/${slug}`, {
       method: 'POST', // Use POST method
       headers: {
         'Content-Type': 'application/json', // Set the content type to JSON if necessary
@@ -92,7 +91,7 @@ export default function PostDetails({ postData }) {
   console.log({ withoutTagDes })
   let description = withoutTagDes;
   let postLink = `https://lekharpoka.com${asPath}`;
-  let imageLink = `${serverEndApiBasePath}/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/') + 1)}`
+  let imageLink = `https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/') + 1)}`
   console.log({ pageTitle, description, postLink, imageLink })
 
   let audioList = [];
