@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import AudioDetailsSideBar from '../../components/AudioBook/components/audioSidebar/AudioDetailsSidebar';
 import AudioTabs from '../../components/AudioBook/components/audioDetails/AudioTabs';
-import { apiBasePath } from '../../utils/constant';
+import { apiBasePath, serverEndApiBasePath } from '../../utils/constant';
 import { useEffect, useState } from 'react';
 import LoginPage from '../../components/login/login';
 import { useRouter } from 'next/router';
@@ -11,7 +11,7 @@ export async function getServerSideProps(context) {
     const { slug } = context.params;
     try {
 
-        const res = await fetch(`${apiBasePath}/getaudiobook/${slug}`);
+        const res = await fetch(`${serverEndApiBasePath}/getaudiobook/${slug}`);
         const singleAudioData = await res.json()
 
         console.log({ singleAudioData })
@@ -42,6 +42,7 @@ export default function Home({ singleAudioData }) {
     const router = useRouter();
     const currentUrl = router.asPath;
     console.log('current url', currentUrl);
+    const { asPath } = router;
     const userUuid = useSelector(state => state.usersession.userUuid);
 
     console.log(singleAudioData.audio)
@@ -53,11 +54,23 @@ export default function Home({ singleAudioData }) {
     // }, [])
 
     // if (!isLoading) return null;
-
+let postLink = `https://lekharpoka.com${asPath}`;
+let imageLink = `${serverEndApiBasePath}/${singleAudioData?.banner_img?.slice(singleAudioData?.banner_img.indexOf('/') + 1)}`
 
 
     return (
-        <>{userUuid ?
+        <>
+          <meta property="og:title" content={singleAudioData?.title} key="og:title" />
+          <meta property="og:description" content={`${singleAudioData?.title} by ${singleAudioData?.writer} #lekharpoka`} />
+          <meta property="og:image" content={imageLink} key="og:image" />
+          <meta property="og:url" content={postLink} />
+          <meta property="og:type" content="website" key="og:type" />
+          <meta name="twitter:card" content={imageLink} />
+          <meta name="twitter:title" content={pageTitle} />
+          <meta name="twitter:description" content={description} />
+          <meta name="twitter:image" content={imageLink} />
+        
+        {userUuid ?
             <div>
                 <Head>
                     <title>{singleAudioData?.title}</title>
@@ -67,7 +80,7 @@ export default function Home({ singleAudioData }) {
                     <div className="relative  flex justify-center items-center  w-full xl:h-[380px] lg:h-[380px] md:h-[360px] sm:h-[280px] xs:h-[270px]  overflow-hidden" style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat` }}>
                         <div className='audio_banner__info__wrap flex flex-row place-content-center justify-center items-center'>
                             <div className=''>
-                                <img className='object-cover lg:w-[180px] md:w-[170px] sm:w-[140px] xs:w-[75px] lg:h-[270px] md:h-[260px] sm:h-[190px] xs:h-[130px] -rotate-[19deg]' src={`${apiBasePath}/${singleAudioData?.banner_img?.slice(singleAudioData?.banner_img.indexOf('/') + 1)}`} alt='' />
+                                <img className='object-cover lg:w-[180px] md:w-[170px] sm:w-[140px] xs:w-[75px] lg:h-[270px] md:h-[260px] sm:h-[190px] xs:h-[130px] -rotate-[19deg]' src={`${serverEndApiBasePath}/${singleAudioData?.banner_img?.slice(singleAudioData?.banner_img.indexOf('/') + 1)}`} alt='' />
                             </div>
                             <div className='lg:ml-[98px] lg:ml-[90px] sm:ml-[80px] xs:ml-[30px] text-center relative'>
                                 <h5 className='text-[#F9A106] lg:text-[48px] md:text-[45px] sm:text-[42px] xs:text-[24px] font-semibold'>{singleAudioData?.title}</h5>
