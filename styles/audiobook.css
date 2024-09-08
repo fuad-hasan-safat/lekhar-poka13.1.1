@@ -365,7 +365,7 @@ Bg Slider Css
     .backgroundSlider .slick-next,
     .hmCategorySlider .slick-next {
         right: 0;
-        z-index: 999;
+        /* z-index: 999; */
     }
 
     .backgroundSlider .slick-prev,
@@ -405,7 +405,7 @@ Bg Slider Css
 
     .hmCategorySlider .slick-next {
         right: 0;
-        z-index: 999;
+        /* z-index: 999; */
     }
 
     .hmCategorySlider .slick-prev {
