@@ -1,6 +1,17 @@
 import Link from "next/link";
+import { categoryActions } from "../redux/category-slice";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 
 const FooterLink = ({ title, links }) => {
+
+    const dispatch = useDispatch();
+    const router = useRouter();
+
+    function handleLink(title){
+        dispatch(categoryActions.selectNavbarCategory(title))
+        router.push(`/category/${title}`)
+    }
     return (
 
         <div>
@@ -17,9 +28,14 @@ const FooterLink = ({ title, links }) => {
 
                         <li key={index}>
 
-                            <Link href={link.url}>
+                            {link.type === 'catLink' ?
+                             <button onClick={()=>handleLink(link.label)}>
                                 {link.label}
-                            </Link>
+                            </button> : 
+                            <Link href={link.url}>
+                            {link.label}
+                        </Link>
+                            }
 
                         </li>
 

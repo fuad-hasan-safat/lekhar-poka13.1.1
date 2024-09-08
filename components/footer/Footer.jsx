@@ -39,9 +39,9 @@ const MyFooter = () => {
                         title="গুরুত্বপূর্ণ লিঙ্ক"
                         links={[
                           { url: "/audiobook", label: "অডিও বুক" },
-                          { url: "/golpo", label: "গল্প" },
-                          { url: "/kobita", label: "কবিতা" },
-                          { url: "/probondho", label: "প্রবন্ধ" },
+                          { url: "", label: "গল্প", type: 'catLink' },
+                          { url: "", label: "কবিতা", type: 'catLink' },
+                          { url: "", label: "প্রবন্ধ", type: 'catLink' },
                         ]}
                       />
                     </div>
