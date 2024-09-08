@@ -50,7 +50,7 @@ export default function SeeMoreListPlayList({ audioPlaylist, playListScope }) {
                     </div>
                 </> :
                 <div>
-                    <p className='text-black'>আপনার কোন অডিও প্লেলিস্টে নাই!</p>
+                    <p className='text-black mb-[20px]'>আপনার কোন অডিও প্লেলিস্টে নাই!</p>
                 </div>
             }
 

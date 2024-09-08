@@ -77,7 +77,7 @@ export default function AudioPlayListSingleItem({ songInfo, audioIndex, audioLis
             const response = await axios.delete(apiUrl);
             console.log('Delete successful:', response.data);
       
-           const notification = `${songInfo.title} মুছে ফেলা হয়েছে`
+           const notification = `অডিওটি মুছে ফেলা হয়েছে`
             dispatch(toastAction.setSucessNotification(notification));
             dispatch(playlistAction.removeSingleAudioFromPlaylist(songInfo._id));
       

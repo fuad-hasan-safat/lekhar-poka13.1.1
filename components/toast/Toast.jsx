@@ -11,7 +11,7 @@ const Toast = () => {
   useEffect(() => {
     if (isToastShow) {
       const timer = setTimeout(() => {
-        // dispatch(toastAction.closeNotification());
+        dispatch(toastAction.closeNotification());
       }, 4000);
 
       return () => clearTimeout(timer);
