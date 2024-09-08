@@ -212,7 +212,7 @@ export default function UserProfile() {
                 />
 
               </div>
-              <div className='lg:w-[60%] lg:p-[60px] mb-[40px]'>
+              <div className='lg:w-[60%] lg:pl-[60px] lg:pt-[60px] mb-[40px]'>
                 <div className='lg:mb-[50px] md:mb-[40px] sm:mb-[30px] xs:mb-[20px]'>
                   <button
                     onClick={() => router.push('/user/createpost')}
