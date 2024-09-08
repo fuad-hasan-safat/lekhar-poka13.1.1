@@ -67,10 +67,10 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
             console.log('add playlist response', response);
             if (response.data.status === "failed") {
                 if (response.data.msg === 'Audio Already in playlist') {
-                    notification = `${songInfo.title} ইতিমধ্যে প্লেলিস্টে যুক্ত আছে!`;
+                    notification = `অডিওটি ইতিমধ্যে প্লেলিস্টে যুক্ত আছে!`;
                     dispatch(toastAction.setWarnedNotification(notification))
                 } else {
-                    notification = `${songInfo.title} প্লেলিস্টে যুক্ত করা যাচ্ছে না!`;
+                    notification = `অডিওটি প্লেলিস্টে যুক্ত করা যাচ্ছে না!`;
                     dispatch(toastAction.setWarnedNotification(notification))
                 }
                 return;
