@@ -33,10 +33,10 @@ export default function SeeMoreListGrid({audioData}) {
             {audioData?.slice(0, displayCount).map((item, index) => (
                 <div key={index} className='hm__audio__recent__slide__item'>
                     <div className='hm__audio__recent__slide__item__innr' onClick={() => sliderClickHandler(item?._id)}>
-                        <div className='hm__audio__recent__slide__item__img'>
+                        <div className='hm__audio__recent__slide__item__imgSeeMorelist'>
                             <img src={`${apiBasePath}/${item.image.slice(item.image.indexOf('/') + 1)}`} alt='Slider Img' />
                         </div>
-                        <div className='hm__audio__recent__slide__dsc max-w-[175px]'>
+                        <div className='hm__audio__recent__slide__dscSeeMoreList'>
                             <h5 className='charLim '>{item.title}</h5>
                             <p className='charLim'>{item.writer}</p>
                             <ul className='clearfix '>

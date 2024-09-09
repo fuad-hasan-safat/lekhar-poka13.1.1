@@ -171,6 +171,19 @@ hm audio recent slide item innr
     object-fit: cover;
 }
 
+.hm__audio__recent__slide__item__imgSeeMorelist {
+    width: 100%;
+    height: 270px;
+    border-radius: 16px 16px 0px 0px;
+}
+
+.hm__audio__recent__slide__item__imgSeeMorelist img {
+    width: 100%;
+    height: 100%;
+    border-radius: 16px 16px 0px 0px;
+    object-fit: cover;
+}
+
 .hm__audio__recent__slide__dsc {
     padding: 10px 10px;
     text-align: left;
@@ -200,6 +213,39 @@ hm audio recent slide item innr
 .hm__audio__recent__slide__dsc ul li {
     font-size: 10px;
     line-height: 1.5;
+    color: #5D5A88;
+    padding-right: 5px;
+}
+
+
+.hm__audio__recent__slide__dscSeeMoreList {
+    padding: 10px 10px;
+    text-align: left;
+}
+.hm__audio__recent__slide__dscSeeMoreList h5 {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #F9A106;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.hm__audio__recent__slide__dscSeeMoreList p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #5D5A88;
+    margin-bottom: 8px;
+}
+
+.hm__audio__recent__slide__dscSeeMoreList ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hm__audio__recent__slide__dscSeeMoreList ul li {
+    font-size: 13px;
+    line-height: 1.6;
     color: #5D5A88;
     padding-right: 5px;
 }
