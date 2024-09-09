@@ -69,8 +69,8 @@ export default function Home({ singleAudioData }) {
                             <div className=''>
                                 <img className='object-cover lg:w-[180px] md:w-[170px] sm:w-[140px] xs:w-[75px] lg:h-[270px] md:h-[260px] sm:h-[190px] xs:h-[130px] -rotate-[19deg]' src={`${apiBasePath}/${singleAudioData?.banner_img?.slice(singleAudioData?.banner_img.indexOf('/') + 1)}`} alt='' />
                             </div>
-                            <div className='lg:ml-[98px] lg:ml-[90px] sm:ml-[80px] xs:ml-[30px] text-center relative'>
-                                <h5 className='text-[#F9A106] lg:text-[48px] md:text-[45px] sm:text-[42px] xs:text-[24px] font-semibold'>{singleAudioData?.title}</h5>
+                            <div className='lg:ml-[98px] lg:ml-[90px] sm:ml-[80px] xs:ml-[30px] text-center relative lg:w-[800px] md:w-[600px] xs:w-[230px]'>
+                                <h5 className='text-[#F9A106] lg:text-[48px] md:text-[45px] sm:text-[42px] xs:text-[24px] font-semibold charLim'>{singleAudioData?.title}</h5>
                                 {singleAudioData?.mature_content && <img className='absolute -top-[10px] -right-[30px] ' src={'/audioBook/audioCatIcon/18+.svg'} />}
                                 <h5 className='text-[#484848] lg:text-[28px] md:text-[26px] sm:text-[24px] xs:text-[16px] font-semibold'>{singleAudioData.type} | {singleAudioData.writer} </h5>
                                 <div className='flex flex-row text-center place-content-center'><img src='/audioBook/listiningIcon.png' />
