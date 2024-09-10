@@ -1810,11 +1810,11 @@ transition: all 0.5s !important;
   }
 
   .ftr__main__content>ul>li {
-    width: 30%;
+    width: 28%;
     float: left;
   }
   .ftr__main__content>ul>li:nth-child(5) {
-    width: 10%;
+    width: 12%;
   }
 
   .login__form__wrap {
