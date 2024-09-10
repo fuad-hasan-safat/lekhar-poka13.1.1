@@ -1540,6 +1540,28 @@ transition: all 0.5s !important;
   align-items: center;
 }
 
+
+.text-container {
+  width: 270px;
+  overflow: hidden;
+  position: relative;
+}
+
+.animated-text {
+  /* position: absolute; */
+  white-space: nowrap;
+  animation: slide 9s linear infinite;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
 /*
 -----------------
  Banner Css

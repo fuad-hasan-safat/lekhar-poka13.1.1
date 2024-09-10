@@ -136,7 +136,7 @@ const AudioRecentSlider = ({recentSliderData}) => {
               <p className='charLim'>{item?.writer}</p>
               <ul className='clearfix reset-list'>
                 <li className='charLim'>{item?.voice}</li>
-                <li><i class="ri-time-line"></i> {item?.duration}</li>
+                <li className='text-right'><i class="ri-time-line"></i> {item?.duration}</li>
               </ul>
             </div>
           </div>
