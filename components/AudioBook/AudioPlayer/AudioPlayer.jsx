@@ -284,8 +284,8 @@ export default function AudioPlayer() {
                   ></img>
                 </div>
                 <div className="lg:flex lg:flex-col text-gray-600 pt-[5px] pl-[10px]">
-                  <div className="pb-[5px] text-container">
-                    <div className="text-xl font-bold text-left animated-text">{title}</div>
+                  <div className="pb-[5px] ">
+                    <div className="text-xl font-bold text-left">{shortenedTitle}</div>
                   </div>
                   <div>
                     <div className="text-left">{currentSong?.writer}</div>
