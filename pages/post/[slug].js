@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import Head from 'next/head';
 import FullPost from '../../components/common/fullContent'
 import RatingComponent from '../../components/common/starRating'
-import { apiBasePath } from "../../utils/constant";
+import { apiBasePath, serverEndApiBasePath } from "../../utils/constant";
 import ReaderModeModal from "../../components/readerMode/ReaderModeModal";
 import FullPostReaderMode from "../../components/common/fullContentReadermood";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,7 +14,7 @@ export async function getServerSideProps(context) {
   let postData;
 
   try {
-    const res = await fetch(`${apiBasePath}/getpost/${slug}`, {
+    const res = await fetch(`${serverEndApiBasePath}/getpost/${slug}`, {
       method: 'POST', // Use POST method
       headers: {
         'Content-Type': 'application/json', // Set the content type to JSON if necessary
@@ -166,7 +166,6 @@ export default function PostDetails({ postData }) {
                                       <span className="inline-block text-[26px]"> {isAudioPlaying && currentSongId === audioList.id ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</span> <span className="inline-block font-[600] text-[16px]"> প্লে করুন</span>
                                     </button>
                                   </div>
-
                                 )}
 
                               </div>

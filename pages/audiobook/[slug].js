@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import AudioDetailsSideBar from '../../components/AudioBook/components/audioSidebar/AudioDetailsSidebar';
 import AudioTabs from '../../components/AudioBook/components/audioDetails/AudioTabs';
-import { apiBasePath } from '../../utils/constant';
+import { apiBasePath, serverEndApiBasePath } from '../../utils/constant';
 import { useEffect, useState } from 'react';
 import LoginPage from '../../components/login/login';
 import { useRouter } from 'next/router';
@@ -11,11 +11,11 @@ export async function getServerSideProps(context) {
     const { slug } = context.params;
     try {
 
-        const res = await fetch(`${apiBasePath}/getaudiobook/${slug}`);
+        const res = await fetch(`${serverEndApiBasePath}/getaudiobook/${slug}`);
         const singleAudioData = await res.json()
 
         console.log({ singleAudioData })
-        const postRes = await fetch(`${apiBasePath}/updateview/${slug}`, {
+        const postRes = await fetch(`${serverEndApiBasePath}/updateview/${slug}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
