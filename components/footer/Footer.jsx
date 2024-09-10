@@ -81,7 +81,7 @@ const MyFooter = () => {
 
                   <li>
 
-                    <div className="ftr__socail__icon text-white lg:pl-[90px] md:pl-0 sm:pl-0 xs:pl-0">
+                    <div className="ftr__socail__icon text-white xl:pl-[90px] md:pl-0 sm:pl-0 xs:pl-0">
                       <SocialLink
                         title="Social"
                         links={[

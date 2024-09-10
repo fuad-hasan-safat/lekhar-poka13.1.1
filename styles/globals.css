@@ -1682,6 +1682,7 @@ transition: all 0.5s !important;
   .ftr__main__content>ul>li {
     width: 25%;
     float: left;
+    padding-bottom: 20px;
   }
 
   .contect__frm_left {
@@ -2061,7 +2062,7 @@ transition: all 0.5s !important;
     text-align: center;
     display: table;
     margin: 0 auto;
-    padding-bottom: 25px;
+    /* padding-bottom: 25px; */
   }
 
   .ftr__socail__icon ul {

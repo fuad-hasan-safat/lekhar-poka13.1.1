@@ -113,7 +113,7 @@ export default function AudioPlayListSingleItem({ songInfo, audioIndex, audioLis
 
     return (
         <div className='audio__tab__item'>
-            <DialugueModal ref={dialogueRef} alert={`${songInfo?.title} কি ডিলিট করতে চান ?`} address={deleteSong} type='delete' />
+            <DialugueModal ref={dialogueRef} alert={`আপনি কি ডিলিট করতে চান ?`} address={deleteSong} type='delete' />
             <div className='audio__tab__left'>
                 <div>
                     <img src={image} className='lg:w-[78px] object-cover md:w-[70px] sm:w-[65px] xs:w-[50px] lg:h-[78px] md:h-[70px] sm:h-[65px] xs:h-[50px] rounded-full' />

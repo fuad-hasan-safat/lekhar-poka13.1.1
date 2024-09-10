@@ -9,7 +9,7 @@ const SocialLink = ({ title, links }) => {
             </div>
             <div>
 
-                <div className="pb-14 ">
+                <div className="pb-[30px]">
 
                     <ul className=" flex space-x-4">
 

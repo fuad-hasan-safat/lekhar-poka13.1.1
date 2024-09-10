@@ -417,7 +417,7 @@ Bg Slider Css
     .backgroundSlider .slick-prev,
     .hmCategorySlider .slick-prev {
         left: 0;
-        z-index: 999;
+        z-index: 1;
     }
 }
 
