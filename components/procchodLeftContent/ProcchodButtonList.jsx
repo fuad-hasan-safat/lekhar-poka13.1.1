@@ -30,7 +30,7 @@ const ProcchodButtonList = ({
         console.log('Proccod ------- category ---', result)
         setButtons(result);
       } catch (error) {
-        alert(error)
+        // alert(error)
       }
     }
 

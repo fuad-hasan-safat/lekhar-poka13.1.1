@@ -35,6 +35,7 @@ export default function PostOfWriterPage() {
             try {
                 const response = await fetch(`${apiBasePath}/postswriter/${slug}`);
                 const data = await response.json();
+                console.log('post of wtiter --------------->>>>', data);
                 setPostList(data.object);
                 setWriterInfo(data.writer_info)
                 setProfileInfo(data?.user_profile)
@@ -46,7 +47,8 @@ export default function PostOfWriterPage() {
 
             } catch (error) {
                 setError(error);
-                console.log('writer post ---', error)
+                console.log('writer post ---', error);
+                router.push('/404');
             } finally {
                 setIsLoading(false);
             }
@@ -74,7 +76,7 @@ export default function PostOfWriterPage() {
 
     if (isLoading) {
         return <Loading />;
-    } else{
+    } else {
         return (
 
             <div>
@@ -113,7 +115,7 @@ export default function PostOfWriterPage() {
                             </div>
 
                             <div className='lg:w-[60%] my-[40px] ml-[40px]'>
-                                <WriterPostList profileInfo={profileInfo}  postList={postList} isLoading={isLoading}/>
+                                <WriterPostList profileInfo={profileInfo} postList={postList} isLoading={isLoading} />
                             </div>
 
                         </div>

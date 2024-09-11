@@ -128,12 +128,10 @@ export default function LoginForm({ logreg, btntext}) {
         setnumber('');
         setPassword('');
       } else {
-        // alert('সঠিক নাম্বার দিন');
         notification = 'সঠিক নাম্বার দিন';
         dispatch(toastAction.setWarnedNotification(notification));
       }
     } catch (error) {
-      // alert('সঠিক পাসওয়ার্ড দিন');
       notification = 'সঠিক পাসওয়ার্ড দিন';
       console.log(error);
       dispatch(toastAction.setWarnedNotification(notification));

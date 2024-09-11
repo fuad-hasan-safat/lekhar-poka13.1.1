@@ -29,9 +29,12 @@ export async function getServerSideProps(context) {
         return { props: { singleAudioData } }
 
     } catch (error) {
-        console.log(error)
+        console.log(error);
+    
     }
-    const singleAudioData = []
+    const singleAudioData = {
+        fetchError: 5,
+    }
 
     return { props: { singleAudioData } }
 
@@ -52,12 +55,14 @@ export default function Home({ singleAudioData }) {
     //     setIsLoading(true)
     // }, [])
 
-    // if (!isLoading) return null;
+    if (singleAudioData?.fetchError === 5) {
+        router.push('/404');
+    };
 
 
 
     return (
-        <>{userUuid ?
+        <>{userUuid && singleAudioData?.fetchError !== 5 ?
             <div>
                 <Head>
                     <title>{singleAudioData?.title}</title>

@@ -60,7 +60,10 @@ export default function WriterProfileBanner({
 
                     // console.log(' profile image----------->>>>', image)
                 })
-                .catch((error) => console.error("Error fetching data:", error));
+                .catch((error) => {
+                    console.error("Error fetching data:", error)
+                    router.push('/404');
+                });
 
         }
 

@@ -43,7 +43,7 @@ const Carousel1 = ({ interval = 3000 }) => {
        // console.log("sliders         ->>>>>>>>>>>>>>>>", result.object);
         setData(result)
       } catch (error) {
-        alert(error)
+        // alert(error)
       }
     }
 

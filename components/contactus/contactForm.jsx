@@ -54,7 +54,6 @@ const ContactForm = () => {
                 message: formData.message
             });
 
-            // alert('ধন্যবাদ আপনার মন্তব্যের জন্য')
             notification = 'ধন্যবাদ আপনার মন্তব্যের জন্য'
             dispatch(toastAction.setSucessNotification(notification));
         } catch (error) {

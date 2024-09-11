@@ -40,13 +40,13 @@ export default function PostOfWriterPage() {
                 setBio(data.writer_bio?.content)
                 setIsSelfWriter(data.self_writer)
 
-                console.log('posts of writer ----------------------------------', data)
+                console.log('posts of USER  ----------------------------------', data)
 
                 setTotalPages(Math.ceil(data.object.length / postsPerPage));
 
             } catch (error) {
                 setError(error);
-                console.log('writer post ---', error)
+                console.log('writer post --- by user', error);
             } finally {
                 setIsLoading(false)
             }

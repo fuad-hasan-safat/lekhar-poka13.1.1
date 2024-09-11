@@ -67,7 +67,6 @@ const toggleVisibility = (index) => {
         setPostList(data);
         //console.log( "------------------->>>> POST LIST ------------------>>>>>>>",postList );
       } catch (error) {
-        // alert("Error Fetching data");
       }
     };
 

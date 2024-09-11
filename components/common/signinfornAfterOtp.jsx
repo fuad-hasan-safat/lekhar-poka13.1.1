@@ -114,15 +114,11 @@ export default function SigninFormAterOTP({ logreg, btntext, phonenumber }) {
                     usertype: "user",
 
                 });
-
-                // alert('আপনার রেজিস্ট্রেশন সম্পূর্ণ হয়েছে। অনুগ্রহ করে লগইন করুন।')
                 notification = 'আপনার রেজিস্ট্রেশন সম্পূর্ণ হয়েছে। অনুগ্রহ করে লগইন করুন।';
                 dispatch(toastAction.setSucessNotification(notification));
                 reloadPage()
 
             } catch (error) {
-
-                // alert('আপনি আগে থেকেই সাইন আপ করেছেন');
                 notification = 'আপনি আগে থেকেই সাইন আপ করেছেন';
                 dispatch(toastAction.setWarnedNotification(notification));
             }
