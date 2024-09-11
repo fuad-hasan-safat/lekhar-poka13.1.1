@@ -15,13 +15,7 @@ export default function UserProfile() {
 
   const router = useRouter();
   const { setIsProfileLoaded } = useContext(UserContext);
-
-  const [writer, setWriter] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const [username, setUsername] = useState("");
-  // const [userUuid, setUserUuid] = useState("");
-  const [userPhone, setUserPhone] = useState("");
-  const [userToken, setUserToken] = useState("");
   const [userProfileData, setuserprofiledata] = useState({
     userName: '',
     userImage: '',
@@ -55,7 +49,6 @@ export default function UserProfile() {
   const [unapprovedPost, setUnapprovedPost] = useState(0)
   const [profileStats, setProfileStats] = useState([])
   const [profileStatus, setProfileStatus] = useState('')
-  const [status, setStatus] = useState("");
 
 
 
@@ -65,24 +58,16 @@ export default function UserProfile() {
   const handleClose = () => setProfileController('profile');
 
   useEffect(() => {
-    setIsProfileLoaded(false);
-    setUsername(localStorage.getItem("name") || "");
-    setUserToken(localStorage.getItem("token") || "");
-    setUserPhone(localStorage.getItem("phone") || "");
-    setWriter(localStorage.getItem("name"));
-  }, []);
-
-  useEffect(() => {
-    setStatus(localStorage.getItem("status") || "");
-  }, [status]);
-
-  useEffect(() => {
 
     if(!userUuid) return;
 
     fetch(`${apiBasePath}/getprofile/${userUuid}`)
       .then((response) => response.json())
       .then((data) => {
+        // if(data.status === 'failed'){
+        //   router.push('/404');
+          
+        // }
         console.log('pofile details on user profile--------------->>>>>>>', data);
         setProfileInfo(data.object.profile)
         setApprovedPost(data.object.approved_post)
@@ -113,7 +98,7 @@ export default function UserProfile() {
 
         // console.log(' profile image----------->>>>', image)
       })
-      .catch((error) => console.error("Error fetching data:", error));
+      .catch((error) => console.error("Error fetching userprofiles data:", error));
 
 
     fetch(`${apiBasePath}/writers`)
@@ -183,6 +168,9 @@ export default function UserProfile() {
 
   }
 
+  if(!userUuid){
+    router.push('/404');
+  }
 
   if (isLoading) {
     return <Loading />;
