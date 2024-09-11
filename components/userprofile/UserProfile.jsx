@@ -109,7 +109,7 @@ export default function UserProfile() {
           setCanPostStatus(true)
         }
         
-        if(data.object.name === null) return ;
+        // if(data.object.name === null) return ;
 
         // console.log(' profile image----------->>>>', image)
       })

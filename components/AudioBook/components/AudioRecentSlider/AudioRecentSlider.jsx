@@ -133,10 +133,10 @@ const AudioRecentSlider = ({recentSliderData}) => {
             <div className='hm__audio__recent__slide__dsc'>
               
               <h5 className='charLim'>{item?.title}</h5>
-              <p className='charLim'>{item?.writer}</p>
+              <p className='charLim font-[600]'>লেখক : {item?.writer}</p>
               <ul className='clearfix reset-list'>
-                <li className='charLim'>{item?.voice}</li>
-                <li className='text-right'><i class="ri-time-line"></i> {item?.duration}</li>
+                <li className='charLim'>কন্ঠ: {item?.voice}</li>
+                <li className='text-[11px] flex items-center font-[400]'><span className='inline-block text-[20px]'><i class="ri-time-line"></i></span> <span className='inline-block pl-[5px] text-[12px]' >{item?.duration}</span> </li>
               </ul>
             </div>
           </div>

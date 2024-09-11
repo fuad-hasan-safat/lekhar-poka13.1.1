@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { apiBasePath } from '../../../../utils/constant';
 
-export default function SeeMoreListGrid({audioData}) {
+export default function SeeMoreListGrid({ audioData }) {
     console.log(audioData)
     const router = useRouter()
     const [displayCount, setDisplayCount] = useState(6);
@@ -38,10 +38,10 @@ export default function SeeMoreListGrid({audioData}) {
                         </div>
                         <div className='hm__audio__recent__slide__dscSeeMoreList'>
                             <h5 className='charLim '>{item.title}</h5>
-                            <p className='charLim'>{item.writer}</p>
-                            <ul className='clearfix '>
-                                <li className='charLim'>{item.voice}</li>
-                                <li><i className="ri-time-line"></i> {item.duration}</li>
+                            <p className='charLim font-[600]'>লেখক : {item?.writer}</p>
+                            <ul className='clearfix reset-list'>
+                                <li className='charLim'>কন্ঠ: {item?.voice}</li>
+                                <li className='flex items-center font-[400]'><span className='inline-block text-[20px]'><i class="ri-time-line"></i></span> <span className='inline-block pl-[5px] text-[13px]' >{item?.duration}</span> </li>
                             </ul>
                         </div>
                     </div>

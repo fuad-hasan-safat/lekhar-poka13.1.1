@@ -11,11 +11,9 @@ export default function AudioHomePage() {
             <div className='hm__audio__left'>
               <AudioCategory />
               <AudioSlider />
-
             </div>
             <div className='hm__audio__right'>
               <Sidebar />
-
             </div>
           </div>
         </div>
