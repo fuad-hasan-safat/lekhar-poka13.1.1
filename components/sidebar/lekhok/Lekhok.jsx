@@ -113,12 +113,12 @@ const Lekhok = () => {
             <div>
               <button
                 onClick={allWriterHandler}
-                className="sidebar__all__see page__common__btn bg-yellow-500 lg:w-[180px] md:w-[160px] sm:w-[150px] h-[43px] text-white rounded-md mr-3">
+                className="sidebar__all__see page__common__btn bg-yellow-500 lg:w-[295px] md:w-[270px] sm:w-[150px] h-[43px] text-white rounded-md mr-3">
                 সব দেখুন
               </button>
             </div>
 
-            <div className="flex space-x-3">
+            {/* <div className="flex space-x-3">
               <button
                 onClick={handlePreviousPage}
                 className="page__common__btn pl-2 bg-white rounded-md border border-gray-300 hover:border-[#F9A106]  w-[50px] h-[43px] ">
@@ -158,7 +158,7 @@ const Lekhok = () => {
                   />
                 </svg>
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
