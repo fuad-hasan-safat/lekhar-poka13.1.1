@@ -77,7 +77,7 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
             }
             // setMyPlayList([...myPlayList, songInfo])
             dispatch(playlistAction.addSingleSongToMyPlaylist(songInfo));
-            notification = `${songInfo.title} প্লেলিস্টে যুক্ত হয়েছে!`;
+            notification = `প্লেলিস্টে যুক্ত হয়েছে!`;
             dispatch(toastAction.setSucessNotification(notification))
         } catch (error) {
             console.error('Error posting data:', error);

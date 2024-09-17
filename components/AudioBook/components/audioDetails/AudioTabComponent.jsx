@@ -8,7 +8,7 @@ export default function AudioTabComponent({ singleAudioData }) {
   }))
   console.log({ audioData })
   return (
-    <div className='w-full'>
+    <div className='w-full mb-[100px]'>
       {audioData?.length <= 0 && <div>
         <p className='text-black pt-[15px]'>এই মুহূর্তে কোন অডিও নাই</p>
       </div>}
@@ -19,7 +19,7 @@ export default function AudioTabComponent({ singleAudioData }) {
           writer: singleAudioData.writer,
         }
         return (
-          <div key={index} className='audio__tab__wrap'>
+          <div key={index} className='audio__tab__wrap '>
             <AudioTabSingleItem songInfo={songDetails} audioIndex={index} audioList={audioData} />
           </div>
 
