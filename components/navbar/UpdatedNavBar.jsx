@@ -77,7 +77,6 @@ export default function UpdatedNavBar() {
 
                 }else{
                 setUser({ userImage: `/images/defaultUserPic/rounded/null.png` })
-
                 }
                 //console.log( "------------------->>>> POST LIST ------------------>>>>>>>",postList );
             } catch (error) {
