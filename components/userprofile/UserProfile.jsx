@@ -168,7 +168,7 @@ export default function UserProfile() {
 
   }
 
-  if(!userUuid){
+  if(userUuid && userUuid !== router.query.slug){
     router.push('/404');
   }
 
