@@ -8,6 +8,7 @@ import ReaderModeModal from "../../components/readerMode/ReaderModeModal";
 import FullPostReaderMode from "../../components/common/fullContentReadermood";
 import { useDispatch, useSelector } from "react-redux";
 import { audioPlayerAction } from "../../components/redux/audioplayer-slice";
+
 export async function getServerSideProps(context) {
 
   const { slug } = context.params;
@@ -113,17 +114,16 @@ export default function PostDetails({ postData }) {
     <>
       <div>
         <Head>
-
           <title>{data?.title}</title>
-          <meta property="og:title" content={pageTitle} key="og:title" />
+          <meta property="og:title" content={data?.title} key="og:title" />
           <meta property="og:description" content={`${description} #lekharpoka`} />
-          <meta property="og:image" content={imageLink} key="og:image" />
-          <meta property="og:url" content={postLink} />
+          <meta property="og:image" content={`https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/') + 1)}`} key="og:image" />
+          <meta property="og:url" content={`https://lekharpoka.com${asPath}`} />
           <meta property="og:type" content="website" key="og:type" />
-          <meta name="twitter:card" content={imageLink} />
-          <meta name="twitter:title" content={pageTitle} />
+          <meta name="twitter:card" content={ `https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/') + 1)}`} />
+          <meta name="twitter:title" content={data?.title} />
           <meta name="twitter:description" content={description} />
-          <meta name="twitter:image" content={imageLink} />
+          <meta name="twitter:image" content={ `https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/') + 1)}`} />
 
         </Head>
       </div>
