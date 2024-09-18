@@ -195,7 +195,7 @@ export default function Login() {
                 value={password}
               />
 
-              <button className="absolute right-[10px]  pt-[10px]" type="button" onClick={togglePasswordVisibility}>
+              <button className="absolute right-[10px] text-gray-700  pt-[10px]" type="button" onClick={togglePasswordVisibility}>
                 {showPassword ? <i class="ri-eye-off-line"></i> : <i class="ri-eye-line"></i>}
               </button>
 
