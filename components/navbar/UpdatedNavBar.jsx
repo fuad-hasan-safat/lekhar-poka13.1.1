@@ -72,7 +72,13 @@ export default function UpdatedNavBar() {
                 const response = await fetch(`${apiBasePath}/getprofilepic/${userUuid}`);
                 const data = await response.json();
                 console.log('user image in navbar --', data.image)
-                setUser({ userImage: `${apiBasePath}/${data.image?.slice(data.image?.indexOf('/') + 1)}` })
+                if(data.image){
+                    setUser({ userImage: `${apiBasePath}/${data.image?.slice(data.image?.indexOf('/') + 1)}` })
+
+                }else{
+                setUser({ userImage: `/images/defaultUserPic/rounded/null.png` })
+
+                }
                 //console.log( "------------------->>>> POST LIST ------------------>>>>>>>",postList );
             } catch (error) {
                 // alert("Error Fetching data");
