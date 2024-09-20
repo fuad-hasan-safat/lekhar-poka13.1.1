@@ -44,6 +44,7 @@ const OtpPage = ({ otpProp, SetIsOtpSucess, phonenumber, setIsOtpVerified, setIs
       });
 
       if (response.data.status === "success") {
+        console.log('Send OTP sucessfull---------', response);
         setIsOtpVerified(true);
         setIsOtpSuccess(true);
       } else {

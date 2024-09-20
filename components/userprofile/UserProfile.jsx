@@ -75,10 +75,11 @@ export default function UserProfile() {
         setProfileName(data.object.name)
         setProfileStatus(data.object.status)
         setProfileStats(data.object.stats)
+        const picUrl = `${data.object.profile?.image?.slice( data.object.profile?.image?.indexOf("/") + 1)}` === ('undefined' || undefined || null) ? '' : `${apiBasePath}/${ data.object.profile?.image?.slice( data.object.profile?.image?.indexOf("/") + 1)}`;
         setuserprofiledata((prevData) => ({
           ...prevData,
           userName: data.object.profile?.name,
-          userImage: `${apiBasePath}/${ data.object.profile?.image.slice( data.object.profile?.image?.indexOf("/") + 1)}`,
+          userImage: `${picUrl}`,
           userPhone: data.object.profile?.phone,
           userEmail: data.object.profile?.email,
           userBirthDate: data.object.profile?.dob,
@@ -87,6 +88,8 @@ export default function UserProfile() {
           userStatus: data.object.profile?.profileStatus,
           userAddress: data.object.profile?.address,
         }))
+
+        setIsLoading(false);
 
         if (!data.object.stats) {
           setCanPostStatus(false)
@@ -115,7 +118,7 @@ export default function UserProfile() {
         setCategory(data);
       })
       .catch((error) => console.error("Error fetching data:", error))
-      .finally(setIsLoading(false));
+      .finally();
 
 
     const fetchUserBioData = async () => {

@@ -203,7 +203,6 @@ export default function SigninFormAterOTP({ logreg, btntext, phonenumber }) {
                 </div>
 
             </div>
-            <ToastContainer />
 
         </>
     );

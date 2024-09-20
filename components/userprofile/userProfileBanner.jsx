@@ -38,6 +38,7 @@ export default function UserProfileBanner({
     }
 
     const userProfileImage = userProfileData.userImage;
+    console.log('User Profile data, --->>>> length',userProfileImage.length);
 
 
     return (
