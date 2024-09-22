@@ -4,8 +4,6 @@ import { apiBasePath } from '../../utils/constant'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import { convertToBengaliDate } from '../../utils/convertToBanglaDate'
-// import { ToastContainer, toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
 import DialugueModal from './notification/DialugueModal'
 import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux'

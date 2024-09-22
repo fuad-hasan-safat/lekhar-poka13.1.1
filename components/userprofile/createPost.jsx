@@ -4,9 +4,6 @@ import { apiBasePath } from '../../utils/constant';
 import { useRouter } from 'next/router';
 import { FileUploader } from "react-drag-drop-files";
 import dynamic from 'next/dynamic';
-
-// import { ToastContainer, toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { userPostAction } from '../redux/userpost-slice';
 import { generateUUID } from '../../function/api';
