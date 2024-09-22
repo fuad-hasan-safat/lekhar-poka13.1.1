@@ -112,21 +112,21 @@ export default function PostDetails({ postData }) {
 
   return (
     <>
-      <div>
-        <Head>
-          <title>{data?.title}</title>
-          <meta property="og:title" content={data?.title} key="og:title" />
-          <meta property="og:description" content={`${description} #lekharpoka`} />
-          <meta property="og:image" content={`https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/') + 1)}`} key="og:image" />
-          <meta property="og:url" content={`https://lekharpoka.com${asPath}`} />
-          <meta property="og:type" content="website" key="og:type" />
-          <meta name="twitter:card" content={ `https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/') + 1)}`} />
-          <meta name="twitter:title" content={data?.title} />
-          <meta name="twitter:description" content={description} />
-          <meta name="twitter:image" content={ `https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/') + 1)}`} />
+      <Head>
+        <title>{data?.title}</title>
+        <meta property="og:site_name" content="Lekhar Poka" />
+        <meta property="og:locale" content="bn_BD" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={data?.title} key="og:title" />
+        <meta property="og:description" content={`${description} #lekharpoka`} />
+        <meta property="og:image" content={`https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/') + 1)}`} key="og:image" />
+        <meta property="og:url" content={`https://lekharpoka.com${asPath}`} />
+        <meta name="twitter:card" content={`https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/') + 1)}`} />
+        <meta name="twitter:title" content={data?.title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={`https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/') + 1)}`} />
+      </Head>
 
-        </Head>
-      </div>
       {poststatus || userUuid === postWonnerUuid ?
         <>
           <div className=" body__control" >
