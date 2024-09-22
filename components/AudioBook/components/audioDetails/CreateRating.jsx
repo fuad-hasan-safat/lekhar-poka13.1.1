@@ -11,10 +11,25 @@ export default function CreateRating({ setUserComments }) {
     const userUuid = useSelector((state) => state.usersession.userUuid);
     const [userRating, setUserRating] = useState('');
     const [profileInfo, setProfileInfo] = useState([]);
+    const [canPostStatus, setCanPostStatus] = useState(false)
+
 
     let notification = '';
 
     useEffect(() => {
+
+        fetch(`${apiBasePath}/getprofile/${userUuid}`)
+            .then((response) => response.json())
+            .then((data) => {
+
+                if (!data.object.profile_completion_status) {
+                    setCanPostStatus(false)
+                } else {
+                    setCanPostStatus(true)
+                }
+
+            })
+            .catch((error) => console.error("Error fetching data:", error));
 
         fetch(`${apiBasePath}/getprofile/${userUuid}`)
             .then((response) => response.json())
@@ -33,6 +48,11 @@ export default function CreateRating({ setUserComments }) {
     }
 
     async function submitRating() {
+        if (!canPostStatus) {
+            notification = 'আপনার প্রোফাইল সম্পূর্ণ করুণ!';
+            dispatch(toastAction.setWarnedNotification(notification));
+            return;
+        }
         if (userUuid) {
             const postData = {
                 ebook_id: `${router.query.slug}`,
