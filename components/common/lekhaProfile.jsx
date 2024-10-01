@@ -15,31 +15,31 @@ const LekhaPokaProfile = ({
   uploaded_by,
 }) => {
 
-  const userUuid = useSelector((state)=> state.usersession.userUuid);
+  const userUuid = useSelector((state) => state.usersession.userUuid);
   const [isMounted, setIsMounted] = useState(false);
 
-  useState(()=>{
+  useState(() => {
     setIsMounted(true);
-  },[])
+  }, [])
 
 
-  if(!isMounted) return null;
+  if (!isMounted) return null;
 
   let redurectUrl = `/postswriter/${writer_id}`;
-  if(userUuid){
-    if(userUuid === uploaded_by)
-    redurectUrl = `/user/${uploaded_by}`;
+  if (userUuid) {
+    if (userUuid === uploaded_by)
+      redurectUrl = `/user/${uploaded_by}`;
   }
 
-  let shortenTitle = title?.length > 26 ? `${title?.slice(0,25)}...` : title;
-  let shortenWriter = writer?.length > 26 ? `${writer?.slice(0,25)}...` : writer;
+  let shortenTitle = title?.length > 26 ? `${title?.slice(0, 25)}...` : title;
+  let shortenWriter = writer?.length > 26 ? `${writer?.slice(0, 25)}...` : writer;
 
   return (
     <>
 
       <div className="flex relative w-full">
 
-        <div className="">
+        <div className="w-full">
 
           <div className="iteam absolute left-0">
 
@@ -55,13 +55,15 @@ const LekhaPokaProfile = ({
 
           </div>
 
-          <div className="sidebar__post pl-[80px] w-full">
+          <div className="sidebar__post pl-[80px] ">
 
             <Link
               className="text-[18px] text-gray-800 "
               href={`/post/${id}`}
             >
-              {shortenTitle}
+              <p className="charLim">
+                {title}
+              </p>
             </Link>
 
             <diV>
