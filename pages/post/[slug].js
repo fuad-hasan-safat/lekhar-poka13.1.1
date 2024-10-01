@@ -122,9 +122,9 @@ export default function PostDetails({ postData }) {
         <meta property="og:image" content={`https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/') + 1)}`} key="og:image" />
         <meta property="og:url" content={`https://lekharpoka.com${asPath}`} />
         <meta name="twitter:card" content={`https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/') + 1)}`} />
-        <meta name="twitter:title" content={data?.title} />
+        <meta name="twitter:title" content={data?.title} key="og:title" />
         <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content={`https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/') + 1)}`} />
+        <meta name="twitter:image" content={`https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/') + 1)}`} key="og:image"/>
       </Head>
 
       {poststatus || userUuid === postWonnerUuid ?
