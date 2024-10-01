@@ -16,11 +16,10 @@ export async function getServerSideProps(context) {
 
   try {
     const res = await fetch(`${serverEndApiBasePath}/getpost/${slug}`, {
-      method: 'POST', // Use POST method
+      method: 'POST', 
       headers: {
-        'Content-Type': 'application/json', // Set the content type to JSON if necessary
+        'Content-Type': 'application/json', 
       },
-      // No body data
     });
     postData = await res.json()
 
@@ -32,9 +31,9 @@ export async function getServerSideProps(context) {
     }
   }
 
-
   return { props: { postData } }
 }
+
 
 export default function PostDetails({ postData }) {
   const router = useRouter();
