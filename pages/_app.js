@@ -27,6 +27,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import store, { persistor } from '../components/redux/store';
 import Toast from '../components/toast/Toast';
+import Script from 'next/script';
 
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -93,8 +94,9 @@ export default function MyApp({ Component, pageProps }) {
     // </Layout>
     <>
 
-      <script async defer
-        src="https://connect.facebook.net/en_US/sdk.js/xfbml.js?appId=1103079424285739&version=v16.0"
+      <Script async defer
+        strategy="lazyOnload"
+        src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0&appId=1103079424285739"
         crossOrigin="anonymous"
       />
       <Provider store={store}>

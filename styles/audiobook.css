@@ -3,6 +3,12 @@
 hm__audio__book__wrap
 ----------------------- 
 */
+.break-text {
+    word-wrap: break-word;   /* Breaks long words */
+    word-break: break-all;   /* Breaks words anywhere */
+    overflow-wrap: break-word; /* Ensures breaking in modern browsers */
+  }
+  
 .audio__title {
     /* position: absolute; */
     top: 0;

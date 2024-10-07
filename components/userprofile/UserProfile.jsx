@@ -59,7 +59,11 @@ export default function UserProfile() {
 
   useEffect(() => {
 
+    console.log('user uuid -->', userUuid)
+
     if(!userUuid) return;
+
+    console.log('getting profile .....')
 
     fetch(`${apiBasePath}/getprofile/${userUuid}`)
       .then((response) => response.json())
@@ -89,6 +93,7 @@ export default function UserProfile() {
           userAddress: data.object.profile?.address,
         }))
 
+        console.log('Loding false next line ----------->')
         setIsLoading(false);
 
         if (!data.object.stats) {
