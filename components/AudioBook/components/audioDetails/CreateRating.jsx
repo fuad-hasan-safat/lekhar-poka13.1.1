@@ -80,9 +80,13 @@ export default function CreateRating({ setUserComments }) {
                 notification = 'আপনার মন্তব্য প্রেরণ সফল হয়েছে।';
                 dispatch(toastAction.setSucessNotification(notification));
                 setUserRating('')
+                const newComment = {
+                    ...postData,
+                    _id : ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c => (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)),
+                }
                 setUserComments((prevData) => ([
                     ...prevData,
-                    postData
+                    newComment,
                 ]))
                 console.log('Response:', result); // Handle the response as needed
                 // reloadPage();
