@@ -67,6 +67,7 @@ export default function Rating({ singleAudioData }) {
     function handleEditClick(commentId, currentComment) {
         setEditCommentId(commentId);  // Set the comment ID being edited
         setEditedComment(currentComment);  // Pre-fill with the current comment text
+        setOpenCommentId(null)
     }
 
     async function saveEditedComment(commentId) {
@@ -187,15 +188,15 @@ export default function Rating({ singleAudioData }) {
                         )}
 
                         {editCommentId === comment._id && (
-                            <div className='flex justify-end mt-2'>
+                            <div className='flex justify-end mt-2 mb-2'>
                                 <button
                                     className='bg-green-500 text-white px-4 py-1 rounded-md mr-2'
                                     onClick={() => saveEditedComment(comment._id)}
                                 >
-                                    সংরক্ষন
+                                    সংরক্ষণ
                                 </button>
                                 <button
-                                    className='bg-red-500 text-white px-4 py-1 rounded-md'
+                                    className='bg-red-500 text-white px-4 py-1 rounded-md mr-[15px]'
                                     onClick={() => setEditCommentId(null)}  // Cancel edit
                                 >
                                     বাতিল 
