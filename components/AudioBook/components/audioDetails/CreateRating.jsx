@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { toastAction } from '../../../redux/toast-slice';
 
-export default function CreateRating({ setUserComments }) {
+export default function CreateRating({ setUserComments, setIsNewComment }) {
     const router = useRouter();
     const dispatch = useDispatch();
     const userUuid = useSelector((state) => state.usersession.userUuid);
@@ -80,14 +80,15 @@ export default function CreateRating({ setUserComments }) {
                 notification = 'আপনার মন্তব্য প্রেরণ সফল হয়েছে।';
                 dispatch(toastAction.setSucessNotification(notification));
                 setUserRating('')
-                const newComment = {
-                    ...postData,
-                    _id : ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c => (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)),
-                }
-                setUserComments((prevData) => ([
-                    ...prevData,
-                    newComment,
-                ]))
+                // const newComment = {
+                //     ...postData,
+                //     _id : ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c => (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)),
+                // }
+                // setUserComments((prevData) => ([
+                //     ...prevData,
+                //     newComment,
+                // ]))
+                setIsNewComment((prev) => !prev); 
                 console.log('Response:', result); // Handle the response as needed
                 // reloadPage();
             } catch (error) {
