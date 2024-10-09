@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import TechnicalDetails from './technicalDetails';
 import Summary from './Summary';
 import CommentsOfWriter from './CommentsOfWriter';
@@ -10,8 +10,8 @@ import { AudioDetailsTabContext } from '../../../store/audiodetailstab-context';
 
 const AudioTabs = ({singleAudioData}) => {
 
-  // const [ToggleState, setToggleState] = useState(1);
-  const {audioTabToggleState, setAudioTabToggleState} = useContext(AudioDetailsTabContext);
+  const [audioTabToggleState, setAudioTabToggleState] = useState(1);
+  // const {audioTabToggleState, setAudioTabToggleState} = useContext(AudioDetailsTabContext);
   
   const toggleTab = (index) => {
     setAudioTabToggleState(index);
