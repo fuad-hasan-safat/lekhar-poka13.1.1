@@ -117,7 +117,7 @@ export default function PostDetails({ postData }) {
         <meta property="og:site_name" content="Lekhar Poka" />
         <meta property="og:locale" content="bn_BD" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content={data?.title} key="og:title" />
+        <meta property="og:title" content={pageTitle} key="og:title" />
         <meta property="og:description" content={`${description} #lekharpoka`} />
         <meta property="og:image" content={imageLink} key="og:image" />
         <meta name="twitter:card" content={imageLink} />
