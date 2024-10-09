@@ -1,15 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import CreateRating from './CreateRating';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import DialugueModal from '../../../common/notification/DialugueModal';
 import { apiBasePath, serverEndApiBasePath } from '../../../../utils/constant';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import { toastAction } from '../../../redux/toast-slice';
 
 export default function Rating({ singleAudioData }) {
 
     const router = useRouter();
     const slug = router.query.slug;
+    const dispatch = useDispatch();
     const userUuid = useSelector(state => state.usersession.userUuid);
     const dialogueRef = useRef();
     const editPostRef = useRef();
@@ -17,8 +19,9 @@ export default function Rating({ singleAudioData }) {
     useOutsideAlerter(editPostRef);
     const [userComments, setUserComments] = useState(null);
     const [isNewComment, setIsNewComment] = useState(false);
-    const [editCommentId, setEditCommentId] = useState(null);  
+    const [editCommentId, setEditCommentId] = useState(null);
     const [editedComment, setEditedComment] = useState('');
+    const [deleteCommentId, setDeleteCommentId] = useState(null);
 
 
     useEffect(() => {
@@ -73,18 +76,55 @@ export default function Rating({ singleAudioData }) {
             };
             // await axios.put(`${apiBasePath}/updatecomment/${commentId}`, updatedComment); // Update on server
 
-            // Update comment locally
+            if(editedComment.trim().length === 0){
+                const notification = 'কিছু লিখুন !';
+                dispatch(toastAction.setWarnedNotification(notification));
+                return;
+            }
+
             setUserComments((prevComments) =>
                 prevComments.map((comment) =>
                     comment._id === commentId ? { ...comment, comment: editedComment } : comment
                 )
             );
 
-            setEditCommentId(null); // Exit edit mode
+            const notification = 'আপনার মন্তব্য সম্পাদন করা হয়েছে';
+            dispatch(toastAction.setSucessNotification(notification));
+
+            setEditCommentId(null);
         } catch (error) {
+            const notification = 'আপনার মন্তব্য সম্পাদন করা যায়নি।';
+            dispatch(toastAction.setWarnedNotification(notification));
             console.error('Error updating comment:', error.response ? error.response.data : error.message);
         }
     }
+
+    function deleteCommentHandler(commentId) {
+        setDeleteCommentId(commentId);
+        dialogueRef.current.showModal();
+    }
+
+    async function deleteComment() {
+        try {
+            // await axios.delete(`${apiBasePath}/deletecomment/${deleteCommentId}`);  // API call to delete comment
+
+            setUserComments((prevComments) =>
+                prevComments.filter((comment) => comment._id !== deleteCommentId)
+            );
+
+            const notification = 'আপনার মন্তব্য মুছে ফেলা হয়েছে ।';
+            dispatch(toastAction.setSucessNotification(notification));
+            dialogueRef.current.close();
+
+            setDeleteCommentId(null);  // Reset after deletion
+
+        } catch (error) {
+            const notification = 'আপনার মন্তব্য মুছে ফেলা যায়নি।';
+            dispatch(toastAction.setWarnedNotification(notification));
+            console.error('Error deleting comment:', error.response ? error.response.data : error.message);
+        }
+    }
+
 
     return (
         <div className='audio__tab__content_wrap'>
@@ -92,13 +132,13 @@ export default function Rating({ singleAudioData }) {
                 <h5>শ্রোতাদের মন্তব্য</h5>
                 <hr></hr>
             </div>
-            <CreateRating 
-            setUserComments={setUserComments} 
-            setIsNewComment={setIsNewComment}
+            <CreateRating
+                setUserComments={setUserComments}
+                setIsNewComment={setIsNewComment}
             />
 
             <div className='audio__tab__details my-[40px]'>
-                <DialugueModal ref={dialogueRef} alert='আপনি কি পোস্ট মুছে ফেলতে চান' type='delete' />
+                <DialugueModal ref={dialogueRef} alert='আপনি কি পোস্ট মুছে ফেলতে চান' address={deleteComment} type='delete' />
 
                 {userComments?.map((comment, index) => (
                     <div className='relative' key={index}>
@@ -139,7 +179,7 @@ export default function Rating({ singleAudioData }) {
                                 </li>
                                 <hr />
                                 <li className="block cursor-pointer py-[5px] hover:bg-[#F9A106] hover:text-white">
-                                    <button onClick={() => dialogueRef.current.showModal()} className='w-full text-center'>
+                                    <button onClick={() => deleteCommentHandler(comment._id)} className='w-full text-center'>
                                         মুছে ফেলুন
                                     </button>
                                 </li>
@@ -152,13 +192,13 @@ export default function Rating({ singleAudioData }) {
                                     className='bg-green-500 text-white px-4 py-1 rounded-md mr-2'
                                     onClick={() => saveEditedComment(comment._id)}
                                 >
-                                    Save
+                                    সংরক্ষন
                                 </button>
                                 <button
                                     className='bg-red-500 text-white px-4 py-1 rounded-md'
                                     onClick={() => setEditCommentId(null)}  // Cancel edit
                                 >
-                                    Cancel
+                                    বাতিল 
                                 </button>
                             </div>
                         )}
