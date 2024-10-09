@@ -139,7 +139,7 @@ export default function Rating({ singleAudioData }) {
             />
 
             <div className='audio__tab__details my-[40px]'>
-                <DialugueModal ref={dialogueRef} alert='আপনি কি পোস্ট মুছে ফেলতে চান' address={deleteComment} type='delete' />
+                <DialugueModal ref={dialogueRef} alert='আপনি কি মন্তব্য মুছে ফেলতে চান?' address={deleteComment} type='delete' />
 
                 {userComments?.map((comment, index) => (
                     <div className='relative' key={index}>
