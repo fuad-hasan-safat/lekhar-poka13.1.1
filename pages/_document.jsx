@@ -1,8 +1,6 @@
 import { Html, Head, Main, NextScript } from 'next/document'
-import { useSelector } from 'react-redux'
 
 export default function Document() {
-  const {postTitle, postDiscripption, postImage, postLink} = useSelector(state => state.posts )
 
   return (
     <Html lang="en" >

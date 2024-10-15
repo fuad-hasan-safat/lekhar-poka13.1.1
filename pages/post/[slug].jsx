@@ -97,8 +97,9 @@ export default function PostDetails({ postData }) {
   }
 
   return (
+    isdataFetch &&
     <>
-      {/* <Head>
+      <Head>
         <title>{data?.title}</title>
         <meta property="og:url" content={postLink} />
         <meta property="og:site_name" content="Lekhar Poka" />
@@ -107,7 +108,7 @@ export default function PostDetails({ postData }) {
         <meta property="og:title" content={pageTitle} key="og:title" />
         <meta property="og:description" content={`${description} #lekharpoka`} />
         <meta property="og:image" content={imageLink || '/lekharPokaPreviewImage/lekharpokabanner.jpg'} key="og:image" />
-      </Head> */}
+      </Head>
 
       {poststatus || userUuid === postWonnerUuid ?
         <>
@@ -219,7 +220,7 @@ export async function getServerSideProps(context) {
   const { slug } = context.params;
   let postData;
 
-  try {
+
     const res = await fetch(`${apiBasePath}/getpost/${slug}`, {
       method: 'POST', 
       headers: {
@@ -230,11 +231,6 @@ export async function getServerSideProps(context) {
 
     console.log('single post data', postData);
 
-  } catch (error) {
-    postData = {
-      status: 'failed'
-    }
-  }
 
   return { props: { postData } }
 }
