@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Head from 'next/head';
 import FullPost from '../../components/common/fullContent'
 import RatingComponent from '../../components/common/starRating'
@@ -8,6 +8,7 @@ import ReaderModeModal from "../../components/readerMode/ReaderModeModal";
 import FullPostReaderMode from "../../components/common/fullContentReadermood";
 import { useDispatch, useSelector } from "react-redux";
 import { audioPlayerAction } from "../../components/redux/audioplayer-slice";
+import { postAction } from "../../components/redux/post-slice";
 
 
 
@@ -38,6 +39,7 @@ export default function PostDetails({ postData }) {
   let isdataFetch = postData?.status === "success" ? true : false;
 
   const [rating, setRating] = useState(0);
+
 
   function handlePlayButton(audioList) {
     dispatch(audioPlayerAction.togglePlay({
@@ -71,6 +73,14 @@ export default function PostDetails({ postData }) {
   let imageLink = `https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/') + 1)}`
   console.log({ pageTitle, description, postLink, imageLink })
 
+  useEffect(()=>{
+    dispatch(postAction.setpostData({
+      title: data?.title,
+      description:withoutTagDes,
+      image: imageLink,
+      link: postLink
+    }))
+  },[slug])
   let audioList = [];
 
   if (isAudioAvailable) {
@@ -87,9 +97,8 @@ export default function PostDetails({ postData }) {
   }
 
   return (
-    imageLink &&
     <>
-      <Head>
+      {/* <Head>
         <title>{data?.title}</title>
         <meta property="og:url" content={postLink} />
         <meta property="og:site_name" content="Lekhar Poka" />
@@ -98,7 +107,7 @@ export default function PostDetails({ postData }) {
         <meta property="og:title" content={pageTitle} key="og:title" />
         <meta property="og:description" content={`${description} #lekharpoka`} />
         <meta property="og:image" content={imageLink || '/lekharPokaPreviewImage/lekharpokabanner.jpg'} key="og:image" />
-      </Head>
+      </Head> */}
 
       {poststatus || userUuid === postWonnerUuid ?
         <>

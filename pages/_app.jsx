@@ -23,11 +23,12 @@ import { useContext, useEffect } from 'react';
 import AudioDetailsTabContextProvider from '../components/store/audiodetailstab-context';
 import UserContextProvider, { UserContext } from '../components/lekharpokaStore/user-context';
 
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import store, { persistor } from '../components/redux/store';
 import Toast from '../components/toast/Toast';
 import Script from 'next/script';
+import Head from 'next/head';
 
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -35,6 +36,8 @@ export default function MyApp({ Component, pageProps }) {
   console.log("pathname : ", pathname);
 
   const { setCurrentComponentIndex } = useContext(AdminContext);
+
+  // const {postTitle, postDiscripption, postImage, postLink} = useSelector(state => state.posts )
 
   useRouteChange((url) => {
     console.log('Route changed to:', url);
@@ -99,6 +102,16 @@ export default function MyApp({ Component, pageProps }) {
         src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0&appId=1103079424285739"
         crossOrigin="anonymous"
       />
+      {/* <Head>
+        <meta property="og:url" content={postLink} />
+        <meta property="og:site_name" content="Lekhar Poka" />
+        <meta property="og:locale" content="bn_BD" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={postTitle} key="og:title" />
+        <meta property="og:description" content={`${postDiscripption}  #lekharpoka`} />
+        <meta property="og:image" content= {postImage | '/lekharPokaPreviewImage/lekharpokabanner.jpg'} key="og:image" />
+      </Head> */}
+
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <AdminContextProvider>
@@ -110,6 +123,7 @@ export default function MyApp({ Component, pageProps }) {
                       <GoogleOAuthProvider clientId="854926132475-sm4btto49sresu4g5o9qpuk9lgtqor9f.apps.googleusercontent.com">
                         <>
                           <Toast />
+                        
                           {result}
                           <AudioPlayer />
                         </>
