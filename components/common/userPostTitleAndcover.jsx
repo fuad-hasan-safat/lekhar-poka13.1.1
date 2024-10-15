@@ -22,13 +22,14 @@ export default function UserPostTitleAndcover({
   uploadedBy = '',
   profileName = '',
   updatedAt = '',
+  category = null
 }) {
 
   console.log('single post banner ', title, image)
   const router = useRouter();
 
   const dispatch = useDispatch();
-  const userUuid = useSelector((state)=> state.usersession.userUuid);
+  const userUuid = useSelector((state) => state.usersession.userUuid);
 
   const [isMounted, setIsMounted] = useState(false)
 
@@ -70,7 +71,7 @@ export default function UserPostTitleAndcover({
   }
 
 
-  if(!isMounted) return null;
+  if (!isMounted) return null;
 
   function formatDate(isoString) {
     const date = new Date(isoString);
@@ -119,7 +120,7 @@ export default function UserPostTitleAndcover({
     bannerImage = writerImage;
   }
 
-  
+
 
   if (writer_image === undefined || writer_image === null || writer_image === 'undefined') {
     writerImage = ''
@@ -175,9 +176,12 @@ export default function UserPostTitleAndcover({
                 <img src='/images/usericons/calender.svg' />
               </span>
                 <span className='inline-block leading-1 ml-[14px] lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[11px] text-[#595D5B]'>
-                  {banglaDate}
+                  {banglaDate}  {category && <span className='pb-[3px]'>
+                   , ধরণঃ{category}
+                  </span>}
                 </span></>}
             </Link>
+
           </div>
 
           {isProfile &&

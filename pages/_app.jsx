@@ -94,7 +94,7 @@ export default function MyApp({ Component, pageProps }) {
     // </Layout>
     <>
 
-      <Script async defer
+      <Script
         strategy="lazyOnload"
         src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0&appId=1103079424285739"
         crossOrigin="anonymous"

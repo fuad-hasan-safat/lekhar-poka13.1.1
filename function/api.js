@@ -51,10 +51,26 @@ export function countWords(content = '  ', limit) {
 }
 
 
+export function getKobitaLines(content) {
+  // console.log('in side api function --->><><><><><><<<<>>>><<<<>>> ---- content', content)
+
+  // Match <p>...</p> and <br> tags, preserving the closing tags
+  // const lines = content.match(/<p[\s\S]*?<\/p>|<br\s*\/?>/gi);
+
+  const logLines = content?.split('<br>');
+  console.log({ logLines })
+
+  // Filter out empty lines and return the first 5 lines including closing tags
+  const firstFiveLines = logLines.slice(0, 5);
+
+  return firstFiveLines;
+}
+
+
 
 
 export function replaceUnderscoresWithSpaces(str) {
-  if(!str) return;
+  if (!str) return;
   str = str?.replace(/_/g, ' ');
 
   const dotIndex = str?.indexOf('.');
@@ -68,7 +84,7 @@ export function replaceUnderscoresWithSpaces(str) {
 
 
 export function generateUUID() {
-  return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+  return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
     (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
   );
 }

@@ -10,6 +10,7 @@ const SinglePostConponent = ({
   writer_image,
   profileName,
   content,
+  category,
   image,
   postStatus,
   uploadedBy,
@@ -37,6 +38,7 @@ const SinglePostConponent = ({
         profileName={profileName}
         updatedAt={updatedAt}
         isProfile={isProfile}
+        category={category}
       />
 
       <div className=" pt-[20px] pb-[15px]">

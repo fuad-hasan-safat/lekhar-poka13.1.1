@@ -155,6 +155,7 @@ export default function ProcchodLeftContent() {
                           profileName={post?.profile_name}
                           uploadedBy={post.uploaded_by}
                           updatedAt={post?.updatedAt}
+                          category={post.category}
                           content={post.category === 'কবিতা' ? countWords(post.content, 20) : countWords(post.content, 50)}
                         />
                       </div>

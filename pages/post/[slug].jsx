@@ -87,6 +87,7 @@ export default function PostDetails({ postData }) {
   }
 
   return (
+    imageLink &&
     <>
       <Head>
         <title>{data?.title}</title>
@@ -210,7 +211,7 @@ export async function getServerSideProps(context) {
   let postData;
 
   try {
-    const res = await fetch(`${serverEndApiBasePath}/getpost/${slug}`, {
+    const res = await fetch(`${apiBasePath}/getpost/${slug}`, {
       method: 'POST', 
       headers: {
         'Content-Type': 'application/json', 
