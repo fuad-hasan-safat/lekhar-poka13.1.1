@@ -18,36 +18,46 @@ const isSpace = (char) => /\s/.test(char);
 
 
 
-export function countWords(content = '  ', limit) {
-  // console.log('in side api function --->><><><><><><<<<>>>><<<<>>> ---- content', content)
-  let currentWord = 0;
-  let inTag = false;
-  let substring = "";
+export function countWords(content = '  ', limit, category = 'others') {
+  console.log('in side api function --->><><><><><><<<<>>>><<<<>>> ---- content', content)
+  if (category === 'কবিতা') {
+    const cleanedString = content.replace(/&nbsp;/g, '');
+    const logLines = cleanedString?.split(/<\/p>|<br>/);
 
-  for (const char of content) {
-    if (isSpace(char) && !inTag) {
-      currentWord++;
-    } else if (char === '<') {
-      inTag = true;
-    } else if (char === '>') {
-      inTag = false;
+    return logLines?.slice(0, limit).filter(Boolean).join('<br>')
+
+  } else {
+    let cleanedString = content.replace(/&nbsp;/g, '');
+    let currentWord = 0;
+    let inTag = false;
+    let substring = "";
+
+    for (const char of cleanedString) {
+      if (isSpace(char) && !inTag) {
+        currentWord++;
+      } else if (char === '<') {
+        inTag = true;
+      } else if (char === '>') {
+        inTag = false;
+      }
+
+      if (currentWord <= limit) {
+        substring += char;
+
+      }
+
+      if (currentWord === limit) {
+        // Handle substring or other logic
+        break;
+      }
     }
 
-    if (currentWord <= limit) {
-      substring += char;
+    console.log('SUUUBB STRING-->', substring)
+    // Use the loop variable 'wordCount' directly
 
-    }
-
-    if (currentWord === limit) {
-      // Handle substring or other logic
-      break;
-    }
+    return substring; // Consider character length for non-BMP characters
   }
 
-
-  // Use the loop variable 'wordCount' directly
-
-  return substring; // Consider character length for non-BMP characters
 }
 
 
