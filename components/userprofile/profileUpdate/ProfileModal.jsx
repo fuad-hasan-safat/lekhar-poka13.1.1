@@ -16,6 +16,14 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
     const { setUser } = useContext(UserContext);
     const userUuid = useSelector((state) => state.usersession.userUuid);
 
+    const [loggedInUserId, setLoggedInUserId] = useState(null)
+
+    useEffect(()=>{
+      const loggedInUser = localStorage.getItem('userId') || null ;
+      console.log('logged in user in profile -->', loggedInUser)
+      setLoggedInUserId(loggedInUser);
+    },[])
+
     let notification = ''
 
     const [gender, setGender] = useState('');
@@ -42,7 +50,7 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
     // Fetch user data on component mount
     useEffect(() => {
         //  ge tprofile data-----
-        fetch(`${apiBasePath}/getprofile/${userUuid}`)
+        fetch(`${apiBasePath}/getprofile/${loggedInUserId}`)
             .then((response) => response.json())
             .then((data) => {
 
@@ -79,7 +87,7 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
 
 
         const fetchUserBioData = async () => {
-            const response = await fetch(`${apiBasePath}/bio/${userUuid}`);
+            const response = await fetch(`${apiBasePath}/bio/${loggedInUserId}`);
             const data = await response.json();
             setBio(data?.content)
             setBioId(data?._id)
@@ -95,7 +103,7 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
                 setDesignationFromApi(data);
             })
             .catch((error) => console.error("Error fetching data:", error));
-    }, [showModal]);
+    }, [showModal, loggedInUserId]);
 
 
 
@@ -176,7 +184,7 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
             const response = await axios.post(
                 `${apiBasePath}/bio`,
                 {
-                    user_id: `${userUuid}`,
+                    user_id: `${loggedInUserId}`,
                     content: bio,
                 },
                 {
@@ -257,7 +265,7 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
             formData.append('address', address);
             formData.append('email', email);
             formData.append('phone', phoneNumber);
-            formData.append('user_id', userUuid);
+            formData.append('user_id', loggedInUserId);
             try {
                 const response = await fetch(`${apiBasePath}/profile`, {
                     method: 'PUT',

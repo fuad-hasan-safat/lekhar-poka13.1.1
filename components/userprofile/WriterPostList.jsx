@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import MainContentDivider from "../common/mainContentDivider";
 import Loading from "../common/loading";
 import SinglePostConponent from "../common/singlePostComponent";
+import { countWords } from "../../function/api";
 
 export default function WriterPostList({ profileInfo, postList, isLoading }) {
   //   const [selectedId, setSelectedId] = useState("sob");
@@ -46,7 +47,7 @@ export default function WriterPostList({ profileInfo, postList, isLoading }) {
                         writer={profileInfo?.name}
                         writer_id={post.writer_id}
                         image={post?.image}
-                        content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 20).join(" ")}` : `${post.content.split(/\s+/).slice(0, 40).join(" ")}`} // Truncate content
+                        content={post.category === 'কবিতা' ? countWords(post.content, 8, 'কবিতা') : countWords(post.content, 50)}
                         category={post.category}
                         postStatus={post.status}
                         uploadedBy={post?.uploader_name}

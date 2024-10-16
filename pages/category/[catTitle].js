@@ -18,7 +18,8 @@ export default function CatagoryPostPage() {
     {/* lg:pt-[95px] sm:pt-[90px] xm:pt-[85] */}
 
       <div className="">
-        <PostPage/>
+        <PostPage  catTitle={catTitle} />
+
       </div>
       </div>
     </>

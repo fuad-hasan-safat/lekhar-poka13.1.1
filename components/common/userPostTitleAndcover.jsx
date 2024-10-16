@@ -30,6 +30,13 @@ export default function UserPostTitleAndcover({
 
   const dispatch = useDispatch();
   const userUuid = useSelector((state) => state.usersession.userUuid);
+  const [loggedInUserId, setLoggedInUserId] = useState(null)
+
+  useEffect(()=>{
+    const loggedInUser = localStorage.getItem('userId') || null ;
+    console.log('logged in user in profile -->', loggedInUser)
+    setLoggedInUserId(loggedInUser);
+  },[])
 
   const [isMounted, setIsMounted] = useState(false)
 
@@ -142,7 +149,7 @@ export default function UserPostTitleAndcover({
 
   let writerClickLink = `/postswriter/${writer_id}`;
 
-  if (userUuid === uploadedBy) {
+  if (loggedInUserId === uploadedBy) {
     writerClickLink = `/user/${uploadedBy}`;
   }
 
@@ -177,7 +184,7 @@ export default function UserPostTitleAndcover({
               </span>
                 <span className='inline-block leading-1 ml-[14px] lg:text-[16px] md:text-[15px] sm:text-[14px] xs:text-[11px] text-[#595D5B]'>
                   {banglaDate}  {category && <span className='pb-[3px]'>
-                   , ধরণঃ{category}
+                   , ধরণ : {category}
                   </span>}
                 </span></>}
             </Link>

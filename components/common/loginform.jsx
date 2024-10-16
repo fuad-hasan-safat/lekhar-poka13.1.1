@@ -12,7 +12,7 @@ import { userSessionAction } from "../redux/usersession-slice";
 import { toastAction } from "../redux/toast-slice";
 
 
-export default function LoginForm({ logreg, btntext}) {
+export default function LoginForm({ logreg, btntext }) {
 
   const dispatch = useDispatch();
 
@@ -66,7 +66,7 @@ export default function LoginForm({ logreg, btntext}) {
 
   function reloadPage(url) {
     setTimeout(() => {
-        router.push(url);
+      router.push(url);
     }, 1000)
   }
 
@@ -98,6 +98,11 @@ export default function LoginForm({ logreg, btntext}) {
       if (response.data.status === 'success') {
 
         const data = await response.data;
+
+        // Save user data to local storage
+        localStorage.setItem('userId', data?.uuid);        // Save userId
+        localStorage.setItem('userToken', data?.access_token); // Save userToken
+        localStorage.setItem('userType', data?.usertype);   // Save userType
 
         dispatch(userSessionAction.addValidUser({
           isLoggedIn: true,

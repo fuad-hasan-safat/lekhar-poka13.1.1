@@ -17,7 +17,14 @@ export default function EditPost() {
   const router = useRouter();
   const slug = router.query.postId;
   const dispatch = useDispatch();
-  const userUuid = useSelector((state) => state.usersession.userUuid);
+  // const userUuid = useSelector((state) => state.usersession.userUuid);
+  const [loggedInUserId, setLoggedInUserId] = useState(null)
+
+  useEffect(() => {
+      const loggedInUser = localStorage.getItem('userId') || null;
+      console.log('logged in user in profile -->', loggedInUser)
+      setLoggedInUserId(loggedInUser);
+  }, [])
   let notification = ''
 
   const [fetchedPost, setFeathedPost] = useState([]);
@@ -216,7 +223,7 @@ export default function EditPost() {
         notification = 'আপনার লেখাটির আপডেট সম্পন্ন হয়েছে, অনুমোদনের জন্য এডমিনের নিকট পাঠানো হয়েছে';
         dispatch(toastAction.setWarnedNotification(notification));
         console.log('edit response', response);
-        router.push(`/user/${userUuid}`)
+        router.push(`/user/${loggedInUserId}`)
 
         // Handle successful update
       } catch (error) {

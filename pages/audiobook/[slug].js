@@ -5,16 +5,18 @@ import { apiBasePath, serverEndApiBasePath } from '../../utils/constant';
 import LoginPage from '../../components/login/login';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import Loading from '../../components/common/loading';
 
 export async function getServerSideProps(context) {
     const { slug } = context.params;
     try {
 
-        const res = await fetch(`${serverEndApiBasePath}/getaudiobook/${slug}`);
+        const res = await fetch(`${apiBasePath}/getaudiobook/${slug}`);
         const singleAudioData = await res.json()
 
         console.log({ singleAudioData })
-        const postRes = await fetch(`${serverEndApiBasePath}/updateview/${slug}`, {
+        const postRes = await fetch(`${apiBasePath}/updateview/${slug}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -44,7 +46,16 @@ export default function Home({ singleAudioData }) {
     const router = useRouter();
     const currentUrl = router.asPath;
     console.log('current url', currentUrl);
-    const userUuid = useSelector(state => state.usersession.userUuid);
+    // const userUuid = useSelector(state => state.usersession.userUuid);
+
+    const [loggedInUserId, setLoggedInUserId] = useState(null)
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(()=>{
+      const loggedInUser = localStorage.getItem('userId') || null ;
+      console.log('logged in user in profile -->', loggedInUser)
+      setLoggedInUserId(loggedInUser);
+    },[])
 
     console.log(singleAudioData.audio)
 
@@ -59,9 +70,18 @@ export default function Home({ singleAudioData }) {
     };
 
 
+    useEffect(()=>{
+        if(loggedInUserId?.length > 0){
+            setIsLoading(false)
+        }
+    },[loggedInUserId])
+
+    if(isLoading){
+        return <Loading/>
+    }
 
     return (
-        <>{userUuid ?
+        <>{loggedInUserId ?
             <div>
                 <Head>
                     <title>{singleAudioData?.title}</title>

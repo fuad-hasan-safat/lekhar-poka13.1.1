@@ -2,7 +2,7 @@ import Star from "./Star";
 import Image from "next/image";
 import Link from "next/link";
 import { apiBasePath } from "../../utils/constant";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const LekhaPokaProfile = ({
@@ -15,7 +15,14 @@ const LekhaPokaProfile = ({
   uploaded_by,
 }) => {
 
-  const userUuid = useSelector((state) => state.usersession.userUuid);
+  // const userUuid = useSelector((state) => state.usersession.userUuid);
+  const [loggedInUserId, setLoggedInUserId] = useState(null)
+
+  useEffect(()=>{
+    const loggedInUser = localStorage.getItem('userId') || null ;
+    console.log('logged in user in profile -->', loggedInUser)
+    setLoggedInUserId(loggedInUser);
+  },[])
   const [isMounted, setIsMounted] = useState(false);
 
   useState(() => {
@@ -26,8 +33,8 @@ const LekhaPokaProfile = ({
   if (!isMounted) return null;
 
   let redurectUrl = `/postswriter/${writer_id}`;
-  if (userUuid) {
-    if (userUuid === uploaded_by)
+  if (loggedInUserId) {
+    if (loggedInUserId === uploaded_by)
       redurectUrl = `/user/${uploaded_by}`;
   }
 

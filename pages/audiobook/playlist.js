@@ -1,11 +1,15 @@
 'use client'
 import Head from 'next/head';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import AudioDetailsSideBar from '../../components/AudioBook/components/audioSidebar/AudioDetailsSidebar';
 import SeeMoreListPlayList from '../../components/AudioBook/components/SeeMoreList/seeMorePlayList';
 import LoginPage from '../../components/login/login';
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import Loading from '../../components/common/loading';
+import { apiBasePath } from '../../utils/constant';
+import { playlistAction } from '../../components/redux/playlist-slice';
+import { fetchDataWithAxios } from '../../utils/apiService';
 
 
 const PlaylistSeeAll = () => {
@@ -13,17 +17,75 @@ const PlaylistSeeAll = () => {
     const router = useRouter();
     const currentUrl = router.asPath;
 
-    const userUuid = useSelector((state) => state.usersession.userUuid);
-    const type = useSelector((state) => state.playlist.playListScope)
-    const myPlaylist = useSelector((state) => state.playlist.myPlaylist);
-    const lattestPlaylist = useSelector((state) => state.playlist.lattestPlaylist);
+    const playListScope = useSelector((state) => state.playlist.playListScope);
+    const dispatch = useDispatch();
+    const [loggedInUserId, setLoggedInUserId] = useState(null)
+    const [type, setType] = useState('');
+    const [playlist, setPlaylist] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
-    const scope = type === 'latestPlayList'? 'সর্বশেষ প্লেলিস্ট' : 'আমার প্লেলিস্ট';
-    const playlist = type === 'latestPlayList'? lattestPlaylist: myPlaylist;
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem('userId') || null;
+
+        const scope = localStorage.getItem('type')
+        console.log('logged in user in profile -->', loggedInUser, scope)
+        setLoggedInUserId(loggedInUser);
+        setType(scope)
+
+
+
+        const myPlayListUrl = `${apiBasePath}/showplaylist/${loggedInUser}`;
+        const latestPlayListUrl = `${apiBasePath}/showlatestplaylist/${loggedInUser}`;
+
+        const apiUrl = scope === 'latestPlayList' ?  latestPlayListUrl : myPlayListUrl;
+        getData(apiUrl, scope)
+    }, [type, playListScope])
+
+
+
+
+    const getData = async (url, scope) => {
+       
+        try {
+            const myplayList = await fetchDataWithAxios(url);
+            console.log('my play list', myplayList)
+            const playList = myplayList?.object?.filter((obj) => obj.title !== 'Not Found');
+            setPlaylist(playList)
+
+            if(scope === 'latestPlayList'){
+            // dispatch(playlistAction.addLatestPlaylist(playList));
+
+            }else{
+                // dispatch(playlistAction.addMyPlaylist(playList));
+
+            }
+
+        } catch (error) {
+            console.log('playlist api call error', error)
+        }
+
+    
+
+
+    };
+
+    useEffect(() => {
+        if (loggedInUserId?.length > 0) {
+            setIsLoading(false)
+        }
+    }, [loggedInUserId])
+
+    if (isLoading) {
+        return <Loading />
+    }
+
+
+   
+ const scope = type === 'latestPlayList' ? 'সর্বশেষ প্লেলিস্ট' :  'আমার প্লেলিস্ট' ;
 
 
     return (
-        <>{ userUuid?
+        <>{loggedInUserId ?
             <>
                 <Head>
                     <title>প্লেলিস্ট</title>

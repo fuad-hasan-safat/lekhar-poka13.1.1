@@ -26,6 +26,8 @@ export default function UpdatedNavBar() {
     const [postList, setPostList] = useState(null);
     const [search, setSearch] = useState("");
     const [searchData, setSearchData] = useState([]);
+    const [loogedInuserId,  setLoggedInuserId] = useState(null);
+
 
     // ------
     const dialogueRef = useRef()
@@ -67,9 +69,12 @@ export default function UpdatedNavBar() {
 
     useEffect(() => {
 
+        const loggingUserId =  localStorage.getItem("userId") || null;
+        console.log('Logged in user id-->', loggingUserId)
+        setLoggedInuserId(loggingUserId)
         const fetchUserPhoto = async () => {
             try {
-                const response = await fetch(`${apiBasePath}/getprofilepic/${userUuid}`);
+                const response = await fetch(`${apiBasePath}/getprofilepic/${loggingUserId}`);
                 const data = await response.json();
                 console.log('user image in navbar --', data.image)
                 if(data.image){
@@ -83,12 +88,12 @@ export default function UpdatedNavBar() {
                 // alert("Error Fetching data");
             }
         };
-        if (userUuid) {
+        if (loggingUserId) {
             fetchUserPhoto();
 
         }
 
-    }, [userUuid])
+    }, [loogedInuserId, userUuid])
 
 
     useEffect(() => {
@@ -372,7 +377,7 @@ export default function UpdatedNavBar() {
                                             </li>
 
                                             {
-                                                userUuid ?
+                                                loogedInuserId ?
                                                     <li
                                                         className='relative cursor-pointer -mt-[5px]'
                                                         onClick={() => {toggleVisibility(2);}}>
@@ -396,7 +401,7 @@ export default function UpdatedNavBar() {
                                                                     onClick={() => closeMenu()}
 
                                                                 >
-                                                                    <Link onClick={()=> setSelectedNav('profile')} className='block' href={`/user/${userUuid}`}>প্রোফাইল</Link>
+                                                                    <Link onClick={()=> setSelectedNav('profile')} className='block' href={`/user/${loogedInuserId}`}>প্রোফাইল</Link>
                                                                 </li>
                                                                 <hr className='lg:block md:hidden sm:hidden xs:hidden' />
 

@@ -18,7 +18,15 @@ export default function WriterProfileBanner({
     const router = useRouter()
     const slug = router.query.slug;
     const dispatch = useDispatch();
-    const userUuid = useSelector((state) => state.usersession.userUuid);
+    // const userUuid = useSelector((state) => state.usersession.userUuid);
+
+    const [loggedInUserId, setLoggedInUserId] = useState(null)
+
+    useEffect(()=>{
+      const loggedInUser = localStorage.getItem('userId') || null ;
+      console.log('logged in user in profile -->', loggedInUser)
+      setLoggedInUserId(loggedInUser);
+    },[])
 
     let notification = ''
     const [isAlreadyFollowing, setIsAlreadyFollowing] = useState(false)
@@ -43,7 +51,7 @@ export default function WriterProfileBanner({
 
             fetchUserBioData();
 
-            getFollowingStatus(profileInfo?.user_id, userUuid)
+            getFollowingStatus(profileInfo?.user_id,  localStorage.getItem('userId'))
 
 
             // 
@@ -71,6 +79,8 @@ export default function WriterProfileBanner({
     }, []);
 
     async function getFollowingStatus(user_id, following) {
+        console.log({user_id,  following})
+
         try {
             const followingResponse = await axios.post(
                 `${apiBasePath}/followstatus`,
@@ -120,7 +130,7 @@ export default function WriterProfileBanner({
 
 
     async function followUserhandler(user_id, following) {
-        if (!userUuid) {
+        if (!loggedInUserId) {
             notification = 'অনুসরণ করতে লগইন করুন';
             dispatch(toastAction.setWarnedNotification(notification));
             return;
@@ -201,7 +211,7 @@ export default function WriterProfileBanner({
                     <button
                         disabled={isAlreadyFollowing}
                         className='page__common__yello__btn w-full py-[13px] bg-[#F9A106] px-[75px] p-1 rounded-md text-white text-[16px]'
-                        onClick={() => followUserhandler(profileInfo?.user_id, userUuid)}
+                        onClick={() => followUserhandler(profileInfo?.user_id, loggedInUserId)}
                     >
                         <span><i class="ri-add-box-fill"></i></span> <span> {isAlreadyFollowing ? 'অনুসরণ করছেন' : 'অনুসরণ করুন'}</span>
                     </button>

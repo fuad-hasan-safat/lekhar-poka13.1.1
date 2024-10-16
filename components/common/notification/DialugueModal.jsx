@@ -15,6 +15,11 @@ const DialugueModal = forwardRef(function DialugueModal({ alert, address, type }
 
     const router = useRouter();
     function logout() {
+
+        localStorage.removeItem('userId');
+        localStorage.removeItem('userToken');
+        localStorage.removeItem('userType');
+        
         dispatch(playlistAction.removePlayList());
         dispatch(userPostAction.removePost());
         dispatch(audioPlayerAction.resetAudioPlayer());

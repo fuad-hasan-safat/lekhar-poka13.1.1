@@ -10,7 +10,14 @@ import { toastAction } from '../redux/toast-slice'
 export default function RatingComponent({ post_id, setRating, rating, notification }) {
 
   const dispatch = useDispatch();
-  const userUuid = useSelector((state) => state.usersession.userUuid);
+  // const userUuid = useSelector((state) => state.usersession.userUuid);
+  const [loggedInUserId, setLoggedInUserId] = useState(null)
+
+  useEffect(() => {
+      const loggedInUser = localStorage.getItem('userId') || null;
+      console.log('logged in user in profile -->', loggedInUser)
+      setLoggedInUserId(loggedInUser);
+  }, [])
   const isLoogedIn = useSelector((state) => state.usersession.isLoggedIn);
 
   const [isMounted, setIsMounted] = useState(false);
@@ -22,7 +29,7 @@ export default function RatingComponent({ post_id, setRating, rating, notificati
       try {
         const res = await axios.post(`${apiBasePath}/getpost/${post_id}`, {
           'logged_in': isLoogedIn,
-          'user_id': userUuid,
+          'user_id': loggedInUserId,
         });
         setRating(res.data.object.rating)
         setUserrating(res.data.object.rating)
@@ -32,11 +39,11 @@ export default function RatingComponent({ post_id, setRating, rating, notificati
       }
     }
 
-    if (userUuid) {
+    if (loggedInUserId) {
       getPostData();
     }
     setIsMounted(true)
-  }, []);
+  }, [loggedInUserId]);
 
 
 
@@ -52,7 +59,7 @@ export default function RatingComponent({ post_id, setRating, rating, notificati
       return;
     }
 
-    if (userUuid) {
+    if (loggedInUserId) {
 
       if(rating <= 0){
       notification = 'দয়া করে সঠিক রেটিং দিন!';
@@ -62,7 +69,7 @@ export default function RatingComponent({ post_id, setRating, rating, notificati
       }
 
       const data = {
-        user_id: userUuid,
+        user_id: loggedInUserId,
         rating: rating,
       }
 

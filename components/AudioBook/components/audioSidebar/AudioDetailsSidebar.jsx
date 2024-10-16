@@ -12,8 +12,16 @@ import Loading from '../../../common/loading';
 
 export default function AudioDetailsSideBar() {
 
+    const [loggedInUserId, setLoggedInUserId] = useState(null)
+
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem('userId') || null;
+        console.log('logged in user in profile -->', loggedInUser)
+        setLoggedInUserId(loggedInUser);
+    }, [])
+
     const dispatch = useDispatch();
-    const userUuid = useSelector(state => state.usersession.userUuid);
+    // const userUuid = useSelector(state => state.usersession.userUuid);
     const myPlaylist = useSelector((state) => state.playlist.myPlaylist);
     const lattestPlaylist = useSelector((state) => state.playlist.lattestPlaylist);
     const isPlayListChanged = useSelector((state) => state.playlist.isPlayListChanged);
@@ -21,12 +29,12 @@ export default function AudioDetailsSideBar() {
 
     useEffect(() => {
         getData();
-    }, [isPlayListChanged])
+    }, [isPlayListChanged, loggedInUserId])
 
 
     const getData = async () => {
-        const myPlayListUrl = `${apiBasePath}/showplaylist/${userUuid}`;
-        const latestPlayListUrl = `${apiBasePath}/showlatestplaylist/${userUuid}`;
+        const myPlayListUrl = `${apiBasePath}/showplaylist/${loggedInUserId}`;
+        const latestPlayListUrl = `${apiBasePath}/showlatestplaylist/${loggedInUserId}`;
         console.log({ myPlayListUrl, latestPlayListUrl })
 
 
@@ -43,11 +51,11 @@ export default function AudioDetailsSideBar() {
         try {
             const latestPlayList = await fetchDataWithAxios(latestPlayListUrl);
             console.log('latest playlist get response', latestPlayList);
-            if (lattestPlaylist?.length <= 0) {
-                const playList = latestPlayList?.object?.filter((obj) => obj.title !== 'Not Found');
 
-                dispatch(playlistAction.addLatestPlaylist(playList));
-            }
+            const playList = latestPlayList?.object?.filter((obj) => obj.title !== 'Not Found');
+
+            dispatch(playlistAction.addLatestPlaylist(playList));
+
 
         } catch (error) {
             console.log('playlist api call error', error)
@@ -57,6 +65,7 @@ export default function AudioDetailsSideBar() {
     };
 
     function setPlayListRenderScope(scope) {
+        localStorage.setItem('type', scope)
         dispatch(playlistAction.setPlayListScope(scope))
     }
 
@@ -64,7 +73,7 @@ export default function AudioDetailsSideBar() {
         <>
             <div className="flex flex-col pr-[]">
 
-                {!userUuid && <div className="sidebar__iteam__wrap">
+                {!loggedInUserId && <div className="sidebar__iteam__wrap">
                     <Login />
                 </div>}
                 {lattestPlaylist?.length > 0 && <div className='sidebar__iteam__wrap mt-[16px]'>

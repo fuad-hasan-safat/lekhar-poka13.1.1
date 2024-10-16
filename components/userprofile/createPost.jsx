@@ -4,7 +4,7 @@ import { apiBasePath } from '../../utils/constant';
 import { useRouter } from 'next/router';
 import { FileUploader } from "react-drag-drop-files";
 import dynamic from 'next/dynamic';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { userPostAction } from '../redux/userpost-slice';
 import { generateUUID } from '../../function/api';
 import { toastAction } from '../redux/toast-slice';
@@ -24,7 +24,14 @@ export default function CreatePost() {
 
     const dispatch = useDispatch();
 
-    const useruuid = useSelector((state) => state.usersession.userUuid);
+    // const useruuid = useSelector((state) => state.usersession.userUuid);
+    const [loggedInUserId, setLoggedInUserId] = useState(null)
+
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem('userId') || null;
+        console.log('logged in user in create post -->', loggedInUser)
+        setLoggedInUserId(loggedInUser);
+    }, [])
 
     const router = useRouter()
 
@@ -37,7 +44,6 @@ export default function CreatePost() {
     const [writerId, setWriterId] = useState(null);
     const [title, setTitle] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const [status, setStatus] = useState("");
     const [category, setCategory] = useState([]);
     const [writers, setWriters] = useState([]);
     const [isWriterAdded, setIsWriterAdded] = useState(false)
@@ -48,17 +54,15 @@ export default function CreatePost() {
     const [preview, setPreview] = useState('');
     const [summary, setSummary] = useState('')
 
-    useEffect(() => {
-        setStatus(localStorage.getItem("status") || "");
-    }, [status]);
+
 
 
     useEffect(() => {
-        fetch(`${apiBasePath}/getprofile/${useruuid}`)
+        fetch(`${apiBasePath}/getprofile/${loggedInUserId}`)
             .then((response) => response.json())
             .then((data) => {
-
-                if (!data.object.profile_completion_status) {
+                console.log('profile status--> ', data?.object?.profile_completion_status)
+                if (!data?.object?.profile_completion_status) {
                     setCanPostStatus(false)
                 } else {
                     setCanPostStatus(true)
@@ -87,7 +91,7 @@ export default function CreatePost() {
         setIsCategoryAdded(false)
         setIsWriterAdded(false)
         setIsProfileUpdated(false)
-    }, [isWriterAdded, isCategoryAdded])
+    }, [isWriterAdded, isCategoryAdded, loggedInUserId])
 
 
 
@@ -136,7 +140,7 @@ export default function CreatePost() {
         if (!canPostStatus) {
             const confirmLogout = window.confirm('দয়া করে প্রোফাইল তৈরি করুন');
             if (confirmLogout) {
-                router.push(`/user/${useruuid}`)
+                router.push(`/user/${loggedInUserId}`)
             }
 
         }
@@ -171,7 +175,7 @@ export default function CreatePost() {
                 formData.append("content", content);
                 formData.append("rating", 1);
                 formData.append("status", false);
-                formData.append("uploaded_by", useruuid);
+                formData.append("uploaded_by", loggedInUserId);
                 formData.append("new_writer", isWriter);
 
                 if (title && selectedOption && summary) {
@@ -199,7 +203,7 @@ export default function CreatePost() {
                             setSummary('');
 
                             dispatch(userPostAction.postCreatedAt(generateUUID()))
-                            router.push(`/user/${useruuid}`)
+                            router.push(`/user/${loggedInUserId}`)
 
                         } else {
                             console.error("Failed to update writing:", response.statusText);

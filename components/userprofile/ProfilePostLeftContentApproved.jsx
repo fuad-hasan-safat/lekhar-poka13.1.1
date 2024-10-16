@@ -8,11 +8,12 @@ import SinglePostConponent from "../common/singlePostComponent";
 import { UserContext } from "../lekharpokaStore/user-context";
 import { userPostAction } from "../redux/userpost-slice";
 import { useDispatch, useSelector } from "react-redux";
+import { countWords } from "../../function/api";
 
 export default function ProfilePostLeftContentApproved() {
   const dispatch = useDispatch();
   const approvedItems = useSelector((state) => state.userpost.approvedItems);
-  const userUuid = useSelector((state) => state.usersession.userUuid);
+  // const userUuid = useSelector((state) => state.usersession.userUuid);
 
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -20,25 +21,25 @@ export default function ProfilePostLeftContentApproved() {
   const postsPerPage = 5; // Number of posts to display per page
 
   const { userImage } = useContext(UserContext);
+  const [loggedInUserId, setLoggedInUserId] = useState(null)
 
   useEffect(() => {
-    const username = localStorage.getItem("name") || "";
-    const userToken = localStorage.getItem("token") || "";
-    const slug = localStorage.getItem("uuid") || "";
+    const loggedInUser = localStorage.getItem('userId') || null ;
+    console.log('Logged in user in approved page --', loggedInUser)
+    setLoggedInUserId(loggedInUser);
 
-    console.log({ username, slug, userToken });
 
     const fetchPosts = async () => {
       try {
-        if(userUuid){
-          const response = await axios.get(`${apiBasePath}/postsbyuser/${userUuid}`);
+        if(loggedInUser){
+          const response = await axios.get(`${apiBasePath}/postsbyuser/${loggedInUser}`);
           const data = response.data;
           console.log('APPROVED POST----->>', response);
+          setIsLoading(false);
   
           // Dispatch to Redux store
           dispatch(userPostAction.addApiPostsToApproved(data.object));
   
-          setIsLoading(false);
 
         }
      
@@ -49,7 +50,7 @@ export default function ProfilePostLeftContentApproved() {
     };
 
     fetchPosts();
-  }, [dispatch, userImage]);
+  }, [dispatch, userImage, loggedInUserId]);
 
   useEffect(() => {
     console.log('Approved Items:', approvedItems); // Debugging: Check the contents of approvedItems
@@ -93,11 +94,7 @@ export default function ProfilePostLeftContentApproved() {
                         writer={post.profile_name}
                         writer_id={post.writer_id}
                         image={bannerImage}
-                        content={
-                          post.category === 'কবিতা'
-                            ? `${post.content.split(/\s+/).slice(0, 20).join(" ")}`
-                            : `${post.content.split(/\s+/).slice(0, 30).join(" ")}`
-                        }
+                        content={post.category === 'কবিতা' ? countWords(post.content, 8, 'কবিতা') : countWords(post.content, 50)}
                         category={post.category}
                         postStatus={post.status}
                         uploadedBy={post?.uploaded_by}

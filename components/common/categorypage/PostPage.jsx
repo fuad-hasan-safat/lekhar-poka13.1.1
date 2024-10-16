@@ -4,8 +4,8 @@ import Sidebar from "../../sidebar/Sidebar";
 import { useSelector } from "react-redux";
 
 
-export default function PostPage() {
-    const catTitle = useSelector(state => state.category.selectedNavbarCategory);
+export default function PostPage({catTitle}) {
+    // const catTitle = useSelector(state => state.category.selectedNavbarCategory);
 
     return (
         <>
@@ -24,7 +24,7 @@ export default function PostPage() {
                     <div className="all__post__content flex flex-row">
 
                         <div className="lg:w-[70%]">
-                            <PostPageLeftContent />
+                            <PostPageLeftContent catTitle={catTitle} />
                         </div>
 
                         <div className="lg:w-[30%]">

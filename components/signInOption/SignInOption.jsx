@@ -81,7 +81,10 @@ export default function SignInOption({
                     isLoggedIn: true,
                     isloggedOut: false,
                 };
-
+                // Save user data to local storage
+                localStorage.setItem('userId', data?.uuid);        // Save userId
+                localStorage.setItem('userToken', data?.access_token); // Save userToken
+                localStorage.setItem('userType', data?.usertype);   // Save userType
                 setUser(user);
                 triggerLogin();
             }
@@ -103,9 +106,9 @@ export default function SignInOption({
                     })
                     .then((res) => {
                         console.log('Google details response', res);
-                         sendDataToBackend(res.data.id, res.data.email, res.data.name, res.data.picture, google_accessToken)
+                        sendDataToBackend(res.data.id, res.data.email, res.data.name, res.data.picture, google_accessToken)
 
-                         router.push('/')
+                        router.push('/')
                     })
                     .catch((err) => console.log(err));
             }

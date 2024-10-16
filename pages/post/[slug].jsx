@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, {useState } from "react";
+import React, { useEffect, useState } from "react";
 import Head from 'next/head';
 import FullPost from '../../components/common/fullContent'
 import RatingComponent from '../../components/common/starRating'
@@ -8,23 +8,35 @@ import ReaderModeModal from "../../components/readerMode/ReaderModeModal";
 import FullPostReaderMode from "../../components/common/fullContentReadermood";
 import { useDispatch, useSelector } from "react-redux";
 import { audioPlayerAction } from "../../components/redux/audioplayer-slice";
+import Loading from "../../components/common/loading";
 
 
 
 
-export default function PostDetails({ postData }) {
+export default function PostDetails({ postData = null}) {
   const router = useRouter();
   const slug = router.query.slug;
   const { asPath } = router;
 
   console.log({ postData })
 
+  if (!postData) {
+    return <Loading />
+  }
+
   const dispatch = useDispatch();
   const isAudioPlaying = useSelector(state => state.audioplayer.isAudioPlaying);
   const currentAudioScope = useSelector(state => state.audioplayer.currentAudioScope);
   const currentSongId = useSelector(state => state.audioplayer.currentSongId);
 
-  const userUuid = useSelector(state => state.usersession.userUuid)
+  // const userUuid = useSelector(state => state.usersession.userUuid)
+  const [loggedInUserId, setLoggedInUserId] = useState(null)
+
+  useEffect(()=>{
+    const loggedInUser = localStorage.getItem('userId') || null ;
+    console.log('logged in user in profile -->', loggedInUser)
+    setLoggedInUserId(loggedInUser);
+  },[])
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -101,7 +113,7 @@ export default function PostDetails({ postData }) {
         <meta property="og:image" content={imageLink || '/lekharPokaPreviewImage/lekharpokabanner.jpg'} key="og:image" />
       </Head>
 
-      {poststatus || userUuid === postWonnerUuid ?
+      {poststatus || loggedInUserId === postWonnerUuid ?
         <>
           <div className=" body__control" >
             <div className="all__post__content__overlay">
@@ -209,19 +221,15 @@ export default function PostDetails({ postData }) {
 export async function getServerSideProps(context) {
 
   const { slug } = context.params;
-  let postData;
 
 
-    const res = await fetch(`${apiBasePath}/getpost/${slug}`, {
-      method: 'POST', 
-      headers: {
-        'Content-Type': 'application/json', 
-      },
-    });
-    postData = await res.json()
+  const res = await fetch(`${apiBasePath}/getpost/${slug}`, {
+    method: 'POST'
+  });
+  const postData = await res.json()
 
-    console.log('single post data', postData);
-
-
+  console.log(postData)
   return { props: { postData } }
 }
+
+

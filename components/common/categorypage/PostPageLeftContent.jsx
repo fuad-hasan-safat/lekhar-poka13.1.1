@@ -9,9 +9,9 @@ import MainContentDivider from "../mainContentDivider";
 import SinglePostConponent from "../singlePostComponent";
 import { useSelector } from "react-redux";
 
-export default function PostPageLeftContent() {
+export default function PostPageLeftContent({catTitle}) {
     const router = useRouter();
-    const catTitle = useSelector(state => state.category.selectedNavbarCategory);
+    // const catTitle = useSelector(state => state.category.selectedNavbarCategory);
     const [postList, setPostList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -90,13 +90,13 @@ export default function PostPageLeftContent() {
                                                 title={post.title}
                                                 writer={post.profile_name}
                                                 writer_id={post.writer_id}
-                                                category={post.category}
                                                 image={post?.image}
                                                 uploadedBy={post?.uploaded_by}
                                                 writer_image={post?.profile_image}
                                                 profileName={post?.profile_name}
                                                 updatedAt={post?.updatedAt}
-                                                content={post.category === 'কবিতা' ? countWords(post.content, 20) : countWords(post.content, 50)}
+                                                category={post?.category}
+                                                content={post.category === 'কবিতা' ? countWords(post.content, 8, 'কবিতা') : countWords(post.content, 50)}
                                             />
                                             {index < postList.length - 1 && <MainContentDivider />}
                                         </div>

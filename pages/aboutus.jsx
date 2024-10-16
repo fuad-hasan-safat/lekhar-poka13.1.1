@@ -3,19 +3,24 @@ import Head from 'next/head';
 
 
 
-export default function Home() {
+export default function AboutUs() {
   return (
     <>
-      {/* <div>
-        <head>
-          <title>আমাদের সম্পর্কে</title>
-        </head>
-      </div> */}
-      {/* lg:pt-[95px] md:pt-[90px] sm:pt-[85px] xs:pt-[80px] */}
+      <Head>
+        <title>আমাদের সম্পর্কে</title>
+        <meta property="og:title" content="লেখার পোকা" />
+        <meta property="og:description" key="og:description" content=" লেখার পোকা  হলো কবিতা, গান, প্রবন্ধ গল্প এবং জীবনী লেখা প্রকাশের একটি ওয়েব সাইট। যেটা অভিব্যক্তির একটি সুন্দর রূপ যা ব্যক্তিদের তাদের চিন্তাভাবনা, আবেগ এবং অভিজ্ঞতা সৃজনশীল এবং শৈল্পিক উপায়ে প্রকাশ করতে দেয়। " />
+        <meta property="og:image" content='https://lekharpoka.com/lekharPokaPreviewImage/lekharpokabanner.jpg' />
+        <meta property="og:url" content="https://lekharpoka.com/" key="og:url" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="https://lekharpoka.com/lekharPokaPreviewImage/lekharpokabanner.jpg" />
+        <meta name="twitter:title" content="লেখার পোকা" />
+        <meta name="twitter:description" content=" লেখার পোকা  হলো কবিতা, গান, প্রবন্ধ গল্প এবং জীবনী লেখা প্রকাশের একটি ওয়েব সাইট। যেটা অভিব্যক্তির একটি সুন্দর রূপ যা ব্যক্তিদের তাদের চিন্তাভাবনা, আবেগ এবং অভিজ্ঞতা সৃজনশীল এবং শৈল্পিক উপায়ে প্রকাশ করতে দেয়। " />
+        <meta name="twitter:image" content='https://lekharpoka.com/lekharPokaPreviewImage/lekharpokabanner.jpg' />
+      </Head>
+
       <div className=" text-black">
-        <Head>
-          <title>আমাদের সম্পর্কে</title>
-        </Head>
+
 
         <section className="banner-sec-wrap">
           <div className="banner__bg__wrap relative w-full xl:h-[380px] lg:h-[380px] md:h-[360px] sm:h-[280px] xs:h-[250px]  overflow-hidden" style={{ background: `url('/images/pages-banner-svg/baseBanner.png')center center / cover no-repeat` }}>
@@ -36,35 +41,35 @@ export default function Home() {
 
         <section className="">
           <div className="container">
-              <div className="about__content__wrap">
-                <div className="about__img">
-                  <img
-                    // className="lg:h-[800px] md:h-[400px] sm:h-[400px] xs:h-[400px] "
-                    alt="mission side image"
-                    src="/images/aboutuspage/missionSideImage.png"
-                  />
-                </div>
-                <div className="about__dsc">
-                  <h3 className="text-[#F9A106] text-[48px]">মিশন</h3>
-                  <div>
-                    <hr className={` w-full  h-[0.5px] border-0 bg-[#F9A106]`} />
-                  </div>
-                  <p className="text-[#484848]  pt-[20px]">
-                    লেখার পোকার &apos;কবিতা গল্প জীবনী নিয়ে মিশন&apos; হলো একটি আদর্শ,
-                    একাংশিক বা পূর্ণসংখ্যানে কবিতা, গল্প, এবং জীবনী নিয়ে নির্ধারিত উদ্দেশ্য বা লক্ষ্য বা ধারণা।
-                    এই মিশনের পেছনের উদ্দেশ্য মূলত কবিতা, গল্প, এবং জীবনীর মাধ্যমে নিম্নলিখিত
-                    কিছু অংশে লক্ষ দেওয়া হয়:
-                  </p>
-                  <p className="text-[#484848] pt-1"><span className="text-[#F9A106]">সংস্কৃতি ও বৈচিত্র্য বিষয়ে চিন্তার অনুষ্ঠান:</span> কবিতা, গল্প, এবং জীবনী পড়ে সামাজিক এবং সাংস্কৃতিক সমস্যার উপর চিন্তা নিতে পারেন
-                      এবং সমাধানের দিকে ভাবতে পারেন।</p>
-                  <p className="text-[#484848] pt-1"><span className="text-[#F9A106]">ব্যক্তিগত বা সামাজিক পরিবর্তনে সাহায্য করা:</span> কবিতা, গল্প, এবং জীবনী ব্যক্তিগত ও সামাজিক পরিবর্তনে সাহায্য করতে পারে।।</p>
-                  <p className="text-[#484848] pt-1"><span className="text-[#F9A106]">বিভিন্ন ভূমিকার সামনে আসা:</span>কবিতা, গল্প, এবং জীবনী মাধ্যমে বিভিন্ন ভূমিকার সামনে আসা যায়, যেমন পরিবার, সমাজ, রাষ্ট্র, সাংস্কৃতিক পরিবর্তন, সাহিত্য ইত্যাদি।</p>
-                  <p className="text-[#484848] pt-1"><span className="text-[#F9A106]">উদ্দীপনা এবং প্রেরণা সৃষ্টি করা: </span>কবিতা, গল্প, এবং জীবনী মাধ্যমে অন্যের মধ্যে উদ্দীপনা এবং প্রেরণা সৃষ্টি করা যেতে পারে।।</p>
-                  <p className="text-[#484848] pt-1"><span className="text-[#F9A106]">সাহিত্যিক উন্নতি: </span> কবিতা, গল্প, এবং জীবনী লেখার মাধ্যমে সাহিত্যিক উন্নতি করা যেতে পারে।।</p>
-                  <p>কোনও কবিতা, গল্প, এবং জীবনীর মিশন সাধারণত কবির নিজস্ব পছন্দ এবং ধারণা অনুযায়ী পরিবর্তন করা যেতে পারে। এই মিশনের মাধ্যমে তারা তাদের লেখা বা সৃষ্টির মাধ্যমে সামাজিক ও সাংস্কৃতিক পরিবর্তনে সাহায্য করতে চান এবং আত্মপ্রকাশ করতে চান।
-                    এবং আমাদের মিশন হচ্ছে এই লেখাগুলি প্রতি বছর বইমেলায় প্রদর্শন করা হবে</p>
-                </div>
+            <div className="about__content__wrap">
+              <div className="about__img">
+                <img
+                  // className="lg:h-[800px] md:h-[400px] sm:h-[400px] xs:h-[400px] "
+                  alt="mission side image"
+                  src="/images/aboutuspage/missionSideImage.png"
+                />
               </div>
+              <div className="about__dsc">
+                <h3 className="text-[#F9A106] text-[48px]">মিশন</h3>
+                <div>
+                  <hr className={` w-full  h-[0.5px] border-0 bg-[#F9A106]`} />
+                </div>
+                <p className="text-[#484848]  pt-[20px]">
+                  লেখার পোকার &apos;কবিতা গল্প জীবনী নিয়ে মিশন&apos; হলো একটি আদর্শ,
+                  একাংশিক বা পূর্ণসংখ্যানে কবিতা, গল্প, এবং জীবনী নিয়ে নির্ধারিত উদ্দেশ্য বা লক্ষ্য বা ধারণা।
+                  এই মিশনের পেছনের উদ্দেশ্য মূলত কবিতা, গল্প, এবং জীবনীর মাধ্যমে নিম্নলিখিত
+                  কিছু অংশে লক্ষ দেওয়া হয়:
+                </p>
+                <p className="text-[#484848] pt-1"><span className="text-[#F9A106]">সংস্কৃতি ও বৈচিত্র্য বিষয়ে চিন্তার অনুষ্ঠান:</span> কবিতা, গল্প, এবং জীবনী পড়ে সামাজিক এবং সাংস্কৃতিক সমস্যার উপর চিন্তা নিতে পারেন
+                  এবং সমাধানের দিকে ভাবতে পারেন।</p>
+                <p className="text-[#484848] pt-1"><span className="text-[#F9A106]">ব্যক্তিগত বা সামাজিক পরিবর্তনে সাহায্য করা:</span> কবিতা, গল্প, এবং জীবনী ব্যক্তিগত ও সামাজিক পরিবর্তনে সাহায্য করতে পারে।।</p>
+                <p className="text-[#484848] pt-1"><span className="text-[#F9A106]">বিভিন্ন ভূমিকার সামনে আসা:</span>কবিতা, গল্প, এবং জীবনী মাধ্যমে বিভিন্ন ভূমিকার সামনে আসা যায়, যেমন পরিবার, সমাজ, রাষ্ট্র, সাংস্কৃতিক পরিবর্তন, সাহিত্য ইত্যাদি।</p>
+                <p className="text-[#484848] pt-1"><span className="text-[#F9A106]">উদ্দীপনা এবং প্রেরণা সৃষ্টি করা: </span>কবিতা, গল্প, এবং জীবনী মাধ্যমে অন্যের মধ্যে উদ্দীপনা এবং প্রেরণা সৃষ্টি করা যেতে পারে।।</p>
+                <p className="text-[#484848] pt-1"><span className="text-[#F9A106]">সাহিত্যিক উন্নতি: </span> কবিতা, গল্প, এবং জীবনী লেখার মাধ্যমে সাহিত্যিক উন্নতি করা যেতে পারে।।</p>
+                <p>কোনও কবিতা, গল্প, এবং জীবনীর মিশন সাধারণত কবির নিজস্ব পছন্দ এবং ধারণা অনুযায়ী পরিবর্তন করা যেতে পারে। এই মিশনের মাধ্যমে তারা তাদের লেখা বা সৃষ্টির মাধ্যমে সামাজিক ও সাংস্কৃতিক পরিবর্তনে সাহায্য করতে চান এবং আত্মপ্রকাশ করতে চান।
+                  এবং আমাদের মিশন হচ্ছে এই লেখাগুলি প্রতি বছর বইমেলায় প্রদর্শন করা হবে</p>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -107,10 +112,10 @@ export default function Home() {
 
               <div className="about__btm__img">
                 <img
-                      // className="lg:h-[700px] md:h-[400px] sm:h-[400px] xs:h-[400px]"
-                      alt="mission side image"
-                      src="/images/aboutuspage/vissionSideImage.png"
-                    />
+                  // className="lg:h-[700px] md:h-[400px] sm:h-[400px] xs:h-[400px]"
+                  alt="mission side image"
+                  src="/images/aboutuspage/vissionSideImage.png"
+                />
               </div>
             </div>
           </div>

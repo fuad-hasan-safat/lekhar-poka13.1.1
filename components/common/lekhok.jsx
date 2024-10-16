@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const LekhokDetails = ({
@@ -12,13 +13,21 @@ const LekhokDetails = ({
 }) => {
 
     const router = useRouter();
-    const userUuid = useSelector((state)=> state.usersession.userUuid);
+    // const userUuid = useSelector((state)=> state.usersession.userUuid);
+    const [loggedInUserId, setLoggedInUserId] = useState(null)
+
+    useEffect(()=>{
+      const loggedInUser = localStorage.getItem('userId') || null ;
+      console.log('logged in user in profile -->', loggedInUser)
+      setLoggedInUserId(loggedInUser);
+    },[])
+
     console.log({ writer, writer_id, user_id })
     let redirectAddress = `/postbyuser/${writer_id}`;
     console.log({ redirectAddress })
 
     if (user_id) {
-        if (user_id === userUuid) {
+        if (user_id === loggedInUserId) {
             redirectAddress = `/user/${user_id}`;
         }
     }

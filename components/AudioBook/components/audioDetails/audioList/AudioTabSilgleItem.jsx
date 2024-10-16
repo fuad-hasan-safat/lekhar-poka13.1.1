@@ -12,8 +12,8 @@ import { playlistAction } from '../../../../redux/playlist-slice';
 export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) {
     const dispatch = useDispatch();
     const userUuid = useSelector((state) => state.usersession.userUuid);
-    const currentSongId = useSelector((state)=> state.audioplayer.currentSongId);
-    const isAudioPlaying = useSelector((state)=> state.audioplayer.isAudioPlaying);
+    const currentSongId = useSelector((state) => state.audioplayer.currentSongId);
+    const isAudioPlaying = useSelector((state) => state.audioplayer.isAudioPlaying);
     const currentAudioScope = useSelector((state) => state.audioplayer.currentAudioScope);
 
     const [duration, setDuration] = useState(null);
@@ -64,7 +64,7 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
 
         try {
             const response = await axios.post(`${apiBasePath}/addtoplaylist`, data);
-            console.log('add playlist response', response);
+            // console.log('add playlist response', response.data.data);
             if (response.data.status === "failed") {
                 if (response.data.msg === 'Audio Already in playlist') {
                     notification = `অডিওটি ইতিমধ্যে প্লেলিস্টে যুক্ত আছে!`;
@@ -74,11 +74,13 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
                     dispatch(toastAction.setWarnedNotification(notification))
                 }
                 return;
+            } else {
+                dispatch(playlistAction.addSingleSongToMyPlaylist(songInfo));
+                notification = `প্লেলিস্টে যুক্ত হয়েছে!`;
+                dispatch(toastAction.setSucessNotification(notification))
             }
             // setMyPlayList([...myPlayList, songInfo])
-            dispatch(playlistAction.addSingleSongToMyPlaylist(songInfo));
-            notification = `প্লেলিস্টে যুক্ত হয়েছে!`;
-            dispatch(toastAction.setSucessNotification(notification))
+
         } catch (error) {
             console.error('Error posting data:', error);
         }
@@ -93,7 +95,6 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
             currentSongId: songInfo._id,
         }))
 
-        dispatch(playlistAction.addSingleSongToLatestPlaylist(songInfo));
 
 
 
@@ -110,7 +111,19 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
             const response = await axios.post(`${apiBasePath}/addtolatestplaylist`, data);
             console.log('add playlist response', response);
             if (response.data.status === "failed") {
+                // if (response.data.msg === 'Audio Already in playlist') {
+                //     notification = `অডিওটি ইতিমধ্যে প্লেলিস্টে যুক্ত আছে!`;
+                //     dispatch(toastAction.setWarnedNotification(notification))
+                // } else {
+                //     notification = `অডিওটি প্লেলিস্টে যুক্ত করা যাচ্ছে না!`;
+                //     dispatch(toastAction.setWarnedNotification(notification))
+                // }
                 return;
+            } else {
+                dispatch(playlistAction.addSingleSongToLatestPlaylist(songInfo));
+                notification = `প্লেলিস্টে যুক্ত হয়েছে!`;
+                dispatch(toastAction.setSucessNotification(notification))
+
             }
             // setLatestPlaylist([...latestPlayList, songInfo])
         } catch (error) {
@@ -147,7 +160,7 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
                 </div>
 
                 <div className='audio__tab__playbutton'>
-                    <button onClick={handlePlayButton}>{ isAudioPlaying && currentSongId === songInfo._id ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</button>
+                    <button onClick={handlePlayButton}>{isAudioPlaying && currentSongId === songInfo._id ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</button>
                     <button onClick={handleAddMyPlaylist} className='text-[#484848] text-opacity-[50%] lg:ml-[18px] md:ml-[15px] sm:ml-[12px] xs:ml-[10px]'><i class="ri-add-circle-fill"></i></button>
                 </div>
 

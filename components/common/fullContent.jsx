@@ -21,6 +21,7 @@ console.log("FULL POST : ", writer_image)
                         profileName={profileName}
                         image={image}
                         writer_image={writer_image}
+                        category={catagory}
                     />
               
                     <div className="pt-[30px]">
@@ -45,6 +46,7 @@ console.log("FULL POST : ", writer_image)
                         uploadedBy={uploadedBy}
                         image={image}
                         writer_image={writer_image}
+                        category={catagory}
 
                     />
                  

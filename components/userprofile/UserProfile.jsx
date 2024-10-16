@@ -11,7 +11,14 @@ import { UserContext } from '../lekharpokaStore/user-context';
 
 export default function UserProfile() {
 
-  const userUuid = useSelector(state => state.usersession.userUuid)
+  const userUuid = useSelector(state => state.usersession.userUuid);
+  const [loggedInUserId, setLoggedInUserId] = useState(null)
+
+  useEffect(()=>{
+    const loggedInUser = localStorage.getItem('userId') || null ;
+    console.log('logged in user in profile -->', loggedInUser)
+    setLoggedInUserId(loggedInUser);
+  },[])
 
   const router = useRouter();
   const { setIsProfileLoaded } = useContext(UserContext);
@@ -61,50 +68,45 @@ export default function UserProfile() {
 
     console.log('user uuid -->', userUuid)
 
-    if(!userUuid) return;
+    if(!loggedInUserId) return;
 
     console.log('getting profile .....')
 
-    fetch(`${apiBasePath}/getprofile/${userUuid}`)
+    fetch(`${apiBasePath}/getprofile/${loggedInUserId}`)
       .then((response) => response.json())
       .then((data) => {
-        // if(data.status === 'failed'){
-        //   router.push('/404');
-          
-        // }
         console.log('pofile details on user profile--------------->>>>>>>', data);
-        setProfileInfo(data.object.profile)
-        setApprovedPost(data.object.approved_post)
-        setUnapprovedPost(data.object.unapproved_post)
-        setProfileName(data.object.name)
-        setProfileStatus(data.object.status)
-        setProfileStats(data.object.stats)
-        const picUrl = `${data.object.profile?.image?.slice( data.object.profile?.image?.indexOf("/") + 1)}` === ('undefined' || undefined || null) ? '' : `${apiBasePath}/${ data.object.profile?.image?.slice( data.object.profile?.image?.indexOf("/") + 1)}`;
-        setuserprofiledata((prevData) => ({
-          ...prevData,
-          userName: data.object.profile?.name,
-          userImage: `${picUrl}`,
-          userPhone: data.object.profile?.phone,
-          userEmail: data.object.profile?.email,
-          userBirthDate: data.object.profile?.dob,
-          userGender: data.object.profile?.gender,
-          userDesignation: data.object.profile?.designation,
-          userStatus: data.object.profile?.profileStatus,
-          userAddress: data.object.profile?.address,
-        }))
-
+        setProfileInfo(data?.object?.profile)
+        setApprovedPost(data?.object?.approved_post)
+        setUnapprovedPost(data?.object?.unapproved_post)
+        setProfileName(data?.object?.name)
+        setProfileStatus(data?.object?.status)
+        setProfileStats(data?.object?.stats)
         console.log('Loding false next line ----------->')
         setIsLoading(false);
 
-        if (!data.object.stats) {
+        const picUrl = `${data?.object?.profile?.image?.slice( data?.object?.profile?.image?.indexOf("/") + 1)}` === ('undefined' || undefined || null) ? '' : `${apiBasePath}/${ data?.object?.profile?.image?.slice( data?.object?.profile?.image?.indexOf("/") + 1)}`;
+        setuserprofiledata((prevData) => ({
+          ...prevData,
+          userName: data?.object?.profile?.name,
+          userImage: `${picUrl}`,
+          userPhone: data?.object?.profile?.phone,
+          userEmail: data?.object?.profile?.email,
+          userBirthDate: data?.object?.profile?.dob,
+          userGender: data?.object?.profile?.gender,
+          userDesignation: data?.object?.profile?.designation,
+          userStatus: data?.object?.profile?.profileStatus,
+          userAddress: data?.object?.profile?.address,
+        }))
+
+      
+
+        if (!data?.object?.stats) {
           setCanPostStatus(false)
         } else {
           setCanPostStatus(true)
         }
-        
-        // if(data.object.name === null) return ;
 
-        // console.log(' profile image----------->>>>', image)
       })
       .catch((error) => console.error("Error fetching userprofiles data:", error));
 
@@ -128,8 +130,8 @@ export default function UserProfile() {
 
     const fetchUserBioData = async () => {
       try{
-        if(userUuid){
-          const response = await fetch(`${apiBasePath}/bio/${userUuid}`);
+        if(loggedInUserId){
+          const response = await fetch(`${apiBasePath}/bio/${loggedInUserId}`);
           const data = await response.json();
           setBio(data?.content)
           setBioId(data?._id)
@@ -152,7 +154,7 @@ export default function UserProfile() {
     setIsWriterAdded(false)
     setIsProfileUpdated(false)
     setIsProfileLoaded(true);
-  }, [isWriterAdded, isCategoryAdded]);
+  }, [isWriterAdded, isCategoryAdded, loggedInUserId]);
 
 
 
@@ -176,7 +178,7 @@ export default function UserProfile() {
 
   }
 
-  if(userUuid && userUuid !== router.query.slug){
+  if(loggedInUserId && loggedInUserId !== router.query.slug){
     router.push('/404');
   }
 

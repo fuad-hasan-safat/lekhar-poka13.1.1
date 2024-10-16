@@ -9,13 +9,14 @@ import SinglePostConponent from "../common/singlePostComponent";
 import { UserContext } from "../lekharpokaStore/user-context";
 import { useDispatch, useSelector } from "react-redux";
 import { userPostAction } from "../redux/userpost-slice";
+import { countWords } from "../../function/api";
 
 
 export default function ProfilePostLeftContentUnApproved() {
 
   const dispatch = useDispatch();
   const unapprovedItems = useSelector((state) => state.userpost.unapprovedItems);
-  const userUuid = useSelector((state) => state.usersession.userUuid);
+  // const userUuid = useSelector((state) => state.usersession.userUuid);
   const createdPostAt = useSelector((state) => state.userpost.createdPostAt);
 
   const [postList, setPostList] = useState([])
@@ -28,14 +29,14 @@ export default function ProfilePostLeftContentUnApproved() {
   const [username, setUsername] = useState("");
   const [slug, setUserUuid] = useState("");
   const [userToken, setUserToken] = useState("");
+  const [loggedInUserId, setLoggedInUserId] = useState(null)
 
   const { userImage } = useContext(UserContext);
 
   useEffect(() => {
 
-    setUsername(localStorage.getItem("name") || "");
-    setUserToken(localStorage.getItem("token") || "");
-    setUserUuid(localStorage.getItem("uuid") || "");
+    const loggedInUser = localStorage.getItem('userId') || null ;
+    setLoggedInUserId(loggedInUser);
 
   }, []);
 
@@ -45,8 +46,8 @@ export default function ProfilePostLeftContentUnApproved() {
     const fetchPosts = async () => {
       try {
 
-        if (userUuid) {
-          const response = await axios.get(`${apiBasePath}/unverifiedpostsbyuser/${userUuid}`); // Use Axios
+        if (loggedInUserId) {
+          const response = await axios.get(`${apiBasePath}/unverifiedpostsbyuser/${loggedInUserId}`); // Use Axios
           const data = response.data;
           console.log('UN-APPROVED POST----->>', data)
 
@@ -67,7 +68,7 @@ export default function ProfilePostLeftContentUnApproved() {
 
     fetchPosts();
 
-  }, [userImage, createdPostAt]);
+  }, [userImage, createdPostAt, loggedInUserId]);
 
 
   const handlePageChange = (pageNumber) => {
@@ -106,8 +107,8 @@ export default function ProfilePostLeftContentUnApproved() {
                           writer={post.profile_name}
                           writer_id={post?.writer_id}
                           image={post?.image}
-                          content={post.category === 'কবিতা' ? `${post.content.split(/\s+/).slice(0, 20).join(" ")}` : `${post.content.split(/\s+/).slice(0, 30).join(" ")}`} // Truncate content
                           category={post.category}
+                          content={post.category === 'কবিতা' ? countWords(post.content, 8, 'কবিতা') : countWords(post.content, 50)}
                           postStatus={post.status}
                           uploadedBy={post?.uploaded_by}
                           writer_image={post?.writer_image}

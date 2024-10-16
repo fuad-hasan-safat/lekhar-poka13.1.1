@@ -19,16 +19,14 @@ import SearchContextProvider from '../components/lekharpokaStore/search-context'
 import SearchResult from '../components/common/SearchResult'
 import AdminContextProvider, { AdminContext } from '../components/store/adminpanel-context';
 import useRouteChange from '../utils/useRouteChange';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import AudioDetailsTabContextProvider from '../components/store/audiodetailstab-context';
-import UserContextProvider, { UserContext } from '../components/lekharpokaStore/user-context';
+import UserContextProvider from '../components/lekharpokaStore/user-context';
 
-import { Provider, useSelector } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import store, { persistor } from '../components/redux/store';
+import { Provider } from 'react-redux';
+import store from '../components/redux/store';
 import Toast from '../components/toast/Toast';
 import Script from 'next/script';
-import Head from 'next/head';
 
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -62,7 +60,6 @@ export default function MyApp({ Component, pageProps }) {
   }, []);
 
 
-
   // /account/login
   // /account/signup
   // /account/recoverpassword
@@ -91,10 +88,8 @@ export default function MyApp({ Component, pageProps }) {
   else {
     result = <Layout><Component {...pageProps} />  <SearchResult /> </Layout>
   }
+
   return (
-    // <Layout>
-    //   <Component {...pageProps} />
-    // </Layout>
     <>
 
       <Script
@@ -102,18 +97,8 @@ export default function MyApp({ Component, pageProps }) {
         src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0&appId=1103079424285739"
         crossOrigin="anonymous"
       />
-      {/* <Head>
-        <meta property="og:url" content={postLink} />
-        <meta property="og:site_name" content="Lekhar Poka" />
-        <meta property="og:locale" content="bn_BD" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content={postTitle} key="og:title" />
-        <meta property="og:description" content={`${postDiscripption}  #lekharpoka`} />
-        <meta property="og:image" content= {postImage | '/lekharPokaPreviewImage/lekharpokabanner.jpg'} key="og:image" />
-      </Head> */}
 
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
+    
           <AdminContextProvider>
             <UserContextProvider>
               <AudioPlaylistContextProvider>
@@ -121,12 +106,16 @@ export default function MyApp({ Component, pageProps }) {
                   <SearchContextProvider>
                     <AudioDetailsTabContextProvider>
                       <GoogleOAuthProvider clientId="854926132475-sm4btto49sresu4g5o9qpuk9lgtqor9f.apps.googleusercontent.com">
+                      <Provider store={store}>
+                      {/* <PersistGate loading={null} persistor={persistor}> */}
                         <>
                           <Toast />
                         
                           {result}
                           <AudioPlayer />
                         </>
+                        {/* </PersistGate> */}
+                        </Provider>
                       </GoogleOAuthProvider>
                     </AudioDetailsTabContextProvider>
                   </SearchContextProvider>
@@ -134,8 +123,7 @@ export default function MyApp({ Component, pageProps }) {
               </AudioPlaylistContextProvider>
             </UserContextProvider>
           </AdminContextProvider>
-        </PersistGate>
-      </Provider>
+   
 
     </>
 
