@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 export default function SearchResult() {
     const router = useRouter();
     const [isMounted, setIsMounted] = useState(false)
-    const { selectedIteam ,searchResult, isSearchbarActive, setIsSearchbarActive, setSearchResult, setSearchKey, searchKey} = useContext(SearchContext);
+    const { selectedIteam ,searchResult, isSearchbarActive, setIsSearchbarActive, isSearChPageActive, setSearchResult, setSearchKey, searchKey} = useContext(SearchContext);
 
     useEffect(() => {
         const handleRouteChange = (url) => {
@@ -52,7 +52,7 @@ export default function SearchResult() {
         setSearchKey('')
     }
 
-    if (!isSearchbarActive || isMounted) return null;
+    if (!isSearChPageActive || isMounted) return null;
 
     return createPortal((
         <>

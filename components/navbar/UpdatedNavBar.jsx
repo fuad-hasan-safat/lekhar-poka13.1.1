@@ -19,14 +19,15 @@ export default function UpdatedNavBar() {
     const userUuid = useSelector(state => state.usersession.userUuid);
     const router = useRouter();
 
-    const { selectedIteam, handleKeyDown, setSelectedIteam, searchAreaRef, setIsSearchbarActive, isSearchbarActive, setSearchResult, searchKey, setSearchKey } = useContext(SearchContext)
+    const { selectedIteam, handleKeyDown, setSelectedIteam, searchAreaRef, setIsSearchbarActive, setIsSearChPageActive, isSearchbarActive, setSearchResult, searchKey, setSearchKey } = useContext(SearchContext)
     const { setUser, userImage } = useContext(UserContext)
 
     const [selectedNav, setSelectedNav] = useState("");
     const [postList, setPostList] = useState(null);
     const [search, setSearch] = useState("");
     const [searchData, setSearchData] = useState([]);
-    const [loogedInuserId,  setLoggedInuserId] = useState(null);
+    const [loogedInuserId, setLoggedInuserId] = useState(null);
+
 
 
     // ------
@@ -69,7 +70,7 @@ export default function UpdatedNavBar() {
 
     useEffect(() => {
 
-        const loggingUserId =  localStorage.getItem("userId") || null;
+        const loggingUserId = localStorage.getItem("userId") || null;
         console.log('Logged in user id-->', loggingUserId)
         setLoggedInuserId(loggingUserId)
         const fetchUserPhoto = async () => {
@@ -77,11 +78,11 @@ export default function UpdatedNavBar() {
                 const response = await fetch(`${apiBasePath}/getprofilepic/${loggingUserId}`);
                 const data = await response.json();
                 console.log('user image in navbar --', data.image)
-                if(data.image){
+                if (data.image) {
                     setUser({ userImage: `${apiBasePath}/${data.image?.slice(data.image?.indexOf('/') + 1)}` })
 
-                }else{
-                setUser({ userImage: `/images/defaultUserPic/rounded/null.png` })
+                } else {
+                    setUser({ userImage: `/images/defaultUserPic/rounded/null.png` })
                 }
                 //console.log( "------------------->>>> POST LIST ------------------>>>>>>>",postList );
             } catch (error) {
@@ -149,6 +150,11 @@ export default function UpdatedNavBar() {
     const handleChange = (e) => {
         // setSearch(e.target.value);
         setSearchKey(e.target.value);
+        if (e.target.value?.length > 0) {
+            setIsSearChPageActive(true)
+        } else {
+            setIsSearChPageActive(false)
+        }
     };
     const handleKeyDown1 = (e) => {
         // console.log(e.key)
@@ -164,6 +170,7 @@ export default function UpdatedNavBar() {
                 // window.open(searchData[selectedIteam]?.link);
                 // setSearch('')
                 setSearchKey('')
+                setIsSearChPageActive(false)
                 router.push(`/post/${searchData[selectedIteam]?._id}`)
 
             }
@@ -213,7 +220,14 @@ export default function UpdatedNavBar() {
         // router.refresh()
     }
 
-
+    function closeSearchBar() {
+        setIsSearchbarActive(false);
+        setIsSearChPageActive(false)
+        setSearchKey('')
+        setSearchData([]);
+        const data = [];
+        setSearchResult(data)
+    }
     //   logout
 
     function Logout() {
@@ -293,7 +307,7 @@ export default function UpdatedNavBar() {
 
                                             <button
                                                 className='lg:px-[15px] md:px-[15px] sm:px-[10px] xs:px-[10px]'
-                                                onClick={() => setIsSearchbarActive(false)}
+                                                onClick={closeSearchBar}
                                             >
                                                 <i class="ri-list-check"></i>
                                             </button>
@@ -325,7 +339,7 @@ export default function UpdatedNavBar() {
                                                         ? "text-[#F9A106] font-semibold border-b-[2px] border-[#F9A106]"
                                                         : "text-black"
                                                         }`}
-                                                    >সব লেখা <span style={{ position: 'relative', top: '-1px' }}><i class="ri-arrow-down-s-line"></i></span></button>
+                                                >সব লেখা <span style={{ position: 'relative', top: '-1px' }}><i class="ri-arrow-down-s-line"></i></span></button>
                                                 {/* <FontAwesomeIcon icon={faAngleDown} className="ml-2 pt-1 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-4 sm:w-4 xs:h-4 xs:w-4 focus:text-[#F9A106]" /> */}
                                                 {visibleItem === 0 && (
                                                     <ul ref={popupRef1}
@@ -338,12 +352,12 @@ export default function UpdatedNavBar() {
                                                                 <li
                                                                     key={category._id}
                                                                     className="block px-4 py-2  hover:bg-[#F9A106]  hover:text-white"
-                                                                    onClick={() => {dispatch(categoryActions.selectNavbarCategory(category.title)) ;closeMenu(); }}
+                                                                    onClick={() => { dispatch(categoryActions.selectNavbarCategory(category.title)); closeMenu(); }}
 
                                                                 >
                                                                     <Link className='block' href={`/category/${category.title}`}>{category.title}</Link>
                                                                 </li>
-                                                                {index <= (lekharpokaCategory.length - 1) && <hr className='lg:block md:hidden sm:hidden xs:hidden' /> }
+                                                                {index <= (lekharpokaCategory.length - 1) && <hr className='lg:block md:hidden sm:hidden xs:hidden' />}
                                                             </>)
                                                         }
 
@@ -380,7 +394,7 @@ export default function UpdatedNavBar() {
                                                 loogedInuserId ?
                                                     <li
                                                         className='relative cursor-pointer -mt-[5px]'
-                                                        onClick={() => {toggleVisibility(2);}}>
+                                                        onClick={() => { toggleVisibility(2); }}>
                                                         {userImage?.length > 0 ? <img src={userImage} alt={userImage} className='h-[35px] w-[35px] rounded-full' /> :
                                                             <img src='/images/user/deafultProfile.png' alt='profile pic' className='h-[35px] w-[35px] rounded-full' />}
 
@@ -391,7 +405,7 @@ export default function UpdatedNavBar() {
                                                                     onClick={() => closeMenu()}
 
                                                                 >
-                                                                    <Link onClick={()=> setSelectedNav('profile')} className='block' href="/user/createpost">লিখুন</Link>
+                                                                    <Link onClick={() => setSelectedNav('profile')} className='block' href="/user/createpost">লিখুন</Link>
                                                                 </li>
 
                                                                 <hr className='lg:block md:hidden sm:hidden xs:hidden' />
@@ -401,7 +415,7 @@ export default function UpdatedNavBar() {
                                                                     onClick={() => closeMenu()}
 
                                                                 >
-                                                                    <Link onClick={()=> setSelectedNav('profile')} className='block' href={`/user/${loogedInuserId}`}>প্রোফাইল</Link>
+                                                                    <Link onClick={() => setSelectedNav('profile')} className='block' href={`/user/${loogedInuserId}`}>প্রোফাইল</Link>
                                                                 </li>
                                                                 <hr className='lg:block md:hidden sm:hidden xs:hidden' />
 

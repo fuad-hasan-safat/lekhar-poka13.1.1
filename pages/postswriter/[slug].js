@@ -11,6 +11,7 @@ import WriterPostList from '../../components/userprofile/WriterPostList';
 
 export default function PostOfWriterPage() {
     const router = useRouter();
+    const currentUrl = router.asPath;
     const slug = router.query.slug;
 
     const [postList, setPostList] = useState([])
@@ -71,7 +72,6 @@ export default function PostOfWriterPage() {
     const endIndex = Math.min(startIndex + postsPerPage, postList.length); // Ensure endIndex doesn't exceed posts length
 
     const displayedPosts = postList.slice(startIndex, endIndex);
-
 
 
     if (isLoading) {

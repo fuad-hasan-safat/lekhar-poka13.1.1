@@ -4,17 +4,20 @@ import Head from 'next/head';
 
 
 export default function Home() {
+  const description = `Effective as of April 01, 2024. We, Live Technologies Limited (“Company”, “We”, “Us”, “Our”) value the trust placed in use by you and therefore, we follow the highest standards of privacy guidelines to protect the information shared by you with us. This Privacy Policy ("Privacy Policy") governs the use of Personal Information shared (as defined below) with or collected by LIVE TECHNOLOGIES LTD. from the users or subscribers of 'LEKHARPOKA.' Your viewing or browsing of our content or your use of our services offered on LEKHARPOKA is constructed to mean that you consent to our collection, storage, processing and transfer of your Personal Information or Sensitive Personal Data or Information in accordance with this Privacy Policy and you consent to the terms and conditions of this Privacy Policy.You agree to be bound by the terms of this Privacy Policy. If you do not agree with the terms contained herein, please do not download or browse LEKHARPOKA. By mere browsing or use of LEKHARPOKA platform or its application, you consent to the terms of this Privacy Policy and agree to the use of Your Personal Information in the manner as provided under this Privacy Policy. All capitalized terms that have not been specifically defined herein shall have the same meaning as provided under the Terms of Use. This Privacy Policy should be read in conjunction and together with the Terms of Use available on www.LEKHARPOKA.mobi/terms 'Personal Information', 'Information' and 'Sensitive Personal Data or Information' shall have the meaning ascribed to it under the applicable laws in India. Collection and Use Of Personal Information We collect the information directly provided by you, your usage and log data, data collected through cookies and similar technologies. Data provided by user We collect the following personal information about you when You use or browse LEKHARPOKA, at the time of Your registration with LEKHARPOKA and when you share such information with Us through email, by posting on LEKHARPOKA or by any other means like customer care center, etc. made available to You by Us. We collect information with respect to you name, mobile number, email, address, IP Address, zip code, age, gender, occupation etc. Based on Your purchase of a subscription package, our payment gateway partners collect information with respect to you credit/debit card details or other bank account details. This information is stored by our payment gateway partners. For instance, LEKHARPOKA will be using third party payment gateway providers to process and facilitate the payment of Your Subscription Fee to LEKHARPOKA for providing Page 2 of 6 you access to the subscription. Please note that LEKHARPOKA does not directly collect any financial information such as credit card or debit card or net banking details from you. Such payment gateway partners are not controlled by us.</p>
+              `
   return (
     <>
-      {/* <div>
-        <head>
-          <title>আমাদের সম্পর্কে</title>
-        </head>
-      </div> */}
-      {/* lg:pt-[95px] md:pt-[90px] sm:pt-[85px] xs:pt-[80px] */}
       <div className=" text-black">
         <Head>
           <title>Privacy and Policy</title>
+          <meta property="og:url" content="https://lekharpoka.com/privacypolicy" />
+          <meta property="og:site_name" content="Lekhar Poka" />
+          <meta property="og:locale" content="bn_BD" />
+          <meta property="og:type" content="website" />
+          <meta property="og:title" content="Privacy and Policy" key="og:title" />
+          <meta property="og:description" content={`${description} #lekharpoka`} />
+          <meta property="og:image" content='/lekharPokaPreviewImage/lekharpokabanner.jpg' key="og:image" />
         </Head>
 
         <section className="banner-sec-wrap">
