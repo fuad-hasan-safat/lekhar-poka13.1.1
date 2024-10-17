@@ -5,61 +5,72 @@ import LoginSignInOtpLeftPartDesign from '../common/login-signup-otp-left-design
 import SignInOption from "../signInOption/SignInOption";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import Loading from "../common/loading";
 
 const LoginPage = ({ url = '/' }) => {
   const router = useRouter();
   const isLoggedIn = useSelector((state) => state.usersession.isLoggedIn);
   const [loggedInUserId, setLoggedInUserId] = useState(null)
+  const [isLoading, setisLoading] = useState(true);
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem('userId') || null;
     console.log('logged in user in profile -->', loggedInUser)
     setLoggedInUserId(loggedInUser);
-
-
   }, [])
+
   if (isLoggedIn || loggedInUserId) {
     router.push(url);
   }
-  return (
-    <>
-      <section className="login__form__sec__wrp clearfix">
 
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <div className="login__form__wrap flex flex-row bg-[#FCF7E8] shadow-md">
+  useEffect(() => {
+    if (loggedInUserId?.length > 0) {
+      setisLoading(false);
+    }
+  }, [loggedInUserId])
 
-                <div className="login__form__left">
-                  <LoginSignInOtpLeftPartDesign />
-                </div>
+  if (isLoading) {
+    return <Loading />
+  }
+  else {
+    return (
+      !isLoading && !loggedInUserId &&
+      <>
+        <section className="login__form__sec__wrp clearfix">
 
-                <div className="login__form__right relative bg-white rounded-l-[46px] text-black grid place-items-center ">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-12">
+                <div className="login__form__wrap flex flex-row bg-[#FCF7E8] shadow-md">
 
-                  <div className="w-full">
-                    <LoginReg logreg="লগইন করুন" btntext="লগইন" />
-
-                    <SignInOption
-                      title="অথবা সাইন ইন করুন"
-                      icon1="/images/loginOptionIcon/google.svg"
-                      lowermessege1="একাউন্ট নেই? "
-                      lowermessege2="একাউন্ট তৈরী করুন"
-                      signLogLink="/account/signup"
-                    />
-
+                  <div className="login__form__left">
+                    <LoginSignInOtpLeftPartDesign />
                   </div>
-                  {/* <div className="absolute top-7 right-0 pr-2">
-                      <DropDown />
-                    </div> */}
-                </div>
 
+                  <div className="login__form__right relative bg-white rounded-l-[46px] text-black grid place-items-center ">
+
+                    <div className="w-full">
+                      <LoginReg logreg="লগইন করুন" btntext="লগইন" />
+
+                      <SignInOption
+                        title="অথবা সাইন ইন করুন"
+                        icon1="/images/loginOptionIcon/google.svg"
+                        lowermessege1="একাউন্ট নেই? "
+                        lowermessege2="একাউন্ট তৈরী করুন"
+                        signLogLink="/account/signup"
+                      />
+
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-    </>
-  );
+        </section>
+      </>
+    );
+  }
+
 };
 
 export default LoginPage;

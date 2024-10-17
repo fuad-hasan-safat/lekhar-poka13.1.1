@@ -423,7 +423,7 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
 
                             </div>
 
-                            <input
+                            {/* <input
                                 id='profilestatus'
                                 type='text'
                                 placeholder='স্ট্যাটাস'
@@ -433,7 +433,7 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
                                     setProfileStatus(e.target.value);
                                 }}
                             >
-                            </input>
+                            </input> */}
 
 
                             <input
