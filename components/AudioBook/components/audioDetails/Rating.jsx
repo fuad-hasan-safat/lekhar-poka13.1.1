@@ -13,6 +13,14 @@ export default function Rating({ singleAudioData }) {
     const slug = router.query.slug;
     const dispatch = useDispatch();
     const userUuid = useSelector(state => state.usersession.userUuid);
+    const [loggedInUserId, setLoggedInUserId] = useState(null)
+
+    useEffect(()=>{
+      const loggedInUser = localStorage.getItem('userId') || null ;
+      console.log('logged in user in profile -->', loggedInUser)
+      setLoggedInUserId(loggedInUser);
+    },[])
+
     const dialogueRef = useRef();
     const editPostRef = useRef();
     const [openCommentId, setOpenCommentId] = useState(null);  // Track the comment ID for 'More Options'
@@ -158,7 +166,7 @@ export default function Rating({ singleAudioData }) {
                                 </p>
                             )}
 
-                            {comment.user_id === userUuid && (
+                            {comment.user_id === loggedInUserId && (
                                 <span className='cursor-pointer' onClick={() => moreOptionHandler(comment._id)}>
                                     <i className="ri-draggable"></i>
                                 </span>

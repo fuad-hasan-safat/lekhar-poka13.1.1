@@ -24,9 +24,8 @@ const LoginPage = ({ url = '/' }) => {
   }
 
   useEffect(() => {
-    if (loggedInUserId?.length > 0) {
       setisLoading(false);
-    }
+  
   }, [loggedInUserId])
 
   if (isLoading) {

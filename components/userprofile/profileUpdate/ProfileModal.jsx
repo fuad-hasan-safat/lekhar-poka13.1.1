@@ -18,11 +18,11 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
 
     const [loggedInUserId, setLoggedInUserId] = useState(null)
 
-    useEffect(()=>{
-      const loggedInUser = localStorage.getItem('userId') || null ;
-      console.log('logged in user in profile -->', loggedInUser)
-      setLoggedInUserId(loggedInUser);
-    },[])
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem('userId') || null;
+        console.log('logged in user in profile -->', loggedInUser)
+        setLoggedInUserId(loggedInUser);
+    }, [])
 
     let notification = ''
 
@@ -175,60 +175,62 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
         if (!isEmailValidated) {
             notification = 'সঠিক ইমেইল দিন!';
             dispatch(toastAction.setWarnedNotification(notification));
-
             return;
         }
 
+        if (bio?.length > 0) {
+            try {
 
-        try {
-            const response = await axios.post(
-                `${apiBasePath}/bio`,
-                {
-                    user_id: `${loggedInUserId}`,
-                    content: bio,
-                },
-                {
-                    headers: {
-                        "Content-Type": "application/json",
+                const response = await axios.post(
+                    `${apiBasePath}/bio`,
+                    {
+                        user_id: `${loggedInUserId}`,
+                        content: bio,
                     },
-                }
-            );
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    }
+                );
 
-            console.log('bio post res', response)
-            setuserprofiledata((prevData) => ({
-                ...prevData,
-                userBio: bio,
-            }))
+                console.log('bio post res', response)
+                setuserprofiledata((prevData) => ({
+                    ...prevData,
+                    userBio: bio,
+                }))
 
-        } catch (error) {
-            console.error('Error updating profile:', error);
+            } catch (error) {
+                console.error('Error updating profile:', error);
+            }
+
+
+
+
+            try {
+                const response = await axios.put(
+                    `${apiBasePath}/bio/${bioId}`,
+                    {
+                        content: bio
+                    },
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    }
+                );
+                console.log('bio PUT res', response)
+                setuserprofiledata((prevData) => ({
+                    ...prevData,
+                    userBio: bio,
+                }))
+
+
+            } catch (error) {
+                console.error('Error updating profile:', error);
+            }
         }
 
-
-
-
-        try {
-            const response = await axios.put(
-                `${apiBasePath}/bio/${bioId}`,
-                {
-                    content: bio
-                },
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                }
-            );
-            console.log('bio PUT res', response)
-            setuserprofiledata((prevData) => ({
-                ...prevData,
-                userBio: bio,
-            }))
-
-
-        } catch (error) {
-            console.error('Error updating profile:', error);
-        }
 
 
         console.log('outside check,', image, imageFile)
@@ -237,12 +239,12 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
         if (username.trim().length <= 0) {
             notification = 'দয়া করে প্রোফাইল এর নাম নির্বাচন করুন';
             dispatch(toastAction.setWarnedNotification(notification));
-            
+
         }
         else if ((image?.length <= 0) && (!imageFile)) {
             notification = 'দয়া করে প্রোফাইল এর জন্য স্থিরচিত্র নির্বাচন করুন';
             dispatch(toastAction.setWarnedNotification(notification));
-            
+
         }
         else if (designation?.length <= 0) {
             notification = 'আপনার পদবী প্রদান করুন';
@@ -274,18 +276,19 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
                     },
                     body: formData
                 });
+                // dispatch(toastAction.setWarnedNotification('দুঃখিত আপনার তথ্য সার্ভারে সংরক্ষণ করা যায় নি!'));
                 if (response.ok) {
 
-                  if(updatedImage) {
-                    setImageFile(updatedImage);
+                    if (updatedImage) {
+                        setImageFile(updatedImage);
 
-                    const imageDataUrl = await readFile(updatedImage);
-                    setuserprofiledata((prevData) => ({
-                        ...prevData,
-                        userImage: imageDataUrl,
-                    }))
-                    setUser({ userImage: imageDataUrl });
-                  } 
+                        const imageDataUrl = await readFile(updatedImage);
+                        setuserprofiledata((prevData) => ({
+                            ...prevData,
+                            userImage: imageDataUrl,
+                        }))
+                        setUser({ userImage: imageDataUrl });
+                    }
 
                     setuserprofiledata((prevData) => ({
                         ...prevData,
@@ -302,9 +305,11 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
                     handleClose();
 
                 } else {
+                    dispatch(toastAction.setWarnedNotification('দুঃখিত আপনার তথ্য সার্ভারে সংরক্ষণ করা যায় নি!'));
                     console.error('Failed to update profile:', response.statusText);
                 }
             } catch (error) {
+                dispatch(toastAction.setWarnedNotification('দুঃখিত আপনার তথ্য সার্ভারে সংরক্ষণ করা যায় নি!'));
                 console.error('Error updating profile:', error);
             }
 
