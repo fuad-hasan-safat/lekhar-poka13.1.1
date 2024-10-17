@@ -10,12 +10,14 @@ export const SearchContext = createContext({
     selectedIteam: -1,
     searchResult: [],
     isSearchbarActive: false,
+    isSearChPageActive: false,
     setSearchInfo: () => { },
     setSearchKey: () => { },
     setSearchText: () => { },
     setSearchScope: () => { },
     setSearchResult: () => { },
     setIsSearchbarActive: () => { },
+    setIsSearChPageActive: () => { },
     handleKeyDown: () => { }
 });
 
@@ -30,6 +32,7 @@ export default function SearchContextProvider({ children }) {
         selectedIteam: -1,
         searchResult: [],
         isSearchbarActive: false,
+        isSearChPageActive: false,
     })
 
     const searchRef = useRef(null);
@@ -68,6 +71,13 @@ export default function SearchContextProvider({ children }) {
         }))
     }
 
+    function updateSearchPageActiveStatus(status){
+        setSearchBar((prevSearchBar) => ({
+            ...prevSearchBar,
+            isSearChPageActive: status
+        }))
+    }
+
     function KeyDownHandle(e) {
 
         // console.log(e.key)
@@ -91,7 +101,8 @@ export default function SearchContextProvider({ children }) {
                 if (searchBar.selectedIteam != -1) {
                     setSearchBar((prevSearchbar) => ({
                         ...prevSearchbar,
-                        searchKey: ''
+                        searchKey: '',
+                        isSearChPageActive:false 
                     }))
                     router.push(`/post/${searchBar.searchResult[searchBar.selectedIteam]?._id}`)
 
@@ -114,12 +125,14 @@ export default function SearchContextProvider({ children }) {
         searchResult: searchBar.searchResult,
         selectedIteam: searchBar.selectedIteam,
         isSearchbarActive: searchBar.isSearchbarActive,
+        isSearChPageActive: searchBar.isSearChPageActive,
         setSearchInfo: updateSearchInfo,
         setSearchKey: updateSearchKey,
         setSearchText: updateSearchText,
         setSearchScope: updateSearchScope,
         setSearchResult: updateResult,
         setIsSearchbarActive: updateSearchBarActiveStatus,
+        setIsSearChPageActive: updateSearchPageActiveStatus,
         handleKeyDown: KeyDownHandle
     }
 

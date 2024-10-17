@@ -40,7 +40,7 @@ export default function WriterPostList({ profileInfo, postList, isLoading }) {
               {postList.length && (
                 postList.map((post, index) => (
                   <>
-                    <div key={index}>
+                    <div key={post?._id}>
                       <SinglePostConponent
                         id={post._id} // Assuming '_id' is the unique identifier
                         title={post.title}

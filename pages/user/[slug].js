@@ -16,7 +16,6 @@ export default function Home() {
         <Head>
           <title>প্রোফাইল</title>
         </Head>
-      
         <UserProfile/>
       </div>
     </>

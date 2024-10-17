@@ -109,7 +109,7 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
 
         try {
             const response = await axios.post(`${apiBasePath}/addtolatestplaylist`, data);
-            console.log('add playlist response', response);
+            console.log('add playlist response', response.data);
             if (response.data.status === "failed") {
                 // if (response.data.msg === 'Audio Already in playlist') {
                 //     notification = `অডিওটি ইতিমধ্যে প্লেলিস্টে যুক্ত আছে!`;

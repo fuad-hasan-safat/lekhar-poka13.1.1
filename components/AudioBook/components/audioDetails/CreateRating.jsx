@@ -9,6 +9,13 @@ export default function CreateRating({ setUserComments, setIsNewComment }) {
     const router = useRouter();
     const dispatch = useDispatch();
     const userUuid = useSelector((state) => state.usersession.userUuid);
+    const [loggedInUserId, setLoggedInUserId] = useState(null)
+
+    useEffect(()=>{
+      const loggedInUser = localStorage.getItem('userId') || null ;
+      console.log('logged in user in profile -->', loggedInUser)
+      setLoggedInUserId(loggedInUser);
+    },[])
     const [userRating, setUserRating] = useState('');
     const [profileInfo, setProfileInfo] = useState([]);
     const [canPostStatus, setCanPostStatus] = useState(false)
@@ -18,7 +25,7 @@ export default function CreateRating({ setUserComments, setIsNewComment }) {
 
     useEffect(() => {
 
-        fetch(`${apiBasePath}/getprofile/${userUuid}`)
+        fetch(`${apiBasePath}/getprofile/${loggedInUserId}`)
             .then((response) => response.json())
             .then((data) => {
 
@@ -31,7 +38,7 @@ export default function CreateRating({ setUserComments, setIsNewComment }) {
             })
             .catch((error) => console.error("Error fetching data:", error));
 
-        fetch(`${apiBasePath}/getprofile/${userUuid}`)
+        fetch(`${apiBasePath}/getprofile/${loggedInUserId}`)
             .then((response) => response.json())
             .then((data) => {
                 console.log('pofile details on user profile--------------->>>>>>>', data);
@@ -39,7 +46,7 @@ export default function CreateRating({ setUserComments, setIsNewComment }) {
             })
             .catch((error) => console.error("Error fetching data:", error));
 
-    }, [])
+    }, [loggedInUserId])
 
     function reloadPage() {
         setTimeout(() => {
@@ -53,12 +60,12 @@ export default function CreateRating({ setUserComments, setIsNewComment }) {
             dispatch(toastAction.setWarnedNotification(notification));
             return;
         }
-        if (userUuid) {
+        if (loggedInUserId) {
             const postData = {
                 ebook_id: `${router.query.slug}`,
                 name: profileInfo?.name,
                 comment: userRating,
-                user_id: userUuid
+                user_id: loggedInUserId
             };
 
             console.log({ postData })
