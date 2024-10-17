@@ -46,7 +46,7 @@ export default function Home({ singleAudioData }) {
     const router = useRouter();
     const currentUrl = router.asPath;
     console.log('current url', currentUrl);
-    // const userUuid = useSelector(state => state.usersession.userUuid);
+    const userUuid = useSelector(state => state.usersession.userUuid);
 
     const [loggedInUserId, setLoggedInUserId] = useState(null)
     const [isLoading, setIsLoading] = useState(true);
@@ -55,6 +55,9 @@ export default function Home({ singleAudioData }) {
       const loggedInUser = localStorage.getItem('userId') || null ;
       console.log('logged in user in profile -->', loggedInUser)
       setLoggedInUserId(loggedInUser);
+
+      setIsLoading(false)
+
     },[])
 
     console.log(singleAudioData.audio)
@@ -70,18 +73,14 @@ export default function Home({ singleAudioData }) {
     };
 
 
-    useEffect(()=>{
-        if(loggedInUserId?.length > 0){
-            setIsLoading(false)
-        }
-    },[loggedInUserId])
+    
 
     if(isLoading){
         return <Loading/>
     }
 
     return (
-        <>{loggedInUserId ?
+        <>{loggedInUserId || userUuid ?
             <div>
                 <Head>
                     <title>{singleAudioData?.title}</title>
