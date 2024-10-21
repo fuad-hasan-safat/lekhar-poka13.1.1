@@ -20,7 +20,7 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
 
     useEffect(() => {
         const loggedInUser = localStorage.getItem('userId') || null;
-        console.log('logged in user in profile -->', loggedInUser)
+        // console.log('logged in user in profile -->', loggedInUser)
         setLoggedInUserId(loggedInUser);
     }, [])
 
@@ -161,7 +161,7 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
     const handleSubmit = async (e) => {
         e?.preventDefault();
 
-        console.log('Inside submit')
+        // console.log('Inside submit')
 
         const isValidPhone = validatePhoneNumber(phoneNumber);
 
@@ -194,7 +194,7 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
                     }
                 );
 
-                console.log('bio post res', response)
+                // console.log('bio post res', response)
                 setuserprofiledata((prevData) => ({
                     ...prevData,
                     userBio: bio,
@@ -219,7 +219,7 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
                         },
                     }
                 );
-                console.log('bio PUT res', response)
+                // console.log('bio PUT res', response)
                 setuserprofiledata((prevData) => ({
                     ...prevData,
                     userBio: bio,

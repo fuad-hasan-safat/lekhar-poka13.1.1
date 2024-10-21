@@ -25,7 +25,7 @@ export default function ProfilePostLeftContentApproved() {
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem('userId') || null ;
-    console.log('Logged in user in approved page --', loggedInUser)
+    // console.log('Logged in user in approved page --', loggedInUser)
     setLoggedInUserId(loggedInUser);
 
 
@@ -34,7 +34,7 @@ export default function ProfilePostLeftContentApproved() {
         if(loggedInUser){
           const response = await axios.get(`${apiBasePath}/postsbyuser/${loggedInUser}`);
           const data = response.data;
-          console.log('APPROVED POST----->>', response);
+          // console.log('APPROVED POST----->>', response);
           setIsLoading(false);
   
           // Dispatch to Redux store
@@ -53,7 +53,7 @@ export default function ProfilePostLeftContentApproved() {
   }, [dispatch, userImage, loggedInUserId]);
 
   useEffect(() => {
-    console.log('Approved Items:', approvedItems); // Debugging: Check the contents of approvedItems
+    // console.log('Approved Items:', approvedItems); // Debugging: Check the contents of approvedItems
   }, [approvedItems]);
 
   const handlePageChange = (pageNumber) => {
@@ -78,13 +78,13 @@ export default function ProfilePostLeftContentApproved() {
             <div className="flex">
               <div className="lakha__main__content text-3xl">
                 {displayedPosts.map((post, index) => {
-                  console.log('Rendering post:', post); // Debugging: Log each post being rendered
+                  // console.log('Rendering post:', post); // Debugging: Log each post being rendered
 
                   let bannerImage = post?.image;
                   if (!bannerImage) {
                     bannerImage = post?.writer_image;
                   }
-                  console.log('approved banner image', bannerImage);
+                  // console.log('approved banner image', bannerImage);
 
                   return (
                     <div key={post._id}> {/* Ensure _id is unique */}

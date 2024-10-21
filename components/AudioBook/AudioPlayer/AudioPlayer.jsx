@@ -68,9 +68,9 @@ export default function AudioPlayer() {
       if (audioPlayer.current) {
 
         if (isAudioPlaying) {
-          console.log('Trying to play audio...');
+          // console.log('Trying to play audio...');
           audioPlayer.current.play().then(() => {
-            console.log('Audio playing');
+            // console.log('Audio playing');
           }).catch((error) => {
             dispatch(audioPlayerAction.stopAudioPlaying())
             audioPlayer.current.currentTime = currentSongPlayedTime;
@@ -84,7 +84,7 @@ export default function AudioPlayer() {
 
         }
       } else {
-        console.error('Audio player is null');
+        // console.error('Audio player is null');
       }
     }
 

@@ -7,7 +7,7 @@ export default function AudioSingleCategory({ color, title, image, background })
     const router = useRouter();
     let clr = 'green';
     let bg_color = `bg-[` + color + `]`;
-    console.log({ color, title })
+    // console.log({ color, title })
     
     const {setSliderInfo} = useContext(SeeAllSliderContext);
 

@@ -7,6 +7,7 @@ import { apiBasePath } from '../../utils/constant';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { toastAction } from '../redux/toast-slice';
+import Loading from '../common/loading';
 
 const CustomEditor = dynamic(() => {
   return import('../../components/custom-editor');
@@ -19,11 +20,13 @@ export default function EditPost() {
   const dispatch = useDispatch();
   // const userUuid = useSelector((state) => state.usersession.userUuid);
   const [loggedInUserId, setLoggedInUserId] = useState(null)
+  const [isSubmitting, setIsSubmitting] = useState(-1);
+
 
   useEffect(() => {
-      const loggedInUser = localStorage.getItem('userId') || null;
-      console.log('logged in user in profile -->', loggedInUser)
-      setLoggedInUserId(loggedInUser);
+    const loggedInUser = localStorage.getItem('userId') || null;
+    // console.log('logged in user in profile -->', loggedInUser)
+    setLoggedInUserId(loggedInUser);
   }, [])
   let notification = ''
 
@@ -40,7 +43,7 @@ export default function EditPost() {
 
   useEffect(() => {
 
-    console.log('9999999999999999999999999999999999999')
+    // console.log('9999999999999999999999999999999999999')
 
     fetchDataAsync();
 
@@ -57,12 +60,12 @@ export default function EditPost() {
   async function fetchDataAsync() {
 
     try {
-      console.log('Inside try')
+      // console.log('Inside try')
       const result = await axios.post(
         `${apiBasePath}/getpost/${slug}`
       );
-      console.log('hello slug---', router);
-      console.log('Edite post data ', result.data);
+      // console.log('hello slug---', router);
+      // console.log('Edite post data ', result.data);
 
       setFeathedPost(result.data.object)
       setFormData(result.data.object)
@@ -70,7 +73,7 @@ export default function EditPost() {
       setPreview(result.data.object?.image)
       setAudioPreview(result.data.object?.audio)
       setSelectedOption(result.data.object.category)
-      console.log('post page single postss EDIT ====================>>>>>>>>>>>>>>>>>>>>', result.data.object)
+      // console.log('post page single postss EDIT ====================>>>>>>>>>>>>>>>>>>>>', result.data.object)
       if (result.data.object.audio?.length > 0) {
       } else {
       }
@@ -91,7 +94,7 @@ export default function EditPost() {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    console.log({ name, value })
+    // console.log({ name, value })
     setFormData({ ...formData, [name]: value });
   };
 
@@ -118,10 +121,10 @@ export default function EditPost() {
 
   //  image handle
   const handleFileChange = (acceptedFiles) => {
-    console.log({ acceptedFiles })
+    // console.log({ acceptedFiles })
 
     if (acceptedFiles?.length > 0) {
-      console.log('IS ARRAY ', acceptedFiles)
+      // console.log('IS ARRAY ', acceptedFiles)
       // const imageFiles = acceptedFiles.map((file) => {
       //     return file.type.startsWith('image/');
       // });
@@ -130,7 +133,7 @@ export default function EditPost() {
         const file = acceptedFiles[0];
         if (file) {
           setImage(file);
-          console.log({ file })
+          // console.log({ file })
           const reader = new FileReader();
           reader.onloadend = () => {
             setPreview(reader.result); // Set preview image
@@ -147,14 +150,14 @@ export default function EditPost() {
   };
 
   const handleAudioFile = (acceptedFiles) => {
-    console.log('file', acceptedFiles)
+    // console.log('file', acceptedFiles)
     if (acceptedFiles?.length > 0) {
-      console.log('IS ARRAY ', acceptedFiles);
+      // console.log('IS ARRAY ', acceptedFiles);
       if (acceptedFiles[0].type.startsWith('audio/')) {
         const file = acceptedFiles[0];
         if (file) {
           setSelectedFile(file);
-          console.log({ file })
+          // console.log({ file })
 
         }
       } else {
@@ -207,9 +210,9 @@ export default function EditPost() {
       notification = 'দয়া করে আপনার মূল লেখা লিখুন';
       dispatch(toastAction.setWarnedNotification(notification));
     } else {
+      setIsSubmitting(1)
 
       try {
-        console.log({})
         // const response = await axios.put(`${apiBasePath}/posts/${formData?._id}`, changedData);
         const response = await fetch(`${apiBasePath}/posts/${formData?._id}`, {
           method: "PUT",
@@ -219,14 +222,18 @@ export default function EditPost() {
           body: editFormData,
         });
 
+        setIsSubmitting(-1)
+
         // alert("আপনার লেখাটির আপডেট সম্পন্ন হয়েছে");
         notification = 'আপনার লেখাটির আপডেট সম্পন্ন হয়েছে, অনুমোদনের জন্য এডমিনের নিকট পাঠানো হয়েছে';
         dispatch(toastAction.setWarnedNotification(notification));
-        console.log('edit response', response);
+        // console.log('edit response', response);
         router.push(`/user/${loggedInUserId}`)
 
         // Handle successful update
       } catch (error) {
+        setIsSubmitting(-1)
+
         console.error(error);
         // Handle error
       }
@@ -234,6 +241,10 @@ export default function EditPost() {
     }
 
   };
+
+  if (isSubmitting === 1) {
+    return <Loading />
+  }
 
   return (
     router.isReady &&

@@ -22,7 +22,7 @@ const Lekhok = () => {
       .then((response) => response.json())
       .then((data) => {
         setLekhokList(data);
-        console.log('writer list ----', data)
+        // console.log('writer list ----', data)
       })
       .catch((error) => console.error("Error fetching data:", error));
 
@@ -64,9 +64,9 @@ const Lekhok = () => {
 
             {getVisibleWriters().length > 0 &&
               getVisibleWriters().map((item, index) => {
-                console.log(item?.birth_date)
+                // console.log(item?.birth_date)
                 const banglaBirthdate = item?.birth_date ? convertToBengaliDate(item?.birth_date) : '';
-                console.log({ banglaBirthdate })
+                // console.log({ banglaBirthdate })
                 const banglaExpiredate = item?.expiry_date ? convertToBengaliDate(item?.expiry_date) : '';
 
                 let lifeCycle = `${banglaBirthdate} থেকে  বর্তমান `;

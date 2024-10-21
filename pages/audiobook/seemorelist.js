@@ -26,7 +26,7 @@ const SeeMoreList = () => {
         const type = localStorage.getItem("slideType");
         const category = localStorage.getItem("slideCategory");
 
-        console.log(type, category)
+        // console.log(type, category)
 
         setSeeAllRenderInfo((prevSeeAllRenderInfo) => ({
             ...prevSeeAllRenderInfo,

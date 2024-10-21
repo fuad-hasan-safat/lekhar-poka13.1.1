@@ -25,9 +25,9 @@ const PostDropDown = ({ options, selected, onSelect, lebel, sobClass, visibleIte
   };
 
   const handleClickOutside = (event) => {
-    console.log('Clicked outside:', event.target, event.currentTarget);
+    // console.log('Clicked outside:', event.target, event.currentTarget);
     if (isOpen && dropdownRef.current && !dropdownRef.current.contains(event.target) && event.target !== event.currentTarget) {
-      console.log('Closing dropdown');
+      // console.log('Closing dropdown');
       setIsOpen(false);
     }
   };

@@ -3,12 +3,12 @@ import React from 'react'
 import PlaylistItem from './PlaylistItem'
 
 export default function PlayList({ audioPlaylist, audioScope }) {
-  console.log('My play list',audioPlaylist)
+  // console.log('My play list',audioPlaylist)
   return (
     <>
       {audioPlaylist?.slice(0,5).map((songInfo, index) => {
         const length = audioPlaylist?.length;
-        console.log('playlist audio title: ---', songInfo?.title);
+        // console.log('playlist audio title: ---', songInfo?.title);
         if(songInfo?.title === 'Not Found') return;
         return (
           <div key={index} className='audio__playlist__wrap'>

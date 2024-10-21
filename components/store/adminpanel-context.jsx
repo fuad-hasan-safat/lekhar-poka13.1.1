@@ -30,7 +30,7 @@ export default function AdminContextProvider({ children }) {
         const currentDashboardIndex = parseInt(localStorage.getItem("dashBordPageIndex"));
         const currentDashboardPageScope = localStorage.getItem("dashBordPageScope");
 
-        console.log({ currentDashboardIndex, currentDashboardPageScope })
+        // console.log({ currentDashboardIndex, currentDashboardPageScope })
         if (currentDashboardIndex != null) {
             setDashboard((prevState) => ({
                 ...prevState,
@@ -45,7 +45,7 @@ export default function AdminContextProvider({ children }) {
     function updateCurrentComponentIndex(index, page) {
         localStorage.setItem("dashBordPageIndex", index);
         localStorage.setItem("dashBordPageScope", page);
-        console.log({ index, page })
+        // console.log({ index, page })
         setDashboard((prevDashboard) => ({
             ...prevDashboard,
             currentindex: index,

@@ -33,7 +33,7 @@ export default function UserContextProvider({ children }) {
         if (loggedInUser) {
           try {
             const userObj = JSON.parse(loggedInUser);
-            console.log('user object user context ', userObj);
+            // console.log('user object user context ', userObj);
             setUserData(userObj);
           } catch (error) {
             console.error('Failed to parse loggedInUser from localStorage:', error);

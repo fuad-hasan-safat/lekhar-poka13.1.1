@@ -36,7 +36,7 @@ function CustomEditor( props ) {
                 onChange={ (event, editor ) => {
                     const data = editor.getData();
                     props.setContent(data);
-                    console.log( { event, editor, data } );
+                    // console.log( { event, editor, data } );
                 } }
 
             

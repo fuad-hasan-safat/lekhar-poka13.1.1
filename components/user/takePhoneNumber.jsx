@@ -37,12 +37,12 @@ export default function TakePhoneNumber({userUuid}) {
                 }
             });
 
-           console.log('phone number updated -------------', response)
+        //    console.log('phone number updated -------------', response)
         } catch (error) {
             console.error('Error updating phonenumber:', error);
         }
 
-        console.log("Phone Number:", phoneNumber);
+        // console.log("Phone Number:", phoneNumber);
         closeModal();
     };
 

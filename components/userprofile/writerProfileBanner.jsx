@@ -79,7 +79,7 @@ export default function WriterProfileBanner({
     }, []);
 
     async function getFollowingStatus(user_id, following) {
-        console.log({user_id,  following})
+        // console.log({user_id,  following})
 
         try {
             const followingResponse = await axios.post(
@@ -96,7 +96,7 @@ export default function WriterProfileBanner({
             );
 
             setIsAlreadyFollowing(followingResponse.data.status)
-            console.log('followingResponse ------------------------- writer in response message---------------->>>>>>', followingResponse)
+            // console.log('followingResponse ------------------------- writer in response message---------------->>>>>>', followingResponse)
         } catch (error) {
             // console.log("inside catch ----------------", error);
         }
@@ -151,7 +151,7 @@ export default function WriterProfileBanner({
                 );
                 setIsAlreadyFollowing(true);
                 setFollowerNumber(followerNumber + 1)
-                console.log('following ------------------------- writer in response message---------------->>>>>>', response)
+                // console.log('following ------------------------- writer in response message---------------->>>>>>', response)
                 notification = 'অনুসরণ করছেন'
                 dispatch(toastAction.setSucessNotification(notification));
 
@@ -164,7 +164,7 @@ export default function WriterProfileBanner({
     }
 
 
-    console.log('image --------- length >>>>>', profileInfo?.image)
+    // console.log('image --------- length >>>>>', profileInfo?.image)
 
     const phoneNumber = convertToBanglaPhoneNumber(profileInfo?.phone);
     const maskedNumber = phoneNumber?.substring(0, 5) + '*'.repeat(phoneNumber?.length - 5);

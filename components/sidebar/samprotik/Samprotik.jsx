@@ -19,7 +19,7 @@ const Samprotik = () => {
         const result = await fetchData(
           `${apiBasePath}/recentpost`
         );
-        console.log('samprotik ---->>', result);
+        // console.log('samprotik ---->>', result);
         setSamprotikPost(result.posts);
 
       } catch (error) {

@@ -11,11 +11,11 @@ import { useRouter } from 'next/router';
 export default function SearchResult() {
     const router = useRouter();
     const [isMounted, setIsMounted] = useState(false)
-    const { selectedIteam ,searchResult, isSearchbarActive, setIsSearchbarActive, isSearChPageActive, setSearchResult, setSearchKey, searchKey} = useContext(SearchContext);
+    const { selectedIteam, searchResult, isSearchbarActive, setIsSearChPageActive, setIsSearchbarActive, isSearChPageActive, setSearchResult, setSearchKey, searchKey } = useContext(SearchContext);
 
     useEffect(() => {
         const handleRouteChange = (url) => {
-            console.log('App is changing to: ', url);
+            // console.log('App is changing to: ', url);
             const data = [];
             setIsSearchbarActive(false);
             setSearchResult(data);
@@ -49,7 +49,8 @@ export default function SearchResult() {
         const data = [];
         setIsSearchbarActive(false);
         setSearchResult(data);
-        setSearchKey('')
+        setSearchKey('');
+        setIsSearChPageActive(false);
     }
 
     if (!isSearChPageActive || isMounted) return null;

@@ -13,7 +13,7 @@ export default function CreateRating({ setUserComments, setIsNewComment }) {
 
     useEffect(()=>{
       const loggedInUser = localStorage.getItem('userId') || null ;
-      console.log('logged in user in profile -->', loggedInUser)
+    //   console.log('logged in user in profile -->', loggedInUser)
       setLoggedInUserId(loggedInUser);
     },[])
     const [userRating, setUserRating] = useState('');
@@ -41,7 +41,7 @@ export default function CreateRating({ setUserComments, setIsNewComment }) {
         fetch(`${apiBasePath}/getprofile/${loggedInUserId}`)
             .then((response) => response.json())
             .then((data) => {
-                console.log('pofile details on user profile--------------->>>>>>>', data);
+                // console.log('pofile details on user profile--------------->>>>>>>', data);
                 setProfileInfo(data.object.profile)
             })
             .catch((error) => console.error("Error fetching data:", error));
@@ -68,7 +68,7 @@ export default function CreateRating({ setUserComments, setIsNewComment }) {
                 user_id: loggedInUserId
             };
 
-            console.log({ postData })
+            // console.log({ postData })
 
             if (postData.comment.trim() === '') {
                 notification = 'দয়া করে আপনার মন্তব্য লিখুন ।';
@@ -96,7 +96,7 @@ export default function CreateRating({ setUserComments, setIsNewComment }) {
                 //     newComment,
                 // ]))
                 setIsNewComment((prev) => !prev); 
-                console.log('Response:', result); // Handle the response as needed
+                // console.log('Response:', result); // Handle the response as needed
                 // reloadPage();
             } catch (error) {
                 console.error('Error submitting rating:', error);

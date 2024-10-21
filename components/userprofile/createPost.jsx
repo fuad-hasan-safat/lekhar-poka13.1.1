@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { userPostAction } from '../redux/userpost-slice';
 import { generateUUID } from '../../function/api';
 import { toastAction } from '../redux/toast-slice';
+import Loading from '../common/loading';
 
 
 
@@ -25,11 +26,12 @@ export default function CreatePost() {
     const dispatch = useDispatch();
 
     // const useruuid = useSelector((state) => state.usersession.userUuid);
-    const [loggedInUserId, setLoggedInUserId] = useState(null)
+    const [loggedInUserId, setLoggedInUserId] = useState(null);
+    const [isSubmitting, setIsSubmitting] = useState(-1);
 
     useEffect(() => {
         const loggedInUser = localStorage.getItem('userId') || null;
-        console.log('logged in user in create post -->', loggedInUser)
+        // console.log('logged in user in create post -->', loggedInUser)
         setLoggedInUserId(loggedInUser);
     }, [])
 
@@ -55,22 +57,26 @@ export default function CreatePost() {
     const [summary, setSummary] = useState('')
 
 
+    useEffect(() => {
+        if (loggedInUserId) {
+            fetch(`${apiBasePath}/getprofile/${loggedInUserId}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log('profile status--> ', data?.object?.profile_completion_status)
+                    if (!data?.object?.profile_completion_status) {
+                        setCanPostStatus(false)
+                    } else {
+                        setCanPostStatus(true)
+                    }
+
+                })
+                .catch((error) => console.error("Error fetching data:", error));
+        }
+
+    }, [loggedInUserId])
 
 
     useEffect(() => {
-        fetch(`${apiBasePath}/getprofile/${loggedInUserId}`)
-            .then((response) => response.json())
-            .then((data) => {
-                console.log('profile status--> ', data?.object?.profile_completion_status)
-                if (!data?.object?.profile_completion_status) {
-                    setCanPostStatus(false)
-                } else {
-                    setCanPostStatus(true)
-                }
-
-            })
-            .catch((error) => console.error("Error fetching data:", error));
-
 
         fetch(`${apiBasePath}/writers`)
             .then((response) => response.json())
@@ -136,7 +142,8 @@ export default function CreatePost() {
     };
 
     const handleSubmit = async () => {
-        console.log("INSIDE HANDLE")
+        // console.log("INSIDE HANDLE")
+
         if (!canPostStatus) {
             const confirmLogout = window.confirm('দয়া করে প্রোফাইল তৈরি করুন');
             if (confirmLogout) {
@@ -163,6 +170,7 @@ export default function CreatePost() {
             }
             else {
                 var isWriter = true;
+                setIsSubmitting(1);
 
                 const formData = new FormData();
                 formData.append("file", selectedFile);
@@ -191,6 +199,7 @@ export default function CreatePost() {
                         });
 
                         if (response.ok) {
+                            setIsSubmitting(-1);
                             const data = await response.json();
                             notification = 'আপনার লেখাটি অনুমোদনের জন্য এডমিনের কাছে পাঠানো হয়েছে। লেখাটি শীঘ্রই প্রকাশিত হবে। ধন্যবাদ';
                             dispatch(toastAction.setWarnedNotification(notification));
@@ -206,11 +215,15 @@ export default function CreatePost() {
                             router.push(`/user/${loggedInUserId}`)
 
                         } else {
+                            setIsSubmitting(-1);
                             console.error("Failed to update writing:", response.statusText);
                         }
                     } catch (error) {
+                        setIsSubmitting(-1);
                         console.error("Error creating post:", error);
                         notification = error
+                    } finally {
+                        setIsSubmitting(0)
                     }
                 } else {
                     notification = 'শিরোনাম, লেখার ধরণ ও সারসংক্ষেপ লিখুন';
@@ -227,16 +240,16 @@ export default function CreatePost() {
 
     //  image handle
     const handleFileChange = (acceptedFiles) => {
-        console.log({ acceptedFiles })
+        // console.log({ acceptedFiles })
 
         if (acceptedFiles?.length > 0) {
-            console.log('IS ARRAY ', acceptedFiles)
+            // console.log('IS ARRAY ', acceptedFiles)
 
             if (acceptedFiles[0].type.startsWith('image/')) {
                 const file = acceptedFiles[0];
                 if (file) {
                     setImage(file);
-                    console.log({ file })
+                    // console.log({ file })
                     const reader = new FileReader();
                     reader.onloadend = () => {
                         setPreview(reader.result); // Set preview image
@@ -253,15 +266,15 @@ export default function CreatePost() {
     };
 
     const handleAudioFile = (acceptedFiles) => {
-        console.log('file', acceptedFiles)
+        // console.log('file', acceptedFiles)
         if (acceptedFiles?.length > 0) {
-            console.log('IS ARRAY ', acceptedFiles)
+            // console.log('IS ARRAY ', acceptedFiles)
 
             if (acceptedFiles[0].type.startsWith('audio/')) {
                 const file = acceptedFiles[0];
                 if (file) {
                     setSelectedFile(file);
-                    console.log({ file })
+                    // console.log({ file })
 
                 }
             } else {
@@ -284,9 +297,13 @@ export default function CreatePost() {
 
 
 
-    console.log({ category })
+    // console.log({ category })
 
     if (!isLoading) return null;
+
+    if (isSubmitting == 1) {
+        return <Loading />
+    }
 
     return (
         <>

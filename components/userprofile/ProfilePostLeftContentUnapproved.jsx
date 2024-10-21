@@ -49,7 +49,7 @@ export default function ProfilePostLeftContentUnApproved() {
         if (loggedInUserId) {
           const response = await axios.get(`${apiBasePath}/unverifiedpostsbyuser/${loggedInUserId}`); // Use Axios
           const data = response.data;
-          console.log('UN-APPROVED POST----->>', data)
+          // console.log('UN-APPROVED POST----->>', data)
 
 
           setPostList(data.object);

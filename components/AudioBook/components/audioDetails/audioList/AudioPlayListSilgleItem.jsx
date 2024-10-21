@@ -69,9 +69,9 @@ export default function AudioPlayListSingleItem({ songInfo, audioIndex, audioLis
             api = 'deleteitem';
         };
 
-        console.log('play list scope::::', playListScope);
+        // console.log('play list scope::::', playListScope);
         const apiUrl = `${apiBasePath}/${api}/${songInfo._id}`;
-        console.log('API DELETE URL ', apiUrl);
+        // console.log('API DELETE URL ', apiUrl);
 
         try {
             const response = await axios.delete(apiUrl);
@@ -98,7 +98,7 @@ export default function AudioPlayListSingleItem({ songInfo, audioIndex, audioLis
     }
 
     const title = replaceUnderscoresWithSpaces(songInfo?.title)
-    console.log(title);
+    // console.log(title);
 
     let shortenedTitle = title;
 

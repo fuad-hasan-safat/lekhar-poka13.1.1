@@ -16,7 +16,7 @@ export default function AudioDetailsSideBar() {
 
     useEffect(() => {
         const loggedInUser = localStorage.getItem('userId') || null;
-        console.log('logged in user in profile -->', loggedInUser)
+        // console.log('logged in user in profile -->', loggedInUser)
         setLoggedInUserId(loggedInUser);
     }, [])
 
@@ -35,12 +35,12 @@ export default function AudioDetailsSideBar() {
     const getData = async () => {
         const myPlayListUrl = `${apiBasePath}/showplaylist/${loggedInUserId}`;
         const latestPlayListUrl = `${apiBasePath}/showlatestplaylist/${loggedInUserId}`;
-        console.log({ myPlayListUrl, latestPlayListUrl })
+        // console.log({ myPlayListUrl, latestPlayListUrl })
 
 
         try {
             const myplayList = await fetchDataWithAxios(myPlayListUrl);
-            console.log('my play list', myplayList)
+            // console.log('my play list', myplayList)
             const playList = myplayList?.object?.filter((obj) => obj.title !== 'Not Found');
             dispatch(playlistAction.addMyPlaylist(playList));
 
@@ -50,7 +50,7 @@ export default function AudioDetailsSideBar() {
 
         try {
             const latestPlayList = await fetchDataWithAxios(latestPlayListUrl);
-            console.log('latest playlist get response', latestPlayList);
+            // console.log('latest playlist get response', latestPlayList);
 
             const playList = latestPlayList?.object?.filter((obj) => obj.title !== 'Not Found');
 

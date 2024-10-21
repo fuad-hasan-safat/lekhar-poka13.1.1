@@ -12,11 +12,11 @@ export async function getServerSideProps(context) {
     const { slug } = context.params;
     try {
 
-        const res = await fetch(`${serverEndApiBasePath}/getaudiobook/${slug}`);
+        const res = await fetch(`${apiBasePath}/getaudiobook/${slug}`);
         const singleAudioData = await res.json()
 
-        console.log({ singleAudioData })
-        const postRes = await fetch(`${serverEndApiBasePath}/updateview/${slug}`, {
+        // console.log({ singleAudioData })
+        const postRes = await fetch(`${apiBasePath}/updateview/${slug}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ export async function getServerSideProps(context) {
 
         const postResult = await postRes.json();
 
-        console.log({ postResult })
+        // console.log({ postResult })
 
         return { props: { singleAudioData } }
 
@@ -45,7 +45,7 @@ export default function Home({ singleAudioData }) {
 
     const router = useRouter();
     const currentUrl = router.asPath;
-    console.log('current url', currentUrl);
+    // console.log('current url', currentUrl);
     const userUuid = useSelector(state => state.usersession.userUuid);
 
     const [loggedInUserId, setLoggedInUserId] = useState(null)
@@ -53,20 +53,16 @@ export default function Home({ singleAudioData }) {
 
     useEffect(() => {
         const loggedInUser = localStorage.getItem('userId') || null;
-        console.log('logged in user in profile -->', loggedInUser)
+        // console.log('logged in user in profile -->', loggedInUser)
         setLoggedInUserId(loggedInUser);
 
         setIsLoading(false)
 
     }, [])
 
-    console.log(singleAudioData.audio)
+    // console.log(singleAudioData.audio)
 
-    // const [isLoading, setIsLoading] = useState(false)
 
-    // useEffect(() => {
-    //     setIsLoading(true)
-    // }, [])
 
     if (singleAudioData?.fetchError === 5) {
         router.push('/404');
@@ -96,7 +92,7 @@ export default function Home({ singleAudioData }) {
                 <meta property="og:description" content={`${description} #lekharpoka`} />
                 <meta property="og:image" content={imageLink || '/lekharPokaPreviewImage/lekharpokabanner.jpg'} key="og:image" />
             </Head>
-            {loggedInUserId || userUuid ?
+            {loggedInUserId ?
                 <div>
 
 

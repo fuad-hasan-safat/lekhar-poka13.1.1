@@ -10,7 +10,6 @@ export default function AudioSidebarLekhok() {
     const router = useRouter()
 
     const [lekhokList, setLekhokList] = useState([]);
-    let getVisibleWriters = ''
 
     useEffect(() => {
 
@@ -18,7 +17,6 @@ export default function AudioSidebarLekhok() {
             .then((response) => response.json())
             .then((data) => {
                 setLekhokList(data);
-                getVisibleWriters(data?.slice(0,4))
             })
             .catch((error) => console.error("Error fetching data:", error));
 

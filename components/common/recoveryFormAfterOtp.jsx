@@ -115,7 +115,7 @@ export default function PassRecovertFormAterOTP({ phonenumber }) {
                 }
 
                 const responseBody = await response.json();
-                console.log("API response:", responseBody);
+                // console.log("API response:", responseBody);
                 notification = 'পাসওয়ার্ড রিকভারি সফলভাবে সম্পন্ন হয়েছে, অনুগ্রহ করে লগইন করুন';
                 dispatch(toastAction.setSucessNotification(notification))
 

@@ -31,14 +31,14 @@ import Script from 'next/script';
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const { pathname } = router;
-  console.log("pathname : ", pathname);
+  // console.log("pathname : ", pathname);
 
   const { setCurrentComponentIndex } = useContext(AdminContext);
 
   // const {postTitle, postDiscripption, postImage, postLink} = useSelector(state => state.posts )
 
   useRouteChange((url) => {
-    console.log('Route changed to:', url);
+    // console.log('Route changed to:', url);
     setCurrentComponentIndex(0, 'Dashboard');
   });
 

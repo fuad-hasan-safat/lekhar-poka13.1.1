@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { apiBasePath } from '../../../../../utils/constant';
 
 export default function BackGroundSlider({ sliderData, category }) {
-    console.log('BACKGROUND SLIDER', sliderData)
+    // console.log('BACKGROUND SLIDER', sliderData)
 
     const router = useRouter();
 
@@ -43,7 +43,7 @@ export default function BackGroundSlider({ sliderData, category }) {
                 {sliderData.map((iteam, index) => {
 
                     const color = iteam?.color;
-                    console.log({ color, iteam })
+                    // console.log({ color, iteam })
                     return (
                         <div className='backgroundSlider__single__wrap'>
 

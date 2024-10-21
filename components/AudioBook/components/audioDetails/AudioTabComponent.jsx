@@ -6,7 +6,7 @@ export default function AudioTabComponent({ singleAudioData }) {
     ...audio,
     writer: singleAudioData.writer,
   }))
-  console.log({ audioData })
+  // console.log({ audioData })
   return (
     <div className='w-full mb-[100px]'>
       {audioData?.length <= 0 && <div>

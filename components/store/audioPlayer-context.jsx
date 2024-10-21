@@ -45,7 +45,7 @@ export default function AudioPlaylistContextProvider({ children }) {
   const [isPlaying, setIsPlaying] = useState(false);
 
   function setCurrentPlaylist(playlist, currentIndex = 0) {
-    console.log('Playlist in context function', playlist, currentIndex);
+    // console.log('Playlist in context function', playlist, currentIndex);
     setAudioBar((prevAudioBar) => ({
       ...prevAudioBar,
       playList: playlist,
@@ -79,7 +79,7 @@ export default function AudioPlaylistContextProvider({ children }) {
   }
 
   const playNextSong = () => {
-    console.log('shuffle ', audioBar.isShuffle)
+    // console.log('shuffle ', audioBar.isShuffle)
     if (isPlaying && audioBar.playList.length <= 1) {
       setIsPlaying(false)
     }
@@ -94,7 +94,7 @@ export default function AudioPlaylistContextProvider({ children }) {
   };
 
   const playPreviousSong = () => {
-    console.log('shuffle ', audioBar.isShuffle)
+    // console.log('shuffle ', audioBar.isShuffle)
 
     setCurrentPlayingIndex((prevIndex) =>
       audioBar.isShuffle
@@ -128,7 +128,7 @@ export default function AudioPlaylistContextProvider({ children }) {
   };
 
   function togglePlay(songIndex, songList, audioScope = 'none') {
-    console.log({ songIndex, songList })
+    // console.log({ songIndex, songList })
     const prevScope = audioBar.audioPlace;
     const prevIndex = currentPlayingIndex;
 
@@ -157,10 +157,10 @@ export default function AudioPlaylistContextProvider({ children }) {
 
   function toggleShuffleState() {
     setAudioBar((prevAudioBar) => {
-      console.log('Previous audio shuffle -', prevAudioBar.isShuffle)
+      // console.log('Previous audio shuffle -', prevAudioBar.isShuffle)
 
       const upDateShuffle = !prevAudioBar.isShuffle;
-      console.log('upDateShuffle audio shuffle -', upDateShuffle)
+      // console.log('upDateShuffle audio shuffle -', upDateShuffle)
 
 
       return ({
@@ -173,7 +173,7 @@ export default function AudioPlaylistContextProvider({ children }) {
 
   function toggleReapetState() {
     setAudioBar((prevAudioBar) => {
-      console.log('Previous audio reaper -', prevAudioBar.isRepeat)
+      // console.log('Previous audio reaper -', prevAudioBar.isRepeat)
       return ({
         ...prevAudioBar,
         isRepeat: !prevAudioBar.isRepeat

@@ -30,7 +30,7 @@ export default function SignInOption({
     const login = useGoogleLogin({
         onSuccess: (codeResponse) => {
             setGoogle_accessToken(codeResponse.access_token);
-            console.log('google log in response , ', codeResponse);
+            // console.log('google log in response , ', codeResponse);
             // router.push('/')
 
         },
@@ -56,12 +56,12 @@ export default function SignInOption({
                     },
                 }
             );
-            console.log('Google log in backend response', response)
+            // console.log('Google log in backend response', response)
 
             if (response.data.status === 'success') {
 
                 const data = response.data;
-                console.log('Google back end log in sucess', data);
+                // console.log('Google back end log in sucess', data);
 
                 dispatch(userSessionAction.addValidUser({
                     isLoggedIn: true,
@@ -105,7 +105,7 @@ export default function SignInOption({
                         }
                     })
                     .then((res) => {
-                        console.log('Google details response', res);
+                        // console.log('Google details response', res);
                         sendDataToBackend(res.data.id, res.data.email, res.data.name, res.data.picture, google_accessToken)
 
                         router.push('/')

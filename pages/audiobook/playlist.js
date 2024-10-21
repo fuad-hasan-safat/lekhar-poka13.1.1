@@ -28,7 +28,7 @@ const PlaylistSeeAll = () => {
         const loggedInUser = localStorage.getItem('userId') || null;
 
         const scope = localStorage.getItem('type')
-        console.log('logged in user in profile -->', loggedInUser, scope)
+        // console.log('logged in user in profile -->', loggedInUser, scope)
         setLoggedInUserId(loggedInUser);
         setType(scope)
 
@@ -48,7 +48,7 @@ const PlaylistSeeAll = () => {
        
         try {
             const myplayList = await fetchDataWithAxios(url);
-            console.log('my play list', myplayList)
+            // console.log('my play list', myplayList)
             const playList = myplayList?.object?.filter((obj) => obj.title !== 'Not Found');
             setPlaylist(playList)
 

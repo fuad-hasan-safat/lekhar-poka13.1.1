@@ -45,7 +45,7 @@ const FullPostPaginationOthers = ({ logText, customclass }) => {
   const getSavedpage = async () => {
     
     const userUUID = localStorage.getItem("uuid") || ''
-    console.log({ userUUID, slug, userUuid })
+    // console.log({ userUUID, slug, userUuid })
 
     if(userUUID?.length > 0){
 
@@ -62,17 +62,17 @@ const FullPostPaginationOthers = ({ logText, customclass }) => {
             },
           }
         );
-        console.log('get page---', response)
+        // console.log('get page---', response)
   
         if (response.data.status === 'success') {
           setCurrentPage(response.data.saved_page)
         } else {
-          console.log('response  eeeerrrrroooorrrr')
+          // console.log('response  eeeerrrrroooorrrr')
           setCurrentPage(0)
         }
   
       } catch (error) {
-        console.log('api  eeeerrrrroooorrrr')
+        // console.log('api  eeeerrrrroooorrrr')
 
         setCurrentPage(0)
   
@@ -87,12 +87,12 @@ const FullPostPaginationOthers = ({ logText, customclass }) => {
 
   const saveCurrentPage = async (selected) => {
 
-    const userUUID = localStorage.getItem("uuid")
+    const userUUID = localStorage.getItem("userId")
 
-    console.log({ userUUID })
+    // console.log({ userUUID })
 
     if (userUUID?.length > 0) {
-      console.log('current selected page-->>>', selected)
+      // console.log('current selected page-->>>', selected)
       try {
         const response = await axios.post(
           `${apiBasePath}/recordpostpage`,
