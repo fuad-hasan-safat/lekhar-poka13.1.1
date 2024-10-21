@@ -13,16 +13,14 @@ import Loading from "../../components/common/loading";
 
 
 
-export default function PostDetails({ postData = null}) {
+export default function PostDetails({ postData }) {
+
   const router = useRouter();
   const slug = router.query.slug;
   const { asPath } = router;
 
   // console.log({ postData })
 
-  if (!postData) {
-    return <Loading />
-  }
 
   const dispatch = useDispatch();
   const isAudioPlaying = useSelector(state => state.audioplayer.isAudioPlaying);
@@ -32,11 +30,14 @@ export default function PostDetails({ postData = null}) {
   // const userUuid = useSelector(state => state.usersession.userUuid)
   const [loggedInUserId, setLoggedInUserId] = useState(null)
 
-  useEffect(()=>{
-    const loggedInUser = localStorage.getItem('userId') || null ;
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem('userId') || null;
     // console.log('logged in user in profile -->', loggedInUser)
     setLoggedInUserId(loggedInUser);
-  },[])
+  }, [])
+
+
+  
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -99,7 +100,10 @@ export default function PostDetails({ postData = null}) {
 
   }
 
-  console.log('slug, id', slug, data._id);
+
+  if (postData?.fetchError === 5) {
+    router.push('/404');
+  };
 
   return (
     isdataFetch &&
@@ -224,11 +228,23 @@ export async function getServerSideProps(context) {
 
   const { slug } = context.params;
 
+  try {
+    const res = await fetch(`${serverEndApiBasePath}/getpost/${slug}`, {
+      method: 'POST'
+    });
+    const postData = await res.json();
 
-  const res = await fetch(`${serverEndApiBasePath}/getpost/${slug}`, {
-    method: 'POST'
-  });
-  const postData = await res.json()
+    return { props: { postData } }
+
+
+  } catch (error) {
+    console.log(error);
+
+  }
+
+  const postData = {
+    fetchError: 5,
+  }
 
   console.log(postData)
   return { props: { postData } }
