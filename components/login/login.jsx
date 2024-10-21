@@ -17,15 +17,19 @@ const LoginPage = ({ url = '/' }) => {
     const loggedInUser = localStorage.getItem('userId') || null;
     // console.log('logged in user in profile -->', loggedInUser)
     setLoggedInUserId(loggedInUser);
-  }, [])
+  }, [isLoggedIn])
 
-  if (isLoggedIn || loggedInUserId) {
-    router.push(url);
-  }
+
 
   useEffect(() => {
-      setisLoading(false);
-  
+    if (isLoggedIn || loggedInUserId) {
+      console.log({ url })
+      router.reload(url);
+    }
+
+    setisLoading(false);
+
+
   }, [loggedInUserId])
 
   if (isLoading) {
@@ -33,7 +37,6 @@ const LoginPage = ({ url = '/' }) => {
   }
   else {
     return (
-      !isLoading && !loggedInUserId &&
       <>
         <section className="login__form__sec__wrp clearfix">
 

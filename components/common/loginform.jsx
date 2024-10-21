@@ -34,6 +34,7 @@ export default function LoginForm({ logreg, btntext }) {
   const [error, setError] = useState(null);
   const [numberPrefix, setNumberPrefix] = useState('88');
   const [showPassword, setShowPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(-1);
 
 
   const togglePasswordVisibility = () => {
@@ -79,6 +80,7 @@ export default function LoginForm({ logreg, btntext }) {
 
 
   async function submitLogin() {
+    setIsSubmitting(1);
 
     try {
       const response = await axios.post(
@@ -132,17 +134,26 @@ export default function LoginForm({ logreg, btntext }) {
         triggerLogin();
         setnumber('');
         setPassword('');
+        setIsSubmitting(-1)
       } else {
         notification = 'সঠিক নাম্বার দিন';
         dispatch(toastAction.setWarnedNotification(notification));
+        setIsSubmitting(-1)
+
       }
     } catch (error) {
       notification = 'সঠিক পাসওয়ার্ড দিন';
       console.log(error);
       dispatch(toastAction.setWarnedNotification(notification));
+      setIsSubmitting(-1)
+
     }
   }
 
+
+  if(isSubmitting === 1){
+    return <Loading/>
+  }
 
   return (
     <>

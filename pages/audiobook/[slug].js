@@ -12,11 +12,11 @@ export async function getServerSideProps(context) {
     const { slug } = context.params;
     try {
 
-        const res = await fetch(`${serverEndApiBasePath}/getaudiobook/${slug}`);
+        const res = await fetch(`${apiBasePath}/getaudiobook/${slug}`);
         const singleAudioData = await res.json()
 
         // console.log({ singleAudioData })
-        const postRes = await fetch(`${serverEndApiBasePath}/updateview/${slug}`, {
+        const postRes = await fetch(`${apiBasePath}/updateview/${slug}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -73,9 +73,9 @@ export default function Home({ singleAudioData }) {
         return str?.replace(/<\/?[^>]+(>|$)/g, "");
     }
 
-    // if (isLoading) {
-    //     return <Loading />
-    // }
+    if (isLoading) {
+        return <Loading />
+    }
 
     const postLink = `https://lekharpoka.com${currentUrl}`
     const description = removeHtmlTags(singleAudioData?.summary?.slice(0, 700));
