@@ -101,7 +101,7 @@ export default function UserPostTitleAndcover({
       // console.log('Delete successful:', response.data);
 
       notification = 'পোস্টটি মুছে ফেলা হয়েছে'
-      dispatch(toastAction.setWarnedNotification(notification));
+      dispatch(toastAction.setSucessNotification(notification));
       dispatch(userPostAction.deleteApost(id));
 
       dialogueRef.current.close();
