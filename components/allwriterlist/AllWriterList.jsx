@@ -39,7 +39,7 @@ export default function AllWriterList() {
                         {lekhokList.length &&
 
                             lekhokList.map((item, index) => {
-                                console.log('writer-->', item);
+                                // console.log('writer-->', item);
                                 let banglaBirthdate = item?.birth_date ? convertToBengaliDate(item?.birth_date) : '';
                                 let banglaExpiredate = item?.expiry_date ? convertToBengaliDate(item?.expiry_date) : '';
 

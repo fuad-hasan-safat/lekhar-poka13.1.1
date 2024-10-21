@@ -69,11 +69,11 @@ export default function WriterProfile() {
     }
 
     useEffect(() => {
-        console.log("-----------------------------  SLUG -----------------------", slug);
+        // console.log("-----------------------------  SLUG -----------------------", slug);
         fetch(`${apiBasePath}/getprofile/${slug}`)
             .then((response) => response.json())
             .then((data) => {
-                console.log('pofile details on writer---- profile--------------->>>>>>>', data);
+                // console.log('pofile details on writer---- profile--------------->>>>>>>', data);
                 setDesignation(data.object.profile?.designation)
                 setProfileStatus(data.object.profile?.profileStatus)
                 setGender(data.object.profile.gender)
@@ -88,7 +88,7 @@ export default function WriterProfile() {
                 setUserName(data.object.profile.name)
 
 
-                console.log(' profile ----------->>>>', data)
+                // console.log(' profile ----------->>>>', data)
             })
             .catch((error) => console.error("Error fetching data:", error));
 
@@ -143,7 +143,7 @@ export default function WriterProfile() {
                     },
                 }
             );
-            console.log('following ------------------------- writer in response message---------------->>>>>>', response)
+            // console.log('following ------------------------- writer in response message---------------->>>>>>', response)
 
         } catch (error) {
             // console.log("inside catch ----------------", error);

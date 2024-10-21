@@ -36,7 +36,7 @@ const ImageCrop = ({ setuserprofiledata, setUpdatedImage, setImageFile, image, t
     const handleDone = async () => {
         const avatar = await getProcessedImage();
         const avaterUrl = window.URL.createObjectURL(avatar);
-        console.log('avater url ---', avaterUrl);
+        // console.log('avater url ---', avaterUrl);
         setPreview(avaterUrl);
         resetStates();
         setOpenModal(false);

@@ -15,7 +15,7 @@ const LoginPage = ({ url = '/' }) => {
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem('userId') || null;
-    console.log('logged in user in profile -->', loggedInUser)
+    // console.log('logged in user in profile -->', loggedInUser)
     setLoggedInUserId(loggedInUser);
   }, [])
 

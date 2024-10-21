@@ -18,13 +18,13 @@ const LekhokDetails = ({
 
     useEffect(()=>{
       const loggedInUser = localStorage.getItem('userId') || null ;
-      console.log('logged in user in profile -->', loggedInUser)
+    //   console.log('logged in user in profile -->', loggedInUser)
       setLoggedInUserId(loggedInUser);
     },[])
 
-    console.log({ writer, writer_id, user_id })
+    // console.log({ writer, writer_id, user_id })
     let redirectAddress = `/postbyuser/${writer_id}`;
-    console.log({ redirectAddress })
+    // console.log({ redirectAddress })
 
     if (user_id) {
         if (user_id === loggedInUserId) {
@@ -36,7 +36,7 @@ const LekhokDetails = ({
         router.push(redirectAddress);
     }
 
-    console.log('redirected --- url', redirectAddress)
+    // console.log('redirected --- url', redirectAddress)
     return (
         <>
             <div className="flex">

@@ -15,7 +15,7 @@ export default function UserProfile() {
 
   useEffect(()=>{
     const loggedInUser = localStorage.getItem('userId') || null ;
-    console.log('logged in user in profile -->', loggedInUser)
+    // console.log('logged in user in profile -->', loggedInUser)
     setLoggedInUserId(loggedInUser);
   },[])
 
@@ -65,23 +65,23 @@ export default function UserProfile() {
 
   useEffect(() => {
 
-    console.log('user uuid -->', userUuid)
+    // console.log('user uuid -->', userUuid)
 
     if(!loggedInUserId) return;
 
-    console.log('getting profile .....')
+    // console.log('getting profile .....')
 
     fetch(`${apiBasePath}/getprofile/${loggedInUserId}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log('pofile details on user profile--------------->>>>>>>', data);
+        // console.log('pofile details on user profile--------------->>>>>>>', data);
         setProfileInfo(data?.object?.profile)
         setApprovedPost(data?.object?.approved_post)
         setUnapprovedPost(data?.object?.unapproved_post)
         setProfileName(data?.object?.name)
         setProfileStatus(data?.object?.status)
         setProfileStats(data?.object?.stats)
-        console.log('Loding false next line ----------->')
+        // console.log('Loding false next line ----------->')
         setIsLoading(false);
 
         const picUrl = `${data?.object?.profile?.image?.slice( data?.object?.profile?.image?.indexOf("/") + 1)}` === ('undefined' || undefined || null) ? '' : `${apiBasePath}/${ data?.object?.profile?.image?.slice( data?.object?.profile?.image?.indexOf("/") + 1)}`;

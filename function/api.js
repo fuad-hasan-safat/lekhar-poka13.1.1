@@ -19,7 +19,7 @@ const isSpace = (char) => /\s/.test(char);
 
 
 export function countWords(content = '  ', limit, category = 'others') {
-  console.log('in side api function --->><><><><><><<<<>>>><<<<>>> ---- content', content)
+  // console.log('in side api function --->><><><><><><<<<>>>><<<<>>> ---- content', content)
   if (category === 'কবিতা') {
     const cleanedString = content.replace(/&nbsp;/g, '');
     const logLines = cleanedString?.split(/<\/p>|<br>/);
@@ -52,7 +52,7 @@ export function countWords(content = '  ', limit, category = 'others') {
       }
     }
 
-    console.log('SUUUBB STRING-->', substring)
+    // console.log('SUUUBB STRING-->', substring)
     // Use the loop variable 'wordCount' directly
 
     return substring; // Consider character length for non-BMP characters
@@ -68,7 +68,7 @@ export function getKobitaLines(content) {
   // const lines = content.match(/<p[\s\S]*?<\/p>|<br\s*\/?>/gi);
 
   const logLines = content?.split('<br>');
-  console.log({ logLines })
+  // console.log({ logLines })
 
   // Filter out empty lines and return the first 5 lines including closing tags
   const firstFiveLines = logLines.slice(0, 5);

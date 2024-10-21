@@ -44,7 +44,7 @@ export default function AudioSlider() {
   return (
     <>
       {homeSlider.audioSlider.map((sliderData, index) => {
-        console.log(sliderData)
+        // console.log(sliderData)
         return (
 
           <Fragment key={index}>

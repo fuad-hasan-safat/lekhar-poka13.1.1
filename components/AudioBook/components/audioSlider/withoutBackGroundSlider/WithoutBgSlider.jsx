@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { apiBasePath } from '../../../../../utils/constant';
 
 export default function WithoutBgSlider({ sliderData, category }) {
-  console.log('WITHOUT BACKGROUND SLIDER', sliderData)
+  // console.log('WITHOUT BACKGROUND SLIDER', sliderData)
 
   const router = useRouter();
 

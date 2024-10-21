@@ -27,7 +27,7 @@ export default function MusicPlayer({ songs }) {
 
 
   var currentSong = songs[currentSongIndex];
-  console.log(songs)
+  // console.log(songs)
 
   useEffect(() => {
     currentSong = songs[currentSongIndex];

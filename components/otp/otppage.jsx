@@ -44,7 +44,7 @@ const OtpPage = ({ otpProp, SetIsOtpSucess, phonenumber, setIsOtpVerified, setIs
       });
 
       if (response.data.status === "success") {
-        console.log('Send OTP sucessfull---------', response);
+        // console.log('Send OTP sucessfull---------', response);
         setIsOtpVerified(true);
         setIsOtpSuccess(true);
       } else {
@@ -59,7 +59,7 @@ const OtpPage = ({ otpProp, SetIsOtpSucess, phonenumber, setIsOtpVerified, setIs
 
   const handleSendOtpAgain = async () => {
     const formattedPhoneNumber = `88${phonenumber?.trim()}`;
-    console.log('before otp ', formattedPhoneNumber)
+    // console.log('before otp ', formattedPhoneNumber)
 
 
     try {
@@ -67,7 +67,7 @@ const OtpPage = ({ otpProp, SetIsOtpSucess, phonenumber, setIsOtpVerified, setIs
         phone: formattedPhoneNumber,
       });
 
-      console.log('Resend otp response', response)
+      // console.log('Resend otp response', response)
 
       setOtpStatus(response.data.otp_status)
 
@@ -124,8 +124,8 @@ const OtpPage = ({ otpProp, SetIsOtpSucess, phonenumber, setIsOtpVerified, setIs
       inputRefs.current[index + 1].focus();
     }
 
-    console.log(otp.join(''))
-    console.log(typeof (otp.join()))
+    // console.log(otp.join(''))
+    // console.log(typeof (otp.join()))
   };
 
 

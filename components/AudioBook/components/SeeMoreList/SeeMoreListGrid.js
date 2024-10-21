@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { apiBasePath } from '../../../../utils/constant';
 
 export default function SeeMoreListGrid({ audioData }) {
-    console.log(audioData)
+    // console.log(audioData)
     const router = useRouter()
     const [displayCount, setDisplayCount] = useState(6);
     const [loading, setLoading] = useState(false);

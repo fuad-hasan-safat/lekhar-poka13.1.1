@@ -15,15 +15,22 @@ export default function RatingComponent({ post_id, setRating, rating, notificati
 
   useEffect(() => {
       const loggedInUser = localStorage.getItem('userId') || null;
-      console.log('logged in user in profile -->', loggedInUser)
+      // console.log('logged in user in profile -->', loggedInUser)
       setLoggedInUserId(loggedInUser);
   }, [])
-  const isLoogedIn = useSelector((state) => state.usersession.isLoggedIn);
+  // const isLoogedIn = useSelector((state) => state.usersession.isLoggedIn);
 
   const [isMounted, setIsMounted] = useState(false);
   const [userRating, setUserrating] = useState(0);
 
   useEffect(() => {
+    let isLoogedIn = false;
+
+
+
+    if(loggedInUserId?.length>0){
+      isLoogedIn = true
+    }
 
     async function getPostData() {
       try {
@@ -81,7 +88,7 @@ export default function RatingComponent({ post_id, setRating, rating, notificati
         body: JSON.stringify(data),
       });
 
-      console.log('Rating sesponse ', response);
+      // console.log('Rating sesponse ', response);
 
       if (!response.ok) {
 

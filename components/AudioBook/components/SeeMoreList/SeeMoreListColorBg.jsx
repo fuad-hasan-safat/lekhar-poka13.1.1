@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { apiBasePath } from '../../../../utils/constant';
 
 export default function SeeMoreListBackground(audioData) {
-    console.log(audioData.audioData)
+    // console.log(audioData.audioData)
 
     const router = useRouter();
     const [displayCount, setDisplayCount] = useState(6);
@@ -33,7 +33,7 @@ export default function SeeMoreListBackground(audioData) {
             {audioData.audioData.slice(0, displayCount).map((iteam, index) => {
 
                 const color = iteam?.color;
-                console.log({ color, iteam })
+                // console.log({ color, iteam })
                 return (
                     <div className='backgroundSlider__single__wrap backgroundSlider__single'>
                         <div 

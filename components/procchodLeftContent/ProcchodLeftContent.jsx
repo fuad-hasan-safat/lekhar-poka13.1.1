@@ -72,7 +72,7 @@ export default function ProcchodLeftContent() {
 
       const response = await fetch(`${apiBasePath}/posts/${currentPage}`);
       const data = await response.json();
-      console.log('main page post,', data)
+      // console.log('main page post,', data)
       preparePostList(data)
 
     } catch (error) {
@@ -87,7 +87,7 @@ export default function ProcchodLeftContent() {
     try {
       const response = await fetch(`${apiBasePath}/categoryposts/${selectedCategory}/${currentPage}`);
       const data = await response.json();
-      console.log('main page category post,', data)
+      // console.log('main page category post,', data)
 
       preparePostList(data)
 
@@ -143,7 +143,7 @@ export default function ProcchodLeftContent() {
                         selectedCoverImage = post?.image;
                       }
                       if(post.category === 'কবিতা'){
-                        console.log(post.content)
+                        // console.log(post.content)
                       }
                      return (
                     <>

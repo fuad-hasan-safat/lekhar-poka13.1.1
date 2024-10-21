@@ -24,7 +24,7 @@ export default function ProfilePostLeftContent({ slug }) {
 
   useEffect(() => {
 
-    console.log("user profile post---------------------->>>>>>>>>>>>><<<<<<<<<<<<<<<< SLUG ", slug)
+    // console.log("user profile post---------------------->>>>>>>>>>>>><<<<<<<<<<<<<<<< SLUG ", slug)
 
     const fetchPosts = async () => {
       try {
@@ -32,7 +32,7 @@ export default function ProfilePostLeftContent({ slug }) {
         const data = response.data; // Assuming the response structure
         setPostList(data.object);
 
-        console.log("user profile post writer---------------------->>>>>>>>>>>>><<<<<<<<<<<<<<<< data ", data.object)
+        // console.log("user profile post writer---------------------->>>>>>>>>>>>><<<<<<<<<<<<<<<< data ", data.object)
 
 
         // Calculate total pages based on posts and postsPerPage

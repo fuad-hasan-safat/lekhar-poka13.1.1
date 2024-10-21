@@ -18,7 +18,7 @@ export default function PostDetails({ postData = null}) {
   const slug = router.query.slug;
   const { asPath } = router;
 
-  console.log({ postData })
+  // console.log({ postData })
 
   if (!postData) {
     return <Loading />
@@ -34,7 +34,7 @@ export default function PostDetails({ postData = null}) {
 
   useEffect(()=>{
     const loggedInUser = localStorage.getItem('userId') || null ;
-    console.log('logged in user in profile -->', loggedInUser)
+    // console.log('logged in user in profile -->', loggedInUser)
     setLoggedInUserId(loggedInUser);
   },[])
 
@@ -57,7 +57,7 @@ export default function PostDetails({ postData = null}) {
       audioIndex: 0,
       audioscope: `lekharPokaPostdetails`,
       audioList: audioList,
-      currentSongId: audioList.id,
+      currentSongId: audioList[0].id,
     }))
   }
 
@@ -78,11 +78,11 @@ export default function PostDetails({ postData = null}) {
 
   let pageTitle = data?.title
   let withoutTagDes = removeHtmlTags(data?.content?.slice(0, 700))
-  console.log({ withoutTagDes })
+  // console.log({ withoutTagDes })
   let description = withoutTagDes;
   let postLink = `https://lekharpoka.com${asPath}`;
   let imageLink = `https://api.lekharpoka.com/${selectedCoverImage?.slice(selectedCoverImage?.indexOf('/') + 1)}`
-  console.log({ pageTitle, description, postLink, imageLink })
+  // console.log({ pageTitle, description, postLink, imageLink })
 
   let audioList = [];
 
@@ -98,6 +98,8 @@ export default function PostDetails({ postData = null}) {
     ]
 
   }
+
+  console.log('slug, id', slug, data._id);
 
   return (
     isdataFetch &&
@@ -149,7 +151,7 @@ export default function PostDetails({ postData = null}) {
                                 {isAudioAvailable && (
                                   <div className="audio__tab__playbutton absolute  lg:left-[18px] md:left-[18px] sm:left-[18px] xs:left-[12px]  lg:top-[150px] md:top-[140px] sm:top-[130px] xs:top-[110px]">
                                     <button className="text-center text-[#F9A106]  flex justify-center items-center" onClick={() => handlePlayButton(audioList)}>
-                                      <span className="inline-block text-[26px]"> {isAudioPlaying && currentSongId === audioList.id ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</span> <span className="inline-block font-[600] text-[16px]"> প্লে করুন</span>
+                                      <span className="inline-block text-[26px]"> {isAudioPlaying && currentSongId === audioList[0].id ? <i class="ri-pause-circle-fill"></i> : <i class="ri-play-circle-fill"></i>}</span> <span className="inline-block font-[600] text-[16px]"> প্লে করুন</span>
                                     </button>
                                   </div>
                                 )}

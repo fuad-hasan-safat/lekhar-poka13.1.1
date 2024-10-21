@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { audioPlayerAction } from '../../../redux/audioplayer-slice';
 
 export default function PlaylistItem({ songInfo, songIndex, songList, audioScope }) {
-    console.log('song info-----', songInfo)
+    // console.log('song info-----', songInfo)
     const dispatch = useDispatch();
     const isAudioPlaying = useSelector((state) => state.audioplayer.isAudioPlaying);
     const currentAudioScope = useSelector((state) => state.audioplayer.currentAudioScope);
@@ -53,10 +53,10 @@ export default function PlaylistItem({ songInfo, songIndex, songList, audioScope
             currentSongId: songInfo._id,
         }))
     }
-    console.log('song info', songInfo)
+    // console.log('song info', songInfo)
 
     const title = replaceUnderscoresWithSpaces(songInfo?.title)
-    console.log(title);
+    // console.log(title);
 
     let shortenedTitle = title || '' ;
 

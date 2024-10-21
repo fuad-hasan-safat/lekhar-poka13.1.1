@@ -8,12 +8,12 @@ export default function FollowerList({ showModal, handleClose, userId }) {
     const slug = router.query.slug;
     const [followerList, setFollowerList] = useState([])
     useEffect(() => {
-        console.log('writer user id ---->>>', userId)
+        // console.log('writer user id ---->>>', userId)
         fetch(`${apiBasePath}/followers/${userId}`)
             .then((response) => response.json())
             .then((data) => {
                 setFollowerList(data.follower_list);
-                console.log("----------->>>>>>>>>>>>>>>>>   FOLLOWER list ------------------->>>>>>>>>>>", data);
+                // console.log("----------->>>>>>>>>>>>>>>>>   FOLLOWER list ------------------->>>>>>>>>>>", data);
                 // console.log("-----------", setLekhokList);
             })
             .catch((error) => console.error("Error fetching data:", error));

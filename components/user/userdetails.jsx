@@ -9,7 +9,7 @@ import TakePhoneNumber from './takePhoneNumber';
 
 export default function UserDetails({ sex = '---', birthdate = '---', location = '---', mail = '---', phone = '---', userID = '', setIsProfileUpdated, isProfileUpdated }) {
 
-    console.log('user page phone number------>>>', phone)
+    // console.log('user page phone number------>>>', phone)
 
     const router = useRouter();
     const [startDate, setStartDate] = useState(new Date());
@@ -77,9 +77,9 @@ export default function UserDetails({ sex = '---', birthdate = '---', location =
 
                 setImage(`${apiBasePath}/${data.object.profile.image.slice(data.object.profile.image.indexOf("/") + 1)}`)
                 saveImageFromURL(`${apiBasePath}/${data.object.profile.image.slice(data.object.profile.image.indexOf("/") + 1)}`, 'profile.jpg')
-                console.log(' Image ---------------------------- file ******', file)
+                // console.log(' Image ---------------------------- file ******', file)
 
-                console.log(' profile image----------->>>>', image)
+                // console.log(' profile image----------->>>>', image)
             })
             .catch((error) => console.error("Error fetching profile:", error));
 
@@ -130,7 +130,7 @@ export default function UserDetails({ sex = '---', birthdate = '---', location =
 
                 if (response.ok) {
                     const data = await response.json();
-                    console.log('Profile updated successfully:', data);
+                    // console.log('Profile updated successfully:', data);
                     router.push(`/user/${userID}`);
                 } else {
                     console.error('Failed to update profile:', response.statusText);

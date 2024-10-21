@@ -29,7 +29,7 @@ export default function PostOfWriterPage() {
 
     useEffect(() => {
         const fetchPosts = async () => {
-            console.log('------------------slug of writers ---------------', slug)
+            // console.log('------------------slug of writers ---------------', slug)
             try {
                 const response = await fetch(`${apiBasePath}/postsprofile/${slug}`);
                 const data = await response.json();
@@ -40,7 +40,7 @@ export default function PostOfWriterPage() {
                 setBio(data.writer_bio?.content)
                 setIsSelfWriter(data.self_writer)
 
-                console.log('posts of USER  ----------------------------------', data)
+                // console.log('posts of USER  ----------------------------------', data)
 
                 setTotalPages(Math.ceil(data.object.length / postsPerPage));
 

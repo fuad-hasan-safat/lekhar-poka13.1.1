@@ -33,12 +33,12 @@ export default function AudioBookHome() {
             const url2 = `${apiBasePath}/recentbooks`;
 
             const response = await axios.get(url);
-            console.log('audio book quote response', response)
+            // console.log('audio book quote response', response)
             const textSliderData = response.data;
 
             const response2 = await axios.get(url2);
             const recentSliderData = response2.data;
-            console.log('recent book', recentSliderData)
+            // console.log('recent book', recentSliderData)
 
             setData((prevData) => ({
                 ...prevData,

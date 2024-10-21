@@ -65,7 +65,7 @@ export const AudioRecentSliderData = [
 
 const AudioRecentSlider = ({recentSliderData}) => {
 
-  console.log('audio slider data --',recentSliderData)
+  // console.log('audio slider data --',recentSliderData)
 
   const router = useRouter();
 

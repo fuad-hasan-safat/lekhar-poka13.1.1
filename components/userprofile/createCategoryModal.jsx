@@ -14,7 +14,7 @@ const CreatecategoryModal = ({ showModal, handleClose, setIsCategoryAdded }) => 
     const file = files && files[0];
     if (file) {
       setImage(file);
-      console.log({ file })
+      // console.log({ file })
       const reader = new FileReader();
       reader.onloadend = () => {
         setPreview(reader.result); // Set preview image
@@ -34,7 +34,7 @@ const CreatecategoryModal = ({ showModal, handleClose, setIsCategoryAdded }) => 
     formData.append("title", title)
 
     try {
-      console.log({image, title})
+      // console.log({image, title})
       // const response = await axios.post(`${apiBasePath}/categories`, formData);
       const response = await fetch(`${apiBasePath}/categories`, {
         method: "POST",
@@ -45,7 +45,7 @@ const CreatecategoryModal = ({ showModal, handleClose, setIsCategoryAdded }) => 
     });
       setIsCategoryAdded(true)
 
-      console.log(' category response ---', response)
+      // console.log(' category response ---', response)
 
       handleClose();
 

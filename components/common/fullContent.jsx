@@ -5,7 +5,7 @@ import UserPostTitleAndcover from "./userPostTitleAndcover";
 
 const FullPost = ({ id, content, title, writer, writer_id, catagory, image, uploadedBy,updatedAt,profileName,writer_image }) => {
 
-console.log("FULL POST : ", writer_image)
+// console.log("FULL POST : ", writer_image)
     if (catagory === 'কবিতা') {
         return (
             <>

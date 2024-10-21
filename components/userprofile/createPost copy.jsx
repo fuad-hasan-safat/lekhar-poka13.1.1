@@ -203,7 +203,7 @@ export default function CreatePost() {
 
 
     const handleSubmit = async () => {
-        console.log("INSIDE HANDLE")
+        // console.log("INSIDE HANDLE")
         if (!canPostStatus) {
             // alert('দয়া করে প্রোফাইল তৈরি করুন')
             const confirmLogout = window.confirm('দয়া করে প্রোফাইল তৈরি করুন');
@@ -226,7 +226,7 @@ export default function CreatePost() {
             else {
 
                 // const formated_text = extractText(content)
-                console.log({ userUuid, isWriter, writer, writerId })
+                // console.log({ userUuid, isWriter, writer, writerId })
                 var isWriter = true;
 
                 if (userType === 'admin') {
@@ -251,7 +251,7 @@ export default function CreatePost() {
 
                 if (title && selectedOption && summary) {
 
-                    console.log(writer, writerId)
+                    // console.log(writer, writerId)
 
                     try {
                     // console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&   inside first &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
@@ -305,7 +305,7 @@ export default function CreatePost() {
         const file = files && files[0];
         if (file) {
             setImage(file);
-            console.log({ file })
+            // console.log({ file })
             const reader = new FileReader();
             reader.onloadend = () => {
                 setPreview(reader.result); // Set preview image

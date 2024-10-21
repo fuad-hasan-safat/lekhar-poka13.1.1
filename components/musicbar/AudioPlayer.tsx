@@ -10,7 +10,7 @@ import { Playlist, Track } from "./audioplayer/type";
 import React from "react";
 
 const AudioPlayer = ({playlist} : any) => {
-  console.log("playlist data : ", playlist)
+  // console.log("playlist data : ", playlist)
   const {
     playNextTrack,
     playPreviousTrack,

@@ -25,7 +25,7 @@ export default function UserPostTitleAndcover({
   category = null
 }) {
 
-  console.log('single post banner ', title, image)
+  // console.log('single post banner ', title, image)
   const router = useRouter();
 
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ export default function UserPostTitleAndcover({
 
   useEffect(()=>{
     const loggedInUser = localStorage.getItem('userId') || null ;
-    console.log('logged in user in profile -->', loggedInUser)
+    // console.log('logged in user in profile -->', loggedInUser)
     setLoggedInUserId(loggedInUser);
   },[])
 
@@ -98,7 +98,7 @@ export default function UserPostTitleAndcover({
     console.log('Delete id----', id)
     try {
       const response = await axios.delete(`${apiBasePath}/posts/${id}`);
-      console.log('Delete successful:', response.data);
+      // console.log('Delete successful:', response.data);
 
       notification = 'পোস্টটি মুছে ফেলা হয়েছে'
       dispatch(toastAction.setWarnedNotification(notification));

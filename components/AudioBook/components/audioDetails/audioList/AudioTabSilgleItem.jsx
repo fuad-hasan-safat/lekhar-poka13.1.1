@@ -22,6 +22,18 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
 
     let notification = '';
 
+    const [loggedInUserId, setLoggedInUserId] = useState(null)
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem('userId') || null;
+        // console.log('logged in user in profile -->', loggedInUser)
+        setLoggedInUserId(loggedInUser);
+
+        setIsLoading(false)
+
+    }, [])
+
 
     useEffect(() => {
         const audioElement = audioRef.current;
@@ -53,11 +65,11 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
     }, [songInfo?.audio, songInfo?.id]);
 
     async function handleAddMyPlaylist() {
-        console.log({ songInfo })
+        // console.log({ songInfo })
         const data = {
             ebook_id: songInfo.ebook_id,
             audio_id: songInfo._id,
-            userId: userUuid
+            userId: loggedInUserId
         }
 
         console.log('Add to playlist data -,', data);
@@ -101,23 +113,17 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
         const data = {
             ebook_id: songInfo.ebook_id,
             audio_id: songInfo._id,
-            userId: userUuid,
+            userId: loggedInUserId,
         }
 
-        console.log('Add to latest playlist data -,', data);
-        console.log('SongInfo--', songInfo);
+        // console.log('Add to latest playlist data -,', data);
+        // console.log('SongInfo--', songInfo);
 
         try {
             const response = await axios.post(`${apiBasePath}/addtolatestplaylist`, data);
-            console.log('add playlist response', response.data);
+            // console.log('add playlist response', response.data);
             if (response.data.status === "failed") {
-                // if (response.data.msg === 'Audio Already in playlist') {
-                //     notification = `অডিওটি ইতিমধ্যে প্লেলিস্টে যুক্ত আছে!`;
-                //     dispatch(toastAction.setWarnedNotification(notification))
-                // } else {
-                //     notification = `অডিওটি প্লেলিস্টে যুক্ত করা যাচ্ছে না!`;
-                //     dispatch(toastAction.setWarnedNotification(notification))
-                // }
+             
                 return;
             } else {
                 dispatch(playlistAction.addSingleSongToLatestPlaylist(songInfo));
@@ -134,7 +140,7 @@ export default function AudioTabSingleItem({ songInfo, audioIndex, audioList }) 
 
 
     const title = replaceUnderscoresWithSpaces(songInfo.title)
-    console.log(title);
+    // console.log(title);
 
     let shortenedTitle = title;
 

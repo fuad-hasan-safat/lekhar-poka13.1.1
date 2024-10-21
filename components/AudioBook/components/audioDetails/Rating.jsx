@@ -17,7 +17,7 @@ export default function Rating({ singleAudioData }) {
 
     useEffect(()=>{
       const loggedInUser = localStorage.getItem('userId') || null ;
-      console.log('logged in user in profile -->', loggedInUser)
+    //   console.log('logged in user in profile -->', loggedInUser)
       setLoggedInUserId(loggedInUser);
     },[])
 
@@ -37,10 +37,10 @@ export default function Rating({ singleAudioData }) {
     }, [slug, isNewComment])
 
     async function getAudioComment() {
-        console.log('router', router)
+        // console.log('router', router)
         try {
             const response = await axios.get(`${apiBasePath}/getaudiobook/${slug}`);
-            console.log('Response:', response.data?.rating);
+            // console.log('Response:', response.data?.rating);
             setUserComments(response.data?.rating);
         } catch (error) {
             console.error('Error:', error.response ? error.response.data : error.message);
@@ -55,7 +55,7 @@ export default function Rating({ singleAudioData }) {
         }
     }
 
-    console.log({ openCommentId });
+    // console.log({ openCommentId });
 
     function useOutsideAlerter(ref) {
         useEffect(() => {

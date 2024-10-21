@@ -13,7 +13,7 @@ const SignUpPageBeforeOTP = () => {
 
   const userUuid = useSelector((state) => state.usersession.userUuid);
 
-  console.log({ userUuid });
+  // console.log({ userUuid });
 
   const router = useRouter();
 

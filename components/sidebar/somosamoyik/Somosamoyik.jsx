@@ -20,7 +20,7 @@ useEffect(() => {
         `${apiBasePath}/contemporarypost`
       );
 
-      console.log('somosamoyik ---->>', result);
+      // console.log('somosamoyik ---->>', result);
       setSomosamoyikPost(result.posts);
 
     } catch (error) {
