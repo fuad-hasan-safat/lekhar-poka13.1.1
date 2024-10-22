@@ -56,8 +56,6 @@ export default function Home({ singleAudioData }) {
         // console.log('logged in user in profile -->', loggedInUser)
         setLoggedInUserId(loggedInUser);
 
-        setIsLoading(false)
-
     }, [])
 
     // console.log(singleAudioData.audio)
@@ -67,6 +65,10 @@ export default function Home({ singleAudioData }) {
     if (singleAudioData?.fetchError === 5) {
         router.push('/404');
     };
+
+    useEffect(()=>{
+        setIsLoading(false)
+    },[])
 
 
     function removeHtmlTags(str) {
@@ -92,7 +94,7 @@ export default function Home({ singleAudioData }) {
                 <meta property="og:description" content={`${description} #lekharpoka`} />
                 <meta property="og:image" content={imageLink || '/lekharPokaPreviewImage/lekharpokabanner.jpg'} key="og:image" />
             </Head>
-            {loggedInUserId ?
+            {loggedInUserId  && !isLoading ?
                 <div>
 
 

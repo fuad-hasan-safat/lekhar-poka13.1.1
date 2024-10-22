@@ -9,6 +9,7 @@ import { UserContext } from '../../lekharpokaStore/user-context'
 import { readFile } from '../cropComponents/cropImage'
 import { useDispatch, useSelector } from 'react-redux'
 import { toastAction } from '../../redux/toast-slice'
+import Loading from '../../common/loading'
 
 export default function ProfileModal({ setShowModal, setuserprofiledata, showModal, handleClose, image = '' }) {
 
@@ -17,6 +18,7 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
     const userUuid = useSelector((state) => state.usersession.userUuid);
 
     const [loggedInUserId, setLoggedInUserId] = useState(null)
+    const [isSubmitting, setIsSubmitting] = useState(-1);
 
     useEffect(() => {
         const loggedInUser = localStorage.getItem('userId') || null;
@@ -268,6 +270,8 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
             formData.append('email', email);
             formData.append('phone', phoneNumber);
             formData.append('user_id', loggedInUserId);
+
+            setIsSubmitting(1);
             try {
                 const response = await fetch(`${apiBasePath}/profile`, {
                     method: 'PUT',
@@ -302,6 +306,7 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
                         userAddress: address,
                     }));
                     dispatch(toastAction.setSucessNotification('প্রোফাইল সফলভাবে আপডেট হয়েছে'));
+                    setIsSubmitting(-1);
                     handleClose();
 
                 } else {
@@ -311,6 +316,9 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
             } catch (error) {
                 dispatch(toastAction.setWarnedNotification('দুঃখিত আপনার তথ্য সার্ভারে সংরক্ষণ করা যায় নি!'));
                 console.error('Error updating profile:', error);
+            }finally{
+                setIsSubmitting(-1);
+
             }
 
         }
@@ -322,7 +330,9 @@ export default function ProfileModal({ setShowModal, setuserprofiledata, showMod
         }
     };
 
-
+if(isSubmitting === 1){
+    return <Loading message = "প্রোফাইল আপডেট হচ্ছে ..."/>
+}
 
     return (
         <>
