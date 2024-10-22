@@ -12,7 +12,7 @@ import { userSessionAction } from "../redux/usersession-slice";
 import { toastAction } from "../redux/toast-slice";
 
 
-export default function LoginForm({ logreg, btntext, url }) {
+export default function LoginForm({ logreg, btntext,setIsLoggedIn  , url }) {
 
   const dispatch = useDispatch();
 
@@ -119,6 +119,7 @@ export default function LoginForm({ logreg, btntext, url }) {
         dispatch(toastAction.setSucessNotification(notification))
 
         setStatus(data.status);
+        setIsLoggedIn();
 
         const user = {
           userName: data?.name,

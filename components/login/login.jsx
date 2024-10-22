@@ -7,7 +7,9 @@ import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import Loading from "../common/loading";
 
-const LoginPage = ({ url = '/' }) => {
+const LoginPage = ({ url = '/' , setIsLoggedIn =  () => {}}) => {
+
+
   const router = useRouter();
   const isLoggedIn = useSelector((state) => state.usersession.isLoggedIn);
   const [loggedInUserId, setLoggedInUserId] = useState(null)
@@ -24,7 +26,7 @@ const LoginPage = ({ url = '/' }) => {
   useEffect(() => {
     if (isLoggedIn || loggedInUserId) {
       console.log({ url })
-      router.push(url);
+      router.replace(url);
     }
 
     setisLoading(false);
@@ -52,7 +54,11 @@ const LoginPage = ({ url = '/' }) => {
                   <div className="login__form__right relative bg-white rounded-l-[46px] text-black grid place-items-center ">
 
                     <div className="w-full">
-                      <LoginReg logreg="লগইন করুন" btntext="লগইন"  url={url}/>
+                      <LoginReg 
+                      logreg="লগইন করুন" 
+                      btntext="লগইন" 
+                      setIsLoggedIn={setIsLoggedIn}
+                      url={url}/>
 
                       <SignInOption
                         title="অথবা সাইন ইন করুন"

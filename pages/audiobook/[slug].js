@@ -12,11 +12,11 @@ export async function getServerSideProps(context) {
     const { slug } = context.params;
     try {
 
-        const res = await fetch(`${serverEndApiBasePath}/getaudiobook/${slug}`);
+        const res = await fetch(`${apiBasePath}/getaudiobook/${slug}`);
         const singleAudioData = await res.json()
 
         // console.log({ singleAudioData })
-        const postRes = await fetch(`${serverEndApiBasePath}/updateview/${slug}`, {
+        const postRes = await fetch(`${apiBasePath}/updateview/${slug}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -47,6 +47,8 @@ export default function Home({ singleAudioData }) {
     const currentUrl = router.asPath;
     // console.log('current url', currentUrl);
     const userUuid = useSelector(state => state.usersession.userUuid);
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+
 
     const [loggedInUserId, setLoggedInUserId] = useState(null)
     const [isLoading, setIsLoading] = useState(true);
@@ -55,6 +57,10 @@ export default function Home({ singleAudioData }) {
         const loggedInUser = localStorage.getItem('userId') || null;
         // console.log('logged in user in profile -->', loggedInUser)
         setLoggedInUserId(loggedInUser);
+
+        if(loggedInUser){
+            setIsLoggedIn(true)
+        }
 
     }, [])
 
@@ -66,13 +72,17 @@ export default function Home({ singleAudioData }) {
         router.push('/404');
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         setIsLoading(false)
-    },[])
+    }, [])
 
 
     function removeHtmlTags(str) {
         return str?.replace(/<\/?[^>]+(>|$)/g, "");
+    }
+
+    function getLiggedInData(){
+        setIsLoggedIn(true)
     }
 
     if (isLoading) {
@@ -94,7 +104,7 @@ export default function Home({ singleAudioData }) {
                 <meta property="og:description" content={`${description} #lekharpoka`} />
                 <meta property="og:image" content={imageLink || '/lekharPokaPreviewImage/lekharpokabanner.jpg'} key="og:image" />
             </Head>
-            {loggedInUserId  && !isLoading ?
+            { isLoggedIn ?
                 <div>
 
 
@@ -131,7 +141,7 @@ export default function Home({ singleAudioData }) {
 
 
                 </div> : <div className='pb-[-80px]'>
-                    <LoginPage url={currentUrl} />
+                    <LoginPage url={currentUrl} setIsLoggedIn={getLiggedInData}/>
                 </div>
             }
         </>
