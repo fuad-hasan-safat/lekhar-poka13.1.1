@@ -12,7 +12,7 @@ import { userSessionAction } from "../redux/usersession-slice";
 import { toastAction } from "../redux/toast-slice";
 
 
-export default function LoginForm({ logreg, btntext }) {
+export default function LoginForm({ logreg, btntext, url }) {
 
   const dispatch = useDispatch();
 
@@ -134,25 +134,29 @@ export default function LoginForm({ logreg, btntext }) {
         triggerLogin();
         setnumber('');
         setPassword('');
-        setIsSubmitting(-1)
+        // setIsSubmitting(-1)
       } else {
         notification = 'সঠিক নাম্বার দিন';
         dispatch(toastAction.setWarnedNotification(notification));
-        setIsSubmitting(-1)
+        // setIsSubmitting(-1)
 
       }
     } catch (error) {
       notification = 'সঠিক পাসওয়ার্ড দিন';
       console.log(error);
       dispatch(toastAction.setWarnedNotification(notification));
-      setIsSubmitting(-1)
+      // setIsSubmitting(-1)
+
+    } finally {
+      // Delays the execution by 1000ms (1 second)
+      setIsSubmitting(-1);
 
     }
   }
 
 
-  if(isSubmitting === 1){
-    return <Loading/>
+  if (isSubmitting === 1) {
+    return <Loading />
   }
 
   return (

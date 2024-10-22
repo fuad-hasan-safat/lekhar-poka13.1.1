@@ -24,7 +24,7 @@ const LoginPage = ({ url = '/' }) => {
   useEffect(() => {
     if (isLoggedIn || loggedInUserId) {
       console.log({ url })
-      router.reload(url);
+      router.push(url);
     }
 
     setisLoading(false);
@@ -52,7 +52,7 @@ const LoginPage = ({ url = '/' }) => {
                   <div className="login__form__right relative bg-white rounded-l-[46px] text-black grid place-items-center ">
 
                     <div className="w-full">
-                      <LoginReg logreg="লগইন করুন" btntext="লগইন" />
+                      <LoginReg logreg="লগইন করুন" btntext="লগইন"  url={url}/>
 
                       <SignInOption
                         title="অথবা সাইন ইন করুন"
