@@ -105,6 +105,10 @@ export default function PostDetails({ postData }) {
     router.push('/404');
   };
 
+  if(!isdataFetch){
+    return <Loading/>
+  }
+
   return (
     isdataFetch &&
     <>
