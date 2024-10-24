@@ -21,6 +21,7 @@ export default function AudioPlayListSingleItem({ songInfo, audioIndex, audioLis
     const audioRef = useRef(null);
 
 
+
     useEffect(() => {
         const audioElement = audioRef.current;
 
@@ -62,16 +63,18 @@ export default function AudioPlayListSingleItem({ songInfo, audioIndex, audioLis
     }
 
     async function deleteSong() {
+        const scope = localStorage.getItem('type')
+
         let api = '';
-        if(playListScope === 'latestPlayList'){
+        if(scope === 'latestPlayList'){
             api = 'deleteitemfromlatest';
-        }else if(playListScope === 'myPlayList'){
+        }else if(scope === 'myPlayList'){
             api = 'deleteitem';
         };
 
         // console.log('play list scope::::', playListScope);
         const apiUrl = `${apiBasePath}/${api}/${songInfo._id}`;
-        // console.log('API DELETE URL ', apiUrl);
+        console.log('API DELETE URL ', apiUrl);
 
         try {
             const response = await axios.delete(apiUrl);
@@ -80,7 +83,7 @@ export default function AudioPlayListSingleItem({ songInfo, audioIndex, audioLis
            const notification = `অডিওটি মুছে ফেলা হয়েছে`
             dispatch(toastAction.setSucessNotification(notification));
             dispatch(playlistAction.removeSingleAudioFromPlaylist(songInfo._id));
-      
+            dispatch(playlistAction.updateSongDeleted());
             dialogueRef.current.close();
       
             // reloadPage();

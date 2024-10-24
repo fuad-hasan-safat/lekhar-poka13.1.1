@@ -229,7 +229,7 @@ export async function getServerSideProps(context) {
   const { slug } = context.params;
 
   try {
-    const res = await fetch(`${serverEndApiBasePath}/getpost/${slug}`, {
+    const res = await fetch(`${apiBasePath}/getpost/${slug}`, {
       method: 'POST'
     });
     const postData = await res.json();

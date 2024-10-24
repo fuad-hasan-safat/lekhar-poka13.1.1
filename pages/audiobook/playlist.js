@@ -18,11 +18,14 @@ const PlaylistSeeAll = () => {
     const currentUrl = router.asPath;
 
     const playListScope = useSelector((state) => state.playlist.playListScope);
+    const isSongDeleted =  useSelector((state) => state.playlist.isSongDeleted);
+
     const dispatch = useDispatch();
     const [loggedInUserId, setLoggedInUserId] = useState(null)
     const [type, setType] = useState('');
     const [playlist, setPlaylist] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+
 
     useEffect(() => {
         const loggedInUser = localStorage.getItem('userId') || null;
@@ -39,7 +42,7 @@ const PlaylistSeeAll = () => {
 
         const apiUrl = scope === 'latestPlayList' ?  latestPlayListUrl : myPlayListUrl;
         getData(apiUrl, scope)
-    }, [type, playListScope])
+    }, [type, playListScope, isSongDeleted])
 
 
 

@@ -6,7 +6,8 @@ const playlistSlice = createSlice({
         isPlayListChanged: null,
         playListScope: null,
         myPlaylist: [],
-        lattestPlaylist: []
+        lattestPlaylist: [],
+        isSongDeleted: false,
     }, reducers: {
         addMyPlaylist(state, action) {
             state.myPlaylist = action.payload;
@@ -49,6 +50,9 @@ const playlistSlice = createSlice({
             } else if (state.playListScope === 'latestPlayList') {
                 state.lattestPlaylist = state.lattestPlaylist.filter(song => song._id !== action.payload);
             }
+        },
+        updateSongDeleted(state){
+            state.isSongDeleted = !state.isSongDeleted;
         }
     }
 })

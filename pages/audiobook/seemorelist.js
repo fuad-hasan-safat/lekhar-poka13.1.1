@@ -8,11 +8,12 @@ import SeeMoreListBackground from '../../components/AudioBook/components/SeeMore
 import axios from 'axios';
 import { apiBasePath } from '../../utils/constant';
 import Loading from '../../components/common/loading';
+import { useSelector } from 'react-redux';
 
 
 
 const SeeMoreList = () => {
-
+    const playListScope = useSelector((state) => state.playlist.playListScope)
 
     const [seeAllRenderInfo, setSeeAllRenderInfo] = useState({
         sliderType: '',

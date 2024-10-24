@@ -25,11 +25,12 @@ export default function AudioDetailsSideBar() {
     const myPlaylist = useSelector((state) => state.playlist.myPlaylist);
     const lattestPlaylist = useSelector((state) => state.playlist.lattestPlaylist);
     const isPlayListChanged = useSelector((state) => state.playlist.isPlayListChanged);
+    const isSongDeleted =  useSelector((state) => state.playlist.isSongDeleted);
 
 
     useEffect(() => {
         getData();
-    }, [isPlayListChanged, loggedInUserId])
+    }, [isPlayListChanged, loggedInUserId, isSongDeleted])
 
 
     const getData = async () => {
